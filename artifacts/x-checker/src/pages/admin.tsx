@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import {
   BarChart3, DollarSign, Search,
   Server, AlertTriangle, Clock, Star, TrendingUp,
   Cpu, Database, LineChart, MousePointerClick, Layers,
+  ImageIcon, Upload, Palette,
 } from "lucide-react";
 import { ALL_TOOLS, CATEGORIES, TOTAL_LIVE, type CategoryKey } from "@/lib/tools-registry";
 
@@ -661,6 +662,216 @@ function PageAnalytics({ password }: { password: string }) {
   );
 }
 
+// ── Branding Panel ─────────────────────────────────────────────────────────
+
+interface BrandingAsset {
+  filename: string;
+  exists: boolean;
+  updatedAt: string | null;
+}
+
+const ASSET_GROUPS = [
+  {
+    label: "Favicons",
+    description: "Browser tab icons shown at various sizes",
+    assets: [
+      { filename: "favicon.ico", label: "favicon.ico", hint: "32×32 ICO" },
+      { filename: "favicon.svg", label: "favicon.svg", hint: "Vector SVG" },
+      { filename: "favicon-48.png", label: "favicon-48.png", hint: "48×48 PNG" },
+      { filename: "favicon-192.png", label: "favicon-192.png", hint: "192×192 PNG" },
+      { filename: "favicon-512.png", label: "favicon-512.png", hint: "512×512 PNG" },
+    ],
+  },
+  {
+    label: "Open Graph",
+    description: "Social sharing preview images",
+    assets: [
+      { filename: "opengraph.png", label: "opengraph.png", hint: "1200×630 PNG" },
+      { filename: "opengraph.jpg", label: "opengraph.jpg", hint: "1200×630 JPG" },
+    ],
+  },
+  {
+    label: "Extension Icons",
+    description: "Chrome extension toolbar icons",
+    assets: [
+      { filename: "icon16.png", label: "icon16.png", hint: "16×16 PNG" },
+      { filename: "icon32.png", label: "icon32.png", hint: "32×32 PNG" },
+      { filename: "icon48.png", label: "icon48.png", hint: "48×48 PNG" },
+      { filename: "icon128.png", label: "icon128.png", hint: "128×128 PNG" },
+    ],
+  },
+];
+
+function BrandingPanel({ password }: { password: string }) {
+  const [assets, setAssets] = useState<BrandingAsset[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<Record<string, { ok: boolean; msg: string }>>({});
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const pendingFilename = useRef<string>("");
+
+  const fetchAssets = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/admin/branding/assets", {
+        headers: { "x-admin-password": password },
+      });
+      if (res.ok) {
+        const json = await res.json() as { assets: BrandingAsset[] };
+        setAssets(json.assets);
+      }
+    } catch { /* silent */ }
+    setLoading(false);
+  }, [password]);
+
+  useEffect(() => { fetchAssets(); }, [fetchAssets]);
+
+  function triggerUpload(filename: string) {
+    pendingFilename.current = filename;
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+      fileInputRef.current.click();
+    }
+  }
+
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    const filename = pendingFilename.current;
+    if (!file || !filename) return;
+
+    setUploading(filename);
+    setFeedback((prev) => { const n = { ...prev }; delete n[filename]; return n; });
+
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      form.append("filename", filename);
+
+      const res = await fetch("/api/admin/branding/upload", {
+        method: "POST",
+        headers: { "x-admin-password": password },
+        body: form,
+      });
+
+      const json = await res.json() as { ok?: boolean; error?: string };
+      if (res.ok && json.ok) {
+        setFeedback((prev) => ({ ...prev, [filename]: { ok: true, msg: "Uploaded!" } }));
+        await fetchAssets();
+      } else {
+        setFeedback((prev) => ({ ...prev, [filename]: { ok: false, msg: json.error ?? "Upload failed." } }));
+      }
+    } catch {
+      setFeedback((prev) => ({ ...prev, [filename]: { ok: false, msg: "Network error." } }));
+    }
+    setUploading(null);
+  }
+
+  const assetMap = Object.fromEntries(assets.map((a) => [a.filename, a]));
+
+  return (
+    <div className="space-y-6">
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*,.ico,.svg"
+        className="hidden"
+        onChange={handleFileChange}
+      />
+
+      {loading ? (
+        <div className="flex items-center gap-2 text-sm text-muted-foreground py-4">
+          <Loader2 className="h-4 w-4 animate-spin" /> Loading assets…
+        </div>
+      ) : (
+        ASSET_GROUPS.map((group) => (
+          <div key={group.label} className="rounded-xl border border-border/60 bg-card overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/40">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  {group.label}
+                </p>
+                <p className="text-[11px] text-muted-foreground/70 mt-0.5">{group.description}</p>
+              </div>
+            </div>
+            <div className="divide-y divide-border/40">
+              {group.assets.map(({ filename, label, hint }) => {
+                const info = assetMap[filename];
+                const isUploading = uploading === filename;
+                const fb = feedback[filename];
+                const isImage = !filename.endsWith(".ico");
+                const previewSrc = isImage ? `/${filename}` : undefined;
+
+                return (
+                  <div key={filename} className="flex items-center gap-3 px-4 py-3">
+                    {/* Preview thumbnail */}
+                    <div className="w-10 h-10 rounded-lg border border-border/60 bg-muted flex items-center justify-center overflow-hidden shrink-0">
+                      {previewSrc && info?.exists ? (
+                        <img
+                          src={previewSrc}
+                          alt={label}
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                          }}
+                        />
+                      ) : (
+                        <ImageIcon className="h-4 w-4 text-muted-foreground/50" />
+                      )}
+                    </div>
+
+                    {/* Info */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium font-mono">{label}</p>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span className="text-[11px] text-muted-foreground">{hint}</span>
+                        {info?.exists ? (
+                          <Badge className="bg-green-500/10 text-green-400 border-green-500/20 text-[10px] px-1.5 py-0">
+                            Uploaded
+                          </Badge>
+                        ) : (
+                          <Badge className="bg-muted text-muted-foreground border-border/60 text-[10px] px-1.5 py-0">
+                            Default
+                          </Badge>
+                        )}
+                        {info?.updatedAt && (
+                          <span className="text-[10px] text-muted-foreground/60">
+                            {new Date(info.updatedAt).toLocaleDateString()}
+                          </span>
+                        )}
+                      </div>
+                      {fb && (
+                        <p className={`text-[11px] mt-0.5 ${fb.ok ? "text-green-400" : "text-red-400"}`}>
+                          {fb.msg}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Upload button */}
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-7 px-2.5 text-xs shrink-0"
+                      disabled={isUploading}
+                      onClick={() => triggerUpload(filename)}
+                    >
+                      {isUploading ? (
+                        <Loader2 className="h-3 w-3 animate-spin mr-1" />
+                      ) : (
+                        <Upload className="h-3 w-3 mr-1" />
+                      )}
+                      {info?.exists ? "Replace" : "Upload"}
+                    </Button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
 // ── Health Check ───────────────────────────────────────────────────────────
 
 function HealthStatus({ password }: { password: string }) {
@@ -770,6 +981,18 @@ function AdminDashboard({ password }: { password: string }) {
           Tool Categories
         </h2>
         <ToolCategories />
+      </section>
+
+      {/* Branding */}
+      <section className="space-y-3">
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide flex items-center gap-2">
+          <Palette className="h-3.5 w-3.5" />
+          Branding Assets
+        </h2>
+        <p className="text-xs text-muted-foreground -mt-1">
+          Upload replacement files for favicons, social images, and extension icons. Changes apply immediately in development.
+        </p>
+        <BrandingPanel password={password} />
       </section>
 
       {/* Tool Status */}
