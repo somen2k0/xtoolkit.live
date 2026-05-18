@@ -142,6 +142,57 @@
   --ring: 258 82% 66%;
 }
 
+/* ── Keyframe animations ─────────────────────────────────────────────────── */
+
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(60px, -80px) scale(1.08); }
+  66%       { transform: translate(-40px, 50px) scale(0.95); }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-70px, 60px) scale(1.05); }
+  70%       { transform: translate(50px, -40px) scale(0.92); }
+}
+
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(80px, 80px) scale(1.1); }
+}
+
+@keyframes grid-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes aurora-shift {
+  0%, 100% { opacity: 0.12; transform: scaleX(1) scaleY(1); }
+  50%       { opacity: 0.18; transform: scaleX(1.15) scaleY(1.2); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(258 82% 66% / 0.15); }
+  50%       { box-shadow: 0 0 0 12px hsl(258 82% 66% / 0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes badge-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(258 82% 66% / 0); }
+  50%       { box-shadow: 0 0 16px 2px hsl(258 82% 66% / 0.2); }
+}
+
+/* ── Base styles ─────────────────────────────────────────────────────────── */
+
 @layer base {
   * {
     @apply border-border;
@@ -154,15 +205,31 @@
   }
 }
 
-/* Subtle line grid background */
+/* Animated line grid */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(hsl(220 20% 90% / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(220 20% 90% / 0.04) 1px, transparent 1px);
+    linear-gradient(hsl(220 20% 90% / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(220 20% 90% / 0.035) 1px, transparent 1px);
   background-size: 40px 40px;
+  animation: grid-drift 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animated aurora at top */
+body::after {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 60vh;
+  background: radial-gradient(ellipse at center, hsl(258 82% 66% / 0.12), transparent 70%);
+  animation: aurora-shift 8s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
 }
@@ -170,4 +237,111 @@ body::before {
 #root {
   position: relative;
   z-index: 1;
+}
+
+/* ── Floating orb styles ─────────────────────────────────────────────────── */
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.bg-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, hsl(258 82% 66% / 0.12) 0%, transparent 70%);
+  top: -10%;
+  left: -10%;
+  animation: orb-float-1 18s ease-in-out infinite;
+}
+
+.bg-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, hsl(240 82% 70% / 0.09) 0%, transparent 70%);
+  top: 20%;
+  right: -8%;
+  animation: orb-float-2 22s ease-in-out infinite;
+}
+
+.bg-orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, hsl(270 70% 60% / 0.08) 0%, transparent 70%);
+  bottom: 10%;
+  left: 30%;
+  animation: orb-float-3 16s ease-in-out infinite;
+}
+
+/* ── Hero entrance animation helpers ────────────────────────────────────── */
+
+.hero-badge {
+  animation: fade-up 0.6s ease-out 0.1s both, badge-glow 4s ease-in-out 1s infinite;
+}
+
+.hero-title {
+  animation: fade-up 0.7s ease-out 0.25s both;
+}
+
+.hero-subtitle {
+  animation: fade-up 0.7s ease-out 0.4s both;
+}
+
+.hero-actions {
+  animation: fade-up 0.7s ease-out 0.55s both;
+}
+
+.hero-trust {
+  animation: fade-up 0.6s ease-out 0.7s both;
+}
+
+/* ── Shimmer text for headline ───────────────────────────────────────────── */
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(258 82% 72%),
+    hsl(280 90% 80%),
+    hsl(258 82% 66%),
+    hsl(240 80% 75%),
+    hsl(258 82% 72%)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Card hover glow ─────────────────────────────────────────────────────── */
+
+.card-hover-glow {
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.card-hover-glow:hover {
+  border-color: hsl(258 82% 66% / 0.35);
+  box-shadow: 0 0 20px hsl(258 82% 66% / 0.08), 0 4px 16px hsl(0 0% 0% / 0.3);
+}
+
+/* ── CTA pulse ring ──────────────────────────────────────────────────────── */
+
+.cta-pulse {
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+
+/* ── Scroll fade-in utility ──────────────────────────────────────────────── */
+
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
