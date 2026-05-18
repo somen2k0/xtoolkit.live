@@ -315,8 +315,57 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-md shadow-indigo-500/40 shrink-0">
-              <img src="/logo.png" alt="X Toolkit" width="28" height="28" className="w-full h-full object-cover" />
+            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-lg shadow-violet-600/50 shrink-0">
+              <svg width="28" height="28" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="nBg" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#09071a"/>
+                    <stop offset="100%" stopColor="#110d24"/>
+                  </linearGradient>
+                  <linearGradient id="nFront" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#c4b5fd"/>
+                    <stop offset="45%" stopColor="#7c3aed"/>
+                    <stop offset="100%" stopColor="#4c1d95"/>
+                  </linearGradient>
+                  <radialGradient id="nGlow" cx="90" cy="90" r="70" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.22"/>
+                    <stop offset="100%" stopColor="#7c3aed" stopOpacity="0"/>
+                  </radialGradient>
+                </defs>
+                {/* Background */}
+                <rect width="180" height="180" rx="36" fill="url(#nBg)"/>
+                <rect width="180" height="180" rx="36" fill="url(#nGlow)"/>
+                {/* 3D extrusion layers — darkest to lightest */}
+                <g stroke="#120a2e" strokeLinecap="round" fill="none" transform="translate(6,6)">
+                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+                </g>
+                <g stroke="#120a2e" strokeLinecap="square" strokeLinejoin="miter" fill="none" transform="translate(6,6)">
+                  <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+                </g>
+                <g stroke="#1d1050" strokeLinecap="round" fill="none" transform="translate(4,4)">
+                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+                </g>
+                <g stroke="#1d1050" strokeLinecap="square" strokeLinejoin="miter" fill="none" transform="translate(4,4)">
+                  <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+                </g>
+                <g stroke="#2e1878" strokeLinecap="round" fill="none" transform="translate(2,2)">
+                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+                </g>
+                <g stroke="#2e1878" strokeLinecap="square" strokeLinejoin="miter" fill="none" transform="translate(2,2)">
+                  <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+                </g>
+                {/* Front face */}
+                <g stroke="url(#nFront)" strokeLinecap="round" fill="none">
+                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+                </g>
+                <g stroke="url(#nFront)" strokeLinecap="square" strokeLinejoin="miter" fill="none">
+                  <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+                </g>
+                {/* Specular highlight */}
+                <g stroke="white" strokeLinecap="round" fill="none" opacity="0.18">
+                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="5"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="5"/>
+                </g>
+              </svg>
             </div>
             <span className="font-semibold text-foreground tracking-tight">X Toolkit</span>
             <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-primary/30 text-primary bg-primary/8 px-1.5 py-0">

@@ -1,3 +1,68 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <image href="/logo.png" x="0" y="0" width="180" height="180"/>
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09071a"/>
+      <stop offset="100%" stop-color="#110d24"/>
+    </linearGradient>
+    <linearGradient id="front" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c4b5fd"/>
+      <stop offset="45%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="90" cy="90" r="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="180" height="180" rx="36" fill="url(#bg)"/>
+  <rect width="180" height="180" rx="36" fill="url(#glow)"/>
+
+  <!-- 3D extrusion layer 1 — deepest shadow -->
+  <g stroke="#120a2e" stroke-linecap="round" fill="none" transform="translate(6,6)">
+    <line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/>
+    <line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/>
+  </g>
+  <g stroke="#120a2e" stroke-linecap="square" stroke-linejoin="miter" fill="none" transform="translate(6,6)">
+    <polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/>
+    <polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/>
+  </g>
+
+  <!-- 3D extrusion layer 2 -->
+  <g stroke="#1d1050" stroke-linecap="round" fill="none" transform="translate(4,4)">
+    <line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/>
+    <line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/>
+  </g>
+  <g stroke="#1d1050" stroke-linecap="square" stroke-linejoin="miter" fill="none" transform="translate(4,4)">
+    <polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/>
+    <polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/>
+  </g>
+
+  <!-- 3D extrusion layer 3 -->
+  <g stroke="#2e1878" stroke-linecap="round" fill="none" transform="translate(2,2)">
+    <line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/>
+    <line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/>
+  </g>
+  <g stroke="#2e1878" stroke-linecap="square" stroke-linejoin="miter" fill="none" transform="translate(2,2)">
+    <polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/>
+    <polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/>
+  </g>
+
+  <!-- Front face — X -->
+  <g stroke="url(#front)" stroke-linecap="round" fill="none">
+    <line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/>
+    <line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/>
+  </g>
+  <!-- Front face — [ ] brackets -->
+  <g stroke="url(#front)" stroke-linecap="square" stroke-linejoin="miter" fill="none">
+    <polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/>
+    <polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/>
+  </g>
+
+  <!-- Specular highlight on X -->
+  <g stroke="white" stroke-linecap="round" fill="none" opacity="0.18">
+    <line x1="58" y1="44" x2="122" y2="136" stroke-width="5"/>
+    <line x1="122" y1="44" x2="58" y2="136" stroke-width="5"/>
+  </g>
 </svg>
