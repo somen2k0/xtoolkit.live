@@ -315,18 +315,18 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="h-7 w-7 rounded-md overflow-hidden shadow-md shadow-primary/30 shrink-0">
+            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-md shadow-indigo-500/40 shrink-0">
               <svg width="28" height="28" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="180" height="180" rx="40" fill="url(#navGrad)"/>
+                <rect width="180" height="180" rx="36" fill="url(#navGrad)"/>
                 <defs>
                   <linearGradient id="navGrad" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#6366f1"/>
-                    <stop offset="100%" stopColor="#8b5cf6"/>
+                    <stop offset="0%" stopColor="#4f46e5"/>
+                    <stop offset="100%" stopColor="#7c3aed"/>
                   </linearGradient>
                 </defs>
-                <line x1="54" y1="54" x2="126" y2="126" stroke="white" strokeWidth="18" strokeLinecap="round"/>
-                <line x1="126" y1="54" x2="54" y2="126" stroke="white" strokeWidth="18" strokeLinecap="round"/>
-                <circle cx="137" cy="137" r="10" fill="white" fillOpacity="0.35"/>
+                <polyline points="62,46 27,90 62,134" stroke="white" strokeWidth="15" strokeLinecap="square" strokeLinejoin="miter" fill="none"/>
+                <line x1="105" y1="40" x2="75" y2="140" stroke="white" strokeWidth="12" strokeLinecap="square"/>
+                <polyline points="118,46 153,90 118,134" stroke="white" strokeWidth="15" strokeLinecap="square" strokeLinejoin="miter" fill="none"/>
               </svg>
             </div>
             <span className="font-semibold text-foreground tracking-tight">X Toolkit</span>

@@ -1,5 +1,5 @@
 import { deflateSync } from "node:zlib";
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -97,12 +97,39 @@ function drawIcon(size) {
   return pixels;
 }
 
-const outDir = resolve(__dirname, "public/icons");
-mkdirSync(outDir, { recursive: true });
+const outDir = resolve(__dirname, "public");
 
-for (const size of [16, 32, 48, 128]) {
+for (const size of [48, 192, 512]) {
   const png = makePNG(size, drawIcon(size));
-  writeFileSync(resolve(outDir, `icon${size}.png`), png);
-  console.log(`  Generated icon${size}.png`);
+  writeFileSync(resolve(outDir, `favicon-${size}.png`), png);
+  console.log(`  Generated favicon-${size}.png`);
 }
-console.log("Icons ready.");
+
+function makeICO(png16, png32) {
+  const header = Buffer.alloc(6);
+  header.writeUInt16LE(0, 0);
+  header.writeUInt16LE(1, 2);
+  header.writeUInt16LE(2, 4);
+
+  const entry16 = Buffer.alloc(16);
+  entry16.writeUInt8(16, 0); entry16.writeUInt8(16, 1);
+  entry16.writeUInt8(0, 2); entry16.writeUInt8(0, 3);
+  entry16.writeUInt16LE(1, 4); entry16.writeUInt16LE(32, 6);
+  entry16.writeUInt32LE(png16.length, 8);
+  entry16.writeUInt32LE(6 + 32, 12);
+
+  const entry32 = Buffer.alloc(16);
+  entry32.writeUInt8(32, 0); entry32.writeUInt8(32, 1);
+  entry32.writeUInt8(0, 2); entry32.writeUInt8(0, 3);
+  entry32.writeUInt16LE(1, 4); entry32.writeUInt16LE(32, 6);
+  entry32.writeUInt32LE(png32.length, 8);
+  entry32.writeUInt32LE(6 + 32 + png16.length, 12);
+
+  return Buffer.concat([header, entry16, entry32, png16, png32]);
+}
+
+const png16 = makePNG(16, drawIcon(16));
+const png32 = makePNG(32, drawIcon(32));
+writeFileSync(resolve(outDir, "favicon.ico"), makeICO(png16, png32));
+console.log("  Generated favicon.ico");
+console.log("Favicons ready.");
