@@ -183,6 +183,20 @@ const STATIC_PAGES = [
     description:
       "How to use Gmail's plus-addressing and dot tricks to create multiple addresses. A complete guide to temporary Gmail usage.",
   },
+  {
+    path: "/blog/how-to-use-temp-email-extension",
+    label: "How to Use a Temp Email Chrome Extension",
+    title: "How to Use a Temp Email Chrome Extension | X Toolkit Blog",
+    description:
+      "Step-by-step guide: install the X Toolkit Chrome Extension, generate a disposable inbox, auto-copy OTP codes, use temp Gmail, and get background notifications from your toolbar.",
+  },
+  {
+    path: "/chrome-extension",
+    label: "Chrome Extension",
+    title: "X Toolkit Chrome Extension — Free Temp Email & OTP Detector",
+    description:
+      "The free X Toolkit Chrome Extension gives you instant disposable email inboxes, automatic OTP code detection, temp Gmail address generation, and Gmail dot & plus-tag tricks — all from your browser toolbar.",
+  },
 ];
 
 // Temp-mail sub-routes (manually defined since they share a parent page)
@@ -274,7 +288,7 @@ function buildToolSchema(tool, canonicalUrl) {
     applicationCategory: appCategory,
     operatingSystem: "Web",
     softwareVersion: "1.0",
-    screenshot: `${SITE_URL}/opengraph.jpg`,
+    screenshot: `${SITE_URL}/opengraph.png`,
     author: {
       "@type": "Organization",
       name: "X Toolkit",
@@ -352,6 +366,48 @@ ${toolLinks}
   </noscript>`;
 }
 
+/**
+ * Builds static HTML content for <div id="root"> so Google can index each
+ * page's unique content without executing JavaScript. React's createRoot()
+ * replaces this at runtime — no hydration mismatch risk.
+ */
+function buildRootContent(pageData, tool) {
+  const { title, description, isHomepage } = pageData;
+
+  if (isHomepage) {
+    const toolLinks = LIVE_TOOLS.map(
+      (t) =>
+        `<li><a href="${SITE_URL}${t.href}">${escapeHtml(t.label)}</a> — ${escapeHtml(t.seoDescription || t.description)}</li>`,
+    ).join("");
+    return `<div style="font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:24px 20px">` +
+      `<h1>X Toolkit — ${LIVE_TOOLS.length}+ Free Online Tools for X, SEO, Developers &amp; Creators</h1>` +
+      `<p>${escapeHtml(description)}</p>` +
+      `<h2>All ${LIVE_TOOLS.length} Free Tools</h2><ul>${toolLinks}</ul>` +
+      `<p><a href="${SITE_URL}/tools">Browse all tools</a> | <a href="${SITE_URL}/about">About</a></p>` +
+      `</div>`;
+  }
+
+  if (tool) {
+    const related = LIVE_TOOLS
+      .filter((t) => t.category === tool.category && t.id !== tool.id)
+      .slice(0, 6)
+      .map((t) => `<li><a href="${SITE_URL}${t.href}">${escapeHtml(t.label)}</a></li>`)
+      .join("");
+    return `<div style="font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:24px 20px">` +
+      `<h1>${escapeHtml(tool.seoTitle || tool.label)}</h1>` +
+      `<p>${escapeHtml(tool.seoDescription || tool.description)}</p>` +
+      (related ? `<h2>Related Tools</h2><ul>${related}</ul>` : "") +
+      `<p><a href="${SITE_URL}/tools">Browse all ${LIVE_TOOLS.length} free tools</a></p>` +
+      `</div>`;
+  }
+
+  return `<div style="font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:24px 20px">` +
+    `<h1>${escapeHtml(title)}</h1>` +
+    `<p>${escapeHtml(description)}</p>` +
+    `<p><a href="${SITE_URL}/tools">Browse all ${LIVE_TOOLS.length} free tools</a></p>` +
+    `</div>`;
+}
+
 function generatePageHtml(template, { path, title, description, isHomepage, category }, tool) {
   const canonicalUrl = `${SITE_URL}${path}`;
   const safeTitle = escapeHtml(title);
@@ -369,6 +425,11 @@ function generatePageHtml(template, { path, title, description, isHomepage, cate
   html = html.replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/,  `$1${safeTitle}$2`);
   html = html.replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/,  `$1${safeDesc}$2`);
   html = html.replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/,  `$1${canonicalUrl}$2`);
+
+  // Inject static content into <div id="root"> so Google indexes unique
+  // content on every page without needing to execute JavaScript.
+  const rootContent = buildRootContent({ path, title, description, isHomepage, category }, tool);
+  html = html.replace('<div id="root"></div>', `<div id="root">${rootContent}</div>`);
 
   // Tool and category pages get SoftwareApplication + BreadcrumbList.
   // Homepage already has complete schemas from the template — no injection needed.
