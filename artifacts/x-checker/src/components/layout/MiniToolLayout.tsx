@@ -95,9 +95,9 @@ export function MiniToolLayout({
 
       {/* ── Tool header banner ── */}
       <div className="border-b border-border/50 bg-gradient-to-b from-primary/[0.04] to-transparent">
-        <div className="max-w-4xl mx-auto px-4 md:px-8 pt-6 pb-8">
+        <div className="max-w-4xl mx-auto px-4 md:px-8 pt-3 pb-4">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-5">
+          <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
             <Link href="/">
               <span className="flex items-center gap-1 hover:text-foreground transition-colors cursor-pointer">
                 <Home className="h-3 w-3" /> Home
@@ -111,24 +111,24 @@ export function MiniToolLayout({
             <span className="text-foreground font-medium truncate">{title}</span>
           </nav>
 
-          <div className="flex items-start gap-4">
-            <div className="h-12 w-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 shadow-sm shadow-primary/10">
-              <Icon className="h-6 w-6 text-primary" />
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 shadow-sm shadow-primary/10">
+              <Icon className="h-4.5 w-4.5 text-primary" style={{width:"18px",height:"18px"}} />
             </div>
-            <div className="flex-1 min-w-0 pt-0.5">
-              <div className="flex items-center gap-2.5 mb-2">
-                <h1 className="text-2xl md:text-3xl font-bold tracking-tight leading-tight">{title}</h1>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="text-xl md:text-2xl font-bold tracking-tight leading-tight">{title}</h1>
                 <Badge variant="outline" className="border-primary/30 text-primary bg-primary/8 text-xs shrink-0 hidden sm:inline-flex">
                   {badge}
                 </Badge>
               </div>
-              <p className="text-muted-foreground leading-relaxed max-w-2xl text-sm md:text-base">{description}</p>
+              <p className="text-muted-foreground text-xs md:text-sm leading-snug max-w-2xl mt-0.5 line-clamp-1">{description}</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 md:px-8 py-10 md:py-12 space-y-12">
+      <div className="max-w-4xl mx-auto px-4 md:px-8 py-5 md:py-7 space-y-10">
 
         {/* Tool content */}
         <div>{children}</div>
