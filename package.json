@@ -28,5 +28,8 @@
       "postcss": "^8.5.10",
       "lodash": "^4.18.0"
     }
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2"
   }
 }
