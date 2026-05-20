@@ -404,11 +404,12 @@ export function Navbar() {
             <Link href="/chrome-extension">
               <button className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap border ${
                 location === "/chrome-extension"
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-primary/10 text-primary border-primary/30 hover:bg-primary/20"
+                  ? "bg-amber-500/20 text-amber-400 border-amber-500/40"
+                  : "bg-amber-500/8 text-amber-400 border-amber-500/25 hover:bg-amber-500/15"
               }`}>
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 Extension
+                <span className="text-[9px] font-bold uppercase tracking-wide opacity-70">Soon</span>
               </button>
             </Link>
             <div className="hidden xl:flex items-center gap-1.5 text-xs text-muted-foreground">
