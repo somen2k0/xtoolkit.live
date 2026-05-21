@@ -38,15 +38,16 @@ const O_DOMAINS = [
 ];
 type InboxProv = "guerrilla" | "onesecmail" | "freemail";
 
-function pickRandomDomain(fDomains: string[], exclude?: InboxProv): { domain: string; prov: InboxProv } {
+function pickRandomDomain(fDomains: string[], exclude?: Set<InboxProv>): { domain: string; prov: InboxProv } {
   // Pick provider with equal weight, then a random domain within it.
   // This ensures 1secmail, Guerrilla, and mail.gw each get ~33% of traffic.
   // If a provider fails (e.g. 1secmail blocked on Replit), the retry picks a different one.
-  const pool: Array<{ prov: InboxProv; domains: string[] }> = [
-    { prov: "guerrilla", domains: G_DOMAINS },
-    { prov: "onesecmail", domains: O_DOMAINS },
+  const allPool: Array<{ prov: InboxProv; domains: string[] }> = [
+    { prov: "guerrilla" as InboxProv, domains: G_DOMAINS },
+    { prov: "onesecmail" as InboxProv, domains: O_DOMAINS },
     ...(fDomains.length > 0 ? [{ prov: "freemail" as InboxProv, domains: fDomains }] : []),
-  ].filter(p => p.prov !== exclude);
+  ];
+  const pool = allPool.filter(p => !exclude?.has(p.prov));
   if (pool.length === 0) return { domain: G_DOMAINS[0], prov: "guerrilla" };
   const pick = pool[Math.floor(Math.random() * pool.length)];
   return { domain: pick.domains[Math.floor(Math.random() * pick.domains.length)], prov: pick.prov };
@@ -176,6 +177,9 @@ function UnifiedInboxSection() {
   const [showDomainDrop, setShowDomainDrop] = useState(false);
   const { toast } = useToast();
   const [fDomains, setFDomains] = useState<string[]>([]);
+  const [failedDomains, setFailedDomains] = useState<Set<string>>(new Set());
+  const [switchingToDomain, setSwitchingToDomain] = useState<string | null>(null);
+  const failedDomainsRef = useRef<Set<string>>(new Set());
   const refreshTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const countdownTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const initialized = useRef(false);
@@ -372,15 +376,15 @@ function UnifiedInboxSection() {
       }
     }
     setCreating(true); setError(null);
-    // Retry up to 3 times, excluding the failed provider each time.
-    // On Vercel: 1secmail works fine. On Replit: 1secmail returns 503 → retries pick guerrilla/mail.gw.
-    let lastFailed: InboxProv | undefined;
+    // Retry up to 3 times, accumulating all failed providers so each is tried at most once.
+    // On Replit: 1secmail returns 503 and mail.gw creation fails → guerrilla is used.
+    const failedProvs = new Set<InboxProv>();
     for (let attempt = 0; attempt < 3; attempt++) {
       if (attempt > 0) await sleep(1800);
-      const { domain, prov } = pickRandomDomain(fDomainsRef.current, lastFailed);
+      const { domain, prov } = pickRandomDomain(fDomainsRef.current, failedProvs);
       const ok = await createOnDomain(domain, prov);
       if (ok) { startPolling(); setCreating(false); return; }
-      lastFailed = prov;
+      failedProvs.add(prov);
     }
     setError("Could not create inbox. Please try again."); setCreating(false);
   }, [createOnDomain, startPolling, fetchGMsgs, fetchOMsgs, fetchFMsgs]);
@@ -391,83 +395,127 @@ function UnifiedInboxSection() {
     setGMessages([]); setOMessages([]); setSelectedG(null); setSelectedO(null); setSelectedId(null);
     if (refreshTimer.current) clearInterval(refreshTimer.current);
     if (countdownTimer.current) clearInterval(countdownTimer.current);
-    let lastFailed: InboxProv | undefined;
+    const failedProvs = new Set<InboxProv>();
     for (let attempt = 0; attempt < 3; attempt++) {
       if (attempt > 0) await sleep(1800);
-      const { domain, prov } = pickRandomDomain(fDomainsRef.current, lastFailed);
+      const { domain, prov } = pickRandomDomain(fDomainsRef.current, failedProvs);
       const ok = await createOnDomain(domain, prov);
       if (ok) { startPolling(); setCreating(false); return; }
-      lastFailed = prov;
+      failedProvs.add(prov);
     }
     setError("Could not create new inbox."); setCreating(false);
   }, [createOnDomain, startPolling]);
 
   // ── domain switching ───────────────────────────────────────────────
-  const switchDomain = useCallback(async (newDomain: string) => {
-    setShowDomainDrop(false);
-    const isG = G_DOMAINS.includes(newDomain);
-    const isO = O_DOMAINS.includes(newDomain);
-    const newProv: InboxProv = isG ? "guerrilla" : isO ? "onesecmail" : "freemail";
-    setSelectedG(null); setSelectedO(null); setSelectedF(null); setSelectedId(null);
 
+  // Tries to switch to exactly one domain. Returns true on success (and updates refs+state).
+  const trySwitchToDomain = useCallback(async (domain: string): Promise<boolean> => {
+    const isG = G_DOMAINS.includes(domain);
+    const isO = O_DOMAINS.includes(domain);
     if (isG) {
       if (gSession) {
         try {
           const r = await fetch("/api/guerrilla/set-user", {
             method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user: gSession.user, domain: newDomain, sid_token: gSession.sid }),
+            body: JSON.stringify({ user: gSession.user, domain, sid_token: gSession.sid }),
           });
           const d = await r.json() as GuerrillaInbox & { error?: string };
           if (r.ok && d.email) {
-            const gs = { sid: d.sid_token ?? gSession.sid, user: d.user ?? gSession.user, domain: d.domain ?? newDomain, email: d.email };
+            const gs = { sid: d.sid_token ?? gSession.sid, user: d.user ?? gSession.user, domain: d.domain ?? domain, email: d.email };
             gSessionRef.current = gs; setGSession(gs); setGMessages([]);
-            toast({ title: "Domain switched!", description: d.email });
+            return true;
           }
-        } catch { toast({ title: "Network error", variant: "destructive" }); }
+          return false;
+        } catch { return false; }
       } else {
         const gs = await createGInbox(oSession?.login ?? fSession?.login);
-        if (!gs) { toast({ title: "Could not switch domain", variant: "destructive" }); return; }
+        return !!gs;
       }
     } else if (isO) {
       const currentLogin = oSession?.login ?? gSession?.user ?? fSession?.login;
       try {
         const r = await fetch("/api/onesecmail/set-address", {
           method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ login: currentLogin, domain: newDomain }),
+          body: JSON.stringify({ login: currentLogin, domain }),
         });
         const d = await r.json() as OSession & { error?: string };
         if (r.ok && d.email) {
           const os = { login: d.login, domain: d.domain, email: d.email, domains: d.domains ?? O_DOMAINS };
           oSessionRef.current = os; setOSession(os); setOMessages([]);
-          toast({ title: "Domain switched!", description: d.email });
+          return true;
         }
-      } catch { toast({ title: "Network error", variant: "destructive" }); }
+        return false;
+      } catch { return false; }
     } else {
-      // mail.gw domain — create new account (preserving username where possible)
       const currentLogin = fSession?.login ?? oSession?.login ?? gSession?.user;
       try {
         const r = await fetch("/api/freemail/set-address", {
           method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ login: currentLogin, domain: newDomain }),
+          body: JSON.stringify({ login: currentLogin, domain }),
         });
         const d = await r.json() as FSession & { token: string; error?: string };
         if (r.ok && d.email && d.token) {
           const fs: FSession = { login: d.login, domain: d.domain, email: d.email, token: d.token };
           fSessionRef.current = fs; setFSession(fs); setFMessages([]);
           saveInboxSession("freemail", fs);
-          toast({ title: "Domain switched!", description: d.email });
-        } else {
-          const fs = await createFInbox(undefined, newDomain);
-          if (!fs) { toast({ title: "Could not switch domain", variant: "destructive" }); return; }
-          setFMessages([]);
+          return true;
         }
-      } catch { toast({ title: "Network error", variant: "destructive" }); }
+        const fs = await createFInbox(undefined, domain);
+        if (fs) { setFMessages([]); return true; }
+        return false;
+      } catch { return false; }
+    }
+  }, [gSession, oSession, fSession, createGInbox, createFInbox]);
+
+  const switchDomain = useCallback(async (requestedDomain: string) => {
+    setShowDomainDrop(false);
+    setSelectedG(null); setSelectedO(null); setSelectedF(null); setSelectedId(null);
+
+    // Build ordered list: requested domain first, then all others that haven't failed yet
+    const allDomains = [...G_DOMAINS, ...O_DOMAINS, ...fDomainsRef.current];
+    const orderedToTry = [
+      requestedDomain,
+      ...allDomains.filter(d => d !== requestedDomain && !failedDomainsRef.current.has(d)),
+    ];
+
+    const nowFailed = new Set<string>();
+
+    for (let i = 0; i < Math.min(orderedToTry.length, 4); i++) {
+      const domain = orderedToTry[i];
+      setSwitchingToDomain(domain);
+
+      const ok = await trySwitchToDomain(domain);
+      if (ok) {
+        const isG = G_DOMAINS.includes(domain);
+        const isO = O_DOMAINS.includes(domain);
+        const newProv: InboxProv = isG ? "guerrilla" : isO ? "onesecmail" : "freemail";
+        activeProvRef.current = newProv;
+        setActiveProv(newProv);
+        startPolling();
+        setSwitchingToDomain(null);
+        if (nowFailed.size > 0) {
+          const updatedFailed = new Set([...failedDomainsRef.current, ...nowFailed]);
+          failedDomainsRef.current = updatedFailed;
+          setFailedDomains(updatedFailed);
+          toast({ title: "Switched domain", description: `Using @${domain} (${requestedDomain} was unavailable)` });
+        } else {
+          toast({ title: "Domain switched!", description: `@${domain}` });
+        }
+        if (newProv === "guerrilla" && gSessionRef.current) fetchGMsgs(gSessionRef.current.sid);
+        else if (newProv === "onesecmail" && oSessionRef.current) fetchOMsgs(oSessionRef.current.login, oSessionRef.current.domain);
+        else if (newProv === "freemail" && fSessionRef.current) fetchFMsgs(fSessionRef.current.token);
+        return;
+      }
+      nowFailed.add(domain);
     }
 
-    activeProvRef.current = newProv;
-    setActiveProv(newProv);
-    startPolling();
-  }, [gSession, oSession, fSession, createGInbox, createFInbox, toast, startPolling]);
+    // All tried domains failed
+    const updatedFailed = new Set([...failedDomainsRef.current, ...nowFailed]);
+    failedDomainsRef.current = updatedFailed;
+    setFailedDomains(updatedFailed);
+    setSwitchingToDomain(null);
+    toast({ title: "Domain unavailable", description: "Could not switch — tried domains are currently unreachable.", variant: "destructive" });
+  }, [trySwitchToDomain, fetchGMsgs, fetchOMsgs, fetchFMsgs, startPolling, toast]);
 
   // ── custom username ────────────────────────────────────────────────
   const applyCustomUser = useCallback(async () => {
@@ -668,20 +716,26 @@ function UnifiedInboxSection() {
 
           {/* 16-domain picker */}
           <div className="relative">
-            <Button variant="outline" size="sm" onClick={() => setShowDomainDrop(v => !v)} disabled={!currentEmail} className="text-xs gap-1.5">
-              <Zap className={`h-3.5 w-3.5 ${currentPill.color}`} />
-              {currentDomain ? `@${currentDomain}` : "Choose domain"}
-              <ChevronDown className="h-3 w-3" />
+            <Button variant="outline" size="sm" onClick={() => setShowDomainDrop(v => !v)} disabled={!currentEmail || !!switchingToDomain} className="text-xs gap-1.5">
+              <Zap className={`h-3.5 w-3.5 ${switchingToDomain ? "text-amber-400" : currentPill.color}`} />
+              {switchingToDomain ? `Trying @${switchingToDomain}…` : currentDomain ? `@${currentDomain}` : "Choose domain"}
+              {switchingToDomain ? <Loader2 className="h-3 w-3 animate-spin" /> : <ChevronDown className="h-3 w-3" />}
             </Button>
             {showDomainDrop && (
               <div className="absolute top-full left-0 mt-1 z-50 bg-card border border-border/60 rounded-xl shadow-xl overflow-hidden min-w-60 max-h-80 overflow-y-auto">
                 <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30">Available domains</div>
-                {ALL_DOMAINS_GROUPED.flatMap(grp => grp.domains).map(d => (
-                  <button key={d} onClick={() => switchDomain(d)}
-                    className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors font-mono border-b border-border/20 last:border-b-0 ${d === currentDomain ? "text-cyan-400 font-semibold bg-muted/20" : "text-foreground/80"}`}>
-                    @{d}
-                  </button>
-                ))}
+                {ALL_DOMAINS_GROUPED.flatMap(grp => grp.domains).map(d => {
+                  const isFailed = failedDomains.has(d);
+                  const isCurrent = d === currentDomain;
+                  return (
+                    <button key={d} onClick={() => switchDomain(d)}
+                      className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors font-mono border-b border-border/20 last:border-b-0 flex items-center justify-between gap-2
+                        ${isCurrent ? "text-cyan-400 font-semibold bg-muted/20" : isFailed ? "text-muted-foreground/40" : "text-foreground/80"}`}>
+                      <span>@{d}</span>
+                      {isFailed && <span className="text-amber-400 text-[10px] font-bold shrink-0">(unavailable)</span>}
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>

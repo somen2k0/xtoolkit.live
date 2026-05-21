@@ -4,7 +4,7 @@ const router = Router();
 
 // ── Provider base URLs ─────────────────────────────────────────────────────
 const PROVIDERS = [
-  { prefix: "mgw", base: "https://api.mail.gw", fallback: ["oakon.com"] },
+  { prefix: "mgw", base: "https://api.mail.gw", fallback: ["mail.gw", "mail.tm"] },
 ] as const;
 type Prefix = "mgw";
 
@@ -188,7 +188,7 @@ router.get("/freemail/new", async (req, res) => {
   if (tagged.length === 0) { res.status(503).json({ error: "No domains available." }); return; }
 
   const reqDomain = (req.query.domain as string | undefined)?.toLowerCase().trim();
-  const entry = (reqDomain && tagged.find(x => x.domain === reqDomain))
+  const entry = (reqDomain ? tagged.find(x => x.domain === reqDomain) : undefined)
     ?? tagged[Math.floor(Math.random() * tagged.length)];
 
   const { domain, prefix } = entry;
@@ -215,7 +215,7 @@ router.post("/freemail/set-address", async (req, res) => {
   const tagged = await getAllDomains();
   if (tagged.length === 0) { res.status(503).json({ error: "No domains available." }); return; }
 
-  const entry = (rawDomain && tagged.find(x => x.domain === rawDomain.toLowerCase()))
+  const entry = (rawDomain ? tagged.find(x => x.domain === rawDomain.toLowerCase()) : undefined)
     ?? tagged[Math.floor(Math.random() * tagged.length)];
 
   const { domain, prefix } = entry;
