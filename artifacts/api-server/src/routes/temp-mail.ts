@@ -59,7 +59,7 @@ async function gFetch(params: Record<string, string>, sid?: string): Promise<Res
   Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   return fetch(url.toString(), {
     headers: { Accept: "application/json", "User-Agent": "Mozilla/5.0" },
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(5000),
   });
 }
 

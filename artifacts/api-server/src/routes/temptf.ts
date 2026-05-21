@@ -26,7 +26,7 @@ router.get("/temptf/generate", async (req, res) => {
   try {
     const r = await fetch(`${BASE}/account?${params.toString()}`, {
       headers: HEADERS,
-      signal: AbortSignal.timeout(12000),
+      signal: AbortSignal.timeout(7000),
     });
 
     if (!r.ok) {
@@ -67,7 +67,7 @@ router.post("/temptf/messages", async (req, res) => {
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify({ email }),
-      signal: AbortSignal.timeout(15000),
+      signal: AbortSignal.timeout(8000),
     });
 
     if (!r.ok) {

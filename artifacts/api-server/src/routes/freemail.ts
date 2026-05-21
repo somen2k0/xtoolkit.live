@@ -17,7 +17,7 @@ async function fetchProviderDomains(prefix: Prefix, base: string, fallback: read
   const cache = domainCache[prefix];
   if (Date.now() < cache.expiry && cache.domains.length > 0) return cache.domains;
   try {
-    const r = await fetch(`${base}/domains`, { signal: AbortSignal.timeout(8000) });
+    const r = await fetch(`${base}/domains`, { signal: AbortSignal.timeout(5000) });
     if (!r.ok) return cache.domains.length ? cache.domains : [...fallback];
     const d = await r.json() as { "hydra:member"?: Array<{ domain: string; isActive: boolean; isPrivate?: boolean }> };
     const domains = (d["hydra:member"] ?? [])
@@ -100,7 +100,7 @@ async function createAccount(base: string, address: string, password: string): P
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ address, password }),
-      signal: AbortSignal.timeout(10000),
+      signal: AbortSignal.timeout(5000),
     });
     return r.ok; // only true on 2xx — 422 means taken, password unknown
   } catch { return false; }
@@ -112,7 +112,7 @@ async function getJwt(base: string, address: string, password: string): Promise<
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ address, password }),
-      signal: AbortSignal.timeout(10000),
+      signal: AbortSignal.timeout(5000),
     });
     if (!r.ok) return null;
     const d = await r.json() as { token?: string };
@@ -123,7 +123,7 @@ async function getJwt(base: string, address: string, password: string): Promise<
 async function fetchInbox(base: string, jwt: string): Promise<NormMsg[]> {
   const r = await fetch(`${base}/messages`, {
     headers: { Authorization: `Bearer ${jwt}` },
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(6000),
   });
   if (!r.ok) throw new Error(`Inbox fetch failed: ${r.status}`);
   const d = await r.json() as {
@@ -148,7 +148,7 @@ async function fetchMessage(base: string, id: string, jwt: string): Promise<Norm
   try {
     const r = await fetch(`${base}/messages/${encodeURIComponent(id)}`, {
       headers: { Authorization: `Bearer ${jwt}` },
-      signal: AbortSignal.timeout(10000),
+      signal: AbortSignal.timeout(6000),
     });
     if (!r.ok) return null;
     const m = await r.json() as {
@@ -191,7 +191,7 @@ router.get("/freemail/new", async (req, res) => {
 
   let login = randomLogin();
   let jwt: string | null = null;
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     if (attempt > 0) login = randomLogin();
     const created = await createAccount(base, `${login}@${domain}`, password);
     if (!created) continue;
@@ -221,7 +221,7 @@ router.post("/freemail/set-address", async (req, res) => {
 
   let login = requestedLogin ?? randomLogin();
   let jwt: string | null = null;
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     if (attempt > 0) login = randomLogin(); // fall back to random if requested name is taken
     const created = await createAccount(base, `${login}@${domain}`, password);
     if (!created) continue;

@@ -2,6 +2,10 @@
   "buildCommand": "pnpm install --frozen-lockfile && PORT=5000 BASE_PATH=/ pnpm --filter @workspace/x-checker run build && pnpm --filter @workspace/api-server run build",
   "outputDirectory": "artifacts/x-checker/dist/public",
 
+  "functions": {
+    "api/[...path].ts": { "maxDuration": 30 }
+  },
+
   "headers": [
     {
       "source": "/(.*)",
