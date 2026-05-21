@@ -926,18 +926,24 @@ function TempGmailTab() {
     setMessages([]);
     setSelectedId(null);
     emailRef.current = null;
-    // Retry up to 3 times — handles API server startup delay and transient failures
     for (let attempt = 0; attempt < 3; attempt++) {
       if (attempt > 0) await sleep(1800);
       try {
         const r = await fetch(`/api/temptf/generate?type=${gmailType}`);
-        const d = await r.json() as { email?: string; error?: string };
+        const d = await r.json() as { email?: string; source?: string; error?: string };
         if (!r.ok || !d.email) {
           if (attempt === 2) setError(d.error ?? "Failed to generate address. Please try again.");
           continue;
         }
         emailRef.current = d.email;
         setEmail(d.email);
+        // If address was generated locally (temp.tf unavailable), inbox checking
+        // won't work — show a soft warning instead of polling.
+        if (d.source === "local") {
+          setError("Inbox checking is temporarily unavailable. You can still use the address for sign-ups.");
+          setGenerating(false);
+          return;
+        }
         await fetchMessages(d.email);
         startPolling(d.email);
         setGenerating(false);

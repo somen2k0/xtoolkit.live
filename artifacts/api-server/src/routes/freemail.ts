@@ -13,11 +13,17 @@ const domainCache: Record<Prefix, { domains: string[]; expiry: number }> = {
   mgw: { domains: [], expiry: 0 },
 };
 
+const FETCH_HEADERS = {
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+  "Accept": "application/json",
+  "Content-Type": "application/json",
+};
+
 async function fetchProviderDomains(prefix: Prefix, base: string, fallback: readonly string[]): Promise<string[]> {
   const cache = domainCache[prefix];
   if (Date.now() < cache.expiry && cache.domains.length > 0) return cache.domains;
   try {
-    const r = await fetch(`${base}/domains`, { signal: AbortSignal.timeout(5000) });
+    const r = await fetch(`${base}/domains`, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(6000) });
     if (!r.ok) return cache.domains.length ? cache.domains : [...fallback];
     const d = await r.json() as { "hydra:member"?: Array<{ domain: string; isActive: boolean; isPrivate?: boolean }> };
     const domains = (d["hydra:member"] ?? [])
@@ -98,9 +104,9 @@ async function createAccount(base: string, address: string, password: string): P
   try {
     const r = await fetch(`${base}/accounts`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: FETCH_HEADERS,
       body: JSON.stringify({ address, password }),
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(6000),
     });
     return r.ok; // only true on 2xx — 422 means taken, password unknown
   } catch { return false; }
@@ -110,9 +116,9 @@ async function getJwt(base: string, address: string, password: string): Promise<
   try {
     const r = await fetch(`${base}/token`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: FETCH_HEADERS,
       body: JSON.stringify({ address, password }),
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(6000),
     });
     if (!r.ok) return null;
     const d = await r.json() as { token?: string };
@@ -122,8 +128,8 @@ async function getJwt(base: string, address: string, password: string): Promise<
 
 async function fetchInbox(base: string, jwt: string): Promise<NormMsg[]> {
   const r = await fetch(`${base}/messages`, {
-    headers: { Authorization: `Bearer ${jwt}` },
-    signal: AbortSignal.timeout(6000),
+    headers: { ...FETCH_HEADERS, Authorization: `Bearer ${jwt}` },
+    signal: AbortSignal.timeout(8000),
   });
   if (!r.ok) throw new Error(`Inbox fetch failed: ${r.status}`);
   const d = await r.json() as {
@@ -147,8 +153,8 @@ async function fetchInbox(base: string, jwt: string): Promise<NormMsg[]> {
 async function fetchMessage(base: string, id: string, jwt: string): Promise<NormMsg | null> {
   try {
     const r = await fetch(`${base}/messages/${encodeURIComponent(id)}`, {
-      headers: { Authorization: `Bearer ${jwt}` },
-      signal: AbortSignal.timeout(6000),
+      headers: { ...FETCH_HEADERS, Authorization: `Bearer ${jwt}` },
+      signal: AbortSignal.timeout(8000),
     });
     if (!r.ok) return null;
     const m = await r.json() as {
