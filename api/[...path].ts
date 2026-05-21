@@ -1,28 +1,33 @@
-console.log('=== VERCEL FUNCTION STARTING ===');
-console.log('NODE_ENV:', process.env['NODE_ENV']);
+// @ts-ignore
+import handler from "../artifacts/api-server/dist/handler.mjs";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let app: any;
 
-try {
-  console.log('Importing Express app from handler.mjs...');
-  // Dynamic import prevents @vercel/node from re-bundling the pre-built esbuild
-  // output. The pre-built handler.mjs is a self-contained bundle that includes
-  // all dependencies; re-bundling it causes pino worker files to be lost.
-  const mod = await import('../artifacts/api-server/dist/handler.mjs');
-  app = mod.default;
-  console.log('Express app imported successfully');
-} catch (err) {
-  console.error('STARTUP CRASH:', err);
+async function loadApp() {
+  if (!app) {
+    try {
+      // @ts-ignore
+      const mod = await import("../artifacts/api-server/dist/handler.mjs");
+      app = mod.default;
+    } catch (err: any) {
+      console.error("STARTUP CRASH:", err?.message, err?.stack);
+    }
+  }
+  return app;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function handler(req: any, res: any) {
-  if (!app) {
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
+  const expressApp = await loadApp();
+  if (!expressApp) {
     return res.status(500).json({
-      error: 'Server failed to start',
-      hint: 'Check Vercel function logs for STARTUP CRASH message',
+      error: "Server failed to initialize",
+      hint: "Check Vercel function logs for STARTUP CRASH"
     });
   }
-  return app(req, res);
+  return expressApp(req, res);
 }
