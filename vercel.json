@@ -3,7 +3,10 @@
   "outputDirectory": "artifacts/x-checker/dist/public",
 
   "functions": {
-    "api/[...path].ts": { "maxDuration": 30 }
+    "api/[...path].ts": {
+      "maxDuration": 30,
+      "includeFiles": "artifacts/api-server/dist/**"
+    }
   },
 
   "headers": [

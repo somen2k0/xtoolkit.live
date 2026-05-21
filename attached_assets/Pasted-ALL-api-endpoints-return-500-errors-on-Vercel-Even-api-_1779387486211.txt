@@ -1,0 +1,99 @@
+ALL /api/* endpoints return 500 errors on Vercel. Even /api/healthz
+and /api/track which need zero API keys are failing. This is a
+server startup crash, not a logic error.
+
+Do NOT revert anything. Do NOT change any features.
+Just find and fix the startup crash.
+
+---
+
+### STEP 1 — Build the backend right now and show output
+
+Run this and paste the FULL output:
+
+cd artifacts/api-server && pnpm build
+
+If there are any errors in the build output, fix those first
+and show me what they are.
+
+---
+
+### STEP 2 — Show me these 3 files in full
+
+Please show the complete current contents of:
+1. api/[...path].ts  (Vercel entry point)
+2. artifacts/api-server/src/index.ts  (Express app entry)
+3. vercel.json
+
+Do not change them yet — just show me.
+
+---
+
+### STEP 3 — Check for broken imports
+
+In artifacts/api-server/src/index.ts, look at every single
+import statement at the top of the file.
+
+For each imported file/module check:
+- Does the file actually exist at that path?
+- Is the package installed in package.json?
+- Could it throw an error when imported?
+
+List any suspicious imports.
+
+---
+
+### STEP 4 — Add temporary debug logging
+
+At the very top of api/[...path].ts, before anything else,
+add this and redeploy:
+
+console.log('=== VERCEL FUNCTION STARTING ===');
+
+Then wrap the Express import in try/catch:
+
+let app: any;
+try {
+  console.log('Importing Express app...');
+  const module = await import('../artifacts/api-server/dist/index.mjs');
+  app = module.default;
+  console.log('Express app imported successfully');
+} catch (err) {
+  console.error('STARTUP CRASH:', err);
+}
+
+export default async function handler(req: any, res: any) {
+  if (!app) {
+    return res.status(500).json({
+      error: 'Server failed to start',
+      hint: 'Check Vercel function logs for STARTUP CRASH message'
+    });
+  }
+  return app(req, res);
+}
+
+After deploying this, go to Vercel dashboard → your project →
+Deployments → latest deployment → Functions tab → click on
+api/[...path] → check the logs for the STARTUP CRASH error.
+That will tell us the exact line causing the crash.
+
+---
+
+### STEP 5 — Check vercel.json functions config
+
+Make sure vercel.json has this exact functions block:
+{
+  "functions": {
+    "api/[...path].ts": {
+      "maxDuration": 30
+    }
+  }
+}
+
+If "includeFiles" or any other option was added recently,
+show me — it could be causing the build to fail silently.
+
+---
+
+Show me the output of every step before proceeding.
+Do not make feature changes. Only fix the 500 errors.
