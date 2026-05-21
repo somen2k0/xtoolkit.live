@@ -293,6 +293,22 @@ export default function RegexTester() {
             </div>
           </div>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Regex Tester lets you write, test, and debug regular expressions in real time — with live match highlighting, capture group extraction, and support for all standard JavaScript regex flags (global, case-insensitive, multiline, dotAll, unicode, and sticky).
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            All processing happens in your browser using JavaScript's built-in RegExp engine — no server round-trips, so it works instantly even on large input strings.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Writing and testing validation patterns for forms or APIs</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Debugging a regex that isn't matching the expected strings</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Extracting capture groups from log files or structured text</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -285,6 +285,22 @@ export default function NewsletterTemplateGenerator() {
             <pre className="rounded-xl border border-border/60 bg-muted/20 p-3 text-xs font-mono text-foreground/70 overflow-auto max-h-48 whitespace-pre-wrap">{html.slice(0, 800)}...</pre>
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Newsletter Template Generator creates clean, responsive HTML email templates based on your content — including a header, body sections, call-to-action button, and footer. Templates are designed to render correctly across Gmail, Outlook, Apple Mail, and mobile clients.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            HTML email has notoriously inconsistent rendering across clients. This generator uses table-based layouts and inline styles — the most reliable approach for consistent display across all email clients.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Creating a ready-to-send newsletter template without a paid email platform</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Building a quick one-off announcement email outside your usual ESP</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Generating a base HTML template to import into Mailchimp, Klaviyo, or similar</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

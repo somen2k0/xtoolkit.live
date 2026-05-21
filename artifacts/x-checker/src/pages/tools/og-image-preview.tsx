@@ -355,6 +355,19 @@ export default function OgImagePreview() {
               ))}
             </div>
           </section>
+
+          {/* About */}
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">About this tool</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              The OG Image Preview tool lets you see exactly how your page will look when shared on X (Twitter), Facebook, LinkedIn, and Slack — before you publish. Enter a URL to fetch live meta tags, or manually input your title, description, and image URL to test any combination.
+            </p>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Testing Open Graph tags after deploying a new page or blog post</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Verifying the correct image appears when sharing on social media</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Previewing link cards before a launch or campaign announcement</li>
+            </ul>
+          </div>
         </div>
       </div>
     </MiniToolLayout>

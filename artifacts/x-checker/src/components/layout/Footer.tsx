@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FeedbackModal } from "@/components/FeedbackModal";
-import { Search, Sparkles, Link2, AtSign, Mail, CheckCheck, Hash, MessageSquare, Type, BarChart2, Users, Smile, Briefcase, Palette, FileJson, Lock } from "lucide-react";
+import { Search, Sparkles, Link2, AtSign, Mail, CheckCheck, Hash, MessageSquare, Type, BarChart2, FileJson, Lock } from "lucide-react";
 
 const X_TOOLS = [
   { icon: Search, label: "Account Checker", href: "/tools/x-account-checker" },
@@ -13,12 +13,11 @@ const X_TOOLS = [
 ];
 
 const CONTENT_TOOLS = [
-  { icon: Sparkles, label: "Bio Ideas", href: "/tools/bio-ideas" },
-  { icon: Smile, label: "Funny Bios", href: "/tools/funny-bios" },
-  { icon: Briefcase, label: "Professional Bios", href: "/tools/professional-bios" },
-  { icon: Palette, label: "Aesthetic Bios", href: "/tools/aesthetic-bios" },
+  { icon: Sparkles, label: "AI Bio Generator", href: "/tools/bio-generator" },
   { icon: AtSign, label: "Username Generator", href: "/tools/username-generator" },
-  { icon: Users, label: "Name Ideas", href: "/tools/name-ideas" },
+  { icon: Hash, label: "Hashtag Formatter", href: "/tools/hashtag-formatter" },
+  { icon: MessageSquare, label: "Tweet Formatter", href: "/tools/tweet-formatter" },
+  { icon: Type, label: "Font Preview", href: "/tools/font-preview" },
 ];
 
 const FORMATTING_TOOLS = [
@@ -138,11 +137,11 @@ export function Footer() {
                 {[
                   { label: "About", href: "/about" },
                   { label: "Blog", href: "/blog" },
-                  { label: "Chrome Extension", href: "/chrome-extension" },
+                  { label: "Pricing", href: "/pricing" },
+                  { label: "Contact", href: "/contact" },
                   { label: "Privacy Policy", href: "/privacy" },
                   { label: "Terms of Service", href: "/terms" },
-                  { label: "Contact / Feedback", action: () => setShowFeedback(true) },
-                ].map(({ label, href, action }) => (
+                ].map(({ label, href, action }: { label: string; href?: string; action?: () => void }) => (
                   <li key={label}>
                     {action ? (
                       <button onClick={action} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -195,7 +194,7 @@ export function Footer() {
             <div className="flex items-center gap-4">
               <Link href="/privacy"><button className="hover:text-foreground transition-colors">Privacy</button></Link>
               <Link href="/terms"><button className="hover:text-foreground transition-colors">Terms</button></Link>
-              <button onClick={() => setShowFeedback(true)} className="hover:text-foreground transition-colors">Contact</button>
+              <Link href="/contact"><button className="hover:text-foreground transition-colors">Contact</button></Link>
             </div>
           </div>
         </div>

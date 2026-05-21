@@ -185,6 +185,22 @@ export default function EmailValidator() {
             <p className="text-xs text-muted-foreground/40">Supports bulk validation — one per line or comma-separated</p>
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Email Validator checks email addresses for formatting issues, known disposable/throwaway domains, and role-based addresses (like admin@ or info@) that typically have low engagement rates. It supports bulk validation — paste one address per line or comma-separated.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Invalid or low-quality email addresses in your list increase bounce rates, which can damage your sender reputation and affect deliverability for all future campaigns.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Cleaning an email list before sending a campaign</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Filtering out disposable or fake emails from form signups</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Identifying role-based addresses that rarely convert</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -1,0 +1,431 @@
+## SECTION 1 — REMOVE THESE TOOLS COMPLETELY
+ 
+Delete the route, page component, and any navigation/directory references for
+each of the following tools. Also remove them from the /tools directory grid,
+any category landing pages, sitemap, and prerender list.
+ 
+### X / Twitter Tools to Remove:
+- /tools/follower-analyzer
+- /tools/profile-audit
+- /tools/bio-ideas
+- /tools/funny-bios
+- /tools/professional-bios
+- /tools/aesthetic-bios
+- /tools/name-ideas
+### SEO Tools to Remove:
+- /tools/backlink-analyzer
+### Email Tools to Remove:
+- /tools/email-username-generator
+- /tools/email-privacy-checker
+- /tools/spam-risk-checker
+- /tools/email-leak-checker
+- /tools/alias-email-explainer
+- /tools/disposable-email-guide
+- /tools/email-ab-tester
+- /tools/email-character-counter
+- /tools/plain-text-formatter
+After removal, make sure no broken links remain anywhere on the site.
+Update the tools count in the homepage headline (currently says "55+ Free Tools")
+to reflect the accurate number after removals and new additions.
+ 
+---
+ 
+## SECTION 2 — ADD 5 HIGH-TRAFFIC NEW TOOLS
+ 
+Build and add the following 5 new tools. Each must:
+- Have its own route and full page matching the existing site design
+  (Tailwind CSS, Radix UI, same header/footer, same card/layout style)
+- Be added to the /tools directory grid under the correct category
+- Be added to the correct category landing page
+- Be added to the sitemap and prerender list
+- Work 100% in the browser (no backend needed unless noted)
+- Have a descriptive meta title, meta description, and OG tags
+- Include an "About this tool" section below the tool UI
+  (3-4 sentences + 2-3 use case bullet points)
+---
+ 
+### NEW TOOL 1 — Password Generator
+Route: /tools/password-generator
+Category: Developer Tools (or new "Utility Tools" category)
+Meta title: "Password Generator — Free Strong Password Creator | X Toolkit"
+Meta description: "Generate strong, secure passwords instantly. Customize
+length, include symbols, numbers, uppercase. Free online password generator,
+no signup required."
+ 
+Features to build:
+- Slider for password length (8 to 64 characters)
+- Checkboxes: Include Uppercase, Include Lowercase, Include Numbers,
+  Include Symbols (!@#$%^&*)
+- Exclude ambiguous characters option (0, O, l, 1)
+- Generate button → shows password in a large readable field
+- Copy to clipboard button with toast confirmation
+- Password strength indicator (Weak / Fair / Strong / Very Strong)
+  shown as a colored progress bar
+- "Generate Another" button
+- Bulk generate: option to generate 5 or 10 passwords at once
+---
+ 
+### NEW TOOL 2 — QR Code Generator
+Route: /tools/qr-code-generator
+Category: Utility Tools
+Meta title: "QR Code Generator — Free Online QR Creator | X Toolkit"
+Meta description: "Generate QR codes for URLs, text, email, phone numbers,
+and WiFi instantly. Free online QR code generator. No signup, download as PNG."
+ 
+Features to build:
+- Input type selector: URL, Plain Text, Email, Phone, WiFi
+- Dynamic form fields based on type selected
+  (WiFi: SSID, Password, Security type)
+- Real-time QR code preview using the "qrcode" npm package
+  (install: qrcode or qrcode.react)
+- QR size selector: Small / Medium / Large
+- Foreground color picker and background color picker
+- Download as PNG button
+- Error correction level selector: L / M / Q / H
+---
+ 
+### NEW TOOL 3 — Image Compressor
+Route: /tools/image-compressor
+Category: Utility Tools
+Meta title: "Image Compressor — Free Online Image Compression | X Toolkit"
+Meta description: "Compress JPEG, PNG, and WebP images for free online.
+Reduce file size without losing quality. Browser-based, private, no upload
+to server required."
+ 
+Features to build:
+- Drag and drop upload area + click to browse (accept .jpg, .jpeg, .png, .webp)
+- Uses browser Canvas API to compress (no server upload — keep it private)
+- Quality slider: 10% to 100%
+- Shows before/after file size comparison (e.g. "2.4 MB → 340 KB, saved 86%")
+- Shows before/after image preview side by side
+- Download compressed image button
+- Support multiple images (up to 5 at once)
+- Shows compression ratio for each file
+---
+ 
+### NEW TOOL 4 — Color Picker & Converter
+Route: /tools/color-picker
+Category: Developer Tools
+Meta title: "Color Picker & Converter — HEX, RGB, HSL | X Toolkit"
+Meta description: "Pick any color and instantly convert between HEX, RGB,
+HSL, and RGBA formats. Free online color picker for designers and developers.
+No signup."
+ 
+Features to build:
+- Native browser color picker input (large, prominent)
+- Manual HEX input field with live preview
+- Real-time conversion display showing all 4 formats simultaneously:
+  HEX (#1a2b3c), RGB (rgb(26,43,60)), HSL (hsl(210,40%,17%)), RGBA
+- Copy button next to each format
+- Color name display if it matches a known CSS color name
+- Contrast checker: paste a second color and show contrast ratio +
+  WCAG AA/AAA pass/fail badges
+- 20-color recent colors palette (stored in memory during session)
+- Curated palette section: "Popular palettes" with 5-6 preset color schemes
+---
+ 
+### NEW TOOL 5 — Word & Character Counter
+Route: /tools/word-counter
+Category: Utility Tools
+Meta title: "Word Counter — Free Online Word & Character Count | X Toolkit"
+Meta description: "Count words, characters, sentences, and paragraphs in
+real time. Free online word counter for writers, students, and social media.
+No signup."
+ 
+Features to build:
+- Large textarea for pasting or typing text
+- Real-time live stats displayed in prominent stat cards:
+  Words, Characters (with spaces), Characters (no spaces),
+  Sentences, Paragraphs, Reading Time (estimated)
+- Platform limits bar: shows colored progress bars for
+  Twitter/X (280), LinkedIn post (3000), Instagram caption (2200),
+  Meta description (160), Email subject (60)
+- Each platform bar turns yellow at 80% and red at 100%
+- Clear button
+- Keyword density mini-section: shows top 5 most frequent words
+- Copy stats as text button
+---
+ 
+## SECTION 3 — UPDATES TO EXISTING TOOL PAGES
+ 
+For each of the following existing tools, add a content section BELOW the
+tool UI (never above — don't disrupt the tool experience) with:
+- A heading: "About this tool"
+- 3-4 sentences: what it does, who uses it, why it's useful
+- "Common use cases" with 2-3 bullet points
+Add this "About" section to ALL of these:
+- /tools/base64
+- /tools/uuid-generator
+- /tools/case-converter
+- /tools/url-encoder
+- /tools/jwt-decoder
+- /tools/regex-tester
+- /tools/json-formatter
+- /tools/yaml-json
+- /tools/character-counter
+- /tools/hashtag-formatter
+- /tools/at-formatter
+- /tools/profile-link-generator
+- /tools/tweet-scheduler
+- /tools/tweet-formatter
+- /tools/username-generator
+- /tools/font-preview
+- /tools/css-minifier
+- /tools/html-formatter
+- /tools/sql-formatter
+- /tools/url-slug-generator
+- /tools/timezone-converter
+- /tools/temp-mail (all 3 variants)
+- /tools/email-validator
+- /tools/masked-email-generator
+- /tools/email-signature-generator
+- /tools/spam-score-checker
+- /tools/newsletter-template-generator
+- /tools/subject-line-generator
+- /tools/ai-detector
+- /tools/meta-tag-generator
+- /tools/og-image-preview
+- /tools/keyword-density
+- /tools/page-speed-checker
+- /tools/robots-txt-generator
+- /tools/sitemap-validator
+- /tools/schema-generator
+---
+ 
+## SECTION 4 — AD SLOT PLACEHOLDERS
+ 
+Create a reusable AdSlot React component at:
+src/components/AdSlot.tsx
+ 
+Component requirements:
+- Props: slot ("top" | "bottom" | "sidebar"), className (optional)
+- Renders a div with data-ad-slot attribute
+- Contains HTML comment: <!-- Google AdSense ad will load here -->
+- Min-heights: top/bottom = 90px, sidebar = 250px
+- No visible border, no background color, fully transparent placeholder
+- Full width on mobile, responsive
+- Add a data-ad-status="placeholder" attribute for easy find-and-replace later
+Place <AdSlot slot="top" /> between the page title and tool UI, and
+<AdSlot slot="bottom" /> after the tool output/about section on these
+high-value pages:
+- /tools/x-account-checker
+- /tools/json-formatter
+- /tools/jwt-decoder
+- /tools/temp-mail (all variants)
+- /tools/base64
+- /tools/regex-tester
+- /tools/meta-tag-generator
+- /tools/uuid-generator
+- /tools/password-generator (new)
+- /tools/qr-code-generator (new)
+- /tools/image-compressor (new)
+- /tools/color-picker (new)
+- /tools/word-counter (new)
+---
+ 
+## SECTION 5 — PRIVACY POLICY UPDATE (/privacy)
+ 
+Add the following new section to the existing privacy policy page.
+Add it after the existing content, before any footer/closing section.
+Also add "Last updated: [today's date]" at the very top of the page.
+ 
+Section title: "Advertising & Cookies"
+ 
+Content to add:
+- We use Google AdSense to display advertisements on this website.
+- Google AdSense uses cookies, including DoubleClick cookies, to serve
+  ads based on a user's prior visits to this website and other sites.
+- Users may opt out of personalized advertising by visiting:
+  https://www.google.com/settings/ads
+- For more information on how Google uses data when you use our site, visit:
+  https://policies.google.com/technologies/partner-sites
+- We also use Google Analytics cookies to understand how visitors use
+  the site. This data is anonymized and used only to improve the experience.
+- You can opt out of Google Analytics by using the Google Analytics
+  Opt-out Browser Add-on at: https://tools.google.com/dlpage/gaoptout
+- By continuing to use this site, you consent to the use of these cookies.
+---
+ 
+## SECTION 6 — TERMS OF SERVICE UPDATE (/terms)
+ 
+Add "Last updated: [today's date]" at the very top of the Terms page.
+No other changes needed.
+ 
+---
+ 
+## SECTION 7 — ADD CONTACT PAGE (/contact)
+ 
+Create a new /contact route and page with:
+- Same header/footer layout as all other pages
+- Page title: "Contact Us"
+- Subtitle: "Have a question, found a bug, or want to suggest a tool?
+  We'd love to hear from you."
+- Contact form using the existing Web3Forms integration
+  (reuse /api/contact backend endpoint already in the codebase)
+- Form fields: Name (required), Email (required), Subject (required),
+  Message (required, min 20 characters), Submit button
+- On success: show a Sonner toast "Message sent! We'll get back to you soon."
+- On error: show a Sonner toast "Something went wrong. Please try again."
+- Disable submit button while sending (show loading spinner)
+- Also display below the form:
+  "You can also reach us at: support@xtoolkit.live"
+  (plain text, no mailto link needed)
+---
+ 
+## SECTION 8 — FOOTER UPDATE
+ 
+Update the site footer to consistently show these links across ALL pages:
+Tools | About | Contact | Privacy Policy | Terms of Service | Pricing
+ 
+Make sure:
+- "Contact" links to /contact (newly created)
+- All links are present on every page including tool pages
+- Footer is visually consistent with current design
+---
+ 
+## SECTION 9 — SEO IMPROVEMENTS
+ 
+### 9A — Structured Data (JSON-LD) on Tool Pages
+Add a JSON-LD WebApplication schema to every tool page's <head>.
+Use this template for each tool (fill in the tool-specific values):
+ 
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "[Tool Name]",
+  "url": "https://xtoolkit.live/tools/[slug]",
+  "description": "[Tool meta description]",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+```
+ 
+### 9B — Canonical Tags
+Ensure every page has a canonical tag pointing to its own URL.
+Format: <link rel="canonical" href="https://xtoolkit.live/[path]" />
+This should already be handled by prerender.mjs — verify it's working
+for all new tool pages added in Section 2.
+ 
+### 9C — Internal Linking
+On each tool page's "About this tool" section, add 2-3 related tool
+suggestions at the bottom as clickable cards or text links.
+Example: On the JSON Formatter page, link to YAML↔JSON Converter,
+JWT Decoder, and Regex Tester.
+Use logical groupings:
+- Dev tools link to other dev tools
+- SEO tools link to other SEO tools
+- Email tools link to other email tools
+- X tools link to other X tools
+### 9D — Homepage SEO
+On the homepage (/), update the page's <title> and meta description
+to reflect the updated tool count after all additions and removals.
+Also ensure the homepage has a JSON-LD SiteNavigationElement schema
+listing the 6 main category landing pages.
+ 
+### 9E — Category Landing Pages SEO
+For each category landing page (/developer-tools, /seo-tools, /email-tools,
+/social-media-tools, /ai-writing-tools), ensure:
+- Unique meta title and description per category
+- H1 tag matches the category name
+- Intro paragraph (2-3 sentences) describing what tools are in that category
+- All tools in that category are listed with their name, description,
+  and a link to the tool page
+### 9F — robots.txt Update
+Make sure robots.txt allows all tools pages and blocks only:
+- /admin
+- /api/
+- /cws-screenshots
+### 9G — Sitemap
+After all additions and removals, regenerate the sitemap to include
+all new tool pages and exclude all removed ones.
+Ensure the sitemap is accessible at: https://xtoolkit.live/sitemap.xml
+ 
+---
+ 
+## SECTION 10 — PERFORMANCE & TECHNICAL
+ 
+### 10A — Lazy Loading
+Add React.lazy() and Suspense to all tool page components so they
+only load when navigated to. This reduces initial bundle size.
+ 
+### 10B — Image Alt Tags
+Ensure all images on the site (including OG images, icons, tool
+screenshots) have descriptive alt attributes.
+ 
+### 10C — Page Title Format
+Standardize all page <title> tags to this format:
+"[Tool Name] — Free Online [Tool Type] | X Toolkit"
+Examples:
+- "JSON Formatter — Free Online JSON Beautifier | X Toolkit"
+- "Password Generator — Free Strong Password Creator | X Toolkit"
+- "Temp Mail — Free Disposable Email Address | X Toolkit"
+### 10D — 404 Page
+Create a custom 404 page that:
+- Shows a friendly "Page not found" message
+- Lists 6 popular tools as suggestions
+- Has a "Browse all tools" button linking to /tools
+- Matches site design
+---
+ 
+## SECTION 11 — TOOLS DIRECTORY PAGE (/tools)
+ 
+Update the /tools directory page to:
+- Reflect all removed tools (remove their cards)
+- Add cards for all 5 new tools (Sections 2)
+- Group tools clearly by category with visual section headers
+- Add a search/filter bar at the top so users can search tools by name
+- Add category filter buttons (All / X Tools / Developer / SEO /
+  Email / AI / Utility)
+- Update the total tool count badge/text to accurate number
+- Each tool card should show: Tool name, short description (1 line),
+  category badge, and arrow/link
+---
+ 
+## FINAL CHECKLIST FOR REPLIT
+ 
+After completing all sections above, please verify and confirm:
+ 
+[ ] All 16 removed tools are gone with no broken links remaining
+[ ] All 5 new tools are built, accessible, and working
+[ ] All "About this tool" sections added to existing tools
+[ ] AdSlot component created and placed on 13 key pages
+[ ] Privacy Policy updated with AdSense/cookie language + date
+[ ] Terms of Service has last updated date
+[ ] /contact page created and working with Web3Forms
+[ ] Footer updated consistently across all pages
+[ ] JSON-LD schema on all tool pages
+[ ] Canonical tags on all pages
+[ ] Internal linking between related tools
+[ ] Homepage title/description updated with correct tool count
+[ ] Category landing pages have intros and full tool lists
+[ ] robots.txt updated
+[ ] Sitemap regenerated with all current pages
+[ ] React.lazy() added for tool pages
+[ ] Page titles follow standard format
+[ ] Custom 404 page created
+[ ] /tools directory has search bar + category filters
+[ ] No console errors on any page
+[ ] Mobile responsive on all new pages
+ 
+---
+ 
+## IMPORTANT NOTES FOR REPLIT
+ 
+1. Keep ALL existing functionality — do not break anything that currently works
+2. Use the existing design system throughout:
+   Tailwind CSS v4, Radix UI, Framer Motion, Lucide React icons,
+   existing color scheme (indigo/purple theme, #6366f1 primary)
+3. For the Image Compressor, use the browser Canvas API only —
+   no server upload, keep it fully private and client-side
+4. For the QR Code Generator, install the "qrcode.react" package
+5. All new tools must be added to prerender.mjs so they get
+   static HTML generated for SEO
+6. Maintain the existing monorepo structure — frontend changes go
+   in artifacts/x-checker, do not touch the backend unless needed
+7. After all changes, run the build to confirm no TypeScript errors

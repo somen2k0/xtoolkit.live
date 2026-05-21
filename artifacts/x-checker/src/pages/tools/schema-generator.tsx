@@ -324,6 +324,22 @@ export default function SchemaGenerator() {
             <p className="text-xs text-muted-foreground">Paste inside a <code className="bg-muted/40 px-1 rounded">{"<script type=\"application/ld+json\">"}</code> tag in your HTML <code className="bg-muted/40 px-1 rounded">{"<head>"}</code>.</p>
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Schema Markup Generator creates JSON-LD structured data for your web pages — including Article, Product, FAQ, LocalBusiness, and more. Structured data helps search engines understand your content and can unlock rich results like star ratings, FAQs, and product prices directly in Google search.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            JSON-LD is Google's preferred format for structured data and can be dropped into your page's <code className="text-xs font-mono bg-muted/60 rounded px-1">{"<head>"}</code> without modifying your HTML structure.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding FAQ schema to enable FAQ rich results in Google search</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding Article schema to improve news article indexing and display</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding LocalBusiness schema to enhance your Google Business appearance</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

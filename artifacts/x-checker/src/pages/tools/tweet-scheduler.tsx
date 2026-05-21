@@ -178,6 +178,22 @@ export default function TweetScheduler() {
             ))}
           </div>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Tweet Scheduler helps you plan your posting calendar by identifying the best times and days to post on X for maximum reach and engagement. Based on aggregate engagement data, it highlights peak windows by day of week and hour — so you can schedule posts when your audience is most active.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Note: this tool shows general best-practice windows. Your personal audience may behave differently — use X Analytics to validate timing for your specific account.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Planning a content calendar for a new X account</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Scheduling time-sensitive announcements or product launches</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Optimizing post timing for cross-timezone audiences</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

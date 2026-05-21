@@ -191,6 +191,22 @@ export default function HtmlFormatter() {
             </div>
           ))}
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This HTML formatter beautifies messy or minified HTML by adding proper indentation and line breaks, making it easy to read and debug. The minifier strips all unnecessary whitespace to produce the smallest possible HTML string for production use.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Your HTML is processed entirely in your browser — nothing leaves your device.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Reading minified HTML from an API or CMS response</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Cleaning up template or email HTML before editing</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Minifying HTML for faster page delivery</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

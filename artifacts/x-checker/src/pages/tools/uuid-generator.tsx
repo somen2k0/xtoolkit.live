@@ -145,6 +145,22 @@ export default function UuidGenerator() {
             </div>
           ))}
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This UUID generator creates cryptographically random UUID v4 identifiers using the browser's built-in Web Crypto API — the same API used by operating systems and password managers. Generate one or bulk-create up to 20 UUIDs at a time, and copy them individually or all at once.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            UUID v4 identifiers are 128-bit values with 2¹²² possible combinations, making collisions astronomically unlikely — suitable for use as primary keys, session tokens, or correlation IDs.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Generating primary keys for database records or test fixtures</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Creating unique identifiers for API requests or event tracking</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Populating mock data with unique IDs for development</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

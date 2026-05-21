@@ -280,6 +280,22 @@ export default function MetaTagGenerator() {
             </div>
           ))}
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This meta tag generator produces complete, copy-ready HTML meta tags for SEO and social sharing — including the standard title and description tags, Open Graph tags for Facebook and LinkedIn, and Twitter Card tags for rich previews on X.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Properly configured meta tags help search engines understand your page content and ensure your links look great when shared on social media — both are important for traffic and click-through rate.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Setting up SEO meta tags for a new website or landing page</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Creating Open Graph tags so blog posts look polished on social media</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Generating Twitter Card markup for better click-through rates on X</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

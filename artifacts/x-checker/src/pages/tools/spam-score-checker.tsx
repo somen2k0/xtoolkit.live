@@ -149,6 +149,22 @@ export default function SpamScoreChecker() {
             )}
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Spam Score Checker analyzes your email subject line and body text against common spam filter rules — checking for spam trigger words, excessive capitalization, missing unsubscribe text, and other patterns that get emails flagged by Gmail, Outlook, and spam filters.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Even well-intentioned emails can land in spam if they trigger common filter rules. Checking your email before sending can significantly improve deliverability and inbox placement.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Pre-flight checking marketing emails before sending to your list</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Diagnosing why a previous campaign had low open rates</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Checking cold outreach emails for spam trigger words</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

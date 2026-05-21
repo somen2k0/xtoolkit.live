@@ -158,11 +158,27 @@ export default function UrlEncoder() {
         </div>
 
         <div className="flex flex-wrap gap-2 pt-1">
-          {[{ icon: ShieldCheck, label: "100% client-side" }, { icon: ArrowLeftRight, label: "Real-time conversion" }, { icon: Link2, label: "encodeURIComponent" }].map(({ icon: Ic, label }) => (
+          {[{ icon: ShieldCheck, label: "100% client-side" }, { icon: ArrowLeftRight, label: "Real-time encoding" }, { icon: Link2, label: "encodeURIComponent" }].map(({ icon: Ic, label }) => (
             <div key={label} className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground bg-muted/40 border border-border/50 rounded-full px-3 py-1">
               <Ic className="h-3 w-3" />{label}
             </div>
           ))}
+        </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This URL encoder converts special characters like spaces, ampersands, and slashes into percent-encoded equivalents (e.g., space → %20) so they can be safely included in URLs. The decoder does the reverse — converting %XX sequences back to their original characters.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This tool uses JavaScript's built-in <code className="text-xs font-mono bg-muted/60 rounded px-1.5 py-0.5">encodeURIComponent</code> and <code className="text-xs font-mono bg-muted/60 rounded px-1.5 py-0.5">decodeURIComponent</code> functions — no server needed.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Encoding query string parameters before appending to URLs</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Decoding percent-encoded URLs from server logs or redirects</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Preparing data for API calls that require URL-encoded form bodies</li>
+          </ul>
         </div>
       </div>
     </MiniToolLayout>

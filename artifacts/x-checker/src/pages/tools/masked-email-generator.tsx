@@ -183,6 +183,21 @@ export default function MaskedEmailGenerator() {
           </div>
         </div>
 
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Masked Email Generator helps you protect your real email address when signing up for services, newsletters, or online forms. It generates unique alias-style email addresses that forward to your real inbox — so you can sign up anywhere without exposing your personal email or risking spam.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Services like Apple's Hide My Email, SimpleLogin, and Addy.io create these forwarding aliases for you. This tool explains how they work and guides you to the best option for your use case.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Signing up for a service you don't fully trust with your real email</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Creating per-service aliases to track where spam originated</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Keeping your personal inbox clean while still receiving forwards</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

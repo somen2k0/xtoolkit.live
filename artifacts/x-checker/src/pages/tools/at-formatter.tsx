@@ -116,6 +116,19 @@ export default function AtFormatter() {
             </CardContent>
           </Card>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The @ Formatter takes a plain list of names or words and converts them into properly formatted @mentions by adding the @ symbol, removing spaces, and cleaning up special characters. Paste one name per line and get a ready-to-paste list of @handles in seconds.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Preparing a list of @mentions from a spreadsheet of names</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Converting a team roster into X (Twitter) handles for a post</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Formatting usernames from a CRM export for outreach</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

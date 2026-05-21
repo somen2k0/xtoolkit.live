@@ -256,6 +256,22 @@ export default function RobotsTxtGenerator() {
             {output}
           </pre>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The robots.txt Generator creates a properly formatted robots.txt file that tells search engine crawlers which pages and directories they can and cannot access. You can configure rules per user-agent (e.g. Googlebot, Bingbot), block specific paths, and add your sitemap URL.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            A correctly configured robots.txt file prevents crawlers from indexing private areas of your site (like admin pages or duplicate content) and can help protect your crawl budget for large websites.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Setting up robots.txt for a new website or CMS installation</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Blocking crawlers from admin, staging, or duplicate-content pages</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding a sitemap URL to help Googlebot discover all your pages</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

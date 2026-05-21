@@ -145,6 +145,19 @@ export default function CharacterCounter() {
           <span className="font-medium text-foreground/80">Paragraphs: </span>{text.split(/\n\s*\n/).filter(Boolean).length || 0} &nbsp;·&nbsp;
           <span className="font-medium text-foreground/80">Unique words: </span>{new Set(text.toLowerCase().match(/\b\w+\b/g) ?? []).size}
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This character counter is purpose-built for X (Twitter), showing a real-time progress bar that turns yellow at 250 characters and red at 280. It also counts words, sentences, paragraphs, and unique words — all without sending your text to any server.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Checking tweet length before posting</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Counting words in a writing assignment or article</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Verifying email subject line or meta description length</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -366,6 +366,19 @@ export default function AiDetector() {
             </div>
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The AI Detector & Humanizer analyzes text for patterns commonly produced by AI writing tools — such as overly uniform sentence structures, predictable word choices, and unnatural cadence — and gives it a score from 0% to 100% AI likelihood. The humanizer rewrites flagged passages to sound more natural and bypass AI detection.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Checking blog posts, essays, or reports before submitting them</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Humanizing AI-drafted content before publishing to avoid penalties</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Reviewing content from freelancers or contractors for AI usage</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

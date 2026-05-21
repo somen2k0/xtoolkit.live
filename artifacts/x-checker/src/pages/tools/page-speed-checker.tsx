@@ -166,6 +166,22 @@ export default function PageSpeedChecker() {
             for real Core Web Vitals data, Lighthouse scores, and field data from real users visiting your site.
           </div>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Page Speed Checker estimates the performance of any public URL by analyzing response time, page size, and resource count. It gives you a quick snapshot of speed metrics and actionable recommendations to improve load time — no installation or browser extension needed.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Page speed directly affects SEO rankings, bounce rate, and conversion rates. Even a 1-second delay in load time can reduce conversions by up to 7%.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Quick-checking a page's speed before or after a deployment</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Getting a baseline reading to track performance improvements over time</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Identifying slow-loading pages during an SEO audit</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -197,6 +197,22 @@ export default function CssMinifier() {
             </div>
           ))}
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This CSS minifier removes all unnecessary whitespace, comments, and redundant code from your stylesheets — reducing file size to improve page load speed. The beautifier does the reverse, adding proper indentation so you can read and edit minified CSS.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Everything runs in your browser — your CSS is never sent to a server.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Minifying production stylesheets before deployment</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Beautifying minified CSS from a third-party library</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Reducing page weight for better Core Web Vitals scores</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

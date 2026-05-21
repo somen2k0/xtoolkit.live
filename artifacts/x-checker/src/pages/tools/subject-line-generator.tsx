@@ -231,6 +231,22 @@ export default function SubjectLineGenerator() {
             ))}
           </div>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Subject Line Generator uses AI to write high-converting email subject lines based on your topic, goal, and tone. It generates multiple variations — from curiosity-driven to urgency-based — so you can A/B test and find what resonates with your audience.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Email subject lines are the single biggest factor in open rates. The average office worker receives 120+ emails per day — a great subject line is the only thing standing between your email and the trash folder.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Writing subject lines for newsletters, cold outreach, or marketing campaigns</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Generating A/B test variants to improve open rates</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Overcoming writer's block when starting an email campaign</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

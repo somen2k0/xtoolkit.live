@@ -192,6 +192,22 @@ export default function UrlSlugGenerator() {
             ))}
           </div>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This URL slug generator converts any title, phrase, or sentence into a clean, SEO-friendly URL slug by lowercasing all characters, removing special characters and accents, and replacing spaces with hyphens.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Clean URL slugs help search engines and users understand page content from the URL alone. They're a simple, high-impact SEO improvement that takes seconds to get right.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Creating permalink slugs for blog posts or CMS content</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Generating clean URLs for product or category pages in e-commerce</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Standardizing URL formats across a website or API</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -236,6 +236,22 @@ export default function KeywordDensity() {
             )}
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Keyword Density Checker analyzes your text and shows you how often each word appears as a percentage of total words. It automatically filters out common stop words (the, and, is…) so you see only the meaningful keywords — helping you spot over-optimized or under-represented terms.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The recommended keyword density for SEO is 1–2%. Much higher can trigger over-optimization penalties; much lower and your page may not rank for the term.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Auditing blog posts or landing pages for keyword balance before publishing</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Checking that primary keywords appear at the right frequency</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Comparing keyword density across competitor pages and your own</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

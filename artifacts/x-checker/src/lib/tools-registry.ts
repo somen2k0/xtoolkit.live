@@ -5,6 +5,7 @@ import {
   Shield, Tag, Minimize2, KeyRound, Regex, Database, Shuffle,
   Clock, ArrowLeftRight, ScanSearch, EyeOff, MailWarning, AlertOctagon,
   BookOpen, Calendar, ClipboardList, Gauge, FlaskConical, ShieldAlert, Newspaper,
+  QrCode, ImageIcon, AlignLeft,
   type LucideIcon,
 } from "lucide-react";
 import toolsManifest from "./tools-manifest.json";
@@ -134,6 +135,11 @@ const ICON_MAP: Record<string, LucideIcon> = {
   "yaml-json": ArrowLeftRight,
   "timezone-converter": Clock,
   "og-image-preview": Globe,
+  "password-generator": KeyRound,
+  "color-picker": Palette,
+  "qr-code-generator": QrCode,
+  "image-compressor": ImageIcon,
+  "word-counter": AlignLeft,
   "meta-tag-generator": Globe,
   "url-slug-generator": Link2,
   "keyword-density": TrendingUp,

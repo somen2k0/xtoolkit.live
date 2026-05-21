@@ -88,13 +88,14 @@ For these tools, your input data never leaves your device.`,
   },
   {
     id: "cookies",
-    title: "6. Cookies",
+    title: "6. Cookies & Advertising",
     content: `X Toolkit uses minimal cookies:
 
 - **Functional cookies**: used to remember your preferences (e.g., tab selections, cookie consent). These are strictly necessary for the service to function.
-- **Analytics**: we use anonymized, aggregate analytics to understand usage patterns. No personally identifiable data is collected.
+- **Analytics cookies**: we use Google Analytics in anonymized, aggregate form to understand usage patterns. No personally identifiable data is collected.
+- **Advertising cookies**: we use Google AdSense to display advertisements that help fund the free service. Google may use cookies to serve ads based on your prior visits to our site or other sites. You can opt out of personalized advertising by visiting Google's Ad Settings at adssettings.google.com.
 
-We do not use advertising or tracking cookies.`,
+**Google AdSense disclosure**: Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to our website or other websites. Google's use of advertising cookies enables it and its partners to serve ads based on your visits to our site and/or other sites on the Internet. You may opt out of personalized advertising by visiting Ads Settings. For more information about how Google uses data when you use our website, see google.com/policies/privacy/partners/.`,
   },
   {
     id: "your-rights",

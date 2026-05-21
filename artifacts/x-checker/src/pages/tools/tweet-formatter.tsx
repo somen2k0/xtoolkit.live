@@ -169,6 +169,19 @@ export default function TweetFormatter() {
             ))}
           </ul>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This tweet thread formatter takes long-form text and automatically splits it into numbered tweets that each fit within X's 280-character limit. It respects word boundaries so words are never cut in the middle, and numbers each tweet (1/n, 2/n…) to preserve thread context.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Turning a long blog post excerpt or essay into a tweetstorm</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Converting speaking notes or outlines into numbered thread tweets</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Formatting listicles and tips as readable tweet threads</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

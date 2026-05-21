@@ -139,6 +139,22 @@ export default function BioGenerator() {
             </Button>
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The AI Bio Generator uses a language model to write polished X (Twitter) bios tailored to your role, tone, and keywords. Choose from professional, casual, witty, or creative styles — then regenerate as many times as you like until you find one that fits.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            X bios are capped at 160 characters and are one of the first things people read when deciding whether to follow you — a strong bio significantly improves follow-through rates.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Setting up a new X account and writing your first bio</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Refreshing a stale bio to better reflect your current work</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Ghostwriting bios for clients, founders, or team members</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

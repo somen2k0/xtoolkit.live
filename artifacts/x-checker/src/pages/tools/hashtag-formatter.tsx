@@ -154,6 +154,19 @@ export default function HashtagFormatter() {
             )}
           </div>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This hashtag formatter cleans and normalizes a messy list of hashtags — adding missing # symbols, removing duplicates, fixing spacing, and converting everything to lowercase for consistency. You can choose to output as a neat list or inline for copy-pasting into your caption.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Cleaning up hashtag sets copied from different sources</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Preparing Instagram or X hashtag blocks before posting</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Deduplicating a large list of tags across multiple campaigns</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

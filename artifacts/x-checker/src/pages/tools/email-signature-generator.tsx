@@ -287,6 +287,22 @@ export default function EmailSignatureGenerator() {
             )}
           </div>
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Email Signature Generator creates a clean, professional HTML email signature with your name, title, company, contact details, and social links. You can preview it in both rendered HTML and plain text format, then copy and paste it directly into Gmail, Outlook, or any email client.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            A consistent, professional signature builds credibility and makes it easy for recipients to reach you across channels — important for sales, partnerships, and client-facing roles.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Setting up a professional signature for a new job or role</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Standardizing email signatures across a small team</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding social links and a call-to-action to outbound emails</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

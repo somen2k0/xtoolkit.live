@@ -198,7 +198,7 @@ export default function JwtDecoder() {
               { claim: "nbf",  type: "number",  desc: "Not Before — token must not be accepted before this Unix timestamp" },
               { claim: "jti",  type: "string",  desc: "JWT ID — unique identifier, used to prevent token replay attacks" },
               { claim: "name", type: "string",  desc: "Full name of the token subject (OpenID Connect)" },
-              { claim: "email",type: "string",  desc: "Email address of the subject (OpenID Connect)" },
+              { claim: "email", type: "string",  desc: "Email address of the subject (OpenID Connect)" },
               { claim: "role", type: "string",  desc: "Custom claim — user role (e.g. admin, viewer). Not standardised." },
             ].map(({ claim, type, desc }) => (
               <div key={claim} className="flex items-start gap-3 px-4 py-2.5 text-xs">
@@ -208,6 +208,22 @@ export default function JwtDecoder() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This JWT decoder splits a JSON Web Token into its three parts — header, payload, and signature — and displays them in readable JSON format. It also shows the expiration time in human-readable date format and warns if the token has already expired.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Everything runs in your browser — your tokens are never sent to a server, making this safe to use with production tokens (though you should rotate them after debugging).
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Debugging authentication issues with OAuth or OpenID Connect tokens</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Verifying JWT claims like expiry, audience, and issuer</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Inspecting custom claims in API tokens during development</li>
+          </ul>
         </div>
       </div>
     </MiniToolLayout>

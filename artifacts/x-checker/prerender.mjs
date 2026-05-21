@@ -7,7 +7,7 @@
  *   - Unique Open Graph + Twitter Card tags
  *   - Unique <link rel="canonical">
  *   - Per-page JSON-LD structured data (SoftwareApplication + BreadcrumbList)
- *   - <noscript> static content (homepage lists all 55 tools as <a href> links)
+ *   - <noscript> static content (homepage lists all 43 tools as <a href> links)
  *
  * Also auto-generates dist/public/sitemap-tools.xml from tools-manifest.json
  * so the sitemap stays in sync with the tool list automatically.
@@ -50,24 +50,24 @@ const STATIC_PAGES = [
   {
     path: "/",
     label: "Home",
-    title: "X Toolkit — 55+ Free Tools for X, SEO, Developers & Creators",
+    title: "X Toolkit — 43+ Free Tools for X, SEO, Developers & Creators",
     description:
-      "55+ free online tools for X (Twitter), SEO, developers & creators: account checker, AI bio generator, JSON formatter, JWT decoder, temp mail & more. No signup.",
+      "43+ free online tools for X (Twitter), SEO, developers & creators: account checker, AI bio generator, JSON formatter, JWT decoder, QR code generator, password generator & more. No signup.",
     isHomepage: true,
   },
   {
     path: "/tools",
     label: "All Tools",
-    title: "All 55 Free Online Tools | X Toolkit",
+    title: "All 43 Free Online Tools | X Toolkit",
     description:
-      "Browse all 55 free tools from X Toolkit: social media, AI writing, developer, SEO, and email tools. No signup required, instant results.",
+      "Browse all 43 free tools from X Toolkit: social media, AI writing, developer, SEO, and email tools. No signup required, instant results.",
   },
   {
     path: "/about",
     label: "About",
     title: "About X Toolkit - Free Tools for X, SEO & Developers",
     description:
-      "X Toolkit offers 55+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work.",
+      "X Toolkit offers 43+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work.",
   },
   {
     path: "/pricing",
@@ -197,6 +197,13 @@ const STATIC_PAGES = [
     description:
       "The free X Toolkit Chrome Extension gives you instant disposable email inboxes, automatic OTP code detection, temp Gmail address generation, and Gmail dot & plus-tag tricks — all from your browser toolbar.",
   },
+  {
+    path: "/contact",
+    label: "Contact",
+    title: "Contact Us | X Toolkit",
+    description:
+      "Get in touch with the X Toolkit team. Report a bug, suggest a feature, or ask a question. We read every message.",
+  },
 ];
 
 // Temp-mail sub-routes (manually defined since they share a parent page)
@@ -254,7 +261,7 @@ const PAGE_FAQS = {
     { q: "What permissions does the temp email extension need and why?", a: "storage (to remember your inbox across sessions), notifications (to alert you when new mail arrives), alarms (for background polling every 15 seconds), contextMenus (for the right-click 'Copy active email' option), and clipboardWrite (to copy addresses and OTP codes with one click). It only connects to xtoolkit.live — no other domains." },
     { q: "Does the extension check my inbox when the popup is closed?", a: "Yes. A lightweight Manifest V3 service worker runs in the background, polling your inbox every 15 seconds and sending a desktop notification the moment new mail arrives — even if you haven't opened the extension popup." },
     { q: "What is the keyboard shortcut to copy my temp email address?", a: "Press Alt+Shift+C anywhere in your browser to instantly copy your active temp email address to the clipboard — without opening the popup. You can reassign this shortcut in Chrome's extension keyboard shortcut settings (chrome://extensions/shortcuts)." },
-    { q: "Can I use the extension without visiting the xtoolkit.live website?", a: "Exactly — that's the whole point. The extension gives you a full temp email inbox from any tab or page, without ever navigating away. For 55+ additional tools (JSON formatter, X account checker, AI bio generator, SEO tools, and more), visit xtoolkit.live." },
+    { q: "Can I use the extension without visiting the xtoolkit.live website?", a: "Exactly — that's the whole point. The extension gives you a full temp email inbox from any tab or page, without ever navigating away. For 43+ additional tools (JSON formatter, X account checker, AI bio generator, SEO tools, and more), visit xtoolkit.live." },
     { q: "Is it safe to use a Chrome temp email extension?", a: "Yes. The extension is open about every permission it requests, collects zero personal data, requires no account, and only communicates with xtoolkit.live — which you can verify in the Chrome Web Store's 'Privacy practices' tab. Disposable inboxes are public by design, so avoid using them for sensitive communications." },
   ],
   "/tools/aesthetic-bios": [

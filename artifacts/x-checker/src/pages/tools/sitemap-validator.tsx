@@ -280,6 +280,22 @@ export default function SitemapValidator() {
             </button>
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Sitemap Validator checks your XML sitemap for well-formedness, required tags, and common issues that could prevent search engines from properly indexing your URLs. It validates the structure against the sitemap protocol and highlights missing or malformed entries.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            A valid sitemap helps search engines discover and index all your pages — especially new ones that haven't been linked to yet. Invalid sitemaps are silently ignored by crawlers, which can delay indexing.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Validating a sitemap before submitting it to Google Search Console</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Debugging sitemap errors reported in Google Search Console</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Verifying the output of a sitemap generator plugin or CMS</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -98,6 +98,19 @@ export default function ProfileLinkGenerator() {
             </CardContent>
           </Card>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This profile link generator converts a list of X (Twitter) usernames into direct clickable profile URLs in seconds. Paste one username per line (with or without the @ symbol), and get a formatted list of <code className="text-xs font-mono bg-muted/60 rounded px-1.5 py-0.5">x.com/username</code> links ready to use.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Building a curated list of X profile links to share in a newsletter</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Converting a spreadsheet of usernames into clickable links</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Preparing a "follow these accounts" roundup for a blog post or report</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

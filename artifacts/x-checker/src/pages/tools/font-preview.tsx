@@ -114,6 +114,22 @@ export default function FontPreview() {
             </div>
           </div>
         )}
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This font preview tool converts your text into Unicode character variants — bold, italic, cursive, monospace, and more — that can be copied and pasted directly into X (Twitter) bios, tweets, Instagram captions, and other platforms that don't support native text formatting.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            These are real Unicode characters, not HTML tags — they display anywhere plain text is accepted, including social media bios and messaging apps.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Making your X or Instagram bio stand out with styled text</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding bold or italic emphasis in tweets (which don't support Markdown)</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Creating aesthetic usernames or display names with special characters</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );

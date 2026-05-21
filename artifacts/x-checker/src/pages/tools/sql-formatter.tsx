@@ -175,6 +175,22 @@ export default function SqlFormatter() {
             </div>
           ))}
         </div>
+
+        {/* About */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">About this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This SQL formatter beautifies SQL queries with proper indentation and uppercased keywords, making complex queries readable at a glance. It supports SELECT, INSERT, UPDATE, DELETE, CREATE, and JOIN statements across PostgreSQL, MySQL, SQLite, and most standard SQL dialects.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            All formatting runs in your browser — your SQL queries are never sent to a server.
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Reading auto-generated or minified SQL from an ORM or query builder</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Reviewing database migrations before running them in production</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Documenting SQL queries in technical specifications or READMEs</li>
+          </ul>
+        </div>
       </div>
     </MiniToolLayout>
   );
