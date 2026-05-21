@@ -38,14 +38,18 @@ const O_DOMAINS = [
 ];
 type InboxProv = "guerrilla" | "onesecmail" | "freemail";
 
-function pickRandomDomain(fDomains: string[]): { domain: string; prov: InboxProv } {
-  // 1secmail (O_DOMAINS) is excluded — blocked from most cloud/VPS IPs (returns 403).
-  // Use Guerrilla Mail or mail.gw only.
-  const allDomains = [...G_DOMAINS, ...fDomains];
-  if (allDomains.length === 0) return { domain: G_DOMAINS[0], prov: "guerrilla" };
-  const domain = allDomains[Math.floor(Math.random() * allDomains.length)];
-  const prov: InboxProv = G_DOMAINS.includes(domain) ? "guerrilla" : "freemail";
-  return { domain, prov };
+function pickRandomDomain(fDomains: string[], exclude?: InboxProv): { domain: string; prov: InboxProv } {
+  // Pick provider with equal weight, then a random domain within it.
+  // This ensures 1secmail, Guerrilla, and mail.gw each get ~33% of traffic.
+  // If a provider fails (e.g. 1secmail blocked on Replit), the retry picks a different one.
+  const pool: Array<{ prov: InboxProv; domains: string[] }> = [
+    { prov: "guerrilla", domains: G_DOMAINS },
+    { prov: "onesecmail", domains: O_DOMAINS },
+    ...(fDomains.length > 0 ? [{ prov: "freemail" as InboxProv, domains: fDomains }] : []),
+  ].filter(p => p.prov !== exclude);
+  if (pool.length === 0) return { domain: G_DOMAINS[0], prov: "guerrilla" };
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  return { domain: pick.domains[Math.floor(Math.random() * pick.domains.length)], prov: pick.prov };
 }
 
 async function sleep(ms: number): Promise<void> {
@@ -349,6 +353,14 @@ function UnifiedInboxSection() {
         await fetchGMsgs(saved.sid);
         startPolling();
         return;
+      } else if (saved.prov === "onesecmail") {
+        const os: OSession = { login: saved.user, domain: saved.domain, email: saved.email, domains: O_DOMAINS };
+        oSessionRef.current = os; setOSession(os);
+        activeProvRef.current = "onesecmail"; setActiveProv("onesecmail");
+        setCreating(false);
+        await fetchOMsgs(saved.user, saved.domain);
+        startPolling();
+        return;
       } else if (saved.prov === "freemail" && saved.sid) {
         const fs: FSession = { login: saved.user, domain: saved.domain, email: saved.email, token: saved.sid };
         fSessionRef.current = fs; setFSession(fs);
@@ -360,15 +372,18 @@ function UnifiedInboxSection() {
       }
     }
     setCreating(true); setError(null);
-    // Retry up to 3 times — handles API server startup delay and transient failures
+    // Retry up to 3 times, excluding the failed provider each time.
+    // On Vercel: 1secmail works fine. On Replit: 1secmail returns 503 → retries pick guerrilla/mail.gw.
+    let lastFailed: InboxProv | undefined;
     for (let attempt = 0; attempt < 3; attempt++) {
       if (attempt > 0) await sleep(1800);
-      const { domain, prov } = pickRandomDomain(fDomainsRef.current);
+      const { domain, prov } = pickRandomDomain(fDomainsRef.current, lastFailed);
       const ok = await createOnDomain(domain, prov);
       if (ok) { startPolling(); setCreating(false); return; }
+      lastFailed = prov;
     }
     setError("Could not create inbox. Please try again."); setCreating(false);
-  }, [createOnDomain, startPolling, fetchGMsgs, fetchOMsgs]);
+  }, [createOnDomain, startPolling, fetchGMsgs, fetchOMsgs, fetchFMsgs]);
 
   const newAddress = useCallback(async () => {
     clearInboxSession();
@@ -376,11 +391,13 @@ function UnifiedInboxSection() {
     setGMessages([]); setOMessages([]); setSelectedG(null); setSelectedO(null); setSelectedId(null);
     if (refreshTimer.current) clearInterval(refreshTimer.current);
     if (countdownTimer.current) clearInterval(countdownTimer.current);
+    let lastFailed: InboxProv | undefined;
     for (let attempt = 0; attempt < 3; attempt++) {
       if (attempt > 0) await sleep(1800);
-      const { domain, prov } = pickRandomDomain(fDomainsRef.current);
+      const { domain, prov } = pickRandomDomain(fDomainsRef.current, lastFailed);
       const ok = await createOnDomain(domain, prov);
       if (ok) { startPolling(); setCreating(false); return; }
+      lastFailed = prov;
     }
     setError("Could not create new inbox."); setCreating(false);
   }, [createOnDomain, startPolling]);

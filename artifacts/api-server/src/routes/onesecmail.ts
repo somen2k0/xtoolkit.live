@@ -8,17 +8,19 @@ const FALLBACK_DOMAINS = [
   "wwjmp.com", "esiix.com", "xojxe.com", "yoggm.com",
 ];
 
-async function getDomains(): Promise<string[]> {
+/** Returns null when 1secmail is explicitly blocked on this server (403). */
+async function getDomains(): Promise<string[] | null> {
   try {
     const r = await fetch(`${BASE}?action=getDomainList`, {
       signal: AbortSignal.timeout(6000),
     });
+    if (r.status === 403) return null; // server IP is blocked by 1secmail
     if (r.ok) {
       const data = await r.json() as string[];
       if (Array.isArray(data) && data.length > 0) return data;
     }
   } catch {}
-  return FALLBACK_DOMAINS;
+  return FALLBACK_DOMAINS; // network timeout or unexpected error — use static fallback
 }
 
 const US_FIRST = [
@@ -55,6 +57,10 @@ function randomLogin(): string {
 router.get("/onesecmail/new", async (req, res) => {
   try {
     const domains = await getDomains();
+    if (!domains) {
+      res.status(503).json({ error: "1secmail is not available on this server." });
+      return;
+    }
     const login = randomLogin();
     const domain = domains[Math.floor(Math.random() * Math.min(3, domains.length))];
     res.json({ login, domain, email: `${login}@${domain}`, domains });
@@ -66,9 +72,10 @@ router.get("/onesecmail/new", async (req, res) => {
 
 router.get("/onesecmail/domains", async (req, res) => {
   try {
-    res.json({ domains: await getDomains() });
+    const domains = await getDomains();
+    res.json({ domains: domains ?? [], available: domains !== null });
   } catch {
-    res.json({ domains: FALLBACK_DOMAINS });
+    res.json({ domains: FALLBACK_DOMAINS, available: true });
   }
 });
 
@@ -79,6 +86,10 @@ router.post("/onesecmail/set-address", async (req, res) => {
     return;
   }
   const domains = await getDomains();
+  if (!domains) {
+    res.status(503).json({ error: "1secmail is not available on this server." });
+    return;
+  }
   const clean = login.trim().toLowerCase().replace(/[^a-z0-9._-]/g, "");
   if (!clean) { res.status(400).json({ error: "Invalid login." }); return; }
   res.json({ login: clean, domain, email: `${clean}@${domain}`, domains });
