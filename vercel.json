@@ -49,6 +49,25 @@
     }
   ],
 
+  "redirects": [
+    { "source": "/tools/backlink-analyzer", "destination": "/tools/keyword-density", "permanent": true },
+    { "source": "/tools/name-ideas", "destination": "/tools/username-generator", "permanent": true },
+    { "source": "/tools/professional-bios", "destination": "/tools/bio-generator", "permanent": true },
+    { "source": "/tools/plain-text-formatter", "destination": "/tools/email-tools", "permanent": true },
+    { "source": "/tools/email-character-counter", "destination": "/tools/character-counter", "permanent": true },
+    { "source": "/tools/email-username-generator", "destination": "/tools/email-tools", "permanent": true },
+    { "source": "/tools/bio-ideas", "destination": "/tools/bio-generator", "permanent": true },
+    { "source": "/tools/aesthetic-bios", "destination": "/tools/bio-generator", "permanent": true },
+    { "source": "/tools/funny-bios", "destination": "/tools/bio-generator", "permanent": true },
+    { "source": "/tools/follower-analyzer", "destination": "/tools/x-account-checker", "permanent": true },
+    { "source": "/tools/profile-audit", "destination": "/tools/x-account-checker", "permanent": true },
+    { "source": "/tools/spam-risk-checker", "destination": "/tools/spam-score-checker", "permanent": true },
+    { "source": "/tools/email-privacy-checker", "destination": "/tools/masked-email-generator", "permanent": true },
+    { "source": "/tools/email-leak-checker", "destination": "/tools/temp-mail", "permanent": true },
+    { "source": "/tools/alias-email-explainer", "destination": "/tools/masked-email-generator", "permanent": true },
+    { "source": "/tools/disposable-email-guide", "destination": "/tools/temp-mail", "permanent": true }
+  ],
+
   "rewrites": [
     { "source": "/api/check-accounts", "destination": "/api/check-accounts-edge" },
 

@@ -1,0 +1,65 @@
+Google is crawling these pages but refusing to index them
+due to thin content. Please add substantial content to each:
+
+For these tool pages, expand the existing "About this tool"
+section to at least 300 words total on the page:
+
+/tools/hashtag-formatter
+Add these sections below the tool:
+"What is a hashtag formatter?" (2 paragraphs)
+"How to use hashtags effectively on X/Twitter" (2 paragraphs)
+"Best practices for hashtag usage" (bullet list of 5 tips)
+"Common hashtag mistakes to avoid" (bullet list)
+/tools/timezone-converter
+Add these sections:
+"Why timezone conversion matters" (2 paragraphs)
+"Most common timezone conversions" (table: UTC, EST, PST,
+IST, GMT, CET with their offsets)
+"Daylight saving time explained" (1 paragraph)
+"Tips for scheduling across timezones" (bullet list)
+/tools/tweet-formatter
+Add these sections:
+"What is a tweet thread?" (2 paragraphs)
+"How to write viral tweet threads" (numbered list of 6 tips)
+"Tweet thread examples by category" (3 short examples)
+"Character limit guide for X/Twitter" (small table)
+/tools/username-generator
+Add these sections:
+"How to choose the perfect X username" (2 paragraphs)
+"Username best practices" (bullet list)
+"Why your username matters for growth" (1 paragraph)
+"Examples of great X usernames by niche" (list)
+For these pages that should be REMOVED (already decided):
+
+/tools/bio-ideas
+/tools/aesthetic-bios
+Make sure these are fully removed and return a 301 redirect
+to /tools/bio-generator instead of a 404 or blank page.
+For /text-format-tools category page:
+Add a proper intro paragraph (3-4 sentences) explaining what
+text formatting tools are and list ALL tools in that category
+with name, description, and link.
+
+Add 301 redirects for all removed tools so Google doesn't
+see dead pages. In vercel.json add a "redirects" section:
+
+{
+"redirects": [
+{ "source": "/tools/backlink-analyzer", "destination": "/tools/keyword-density", "permanent": true },
+{ "source": "/tools/name-ideas", "destination": "/tools/username-generator", "permanent": true },
+{ "source": "/tools/professional-bios", "destination": "/tools/bio-generator", "permanent": true },
+{ "source": "/tools/plain-text-formatter", "destination": "/tools/email-tools", "permanent": true },
+{ "source": "/tools/email-character-counter", "destination": "/tools/character-counter", "permanent": true },
+{ "source": "/tools/email-username-generator", "destination": "/tools/email-tools", "permanent": true },
+{ "source": "/tools/bio-ideas", "destination": "/tools/bio-generator", "permanent": true },
+{ "source": "/tools/aesthetic-bios", "destination": "/tools/bio-generator", "permanent": true },
+{ "source": "/tools/funny-bios", "destination": "/tools/bio-generator", "permanent": true },
+{ "source": "/tools/follower-analyzer", "destination": "/tools/x-account-checker", "permanent": true },
+{ "source": "/tools/profile-audit", "destination": "/tools/x-account-checker", "permanent": true },
+{ "source": "/tools/spam-risk-checker", "destination": "/tools/spam-score-checker", "permanent": true },
+{ "source": "/tools/email-privacy-checker", "destination": "/tools/masked-email-generator", "permanent": true },
+{ "source": "/tools/email-leak-checker", "destination": "/tools/temp-mail", "permanent": true },
+{ "source": "/tools/alias-email-explainer", "destination": "/tools/masked-email-generator", "permanent": true },
+{ "source": "/tools/disposable-email-guide", "destination": "/tools/temp-mail", "permanent": true }
+]
+}

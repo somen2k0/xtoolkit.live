@@ -15,7 +15,7 @@ const config: CategoryPageConfig = {
   title: "Text & Formatting Tools",
   tagline: "Format, style, and polish your X content before you post",
   description:
-    "Six free tools for crafting perfectly formatted X (Twitter) content: split text into numbered threads, preview stylish Unicode fonts, format hashtag lists, count characters to the limit, generate unique usernames, and find great display names.",
+    "Text formatting tools help you shape, clean, and style written content before it goes live on X (Twitter) or any other platform. Whether you're splitting a long essay into a numbered tweet thread, previewing your bio in stylized Unicode fonts, or normalizing a messy list of hashtags, these browser-based utilities handle the tedious formatting work instantly — no account required. All six tools run entirely in your browser, so your text never leaves your device.",
   icon: Type,
   color: "text-green-400",
   bg: "bg-green-400/10 border-green-400/20",

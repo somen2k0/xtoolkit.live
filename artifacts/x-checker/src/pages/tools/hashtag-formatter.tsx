@@ -155,17 +155,51 @@ export default function HashtagFormatter() {
           </div>
         </div>
 
-        {/* About */}
-        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
-          <h2 className="text-lg font-semibold">About this tool</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            This hashtag formatter cleans and normalizes a messy list of hashtags — adding missing # symbols, removing duplicates, fixing spacing, and converting everything to lowercase for consistency. You can choose to output as a neat list or inline for copy-pasting into your caption.
-          </p>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Cleaning up hashtag sets copied from different sources</li>
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Preparing Instagram or X hashtag blocks before posting</li>
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Deduplicating a large list of tags across multiple campaigns</li>
-          </ul>
+        {/* Expanded SEO content */}
+        <div className="space-y-8 pt-2">
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">What is a hashtag formatter?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              A hashtag formatter is a tool that converts plain words, phrases, or a messy list of tags into properly structured hashtags ready to paste into your X (Twitter), Instagram, or LinkedIn posts. Instead of manually adding # symbols, stripping spaces, and fixing capitalization on every tag, a formatter handles all of that in one step — so you can focus on your content rather than on cleanup.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              This tool goes further by letting you choose your preferred casing style: <strong>CamelCase</strong> (#DigitalMarketing) for readability, <strong>lowercase</strong> (#digitalmarketing) for a clean, modern look, or <strong>UPPERCASE</strong> (#DIGITALMARKETING) for high-visibility brand tags. It strips any special characters that X doesn't allow in hashtags, removes duplicate entries, and outputs both a clickable badge view and an inline copy-paste string — everything you need in one place.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">How to use hashtags effectively on X / Twitter</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Hashtags on X work as discovery signals — they make your tweet findable to users searching for or following that topic. The most effective hashtag strategy is to use 1–2 highly relevant tags per tweet rather than stuffing in as many as possible. Over-hashtagging looks spammy to both the algorithm and human readers, and X's own research shows that tweets with 1–2 hashtags get better engagement than those with 5 or more. Focus on tags your target audience actually follows, not just tags that are broadly popular.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Placement matters too. Hashtags embedded naturally in the sentence ("Excited about #WebDesign trends") read more cleanly than a wall of tags at the end. If you're adding multiple hashtags, place them at the very end of the tweet after your main content so the message stays readable. For campaigns, branded hashtags (#YourBrandEvent) are valuable for aggregating conversation and tracking reach — just keep them short and easy to spell correctly from memory.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Best practices for hashtag usage</h2>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Use 1–2 hashtags per tweet.</strong> X's algorithm rewards focused, relevant tagging. More than 3 tags typically signals spam and reduces organic reach.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Choose niche over broad.</strong> #IndieGameDev will reach a more engaged audience than #Gaming, which has millions of competing posts drowning yours out.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Use CamelCase for multi-word tags.</strong> #ContentCreator is far more readable than #contentcreator — and screen readers announce each word separately, improving accessibility.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Research before you post.</strong> Search for the hashtag on X first to see if it's active, relevant, and not associated with content you wouldn't want to be grouped with.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Create a consistent set for your niche.</strong> Having a saved library of 10–15 relevant hashtags for your topic means you can pick the best 1–2 for any tweet without starting from scratch every time.</span></li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Common hashtag mistakes to avoid</h2>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-destructive/70 mt-0.5">✕</span> <span><strong className="text-foreground/80">Hashtag stuffing</strong> — Adding 10+ hashtags makes your tweet look like spam and suppresses engagement.</span></li>
+              <li className="flex items-start gap-2"><span className="text-destructive/70 mt-0.5">✕</span> <span><strong className="text-foreground/80">Using spaces or special characters</strong> — #web design breaks at the space and only links #web. Always run phrases through a formatter first.</span></li>
+              <li className="flex items-start gap-2"><span className="text-destructive/70 mt-0.5">✕</span> <span><strong className="text-foreground/80">Copying hashtags from Instagram</strong> — Instagram culture uses many more tags than X. What works there will look out of place on X.</span></li>
+              <li className="flex items-start gap-2"><span className="text-destructive/70 mt-0.5">✕</span> <span><strong className="text-foreground/80">Using only mega-popular tags</strong> — Tags like #love or #marketing have millions of posts. Your tweet disappears in seconds. Target mid-size, focused communities instead.</span></li>
+              <li className="flex items-start gap-2"><span className="text-destructive/70 mt-0.5">✕</span> <span><strong className="text-foreground/80">Ignoring trending hashtags</strong> — Jumping on a trending topic with a relevant tweet can dramatically increase reach, but only if your content actually relates to the trend.</span></li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </MiniToolLayout>

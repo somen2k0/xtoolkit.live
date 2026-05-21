@@ -181,6 +181,62 @@ export default function UsernameGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Generating niche-specific handles for a new project or side business</li>
           </ul>
         </div>
+
+        {/* Expanded SEO content */}
+        <div className="space-y-8 pt-2">
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">How to choose the perfect X username</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Your X username — the @handle that appears in your profile URL, mentions, and every reply you make — is one of the most permanent decisions you'll make on the platform. While you can change it, doing so breaks any existing @mentions of you, costs you SEO authority built on your old handle's URL, and creates confusion for existing followers. Getting it right the first time matters. The ideal username is short (under 12 characters), easy to spell from hearing it spoken aloud, and either your real name, your brand name, or a niche-specific variation that immediately signals what you're about.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              When your first-choice name is taken — which is likely for common names — the best fallback is to add a meaningful word that describes your niche or role rather than random numbers. @JohnSmith becoming @JohnSmithDev, @JohnSmithHQ, or @JohnSmithDesign is far preferable to @JohnSmith4829. Niche suffixes also make your profile immediately legible to potential followers: they know what you do before they even read your bio. For brands and businesses, check that your chosen handle is available across Instagram, TikTok, and YouTube simultaneously — cross-platform consistency is worth the extra effort at the start.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Username best practices</h2>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Keep it under 12 characters.</strong> Shorter handles are easier to remember, type, and fit within the 280-character tweet limit when others mention you — leaving more room for the actual conversation.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Make it pronounceable.</strong> If someone hears your username mentioned on a podcast or in a video, they should be able to spell and find it without Googling. Avoid unusual character combinations.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Avoid excessive underscores.</strong> One underscore is fine (@john_doe). Multiple underscores (@_john__doe_) look unpolished and are harder to read and remember.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Skip random numbers.</strong> Numbers appended because your name was taken (@mike4729) signal an afterthought. If you must add a number, make it meaningful — graduation year, founding year, or a number associated with your brand.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Check all platforms before committing.</strong> Lock in the same handle on X, Instagram, TikTok, LinkedIn, and YouTube simultaneously so your brand is consistent everywhere your audience might look for you.</span></li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Why your username matters for growth</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Your username isn't just an ID — it's a discovery mechanism and a first impression rolled into one. When someone searches for you, your handle appears before your bio. When you're mentioned in a tweet, your handle is the clickable link that new audiences follow back to your profile. A handle that clearly signals your niche (like @TechWithSarah or @StartupLawyer) attracts relevant followers organically because it pre-qualifies what they'll find. A generic or cryptic handle (@xuser7741) gives no signal at all, making it harder for the algorithm to surface you to the right people and harder for new visitors to decide in two seconds whether to follow you. Your username is silent marketing — make it work for you.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Examples of great X usernames by niche</h2>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                { niche: "Software / Developer", examples: ["@swiftdev", "@rustlang_fan", "@devwithjake", "@codeandcoffee"] },
+                { niche: "Marketing / Growth", examples: ["@growthhacks", "@marketingmike", "@seowithliz", "@funnelstrat"] },
+                { niche: "Design / Creative", examples: ["@designdaily", "@uiwithtom", "@pixelcraft", "@brandbyamy"] },
+                { niche: "Finance / Investing", examples: ["@stocksimple", "@financewithn", "@dividenddan", "@thriftmode"] },
+                { niche: "Fitness / Wellness", examples: ["@liftwithjess", "@runnersmind", "@cleaneatpro", "@gymchronicles"] },
+                { niche: "Creator / Writer", examples: ["@writewithkai", "@threadsmith", "@essayist", "@storydropper"] },
+              ].map(({ niche, examples }) => (
+                <div key={niche} className="rounded-xl border border-border/50 bg-background/40 p-4 space-y-2">
+                  <p className="text-xs font-semibold text-primary uppercase tracking-wide">{niche}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {examples.map(e => (
+                      <span key={e} className="font-mono text-xs bg-muted/50 border border-border/50 rounded px-2 py-0.5 text-foreground/70">{e}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
       </div>
     </MiniToolLayout>
   );

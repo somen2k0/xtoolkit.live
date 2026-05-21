@@ -182,6 +182,95 @@ export default function TweetFormatter() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Formatting listicles and tips as readable tweet threads</li>
           </ul>
         </div>
+
+        {/* Expanded SEO content */}
+        <div className="space-y-8 pt-2">
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">What is a tweet thread?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              A tweet thread is a series of connected tweets published sequentially from the same account, each one replying to the one before it. Threads allow creators, writers, and thought leaders to share long-form content — essays, tutorials, stories, arguments, or listicles — within a platform designed for short posts. Because X limits individual tweets to 280 characters, threads have become the primary way to communicate complex ideas while still benefiting from X's discovery features like the algorithm, hashtags, and retweets.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Threads are numbered to help readers orient themselves — the convention "1/" at the end of the first tweet signals that more follows. The numbering also makes it easy to reference a specific point ("great point in tweet 4"). Well-crafted threads routinely outperform single tweets in engagement, because each tweet in the thread is a fresh opportunity to be liked, retweeted, or replied to, and threads keep readers on the page longer — a signal the X algorithm rewards with broader distribution.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">How to write viral tweet threads</h2>
+            <ol className="space-y-3 text-sm text-muted-foreground list-none">
+              <li className="flex items-start gap-3"><span className="text-primary font-bold font-mono mt-0.5 w-5 shrink-0">1.</span> <span><strong className="text-foreground/80">Start with an irresistible hook.</strong> Your first tweet is everything — it's the only one people see before deciding to read on. Lead with a bold claim, a surprising statistic, a counter-intuitive statement, or a compelling question. Weak openings kill great threads before they start.</span></li>
+              <li className="flex items-start gap-3"><span className="text-primary font-bold font-mono mt-0.5 w-5 shrink-0">2.</span> <span><strong className="text-foreground/80">Make every tweet standalone-valuable.</strong> Readers often enter threads mid-stream from a retweet. Each tweet should deliver a complete thought — not a sentence that only makes sense in context. If tweet 5 is meaningless alone, rewrite it.</span></li>
+              <li className="flex items-start gap-3"><span className="text-primary font-bold font-mono mt-0.5 w-5 shrink-0">3.</span> <span><strong className="text-foreground/80">Use short sentences and white space.</strong> Dense walls of text feel exhausting on mobile. Break your ideas into punchy sentences. One idea per tweet is better than three squeezed in. Readers scan before they read.</span></li>
+              <li className="flex items-start gap-3"><span className="text-primary font-bold font-mono mt-0.5 w-5 shrink-0">4.</span> <span><strong className="text-foreground/80">Keep threads to 5–15 tweets.</strong> Engagement drops sharply after the 10th tweet for most topics. Unless you're telling a story that genuinely requires more, tighten your thread. Quality over quantity always wins on X.</span></li>
+              <li className="flex items-start gap-3"><span className="text-primary font-bold font-mono mt-0.5 w-5 shrink-0">5.</span> <span><strong className="text-foreground/80">End with a clear call to action.</strong> The final tweet is your second most important one. Ask a question to spark replies, summarize the key takeaway, link to a deeper resource, or invite people to retweet tweet 1 to share the thread. Don't just stop — land the plane.</span></li>
+              <li className="flex items-start gap-3"><span className="text-primary font-bold font-mono mt-0.5 w-5 shrink-0">6.</span> <span><strong className="text-foreground/80">Post at your audience's peak time.</strong> Threads need early momentum. Post when your followers are most active, then engage with every reply in the first hour. The algorithm prioritizes threads that spark fast engagement, compounding their reach exponentially.</span></li>
+            </ol>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-5">
+            <h2 className="text-lg font-semibold">Tweet thread examples by category</h2>
+            <div className="space-y-4">
+              <div className="rounded-xl border border-border/50 bg-background/40 p-4 space-y-2">
+                <p className="text-xs font-semibold text-primary uppercase tracking-wide">Lesson / Tutorial thread</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  "I learned CSS Grid in a weekend. Here's everything that actually clicked, condensed into 8 tweets: 🧵 1/8"<br />
+                  → Each tweet covers one concept (fr units, auto-fill, named areas…)<br />
+                  → Final tweet: "Save this thread. Share it with someone learning CSS."
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/50 bg-background/40 p-4 space-y-2">
+                <p className="text-xs font-semibold text-primary uppercase tracking-wide">Story / Case study thread</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  "Two years ago I was $40k in debt with no clients. Today I crossed $200k in revenue. Here's the exact turning point: 🧵 1/10"<br />
+                  → Thread narrates the journey with specific numbers and decisions<br />
+                  → Final tweet: "What changed everything? One habit I'll share in my next thread."
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/50 bg-background/40 p-4 space-y-2">
+                <p className="text-xs font-semibold text-primary uppercase tracking-wide">Opinion / Contrarian take thread</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  "Hot take: Productivity apps make you less productive. I have receipts. 🧵 1/6"<br />
+                  → Each tweet backs up the claim with evidence or logic<br />
+                  → Final tweet: "The best productivity system is the one you don't have to manage."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Character limit guide for X / Twitter</h2>
+            <div className="overflow-x-auto rounded-xl border border-border/60">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border/60 bg-muted/30">
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Content type</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Limit</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Notes</th>
+                  </tr>
+                </thead>
+                <tbody className="text-muted-foreground">
+                  {[
+                    { type: "Standard tweet", limit: "280 chars", note: "Default for all free accounts" },
+                    { type: "X Premium tweet", limit: "25,000 chars", note: "Long-form posts for paid subscribers" },
+                    { type: "URLs (any length)", limit: "23 chars", note: "X counts all URLs as 23 characters" },
+                    { type: "Emoji", limit: "2 chars each", note: "Most emoji count as 2 characters" },
+                    { type: "Username @mention", limit: "Varies", note: "Counts toward the 280-char limit" },
+                    { type: "Display name", limit: "50 chars", note: "Shown on your profile, not @handle" },
+                    { type: "Bio", limit: "160 chars", note: "Profile description under your name" },
+                  ].map((row, i) => (
+                    <tr key={row.type} className={`border-b border-border/40 ${i % 2 === 0 ? "bg-background/20" : ""}`}>
+                      <td className="px-4 py-2.5 font-medium text-foreground/80">{row.type}</td>
+                      <td className="px-4 py-2.5 font-mono text-primary">{row.limit}</td>
+                      <td className="px-4 py-2.5 text-xs">{row.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
       </div>
     </MiniToolLayout>
   );

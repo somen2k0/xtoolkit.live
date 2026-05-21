@@ -283,37 +283,73 @@ export default function TimezoneConverter() {
           </div>
         </div>
 
-        {/* SEO content */}
+        {/* Expanded SEO content */}
         <div className="space-y-8 pt-6 border-t border-border/40">
-          <section className="space-y-3">
-            <h2 className="text-lg font-semibold">Free Online Time Zone Converter</h2>
+
+          <section className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6">
+            <h2 className="text-lg font-semibold">Why timezone conversion matters</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              This <strong>free time zone converter</strong> instantly converts any date and time to equivalent
-              times in other timezones around the world. It uses the browser's built-in{" "}
-              <code className="bg-muted/60 rounded px-1 py-0.5 text-xs font-mono">Intl.DateTimeFormat</code> API
-              with the full IANA timezone database — so daylight saving time is always accounted for correctly.
+              In a globally connected world, getting the time right across timezones is one of the most common — and most consequential — everyday challenges. A missed conversion can mean showing up an hour late to a client call, launching a product at the wrong time for your biggest market, or sending an email campaign at 3 AM for half your audience. As remote work has made cross-timezone collaboration the norm rather than the exception, accurate timezone conversion has become a daily necessity for millions of professionals, developers, marketers, and creators.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Perfect for scheduling meetings across timezones, converting event times, planning international
-              releases, and understanding what time it is anywhere in the world for a specific moment.
+              Beyond scheduling, timezone awareness matters for anyone working with time-sensitive data: server logs, event timestamps, API responses, and database records are often stored in UTC and need to be converted to local time for human interpretation. Understanding the offset between UTC and your local timezone — and how that offset shifts with daylight saving time — is foundational knowledge for software developers, data analysts, and anyone managing distributed systems or international audiences.
             </p>
           </section>
 
-          <section className="space-y-3">
-            <h2 className="text-lg font-semibold">Common Timezone Use Cases</h2>
-            <div className="grid sm:grid-cols-3 gap-3">
-              {[
-                { title: "Remote team meetings", desc: "Schedule calls across New York, London, and Singapore without confusion." },
-                { title: "Product launches", desc: "Coordinate global launch times so every region gets the right local time." },
-                { title: "Deadline tracking", desc: "Convert deadline times from a client's timezone to your local time instantly." },
-              ].map(({ title, desc }) => (
-                <div key={title} className="rounded-xl border border-border/60 bg-card/40 p-4 space-y-1.5">
-                  <p className="text-sm font-semibold">{title}</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
-                </div>
-              ))}
+          <section className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6">
+            <h2 className="text-lg font-semibold">Most common timezone conversions</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+              These are the six timezones that appear most frequently in global scheduling. Offsets shown reflect standard time (non-DST periods).
+            </p>
+            <div className="overflow-x-auto rounded-xl border border-border/60">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border/60 bg-muted/30">
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Timezone</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Full Name</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">UTC Offset</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">DST Offset</th>
+                  </tr>
+                </thead>
+                <tbody className="text-muted-foreground">
+                  {[
+                    { tz: "UTC", name: "Coordinated Universal Time", std: "UTC+0", dst: "No DST" },
+                    { tz: "GMT", name: "Greenwich Mean Time", std: "UTC+0", dst: "No DST" },
+                    { tz: "EST", name: "Eastern Standard Time", std: "UTC−5", dst: "UTC−4 (EDT)" },
+                    { tz: "PST", name: "Pacific Standard Time", std: "UTC−8", dst: "UTC−7 (PDT)" },
+                    { tz: "CET", name: "Central European Time", std: "UTC+1", dst: "UTC+2 (CEST)" },
+                    { tz: "IST", name: "India Standard Time", std: "UTC+5:30", dst: "No DST" },
+                  ].map((row, i) => (
+                    <tr key={row.tz} className={`border-b border-border/40 ${i % 2 === 0 ? "bg-background/20" : ""}`}>
+                      <td className="px-4 py-2.5 font-mono font-semibold text-primary">{row.tz}</td>
+                      <td className="px-4 py-2.5">{row.name}</td>
+                      <td className="px-4 py-2.5 font-mono">{row.std}</td>
+                      <td className="px-4 py-2.5 font-mono text-xs">{row.dst}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </section>
+
+          <section className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6">
+            <h2 className="text-lg font-semibold">Daylight saving time explained</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Daylight saving time (DST) is the practice of advancing clocks by one hour during warmer months so that evening daylight lasts longer. Most of the United States moves clocks forward on the second Sunday in March and back on the first Sunday in November — temporarily shifting EST to EDT (UTC−4) and PST to PDT (UTC−7). Europe follows a similar pattern but on different dates, which means the gap between US and European time can vary by an hour for a few weeks each year. Countries near the equator — including India (IST), most of Africa, and much of Asia — do not observe DST at all, so their UTC offset remains constant year-round. This tool uses the full IANA timezone database, which knows every DST rule for every region, so conversions are always correct for the specific date you select — not just the current offset.
+            </p>
+          </section>
+
+          <section className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6">
+            <h2 className="text-lg font-semibold">Tips for scheduling across timezones</h2>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Always anchor to UTC.</strong> When sharing times across teams in multiple countries, include the UTC equivalent so everyone has a single reference point regardless of local DST rules.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Avoid the DST transition weeks.</strong> Scheduling recurring meetings near the date clocks change (especially across US and EU) can cause unexpected 1-hour shifts — double-check conversions during those weeks.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Use IANA timezone names, not abbreviations.</strong> "America/New_York" is unambiguous; "EST" is used by at least 3 different timezones globally. Always be explicit when logging or sharing times programmatically.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Find the overlap window.</strong> When teams span more than 3 timezones, look for the 2–3 hour window that falls during business hours everywhere — usually late morning US East Coast time overlaps with afternoon in Europe.</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Send calendar invites, not times.</strong> Calendar apps handle timezone conversion automatically when you use proper invites — so recipients always see the correct local time without manual math.</span></li>
+            </ul>
+          </section>
+
         </div>
       </div>
     </MiniToolLayout>
