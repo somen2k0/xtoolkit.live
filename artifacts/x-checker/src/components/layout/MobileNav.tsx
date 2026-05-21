@@ -1,13 +1,13 @@
 import { useState, useMemo, useRef } from "react";
 import { useLocation, Link } from "wouter";
 import {
-  Home, Wrench, Info, Search, X, ChevronRight,
-  Sparkles, Users, Type, Code2, TrendingUp, AtSign, Smile, Briefcase, Palette,
+  Home, Wrench, Search, X, ChevronRight,
+  Sparkles, Type, Code2, TrendingUp, AtSign, Palette,
   Hash, MessageSquare as MessageSquareIcon, BarChart2, FileJson, Lock, Link2,
   Globe, Mail, ShieldCheck, Pencil, Inbox, Minimize2, KeyRound, Database,
-  Shuffle, Shield, Tag, FileText, BarChart, Clock, ArrowLeftRight, ScanSearch,
-  EyeOff, MailWarning, AlertOctagon, BookOpen,
-  Calendar, ClipboardList, Gauge, FlaskConical, ShieldAlert, Newspaper,
+  Shuffle, Shield, Tag, BarChart, Clock, ArrowLeftRight, ScanSearch,
+  EyeOff, ShieldAlert, Newspaper, Calendar, Gauge,
+  AlignLeft, QrCode, ImageIcon,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
@@ -29,27 +29,20 @@ const TOOL_CATEGORIES = [
     tools: [
       { icon: ScanSearch, label: "AI Text Detector & Humanizer", desc: "Detect AI content & rewrite it human", href: "/tools/ai-detector", badge: "AI" },
       { icon: Sparkles, label: "AI Bio Generator", desc: "Generate 3 X bios instantly", href: "/tools/bio-generator", badge: "AI" },
-      { icon: Sparkles, label: "Bio Ideas", desc: "100+ ready-made bio templates", href: "/tools/bio-ideas", badge: "Popular" },
-      { icon: Smile, label: "Funny Bios", desc: "Witty, humorous bio ideas", href: "/tools/funny-bios" },
-      { icon: Briefcase, label: "Professional Bios", desc: "Bios for career builders", href: "/tools/professional-bios" },
-      { icon: Palette, label: "Aesthetic Bios", desc: "Minimal, stylish profile bios", href: "/tools/aesthetic-bios" },
     ],
   },
   {
     key: "social-media",
     label: "Social Media Tools",
-    icon: Users,
+    icon: Search,
     color: "text-blue-400",
     bg: "bg-blue-400/10 border-blue-400/20",
     tools: [
       { icon: Search, label: "Account Checker", desc: "Bulk-check 100 X accounts", href: "/tools/x-account-checker", badge: "Popular" },
       { icon: Link2, label: "Profile Link Generator", desc: "Convert usernames to links", href: "/tools/profile-link-generator" },
-      { icon: AtSign, label: "Handle Formatter", desc: "Add/remove @ prefix in bulk", href: "/tools/at-formatter" },
+      { icon: AtSign, label: "@ Formatter", desc: "Add/remove @ prefix in bulk", href: "/tools/at-formatter" },
       { icon: AtSign, label: "Username Generator", desc: "Unique X handle ideas", href: "/tools/username-generator" },
-      { icon: Users, label: "Display Name Ideas", desc: "Curated X display names", href: "/tools/name-ideas" },
-      { icon: Users, label: "Follower Analyzer", desc: "Analyze follower ratio & engagement", href: "/tools/follower-analyzer", badge: "New" },
       { icon: Calendar, label: "Tweet Scheduler", desc: "Plan & export your content calendar", href: "/tools/tweet-scheduler", badge: "New" },
-      { icon: ClipboardList, label: "Profile Audit", desc: "Score and improve your X profile", href: "/tools/profile-audit", badge: "New" },
     ],
   },
   {
@@ -63,6 +56,7 @@ const TOOL_CATEGORIES = [
       { icon: MessageSquareIcon, label: "Tweet Thread Formatter", desc: "Split text into tweet threads", href: "/tools/tweet-formatter" },
       { icon: Type, label: "Font Preview", desc: "Preview text in Unicode fonts", href: "/tools/font-preview" },
       { icon: BarChart2, label: "Character Counter", desc: "Fit X's 280-char limit", href: "/tools/character-counter" },
+      { icon: AlignLeft, label: "Word Counter", desc: "Count words, characters & paragraphs", href: "/tools/word-counter", badge: "New" },
       { icon: Type, label: "Case Converter", desc: "camelCase, snake_case, UPPERCASE & more", href: "/tools/case-converter", badge: "New" },
     ],
   },
@@ -83,7 +77,12 @@ const TOOL_CATEGORIES = [
       { icon: Database, label: "SQL Formatter", desc: "Format & beautify SQL queries", href: "/tools/sql-formatter", badge: "New" },
       { icon: Shuffle, label: "UUID Generator", desc: "Generate v4 UUIDs in bulk", href: "/tools/uuid-generator" },
       { icon: ArrowLeftRight, label: "YAML ↔ JSON Converter", desc: "Convert between YAML and JSON instantly", href: "/tools/yaml-json", badge: "New" },
-      { icon: Clock, label: "Time Zone Converter", desc: "Convert time between world timezones", href: "/tools/timezone-converter", badge: "New" },
+      { icon: Clock, label: "Timezone Converter", desc: "Convert time between world timezones", href: "/tools/timezone-converter", badge: "New" },
+      { icon: KeyRound, label: "Password Generator", desc: "Generate strong, secure passwords", href: "/tools/password-generator", badge: "New" },
+      { icon: Palette, label: "Color Picker", desc: "Convert HEX, RGB, HSL instantly", href: "/tools/color-picker", badge: "New" },
+      { icon: QrCode, label: "QR Code Generator", desc: "Create QR codes for URLs & more", href: "/tools/qr-code-generator", badge: "New" },
+      { icon: ImageIcon, label: "Image Compressor", desc: "Compress images in your browser", href: "/tools/image-compressor", badge: "New" },
+      { icon: Globe, label: "OG Image Preview", desc: "Preview social share cards", href: "/tools/og-image-preview" },
     ],
   },
   {
@@ -93,14 +92,12 @@ const TOOL_CATEGORIES = [
     color: "text-pink-400",
     bg: "bg-pink-400/10 border-pink-400/20",
     tools: [
-      { icon: Globe, label: "OG / Twitter Card Preview", desc: "Preview social share cards for any URL", href: "/tools/og-image-preview", badge: "New" },
-      { icon: Globe, label: "Meta Tag Generator", desc: "Optimise meta titles & descriptions", href: "/tools/meta-tag-generator", badge: "New" },
-      { icon: Link2, label: "URL Slug Generator", desc: "Clean, SEO-friendly slugs", href: "/tools/url-slug-generator", badge: "New" },
-      { icon: TrendingUp, label: "Keyword Density", desc: "Check keyword frequency", href: "/tools/keyword-density", badge: "New" },
-      { icon: Shield, label: "Robots.txt Generator", desc: "Generate robots.txt rules", href: "/tools/robots-txt-generator", badge: "New" },
-      { icon: Tag, label: "Sitemap Validator", desc: "Validate XML sitemaps", href: "/tools/sitemap-validator", badge: "New" },
-      { icon: Gauge, label: "Page Speed Checker", desc: "Audit your site speed & Core Web Vitals", href: "/tools/page-speed-checker", badge: "New" },
-      { icon: Link2, label: "Backlink Analyzer", desc: "Check backlink quality & spam signals", href: "/tools/backlink-analyzer", badge: "New" },
+      { icon: Globe, label: "Meta Tag Generator", desc: "Optimise meta titles & descriptions", href: "/tools/meta-tag-generator", badge: "Popular" },
+      { icon: Link2, label: "URL Slug Generator", desc: "Clean, SEO-friendly slugs", href: "/tools/url-slug-generator" },
+      { icon: TrendingUp, label: "Keyword Density", desc: "Check keyword frequency", href: "/tools/keyword-density" },
+      { icon: Shield, label: "Robots.txt Generator", desc: "Generate robots.txt rules", href: "/tools/robots-txt-generator" },
+      { icon: Tag, label: "Sitemap Validator", desc: "Validate XML sitemaps", href: "/tools/sitemap-validator" },
+      { icon: Gauge, label: "Page Speed Checker", desc: "Audit your site speed & Core Web Vitals", href: "/tools/page-speed-checker" },
       { icon: Code2, label: "Schema Generator", desc: "Generate JSON-LD structured data markup", href: "/tools/schema-generator", badge: "New" },
     ],
   },
@@ -111,16 +108,15 @@ const TOOL_CATEGORIES = [
     color: "text-cyan-400",
     bg: "bg-cyan-400/10 border-cyan-400/20",
     tools: [
-      { icon: Inbox, label: "Temp Email", desc: "Disposable throwaway inbox", href: "/tools/temp-mail/tempemail", badge: "New" },
-      { icon: Mail, label: "Temp Gmail", desc: "Real temporary Gmail address", href: "/tools/temp-mail/tempgmail", badge: "New" },
+      { icon: Inbox, label: "Temp Email", desc: "Disposable throwaway inbox", href: "/tools/temp-mail/tempemail", badge: "Popular" },
+      { icon: Mail, label: "Temp Gmail", desc: "Real temporary Gmail address", href: "/tools/temp-mail/tempgmail" },
       { icon: Hash, label: "Gmail Tricks", desc: "Dot & plus-tag address variants", href: "/tools/temp-mail/gmail-tricks" },
-      { icon: Pencil, label: "Subject Line Generator", desc: "AI-powered subject lines", href: "/tools/subject-line-generator" },
-      { icon: ShieldCheck, label: "Email Validator", desc: "Validate format & MX records", href: "/tools/email-validator" },
-      { icon: Mail, label: "Email Signature Generator", desc: "Professional email signature builder", href: "/tools/email-signature-generator" },
-      { icon: FileText, label: "Plain Text Formatter", desc: "Convert HTML email to plain text", href: "/tools/plain-text-formatter" },
-      { icon: FlaskConical, label: "Email A/B Tester", desc: "Compare subject lines & predict winner", href: "/tools/email-ab-tester", badge: "New" },
+      { icon: Pencil, label: "Subject Line Generator", desc: "High-converting subject line templates", href: "/tools/subject-line-generator" },
+      { icon: Mail, label: "Email Signature Generator", desc: "Professional email signature builder", href: "/tools/email-signature-generator", badge: "New" },
+      { icon: ShieldCheck, label: "Email Validator", desc: "Validate format & MX records", href: "/tools/email-validator", badge: "New" },
       { icon: ShieldAlert, label: "Spam Score Checker", desc: "Check email content for spam triggers", href: "/tools/spam-score-checker", badge: "New" },
       { icon: Newspaper, label: "Newsletter Template", desc: "Generate responsive HTML email templates", href: "/tools/newsletter-template-generator", badge: "New" },
+      { icon: EyeOff, label: "Masked Email Generator", desc: "Create anonymous email aliases", href: "/tools/masked-email-generator", badge: "New" },
     ],
   },
 ];
@@ -143,11 +139,8 @@ const TEMP_MAIL_SHEET_ITEMS = [
 ];
 
 const TEMP_PRIVACY_SHEET_ITEMS = [
-  { icon: EyeOff,       label: "Email Privacy Checker", href: "/tools/email-privacy-checker",  desc: "Score your address privacy",      color: "text-purple-400" },
-  { icon: MailWarning,  label: "Masked Email Generator",href: "/tools/masked-email-generator", desc: "Create anonymous aliases",         color: "text-purple-400" },
-  { icon: AlertOctagon, label: "Spam Risk Checker",     href: "/tools/spam-risk-checker",      desc: "Check your spam likelihood",      color: "text-purple-400" },
-  { icon: Shield,       label: "Email Leak Checker",    href: "/tools/email-leak-checker",     desc: "See if your email is exposed",    color: "text-purple-400" },
-  { icon: BookOpen,     label: "Alias Email Guide",     href: "/tools/alias-email-explainer",  desc: "How email aliases work",          color: "text-purple-400" },
+  { icon: EyeOff,      label: "Masked Email Generator", href: "/tools/masked-email-generator", desc: "Create anonymous email aliases",       color: "text-purple-400" },
+  { icon: ShieldAlert, label: "Spam Score Checker",     href: "/tools/spam-score-checker",     desc: "Check your email for spam triggers",  color: "text-purple-400" },
 ];
 
 const NAV = [
