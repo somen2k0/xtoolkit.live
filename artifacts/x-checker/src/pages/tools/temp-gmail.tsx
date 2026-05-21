@@ -39,13 +39,17 @@ const O_DOMAINS = [
 type InboxProv = "guerrilla" | "onesecmail" | "freemail";
 
 function pickRandomDomain(fDomains: string[]): { domain: string; prov: InboxProv } {
-  const allDomains = [...G_DOMAINS, ...O_DOMAINS, ...fDomains];
+  // 1secmail (O_DOMAINS) is excluded — blocked from most cloud/VPS IPs (returns 403).
+  // Use Guerrilla Mail or mail.gw only.
+  const allDomains = [...G_DOMAINS, ...fDomains];
   if (allDomains.length === 0) return { domain: G_DOMAINS[0], prov: "guerrilla" };
   const domain = allDomains[Math.floor(Math.random() * allDomains.length)];
-  const prov: InboxProv = G_DOMAINS.includes(domain) ? "guerrilla"
-    : O_DOMAINS.includes(domain) ? "onesecmail"
-    : "freemail";
+  const prov: InboxProv = G_DOMAINS.includes(domain) ? "guerrilla" : "freemail";
   return { domain, prov };
+}
+
+async function sleep(ms: number): Promise<void> {
+  return new Promise(r => setTimeout(r, ms));
 }
 interface GSession { sid: string; user: string; domain: string; email: string }
 interface OSession { login: string; domain: string; email: string; domains: string[] }
@@ -345,14 +349,6 @@ function UnifiedInboxSection() {
         await fetchGMsgs(saved.sid);
         startPolling();
         return;
-      } else if (saved.prov === "onesecmail") {
-        const os: OSession = { login: saved.user, domain: saved.domain, email: saved.email, domains: O_DOMAINS };
-        oSessionRef.current = os; setOSession(os);
-        activeProvRef.current = "onesecmail"; setActiveProv("onesecmail");
-        setCreating(false);
-        await fetchOMsgs(saved.user, saved.domain);
-        startPolling();
-        return;
       } else if (saved.prov === "freemail" && saved.sid) {
         const fs: FSession = { login: saved.user, domain: saved.domain, email: saved.email, token: saved.sid };
         fSessionRef.current = fs; setFSession(fs);
@@ -364,11 +360,14 @@ function UnifiedInboxSection() {
       }
     }
     setCreating(true); setError(null);
-    const { domain, prov } = pickRandomDomain(fDomainsRef.current);
-    const ok = await createOnDomain(domain, prov);
-    if (!ok) { setError("Could not create inbox. Please try again."); setCreating(false); return; }
-    startPolling();
-    setCreating(false);
+    // Retry up to 3 times — handles API server startup delay and transient failures
+    for (let attempt = 0; attempt < 3; attempt++) {
+      if (attempt > 0) await sleep(1800);
+      const { domain, prov } = pickRandomDomain(fDomainsRef.current);
+      const ok = await createOnDomain(domain, prov);
+      if (ok) { startPolling(); setCreating(false); return; }
+    }
+    setError("Could not create inbox. Please try again."); setCreating(false);
   }, [createOnDomain, startPolling, fetchGMsgs, fetchOMsgs]);
 
   const newAddress = useCallback(async () => {
@@ -377,11 +376,13 @@ function UnifiedInboxSection() {
     setGMessages([]); setOMessages([]); setSelectedG(null); setSelectedO(null); setSelectedId(null);
     if (refreshTimer.current) clearInterval(refreshTimer.current);
     if (countdownTimer.current) clearInterval(countdownTimer.current);
-    const { domain, prov } = pickRandomDomain(fDomainsRef.current);
-    const ok = await createOnDomain(domain, prov);
-    if (!ok) { setError("Could not create new inbox."); setCreating(false); return; }
-    startPolling();
-    setCreating(false);
+    for (let attempt = 0; attempt < 3; attempt++) {
+      if (attempt > 0) await sleep(1800);
+      const { domain, prov } = pickRandomDomain(fDomainsRef.current);
+      const ok = await createOnDomain(domain, prov);
+      if (ok) { startPolling(); setCreating(false); return; }
+    }
+    setError("Could not create new inbox."); setCreating(false);
   }, [createOnDomain, startPolling]);
 
   // ── domain switching ───────────────────────────────────────────────
@@ -908,19 +909,27 @@ function TempGmailTab() {
     setMessages([]);
     setSelectedId(null);
     emailRef.current = null;
-    try {
-      const r = await fetch(`/api/temptf/generate?type=${gmailType}`);
-      const d = await r.json() as { email?: string; error?: string };
-      if (!r.ok || !d.email) {
-        setError(d.error ?? "Failed to generate address. Please try again.");
+    // Retry up to 3 times — handles API server startup delay and transient failures
+    for (let attempt = 0; attempt < 3; attempt++) {
+      if (attempt > 0) await sleep(1800);
+      try {
+        const r = await fetch(`/api/temptf/generate?type=${gmailType}`);
+        const d = await r.json() as { email?: string; error?: string };
+        if (!r.ok || !d.email) {
+          if (attempt === 2) setError(d.error ?? "Failed to generate address. Please try again.");
+          continue;
+        }
+        emailRef.current = d.email;
+        setEmail(d.email);
+        await fetchMessages(d.email);
+        startPolling(d.email);
+        setGenerating(false);
         return;
+      } catch {
+        if (attempt === 2) setError("Network error. Please try again.");
       }
-      emailRef.current = d.email;
-      setEmail(d.email);
-      await fetchMessages(d.email);
-      startPolling(d.email);
-    } catch { setError("Network error. Please try again."); }
-    finally { setGenerating(false); }
+    }
+    setGenerating(false);
   }, [fetchMessages, startPolling, stopPolling, gmailType]);
 
   const copyAddress = () => {
