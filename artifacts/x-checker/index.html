@@ -38,6 +38,12 @@
     <meta name="twitter:image" content="https://xtoolkit.live/opengraph.png" />
     <meta name="twitter:image:alt" content="X Toolkit — 55+ free online tools for X, SEO, developers and creators" />
 
+    <!-- Anti-FOUC: set background immediately and hide root until React mounts -->
+    <style>
+      html, body { background-color: hsl(240, 18%, 4%); margin: 0; padding: 0; }
+      #root:empty { visibility: hidden; }
+    </style>
+
     <!-- Favicon — ICO for older browsers, PNG for modern browsers, SVG for supporting browsers -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
