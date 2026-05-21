@@ -24,28 +24,33 @@ router.get("/contact/token", (_req, res) => {
 });
 
 router.post("/contact", async (req, res) => {
-  const { name, email, message } = req.body as {
-    name?: string;
-    email?: string;
-    message?: string;
-  };
+  try {
+    const { name, email, message } = req.body as {
+      name?: string;
+      email?: string;
+      message?: string;
+    };
 
-  if (!message || typeof message !== "string" || !message.trim()) {
-    res.status(400).json({ error: "Message is required." });
-    return;
+    if (!message || typeof message !== "string" || !message.trim()) {
+      res.status(400).json({ error: "Message is required." });
+      return;
+    }
+
+    const entry: FeedbackEntry = {
+      ts: new Date().toISOString(),
+      name: name?.trim() || "Anonymous",
+      email: email?.trim() || "",
+      message: message.trim(),
+    };
+
+    feedbackStore.push(entry);
+    req.log?.info({ entry }, "Feedback received (stored locally)");
+
+    res.status(200).json({ ok: true });
+  } catch (err) {
+    req.log?.error({ err }, "contact route error");
+    res.status(500).json({ error: "Failed to send message. Please try again." });
   }
-
-  const entry: FeedbackEntry = {
-    ts: new Date().toISOString(),
-    name: name?.trim() || "Anonymous",
-    email: email?.trim() || "",
-    message: message.trim(),
-  };
-
-  feedbackStore.push(entry);
-  req.log.info({ entry }, "Feedback received (stored locally)");
-
-  res.status(200).json({ ok: true });
 });
 
 router.get("/contact/messages", (_req, res) => {

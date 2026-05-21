@@ -94,7 +94,9 @@ export default function AiDetector() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text.trim() }),
       });
-      const data = await res.json() as DetectResult & { error?: string };
+      let data: (DetectResult & { error?: string }) = {} as DetectResult & { error?: string };
+      try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
+      if (res.status === 503) { setError(data.error ?? "AI service is not configured. Please try again later."); return; }
       if (!res.ok) { setError(data.error ?? "Something went wrong. Please try again."); return; }
       setDetectResult(data);
     } catch { setError("Network error. Please try again."); }
@@ -111,7 +113,9 @@ export default function AiDetector() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text.trim(), style: humanizeStyle }),
       });
-      const data = await res.json() as { humanized?: string; error?: string };
+      let data: { humanized?: string; error?: string } = {};
+      try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
+      if (res.status === 503) { setError(data.error ?? "AI service is not configured. Please try again later."); return; }
       if (!res.ok) { setError(data.error ?? "Something went wrong. Please try again."); return; }
       setHumanized(data.humanized ?? "");
     } catch { setError("Network error. Please try again."); }

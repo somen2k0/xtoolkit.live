@@ -28,33 +28,50 @@ async function compressImage(file: File, quality: number): Promise<CompressedIma
   return new Promise((resolve, reject) => {
     const img = new Image();
     const originalUrl = URL.createObjectURL(file);
+
     img.onload = () => {
       const canvas = document.createElement("canvas");
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
       const ctx = canvas.getContext("2d");
       if (!ctx) return reject(new Error("Canvas context unavailable"));
+
+      if (file.type === "image/png") {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
       ctx.drawImage(img, 0, 0);
-      const mimeType = file.type === "image/png" ? "image/png" : "image/jpeg";
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) return reject(new Error("Compression failed"));
-          const compressedUrl = URL.createObjectURL(blob);
-          const ratio = Math.round((1 - blob.size / file.size) * 100);
-          resolve({
-            name: file.name,
-            originalSize: file.size,
-            compressedSize: blob.size,
-            originalUrl,
-            compressedUrl,
-            ratio,
-          });
-        },
-        mimeType,
-        quality / 100
-      );
+
+      const mimeType =
+        file.type === "image/png"
+          ? "image/png"
+          : file.type === "image/webp"
+          ? "image/webp"
+          : "image/jpeg";
+
+      const tryBlob = (mime: string, q: number) =>
+        new Promise<Blob | null>((res) => canvas.toBlob(res, mime, q));
+
+      tryBlob(mimeType, quality / 100).then((blob) => {
+        if (!blob && mimeType !== "image/jpeg") {
+          return tryBlob("image/jpeg", quality / 100);
+        }
+        return blob;
+      }).then((blob) => {
+        if (!blob) return reject(new Error("Compression failed — could not encode image"));
+        const compressedUrl = URL.createObjectURL(blob);
+        const ratio = Math.round((1 - blob.size / file.size) * 100);
+        resolve({
+          name: file.name,
+          originalSize: file.size,
+          compressedSize: blob.size,
+          originalUrl,
+          compressedUrl,
+          ratio,
+        });
+      }).catch(reject);
     };
-    img.onerror = () => reject(new Error("Failed to load image"));
+
+    img.onerror = () => reject(new Error("Failed to load image — unsupported or corrupted file"));
     img.src = originalUrl;
   });
 }

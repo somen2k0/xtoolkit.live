@@ -83,9 +83,13 @@ Example: ["Bio one here", "Bio two here", "Bio three here"]`;
     return;
   }
 
-  const data = (await apiRes.json()) as {
-    choices?: Array<{ message?: { content?: string } }>;
-  };
+  let data: { choices?: Array<{ message?: { content?: string } }> };
+  try {
+    data = (await apiRes.json()) as typeof data;
+  } catch {
+    res.status(500).json({ error: "Unexpected response from AI service. Please try again." });
+    return;
+  }
   const raw = (data.choices?.[0]?.message?.content ?? "").trim();
 
   let bios: string[] = [];

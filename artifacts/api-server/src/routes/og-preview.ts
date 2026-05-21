@@ -53,21 +53,30 @@ router.post("/og-preview", async (req, res) => {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
 
-    const response = await fetch(normalizedUrl, {
-      signal: controller.signal,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; XToolkitBot/1.0; +https://xtoolkit.live)",
-        "Accept": "text/html,application/xhtml+xml",
-        "Accept-Language": "en-US,en;q=0.9",
-      },
-    });
-    clearTimeout(timeout);
+    let response: Response;
+    try {
+      response = await fetch(normalizedUrl, {
+        signal: controller.signal,
+        headers: {
+          "User-Agent": "Mozilla/5.0 (compatible; XToolkitBot/1.0; +https://xtoolkit.live)",
+          "Accept": "text/html,application/xhtml+xml",
+          "Accept-Language": "en-US,en;q=0.9",
+        },
+      });
+    } finally {
+      clearTimeout(timeout);
+    }
 
     if (!response.ok) {
       return res.status(422).json({ error: `Page returned HTTP ${response.status}` });
     }
 
-    const html = await response.text();
+    let html: string;
+    try {
+      html = await response.text();
+    } catch {
+      return res.status(422).json({ error: "Failed to read page content." });
+    }
     const finalUrl = response.url || normalizedUrl;
 
     const ogTitle = extractMeta(html, "og:title");
