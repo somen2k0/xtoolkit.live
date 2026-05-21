@@ -58,16 +58,23 @@ async function compressImage(file: File, quality: number): Promise<CompressedIma
         canvas.toBlob(
           (blob) => {
             if (!blob) return reject(new Error(`Compression failed: ${file.name}`));
-            const compressedUrl = URL.createObjectURL(blob);
             const ratio = Math.round((1 - blob.size / file.size) * 100);
-            resolve({
-              name: file.name,
-              originalSize: file.size,
-              compressedSize: blob.size,
-              originalUrl: dataUrl,
-              compressedUrl,
-              ratio,
-            });
+            // Convert blob → data: URL so the preview is not blocked by CSP
+            // (blob: URLs are blocked; data: URLs are already whitelisted)
+            const blobReader = new FileReader();
+            blobReader.onerror = () => reject(new Error(`Preview failed: ${file.name}`));
+            blobReader.onload = (ev) => {
+              const compressedUrl = ev.target?.result as string;
+              resolve({
+                name: file.name,
+                originalSize: file.size,
+                compressedSize: blob.size,
+                originalUrl: dataUrl,
+                compressedUrl,
+                ratio,
+              });
+            };
+            blobReader.readAsDataURL(blob);
           },
           outputMime,
           qualityParam,

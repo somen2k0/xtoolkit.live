@@ -1,0 +1,90 @@
+The Image Compressor tool is working (compression happens correctly)
+but the AFTER preview image is broken/not displaying.
+
+The browser console shows this exact error:
+"Loading the image 'blob:https://xtoolkit.live/...' violates 
+Content Security Policy directive: img-src 'self' data: ..."
+
+This means blob: URLs are blocked by the CSP headers set in helmet.
+
+Please fix this by doing the following:
+
+---
+
+STEP 1 — Find the helmet CSP configuration
+
+Search the entire artifacts/api-server/src directory for where
+helmet() is configured with a contentSecurityPolicy.
+It will look something like:
+
+helmet({
+  contentSecurityPolicy: {
+    directives: {
+      imgSrc: ["'self'", "data:", ...],
+      ...
+    }
+  }
+})
+
+Show me the current full helmet configuration before changing it.
+
+---
+
+STEP 2 — Add blob: to imgSrc
+
+In the imgSrc directive, add "blob:" so it reads:
+
+imgSrc: [
+  "'self'",
+  "data:",
+  "blob:",
+  "https://pbs.twimg.com",
+  "https://abs.twimg.com",
+  "https://www.google-analytics.com"
+]
+
+---
+
+STEP 3 — Also add blob: to the worker-src and script-src
+directives if they exist, because canvas operations sometimes
+need these as well:
+
+workerSrc: ["'self'", "blob:"],
+scriptSrc: ["'self'", "'unsafe-inline'", "blob:"]
+
+---
+
+STEP 4 — Alternative fix if helmet CSP is hard to find
+
+If the CSP is set via a meta tag in the frontend HTML instead
+of helmet, open artifacts/x-checker/index.html and find the
+<meta http-equiv="Content-Security-Policy"> tag and add
+blob: to the img-src directive there.
+
+---
+
+STEP 5 — Also fix the compressed image preview approach
+
+In the Image Compressor component, after compression change
+the preview from using a blob: URL to using a data: URL instead,
+which is already allowed by CSP:
+
+Instead of:
+  const blobUrl = URL.createObjectURL(compressedBlob);
+  setPreviewUrl(blobUrl);
+
+Use:
+  const reader = new FileReader();
+  reader.onload = (e) => setPreviewUrl(e.target?.result as string);
+  reader.readAsDataURL(compressedBlob);
+
+This converts the blob to a base64 data: URL which is already
+whitelisted in the CSP and will display correctly.
+
+This approach is more reliable than changing CSP headers.
+
+---
+
+Do STEP 5 first as it is the safest fix.
+Only do STEP 2-3 additionally if STEP 5 alone doesn't fix it.
+Show me every file changed.
