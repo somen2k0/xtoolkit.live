@@ -14,7 +14,7 @@ const domainCache: Record<Prefix, { domains: string[]; expiry: number }> = {
 };
 
 const FETCH_HEADERS = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+  "User-Agent": "Mozilla/5.0 (compatible; XToolkit/1.0)",
   "Accept": "application/json",
   "Content-Type": "application/json",
 };
@@ -23,7 +23,7 @@ async function fetchProviderDomains(prefix: Prefix, base: string, fallback: read
   const cache = domainCache[prefix];
   if (Date.now() < cache.expiry && cache.domains.length > 0) return cache.domains;
   try {
-    const r = await fetch(`${base}/domains`, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(6000) });
+    const r = await fetch(`${base}/domains`, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(8000) });
     if (!r.ok) return cache.domains.length ? cache.domains : [...fallback];
     const d = await r.json() as { "hydra:member"?: Array<{ domain: string; isActive: boolean; isPrivate?: boolean }> };
     const domains = (d["hydra:member"] ?? [])
@@ -106,9 +106,9 @@ async function createAccount(base: string, address: string, password: string): P
       method: "POST",
       headers: FETCH_HEADERS,
       body: JSON.stringify({ address, password }),
-      signal: AbortSignal.timeout(6000),
+      signal: AbortSignal.timeout(8000),
     });
-    return r.ok; // only true on 2xx — 422 means taken, password unknown
+    return r.ok;
   } catch { return false; }
 }
 
@@ -118,7 +118,7 @@ async function getJwt(base: string, address: string, password: string): Promise<
       method: "POST",
       headers: FETCH_HEADERS,
       body: JSON.stringify({ address, password }),
-      signal: AbortSignal.timeout(6000),
+      signal: AbortSignal.timeout(8000),
     });
     if (!r.ok) return null;
     const d = await r.json() as { token?: string };
@@ -228,7 +228,7 @@ router.post("/freemail/set-address", async (req, res) => {
   let login = requestedLogin ?? randomLogin();
   let jwt: string | null = null;
   for (let attempt = 0; attempt < 2; attempt++) {
-    if (attempt > 0) login = randomLogin(); // fall back to random if requested name is taken
+    if (attempt > 0) login = randomLogin();
     const created = await createAccount(base, `${login}@${domain}`, password);
     if (!created) continue;
     jwt = await getJwt(base, `${login}@${domain}`, password);
@@ -270,7 +270,6 @@ router.get("/freemail/message/:id", async (req, res) => {
   }
 });
 
-// ── Helper used by domain picker display (prefix per domain) ──────────────
 router.get("/freemail/domains-tagged", async (_req, res) => {
   const tagged = await getAllDomains();
   res.json({ domains: tagged });

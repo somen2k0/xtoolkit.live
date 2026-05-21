@@ -44,6 +44,10 @@ const OPTIONAL: EnvVar[] = [
 ];
 
 export function checkEnv(): void {
+  console.info(
+    `[env] NODE_ENV=${process.env["NODE_ENV"] ?? "undefined"} | PORT=${process.env["PORT"] ?? "undefined"}`
+  );
+
   const missing: EnvVar[] = REQUIRED.filter((v) => !process.env[v.name]);
 
   if (missing.length > 0) {

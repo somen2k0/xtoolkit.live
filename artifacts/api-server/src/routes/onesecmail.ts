@@ -9,7 +9,7 @@ const FALLBACK_DOMAINS = [
 ];
 
 const FETCH_HEADERS = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+  "User-Agent": "Mozilla/5.0 (compatible; XToolkit/1.0)",
   "Accept": "application/json",
 };
 
@@ -18,7 +18,7 @@ async function getDomains(): Promise<string[] | null> {
   try {
     const r = await fetch(`${BASE}?action=getDomainList`, {
       headers: FETCH_HEADERS,
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(8000),
     });
     if (r.status === 403) return null; // server IP is blocked by 1secmail
     if (r.ok) {
@@ -110,7 +110,7 @@ router.get("/onesecmail/inbox", async (req, res) => {
   try {
     const r = await fetch(
       `${BASE}?action=getMessages&login=${encodeURIComponent(login)}&domain=${encodeURIComponent(domain)}`,
-      { headers: FETCH_HEADERS, signal: AbortSignal.timeout(6000) }
+      { headers: FETCH_HEADERS, signal: AbortSignal.timeout(8000) }
     );
     if (!r.ok) { res.status(502).json({ error: "Could not reach 1secmail." }); return; }
     const data = await r.json() as Array<{ id: number; from: string; subject: string; date: string }>;
@@ -130,7 +130,7 @@ router.get("/onesecmail/message/:id", async (req, res) => {
   try {
     const r = await fetch(
       `${BASE}?action=readMessage&login=${encodeURIComponent(login)}&domain=${encodeURIComponent(domain)}&id=${id}`,
-      { headers: FETCH_HEADERS, signal: AbortSignal.timeout(6000) }
+      { headers: FETCH_HEADERS, signal: AbortSignal.timeout(8000) }
     );
     if (!r.ok) { res.status(r.status).json({ error: "Message not found." }); return; }
     res.json(await r.json());

@@ -36,6 +36,11 @@ const USA_LAST = [
   "myers","long","foster","sanders","ross","morales","powell","sullivan","russell","ortiz",
 ];
 
+const FETCH_HEADERS = {
+  "User-Agent": "Mozilla/5.0 (compatible; XToolkit/1.0)",
+  "Accept": "application/json",
+};
+
 function randomItem<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -58,20 +63,21 @@ async function gFetch(params: Record<string, string>, sid?: string): Promise<Res
   if (sid) params.sid_token = sid;
   Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   return fetch(url.toString(), {
-    headers: { Accept: "application/json", "User-Agent": "Mozilla/5.0" },
-    signal: AbortSignal.timeout(5000),
+    headers: FETCH_HEADERS,
+    signal: AbortSignal.timeout(8000),
   });
 }
 
-router.get("/guerrilla/new", async (req, res) => {
+// ── Internal helper: create a Guerrilla inbox, returns null on failure ────────
+async function tryCreateGuerrillaInbox(): Promise<{
+  email: string; user: string; domain: string; sid_token: string; domains: string[];
+} | null> {
   try {
-    // Step 1: get a fresh session
     const initRes = await gFetch({ f: "get_email_address", lang: "en" });
-    if (!initRes.ok) { res.status(502).json({ error: "Could not reach Guerrilla Mail. Please try again." }); return; }
+    if (!initRes.ok) return null;
     const initData = await initRes.json() as { email_addr?: string; sid_token?: string };
-    if (!initData.sid_token) { res.status(502).json({ error: "Invalid provider response." }); return; }
+    if (!initData.sid_token) return null;
 
-    // Step 2: set a USA full name as the username
     const sid = initData.sid_token;
     const usaUsername = generateUsaUsername();
     const setRes = await gFetch({ f: "set_email_user", email_user: usaUsername, lang: "en" }, sid);
@@ -96,7 +102,20 @@ router.get("/guerrilla/new", async (req, res) => {
       finalDomain = parts[1] ?? finalDomain;
     }
 
-    res.json({ email: finalEmail, user: finalUser, domain: finalDomain, sid_token: finalSid, domains: GUERRILLA_DOMAINS });
+    return { email: finalEmail, user: finalUser, domain: finalDomain, sid_token: finalSid, domains: GUERRILLA_DOMAINS };
+  } catch {
+    return null;
+  }
+}
+
+router.get("/guerrilla/new", async (req, res) => {
+  try {
+    const result = await tryCreateGuerrillaInbox();
+    if (!result) {
+      res.status(502).json({ error: "Could not reach Guerrilla Mail. Please try another provider." });
+      return;
+    }
+    res.json(result);
   } catch (err) {
     req.log.error({ err }, "guerrilla new error");
     res.status(500).json({ error: "Failed to create inbox." });
@@ -107,9 +126,6 @@ router.post("/guerrilla/set-user", async (req, res) => {
   const { user, domain, sid_token } = req.body as { user?: string; domain?: string; sid_token?: string };
   if (!sid_token) { res.status(400).json({ error: "sid_token required." }); return; }
   try {
-    // All Guerrilla Mail domains are aliases of the same inbox — the API does not
-    // accept a domain parameter. Only send the username, then substitute the
-    // user-selected domain ourselves in the response.
     const params: Record<string, string> = { f: "set_email_user", lang: "en" };
     if (user) params.email_user = user;
     const r = await gFetch(params, sid_token);
@@ -134,8 +150,6 @@ router.get("/guerrilla/inbox", async (req, res) => {
     if (!r.ok) { res.status(502).json({ error: "Could not reach Guerrilla Mail." }); return; }
     const d = await r.json() as { list?: unknown };
     const raw = Array.isArray(d.list) ? d.list : [];
-    // Filter out the Guerrilla Mail placeholder entry (mail_id "0") which is
-    // always present when the inbox is empty and has blank/invalid fields.
     const messages = raw.filter((m: unknown) => {
       const msg = m as Record<string, unknown>;
       return msg.mail_id && String(msg.mail_id) !== "0";
@@ -160,6 +174,73 @@ router.get("/guerrilla/message/:id", async (req, res) => {
     req.log.error({ err }, "guerrilla fetch message error");
     res.status(500).json({ error: "Failed to fetch message." });
   }
+});
+
+// ── Provider health check — tests each provider and logs results ──────────────
+router.get("/temp-mail/health", async (req, res) => {
+  req.log.info({ NODE_ENV: process.env["NODE_ENV"] ?? "unknown" }, "temp-mail health check");
+
+  const results: Record<string, { ok: boolean; latencyMs?: number; error?: string }> = {};
+
+  // Test Guerrilla Mail
+  const guerrillaStart = Date.now();
+  try {
+    const r = await fetch(`${GUERRILLA_BASE}?f=get_email_address&lang=en`, {
+      headers: FETCH_HEADERS,
+      signal: AbortSignal.timeout(8000),
+    });
+    results["guerrilla"] = { ok: r.ok, latencyMs: Date.now() - guerrillaStart };
+    if (!r.ok) results["guerrilla"]!.error = `HTTP ${r.status}`;
+  } catch (err) {
+    results["guerrilla"] = { ok: false, latencyMs: Date.now() - guerrillaStart, error: String(err) };
+  }
+
+  // Test 1secmail
+  const onesecStart = Date.now();
+  try {
+    const r = await fetch("https://www.1secmail.com/api/v1/?action=getDomainList", {
+      headers: FETCH_HEADERS,
+      signal: AbortSignal.timeout(8000),
+    });
+    results["onesecmail"] = { ok: r.ok, latencyMs: Date.now() - onesecStart };
+    if (!r.ok) results["onesecmail"]!.error = `HTTP ${r.status}`;
+  } catch (err) {
+    results["onesecmail"] = { ok: false, latencyMs: Date.now() - onesecStart, error: String(err) };
+  }
+
+  // Test Mail.gw
+  const mailgwStart = Date.now();
+  try {
+    const r = await fetch("https://api.mail.gw/domains", {
+      headers: FETCH_HEADERS,
+      signal: AbortSignal.timeout(8000),
+    });
+    results["mailgw"] = { ok: r.ok, latencyMs: Date.now() - mailgwStart };
+    if (!r.ok) results["mailgw"]!.error = `HTTP ${r.status}`;
+  } catch (err) {
+    results["mailgw"] = { ok: false, latencyMs: Date.now() - mailgwStart, error: String(err) };
+  }
+
+  // Test temp.tf
+  const temptfStart = Date.now();
+  try {
+    const r = await fetch("https://temp.tf/api/account?providers=gmail&dot=1", {
+      headers: { ...FETCH_HEADERS, "Content-Type": "application/json" },
+      signal: AbortSignal.timeout(8000),
+    });
+    results["temptf"] = { ok: r.ok, latencyMs: Date.now() - temptfStart };
+    if (!r.ok) results["temptf"]!.error = `HTTP ${r.status}`;
+  } catch (err) {
+    results["temptf"] = { ok: false, latencyMs: Date.now() - temptfStart, error: String(err) };
+  }
+
+  req.log.info({ providers: results }, "temp-mail provider health results");
+
+  const allDown = Object.values(results).every(r => !r.ok);
+  res.status(allDown ? 503 : 200).json({
+    NODE_ENV: process.env["NODE_ENV"] ?? "unknown",
+    providers: results,
+  });
 });
 
 export default router;
