@@ -6,6 +6,9 @@ import { logger } from "./lib/logger";
 // Crashes with a clear error message if required vars are missing.
 checkEnv();
 
+// FIXED: AI tools - startup check for GROQ_API_KEY presence
+console.log("GROQ_API_KEY present:", !!process.env.GROQ_API_KEY);
+
 const rawPort = process.env["PORT"];
 
 if (!rawPort) {

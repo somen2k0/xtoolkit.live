@@ -1,3 +1,4 @@
+// FIXED: Contact Form - submits directly to Web3Forms API from the frontend
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
@@ -25,16 +26,35 @@ export default function Contact() {
     }
     setSending(true);
     try {
-      const res = await fetch("/api/contact", {
+      // Step 1: fetch the Web3Forms public key from the backend
+      const tokenRes = await fetch("/api/contact/token");
+      if (!tokenRes.ok) throw new Error("token_unavailable");
+      const { key } = await tokenRes.json() as { key?: string };
+      if (!key) throw new Error("token_unavailable");
+
+      // Step 2: submit directly to Web3Forms (public key is safe to use in frontend)
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          access_key: key,
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
       });
-      if (!res.ok) throw new Error("Failed");
+
+      if (!response.ok) throw new Error("submit_failed");
+
       toast({ title: "Message sent!", description: "We'll get back to you soon." });
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch {
-      toast({ title: "Something went wrong.", description: "Please try again.", variant: "destructive" });
+      toast({
+        title: "Could not send message.",
+        description: "Please email us directly at support@xtoolkit.live",
+        variant: "destructive",
+      });
     } finally {
       setSending(false);
     }

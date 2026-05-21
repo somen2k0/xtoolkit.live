@@ -94,10 +94,10 @@ export default function AiDetector() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text.trim() }),
       });
+      // FIXED: AI Detector - graceful error handling for non-JSON and 5xx responses
       let data: (DetectResult & { error?: string }) = {} as DetectResult & { error?: string };
       try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
-      if (res.status === 503) { setError(data.error ?? "AI service is not configured. Please try again later."); return; }
-      if (!res.ok) { setError(data.error ?? "Something went wrong. Please try again."); return; }
+      if (!res.ok) { setError("AI service is temporarily unavailable. Please try again later."); return; }
       setDetectResult(data);
     } catch { setError("Network error. Please try again."); }
     finally { setDetecting(false); }
@@ -113,10 +113,10 @@ export default function AiDetector() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text.trim(), style: humanizeStyle }),
       });
+      // FIXED: AI Humanizer - graceful error handling for non-JSON and 5xx responses
       let data: { humanized?: string; error?: string } = {};
       try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
-      if (res.status === 503) { setError(data.error ?? "AI service is not configured. Please try again later."); return; }
-      if (!res.ok) { setError(data.error ?? "Something went wrong. Please try again."); return; }
+      if (!res.ok) { setError("AI service is temporarily unavailable. Please try again later."); return; }
       setHumanized(data.humanized ?? "");
     } catch { setError("Network error. Please try again."); }
     finally { setHumanizing(false); }

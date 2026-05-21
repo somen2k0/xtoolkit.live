@@ -24,55 +24,60 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
 
+// FIXED: Image Compressor - FileReader approach, PNG→JPEG conversion, per-file error reporting
 async function compressImage(file: File, quality: number): Promise<CompressedImage> {
   return new Promise((resolve, reject) => {
-    const img = new Image();
-    const originalUrl = URL.createObjectURL(file);
+    const reader = new FileReader();
 
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return reject(new Error("Canvas context unavailable"));
+    reader.onerror = () => reject(new Error(`Failed to read file: ${file.name}`));
 
-      if (file.type === "image/png") {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
-      ctx.drawImage(img, 0, 0);
+    reader.onload = (e) => {
+      const dataUrl = e.target?.result as string;
+      if (!dataUrl) return reject(new Error(`Could not read: ${file.name}`));
 
-      const mimeType =
-        file.type === "image/png"
-          ? "image/png"
-          : file.type === "image/webp"
-          ? "image/webp"
-          : "image/jpeg";
+      const img = new Image();
+      img.onerror = () => reject(new Error(`Failed to load image: ${file.name}`));
 
-      const tryBlob = (mime: string, q: number) =>
-        new Promise<Blob | null>((res) => canvas.toBlob(res, mime, q));
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return reject(new Error("Canvas context unavailable"));
 
-      tryBlob(mimeType, quality / 100).then((blob) => {
-        if (!blob && mimeType !== "image/jpeg") {
-          return tryBlob("image/jpeg", quality / 100);
-        }
-        return blob;
-      }).then((blob) => {
-        if (!blob) return reject(new Error("Compression failed — could not encode image"));
-        const compressedUrl = URL.createObjectURL(blob);
-        const ratio = Math.round((1 - blob.size / file.size) * 100);
-        resolve({
-          name: file.name,
-          originalSize: file.size,
-          compressedSize: blob.size,
-          originalUrl,
-          compressedUrl,
-          ratio,
-        });
-      }).catch(reject);
+        // Fill white background before drawing (needed for PNG→JPEG transparency)
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+
+        // PNG and WebP → JPEG for quality-based compression
+        // JPEG already supports quality parameter natively
+        const outputMime = "image/jpeg";
+        const qualityParam = Math.max(0.1, Math.min(1, quality / 100));
+
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) return reject(new Error(`Compression failed: ${file.name}`));
+            const compressedUrl = URL.createObjectURL(blob);
+            const ratio = Math.round((1 - blob.size / file.size) * 100);
+            resolve({
+              name: file.name,
+              originalSize: file.size,
+              compressedSize: blob.size,
+              originalUrl: dataUrl,
+              compressedUrl,
+              ratio,
+            });
+          },
+          outputMime,
+          qualityParam,
+        );
+      };
+
+      img.src = dataUrl;
     };
 
-    img.onerror = () => reject(new Error("Failed to load image — unsupported or corrupted file"));
-    img.src = originalUrl;
+    reader.readAsDataURL(file);
   });
 }
 
@@ -108,13 +113,27 @@ export default function ImageCompressor() {
     }
     setLoading(true);
     setResults([]);
-    try {
-      const compressed = await Promise.all(valid.map((f) => compressImage(f, quality)));
-      setResults(compressed);
-    } catch {
-      toast({ title: "Error", description: "Failed to compress one or more images.", variant: "destructive" });
-    } finally {
-      setLoading(false);
+
+    // Process each file individually so a single failure doesn't block others
+    const compressed: CompressedImage[] = [];
+    const failed: string[] = [];
+    for (const f of valid) {
+      try {
+        compressed.push(await compressImage(f, quality));
+      } catch (err) {
+        failed.push(err instanceof Error ? err.message : f.name);
+      }
+    }
+
+    setResults(compressed);
+    setLoading(false);
+
+    if (failed.length > 0) {
+      toast({
+        title: failed.length === valid.length ? "Compression failed" : "Some files failed",
+        description: failed.join(" · "),
+        variant: "destructive",
+      });
     }
   }, [quality, toast]);
 

@@ -141,7 +141,8 @@ export default function OgImagePreview() {
         setResult(data as OgResult);
       }
     } catch {
-      setError("Network error — could not reach the server.");
+      // FIXED: OG Preview frontend - specific error message
+      setError("Could not fetch page. The site may block external requests.");
     } finally {
       setLoading(false);
     }

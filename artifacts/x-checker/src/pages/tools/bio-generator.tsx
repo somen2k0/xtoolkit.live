@@ -37,17 +37,17 @@ export default function BioGenerator() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topic: bioTopic, tone: bioTone }),
       });
+      // FIXED: AI Bio Generator - graceful error handling for non-JSON and 5xx responses
       let data: { bios?: string[]; error?: string } = {};
-      try { data = await res.json(); } catch { /* non-JSON response */ }
+      try { data = await res.json(); } catch { /* non-JSON response from server */ }
       if (res.status === 429) {
         toast({ title: "Too many requests", description: data.error ?? "Please try again in a moment.", variant: "destructive" });
         return;
       }
-      if (res.status === 503) {
-        toast({ title: "Service unavailable", description: data.error ?? "AI service is not configured. Please try again later.", variant: "destructive" });
+      if (!res.ok) {
+        toast({ title: "AI service unavailable", description: "AI service is temporarily unavailable. Please try again later.", variant: "destructive" });
         return;
       }
-      if (!res.ok) throw new Error(data.error ?? "Failed to generate bio");
       setBios(data.bios ?? []);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Something went wrong";
