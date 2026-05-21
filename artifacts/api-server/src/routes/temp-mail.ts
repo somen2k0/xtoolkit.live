@@ -195,30 +195,30 @@ router.get("/temp-mail/health", async (req, res) => {
     results["guerrilla"] = { ok: false, latencyMs: Date.now() - guerrillaStart, error: String(err) };
   }
 
-  // Test 1secmail
-  const onesecStart = Date.now();
+  // Test Mail.tm
+  const mailtmStart = Date.now();
   try {
-    const r = await fetch("https://www.1secmail.com/api/v1/?action=getDomainList", {
+    const r = await fetch("https://api.mail.tm/domains", {
       headers: FETCH_HEADERS,
       signal: AbortSignal.timeout(8000),
     });
-    results["onesecmail"] = { ok: r.ok, latencyMs: Date.now() - onesecStart };
-    if (!r.ok) results["onesecmail"]!.error = `HTTP ${r.status}`;
+    results["mailtm"] = { ok: r.ok, latencyMs: Date.now() - mailtmStart };
+    if (!r.ok) results["mailtm"]!.error = `HTTP ${r.status}`;
   } catch (err) {
-    results["onesecmail"] = { ok: false, latencyMs: Date.now() - onesecStart, error: String(err) };
+    results["mailtm"] = { ok: false, latencyMs: Date.now() - mailtmStart, error: String(err) };
   }
 
-  // Test Mail.gw
-  const mailgwStart = Date.now();
+  // Test Dispostable
+  const dispStart = Date.now();
   try {
-    const r = await fetch("https://api.mail.gw/domains", {
+    const r = await fetch("https://www.dispostable.com/api/request_email/", {
       headers: FETCH_HEADERS,
       signal: AbortSignal.timeout(8000),
     });
-    results["mailgw"] = { ok: r.ok, latencyMs: Date.now() - mailgwStart };
-    if (!r.ok) results["mailgw"]!.error = `HTTP ${r.status}`;
+    results["dispostable"] = { ok: r.ok, latencyMs: Date.now() - dispStart };
+    if (!r.ok) results["dispostable"]!.error = `HTTP ${r.status}`;
   } catch (err) {
-    results["mailgw"] = { ok: false, latencyMs: Date.now() - mailgwStart, error: String(err) };
+    results["dispostable"] = { ok: false, latencyMs: Date.now() - dispStart, error: String(err) };
   }
 
   // Test temp.tf

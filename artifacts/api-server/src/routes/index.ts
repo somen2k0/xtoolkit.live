@@ -16,8 +16,8 @@ import adminRouter from "./admin";
 import brandingRouter from "./branding";
 import analyticsRouter from "./analytics";
 import ogPreviewRouter from "./og-preview";
-import onesecmailRouter from "./onesecmail";
-import freemailRouter from "./freemail";
+import mailtmRouter from "./mailtm";
+import dispostableRouter from "./dispostable";
 import aiDetectorRouter from "./ai-detector";
 
 const router: IRouter = Router();
@@ -31,8 +31,8 @@ router.use(adminRouter);
 router.use(brandingRouter);
 router.use(analyticsRouter);
 router.use(ogPreviewRouter);
-router.use(onesecmailRouter);
-router.use(freemailRouter);
+router.use(mailtmRouter);
+router.use(dispostableRouter);
 
 // ─── AI routes — full protection stack ────────────────────────────────────────
 // Layer 1: 5 req/IP/hour     (express-rate-limit, standardHeaders)

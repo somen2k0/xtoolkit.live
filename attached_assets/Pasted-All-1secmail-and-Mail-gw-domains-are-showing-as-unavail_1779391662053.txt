@@ -1,0 +1,77 @@
+All 1secmail and Mail.gw domains are showing as "unavailable"
+in the Temp Email tool. Only GuerrillaMail is working.
+
+The issue is that 1secmail.com API and Mail.gw API are either
+down or blocking Vercel's server IP ranges.
+
+Please fix this by replacing 1secmail and Mail.gw with more
+reliable alternative providers:
+
+---
+
+STEP 1 — Replace 1secmail with Internxt Temp Mail API
+
+Internxt offers a free temp mail API that works reliably.
+Replace all /api/onesecmail/* routes with Mailtm API instead.
+
+Use mail.tm API (different from mail.gw):
+Base URL: https://api.mail.tm
+
+Endpoints to implement:
+- GET /domains → lists available domains
+- POST /accounts → creates new mailbox
+  body: { "address": "user@domain", "password": "randompass" }
+- POST /token → gets auth token
+  body: { "address": "user@domain", "password": "randompass" }
+- GET /messages → lists inbox (requires Bearer token header)
+- GET /messages/:id → gets single message
+
+Implementation:
+1. Generate a random username + password on inbox creation
+2. Store the token in the response to frontend
+3. Frontend passes token back for inbox refresh calls
+4. Replace the existing 1secmail frontend provider option
+   with "Mail.tm" label
+
+---
+
+STEP 2 — Replace Mail.gw routes with Dispostable API
+
+Use dispostable.com as fallback:
+- GET https://www.dispostable.com/api/request_email/
+  Returns: { "email": "random@dispostable.com" }
+- GET https://www.dispostable.com/api/get_messages/?email=X
+  Returns list of messages
+
+Replace /api/freemail/* routes with /api/dispostable/* routes
+using the dispostable.com API.
+
+---
+
+STEP 3 — Update the frontend domain selector
+
+In the Temp Email component, update the provider list to:
+1. GuerrillaMail (existing, working) — default
+2. Mail.tm (replaces 1secmail)  
+3. Dispostable (replaces Mail.gw)
+
+Remove all unavailable domain entries from the dropdown.
+Instead of showing individual domains, show provider names.
+
+---
+
+STEP 4 — Add a provider health check on page load
+
+When the Temp Email page loads, silently ping each provider
+backend endpoint to check availability. Mark unavailable
+providers with a grey "Unavailable" badge in the dropdown
+so users only see working options.
+
+---
+
+STEP 5 — Keep GuerrillaMail as primary default
+
+GuerrillaMail is currently working. Make sure it stays as
+the default selected provider and is always tried first.
+
+Show every file changed after completing all steps.
