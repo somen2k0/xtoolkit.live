@@ -38,10 +38,49 @@
     <meta name="twitter:image" content="https://xtoolkit.live/opengraph.png" />
     <meta name="twitter:image:alt" content="X Toolkit — 55+ free online tools for X, SEO, developers and creators" />
 
-    <!-- Anti-FOUC: set background immediately and hide root until React mounts -->
+    <!-- Anti-FOUC: instant dark background + loading screen before React mounts -->
     <style>
       html, body { background-color: hsl(240, 18%, 4%); margin: 0; padding: 0; }
-      #root:empty { visibility: hidden; }
+      #app-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: hsl(240, 18%, 4%);
+        z-index: 9999;
+        gap: 20px;
+      }
+      #app-loader-logo {
+        width: 48px;
+        height: 48px;
+        background: hsl(258, 82%, 66%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        font-family: system-ui, sans-serif;
+        letter-spacing: -1px;
+      }
+      #app-loader-spinner {
+        width: 32px;
+        height: 32px;
+        border: 2.5px solid hsl(240, 12%, 13%);
+        border-top-color: hsl(258, 82%, 66%);
+        border-radius: 50%;
+        animation: app-spin 0.7s linear infinite;
+      }
+      @keyframes app-spin {
+        to { transform: rotate(360deg); }
+      }
+      @keyframes app-fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
     </style>
 
     <!-- Favicon — ICO for older browsers, PNG for modern browsers, SVG for supporting browsers -->
@@ -171,7 +210,12 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="app-loader">
+        <div id="app-loader-logo">X</div>
+        <div id="app-loader-spinner"></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
