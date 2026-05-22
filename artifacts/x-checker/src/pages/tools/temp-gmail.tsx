@@ -499,7 +499,7 @@ function UnifiedInboxSection() {
       fetch(url, { signal: AbortSignal.timeout(10000) })
         .then(r => r.json() as Promise<{ ok: boolean }>)
         .then(d => setProviderHealth(prev => ({ ...prev, [id]: d.ok === true })))
-        .catch(() => setProviderHealth(prev => ({ ...prev, [id]: false })));
+        .catch(() => {}); // leave as null (shows "…") on network error — don't mark Down
     });
   }, []);
 

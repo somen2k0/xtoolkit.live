@@ -9,18 +9,32 @@ function proxied(url: string): string {
   return ALLORIGINS + encodeURIComponent(url);
 }
 
+/** Try direct fetch first; if it fails, fall back to allorigins proxy. */
 async function maildropFetch(path: string, timeoutMs = 10000): Promise<Response> {
-  const url = proxied(`${MAILDROP}${path}`);
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  const directUrl = `${MAILDROP}${path}`;
+
+  // Attempt 1: direct (no proxy)
   try {
-    return await fetch(url, { signal: controller.signal });
-  } finally {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), Math.min(timeoutMs, 5000));
+    const r = await fetch(directUrl, { signal: ctrl.signal });
     clearTimeout(timer);
+    if (r.ok) return r;
+  } catch {}
+
+  // Attempt 2: allorigins proxy
+  const proxyUrl = proxied(directUrl);
+  const ctrl2 = new AbortController();
+  const timer2 = setTimeout(() => ctrl2.abort(), timeoutMs);
+  try {
+    return await fetch(proxyUrl, { signal: ctrl2.signal });
+  } finally {
+    clearTimeout(timer2);
   }
 }
 
-function randomLogin(): string {
+function randomLogin(custom?: string): string {
+  if (custom) return custom;
   const first = ["james","john","robert","michael","william","david","richard","joseph","thomas","charles","christopher","daniel","matthew","anthony","mark","ryan","jacob","mary","patricia","jennifer","linda","barbara","elizabeth","sarah","karen","lisa","emily","donna","michelle","ashley"];
   const last  = ["smith","johnson","williams","brown","jones","garcia","miller","davis","rodriguez","martinez","hernandez","lopez","gonzalez","wilson","anderson","taylor","moore","jackson","martin","lee","perez","thompson","white","harris","sanchez","clark","ramirez","lewis","robinson","walker"];
   const f = first[Math.floor(Math.random() * first.length)]!;
@@ -32,39 +46,24 @@ function randomLogin(): string {
   return `${f}${l}${n}`;
 }
 
-// GET /api/freemail/health
-router.get("/freemail/health", async (_req, res) => {
-  try {
-    const r = await maildropFetch("/inbox/healthcheck", 8000);
-    res.json({ ok: r.ok || r.status === 404 });
-  } catch {
-    res.json({ ok: false });
-  }
+// GET /freemail/health — always healthy, /new is instant
+router.get("/freemail/health", (_req, res) => {
+  res.json({ ok: true });
 });
 
-// GET /api/freemail/new
-router.get("/freemail/new", async (_req, res) => {
-  try {
-    const login = randomLogin();
-    res.json({ email: `${login}@maildrop.cc`, login, domain: "maildrop.cc", token: login });
-  } catch {
-    res.status(502).json({ error: "Provider temporarily unavailable" });
-  }
+// GET /freemail/new — instant: pure local generation, no external calls
+router.get("/freemail/new", (req, res) => {
+  const login = randomLogin(req.query["login"] as string | undefined);
+  res.json({ email: `${login}@maildrop.cc`, login, domain: "maildrop.cc", token: login });
 });
 
-// GET /api/freemail/inbox?token=...
+// GET /freemail/inbox?token=...
 router.get("/freemail/inbox", async (req, res) => {
   const token = req.query["token"] as string | undefined;
-  if (!token) {
-    res.status(400).json({ error: "token required" });
-    return;
-  }
+  if (!token) { res.status(400).json({ error: "token required" }); return; }
   try {
     const r = await maildropFetch(`/inbox/${encodeURIComponent(token)}`);
-    if (!r.ok) {
-      res.status(502).json({ error: "Provider temporarily unavailable" });
-      return;
-    }
+    if (!r.ok) { res.status(502).json({ error: "Provider temporarily unavailable" }); return; }
     type MaildropMsg = { id: string; from?: string; fromFull?: string; subject?: string; date?: string };
     const d = await r.json() as MaildropMsg[];
     const msgs = Array.isArray(d) ? d.map(m => ({
@@ -79,20 +78,14 @@ router.get("/freemail/inbox", async (req, res) => {
   }
 });
 
-// GET /api/freemail/message/:id?token=...
+// GET /freemail/message/:id?token=...
 router.get("/freemail/message/:id", async (req, res) => {
   const { id } = req.params;
   const token = req.query["token"] as string | undefined;
-  if (!token) {
-    res.status(400).json({ error: "token required" });
-    return;
-  }
+  if (!token) { res.status(400).json({ error: "token required" }); return; }
   try {
     const r = await maildropFetch(`/inbox/${encodeURIComponent(token)}/${encodeURIComponent(id)}`);
-    if (!r.ok) {
-      res.status(502).json({ error: "Provider temporarily unavailable" });
-      return;
-    }
+    if (!r.ok) { res.status(502).json({ error: "Provider temporarily unavailable" }); return; }
     const d = await r.json() as {
       id: string; from?: string; fromFull?: string; subject?: string; date?: string; body?: string; html?: string;
     };
