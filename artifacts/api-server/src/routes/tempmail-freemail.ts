@@ -9,7 +9,8 @@ function proxied(url: string): string {
   return ALLORIGINS + encodeURIComponent(url);
 }
 
-/** Try direct fetch first; if it fails, fall back to allorigins proxy. */
+/** Fetch from Maildrop and verify we got a JSON response (their API sometimes
+ *  returns the HTML SPA instead of JSON when the endpoint has moved). */
 async function maildropFetch(path: string, timeoutMs = 10000): Promise<Response> {
   const directUrl = `${MAILDROP}${path}`;
 
@@ -17,9 +18,14 @@ async function maildropFetch(path: string, timeoutMs = 10000): Promise<Response>
   try {
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), Math.min(timeoutMs, 5000));
-    const r = await fetch(directUrl, { signal: ctrl.signal });
+    const r = await fetch(directUrl, {
+      signal: ctrl.signal,
+      headers: { Accept: "application/json" },
+    });
     clearTimeout(timer);
-    if (r.ok) return r;
+    // Reject HTML responses — means the API endpoint no longer exists
+    const ct = r.headers.get("content-type") ?? "";
+    if (r.ok && ct.includes("json")) return r;
   } catch {}
 
   // Attempt 2: allorigins proxy
@@ -27,7 +33,8 @@ async function maildropFetch(path: string, timeoutMs = 10000): Promise<Response>
   const ctrl2 = new AbortController();
   const timer2 = setTimeout(() => ctrl2.abort(), timeoutMs);
   try {
-    return await fetch(proxyUrl, { signal: ctrl2.signal });
+    const r2 = await fetch(proxyUrl, { signal: ctrl2.signal });
+    return r2;
   } finally {
     clearTimeout(timer2);
   }

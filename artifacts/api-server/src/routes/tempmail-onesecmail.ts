@@ -9,7 +9,9 @@ function proxied(url: string): string {
   return ALLORIGINS + encodeURIComponent(url);
 }
 
-/** Try direct fetch first; if it fails, fall back to allorigins proxy. */
+/** Try direct fetch first; if it fails with a network error, fall back to allorigins proxy.
+ *  On HTTP errors (403, 4xx, 5xx) we return the response immediately — no proxy fallback,
+ *  since the proxy would receive the same block from the upstream. */
 async function onesecFetch(params: Record<string, string>, timeoutMs = 10000): Promise<Response> {
   const qs = new URLSearchParams(params).toString();
   const directUrl = `${ONESECMAIL}?${qs}`;
@@ -20,10 +22,13 @@ async function onesecFetch(params: Record<string, string>, timeoutMs = 10000): P
     const timer = setTimeout(() => ctrl.abort(), Math.min(timeoutMs, 5000));
     const r = await fetch(directUrl, { signal: ctrl.signal });
     clearTimeout(timer);
-    if (r.ok) return r;
-  } catch {}
+    // If we get any HTTP response (even 403), return it — proxy won't help with IP blocks
+    return r;
+  } catch {
+    // Network error (DNS failure, connection refused, timeout) — try proxy
+  }
 
-  // Attempt 2: allorigins proxy
+  // Attempt 2: allorigins proxy (only on network-level failures)
   const proxyUrl = proxied(directUrl);
   const ctrl2 = new AbortController();
   const timer2 = setTimeout(() => ctrl2.abort(), timeoutMs);

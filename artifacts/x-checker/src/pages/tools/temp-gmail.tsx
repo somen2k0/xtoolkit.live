@@ -363,7 +363,7 @@ function UnifiedInboxSection() {
       }
     }
     setCreating(true); setError(null);
-    const provOrder: InboxProv[] = ["onesecmail", "guerrilla", "freemail"];
+    const provOrder: InboxProv[] = ["guerrilla", "onesecmail", "freemail"];
     for (let i = 0; i < provOrder.length; i++) {
       if (i > 0) await sleep(800);
       const ok = await createOnProvider(provOrder[i]!);
@@ -379,7 +379,7 @@ function UnifiedInboxSection() {
     setSelectedG(null); setSelectedO(null); setSelectedF(null); setSelectedId(null);
     if (refreshTimer.current) clearInterval(refreshTimer.current);
     if (countdownTimer.current) clearInterval(countdownTimer.current);
-    const provOrder: InboxProv[] = ["onesecmail", "guerrilla", "freemail"];
+    const provOrder: InboxProv[] = ["guerrilla", "onesecmail", "freemail"];
     for (let i = 0; i < provOrder.length; i++) {
       if (i > 0) await sleep(800);
       const ok = await createOnProvider(provOrder[i]!);
