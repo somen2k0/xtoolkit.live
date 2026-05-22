@@ -20,6 +20,9 @@ import tempmailOnesecmailRouter from "./tempmail-onesecmail";
 import tempmailFreemailRouter from "./tempmail-freemail";
 import tempmailMailgwRouter from "./tempmail-mailgw";
 import tempmailTemptfRouter from "./tempmail-temptf";
+import guerrillaRouter from "./guerrilla";
+import onesecmailRouter from "./onesecmail";
+import freemailRouter from "./freemail";
 
 const router: IRouter = Router();
 
@@ -35,6 +38,9 @@ router.use(tempmailOnesecmailRouter);
 router.use(tempmailFreemailRouter);
 router.use(tempmailMailgwRouter);
 router.use(tempmailTemptfRouter);
+router.use('/guerrilla', guerrillaRouter);
+router.use('/onesecmail', onesecmailRouter);
+router.use('/freemail', freemailRouter);
 
 // ─── AI routes — full protection stack ────────────────────────────────────────
 // Layer 1: 5 req/IP/hour     (express-rate-limit, standardHeaders)
