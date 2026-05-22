@@ -73,10 +73,11 @@ function drawIcon(size) {
 
       if (outside) { pixels[i + 3] = 0; continue; }
 
+      // Dark navy background matching website logo (#09071a → #110d24)
       const t = (px + py) / (2 * size);
-      const r = Math.round(0x4f + (0x7c - 0x4f) * t);
-      const g = Math.round(0x46 + (0x3a - 0x46) * t);
-      const b = Math.round(0xe5 + (0xed - 0xe5) * t);
+      const bgR = Math.round(0x09 + (0x11 - 0x09) * t);
+      const bgG = Math.round(0x07 + (0x0d - 0x07) * t);
+      const bgB = Math.round(0x1a + (0x24 - 0x1a) * t);
 
       const cy = size * 0.5;
       const dL1 = distToSeg(px, py, lx1, lyt, lxv, cy);
@@ -88,9 +89,14 @@ function drawIcon(size) {
       const onSymbol = dL1 < bStroke || dL2 < bStroke || dSl < sStroke || dR1 < bStroke || dR2 < bStroke;
 
       if (onSymbol) {
-        pixels[i] = 255; pixels[i + 1] = 255; pixels[i + 2] = 255; pixels[i + 3] = 255;
+        // Purple/violet X matching website gradient (#c4b5fd → #7c3aed)
+        const st = (px + py) / (2 * size);
+        pixels[i]     = Math.round(0xc4 + (0x7c - 0xc4) * st);
+        pixels[i + 1] = Math.round(0xb5 + (0x3a - 0xb5) * st);
+        pixels[i + 2] = Math.round(0xfd + (0xed - 0xfd) * st);
+        pixels[i + 3] = 255;
       } else {
-        pixels[i] = r; pixels[i + 1] = g; pixels[i + 2] = b; pixels[i + 3] = 255;
+        pixels[i] = bgR; pixels[i + 1] = bgG; pixels[i + 2] = bgB; pixels[i + 3] = 255;
       }
     }
   }
