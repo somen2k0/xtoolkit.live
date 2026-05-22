@@ -2,20 +2,39 @@ import { Router, type IRouter } from "express";
 
 const router: IRouter = Router();
 
+const ALLORIGINS = "https://api.allorigins.win/raw?url=";
 const MAILDROP_GRAPHQL = "https://api.maildrop.cc/graphql";
 
+function proxied(url: string): string {
+  return ALLORIGINS + encodeURIComponent(url);
+}
+
 async function gqlFetch(query: string, timeoutMs = 10000): Promise<Response> {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  const body = JSON.stringify({ query });
+  const headers = { "Content-Type": "application/json", Accept: "application/json" };
+
+  // Attempt 1: direct
   try {
-    return await fetch(MAILDROP_GRAPHQL, {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), Math.min(timeoutMs, 6000));
+    const r = await fetch(MAILDROP_GRAPHQL, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ query }),
+      headers,
+      body,
       signal: ctrl.signal,
     });
-  } finally {
     clearTimeout(timer);
+    if (r.ok) return r;
+  } catch {}
+
+  // Attempt 2: allorigins proxy
+  const proxyUrl = proxied(MAILDROP_GRAPHQL);
+  const ctrl2 = new AbortController();
+  const timer2 = setTimeout(() => ctrl2.abort(), timeoutMs);
+  try {
+    return await fetch(proxyUrl, { signal: ctrl2.signal });
+  } finally {
+    clearTimeout(timer2);
   }
 }
 

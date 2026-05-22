@@ -1,0 +1,64 @@
+I need to restore ONLY the temp mail related files from
+commit a88b21a (the commit just before the master prompt
+changes). This was the last working version of temp mail.
+
+STEP 1 — Restore these files exactly from commit a88b21a:
+
+git checkout a88b21a -- artifacts/api-server/src/routes/guerrilla.ts
+git checkout a88b21a -- artifacts/api-server/src/routes/onesecmail.ts
+git checkout a88b21a -- artifacts/api-server/src/routes/freemail.ts
+git checkout a88b21a -- artifacts/api-server/src/routes/temptf.ts
+
+Also restore the temp mail frontend pages:
+git checkout a88b21a -- artifacts/x-checker/src/pages/TempEmail.tsx
+git checkout a88b21a -- artifacts/x-checker/src/pages/TempGmail.tsx
+
+If any of those filenames don't exist, run this to find
+the correct filenames:
+git show a88b21a --name-only | grep -i "temp\|mail\|guerrilla\|onesecmail\|freemail"
+
+Use whatever filenames are returned.
+
+STEP 2 — Add allorigins proxy to all external fetch calls
+
+In each of the 4 restored backend route files, find every
+fetch() call that calls an external URL and wrap it:
+
+Before:
+fetch('https://EXTERNAL-URL...')
+
+After:
+fetch('https://api.allorigins.win/raw?url=' + 
+  encodeURIComponent('https://EXTERNAL-URL...'))
+
+Do this for EVERY external fetch in these files only.
+Do not touch any other files.
+
+STEP 3 — Make sure route registrations exist in
+artifacts/api-server/src/index.ts:
+
+Check that these 4 lines exist and are not commented out:
+app.use('/api/guerrilla', guerrillaRouter)
+app.use('/api/onesecmail', onesecmailRouter)  
+app.use('/api/freemail', freemailRouter)
+app.use('/api/temptf', temptfRouter)
+
+If missing, add them back.
+
+STEP 4 — Revert connect-src in helmet config to only
+allow these (remove all temp mail external domains
+we added in previous sessions):
+connectSrc: [
+  "'self'",
+  "https://www.google-analytics.com",
+  "https://www.googletagmanager.com",
+  "https://clarity.microsoft.com",
+  "https://web3forms.com",
+  "https://api.web3forms.com"
+]
+
+STEP 5 — Build and confirm zero errors:
+pnpm build 2>&1
+
+Show the complete output and list every file changed.
+Do not change anything outside of temp mail files.
