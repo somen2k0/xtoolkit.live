@@ -10,14 +10,10 @@ import healthRouter from "./health";
 import accountsRouter from "./accounts";
 import bioRouter from "./bio";
 import contactRouter from "./contact";
-import tempMailRouter from "./temp-mail";
-import temptfRouter from "./temptf";
 import adminRouter from "./admin";
 import brandingRouter from "./branding";
 import analyticsRouter from "./analytics";
 import ogPreviewRouter from "./og-preview";
-import mailtmRouter from "./mailtm";
-import dispostableRouter from "./dispostable";
 import aiDetectorRouter from "./ai-detector";
 
 const router: IRouter = Router();
@@ -25,14 +21,10 @@ const router: IRouter = Router();
 router.use(healthRouter);
 router.use(accountsRouter);
 router.use(contactRouter);
-router.use(tempMailRouter);
-router.use(temptfRouter);
 router.use(adminRouter);
 router.use(brandingRouter);
 router.use(analyticsRouter);
 router.use(ogPreviewRouter);
-router.use(mailtmRouter);
-router.use(dispostableRouter);
 
 // ─── AI routes — full protection stack ────────────────────────────────────────
 // Layer 1: 5 req/IP/hour     (express-rate-limit, standardHeaders)

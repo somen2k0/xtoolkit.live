@@ -1,0 +1,100 @@
+The temp mail backend routes are all failing because Vercel's
+server IPs are blocked by every free temp mail provider.
+
+The fix is to move ALL temp mail API calls to the frontend
+(browser) directly — bypassing the backend completely.
+Browser IPs are never blocked by these APIs.
+
+---
+
+STEP 1 — Remove these backend routes completely:
+- /api/guerrilla/*
+- /api/onesecmail/*  
+- /api/freemail/*
+- /api/mailtm/*
+- /api/dispostable/*
+- /api/temptf/*
+
+---
+
+STEP 2 — Rewrite the Temp Email frontend component to call
+APIs directly from the browser:
+
+### Provider 1 — GuerrillaMail (call directly from browser)
+Base: https://api.guerrillamail.com/ajax.php
+
+Get email:
+GET https://api.guerrillamail.com/ajax.php?f=get_email_address
+
+Check inbox:
+GET https://api.guerrillamail.com/ajax.php?f=get_email_list&offset=0&sid_token=SID
+
+Get message:
+GET https://api.guerrillamail.com/ajax.php?f=fetch_email&email_id=ID&sid_token=SID
+
+Store sid_token in React state after first call and reuse it
+for all subsequent calls.
+
+### Provider 2 — SecMailbox (1secmail direct)
+Base: https://www.1secmail.com/api/v1/
+
+Get domains:
+GET https://www.1secmail.com/api/v1/?action=getDomainList
+
+Generate random address using one of the domains.
+
+Get inbox:
+GET https://www.1secmail.com/api/v1/?action=getMessages&login=USER&domain=DOMAIN
+
+Get message:
+GET https://www.1secmail.com/api/v1/?action=readMessage&login=USER&domain=DOMAIN&id=ID
+
+### Provider 3 — Mail.tm (direct from browser)
+Base: https://api.mail.tm
+
+GET /domains → get available domains
+POST /accounts → create account { address, password }
+POST /token → get JWT { address, password }
+GET /messages → inbox (Authorization: Bearer TOKEN)
+GET /messages/:id → single message
+
+---
+
+STEP 3 — Update the Temp Gmail component similarly
+
+For /tools/temp-mail/tempgmail, the temp.tf API can also
+be called directly from the browser:
+GET https://temp.tf/api/generate?type=dot&email=USER@gmail.com
+POST https://temp.tf/api/messages with { email } body
+
+Remove /api/temptf/* backend routes and call temp.tf directly
+from the frontend component.
+
+---
+
+STEP 4 — Handle CORS if needed
+
+If any direct API call fails with a CORS error in the browser,
+use this public CORS proxy as fallback:
+https://corsproxy.io/?[ENCODED_URL]
+
+Example:
+fetch('https://corsproxy.io/?' + 
+  encodeURIComponent('https://api.guerrillamail.com/ajax.php?f=get_email_address'))
+
+Only use the proxy for APIs that return CORS errors.
+GuerrillaMail and 1secmail both support CORS natively.
+Mail.tm may need the proxy.
+
+---
+
+STEP 5 — Keep the same UI
+
+Do not change anything about the UI/UX of the temp mail tools.
+Same design, same features, same auto-refresh every 15 seconds.
+Only the data fetching layer changes from backend to frontend.
+
+---
+
+Show every file changed. The backend API route files for
+temp mail can be fully deleted.
