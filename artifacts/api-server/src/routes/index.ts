@@ -22,6 +22,16 @@ import harakirimailRouter from "./harakirimail";
 
 const router: IRouter = Router();
 
+router.get("/groq-debug", (_req, res) => {
+  const raw = process.env.GROQ_API_KEY ?? "";
+  const keys = raw.split(",").map((k) => k.trim()).filter(Boolean);
+  res.json({
+    totalKeys: keys.length,
+    keyLengths: keys.map((k) => k.length),
+    firstChars: keys.map((k) => k.substring(0, 8) + "..."),
+  });
+});
+
 router.use(healthRouter);
 router.use(accountsRouter);
 router.use(contactRouter);

@@ -41,17 +41,16 @@ export default function BioGenerator() {
       let data: { bios?: string[]; error?: string } = {};
       try { data = await res.json(); } catch { /* non-JSON response from server */ }
       if (res.status === 429) {
-        toast({ title: "Too many requests", description: data.error ?? "Please try again in a moment.", variant: "destructive" });
+        toast({ title: "Rate limit reached", description: "Rate limit reached. Please wait 30 seconds and try again.", variant: "destructive" });
         return;
       }
-      if (!res.ok) {
-        toast({ title: "AI service unavailable", description: "AI service is temporarily unavailable. Please try again later.", variant: "destructive" });
+      if (res.status === 503 || !res.ok) {
+        toast({ title: "AI service unavailable", description: "AI service temporarily unavailable. Please try again later.", variant: "destructive" });
         return;
       }
       setBios(data.bios ?? []);
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Something went wrong";
-      toast({ title: "Error", description: message, variant: "destructive" });
+    } catch {
+      toast({ title: "AI service unavailable", description: "AI service temporarily unavailable. Please try again later.", variant: "destructive" });
     } finally {
       setBioLoading(false);
     }

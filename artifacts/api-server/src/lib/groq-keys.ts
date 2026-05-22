@@ -5,7 +5,7 @@
 // caller can surface the correct HTTP status to the client.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const COOLDOWN_MS = 60_000;
+const COOLDOWN_MS = 30_000;
 
 let _index = 0;
 const _coolingUntil = new Map<string, number>();
