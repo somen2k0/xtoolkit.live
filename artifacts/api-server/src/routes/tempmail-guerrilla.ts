@@ -5,6 +5,18 @@ const router: IRouter = Router();
 const ALLORIGINS = "https://api.allorigins.win/raw?url=";
 const GUERRILLA = "https://api.guerrillamail.com/ajax.php";
 
+// All domains guerrilla mail supports
+const GUERRILLA_DOMAINS = [
+  "guerrillamail.com",
+  "guerrillamail.info",
+  "guerrillamail.biz",
+  "guerrillamail.de",
+  "guerrillamail.net",
+  "guerrillamail.org",
+  "grr.la",
+  "spam4.me",
+];
+
 function proxied(url: string): string {
   return ALLORIGINS + encodeURIComponent(url);
 }
@@ -17,7 +29,7 @@ async function guerrillaFetch(
   const qs = new URLSearchParams(params).toString();
   const directUrl = `${GUERRILLA}?${qs}`;
 
-  // Attempt 1: direct (no proxy) — faster and works if Replit IPs are not blocked
+  // Attempt 1: direct (no proxy)
   try {
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), Math.min(timeoutMs, 6000));
@@ -47,28 +59,53 @@ router.get("/guerrilla/health", async (_req, res) => {
   }
 });
 
-// GET /guerrilla/new
-router.get("/guerrilla/new", async (_req, res) => {
+// GET /guerrilla/domains — list of supported domains
+router.get("/guerrilla/domains", (_req, res) => {
+  res.json(GUERRILLA_DOMAINS);
+});
+
+// GET /guerrilla/new?domain=guerrillamail.biz
+// Step 1: get_email_address → obtain session + sid_token
+// Step 2: if domain requested, set_email_user with site=<domain>
+router.get("/guerrilla/new", async (req, res) => {
+  const requestedDomain = req.query["domain"] as string | undefined;
   try {
-    const r = await guerrillaFetch({ f: "get_email_address" });
-    if (!r.ok) {
-      res.status(502).json({ error: "Provider temporarily unavailable" });
-      return;
+    // Step 1: get initial session
+    const r1 = await guerrillaFetch({ f: "get_email_address" });
+    if (!r1.ok) { res.status(502).json({ error: "Provider temporarily unavailable" }); return; }
+    const d1 = await r1.json() as { email_addr?: string; sid_token?: string };
+    if (!d1.email_addr || !d1.sid_token) { res.status(502).json({ error: "Provider temporarily unavailable" }); return; }
+
+    let finalEmail = d1.email_addr;
+    let finalSid   = d1.sid_token;
+    const initialUser = finalEmail.split("@")[0] ?? "user";
+
+    // Step 2: request specific domain via set_email_user
+    if (requestedDomain && GUERRILLA_DOMAINS.includes(requestedDomain)) {
+      try {
+        const r2 = await guerrillaFetch({
+          f: "set_email_user",
+          email_user: initialUser,
+          lang: "en",
+          site: requestedDomain,
+          sid_token: finalSid,
+        }, 8000);
+        if (r2.ok) {
+          const d2 = await r2.json() as { email_addr?: string; sid_token?: string };
+          if (d2.email_addr) {
+            finalEmail = d2.email_addr;
+            if (d2.sid_token) finalSid = d2.sid_token;
+          }
+        }
+      } catch {}
     }
-    const d = await r.json() as {
-      email_addr?: string;
-      sid_token?: string;
-    };
-    if (!d.email_addr || !d.sid_token) {
-      res.status(502).json({ error: "Provider temporarily unavailable" });
-      return;
-    }
-    const parts = d.email_addr.split("@");
+
+    const parts = finalEmail.split("@");
     res.json({
-      email: d.email_addr,
-      sid_token: d.sid_token,
+      email: finalEmail,
+      sid_token: finalSid,
       user: parts[0] ?? "user",
-      domain: parts[1] ?? "guerrillamailblock.com",
+      domain: parts[1] ?? requestedDomain ?? "guerrillamailblock.com",
     });
   } catch {
     res.status(502).json({ error: "Provider temporarily unavailable" });

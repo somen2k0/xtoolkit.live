@@ -200,6 +200,11 @@ function UnifiedInboxSection() {
     "yevme.com", "laafd.com", "txcct.com", "dpptd.com",
     "bheps.com",
   ]);
+  const [availableGuerDomains, setAvailableGuerDomains] = useState<string[]>([
+    "guerrillamail.com", "guerrillamail.info", "guerrillamail.biz",
+    "guerrillamail.de", "guerrillamail.net", "guerrillamail.org",
+    "grr.la", "spam4.me",
+  ]);
   const { toast } = useToast();
   const refreshTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const countdownTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -276,9 +281,10 @@ function UnifiedInboxSection() {
 
   // ── create inbox functions ─────────────────────────────────────────
 
-  const createGInbox = useCallback(async (): Promise<GSession | null> => {
+  const createGInbox = useCallback(async (domain?: string): Promise<GSession | null> => {
     try {
-      const r = await fetch("/api/guerrilla/new", { signal: AbortSignal.timeout(12000) });
+      const qs = domain ? `?domain=${encodeURIComponent(domain)}` : "";
+      const r = await fetch(`/api/guerrilla/new${qs}`, { signal: AbortSignal.timeout(12000) });
       if (!r.ok) return null;
       const d = await r.json() as { email?: string; sid_token?: string; user?: string; domain?: string };
       if (!d.email || !d.sid_token) return null;
@@ -318,7 +324,7 @@ function UnifiedInboxSection() {
   // ── provider-level creation ─────────────────────────────────────────
   const createOnProvider = useCallback(async (prov: InboxProv, domain?: string): Promise<boolean> => {
     if (prov === "guerrilla") {
-      const gs = await createGInbox();
+      const gs = await createGInbox(domain);
       if (!gs) return false;
       activeProvRef.current = "guerrilla"; setActiveProv("guerrilla");
       await fetchGMsgs(gs.sid);
@@ -502,10 +508,14 @@ function UnifiedInboxSection() {
 
   // ── domain list + health checks ────────────────────────────────────
   useEffect(() => {
-    // Fetch live domain list
+    // Fetch live domain lists
     fetch("/api/onesecmail/domains", { signal: AbortSignal.timeout(8000) })
       .then(r => r.json() as Promise<string[]>)
       .then(d => { if (Array.isArray(d) && d.length > 0) setAvailableDomains(d); })
+      .catch(() => {});
+    fetch("/api/guerrilla/domains", { signal: AbortSignal.timeout(8000) })
+      .then(r => r.json() as Promise<string[]>)
+      .then(d => { if (Array.isArray(d) && d.length > 0) setAvailableGuerDomains(d); })
       .catch(() => {});
 
     const checks: Array<[InboxProv, string]> = [
@@ -546,8 +556,8 @@ function UnifiedInboxSection() {
   type DomainEntry = { domain: string; prov: InboxProv; badge: string };
   const DOMAIN_ENTRIES: DomainEntry[] = [
     ...availableDomains.map(d => ({ domain: d, prov: "onesecmail" as InboxProv, badge: "text-yellow-400" })),
-    { domain: "maildrop.cc",   prov: "freemail"   as InboxProv, badge: "text-purple-400" },
-    { domain: "guerrillamail", prov: "guerrilla"  as InboxProv, badge: "text-cyan-400"   },
+    ...availableGuerDomains.map(d => ({ domain: d, prov: "guerrilla" as InboxProv, badge: "text-cyan-400" })),
+    { domain: "maildrop.cc", prov: "freemail" as InboxProv, badge: "text-purple-400" },
   ];
 
   return (
@@ -597,9 +607,7 @@ function UnifiedInboxSection() {
           <div className="relative">
             <Button variant="outline" size="sm" onClick={() => setShowProviderDrop(v => !v)} disabled={!currentEmail || !!switchingToProv} className="text-xs gap-1.5">
               <Zap className={`h-3.5 w-3.5 ${switchingToProv ? "text-amber-400" : currentPill.color}`} />
-              {switchingToProv ? "Switching…"
-                : activeProv === "guerrilla" ? "Guerrilla Mail"
-                : currentDomain ?? "…"}
+              {switchingToProv ? "Switching…" : currentDomain ?? "…"}
               {switchingToProv ? <Loader2 className="h-3 w-3 animate-spin" /> : <ChevronDown className="h-3 w-3" />}
             </Button>
             {showProviderDrop && (
@@ -607,14 +615,13 @@ function UnifiedInboxSection() {
                 <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30 sticky top-0">Switch domain</div>
                 {DOMAIN_ENTRIES.map(({ domain, prov, badge }) => {
                   const health = providerHealth[prov];
-                  const isCurrent = prov === activeProv && (prov !== "onesecmail" || domain === currentDomain) && (prov !== "freemail" || true);
-                  const label = domain === "guerrillamail" ? "Guerrilla Mail" : domain;
+                  const isCurrent = prov === activeProv && (prov === "freemail" || domain === currentDomain);
                   return (
-                    <button key={domain}
-                      onClick={() => switchProvider(prov, domain === "guerrillamail" ? undefined : domain)}
+                    <button key={`${prov}:${domain}`}
+                      onClick={() => switchProvider(prov, domain)}
                       className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 last:border-b-0 flex items-center justify-between gap-3
                         ${isCurrent ? "text-cyan-400 font-semibold bg-muted/20" : "text-foreground/80"}`}>
-                      <span className={`font-mono ${badge}`}>{label}</span>
+                      <span className={`font-mono ${badge}`}>{domain}</span>
                       <span className={`text-[10px] font-semibold shrink-0 px-1.5 py-0.5 rounded-full border
                         ${health === true  ? "text-green-400 border-green-400/30 bg-green-400/10" :
                           health === false ? "text-red-400 border-red-400/30 bg-red-400/10" :
@@ -767,7 +774,7 @@ function UnifiedInboxSection() {
 
       <div className="flex flex-wrap gap-2">
         {[
-          { label: "3 providers — no AWS IPs" },
+          { label: `${availableDomains.length + availableGuerDomains.length + 1} domains — no AWS IPs` },
           { label: "Session-persistent inbox" },
           { label: "Health-checked on load" },
           { label: `Auto-refresh ${REFRESH_MS / 1000}s` },
