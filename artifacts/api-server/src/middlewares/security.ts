@@ -42,6 +42,8 @@ export const helmetMiddleware = helmet({
         "https://temp.tf",
         "https://www.dispostable.com",
         "https://api.allorigins.win",
+        "https://api.tempmail.lol",
+        "https://maildrop.cc",
       ],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       objectSrc: ["'none'"],
