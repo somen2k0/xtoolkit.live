@@ -26,7 +26,8 @@ export async function guerrillaSetUser(user: string, domain: string, sid_token: 
 }
 
 export async function guerrillaInbox(sid_token: string) {
-  return apiFetch<{ messages: RawGuerrillaMessage[] }>(`/api/guerrilla/inbox?sid_token=${encodeURIComponent(sid_token)}`);
+  const data = await apiFetch<{ list?: RawGuerrillaMessage[] }>(`/api/guerrilla/inbox?sid_token=${encodeURIComponent(sid_token)}`);
+  return { messages: data.list ?? [] };
 }
 
 export async function guerrillaMessage(id: string, sid_token: string) {
@@ -57,17 +58,17 @@ export function normaliseGuerrilla(m: RawGuerrillaMessage) {
 // ── mail.gw ────────────────────────────────────────────────────────────────
 
 export async function mailgwNew() {
-  return apiFetch<{ email: string; login: string; domain: string; token: string }>("/api/mailgw/new");
+  return apiFetch<{ email: string; login: string; domain: string; token: string }>("/api/freemail/new?provider=mailgw");
 }
 
 export async function mailgwInbox(token: string) {
-  const msgs = await apiFetch<RawMailgwMessage[]>(`/api/mailgw/inbox?token=${encodeURIComponent(token)}`);
+  const msgs = await apiFetch<RawMailgwMessage[]>(`/api/freemail/inbox?token=${encodeURIComponent(token)}&provider=mailgw`);
   return { messages: Array.isArray(msgs) ? msgs : [] };
 }
 
 export async function mailgwMessage(id: string, token: string) {
   return apiFetch<{ id: string; from: string; subject: string; date: string; body: string; isHtml: boolean }>(
-    `/api/mailgw/message/${encodeURIComponent(id)}?token=${encodeURIComponent(token)}`
+    `/api/freemail/message/${encodeURIComponent(id)}?token=${encodeURIComponent(token)}&provider=mailgw`
   );
 }
 
@@ -129,14 +130,21 @@ export function normaliseMaildrop(m: RawMaildropMessage) {
 // ── TempTF / Gmail ─────────────────────────────────────────────────────────
 
 export async function temptfGenerate(providers = "gmail", type = "dot") {
-  return apiFetch<{ email: string }>(`/api/temptf/generate?providers=${providers}&type=${type}`);
+  return apiFetch<{ email: string }>("/api/temptf/generate", {
+    method: "POST",
+    body: JSON.stringify({ type: type === "plus" ? "plus" : "dot" }),
+  });
 }
 
 export async function temptfMessages(email: string) {
-  return apiFetch<{ messages: RawTempTfMessage[]; totalReceived: number }>("/api/temptf/messages", {
+  const data = await apiFetch<{ data?: RawTempTfMessage[]; totalReceived?: number }>("/api/temptf/check", {
     method: "POST",
     body: JSON.stringify({ email }),
   });
+  return {
+    messages: data.data ?? [],
+    totalReceived: data.totalReceived ?? 0,
+  };
 }
 
 interface RawTempTfMessage {
