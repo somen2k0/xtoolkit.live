@@ -82,26 +82,71 @@ export function App() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <div style={{ width: 22, height: 22, background: "#1d9bf0", borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "#fff", fontWeight: 800, fontSize: 13, lineHeight: 1 }}>X</span>
+          <div style={{ width: 22, height: 22, borderRadius: 5, overflow: "hidden", flexShrink: 0 }}>
+            <svg width="22" height="22" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="eBg" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#09071a"/>
+                  <stop offset="100%" stopColor="#110d24"/>
+                </linearGradient>
+                <linearGradient id="eFront" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#c4b5fd"/>
+                  <stop offset="45%" stopColor="#7c3aed"/>
+                  <stop offset="100%" stopColor="#4c1d95"/>
+                </linearGradient>
+                <radialGradient id="eGlow" cx="90" cy="90" r="70" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.22"/>
+                  <stop offset="100%" stopColor="#7c3aed" stopOpacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect width="180" height="180" rx="36" fill="url(#eBg)"/>
+              <rect width="180" height="180" rx="36" fill="url(#eGlow)"/>
+              <g stroke="#120a2e" strokeLinecap="round" fill="none" transform="translate(6,6)">
+                <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+              </g>
+              <g stroke="#120a2e" strokeLinecap="square" strokeLinejoin="miter" fill="none" transform="translate(6,6)">
+                <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+              </g>
+              <g stroke="#1d1050" strokeLinecap="round" fill="none" transform="translate(4,4)">
+                <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+              </g>
+              <g stroke="#1d1050" strokeLinecap="square" strokeLinejoin="miter" fill="none" transform="translate(4,4)">
+                <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+              </g>
+              <g stroke="#2e1878" strokeLinecap="round" fill="none" transform="translate(2,2)">
+                <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+              </g>
+              <g stroke="#2e1878" strokeLinecap="square" strokeLinejoin="miter" fill="none" transform="translate(2,2)">
+                <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+              </g>
+              <g stroke="url(#eFront)" strokeLinecap="round" fill="none">
+                <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+              </g>
+              <g stroke="url(#eFront)" strokeLinecap="square" strokeLinejoin="miter" fill="none">
+                <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+              </g>
+              <g stroke="white" strokeLinecap="round" fill="none" opacity="0.18">
+                <line x1="58" y1="44" x2="122" y2="136" strokeWidth="5"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="5"/>
+              </g>
+            </svg>
           </div>
-          <span style={{ fontWeight: 700, fontSize: 14, color: "#e7e9ea", letterSpacing: "-0.2px" }}>Toolkit</span>
+          <span style={{ fontWeight: 700, fontSize: 14, color: "#e7e9ea", letterSpacing: "-0.2px" }}>X Toolkit</span>
         </div>
-        <span style={{ fontSize: 11, color: "#71767b", marginLeft: 2, marginTop: 1 }}>Temp Email</span>
+        <span style={{ fontSize: 11, color: "#71767b", marginLeft: 2, marginTop: 1 }}>Temp Mail</span>
         <div style={{ flex: 1 }} />
         {/* Website promotion link */}
         <a
           href={SITE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          title="55+ free tools at xtoolkit.live"
+          title="43+ free tools at xtoolkit.live"
           style={{
             display: "flex", alignItems: "center", gap: 4,
-            color: "#1d9bf0", textDecoration: "none",
+            color: "#7c3aed", textDecoration: "none",
             fontSize: 10, fontWeight: 600,
           }}
         >
-          55+ tools
+          43+ tools
           <ExternalLinkIcon />
         </a>
       </div>
@@ -167,8 +212,8 @@ export function App() {
           flexShrink: 0,
         }}
       >
-        <span>Want 55+ more tools?</span>
-        <span style={{ color: "#1d9bf0", fontWeight: 600 }}>Visit xtoolkit.live →</span>
+        <span>Want 43+ more tools?</span>
+        <span style={{ color: "#7c3aed", fontWeight: 600 }}>Visit xtoolkit.live →</span>
       </a>
     </div>
   );

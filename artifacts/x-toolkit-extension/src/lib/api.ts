@@ -14,15 +14,35 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
 
 // ── Guerrilla Mail ─────────────────────────────────────────────────────────
 
+interface RawGuerrillaResponse {
+  email_addr?: string;
+  sid_token?: string;
+  alias?: string;
+}
+
+function transformGuerrillaResponse(raw: RawGuerrillaResponse) {
+  const emailAddr = raw.email_addr ?? "";
+  const parts = emailAddr.split("@");
+  return {
+    email: emailAddr,
+    user: parts[0] ?? "",
+    domain: parts[1] ?? "",
+    sid_token: raw.sid_token ?? "",
+    domains: [] as string[],
+  };
+}
+
 export async function guerrillaNew() {
-  return apiFetch<{ email: string; user: string; domain: string; sid_token: string; domains: string[] }>("/api/guerrilla/new");
+  const raw = await apiFetch<RawGuerrillaResponse>("/api/guerrilla/new");
+  return transformGuerrillaResponse(raw);
 }
 
 export async function guerrillaSetUser(user: string, domain: string, sid_token: string) {
-  return apiFetch<{ email: string; user: string; domain: string; sid_token: string; domains: string[] }>("/api/guerrilla/set-user", {
+  const raw = await apiFetch<RawGuerrillaResponse>("/api/guerrilla/set-user", {
     method: "POST",
     body: JSON.stringify({ user, domain, sid_token }),
   });
+  return transformGuerrillaResponse(raw);
 }
 
 export async function guerrillaInbox(sid_token: string) {
@@ -129,7 +149,7 @@ export function normaliseMaildrop(m: RawMaildropMessage) {
 
 // ── TempTF / Gmail ─────────────────────────────────────────────────────────
 
-export async function temptfGenerate(providers = "gmail", type = "dot") {
+export async function temptfGenerate(_providers = "gmail", type = "dot") {
   return apiFetch<{ email: string }>("/api/temptf/generate", {
     method: "POST",
     body: JSON.stringify({ type: type === "plus" ? "plus" : "dot" }),
