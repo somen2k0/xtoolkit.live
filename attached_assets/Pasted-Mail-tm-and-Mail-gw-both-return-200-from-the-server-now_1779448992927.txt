@@ -1,0 +1,239 @@
+Mail.tm and Mail.gw both return 200 from the server now.
+Add them back as providers in Temp Email.
+Do NOT touch Temp Gmail or any other files.
+
+===================================================
+STEP 1 — Test full API flow for Mail.tm and Mail.gw
+Run these in shell before writing any code:
+
+TEST Mail.tm domains:
+curl -s "https://api.mail.tm/domains" | head -200
+
+TEST Mail.gw domains:
+curl -s "https://api.mail.gw/domains" | head -200
+
+TEST Mail.tm create account:
+curl -s -X POST "https://api.mail.tm/accounts" \
+  -H "Content-Type: application/json" \
+  -d '{"address":"testxyz999@mail.tm","password":"Test1234!"}'
+
+TEST Mail.tm get token:
+curl -s -X POST "https://api.mail.tm/token" \
+  -H "Content-Type: application/json" \
+  -d '{"address":"testxyz999@mail.tm","password":"Test1234!"}'
+
+Show all outputs before writing any code.
+
+===================================================
+STEP 2 — Create freemail.ts backend route
+Only if Step 1 tests confirm the API works.
+
+Create artifacts/api-server/src/routes/freemail.ts:
+
+import { Router } from 'express';
+const router = Router();
+
+const MAILTM_BASE = 'https://api.mail.tm';
+const MAILGW_BASE = 'https://api.mail.gw';
+
+const HEADERS = {
+  'Content-Type': 'application/json',
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+};
+
+// GET /api/freemail/domains
+router.get('/domains', async (req, res) => {
+  try {
+    // Try Mail.tm first, fallback to Mail.gw
+    let domains: string[] = [];
+    
+    try {
+      const r = await fetch(`${MAILTM_BASE}/domains`, {
+        headers: HEADERS,
+        signal: AbortSignal.timeout(8000)
+      });
+      const data = await r.json();
+      const tmDomains = data['hydra:member']
+        ?.map((d: any) => ({ domain: d.domain, provider: 'mailtm' })) || [];
+      domains = [...domains, ...tmDomains];
+    } catch (e) {
+      console.log('Mail.tm domains failed:', e);
+    }
+
+    try {
+      const r = await fetch(`${MAILGW_BASE}/domains`, {
+        headers: HEADERS,
+        signal: AbortSignal.timeout(8000)
+      });
+      const data = await r.json();
+      const gwDomains = data['hydra:member']
+        ?.map((d: any) => ({ domain: d.domain, provider: 'mailgw' })) || [];
+      domains = [...domains, ...gwDomains];
+    } catch (e) {
+      console.log('Mail.gw domains failed:', e);
+    }
+
+    res.json(domains);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GET /api/freemail/new?provider=mailtm
+router.get('/new', async (req, res) => {
+  try {
+    const provider = req.query.provider as string || 'mailtm';
+    const base = provider === 'mailgw' ? MAILGW_BASE : MAILTM_BASE;
+    
+    // Get available domains first
+    const domainsRes = await fetch(`${base}/domains`, {
+      headers: HEADERS,
+      signal: AbortSignal.timeout(8000)
+    });
+    const domainsData = await domainsRes.json();
+    const availableDomains = domainsData['hydra:member'] || [];
+    
+    if (!availableDomains.length) {
+      throw new Error('No domains available');
+    }
+    
+    const domain = availableDomains[0].domain;
+    const login = Math.random().toString(36).substring(2, 10);
+    const address = `${login}@${domain}`;
+    const password = Math.random().toString(36).substring(2, 15) + 'A1!';
+
+    // Create account
+    const createRes = await fetch(`${base}/accounts`, {
+      method: 'POST',
+      headers: HEADERS,
+      body: JSON.stringify({ address, password }),
+      signal: AbortSignal.timeout(8000)
+    });
+    
+    if (!createRes.ok) {
+      const err = await createRes.json();
+      throw new Error(err['hydra:description'] || 'Account creation failed');
+    }
+
+    // Get token
+    const tokenRes = await fetch(`${base}/token`, {
+      method: 'POST', 
+      headers: HEADERS,
+      body: JSON.stringify({ address, password }),
+      signal: AbortSignal.timeout(8000)
+    });
+    
+    if (!tokenRes.ok) throw new Error('Token fetch failed');
+    const tokenData = await tokenRes.json();
+
+    res.json({
+      address,
+      token: tokenData.token,
+      provider
+    });
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GET /api/freemail/inbox?token=X
+router.get('/inbox', async (req, res) => {
+  try {
+    const { token, provider } = req.query;
+    const base = provider === 'mailgw' ? MAILGW_BASE : MAILTM_BASE;
+    
+    const r = await fetch(`${base}/messages`, {
+      headers: {
+        ...HEADERS,
+        'Authorization': `Bearer ${token}`
+      },
+      signal: AbortSignal.timeout(8000)
+    });
+    const data = await r.json();
+    res.json(data['hydra:member'] || []);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GET /api/freemail/message/:id?token=X
+router.get('/message/:id', async (req, res) => {
+  try {
+    const { token, provider } = req.query;
+    const base = provider === 'mailgw' ? MAILGW_BASE : MAILTM_BASE;
+    
+    const r = await fetch(`${base}/messages/${req.params.id}`, {
+      headers: {
+        ...HEADERS,
+        'Authorization': `Bearer ${token}`
+      },
+      signal: AbortSignal.timeout(8000)
+    });
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+export default router;
+
+===================================================
+STEP 3 — Register in routes/index.ts
+
+Add:
+import freemailRouter from './freemail.js';
+router.use('/freemail', freemailRouter);
+
+===================================================
+STEP 4 — Update Temp Email frontend component
+
+Add Mail.tm and Mail.gw domains to the dropdown.
+
+On component mount, fetch domains from freemail:
+fetch('/api/freemail/domains')
+  .then(r => r.json())
+  .then(domains => {
+    // domains is array of { domain, provider }
+    setFreemailDomains(domains);
+  })
+  .catch(() => {});
+
+Add state:
+const [freemailDomains, setFreemailDomains] = useState
+  {domain: string, provider: string}[]
+>([]);
+
+Update domain dropdown to show 3 groups:
+
+--- GuerrillaMail (4 domains) ---
+guerrillamail.com
+grr.la
+sharklasers.com
+spam4.me
+
+--- Mail.tm ---
+{freemailDomains
+  .filter(d => d.provider === 'mailtm')
+  .map(d => d.domain)}
+
+--- Mail.gw ---  
+{freemailDomains
+  .filter(d => d.provider === 'mailgw')
+  .map(d => d.domain)}
+
+When user selects a freemail domain:
+- Detect provider from freemailDomains array
+- Call GET /api/freemail/new?provider=mailtm or mailgw
+- Store token and address in state
+- Poll inbox with GET /api/freemail/inbox?token=X&provider=X
+- Open messages with GET /api/freemail/message/ID?token=X&provider=X
+
+Keep GuerrillaMail flow completely unchanged.
+
+===================================================
+STEP 5 — Build and confirm zero errors
+pnpm build 2>&1
+Show complete output.
+Only touch freemail.ts and Temp Email component.
+Do not touch Temp Gmail or any other files.

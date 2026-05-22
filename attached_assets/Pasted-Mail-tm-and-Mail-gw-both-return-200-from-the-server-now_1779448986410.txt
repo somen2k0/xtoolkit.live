@@ -1,0 +1,64 @@
+Mail.tm and Mail.gw both return 200 from the server now.
+Add them back as providers in Temp Email.
+Do NOT touch Temp Gmail or any other files.
+
+===================================================
+STEP 1 — Test full API flow for Mail.tm and Mail.gw
+Run these in shell before writing any code:
+
+TEST Mail.tm domains:
+curl -s "https://api.mail.tm/domains" | head -200
+
+TEST Mail.gw domains:
+curl -s "https://api.mail.gw/domains" | head -200
+
+TEST Mail.tm create account:
+curl -s -X POST "https://api.mail.tm/accounts" \
+  -H "Content-Type: application/json" \
+  -d '{"address":"testxyz999@mail.tm","password":"Test1234!"}'
+
+TEST Mail.tm get token:
+curl -s -X POST "https://api.mail.tm/token" \
+  -H "Content-Type: application/json" \
+  -d '{"address":"testxyz999@mail.tm","password":"Test1234!"}'
+
+Show all outputs before writing any code.
+
+===================================================
+STEP 2 — Create freemail.ts backend route
+Only if Step 1 tests confirm the API works.
+
+Create artifacts/api-server/src/routes/freemail.ts:
+
+import { Router } from 'express';
+const router = Router();
+
+const MAILTM_BASE = 'https://api.mail.tm';
+const MAILGW_BASE = 'https://api.mail.gw';
+
+const HEADERS = {
+  'Content-Type': 'application/json',
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+};
+
+// GET /api/freemail/domains
+router.get('/domains', async (req, res) => {
+  try {
+    // Try Mail.tm first, fallback to Mail.gw
+    let domains: string[] = [];
+    
+    try {
+      const r = await fetch(`${MAILTM_BASE}/domains`, {
+        headers: HEADERS,
+        signal: AbortSignal.timeout(8000)
+      });
+      const data = await r.json();
+      const tmDomains = data['hydra:member']
+        ?.map((d: any) => ({ domain: d.domain, provider: 'mailtm' })) || [];
+      domains = [...domains, ...tmDomains];
+    } catch (e) {
+      console.log('Mail.tm domains failed:', e);
+    }
+
+    try {
+      const r = await fetch(`${MAILGW_BASE}/domains`,

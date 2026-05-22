@@ -26,6 +26,15 @@ interface GuerrillaMessage {
 
 interface GFullMsg { id: string; from: string; subject: string; body: string; isHtml: boolean }
 
+interface FreemailMessage {
+  id: string;
+  from: { address: string; name?: string };
+  subject: string;
+  intro?: string;
+  seen: boolean;
+  createdAt: string;
+}
+
 type Tab = "disposable" | "tempgmail" | "gmail";
 
 async function sleep(ms: number): Promise<void> {
@@ -134,7 +143,7 @@ const relatedTools = [
   { title: "Email Character Counter", href: "/tools/email-character-counter", description: "Count subject and body characters." },
 ];
 
-// ── Tab 1: Disposable inbox (GuerrillaMail only) ────────────────────
+// ── Tab 1: Disposable inbox (GuerrillaMail + Mail.tm + Mail.gw) ─────
 
 function UnifiedInboxSection() {
   const [sid, setSid] = useState<string>("");
@@ -151,11 +160,15 @@ function UnifiedInboxSection() {
   const [countdown, setCountdown] = useState(REFRESH_MS / 1000);
   const [copied, setCopied] = useState(false);
   const [showDomainDrop, setShowDomainDrop] = useState(false);
+  const [freemailDomains, setFreemailDomains] = useState<{ domain: string; provider: string }[]>([]);
   const { toast } = useToast();
   const refreshTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const countdownTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const initialized = useRef(false);
   const sidRef = useRef<string>("");
+  const freemailTokenRef = useRef<string>("");
+  const freemailProviderRef = useRef<string>("mailtm");
+  const activeProviderRef = useRef<"guerrilla" | "freemail">("guerrilla");
 
   // ── fetch inbox ────────────────────────────────────────────────────
   const fetchInbox = useCallback(async (token: string, silent = false) => {
@@ -178,17 +191,49 @@ function UnifiedInboxSection() {
     } catch {} finally { if (!silent) setLoadingMsgs(false); }
   }, []);
 
+  // ── fetch inbox (Freemail) ─────────────────────────────────────────
+  const fetchFreemailInbox = useCallback(async (token: string, provider: string, silent = false) => {
+    if (!silent) setLoadingMsgs(true);
+    try {
+      const r = await fetch(`/api/freemail/inbox?token=${encodeURIComponent(token)}&provider=${provider}`, {
+        signal: AbortSignal.timeout(12000),
+      });
+      if (r.ok) {
+        const msgs = await r.json() as FreemailMessage[];
+        if (Array.isArray(msgs)) {
+          const normalized: GuerrillaMessage[] = msgs.map(m => ({
+            mail_id: m.id,
+            mail_from: m.from?.address ?? "Unknown",
+            mail_subject: m.subject,
+            mail_timestamp: String(Math.floor(new Date(m.createdAt).getTime() / 1000)),
+            mail_read: m.seen ? "1" : "0",
+            mail_exerpt: m.intro,
+          }));
+          setMessages(prev => {
+            const map = new Map(prev.map(x => [x.mail_id, x]));
+            normalized.forEach(x => map.set(x.mail_id, { ...map.get(x.mail_id), ...x }));
+            return Array.from(map.values());
+          });
+        }
+      }
+    } catch {} finally { if (!silent) setLoadingMsgs(false); }
+  }, []);
+
   // ── polling ────────────────────────────────────────────────────────
-  const startPolling = useCallback((token: string) => {
+  const startPolling = useCallback(() => {
     if (refreshTimer.current) clearInterval(refreshTimer.current);
     if (countdownTimer.current) clearInterval(countdownTimer.current);
     setCountdown(REFRESH_MS / 1000);
     refreshTimer.current = setInterval(() => {
-      if (sidRef.current) fetchInbox(sidRef.current, true);
+      if (activeProviderRef.current === "guerrilla" && sidRef.current) {
+        fetchInbox(sidRef.current, true);
+      } else if (activeProviderRef.current === "freemail" && freemailTokenRef.current) {
+        fetchFreemailInbox(freemailTokenRef.current, freemailProviderRef.current, true);
+      }
       setCountdown(REFRESH_MS / 1000);
     }, REFRESH_MS);
     countdownTimer.current = setInterval(() => setCountdown(c => c <= 1 ? REFRESH_MS / 1000 : c - 1), 1000);
-  }, [fetchInbox]);
+  }, [fetchInbox, fetchFreemailInbox]);
 
   // ── create inbox ───────────────────────────────────────────────────
   const createInbox = useCallback(async (targetDomain?: string) => {
@@ -217,10 +262,11 @@ function UnifiedInboxSection() {
       const finalUser = apiUser;
       const finalEmail = `${finalUser}@${finalDomain}`;
       sidRef.current = token;
+      activeProviderRef.current = "guerrilla";
       setSid(token); setEmail(finalEmail); setUser(finalUser); setDomain(finalDomain);
       saveInboxSession(token, finalEmail, finalUser, finalDomain);
       await fetchInbox(token);
-      startPolling(token);
+      startPolling();
     } catch (e: any) {
       setError("Could not create inbox. Please try again.");
       console.error("createInbox error:", e.message);
@@ -229,22 +275,68 @@ function UnifiedInboxSection() {
     }
   }, [domain, fetchInbox, startPolling]);
 
+  // ── create inbox (Freemail) ────────────────────────────────────────
+  const createFreemailInbox = useCallback(async (targetDomain: string, provider: string) => {
+    setCreating(true); setError(null);
+    setMessages([]); setSelectedMsg(null); setSelectedId(null);
+    if (refreshTimer.current) clearInterval(refreshTimer.current);
+    if (countdownTimer.current) clearInterval(countdownTimer.current);
+    clearInboxSession();
+    try {
+      const r = await fetch(`/api/freemail/new?provider=${provider}`);
+      if (!r.ok) throw new Error("Failed to create inbox");
+      const d = await r.json() as { address?: string; token?: string; error?: string };
+      if (d.error) throw new Error(d.error);
+      if (!d.address || !d.token) throw new Error("Invalid response from provider");
+      const parts = d.address.split("@");
+      freemailTokenRef.current = d.token;
+      freemailProviderRef.current = provider;
+      activeProviderRef.current = "freemail";
+      sidRef.current = "";
+      setSid("");
+      setEmail(d.address);
+      setUser(parts[0] ?? "");
+      setDomain(parts[1] ?? targetDomain);
+      await fetchFreemailInbox(d.token, provider);
+      startPolling();
+    } catch (e: any) {
+      setError("Could not create inbox. Please try again.");
+      console.error("createFreemailInbox error:", e.message);
+    } finally {
+      setCreating(false);
+    }
+  }, [fetchFreemailInbox, startPolling]);
+
   // ── open message ───────────────────────────────────────────────────
   const openMessage = async (msg: GuerrillaMessage) => {
-    if (!sidRef.current) return;
     setSelectedId(msg.mail_id); setLoadingMsg(true); setSelectedMsg(null);
     try {
-      const r = await fetch(
-        `/api/guerrilla/message/${encodeURIComponent(msg.mail_id)}?sid_token=${encodeURIComponent(sidRef.current)}`,
-        { signal: AbortSignal.timeout(12000) },
-      );
-      if (r.ok) {
-        const d = await r.json() as { mail_id?: string; mail_from?: string; mail_subject?: string; mail_body?: string; mail_html?: string };
-        const body = d.mail_html || d.mail_body || "";
-        const isHtml = !!d.mail_html || /<[a-zA-Z][\s\S]*?>/.test(body);
-        setSelectedMsg({ id: d.mail_id ?? msg.mail_id, from: d.mail_from ?? msg.mail_from, subject: d.mail_subject ?? msg.mail_subject, body, isHtml });
-      } else {
-        setSelectedMsg({ id: msg.mail_id, from: msg.mail_from, subject: msg.mail_subject, body: "", isHtml: false });
+      if (activeProviderRef.current === "freemail" && freemailTokenRef.current) {
+        const r = await fetch(
+          `/api/freemail/message/${encodeURIComponent(msg.mail_id)}?token=${encodeURIComponent(freemailTokenRef.current)}&provider=${freemailProviderRef.current}`,
+          { signal: AbortSignal.timeout(12000) },
+        );
+        if (r.ok) {
+          const d = await r.json() as { id?: string; from?: { address?: string }; subject?: string; text?: string; html?: string[] };
+          const body = d.html?.[0] || d.text || "";
+          const isHtml = !!(d.html?.[0]) || /<[a-zA-Z][\s\S]*?>/.test(body);
+          setSelectedMsg({ id: d.id ?? msg.mail_id, from: d.from?.address ?? msg.mail_from, subject: d.subject ?? msg.mail_subject, body, isHtml });
+        } else {
+          setSelectedMsg({ id: msg.mail_id, from: msg.mail_from, subject: msg.mail_subject, body: "", isHtml: false });
+        }
+      } else if (sidRef.current) {
+        const r = await fetch(
+          `/api/guerrilla/message/${encodeURIComponent(msg.mail_id)}?sid_token=${encodeURIComponent(sidRef.current)}`,
+          { signal: AbortSignal.timeout(12000) },
+        );
+        if (r.ok) {
+          const d = await r.json() as { mail_id?: string; mail_from?: string; mail_subject?: string; mail_body?: string; mail_html?: string };
+          const body = d.mail_html || d.mail_body || "";
+          const isHtml = !!d.mail_html || /<[a-zA-Z][\s\S]*?>/.test(body);
+          setSelectedMsg({ id: d.mail_id ?? msg.mail_id, from: d.mail_from ?? msg.mail_from, subject: d.mail_subject ?? msg.mail_subject, body, isHtml });
+        } else {
+          setSelectedMsg({ id: msg.mail_id, from: msg.mail_from, subject: msg.mail_subject, body: "", isHtml: false });
+        }
       }
     } catch {
       setSelectedMsg({ id: msg.mail_id, from: msg.mail_from, subject: msg.mail_subject, body: "", isHtml: false });
@@ -264,11 +356,18 @@ function UnifiedInboxSection() {
   useEffect(() => {
     if (initialized.current) return;
     initialized.current = true;
+    fetch("/api/freemail/domains")
+      .then(r => r.json())
+      .then((domains: { domain: string; provider: string }[]) => {
+        if (Array.isArray(domains)) setFreemailDomains(domains);
+      })
+      .catch(() => {});
     const saved = loadInboxSession();
     if (saved) {
       sidRef.current = saved.sid;
+      activeProviderRef.current = "guerrilla";
       setSid(saved.sid); setEmail(saved.email); setUser(saved.user); setDomain(saved.domain);
-      fetchInbox(saved.sid).then(() => startPolling(saved.sid));
+      fetchInbox(saved.sid).then(() => startPolling());
     } else {
       createInbox();
     }
@@ -280,6 +379,15 @@ function UnifiedInboxSection() {
   }, []);
 
   const unread = messages.filter(m => m.mail_read === "0").length;
+  const totalDomains = GUERRILLA_DOMAINS.length + freemailDomains.length;
+
+  const handleRefresh = () => {
+    if (activeProviderRef.current === "freemail" && freemailTokenRef.current) {
+      fetchFreemailInbox(freemailTokenRef.current, freemailProviderRef.current);
+    } else if (sid) {
+      fetchInbox(sid);
+    }
+  };
 
   return (
     <div className="space-y-4">
@@ -314,7 +422,7 @@ function UnifiedInboxSection() {
             {copied ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             {copied ? "Copied!" : "Copy Address"}
           </Button>
-          <Button variant="outline" size="sm" onClick={() => sid && fetchInbox(sid)} disabled={loadingMsgs || !sid} className="text-xs gap-1.5">
+          <Button variant="outline" size="sm" onClick={handleRefresh} disabled={loadingMsgs || !email} className="text-xs gap-1.5">
             <RefreshCw className={`h-3.5 w-3.5 ${loadingMsgs ? "animate-spin" : ""}`} />Refresh
           </Button>
           <Button variant="outline" size="sm" onClick={() => createInbox()} disabled={creating} className="text-xs gap-1.5">
@@ -329,17 +437,47 @@ function UnifiedInboxSection() {
               <ChevronDown className="h-3 w-3" />
             </Button>
             {showDomainDrop && (
-              <div className="absolute top-full left-0 mt-1 z-50 bg-card border border-border/60 rounded-xl shadow-xl overflow-hidden min-w-52 max-h-72 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-1 z-50 bg-card border border-border/60 rounded-xl shadow-xl overflow-hidden min-w-56 max-h-80 overflow-y-auto">
+                {/* GuerrillaMail */}
                 <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30 sticky top-0">
-                  Switch domain
+                  GuerrillaMail ({GUERRILLA_DOMAINS.length})
                 </div>
                 {GUERRILLA_DOMAINS.map(d => (
                   <button key={d} onClick={() => { setShowDomainDrop(false); createInbox(d); }}
-                    className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 last:border-b-0 flex items-center gap-2 ${d === domain ? "text-cyan-400 font-semibold bg-muted/20" : "text-foreground/80"}`}>
+                    className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 flex items-center gap-2 ${d === domain ? "text-cyan-400 font-semibold bg-muted/20" : "text-foreground/80"}`}>
                     {d === domain && <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shrink-0" />}
                     <span className="font-mono text-cyan-400 flex-1">{d}</span>
                   </button>
                 ))}
+                {/* Mail.tm */}
+                {freemailDomains.filter(x => x.provider === "mailtm").length > 0 && <>
+                  <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30 sticky top-[28px]">
+                    Mail.tm ({freemailDomains.filter(x => x.provider === "mailtm").length})
+                  </div>
+                  {freemailDomains.filter(x => x.provider === "mailtm").map(({ domain: d }) => (
+                    <button key={d} onClick={() => { setShowDomainDrop(false); createFreemailInbox(d, "mailtm"); }}
+                      className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 flex items-center gap-2 ${d === domain ? "text-violet-400 font-semibold bg-muted/20" : "text-foreground/80"}`}>
+                      {d === domain && <span className="h-1.5 w-1.5 rounded-full bg-violet-400 shrink-0" />}
+                      <span className="font-mono text-violet-400 flex-1">{d}</span>
+                    </button>
+                  ))}
+                </>}
+                {/* Mail.gw */}
+                {freemailDomains.filter(x => x.provider === "mailgw").length > 0 && <>
+                  <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30 sticky top-[56px]">
+                    Mail.gw ({freemailDomains.filter(x => x.provider === "mailgw").length})
+                  </div>
+                  {freemailDomains.filter(x => x.provider === "mailgw").map(({ domain: d }) => (
+                    <button key={d} onClick={() => { setShowDomainDrop(false); createFreemailInbox(d, "mailgw"); }}
+                      className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 flex items-center gap-2 ${d === domain ? "text-emerald-400 font-semibold bg-muted/20" : "text-foreground/80"}`}>
+                      {d === domain && <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />}
+                      <span className="font-mono text-emerald-400 flex-1">{d}</span>
+                    </button>
+                  ))}
+                </>}
+                {freemailDomains.length === 0 && (
+                  <div className="px-4 py-3 text-xs text-muted-foreground/60 text-center border-t border-border/20">Loading additional domains…</div>
+                )}
               </div>
             )}
           </div>
@@ -450,10 +588,10 @@ function UnifiedInboxSection() {
 
       <div className="flex flex-wrap gap-2">
         {[
-          { label: `${GUERRILLA_DOMAINS.length} domains available` },
+          { label: `${totalDomains || GUERRILLA_DOMAINS.length}+ domains available` },
           { label: "Session-persistent inbox" },
           { label: `Auto-refresh ${REFRESH_MS / 1000}s` },
-          { label: "Powered by GuerrillaMail" },
+          { label: "GuerrillaMail · Mail.tm · Mail.gw" },
         ].map(({ label }) => (
           <div key={label} className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground bg-muted/40 border border-border/50 rounded-full px-3 py-1">
             <Mail className="h-3 w-3 text-cyan-400" />{label}

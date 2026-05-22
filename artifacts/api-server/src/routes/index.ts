@@ -15,6 +15,7 @@ import ogPreviewRouter from "./og-preview";
 import aiDetectorRouter from "./ai-detector";
 import tempmailTemptfRouter from "./tempmail-temptf";
 import guerrillaRouter from "./guerrilla";
+import freemailRouter from "./freemail";
 import onesecmailRouter from "./onesecmail";
 import harakirimailRouter from "./harakirimail";
 
@@ -44,6 +45,7 @@ router.use(analyticsRouter);
 router.use(ogPreviewRouter);
 router.use(tempmailTemptfRouter);
 router.use('/guerrilla', guerrillaRouter);
+router.use('/freemail', freemailRouter);
 router.use('/onesecmail', onesecmailRouter);
 router.use('/harakirimail', harakirimailRouter);
 
