@@ -34,14 +34,19 @@ function getActiveEmail(state: StoredState): string {
 
 async function createInbox(setState: (s: Partial<StoredState>) => void, history: StoredState["history"]) {
   try {
+    // Step 1: always get a session first (reliable)
     const session = await guerrillaNew();
-    const name = randomName();
-    const acc = await guerrillaSetUser(name, "guerrillamailblock.com", session.sid_token);
-    const finalAcc = { ...acc, email: acc.email || `${name}@guerrillamailblock.com` };
+    // Step 2: try to rename to a USA-style name — fall back to original if it fails
+    let finalAcc = session;
+    try {
+      const name = randomName();
+      const renamed = await guerrillaSetUser(name, "", session.sid_token);
+      if (renamed.email) finalAcc = renamed;
+    } catch { /* keep original session email */ }
     const entry: HistoryEntry = { address: finalAcc.email, provider: "guerrilla", createdAt: Date.now() };
     setState({ guerrilla: finalAcc, tempMailProvider: "guerrilla", history: [entry, ...history.slice(0, 19)] });
     return;
-  } catch { /* fall through */ }
+  } catch { /* fall through to next provider */ }
 
   try {
     const acc = await mailgwNew();
