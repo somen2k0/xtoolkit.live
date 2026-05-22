@@ -25,7 +25,7 @@ async function guerrillaFetch(
 }
 
 // GET /api/guerrilla/health
-router.get("/api/guerrilla/health", async (_req, res) => {
+router.get("/guerrilla/health", async (_req, res) => {
   try {
     const r = await guerrillaFetch({ f: "get_email_address" }, 8000);
     res.json({ ok: r.ok });
@@ -35,7 +35,7 @@ router.get("/api/guerrilla/health", async (_req, res) => {
 });
 
 // GET /api/guerrilla/new
-router.get("/api/guerrilla/new", async (_req, res) => {
+router.get("/guerrilla/new", async (_req, res) => {
   try {
     const r = await guerrillaFetch({ f: "get_email_address" });
     if (!r.ok) {
@@ -64,7 +64,7 @@ router.get("/api/guerrilla/new", async (_req, res) => {
 });
 
 // GET /api/guerrilla/inbox?sid_token=...
-router.get("/api/guerrilla/inbox", async (req, res) => {
+router.get("/guerrilla/inbox", async (req, res) => {
   const sid_token = req.query["sid_token"] as string | undefined;
   if (!sid_token) {
     res.status(400).json({ error: "sid_token required" });
@@ -94,7 +94,7 @@ router.get("/api/guerrilla/inbox", async (req, res) => {
 });
 
 // GET /api/guerrilla/message/:id?sid_token=...
-router.get("/api/guerrilla/message/:id", async (req, res) => {
+router.get("/guerrilla/message/:id", async (req, res) => {
   const { id } = req.params;
   const sid_token = req.query["sid_token"] as string | undefined;
   if (!sid_token) {

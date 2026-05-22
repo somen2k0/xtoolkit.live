@@ -36,7 +36,7 @@ function randomLogin(): string {
 const FALLBACK_DOMAINS = ["1secmail.com", "1secmail.org", "1secmail.net"];
 
 // GET /api/onesecmail/health
-router.get("/api/onesecmail/health", async (_req, res) => {
+router.get("/onesecmail/health", async (_req, res) => {
   try {
     const r = await onesecFetch({ action: "getDomainList" }, 8000);
     res.json({ ok: r.ok });
@@ -46,7 +46,7 @@ router.get("/api/onesecmail/health", async (_req, res) => {
 });
 
 // GET /api/onesecmail/new
-router.get("/api/onesecmail/new", async (_req, res) => {
+router.get("/onesecmail/new", async (_req, res) => {
   try {
     let domains = FALLBACK_DOMAINS;
     try {
@@ -65,7 +65,7 @@ router.get("/api/onesecmail/new", async (_req, res) => {
 });
 
 // GET /api/onesecmail/inbox?login=...&domain=...
-router.get("/api/onesecmail/inbox", async (req, res) => {
+router.get("/onesecmail/inbox", async (req, res) => {
   const login  = req.query["login"]  as string | undefined;
   const domain = req.query["domain"] as string | undefined;
   if (!login || !domain) {
@@ -86,7 +86,7 @@ router.get("/api/onesecmail/inbox", async (req, res) => {
 });
 
 // GET /api/onesecmail/message/:id?login=...&domain=...
-router.get("/api/onesecmail/message/:id", async (req, res) => {
+router.get("/onesecmail/message/:id", async (req, res) => {
   const { id } = req.params;
   const login  = req.query["login"]  as string | undefined;
   const domain = req.query["domain"] as string | undefined;

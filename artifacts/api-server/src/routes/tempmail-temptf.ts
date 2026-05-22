@@ -23,7 +23,7 @@ async function temptfFetch(
 
 // POST /api/temptf/generate
 // Body: { type: "dot" | "plus" }
-router.post("/api/temptf/generate", async (req, res) => {
+router.post("/temptf/generate", async (req, res) => {
   try {
     const type = (req.body as { type?: string })?.type ?? "dot";
     const params = new URLSearchParams({ providers: "gmail" });
@@ -42,7 +42,7 @@ router.post("/api/temptf/generate", async (req, res) => {
 
 // POST /api/temptf/check
 // Body: { email: string }
-router.post("/api/temptf/check", async (req, res) => {
+router.post("/temptf/check", async (req, res) => {
   try {
     const email = (req.body as { email?: string })?.email;
     if (!email) {

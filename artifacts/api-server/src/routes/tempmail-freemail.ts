@@ -33,7 +33,7 @@ function randomLogin(): string {
 }
 
 // GET /api/freemail/health
-router.get("/api/freemail/health", async (_req, res) => {
+router.get("/freemail/health", async (_req, res) => {
   try {
     const r = await maildropFetch("/inbox/healthcheck", 8000);
     res.json({ ok: r.ok || r.status === 404 });
@@ -43,7 +43,7 @@ router.get("/api/freemail/health", async (_req, res) => {
 });
 
 // GET /api/freemail/new
-router.get("/api/freemail/new", async (_req, res) => {
+router.get("/freemail/new", async (_req, res) => {
   try {
     const login = randomLogin();
     res.json({ email: `${login}@maildrop.cc`, login, domain: "maildrop.cc", token: login });
@@ -53,7 +53,7 @@ router.get("/api/freemail/new", async (_req, res) => {
 });
 
 // GET /api/freemail/inbox?token=...
-router.get("/api/freemail/inbox", async (req, res) => {
+router.get("/freemail/inbox", async (req, res) => {
   const token = req.query["token"] as string | undefined;
   if (!token) {
     res.status(400).json({ error: "token required" });
@@ -80,7 +80,7 @@ router.get("/api/freemail/inbox", async (req, res) => {
 });
 
 // GET /api/freemail/message/:id?token=...
-router.get("/api/freemail/message/:id", async (req, res) => {
+router.get("/freemail/message/:id", async (req, res) => {
   const { id } = req.params;
   const token = req.query["token"] as string | undefined;
   if (!token) {
