@@ -47,18 +47,31 @@ function randomLogin(custom?: string): string {
   return `${f}${l}${n}`;
 }
 
-// Static domain list — stable, no external call needed to create an address
-const DOMAINS = ["1secmail.com", "1secmail.org", "1secmail.net"];
+// Static domain list — comprehensive set of known 1secmail-compatible domains
+const DOMAINS = [
+  "1secmail.com", "1secmail.org", "1secmail.net",
+  "esiix.com", "wwjmp.com", "kzccv.com", "qiott.com",
+  "yevme.com", "laafd.com", "txcct.com", "dpptd.com",
+  "bheps.com",
+];
 
 // GET /onesecmail/health — always healthy, /new is instant
 router.get("/onesecmail/health", (_req, res) => {
   res.json({ ok: true });
 });
 
+// GET /onesecmail/domains — full list of available domains
+router.get("/onesecmail/domains", (_req, res) => {
+  res.json(DOMAINS);
+});
+
 // GET /onesecmail/new — instant: pure local generation, no external calls
+// Accepts optional ?login= and ?domain= query params
 router.get("/onesecmail/new", (req, res) => {
   const login  = randomLogin(req.query["login"] as string | undefined);
-  const domain = DOMAINS[Math.floor(Math.random() * DOMAINS.length)]!;
+  const requested = req.query["domain"] as string | undefined;
+  const domain = (requested && DOMAINS.includes(requested)) ? requested
+    : DOMAINS[Math.floor(Math.random() * DOMAINS.length)]!;
   res.json({ email: `${login}@${domain}`, login, domain });
 });
 

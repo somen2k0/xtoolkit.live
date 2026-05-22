@@ -194,6 +194,12 @@ function UnifiedInboxSection() {
   const [providerHealth, setProviderHealth] = useState<Record<InboxProv, boolean | null>>({
     guerrilla: null, onesecmail: null, freemail: null,
   });
+  const [availableDomains, setAvailableDomains] = useState<string[]>([
+    "1secmail.com", "1secmail.org", "1secmail.net",
+    "esiix.com", "wwjmp.com", "kzccv.com", "qiott.com",
+    "yevme.com", "laafd.com", "txcct.com", "dpptd.com",
+    "bheps.com",
+  ]);
   const { toast } = useToast();
   const refreshTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const countdownTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -281,9 +287,13 @@ function UnifiedInboxSection() {
     } catch { return null; }
   }, []);
 
-  const createOInbox = useCallback(async (login?: string): Promise<OSession | null> => {
+  const createOInbox = useCallback(async (login?: string, domain?: string): Promise<OSession | null> => {
     try {
-      const url = login ? `/api/onesecmail/new?login=${encodeURIComponent(login)}` : "/api/onesecmail/new";
+      const params = new URLSearchParams();
+      if (login)  params.set("login",  login);
+      if (domain) params.set("domain", domain);
+      const qs = params.size ? `?${params.toString()}` : "";
+      const url = `/api/onesecmail/new${qs}`;
       const r = await fetch(url, { signal: AbortSignal.timeout(12000) });
       if (!r.ok) return null;
       const d = await r.json() as { email?: string; login?: string; domain?: string };
@@ -306,14 +316,14 @@ function UnifiedInboxSection() {
   }, []);
 
   // ── provider-level creation ─────────────────────────────────────────
-  const createOnProvider = useCallback(async (prov: InboxProv): Promise<boolean> => {
+  const createOnProvider = useCallback(async (prov: InboxProv, domain?: string): Promise<boolean> => {
     if (prov === "guerrilla") {
       const gs = await createGInbox();
       if (!gs) return false;
       activeProvRef.current = "guerrilla"; setActiveProv("guerrilla");
       await fetchGMsgs(gs.sid);
     } else if (prov === "onesecmail") {
-      const os = await createOInbox();
+      const os = await createOInbox(undefined, domain);
       if (!os) return false;
       activeProvRef.current = "onesecmail"; setActiveProv("onesecmail");
       await fetchOMsgs(os.login, os.domain);
@@ -372,21 +382,23 @@ function UnifiedInboxSection() {
     setError("Could not create new inbox."); setCreating(false);
   }, [createOnProvider, startPolling]);
 
-  // ── provider switching ──────────────────────────────────────────────
-  const switchProvider = useCallback(async (prov: InboxProv) => {
+  // ── provider / domain switching ─────────────────────────────────────
+  const switchProvider = useCallback(async (prov: InboxProv, domain?: string) => {
     setShowProviderDrop(false);
-    if (prov === activeProv && !error) return;
+    const sameProvider = prov === activeProv;
+    const sameDomain   = prov !== "onesecmail" || domain === oSessionRef.current?.domain;
+    if (sameProvider && sameDomain && !error) return;
     setSelectedG(null); setSelectedO(null); setSelectedF(null); setSelectedId(null);
     setSwitchingToProv(prov);
     if (refreshTimer.current) clearInterval(refreshTimer.current);
     if (countdownTimer.current) clearInterval(countdownTimer.current);
-    const ok = await createOnProvider(prov);
+    const ok = await createOnProvider(prov, domain);
     if (ok) {
       startPolling();
-      const label = prov === "guerrilla" ? "Guerrilla Mail" : prov === "freemail" ? "Maildrop" : "1secMail";
-      toast({ title: "Provider switched!", description: `Now using ${label}` });
+      const label = prov === "guerrilla" ? "Guerrilla Mail" : domain ?? "Maildrop";
+      toast({ title: "Switched!", description: `Now using @${label}` });
     } else {
-      toast({ title: "Provider unavailable", description: "Could not connect. Try another provider.", variant: "destructive" });
+      toast({ title: "Domain unavailable", description: "Could not connect. Try another.", variant: "destructive" });
     }
     setSwitchingToProv(null);
   }, [activeProv, error, createOnProvider, startPolling, toast]);
@@ -488,8 +500,14 @@ function UnifiedInboxSection() {
     if (countdownTimer.current) clearInterval(countdownTimer.current);
   }, []);
 
-  // ── health checks via backend ──────────────────────────────────────
+  // ── domain list + health checks ────────────────────────────────────
   useEffect(() => {
+    // Fetch live domain list
+    fetch("/api/onesecmail/domains", { signal: AbortSignal.timeout(8000) })
+      .then(r => r.json() as Promise<string[]>)
+      .then(d => { if (Array.isArray(d) && d.length > 0) setAvailableDomains(d); })
+      .catch(() => {});
+
     const checks: Array<[InboxProv, string]> = [
       ["onesecmail", "/api/onesecmail/health"],
       ["guerrilla",  "/api/guerrilla/health"],
@@ -525,10 +543,11 @@ function UnifiedInboxSection() {
     ? (selectedG?.isHtml ?? false)
     : !!(selectedO?.htmlBody) || !!(selectedF?.isHtml);
 
-  const PROVIDERS: Array<{ id: InboxProv; label: string; badge: string }> = [
-    { id: "onesecmail", label: "1secMail",      badge: "text-yellow-400" },
-    { id: "guerrilla",  label: "Guerrilla Mail", badge: "text-cyan-400"   },
-    { id: "freemail",   label: "Maildrop",       badge: "text-purple-400" },
+  type DomainEntry = { domain: string; prov: InboxProv; badge: string };
+  const DOMAIN_ENTRIES: DomainEntry[] = [
+    ...availableDomains.map(d => ({ domain: d, prov: "onesecmail" as InboxProv, badge: "text-yellow-400" })),
+    { domain: "maildrop.cc",   prov: "freemail"   as InboxProv, badge: "text-purple-400" },
+    { domain: "guerrillamail", prov: "guerrilla"  as InboxProv, badge: "text-cyan-400"   },
   ];
 
   return (
@@ -574,26 +593,28 @@ function UnifiedInboxSection() {
             <Settings2 className="h-3.5 w-3.5" />Custom Username
           </Button>
 
-          {/* Provider picker */}
+          {/* Domain picker */}
           <div className="relative">
             <Button variant="outline" size="sm" onClick={() => setShowProviderDrop(v => !v)} disabled={!currentEmail || !!switchingToProv} className="text-xs gap-1.5">
               <Zap className={`h-3.5 w-3.5 ${switchingToProv ? "text-amber-400" : currentPill.color}`} />
-              {switchingToProv
-                ? `Switching to ${switchingToProv === "guerrilla" ? "Guerrilla Mail" : switchingToProv === "freemail" ? "Maildrop" : "1secMail"}…`
-                : activeProv === "guerrilla" ? "Guerrilla Mail" : activeProv === "freemail" ? "Maildrop" : "1secMail"}
+              {switchingToProv ? "Switching…"
+                : activeProv === "guerrilla" ? "Guerrilla Mail"
+                : currentDomain ?? "…"}
               {switchingToProv ? <Loader2 className="h-3 w-3 animate-spin" /> : <ChevronDown className="h-3 w-3" />}
             </Button>
             {showProviderDrop && (
-              <div className="absolute top-full left-0 mt-1 z-50 bg-card border border-border/60 rounded-xl shadow-xl overflow-hidden min-w-52">
-                <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30">Switch provider</div>
-                {PROVIDERS.map(({ id, label, badge }) => {
-                  const health = providerHealth[id];
-                  const isCurrent = id === activeProv;
+              <div className="absolute top-full left-0 mt-1 z-50 bg-card border border-border/60 rounded-xl shadow-xl overflow-hidden min-w-56 max-h-80 overflow-y-auto">
+                <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30 sticky top-0">Switch domain</div>
+                {DOMAIN_ENTRIES.map(({ domain, prov, badge }) => {
+                  const health = providerHealth[prov];
+                  const isCurrent = prov === activeProv && (prov !== "onesecmail" || domain === currentDomain) && (prov !== "freemail" || true);
+                  const label = domain === "guerrillamail" ? "Guerrilla Mail" : domain;
                   return (
-                    <button key={id} onClick={() => switchProvider(id)}
-                      className={`w-full text-left px-4 py-2.5 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 last:border-b-0 flex items-center justify-between gap-3
+                    <button key={domain}
+                      onClick={() => switchProvider(prov, domain === "guerrillamail" ? undefined : domain)}
+                      className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 last:border-b-0 flex items-center justify-between gap-3
                         ${isCurrent ? "text-cyan-400 font-semibold bg-muted/20" : "text-foreground/80"}`}>
-                      <span className={badge}>{label}</span>
+                      <span className={`font-mono ${badge}`}>{label}</span>
                       <span className={`text-[10px] font-semibold shrink-0 px-1.5 py-0.5 rounded-full border
                         ${health === true  ? "text-green-400 border-green-400/30 bg-green-400/10" :
                           health === false ? "text-red-400 border-red-400/30 bg-red-400/10" :
