@@ -93,7 +93,7 @@ const STATIC_PAGES = [
   {
     path: "/blog",
     label: "Blog",
-    title: "Blog - Email Privacy, Temp Mail & Developer Tips | X Toolkit",
+    title: "Blog — Email Privacy, Temp Mail & Developer Tips | X Toolkit",
     description:
       "Articles on temp mail, email privacy, disposable email services, and developer tools. Tips and guides from X Toolkit.",
   },
@@ -217,27 +217,30 @@ const TEMP_MAIL_SUB_ROUTES = [
   {
     path: "/tools/temp-mail/tempemail",
     label: "Disposable Email Inbox",
-    title: "Disposable Email Inbox - Free Temporary Email | X Toolkit",
+    title: "Disposable Email Inbox — Free Temporary Email | X Toolkit",
     description:
       "Get a free disposable email inbox instantly. No signup, auto-refresh, works with any service. Protect your real email address online.",
+    seoKeywords: "temp mail, temporary email, disposable email inbox, throwaway email, free temp email, no signup email, anonymous inbox, guerrilla mail",
     category: "email",
     sitemapPriority: 0.95,
   },
   {
     path: "/tools/temp-mail/tempgmail",
     label: "Temp Gmail",
-    title: "Temp Gmail - Temporary Gmail Address Tricks | X Toolkit",
+    title: "Temp Gmail — Temporary Gmail Address Tricks | X Toolkit",
     description:
       "Use Gmail dot tricks and plus-addressing to create unlimited temporary Gmail addresses. Free guide and generator tool online.",
+    seoKeywords: "temp gmail, temporary gmail address, gmail dot trick, gmail plus trick, gmail alias generator, disposable gmail, unlimited gmail addresses",
     category: "email",
     sitemapPriority: 0.90,
   },
   {
     path: "/tools/temp-mail/gmail-tricks",
     label: "Gmail Tricks",
-    title: "Gmail Dot & Plus Tricks - Create Unlimited Gmail Aliases | X Toolkit",
+    title: "Gmail Dot & Plus Tricks — Create Unlimited Gmail Aliases | X Toolkit",
     description:
       "Learn Gmail's plus-addressing and dot trick to create unlimited aliases. Use john.doe@gmail.com and johndoe@gmail.com interchangeably.",
+    seoKeywords: "gmail dot trick, gmail plus trick, gmail alias, gmail address generator, create unlimited gmail, gmail tricks guide, gmail plus addressing",
     category: "email",
     sitemapPriority: 0.85,
   },
@@ -816,6 +819,13 @@ function generatePageHtml(template, { path, title, description, isHomepage, cate
   html = html.replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/,  `$1${safeTitle}$2`);
   html = html.replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/,  `$1${safeDesc}$2`);
   html = html.replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/,  `$1${canonicalUrl}$2`);
+
+  // Per-page keywords: inject from tool manifest's seoKeywords field so every
+  // page gets unique keywords instead of the generic site-wide fallback.
+  const pageKeywords = tool?.seoKeywords;
+  if (pageKeywords) {
+    html = html.replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/,  `$1${escapeHtml(pageKeywords)}$2`);
+  }
 
   // Inject static content into <div id="root"> so Google indexes unique
   // content on every page without needing to execute JavaScript.

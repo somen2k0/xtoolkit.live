@@ -138,9 +138,11 @@ const faqs = [
 ];
 
 const relatedTools = [
+  { title: "Temp Gmail", href: "/tools/temp-mail/tempgmail", description: "Generate temporary Gmail addresses with dot and plus tricks." },
+  { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate random email aliases to protect your real inbox." },
   { title: "Email Validator", href: "/tools/email-validator", description: "Validate email address syntax instantly." },
   { title: "Email Signature Generator", href: "/tools/email-signature-generator", description: "Build a professional email signature." },
-  { title: "Email Character Counter", href: "/tools/email-character-counter", description: "Count subject and body characters." },
+  { title: "Spam Score Checker", href: "/tools/spam-score-checker", description: "Check your email for spam trigger words and signals." },
 ];
 
 // ── Tab 1: Disposable inbox (GuerrillaMail + Mail.tm + Mail.gw) ─────
