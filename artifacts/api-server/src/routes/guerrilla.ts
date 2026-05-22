@@ -23,13 +23,17 @@ router.get('/health', async (_req, res) => {
 
 router.get('/new', async (_req, res) => {
   try {
+    console.log('Calling GuerrillaMail /new...');
     const r = await fetch(`${BASE}?f=get_email_address&lang=en`, {
       headers: HEADERS,
       signal: AbortSignal.timeout(10000),
     });
+    console.log('GuerrillaMail response status:', r.status);
     const data = await r.json();
+    console.log('GuerrillaMail data keys:', Object.keys(data));
     res.json(data);
   } catch (e: any) {
+    console.error('GuerrillaMail /new error:', e.message);
     res.status(500).json({ error: e.message });
   }
 });

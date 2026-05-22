@@ -14,9 +14,10 @@ import { Link } from "wouter";
 // ── Types ──────────────────────────────────────────────────────────
 
 const GUERRILLA_DOMAINS = [
-  "guerrillamail.com", "guerrillamail.info", "guerrillamail.biz",
-  "guerrillamail.de",  "guerrillamail.net",  "guerrillamail.org",
-  "grr.la", "sharklasers.com", "guerrillamailblock.com", "spam4.me",
+  "guerrillamail.com",
+  "grr.la",
+  "sharklasers.com",
+  "spam4.me",
 ];
 
 interface GuerrillaMessage {
@@ -197,17 +198,16 @@ function UnifiedInboxSection() {
     if (countdownTimer.current) clearInterval(countdownTimer.current);
     clearInboxSession();
     try {
-      const r1 = await fetch("/api/guerrilla/new", { signal: AbortSignal.timeout(12000) });
+      const r1 = await fetch("/api/guerrilla/new");
       if (!r1.ok) throw new Error("Failed to get session");
       const d1 = await r1.json() as { email_addr?: string; sid_token?: string };
-      if (!d1.sid_token) throw new Error("No session token");
+      if (!d1.sid_token) throw new Error("No session token received");
       const token = d1.sid_token;
       const name = randomGuerrillaName();
       const r2 = await fetch("/api/guerrilla/set-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: name, sid_token: token, domain: targetDomain ?? domain }),
-        signal: AbortSignal.timeout(12000),
       });
       if (!r2.ok) throw new Error("Failed to set username");
       const d2 = await r2.json() as { email_addr?: string; sid_token?: string };
@@ -222,6 +222,7 @@ function UnifiedInboxSection() {
       startPolling(token);
     } catch (e: any) {
       setError("Could not create inbox. Please try again.");
+      console.error("createInbox error:", e.message);
     } finally {
       setCreating(false);
     }

@@ -1,0 +1,95 @@
+Two fixes needed in the Temp Email tool only:
+
+FIX 1 — Remove non-working domains from dropdown
+
+Based on API testing, only these 4 domains actually
+work correctly. Update the DOMAINS array to ONLY these:
+
+const DOMAINS = [
+  'guerrillamail.com',
+  'grr.la', 
+  'sharklasers.com',
+  'spam4.me'
+];
+
+Remove all other domains completely.
+Default selected domain: 'guerrillamail.com'
+
+FIX 2 — Fix "Could not create inbox" error
+
+The error happens because the frontend is calling
+createInbox() but something fails silently.
+
+The issue is the order of operations. Fix createInbox()
+to follow this exact sequence:
+
+async function createInbox() {
+  setIsLoading(true);
+  setError(null);
+  try {
+    // Step 1: Get new session from GuerrillaMail
+    const newRes = await fetch('/api/guerrilla/new');
+    if (!newRes.ok) throw new Error('Failed to get session');
+    const newData = await newRes.json();
+    
+    const token = newData.sid_token;
+    if (!token) throw new Error('No session token received');
+    
+    // Step 2: Set realistic username
+    const name = randomName();
+    const setRes = await fetch('/api/guerrilla/set-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        user: name, 
+        sid_token: token,
+        domain: selectedDomain
+      })
+    });
+    if (!setRes.ok) throw new Error('Failed to set username');
+    const setData = await setRes.json();
+    
+    // Step 3: Update state with real email
+    const emailAddr = setData.email_addr || 
+                      `${name}@${selectedDomain}`;
+    setSidToken(token);
+    setEmail(emailAddr);
+    setMessages([]);
+    setSelectedMessage(null);
+    
+  } catch (e: any) {
+    setError('Could not create inbox. Please try again.');
+    console.error('createInbox error:', e.message);
+  } finally {
+    setIsLoading(false);
+  }
+}
+
+FIX 3 — Add console logging to backend temporarily
+
+In guerrilla.ts, add console.log to the /new route:
+
+router.get('/new', async (req, res) => {
+  try {
+    console.log('Calling GuerrillaMail /new...');
+    const r = await fetch(`${BASE}?f=get_email_address&lang=en`,
+      { headers: HEADERS, signal: AbortSignal.timeout(10000) });
+    console.log('GuerrillaMail response status:', r.status);
+    const data = await r.json();
+    console.log('GuerrillaMail data keys:', Object.keys(data));
+    res.json(data);
+  } catch (e: any) {
+    console.error('GuerrillaMail /new error:', e.message);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+Build, deploy, then check Vercel function logs to see
+exactly what GuerrillaMail returns.
+
+Only touch these 2 files:
+- artifacts/api-server/src/routes/guerrilla.ts
+- The Temp Email frontend component
+
+Do not touch anything else.
+pnpm build 2>&1 — show complete output.
