@@ -1,0 +1,220 @@
+I have 2 issues to fix. Please do both completely.
+
+===================================================
+ISSUE 1 — TEMP MAIL: Remove Mail.gw, fix 1secmail
+inbox, add new provider
+===================================================
+
+PART A — Remove Mail.gw completely
+- Remove all Mail.gw domains from the dropdown
+- Remove /api/freemail/* routes from routes/index.ts
+- Remove the freemail.ts route file
+- Remove gwDomains state from the frontend component
+- Remove Mail.gw section from the domain dropdown
+- Remove Mail.gw health check
+
+PART B — Fix 1secmail inbox messages not showing
+
+The issue is allorigins proxy is failing for 1secmail
+inbox calls. Fix by trying multiple proxy approaches:
+
+In onesecmail.ts, update the inbox and message routes
+to try proxies in order until one works:
+
+const PROXIES = [
+  (url: string) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  (url: string) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  (url: string) => `https://api.codetabs.com/v1/proxy?quest=${url}`,
+];
+
+async function fetchWithFallback(url: string) {
+  for (const proxy of PROXIES) {
+    try {
+      const res = await fetch(proxy(url), {
+        signal: AbortSignal.timeout(8000)
+      });
+      if (res.ok) {
+        const text = await res.text();
+        return JSON.parse(text);
+      }
+    } catch (e) {
+      continue;
+    }
+  }
+  throw new Error('All proxies failed');
+}
+
+Use fetchWithFallback() for ALL 1secmail API calls
+in onesecmail.ts.
+
+PART C — Add Internxt/Harakirimail as 3rd provider
+
+Add a new provider using the harakirimail.com API
+which works reliably from server environments:
+
+Create artifacts/api-server/src/routes/harakirimail.ts:
+
+import { Router } from 'express';
+const router = Router();
+
+const PROXIES = [
+  (url: string) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  (url: string) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+];
+
+async function fetchWithFallback(url: string, options?: any) {
+  for (const proxy of PROXIES) {
+    try {
+      const res = await fetch(proxy(url), {
+        ...options,
+        signal: AbortSignal.timeout(8000)
+      });
+      if (res.ok) return await res.json();
+    } catch (e) { continue; }
+  }
+  throw new Error('All proxies failed');
+}
+
+// Get new inbox
+router.get('/new', async (req, res) => {
+  try {
+    const data = await fetchWithFallback(
+      'https://www.harakirimail.com/api/v1/inbox/new'
+    );
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Harakirimail unavailable' });
+  }
+});
+
+// Get inbox messages
+router.get('/inbox', async (req, res) => {
+  try {
+    const { token } = req.query;
+    const data = await fetchWithFallback(
+      `https://www.harakirimail.com/api/v1/inbox?token=${token}`
+    );
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Harakirimail unavailable' });
+  }
+});
+
+// Get single message
+router.get('/message/:id', async (req, res) => {
+  try {
+    const { token } = req.query;
+    const data = await fetchWithFallback(
+      `https://www.harakirimail.com/api/v1/inbox/${req.params.id}?token=${token}`
+    );
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Harakirimail unavailable' });
+  }
+});
+
+export default router;
+
+Register in routes/index.ts:
+import harakirimailRouter from './harakirimail.js';
+app.use('/api/harakirimail', harakirimailRouter);
+
+Add to frontend dropdown as 3rd provider group:
+--- Harakirimail ---
+harakirimail.com
+
+Handle in frontend exactly like other providers:
+- GET /api/harakirimail/new → store token
+- GET /api/harakirimail/inbox?token=TOKEN
+- GET /api/harakirimail/message/ID?token=TOKEN
+
+===================================================
+ISSUE 2 — GROQ API: Multiple keys round-robin
+===================================================
+
+The GROQ_API_KEY environment variable in Vercel contains
+multiple API keys separated by commas, like:
+"key1,key2,key3"
+
+Update ALL Groq API calls in the backend to use
+round-robin rotation across all keys:
+
+Create a new file:
+artifacts/api-server/src/utils/groqClient.ts
+
+with this content:
+
+const keys = (process.env.GROQ_API_KEY || '')
+  .split(',')
+  .map(k => k.trim())
+  .filter(Boolean);
+
+let currentIndex = 0;
+const cooldowns = new Set<number>();
+
+export function getNextGroqKey(): string {
+  if (keys.length === 0) throw new Error('No GROQ API keys configured');
+  
+  // Find next available key not in cooldown
+  for (let i = 0; i < keys.length; i++) {
+    const idx = (currentIndex + i) % keys.length;
+    if (!cooldowns.has(idx)) {
+      currentIndex = (idx + 1) % keys.length;
+      return keys[idx];
+    }
+  }
+  
+  // All keys in cooldown, use first anyway
+  currentIndex = (currentIndex + 1) % keys.length;
+  return keys[currentIndex];
+}
+
+export function markKeyCooldown(key: string, ms = 60000) {
+  const idx = keys.indexOf(key);
+  if (idx === -1) return;
+  cooldowns.add(idx);
+  setTimeout(() => cooldowns.delete(idx), ms);
+}
+
+export function makeGroqRequest(body: object) {
+  const key = getNextGroqKey();
+  return fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${key}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }).then(async res => {
+    if (res.status === 429) {
+      markKeyCooldown(key);
+      // Try next key immediately
+      const nextKey = getNextGroqKey();
+      return fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${nextKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+    }
+    return res;
+  });
+}
+
+Then update ALL routes that call Groq API
+(bio-generator, ai-detector, humanizer) to use
+makeGroqRequest() instead of direct fetch with
+a hardcoded key.
+
+Replace any existing Groq fetch calls like:
+fetch('https://api.groq.com/...', {
+  headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` }
+})
+
+With:
+makeGroqRequest({ ...body })
+
+Build and confirm zero errors.
+Show all files changed.

@@ -25,10 +25,10 @@ interface GuerrillaMessage {
 
 type Tab = "disposable" | "tempgmail" | "gmail";
 
-type InboxProv = "guerrilla" | "onesecmail" | "freemail";
+type InboxProv = "guerrilla" | "onesecmail" | "harakirimail";
 
 function pickRandomProvider(exclude?: Set<InboxProv>): InboxProv {
-  const pool = (["guerrilla", "onesecmail", "freemail"] as InboxProv[]).filter(p => !exclude?.has(p));
+  const pool = (["guerrilla", "onesecmail", "harakirimail"] as InboxProv[]).filter(p => !exclude?.has(p));
   if (pool.length === 0) return "onesecmail";
   return pool[Math.floor(Math.random() * pool.length)];
 }
@@ -78,11 +78,11 @@ function generateLocalGmailAddress(type: "dot" | "plus"): string {
 
 interface GSession { sid: string; user: string; domain: string; email: string }
 interface OSession { login: string; domain: string; email: string }
-interface FSession { login: string; domain: string; email: string; token: string }
+interface HSession { token: string; email: string; login: string; domain: string }
 interface OMsg { id: number; from: string; subject: string; date: string }
 interface OFullMsg extends OMsg { body?: string; htmlBody?: string; textBody?: string }
-interface FMsg { id: string; from: string; subject: string; date: string }
-interface FFullMsg extends FMsg { body?: string; htmlBody?: string; textBody?: string; isHtml?: boolean }
+interface HMsg { id: string; from: string; subject: string; date: string }
+interface HFullMsg extends HMsg { body?: string; htmlBody?: string; isHtml?: boolean }
 interface GFullMsg { id: string; from: string; subject: string; body: string; isHtml: boolean }
 
 const REFRESH_MS = 15000;
@@ -99,14 +99,14 @@ interface PersistedInbox {
 
 const SESSION_TTL = 3 * 60 * 60 * 1000;
 
-function saveInboxSession(prov: InboxProv, session: GSession | OSession | FSession): void {
+function saveInboxSession(prov: InboxProv, session: GSession | OSession | HSession): void {
   try {
     const data: PersistedInbox = {
       prov,
       email: session.email,
-      user: "user" in session ? session.user : (session as OSession | FSession).login,
+      user: "user" in session ? session.user : (session as OSession | HSession).login,
       domain: session.domain,
-      sid: "sid" in session ? session.sid : "token" in session ? (session as FSession).token : undefined,
+      sid: "sid" in session ? session.sid : "token" in session ? (session as HSession).token : undefined,
       savedAt: Date.now(),
     };
     localStorage.setItem(INBOX_STORAGE_KEY, JSON.stringify(data));
@@ -181,14 +181,14 @@ const relatedTools = [
 function UnifiedInboxSection() {
   const [gSession, setGSession] = useState<GSession | null>(null);
   const [oSession, setOSession] = useState<OSession | null>(null);
-  const [fSession, setFSession] = useState<FSession | null>(null);
+  const [hSession, setHSession] = useState<HSession | null>(null);
   const [activeProv, setActiveProv] = useState<InboxProv>("guerrilla");
   const [gMessages, setGMessages] = useState<GuerrillaMessage[]>([]);
   const [oMessages, setOMessages] = useState<OMsg[]>([]);
-  const [fMessages, setFMessages] = useState<FMsg[]>([]);
+  const [hMessages, setHMessages] = useState<HMsg[]>([]);
   const [selectedG, setSelectedG] = useState<GFullMsg | null>(null);
   const [selectedO, setSelectedO] = useState<OFullMsg | null>(null);
-  const [selectedF, setSelectedF] = useState<FFullMsg | null>(null);
+  const [selectedH, setSelectedH] = useState<HFullMsg | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
   const [loadingMsgs, setLoadingMsgs] = useState(false);
@@ -201,13 +201,12 @@ function UnifiedInboxSection() {
   const [showProviderDrop, setShowProviderDrop] = useState(false);
   const [switchingToProv, setSwitchingToProv] = useState<InboxProv | null>(null);
   const [providerHealth, setProviderHealth] = useState<Record<InboxProv, boolean | null>>({
-    guerrilla: null, onesecmail: null, freemail: null,
+    guerrilla: null, onesecmail: null, harakirimail: null,
   });
   const [onesecDomains, setOnesecDomains] = useState<string[]>([
     "1secmail.com", "1secmail.net", "1secmail.org",
     "wwjmp.com", "esiix.com", "xojxe.com", "yoggm.com",
   ]);
-  const [gwDomains, setGwDomains] = useState<string[]>(["oakon.com", "teihu.com"]);
   const { toast } = useToast();
   const refreshTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const countdownTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -215,7 +214,7 @@ function UnifiedInboxSection() {
 
   const gSessionRef = useRef<GSession | null>(null);
   const oSessionRef = useRef<OSession | null>(null);
-  const fSessionRef = useRef<FSession | null>(null);
+  const hSessionRef = useRef<HSession | null>(null);
   const activeProvRef = useRef<InboxProv>("guerrilla");
 
   // ── fetch helpers ──────────────────────────────────────────────────
@@ -253,15 +252,15 @@ function UnifiedInboxSection() {
     } catch {} finally { if (!silent) setLoadingMsgs(false); }
   }, []);
 
-  const fetchFMsgs = useCallback(async (token: string, silent = false) => {
+  const fetchHMsgs = useCallback(async (token: string, silent = false) => {
     if (!silent) setLoadingMsgs(true);
     try {
-      const r = await fetch(`/api/freemail/inbox?token=${encodeURIComponent(token)}`, {
+      const r = await fetch(`/api/harakirimail/inbox?token=${encodeURIComponent(token)}`, {
         signal: AbortSignal.timeout(12000),
       });
       if (r.ok) {
-        const d = await r.json() as FMsg[];
-        setFMessages(Array.isArray(d) ? d : []);
+        const d = await r.json() as HMsg[];
+        setHMessages(Array.isArray(d) ? d : []);
       }
     } catch {} finally { if (!silent) setLoadingMsgs(false); }
   }, []);
@@ -276,12 +275,12 @@ function UnifiedInboxSection() {
         fetchGMsgs(gSessionRef.current.sid, true);
       else if (activeProvRef.current === "onesecmail" && oSessionRef.current)
         fetchOMsgs(oSessionRef.current.login, oSessionRef.current.domain, true);
-      else if (activeProvRef.current === "freemail" && fSessionRef.current)
-        fetchFMsgs(fSessionRef.current.token, true);
+      else if (activeProvRef.current === "harakirimail" && hSessionRef.current)
+        fetchHMsgs(hSessionRef.current.token, true);
       setCountdown(REFRESH_MS / 1000);
     }, REFRESH_MS);
     countdownTimer.current = setInterval(() => setCountdown(c => c <= 1 ? REFRESH_MS / 1000 : c - 1), 1000);
-  }, [fetchGMsgs, fetchOMsgs, fetchFMsgs]);
+  }, [fetchGMsgs, fetchOMsgs, fetchHMsgs]);
 
   // ── create inbox functions ─────────────────────────────────────────
 
@@ -314,20 +313,20 @@ function UnifiedInboxSection() {
     } catch { return null; }
   }, []);
 
-  const createFInbox = useCallback(async (domain?: string): Promise<FSession | null> => {
+  const createHInbox = useCallback(async (): Promise<HSession | null> => {
     try {
-      const qs = domain ? `?domain=${encodeURIComponent(domain)}` : "";
-      const r = await fetch(`/api/freemail/new${qs}`, { signal: AbortSignal.timeout(15000) });
+      const r = await fetch("/api/harakirimail/new", { signal: AbortSignal.timeout(12000) });
       if (!r.ok) return null;
-      const d = await r.json() as { email?: string; login?: string; domain?: string; token?: string };
-      if (!d.email || !d.token) return null;
-      const fs: FSession = {
-        login: d.login ?? d.email.split("@")[0] ?? "user",
-        domain: d.domain ?? d.email.split("@")[1] ?? "mail.gw",
-        email: d.email,
+      const d = await r.json() as { token?: string; email?: string };
+      if (!d.token || !d.email) return null;
+      const parts = d.email.split("@");
+      const hs: HSession = {
         token: d.token,
+        email: d.email,
+        login: parts[0] ?? "user",
+        domain: parts[1] ?? "harakirimail.com",
       };
-      fSessionRef.current = fs; setFSession(fs); saveInboxSession("freemail", fs); return fs;
+      hSessionRef.current = hs; setHSession(hs); saveInboxSession("harakirimail", hs); return hs;
     } catch { return null; }
   }, []);
 
@@ -344,13 +343,13 @@ function UnifiedInboxSection() {
       activeProvRef.current = "onesecmail"; setActiveProv("onesecmail");
       await fetchOMsgs(os.login, os.domain);
     } else {
-      const fs = await createFInbox(domain);
-      if (!fs) return false;
-      activeProvRef.current = "freemail"; setActiveProv("freemail");
-      await fetchFMsgs(fs.token);
+      const hs = await createHInbox();
+      if (!hs) return false;
+      activeProvRef.current = "harakirimail"; setActiveProv("harakirimail");
+      await fetchHMsgs(hs.token);
     }
     return true;
-  }, [createGInbox, createOnesecInbox, createFInbox, fetchGMsgs, fetchOMsgs, fetchFMsgs]);
+  }, [createGInbox, createOnesecInbox, createHInbox, fetchGMsgs, fetchOMsgs, fetchHMsgs]);
 
   const initInbox = useCallback(async () => {
     const saved = loadInboxSession();
@@ -365,33 +364,33 @@ function UnifiedInboxSection() {
         oSessionRef.current = os; setOSession(os);
         activeProvRef.current = "onesecmail"; setActiveProv("onesecmail");
         setCreating(false); await fetchOMsgs(saved.user, saved.domain); startPolling(); return;
-      } else if (saved.prov === "freemail" && saved.sid) {
-        const fs: FSession = { login: saved.user, domain: saved.domain, email: saved.email, token: saved.sid };
-        fSessionRef.current = fs; setFSession(fs);
-        activeProvRef.current = "freemail"; setActiveProv("freemail");
-        setCreating(false); await fetchFMsgs(saved.sid); startPolling(); return;
+      } else if (saved.prov === "harakirimail" && saved.sid) {
+        const hs: HSession = { token: saved.sid, login: saved.user, domain: saved.domain, email: saved.email };
+        hSessionRef.current = hs; setHSession(hs);
+        activeProvRef.current = "harakirimail"; setActiveProv("harakirimail");
+        setCreating(false); await fetchHMsgs(saved.sid); startPolling(); return;
       }
     }
     setCreating(true); setError(null);
     // Try 1secmail first — creates locally with no external API call, always instant.
-    // Fall back to guerrilla then mail.gw (both proxy through allorigins, may be slow).
-    const provOrder: InboxProv[] = ["onesecmail", "guerrilla", "freemail"];
+    // Fall back to guerrilla then harakirimail (both proxy through allorigins, may be slow).
+    const provOrder: InboxProv[] = ["onesecmail", "guerrilla", "harakirimail"];
     for (let i = 0; i < provOrder.length; i++) {
       if (i > 0) await sleep(800);
       const ok = await createOnProvider(provOrder[i]!);
       if (ok) { startPolling(); setCreating(false); return; }
     }
     setError("Could not create inbox. All providers are currently unavailable."); setCreating(false);
-  }, [createOnProvider, startPolling, fetchGMsgs, fetchOMsgs, fetchFMsgs]);
+  }, [createOnProvider, startPolling, fetchGMsgs, fetchOMsgs, fetchHMsgs]);
 
   const newAddress = useCallback(async () => {
     clearInboxSession();
     setCreating(true); setError(null);
-    setGMessages([]); setOMessages([]); setFMessages([]);
-    setSelectedG(null); setSelectedO(null); setSelectedF(null); setSelectedId(null);
+    setGMessages([]); setOMessages([]); setHMessages([]);
+    setSelectedG(null); setSelectedO(null); setSelectedH(null); setSelectedId(null);
     if (refreshTimer.current) clearInterval(refreshTimer.current);
     if (countdownTimer.current) clearInterval(countdownTimer.current);
-    const provOrder: InboxProv[] = ["onesecmail", "guerrilla", "freemail"];
+    const provOrder: InboxProv[] = ["onesecmail", "guerrilla", "harakirimail"];
     for (let i = 0; i < provOrder.length; i++) {
       if (i > 0) await sleep(800);
       const ok = await createOnProvider(provOrder[i]!);
@@ -407,16 +406,16 @@ function UnifiedInboxSection() {
     const sameDomain =
       prov === "guerrilla"   ? domain === gSessionRef.current?.domain :
       prov === "onesecmail"  ? domain === oSessionRef.current?.domain :
-      domain === fSessionRef.current?.domain;
+      domain === hSessionRef.current?.domain;
     if (sameProvider && sameDomain && !error) return;
-    setSelectedG(null); setSelectedO(null); setSelectedF(null); setSelectedId(null);
+    setSelectedG(null); setSelectedO(null); setSelectedH(null); setSelectedId(null);
     setSwitchingToProv(prov);
     if (refreshTimer.current) clearInterval(refreshTimer.current);
     if (countdownTimer.current) clearInterval(countdownTimer.current);
     const ok = await createOnProvider(prov, domain);
     if (ok) {
       startPolling();
-      const label = domain ?? (prov === "guerrilla" ? "GuerrillaMail" : prov === "onesecmail" ? "1secmail" : "Mail.gw");
+      const label = domain ?? (prov === "guerrilla" ? "GuerrillaMail" : prov === "onesecmail" ? "1secmail" : "Harakirimail");
       toast({ title: "Switched!", description: `Now using @${label}` });
     } else {
       toast({ title: "Domain unavailable", description: "Could not connect. Try another.", variant: "destructive" });
@@ -447,16 +446,10 @@ function UnifiedInboxSection() {
       } else {
         toast({ title: "Could not set username", description: "Try a different one.", variant: "destructive" });
       }
-    } else if (activeProv === "freemail") {
-      const fs = await createFInbox(fSession?.domain);
-      if (fs) {
-        setFMessages([]); setSelectedF(null);
-        toast({ title: "New address created!", description: fs.email });
-      } else {
-        toast({ title: "Could not set username", description: "Try a different one.", variant: "destructive" });
-      }
+    } else if (activeProv === "harakirimail") {
+      toast({ title: "Not supported", description: "Harakirimail generates addresses automatically — use 'New Address' instead." });
     }
-  }, [activeProv, oSession, fSession, customUser, toast, createFInbox]);
+  }, [activeProv, oSession, customUser, toast]);
 
   // ── message opening ────────────────────────────────────────────────
   const openGMessage = async (msg: GuerrillaMessage) => {
@@ -497,23 +490,23 @@ function UnifiedInboxSection() {
     finally { setLoadingMsg(false); }
   };
 
-  const openFMessage = async (msg: FMsg) => {
-    if (!fSession) return;
-    setSelectedId(msg.id); setLoadingMsg(true); setSelectedG(null); setSelectedO(null); setSelectedF(null);
+  const openHMessage = async (msg: HMsg) => {
+    if (!hSession) return;
+    setSelectedId(msg.id); setLoadingMsg(true); setSelectedG(null); setSelectedO(null); setSelectedH(null);
     try {
-      const r = await fetch(`/api/freemail/message/${encodeURIComponent(msg.id)}?token=${encodeURIComponent(fSession.token)}`, {
+      const r = await fetch(`/api/harakirimail/message/${encodeURIComponent(msg.id)}?token=${encodeURIComponent(hSession.token)}`, {
         signal: AbortSignal.timeout(12000),
       });
       if (r.ok) {
-        const d = await r.json() as FFullMsg;
-        setSelectedF(d);
-      } else setSelectedF({ ...msg, body: "" });
-    } catch { setSelectedF({ ...msg, body: "" }); }
+        const d = await r.json() as HFullMsg;
+        setSelectedH(d);
+      } else setSelectedH({ ...msg, body: "" });
+    } catch { setSelectedH({ ...msg, body: "" }); }
     finally { setLoadingMsg(false); }
   };
 
   const copyAddress = () => {
-    const email = activeProv === "guerrilla" ? gSession?.email : activeProv === "onesecmail" ? oSession?.email : fSession?.email;
+    const email = activeProv === "guerrilla" ? gSession?.email : activeProv === "onesecmail" ? oSession?.email : hSession?.email;
     if (!email) return;
     navigator.clipboard.writeText(email);
     setCopied(true); setTimeout(() => setCopied(false), 2000);
@@ -523,7 +516,7 @@ function UnifiedInboxSection() {
   const refresh = () => {
     if (activeProv === "guerrilla" && gSession) fetchGMsgs(gSession.sid);
     else if (activeProv === "onesecmail" && oSession) fetchOMsgs(oSession.login, oSession.domain);
-    else if (activeProv === "freemail" && fSession) fetchFMsgs(fSession.token);
+    else if (activeProv === "harakirimail" && hSession) fetchHMsgs(hSession.token);
   };
 
   useEffect(() => {
@@ -544,15 +537,11 @@ function UnifiedInboxSection() {
       .then(r => r.json() as Promise<string[]>)
       .then(d => { if (Array.isArray(d) && d.length > 0) setOnesecDomains(d); })
       .catch(() => {});
-    fetch("/api/freemail/domains", { signal: AbortSignal.timeout(8000) })
-      .then(r => r.json() as Promise<string[]>)
-      .then(d => { if (Array.isArray(d) && d.length > 0) setGwDomains(d); })
-      .catch(() => {});
 
     const checks: Array<[InboxProv, string]> = [
-      ["guerrilla",  "/api/guerrilla/health"],
-      ["onesecmail", "/api/onesecmail/health"],
-      ["freemail",   "/api/freemail/health"],
+      ["guerrilla",    "/api/guerrilla/health"],
+      ["onesecmail",   "/api/onesecmail/health"],
+      ["harakirimail", "/api/harakirimail/health"],
     ];
     checks.forEach(([id, url]) => {
       fetch(url, { signal: AbortSignal.timeout(10000) })
@@ -563,32 +552,32 @@ function UnifiedInboxSection() {
   }, []);
 
   // ── derived display values ─────────────────────────────────────────
-  const currentEmail  = activeProv === "guerrilla" ? gSession?.email  : activeProv === "onesecmail" ? oSession?.email  : fSession?.email;
-  const currentUser   = activeProv === "guerrilla" ? gSession?.user   : activeProv === "onesecmail" ? oSession?.login  : fSession?.login;
-  const currentDomain = activeProv === "guerrilla" ? gSession?.domain : activeProv === "onesecmail" ? oSession?.domain : fSession?.domain;
+  const currentEmail  = activeProv === "guerrilla" ? gSession?.email  : activeProv === "onesecmail" ? oSession?.email  : hSession?.email;
+  const currentUser   = activeProv === "guerrilla" ? gSession?.user   : activeProv === "onesecmail" ? oSession?.login  : hSession?.login;
+  const currentDomain = activeProv === "guerrilla" ? gSession?.domain : activeProv === "onesecmail" ? oSession?.domain : hSession?.domain;
   const currentPill   = { label: "Temp Mail", color: "text-cyan-400", ring: "focus:ring-cyan-400/30", btn: "bg-cyan-500 hover:bg-cyan-400 text-black", dot: "bg-cyan-400" };
 
   const gUnread = gMessages.filter(m => m.mail_read === "0").length;
   const unread = activeProv === "guerrilla" ? gUnread : 0;
 
-  const activeMessages  = activeProv === "guerrilla" ? gMessages : activeProv === "onesecmail" ? oMessages : fMessages;
-  const selectedMsg     = activeProv === "guerrilla" ? selectedG : activeProv === "onesecmail" ? selectedO : selectedF;
-  const selectedFrom    = activeProv === "guerrilla" ? selectedG?.from    : activeProv === "onesecmail" ? selectedO?.from    : selectedF?.from;
-  const selectedSubject = activeProv === "guerrilla" ? selectedG?.subject : activeProv === "onesecmail" ? selectedO?.subject : selectedF?.subject;
+  const activeMessages  = activeProv === "guerrilla" ? gMessages : activeProv === "onesecmail" ? oMessages : hMessages;
+  const selectedMsg     = activeProv === "guerrilla" ? selectedG : activeProv === "onesecmail" ? selectedO : selectedH;
+  const selectedFrom    = activeProv === "guerrilla" ? selectedG?.from    : activeProv === "onesecmail" ? selectedO?.from    : selectedH?.from;
+  const selectedSubject = activeProv === "guerrilla" ? selectedG?.subject : activeProv === "onesecmail" ? selectedO?.subject : selectedH?.subject;
   const selectedBody = activeProv === "guerrilla"
     ? (selectedG?.body ?? "")
     : activeProv === "onesecmail"
     ? (() => { const s = selectedO; return s?.htmlBody ?? s?.textBody ?? s?.body ?? ""; })()
-    : (() => { const s = selectedF; return s?.body ?? ""; })();
+    : (() => { const s = selectedH; return s?.htmlBody ?? s?.body ?? ""; })();
   const selectedIsHtml = activeProv === "guerrilla"
     ? (selectedG?.isHtml ?? false)
-    : !!(selectedO?.htmlBody) || !!(selectedF?.isHtml);
+    : !!(selectedO?.htmlBody) || !!(selectedH?.isHtml);
 
   type DomainEntry = { domain: string; prov: InboxProv; badge: string; group: string };
   const DOMAIN_ENTRIES: DomainEntry[] = [
     ...GUERRILLA_DOMAINS.map(d => ({ domain: d, prov: "guerrilla" as InboxProv, badge: "text-cyan-400", group: "GuerrillaMail" })),
     ...onesecDomains.map(d => ({ domain: d, prov: "onesecmail" as InboxProv, badge: "text-yellow-400", group: "1secmail" })),
-    ...gwDomains.map(d => ({ domain: d, prov: "freemail" as InboxProv, badge: "text-purple-400", group: "Mail.gw" })),
+    { domain: "harakirimail.com", prov: "harakirimail" as InboxProv, badge: "text-purple-400", group: "Harakirimail" },
   ];
 
   return (
@@ -644,7 +633,7 @@ function UnifiedInboxSection() {
             {showProviderDrop && (
               <div className="absolute top-full left-0 mt-1 z-50 bg-card border border-border/60 rounded-xl shadow-xl overflow-hidden min-w-60 max-h-80 overflow-y-auto">
                 <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30 sticky top-0">Switch domain</div>
-                {(["GuerrillaMail", "1secmail", "Mail.gw"] as const).map(group => {
+                {(["GuerrillaMail", "1secmail", "Harakirimail"] as const).map(group => {
                   const entries = DOMAIN_ENTRIES.filter(e => e.group === group);
                   const groupProv = entries[0]?.prov;
                   const health = groupProv ? providerHealth[groupProv] : null;
@@ -756,8 +745,8 @@ function UnifiedInboxSection() {
                 </div>
               </button>
             ))}
-            {activeProv === "freemail" && fMessages.map(msg => (
-              <button key={msg.id} onClick={() => openFMessage(msg)}
+            {activeProv === "harakirimail" && hMessages.map(msg => (
+              <button key={msg.id} onClick={() => openHMessage(msg)}
                 className={`w-full text-left px-4 py-3 transition-colors hover:bg-muted/30 border-b border-border/30 last:border-b-0 ${selectedId === msg.id ? "bg-muted/20" : ""}`}>
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">
@@ -775,7 +764,7 @@ function UnifiedInboxSection() {
           {selectedMsg ? (
             <>
               <div className="px-4 py-3 border-b border-border/50 flex items-center gap-3 bg-muted/20">
-                <button onClick={() => { setSelectedG(null); setSelectedO(null); setSelectedF(null); setSelectedId(null); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <button onClick={() => { setSelectedG(null); setSelectedO(null); setSelectedH(null); setSelectedId(null); }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
                   <ArrowLeft className="h-3.5 w-3.5" /> Back
                 </button>
                 <div className="flex-1 min-w-0 text-right">
@@ -817,7 +806,7 @@ function UnifiedInboxSection() {
 
       <div className="flex flex-wrap gap-2">
         {[
-          { label: `${GUERRILLA_DOMAINS.length + onesecDomains.length + gwDomains.length} domains · 3 providers` },
+          { label: `${GUERRILLA_DOMAINS.length + onesecDomains.length + 1} domains · 3 providers` },
           { label: "Session-persistent inbox" },
           { label: "Health-checked on load" },
           { label: `Auto-refresh ${REFRESH_MS / 1000}s` },

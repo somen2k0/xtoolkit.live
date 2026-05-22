@@ -1,8 +1,26 @@
 import { Router } from 'express';
 const router = Router();
 
-const PROXY = (url: string) =>
-  'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+const PROXIES = [
+  (url: string) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  (url: string) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  (url: string) => `https://api.codetabs.com/v1/proxy?quest=${url}`,
+];
+
+async function fetchWithFallback(url: string): Promise<unknown> {
+  for (const proxy of PROXIES) {
+    try {
+      const res = await fetch(proxy(url), { signal: AbortSignal.timeout(8000) });
+      if (res.ok) {
+        const text = await res.text();
+        return JSON.parse(text);
+      }
+    } catch (e) {
+      continue;
+    }
+  }
+  throw new Error('All proxies failed');
+}
 
 const FALLBACK_DOMAINS = [
   '1secmail.com', '1secmail.net', '1secmail.org',
@@ -10,14 +28,11 @@ const FALLBACK_DOMAINS = [
 ];
 
 // Get domains
-router.get('/domains', async (req, res) => {
+router.get('/domains', async (_req, res) => {
   try {
-    const response = await fetch(PROXY(
-      'https://www.1secmail.com/api/v1/?action=getDomainList'
-    ));
-    const data = await response.json() as unknown;
-    res.json(Array.isArray(data) && data.length ? data : FALLBACK_DOMAINS);
-  } catch (err) {
+    const data = await fetchWithFallback('https://www.1secmail.com/api/v1/?action=getDomainList');
+    res.json(Array.isArray(data) && (data as string[]).length ? data : FALLBACK_DOMAINS);
+  } catch {
     res.json(FALLBACK_DOMAINS);
   }
 });
@@ -36,7 +51,7 @@ router.get('/new', (req, res) => {
       ? requestedDomain
       : FALLBACK_DOMAINS[Math.floor(Math.random() * FALLBACK_DOMAINS.length)]!;
     res.json({ login, domain, address: `${login}@${domain}` });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: '1secmail unavailable' });
   }
 });
@@ -46,7 +61,7 @@ router.post('/set-address', (req, res) => {
   try {
     const { login, domain } = req.body as { login: string; domain: string };
     res.json({ login, domain, address: `${login}@${domain}` });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: '1secmail unavailable' });
   }
 });
@@ -55,12 +70,11 @@ router.post('/set-address', (req, res) => {
 router.get('/inbox', async (req, res) => {
   try {
     const { login, domain } = req.query as { login?: string; domain?: string };
-    const response = await fetch(PROXY(
+    const data = await fetchWithFallback(
       `https://www.1secmail.com/api/v1/?action=getMessages&login=${encodeURIComponent(login ?? '')}&domain=${encodeURIComponent(domain ?? '')}`
-    ));
-    const data = await response.json();
+    );
     res.json(data);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: '1secmail unavailable' });
   }
 });
@@ -69,12 +83,11 @@ router.get('/inbox', async (req, res) => {
 router.get('/message/:id', async (req, res) => {
   try {
     const { login, domain } = req.query as { login?: string; domain?: string };
-    const response = await fetch(PROXY(
+    const data = await fetchWithFallback(
       `https://www.1secmail.com/api/v1/?action=readMessage&login=${encodeURIComponent(login ?? '')}&domain=${encodeURIComponent(domain ?? '')}&id=${encodeURIComponent(req.params.id)}`
-    ));
-    const data = await response.json();
+    );
     res.json(data);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: '1secmail unavailable' });
   }
 });

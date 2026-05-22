@@ -18,7 +18,7 @@ import aiDetectorRouter from "./ai-detector";
 import tempmailTemptfRouter from "./tempmail-temptf";
 import guerrillaRouter from "./guerrilla";
 import onesecmailRouter from "./onesecmail";
-import freemailRouter from "./freemail";
+import harakirimailRouter from "./harakirimail";
 
 const router: IRouter = Router();
 
@@ -32,7 +32,7 @@ router.use(ogPreviewRouter);
 router.use(tempmailTemptfRouter);
 router.use('/guerrilla', guerrillaRouter);
 router.use('/onesecmail', onesecmailRouter);
-router.use('/freemail', freemailRouter);
+router.use('/harakirimail', harakirimailRouter);
 
 // ─── AI routes — full protection stack ────────────────────────────────────────
 // Layer 1: 5 req/IP/hour     (express-rate-limit, standardHeaders)
