@@ -97,7 +97,7 @@ export default function AiDetector() {
       // FIXED: AI Detector - graceful error handling for non-JSON and 5xx responses
       let data: (DetectResult & { error?: string }) = {} as DetectResult & { error?: string };
       try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
-      if (res.status === 429) { setError("Rate limit reached. Please wait 30 seconds and try again."); return; }
+      if (res.status === 429) { setError("Too many requests. Please wait 30 seconds and try again."); return; }
       if (!res.ok) { setError("AI service temporarily unavailable. Please try again later."); return; }
       setDetectResult(data);
     } catch { setError("AI service temporarily unavailable. Please try again later."); }
@@ -114,10 +114,9 @@ export default function AiDetector() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text.trim(), style: humanizeStyle }),
       });
-      // FIXED: AI Humanizer - graceful error handling for non-JSON and 5xx responses
       let data: { humanized?: string; error?: string } = {};
       try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
-      if (res.status === 429) { setError("Rate limit reached. Please wait 30 seconds and try again."); return; }
+      if (res.status === 429) { setError("Too many requests. Please wait 30 seconds and try again."); return; }
       if (!res.ok) { setError("AI service temporarily unavailable. Please try again later."); return; }
       setHumanized(data.humanized ?? "");
     } catch { setError("AI service temporarily unavailable. Please try again later."); }
@@ -185,6 +184,12 @@ export default function AiDetector() {
             rows={8}
             className="w-full rounded-xl border border-border/60 bg-background/60 px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-purple-400/30 placeholder:text-muted-foreground/40 leading-relaxed"
           />
+          {tab === "detect" && charCount > 3000 && (
+            <p className="text-[11px] text-yellow-400/80 flex items-center gap-1.5">
+              <AlertCircle className="h-3 w-3 shrink-0" />
+              Note: Analysis limited to first 3,000 characters for free tier usage.
+            </p>
+          )}
         </div>
 
         {/* Humanize style selector */}

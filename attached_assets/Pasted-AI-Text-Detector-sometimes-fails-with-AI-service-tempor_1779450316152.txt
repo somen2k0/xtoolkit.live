@@ -1,0 +1,86 @@
+AI Text Detector sometimes fails with "AI service 
+temporarily unavailable" on large inputs (1000+ words).
+
+This is a Groq rate limit issue. Fix in 2 steps only.
+
+STEP 1 — In the AI detector backend route, add retry
+logic with all available keys.
+
+Find the Groq API call in ai-detector.ts and wrap it
+with this retry pattern:
+
+const keys = (process.env.GROQ_API_KEY || '')
+  .split(',')
+  .map(k => k.trim())
+  .filter(Boolean);
+
+// Shuffle so different requests use different keys first
+const shuffled = [...keys].sort(() => Math.random() - 0.5);
+
+let lastError = '';
+for (const key of shuffled) {
+  try {
+    const response = await fetch(
+      'https://api.groq.com/openai/v1/chat/completions',
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${key}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: 'llama-3.3-70b-versatile',
+          messages: [...], // keep existing messages
+          max_tokens: 1000,
+          temperature: 0.1
+        }),
+        signal: AbortSignal.timeout(30000)
+      }
+    );
+
+    if (response.status === 429) {
+      lastError = 'rate_limit';
+      continue; // try next key
+    }
+
+    if (!response.ok) {
+      lastError = `status_${response.status}`;
+      continue;
+    }
+
+    // Success — return result
+    const data = await response.json();
+    return res.json(data); // or however result is returned
+
+  } catch (e: any) {
+    lastError = e.message;
+    continue;
+  }
+}
+
+// All keys exhausted
+return res.status(429).json({
+  error: 'Rate limit reached. Please wait 30 seconds and try again.'
+});
+
+Apply the same pattern to the humanize endpoint too.
+
+STEP 2 — In the frontend AI detector component,
+improve the error message for 429 specifically:
+
+if (response.status === 429) {
+  setError('Too many requests. Please wait 30 seconds and try again.');
+} else {
+  setError('AI service temporarily unavailable. Please try again later.');
+}
+
+STEP 3 — Also reduce the input to Groq for large texts.
+For the detect endpoint, if input text is over 3000
+characters, truncate to first 3000 characters before
+sending to Groq. Add a note in the UI:
+"Note: Analysis limited to first 3,000 characters
+for free tier usage."
+
+Only touch ai-detector.ts backend and the AI detector
+frontend component. Nothing else.
+pnpm build 2>&1 — show output.
