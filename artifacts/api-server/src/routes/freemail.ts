@@ -11,7 +11,6 @@ const HEADERS = {
 
 router.get('/domains', (_req, res) => {
   res.json([
-    { domain: 'mail.tm', provider: 'mailtm' },
     { domain: 'mail.gw', provider: 'mailgw' },
   ]);
 });
