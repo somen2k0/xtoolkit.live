@@ -1,0 +1,195 @@
+Found multiple SEO issues that need fixing across the site.
+These are critical for AdSense approval and Google indexing.
+
+===================================================
+ISSUE 1 — WRONG TOOL COUNT EVERYWHERE (Critical)
+===================================================
+
+The site was updated to 43 tools but still shows "55+"
+and "55 free tools" in many places. Find and fix ALL of
+these occurrences:
+
+1. Homepage <title>:
+   WRONG: "X Toolkit — 55+ Free Tools for X, SEO, Developers & Creators"
+   FIX:   "X Toolkit — 43+ Free Tools for X, SEO, Developers & Creators"
+
+2. Homepage meta-description:
+   WRONG: "55+ free online tools for X (Twitter)..."
+   FIX:   "43+ free online tools for X (Twitter)..."
+
+3. OG tags on homepage:
+   WRONG: og:title and og:description showing "55+"
+   FIX:   Update to "43+"
+
+4. OG image alt text everywhere:
+   WRONG: "X Toolkit — 55+ free online tools..."
+   FIX:   "X Toolkit — 43+ free online tools..."
+
+5. Temp mail page footer link:
+   WRONG: "Browse all 55 free tools"
+   FIX:   "Browse all 43 free tools"
+
+6. Homepage tool list still shows removed tools:
+   The prerendered homepage HTML still lists these
+   removed tools that should not exist:
+   - /tools/follower-analyzer
+   - /tools/profile-audit
+   - /tools/bio-ideas
+   - /tools/funny-bios
+   - /tools/professional-bios
+   - /tools/aesthetic-bios
+   - /tools/name-ideas
+   - /tools/backlink-analyzer
+   - /tools/email-username-generator
+   - /tools/email-privacy-checker
+   - /tools/spam-risk-checker
+   - /tools/email-leak-checker
+   - /tools/alias-email-explainer
+   - /tools/disposable-email-guide
+   - /tools/email-ab-tester
+   - /tools/email-character-counter
+   - /tools/plain-text-formatter
+
+   Remove ALL of these from the tools list in the
+   homepage prerender and tools manifest.
+
+Search the ENTIRE codebase for "55" and "55+" and
+replace every instance with "43" and "43+".
+Also search for "55 free" and replace with "43 free".
+
+===================================================
+ISSUE 2 — SAME KEYWORDS ON EVERY PAGE (Critical)
+===================================================
+
+Every single page uses the exact same meta-keywords:
+"X account checker, Twitter account checker, bulk
+account checker, JSON formatter..."
+
+This is bad for SEO. Each page needs unique keywords
+relevant to THAT specific tool.
+
+Update meta-keywords for these high-priority pages:
+
+/tools/json-formatter:
+"json formatter, json beautifier, json validator,
+format json online, json pretty print, json viewer,
+json editor, beautify json, free json formatter"
+
+/tools/jwt-decoder:
+"jwt decoder, decode jwt token, jwt inspector,
+json web token decoder, jwt payload, jwt header,
+decode bearer token, jwt online decoder"
+
+/tools/temp-mail:
+"temp mail, temporary email, disposable email,
+throwaway email, fake email, guerrillamail,
+free temp email, no signup email, temp email address"
+
+/tools/regex-tester:
+"regex tester, regular expression tester, regex101,
+test regex online, regex matcher, regex debugger,
+javascript regex tester, regex validator online"
+
+/tools/base64:
+"base64 encoder decoder, base64 encode, base64 decode,
+encode base64 online, decode base64 string, base64
+converter, base64 to text, text to base64"
+
+/tools/uuid-generator:
+"uuid generator, guid generator, random uuid, uuid v4,
+generate uuid online, unique id generator, uuid creator,
+free uuid generator"
+
+/tools/meta-tag-generator:
+"meta tag generator, seo meta tags, og tags generator,
+open graph generator, twitter card generator, serp
+preview, meta description generator, seo tags"
+
+/tools/x-account-checker:
+"twitter account checker, x account checker, bulk
+account check, twitter username checker, suspended
+account checker, twitter status checker"
+
+/tools/password-generator:
+"password generator, strong password generator, random
+password, secure password creator, password maker,
+generate password online, complex password generator"
+
+/tools/qr-code-generator:
+"qr code generator, free qr code, qr code maker,
+create qr code, qr code creator, generate qr code,
+wifi qr code, url qr code generator"
+
+/tools/word-counter:
+"word counter, character counter, word count online,
+count words online, word frequency counter, text
+analyzer, writing tool, word count checker"
+
+/tools/image-compressor:
+"image compressor, compress image online, reduce image
+size, jpeg compressor, png compressor, image optimizer,
+compress photo, image size reducer"
+
+/tools/color-picker:
+"color picker, hex color picker, rgb to hex, hex to rgb,
+color converter, color code picker, hsl converter,
+web color picker, css color picker"
+
+For ALL other tool pages not listed above, generate
+unique keywords based on the tool's purpose — do not
+use the generic site-wide keywords anymore.
+
+===================================================
+ISSUE 3 — TEMP MAIL RELATED TOOLS LINKS ARE WRONG
+===================================================
+
+The temp mail page shows these as related tools which
+were already REMOVED from the site:
+- /tools/email-username-generator
+- /tools/plain-text-formatter
+- /tools/email-character-counter
+
+Fix: Update the related tools section on temp mail page
+to link to actually existing tools:
+- /tools/temp-mail/tempgmail
+- /tools/masked-email-generator
+- /tools/email-validator
+- /tools/email-signature-generator
+- /tools/spam-score-checker
+
+===================================================
+ISSUE 4 — OG IMAGE ALT TEXT
+===================================================
+
+Every page has this OG image alt:
+"X Toolkit — 55+ free online tools for X, SEO,
+developers and creators"
+
+Update to:
+"X Toolkit — 43+ free online tools for X, SEO,
+developers and creators"
+
+This appears in both og:image:alt and twitter:image:alt
+on every single page. Fix in prerender.mjs so it
+updates across all 68 pages automatically.
+
+===================================================
+ISSUE 5 — TITLE CONSISTENCY
+===================================================
+
+Some pages use " - " (hyphen) and some use " — " (em dash)
+in titles. Standardize ALL page titles to use " — " (em dash):
+
+Example inconsistency found:
+"Temp Mail - Free Disposable..." (hyphen)
+vs
+"JSON Formatter & Validator — Free Online..." (em dash)
+
+Fix all titles to use " — " consistently.
+
+===================================================
+After all fixes:
+- Run pnpm build
+- Confirm 68 pages prerendered with zero errors
+- Show complete list of files changed
+===================================================

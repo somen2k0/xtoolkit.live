@@ -6,6 +6,7 @@
     "description": "Bulk-check up to 100 X accounts — active, suspended, or deleted — in seconds.",
     "seoTitle": "X Account Checker — Free Bulk Check Twitter Account Status | X Toolkit",
     "seoDescription": "Bulk-check up to 100 X (Twitter) accounts at once. Instantly see which are active, suspended, or not found. Free, no signup required.",
+    "seoKeywords": "twitter account checker, x account checker, bulk account check, twitter username checker, suspended account checker, twitter status checker",
     "category": "social-media",
     "badge": "Popular",
     "sitemapPriority": 0.85,
@@ -18,6 +19,7 @@
     "description": "Convert a list of usernames into direct X profile links instantly.",
     "seoTitle": "Profile Link Generator — Convert Usernames to X Profile URLs | X Toolkit",
     "seoDescription": "Convert a list of X (Twitter) usernames into direct clickable profile URLs instantly. Paste usernames, get links. Free, no signup needed.",
+    "seoKeywords": "twitter profile link generator, x profile url generator, username to url converter, twitter profile link, x profile url creator, bulk profile links",
     "category": "social-media",
     "tags": ["x", "twitter", "links", "profile", "url"]
   },
@@ -28,6 +30,7 @@
     "description": "Bulk add or remove the @ prefix from username lists in one click.",
     "seoTitle": "@ Formatter — Bulk Add or Remove @ from X Usernames | X Toolkit",
     "seoDescription": "Instantly bulk add or remove the @ symbol from a list of X (Twitter) usernames. Clean up lists with one click. Free online tool.",
+    "seoKeywords": "at sign formatter, twitter username formatter, add remove @ symbol, bulk username cleaner, @ prefix formatter, twitter handle formatter",
     "category": "social-media",
     "tags": ["x", "twitter", "username", "format", "at"]
   },
@@ -38,6 +41,7 @@
     "description": "Plan your X content calendar, compose tweets with date/time, and export as CSV.",
     "seoTitle": "Tweet Scheduler — Free X (Twitter) Content Calendar Planner | X Toolkit",
     "seoDescription": "Plan your X content calendar, compose tweets with date and time, and export your schedule as CSV. Free tweet scheduler and planner.",
+    "seoKeywords": "tweet scheduler, twitter content calendar, schedule tweets free, x content planner, tweet planner, twitter posting schedule",
     "category": "social-media",
     "badge": "New",
     "tags": ["x", "twitter", "schedule", "calendar", "content", "plan", "tweet"]
@@ -49,6 +53,7 @@
     "description": "Detect if text was written by AI and rewrite it to sound naturally human. Powered by Llama 3.3 70B.",
     "seoTitle": "AI Text Detector & Humanizer — Free Online AI Content Detector | X Toolkit",
     "seoDescription": "Detect if text was written by AI and rewrite it to sound naturally human. Powered by Llama 3.3 70B via Groq. Free AI content detector.",
+    "seoKeywords": "ai text detector, detect ai writing, chatgpt detector, ai content checker, humanize ai text, ai humanizer, llama detector, ai writing detector",
     "category": "ai-writing",
     "badge": "AI",
     "sitemapPriority": 0.85,
@@ -61,6 +66,7 @@
     "description": "Generate 3 professional X bios in seconds — just enter your niche and tone.",
     "seoTitle": "AI Bio Generator for X (Twitter) — Free Profile Bio Creator | X Toolkit",
     "seoDescription": "Generate 3 unique X (Twitter) bios in seconds. Enter your niche and tone, get AI-crafted professional profile bios instantly. Free.",
+    "seoKeywords": "ai bio generator, twitter bio generator, x bio creator, ai twitter bio, profile bio generator, generate twitter bio, professional bio ai",
     "category": "ai-writing",
     "badge": "AI",
     "sitemapPriority": 0.85,
@@ -73,6 +79,7 @@
     "description": "Generate unique X handle ideas for any niche or brand.",
     "seoTitle": "X Username Generator — Free Unique Twitter Handle Ideas | X Toolkit",
     "seoDescription": "Generate unique X (Twitter) username ideas for your niche or brand. Dozens of creative handle suggestions instantly. Free online tool.",
+    "seoKeywords": "twitter username generator, x handle ideas, unique username ideas, twitter handle generator, create username, username ideas generator",
     "category": "text-formatting",
     "tags": ["username", "handle", "generator", "ideas"]
   },
@@ -83,6 +90,7 @@
     "description": "Clean, format, and deduplicate hashtag lists in one click.",
     "seoTitle": "Hashtag Formatter — Free Clean & Deduplicate Hashtag Lists | X Toolkit",
     "seoDescription": "Clean, format, and deduplicate hashtag lists in one click. Remove duplicates, fix spacing, and prepare hashtags for X or Instagram. Free.",
+    "seoKeywords": "hashtag formatter, clean hashtags, twitter hashtag formatter, deduplicate hashtags, hashtag cleaner, hashtag generator, format hashtags",
     "category": "text-formatting",
     "tags": ["hashtag", "format", "twitter", "clean"]
   },
@@ -93,6 +101,7 @@
     "description": "Split long text into numbered tweet threads automatically.",
     "seoTitle": "Tweet Thread Formatter — Free Split Text into Tweet Threads | X Toolkit",
     "seoDescription": "Automatically split long text into numbered tweet threads for X (Twitter). Format content to fit the 280-character limit perfectly. Free.",
+    "seoKeywords": "tweet thread formatter, split text into tweets, twitter thread maker, tweet splitter, 280 character formatter, thread creator twitter",
     "category": "text-formatting",
     "tags": ["tweet", "thread", "format", "split"]
   },
@@ -103,6 +112,7 @@
     "description": "Preview your bio or tweet text in stylish Unicode fonts.",
     "seoTitle": "Font Preview for X — Free Unicode Text Style Previewer | X Toolkit",
     "seoDescription": "Preview your X (Twitter) bio or tweet text in stylish Unicode fonts. See bold, italic, and cursive styles before posting. Free.",
+    "seoKeywords": "twitter font generator, unicode font preview, fancy fonts twitter, twitter bio fonts, unicode text style, stylish text generator, x bio fonts",
     "category": "text-formatting",
     "tags": ["font", "unicode", "style", "preview"]
   },
@@ -113,6 +123,7 @@
     "description": "Count characters, words, and sentences to fit X's 280-character limit.",
     "seoTitle": "Character Counter for X (Twitter) — Free Word & Character Limit Tool | X Toolkit",
     "seoDescription": "Count characters, words, and sentences in real-time. Optimized for X's 280-character limit. Free instant character counter online.",
+    "seoKeywords": "character counter twitter, tweet character limit, 280 character counter, twitter character count, count characters online, x character counter",
     "category": "text-formatting",
     "tags": ["character", "word", "count", "limit", "280"]
   },
@@ -123,6 +134,7 @@
     "description": "Convert text to UPPERCASE, lowercase, camelCase, snake_case, kebab-case, PascalCase, and more.",
     "seoTitle": "Case Converter — Free UPPERCASE, lowercase, camelCase & More | X Toolkit",
     "seoDescription": "Convert text to UPPERCASE, lowercase, camelCase, snake_case, kebab-case, PascalCase, and Title Case instantly. Free online case converter.",
+    "seoKeywords": "case converter, uppercase converter, lowercase converter, camelcase converter, snake case converter, kebab case converter, title case converter",
     "category": "text-formatting",
     "badge": "New",
     "tags": ["case", "convert", "camelcase", "snake_case", "kebab", "uppercase", "lowercase", "title case", "pascal"]
@@ -134,6 +146,7 @@
     "description": "Count words, characters, sentences, and paragraphs in real time with platform limits.",
     "seoTitle": "Word Counter — Free Online Word & Character Count | X Toolkit",
     "seoDescription": "Count words, characters, sentences, and paragraphs in real time. Free online word counter for writers, students, and social media. No signup.",
+    "seoKeywords": "word counter, character counter, word count online, count words online, word frequency counter, text analyzer, writing tool, word count checker",
     "category": "text-formatting",
     "badge": "New",
     "sitemapPriority": 0.80,
@@ -146,6 +159,7 @@
     "description": "Format, minify, and validate JSON with real-time error detection and line numbers.",
     "seoTitle": "JSON Formatter & Validator — Free Online JSON Beautifier | X Toolkit",
     "seoDescription": "Format, validate, and beautify JSON data instantly in your browser. Real-time error detection, syntax highlighting, and minify support. Free.",
+    "seoKeywords": "json formatter, json beautifier, json validator, format json online, json pretty print, json viewer, json editor, beautify json, free json formatter",
     "category": "developer",
     "badge": "Popular",
     "sitemapPriority": 0.85,
@@ -158,6 +172,7 @@
     "description": "Encode and decode Base64 strings with full Unicode and emoji support.",
     "seoTitle": "Base64 Encoder / Decoder — Free Online Base64 Tool | X Toolkit",
     "seoDescription": "Encode text or data to Base64 and decode Base64 strings back to plain text. Full Unicode and emoji support. Runs entirely in your browser.",
+    "seoKeywords": "base64 encoder decoder, base64 encode, base64 decode, encode base64 online, decode base64 string, base64 converter, base64 to text, text to base64",
     "category": "developer",
     "sitemapPriority": 0.82,
     "tags": ["base64", "encode", "decode", "developer", "binary"]
@@ -169,6 +184,7 @@
     "description": "Minify CSS to reduce file size or format it for readability. Removes comments and whitespace.",
     "seoTitle": "CSS Minifier & Formatter — Free Online CSS Beautifier | X Toolkit",
     "seoDescription": "Minify CSS to reduce file size or beautify it for readability. Removes comments, whitespace, and redundant code. Free, browser-based.",
+    "seoKeywords": "css minifier, minify css online, css beautifier, css formatter, compress css, css optimizer, css compressor, beautify css",
     "category": "developer",
     "tags": ["css", "minify", "format", "beautify", "developer", "web"]
   },
@@ -179,6 +195,7 @@
     "description": "Beautify messy HTML for readability or minify it for production deployment.",
     "seoTitle": "HTML Formatter & Minifier — Free Online HTML Beautifier | X Toolkit",
     "seoDescription": "Beautify messy HTML for readability or minify it to reduce file size. Format HTML code with proper indentation. Free online tool.",
+    "seoKeywords": "html formatter, html beautifier, html minifier, format html online, beautify html, html prettifier, minify html, html pretty print",
     "category": "developer",
     "tags": ["html", "format", "beautify", "minify", "developer", "web"]
   },
@@ -189,6 +206,7 @@
     "description": "Decode and inspect JWT header, payload, and expiration instantly in your browser.",
     "seoTitle": "JWT Decoder — Free Online JSON Web Token Decoder | X Toolkit",
     "seoDescription": "Decode and inspect JWT header, payload, and expiration instantly. No server — everything runs in your browser. Free JWT inspection tool.",
+    "seoKeywords": "jwt decoder, decode jwt token, jwt inspector, json web token decoder, jwt payload, jwt header, decode bearer token, jwt online decoder",
     "category": "developer",
     "badge": "New",
     "sitemapPriority": 0.82,
@@ -201,6 +219,7 @@
     "description": "Test regular expressions with real-time match highlighting and common presets.",
     "seoTitle": "Regex Tester — Free Online Regular Expression Tester | X Toolkit",
     "seoDescription": "Test and debug regular expressions with real-time match highlighting and common presets. Free browser-based regex tester online.",
+    "seoKeywords": "regex tester, regular expression tester, regex101, test regex online, regex matcher, regex debugger, javascript regex tester, regex validator online",
     "category": "developer",
     "badge": "New",
     "sitemapPriority": 0.82,
@@ -213,6 +232,7 @@
     "description": "Format SQL queries with proper indentation and capitalized keywords.",
     "seoTitle": "SQL Formatter & Beautifier — Free Online SQL Query Formatter | X Toolkit",
     "seoDescription": "Format SQL queries with proper indentation and capitalized keywords. Clean up messy SQL for PostgreSQL, MySQL, and more. Free online tool.",
+    "seoKeywords": "sql formatter, sql beautifier, sql query formatter, format sql online, sql pretty print, sql indenter, beautify sql, sql code formatter",
     "category": "developer",
     "badge": "New",
     "tags": ["sql", "format", "beautify", "query", "database", "developer"]
@@ -224,6 +244,7 @@
     "description": "Encode special characters in URLs or decode percent-encoded strings instantly.",
     "seoTitle": "URL Encoder & Decoder — Free Online Percent-Encode URLs | X Toolkit",
     "seoDescription": "Encode special characters in URLs or decode percent-encoded strings. Works with query strings, paths, and full URLs. Free online tool.",
+    "seoKeywords": "url encoder decoder, percent encode url, url encode online, decode url, url encoding tool, percent encoding, encode special characters url",
     "category": "developer",
     "sitemapPriority": 0.80,
     "tags": ["url", "encode", "decode", "percent", "query", "developer"]
@@ -235,6 +256,7 @@
     "description": "Generate random UUID v4 identifiers using the Web Crypto API. Bulk generation supported.",
     "seoTitle": "UUID Generator — Free Online UUID v4 Generator | X Toolkit",
     "seoDescription": "Generate random UUID v4 identifiers using the Web Crypto API. Single or bulk generation with one click. No server, fully private. Free.",
+    "seoKeywords": "uuid generator, guid generator, random uuid, uuid v4, generate uuid online, unique id generator, uuid creator, free uuid generator",
     "category": "developer",
     "tags": ["uuid", "guid", "unique", "id", "generator", "developer"]
   },
@@ -245,6 +267,7 @@
     "description": "Convert YAML to JSON and JSON to YAML instantly with validation.",
     "seoTitle": "YAML to JSON Converter — Free Online YAML ↔ JSON Tool | X Toolkit",
     "seoDescription": "Convert YAML to JSON and JSON to YAML instantly with validation. Free browser-based YAML to JSON converter and JSON to YAML tool.",
+    "seoKeywords": "yaml to json converter, json to yaml converter, yaml json converter, convert yaml online, yaml formatter, json yaml tool, yaml to json online",
     "category": "developer",
     "badge": "New",
     "tags": ["yaml", "json", "convert", "developer", "config"]
@@ -256,6 +279,7 @@
     "description": "Convert times across all global timezones with daylight saving time support.",
     "seoTitle": "Timezone Converter — Free Online Time Zone Converter | X Toolkit",
     "seoDescription": "Convert times across all global timezones with daylight saving time support. Free online timezone converter with world clock.",
+    "seoKeywords": "timezone converter, time zone converter, convert time zones, utc converter, world clock, dst converter, time difference calculator",
     "category": "developer",
     "badge": "New",
     "tags": ["timezone", "convert", "time", "utc", "dst", "developer", "world clock"]
@@ -267,6 +291,7 @@
     "description": "Preview how your Open Graph image and meta tags look when shared on social media.",
     "seoTitle": "OG Image Preview — Free Online Open Graph Preview Tool | X Toolkit",
     "seoDescription": "Preview how your Open Graph image and meta tags appear on social media platforms before publishing. Free OG preview tool online.",
+    "seoKeywords": "og image preview, open graph preview, social media preview, og tag checker, link preview tool, facebook og preview, twitter card preview",
     "category": "developer",
     "tags": ["og", "open graph", "social media", "meta", "preview", "seo"]
   },
@@ -277,6 +302,7 @@
     "description": "Generate strong, secure passwords instantly with custom length, symbols, and more.",
     "seoTitle": "Password Generator — Free Strong Password Creator | X Toolkit",
     "seoDescription": "Generate strong, secure passwords instantly. Customize length, include symbols, numbers, uppercase. Free online password generator, no signup required.",
+    "seoKeywords": "password generator, strong password generator, random password, secure password creator, password maker, generate password online, complex password generator",
     "category": "developer",
     "badge": "New",
     "sitemapPriority": 0.82,
@@ -289,6 +315,7 @@
     "description": "Pick any color and convert between HEX, RGB, HSL, and RGBA instantly.",
     "seoTitle": "Color Picker & Converter — Free HEX, RGB, HSL Tool | X Toolkit",
     "seoDescription": "Pick any color and instantly convert between HEX, RGB, HSL, and RGBA formats. Free online color picker for designers and developers. No signup.",
+    "seoKeywords": "color picker, hex color picker, rgb to hex, hex to rgb, color converter, color code picker, hsl converter, web color picker, css color picker",
     "category": "developer",
     "badge": "New",
     "sitemapPriority": 0.80,
@@ -301,6 +328,7 @@
     "description": "Generate QR codes for URLs, text, email, phone, and WiFi. Download as PNG.",
     "seoTitle": "QR Code Generator — Free Online QR Creator | X Toolkit",
     "seoDescription": "Generate QR codes for URLs, text, email, phone numbers, and WiFi instantly. Free online QR code generator. No signup, download as PNG.",
+    "seoKeywords": "qr code generator, free qr code, qr code maker, create qr code, qr code creator, generate qr code, wifi qr code, url qr code generator",
     "category": "developer",
     "badge": "New",
     "sitemapPriority": 0.82,
@@ -313,6 +341,7 @@
     "description": "Compress JPEG, PNG, and WebP images in your browser — no uploads, fully private.",
     "seoTitle": "Image Compressor — Free Online Image Compression | X Toolkit",
     "seoDescription": "Compress JPEG, PNG, and WebP images for free online. Reduce file size without losing quality. Browser-based, private, no upload to server required.",
+    "seoKeywords": "image compressor, compress image online, reduce image size, jpeg compressor, png compressor, image optimizer, compress photo, image size reducer",
     "category": "developer",
     "badge": "New",
     "sitemapPriority": 0.82,
@@ -325,6 +354,7 @@
     "description": "Generate complete SEO meta tags — title, description, Open Graph, Twitter Cards.",
     "seoTitle": "Meta Tag Generator — Free SEO Meta Tags Builder | X Toolkit",
     "seoDescription": "Generate complete SEO meta tags including title, description, Open Graph tags, and Twitter Cards. Free meta tag generator online.",
+    "seoKeywords": "meta tag generator, seo meta tags, og tags generator, open graph generator, twitter card generator, serp preview, meta description generator, seo tags",
     "category": "seo",
     "badge": "Popular",
     "sitemapPriority": 0.85,
@@ -337,6 +367,7 @@
     "description": "Convert any title or phrase into a clean, SEO-friendly URL slug.",
     "seoTitle": "URL Slug Generator — Free Online SEO URL Slug Creator | X Toolkit",
     "seoDescription": "Convert any title or phrase into a clean, SEO-friendly URL slug. Removes special characters and creates hyphenated lowercase URLs. Free.",
+    "seoKeywords": "url slug generator, seo url slug, permalink generator, slug creator, clean url generator, seo friendly url, url slug maker",
     "category": "seo",
     "tags": ["url", "slug", "seo", "permalink", "generator"]
   },
@@ -347,6 +378,7 @@
     "description": "Analyze keyword frequency and density in any text or webpage content.",
     "seoTitle": "Keyword Density Checker — Free Online Keyword Analyzer | X Toolkit",
     "seoDescription": "Analyze keyword frequency and density in any text or webpage content. Identify over-optimization and improve your on-page SEO. Free.",
+    "seoKeywords": "keyword density checker, keyword frequency analyzer, on-page seo tool, keyword density calculator, seo keyword tool, content keyword analyzer",
     "category": "seo",
     "tags": ["keyword", "density", "seo", "frequency", "analyzer", "on-page"]
   },
@@ -357,6 +389,7 @@
     "description": "Build a robots.txt file visually — allow/disallow rules, sitemap reference, custom agents.",
     "seoTitle": "Robots.txt Generator — Free Online robots.txt Builder | X Toolkit",
     "seoDescription": "Build a robots.txt file visually with allow/disallow rules, sitemap reference, and custom user-agents. Free robots.txt generator online.",
+    "seoKeywords": "robots txt generator, robots.txt builder, disallow rules generator, sitemap robots, crawl control generator, free robots txt tool",
     "category": "seo",
     "tags": ["robots.txt", "seo", "crawl", "sitemap", "disallow", "generator"]
   },
@@ -367,6 +400,7 @@
     "description": "Validate your XML sitemap structure, check URL count, and identify formatting errors.",
     "seoTitle": "Sitemap Validator — Free Online XML Sitemap Checker | X Toolkit",
     "seoDescription": "Validate your XML sitemap structure, check URL counts, and identify formatting errors. Free online sitemap validator tool.",
+    "seoKeywords": "sitemap validator, xml sitemap checker, sitemap validation tool, check sitemap online, sitemap error checker, xml sitemap validator",
     "category": "seo",
     "tags": ["sitemap", "xml", "validate", "seo", "url", "check"]
   },
@@ -377,6 +411,7 @@
     "description": "Get a quick Page Speed score estimate, identify top bottlenecks, and get actionable tips.",
     "seoTitle": "Page Speed Checker — Free Online Website Speed Analyzer | X Toolkit",
     "seoDescription": "Get a quick page speed score estimate, identify top bottlenecks, and get actionable optimization tips for your website. Free tool.",
+    "seoKeywords": "page speed checker, website speed test, pagespeed analyzer, core web vitals checker, site performance tool, website load time checker",
     "category": "seo",
     "tags": ["page speed", "performance", "seo", "core web vitals", "optimize"]
   },
@@ -387,6 +422,7 @@
     "description": "Generate JSON-LD structured data markup for Article, FAQ, Product, LocalBusiness, and more.",
     "seoTitle": "Schema Generator — Free JSON-LD Structured Data Markup Tool | X Toolkit",
     "seoDescription": "Generate JSON-LD structured data for Article, FAQ, Product, LocalBusiness, and more schema types. Free schema markup generator online.",
+    "seoKeywords": "schema generator, json-ld generator, structured data generator, rich results tool, faq schema, article schema, schema markup tool",
     "category": "seo",
     "badge": "New",
     "tags": ["seo", "schema", "json-ld", "structured data", "rich results", "faq", "article"]
@@ -398,6 +434,7 @@
     "description": "Generate high-converting email subject line templates for any campaign type.",
     "seoTitle": "Email Subject Line Generator — Free High Open Rate Templates | X Toolkit",
     "seoDescription": "Generate high-converting email subject line templates for newsletters, cold emails, and campaigns. Free subject line generator online.",
+    "seoKeywords": "email subject line generator, email subject templates, high open rate subject lines, email marketing subject lines, cold email subject generator",
     "category": "email",
     "badge": "New",
     "sitemapPriority": 0.80,
@@ -410,6 +447,7 @@
     "description": "Build a professional HTML or plain text email signature in seconds.",
     "seoTitle": "Email Signature Generator — Free HTML & Plain Text Signatures | X Toolkit",
     "seoDescription": "Build a professional HTML or plain text email signature in seconds. Custom name, title, company, and links. Free email signature maker.",
+    "seoKeywords": "email signature generator, html email signature, professional email signature, gmail signature maker, outlook signature creator, email footer generator",
     "category": "email",
     "badge": "New",
     "sitemapPriority": 0.78,
@@ -422,6 +460,7 @@
     "description": "Validate email address syntax and format instantly in your browser.",
     "seoTitle": "Email Address Validator — Free Email Format Checker | X Toolkit",
     "seoDescription": "Validate email address syntax and format instantly in your browser. Check if an email address is properly formatted. Free online tool.",
+    "seoKeywords": "email address validator, check email format, email syntax checker, validate email online, email format checker, email address checker",
     "category": "email",
     "badge": "New",
     "sitemapPriority": 0.82,
@@ -434,6 +473,7 @@
     "description": "Get a free disposable email inbox — no signup, auto-refresh, multiple providers.",
     "seoTitle": "Temp Mail — Free Disposable Temporary Email Inbox | X Toolkit",
     "seoDescription": "Get a free temporary email inbox instantly — no signup required. Auto-refresh inbox, multiple providers. Protect your real email address.",
+    "seoKeywords": "temp mail, temporary email, disposable email, throwaway email, fake email, guerrillamail, free temp email, no signup email, temp email address",
     "category": "email",
     "badge": "Popular",
     "sitemapPriority": 1.0,
@@ -446,6 +486,7 @@
     "description": "Check your email subject line and body for spam trigger words, excessive caps, and 10 other signals.",
     "seoTitle": "Spam Score Checker — Free Email Deliverability Analyzer | X Toolkit",
     "seoDescription": "Check your email subject line and body for spam trigger words, excessive caps, and 10+ spam signals. Free spam score checker online.",
+    "seoKeywords": "spam score checker, email spam checker, spam filter test, email deliverability checker, spam trigger words, email spam score, subject line spam test",
     "category": "email",
     "badge": "New",
     "tags": ["email", "spam", "score", "deliverability", "subject line", "trigger words"]
@@ -457,6 +498,7 @@
     "description": "Generate responsive HTML email newsletter templates — Minimal, Editorial, or Digest style.",
     "seoTitle": "Newsletter Template Generator — Free HTML Email Templates | X Toolkit",
     "seoDescription": "Generate responsive HTML email newsletter templates in Minimal, Editorial, or Digest style. Free newsletter template builder online.",
+    "seoKeywords": "newsletter template generator, email newsletter template, html email template, responsive email template, newsletter creator, email marketing template",
     "category": "email",
     "badge": "New",
     "tags": ["email", "newsletter", "template", "html", "responsive", "marketing"]
@@ -468,6 +510,7 @@
     "description": "Generate random email aliases and Gmail plus-tag variants to protect your real inbox.",
     "seoTitle": "Masked Email Generator — Free Email Alias Creator for Privacy | X Toolkit",
     "seoDescription": "Generate random email aliases and Gmail plus-tag variants to protect your real inbox. Free masked email generator online.",
+    "seoKeywords": "masked email generator, email alias generator, anonymous email address, email privacy tool, generate email alias, email alias creator",
     "category": "email",
     "badge": "New",
     "sitemapPriority": 0.90,

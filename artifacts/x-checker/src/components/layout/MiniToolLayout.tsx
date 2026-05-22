@@ -1,5 +1,6 @@
 import { type LucideIcon, ArrowRight, Wrench, ChevronRight, Home } from "lucide-react";
 import { TOTAL_LIVE } from "@/lib/tools-registry";
+import toolsManifest from "@/lib/tools-manifest.json";
 import { Link, useLocation } from "wouter";
 import { Layout } from "./Layout";
 import { SeoHead } from "@/components/SeoHead";
@@ -55,6 +56,10 @@ export function MiniToolLayout({
 }: MiniToolLayoutProps) {
   const [path] = useLocation();
 
+  const resolvedKeywords = seoKeywords ??
+    (toolsManifest as Array<{ href: string; seoKeywords?: string }>)
+      .find(t => t.href === path)?.seoKeywords;
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -87,7 +92,7 @@ export function MiniToolLayout({
       <SeoHead
         title={seoTitle}
         description={seoDescription}
-        keywords={seoKeywords}
+        keywords={resolvedKeywords}
         faqs={faqs}
         path={path}
         extraSchemas={allExtraSchemas}
