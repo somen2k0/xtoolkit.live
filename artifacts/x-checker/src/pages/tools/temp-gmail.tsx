@@ -206,7 +206,7 @@ function UnifiedInboxSection() {
       const r2 = await fetch("/api/guerrilla/set-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: name, sid_token: token }),
+        body: JSON.stringify({ user: name, sid_token: token, domain: targetDomain ?? domain }),
         signal: AbortSignal.timeout(12000),
       });
       if (!r2.ok) throw new Error("Failed to set username");

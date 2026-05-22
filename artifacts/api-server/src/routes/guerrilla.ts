@@ -36,9 +36,10 @@ router.get('/new', async (_req, res) => {
 
 router.post('/set-user', async (req, res) => {
   try {
-    const { user, sid_token } = req.body as { user: string; sid_token: string };
+    const { user, sid_token, domain } = req.body as { user: string; sid_token: string; domain?: string };
+    const domainParam = domain ? `&domain=${encodeURIComponent(domain)}` : '';
     const r = await fetch(
-      `${BASE}?f=set_email_user&email_user=${encodeURIComponent(user)}&sid_token=${sid_token}&lang=en`,
+      `${BASE}?f=set_email_user&email_user=${encodeURIComponent(user)}&sid_token=${sid_token}&lang=en${domainParam}`,
       { headers: HEADERS, signal: AbortSignal.timeout(10000) },
     );
     const data = await r.json();

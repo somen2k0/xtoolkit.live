@@ -10,7 +10,7 @@ import {
 const VERSION = "1.0.0";
 
 const features = [
-  { icon: Zap,        title: "Instant inbox generation",           desc: "Opens to a ready-to-use temp email the moment you click the icon. Switch between GuerrillaMail, mail.gw, and Maildrop.cc — if one provider is slow, switch instantly with one click." },
+  { icon: Zap,        title: "Instant inbox generation",           desc: "Opens to a ready-to-use temp email the moment you click the icon. Powered by GuerrillaMail across 10 domains — sharklasers.com, grr.la, spam4.me, and more." },
   { icon: Key,        title: "OTP & verification code detection",  desc: "Automatically detects 4–8 digit codes and shows a 1-click copy button." },
   { icon: Bell,       title: "Desktop notifications",              desc: "Get alerted the moment a new email arrives — even when the popup is closed." },
   { icon: RefreshCw,  title: "Auto-refresh every 15 seconds",      desc: "Lightweight service worker keeps your inbox live in the background." },
@@ -53,7 +53,7 @@ export default function ChromeExtensionPage() {
     <Layout>
       <SeoHead
         title="X Toolkit Chrome Extension — Free Temp Email & OTP Detector"
-        description="Free Chrome extension for instant disposable email inboxes with GuerrillaMail, mail.gw, and Maildrop.cc. Auto-detects OTP codes, sends desktop notifications, and generates temp Gmail addresses — no signup needed."
+        description="Free Chrome extension for instant disposable email inboxes powered by GuerrillaMail across 10 domains. Auto-detects OTP codes, sends desktop notifications, and generates temp Gmail addresses — no signup needed."
         path="/chrome-extension"
         keywords="temp email chrome extension, disposable email extension chrome, temporary email chrome extension free, throwaway email browser extension, otp auto copy chrome extension, temp mail extension, x toolkit chrome extension"
         faqs={faqs}

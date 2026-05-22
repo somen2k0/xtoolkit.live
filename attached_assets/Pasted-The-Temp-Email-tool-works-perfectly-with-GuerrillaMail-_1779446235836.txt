@@ -1,0 +1,88 @@
+The Temp Email tool works perfectly with GuerrillaMail.
+I want to add more email domains to make it the most
+variety temp mail tool available.
+
+STEP 1 — Test these additional GuerrillaMail domains
+in the Replit shell first:
+
+curl -s "https://api.guerrillamail.com/ajax.php?f=set_email_user&email_user=test&sid_token=test&lang=en&domain=spam4.me"
+
+curl -s "https://api.guerrillamail.com/ajax.php?f=get_email_address&lang=en"
+
+GuerrillaMail supports sending to ANY of these domains
+by passing a domain parameter. Test if these work:
+
+spam4.me, grr.la, guerrillamail.com, guerrillamail.info,
+guerrillamail.biz, guerrillamail.de, guerrillamail.net,
+guerrillamail.org, sharklasers.com, guerrillamailblock.com,
+yopmail.com, yopmail.fr, cool.fr.nf, jetable.fr.nf,
+nospam.ze.tc, nomail.xl.cx, mega.zik.dj, speed.1s.fr,
+courriel.fr.nf, moncourrier.fr.nf, monemail.fr.nf,
+monmail.fr.nf
+
+STEP 2 — Update the DOMAINS array in the frontend
+Temp Email component with ALL confirmed working domains
+grouped by provider style:
+
+const DOMAINS = [
+  // GuerrillaMail official
+  'guerrillamail.com',
+  'guerrillamail.info',
+  'guerrillamail.biz',
+  'guerrillamail.de',
+  'guerrillamail.net',
+  'guerrillamail.org',
+  'grr.la',
+  'sharklasers.com',
+  'guerrillamailblock.com',
+  'spam4.me',
+  // Yopmail (GuerrillaMail network)
+  'yopmail.com',
+  'yopmail.fr',
+  'cool.fr.nf',
+  'jetable.fr.nf',
+  'nospam.ze.tc',
+  'nomail.xl.cx',
+  'mega.zik.dj',
+  'speed.1s.fr',
+  'courriel.fr.nf',
+  'moncourrier.fr.nf',
+  'monemail.fr.nf',
+  'monmail.fr.nf'
+];
+
+STEP 3 — Update set-user call to pass domain parameter
+
+When switching domains or creating new inbox, pass the
+selected domain to the backend:
+
+Frontend: POST /api/guerrilla/set-user
+body: { user: randomName(), sid_token, domain: selectedDomain }
+
+Backend guerrilla.ts set-user route, update the URL to
+include domain parameter:
+`${BASE}?f=set_email_user&email_user=${user}&sid_token=${sid_token}&domain=${domain}&lang=en`
+
+STEP 4 — Update the domain dropdown UI
+
+Group domains visually in the dropdown:
+
+--- GuerrillaMail (10 domains) ---
+guerrillamail.com
+guerrillamail.info
+... etc
+
+--- Extended Network (12 domains) ---
+yopmail.com
+yopmail.fr
+... etc
+
+Total: 22 domains
+
+STEP 5 — Update the /chrome-extension page and
+extension code to reflect 22 domains available.
+Update copy to say "22 domains across 2 networks"
+
+STEP 6 — Build and confirm zero errors
+pnpm build 2>&1
+Show complete output.
