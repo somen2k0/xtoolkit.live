@@ -1,0 +1,122 @@
+The root cause of Groq 429 errors on Vercel is that
+serverless functions are stateless — cooldown state
+resets on every cold start so round-robin doesn't work.
+
+The fix is: try ALL keys sequentially within a single
+request until one succeeds. No cooldown state needed.
+
+STEP 1 — Rewrite groq-keys.ts completely:
+
+Replace the entire file with this:
+
+const keys = (process.env.GROQ_API_KEY || '')
+  .split(',')
+  .map(k => k.trim())
+  .filter(Boolean);
+
+export async function makeGroqRequest(body: object): Promise<Response> {
+  if (keys.length === 0) {
+    throw new Error('No GROQ API keys configured');
+  }
+
+  // Shuffle keys randomly so different invocations
+  // don't all start with the same key
+  const shuffled = [...keys].sort(() => Math.random() - 0.5);
+
+  let lastError: Error = new Error('All keys failed');
+
+  for (const key of shuffled) {
+    try {
+      const res = await fetch(
+        'https://api.groq.com/openai/v1/chat/completions',
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${key}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body),
+          signal: AbortSignal.timeout(30000)
+        }
+      );
+
+      // If rate limited, try next key immediately
+      if (res.status === 429) {
+        console.log(`Key ${key.substring(0,8)}... rate limited, trying next`);
+        continue;
+      }
+
+      // Any other error status, try next key
+      if (!res.ok && res.status >= 500) {
+        continue;
+      }
+
+      // Success or client error (400 etc) — return as-is
+      return res;
+
+    } catch (err) {
+      lastError = err as Error;
+      console.log(`Key ${key.substring(0,8)}... failed: ${lastError.message}`);
+      continue;
+    }
+  }
+
+  // All keys exhausted
+  throw lastError;
+}
+
+// Keep this for backwards compatibility if anything imports it
+export function getNextGroqKey(): string {
+  return keys[Math.floor(Math.random() * keys.length)] || '';
+}
+
+STEP 2 — Update bio.ts to use new makeGroqRequest
+
+Find the Groq fetch call in bio.ts and replace it with:
+
+import { makeGroqRequest } from '../utils/groqClient.js';
+// or wherever groq-keys.ts is located
+
+const response = await makeGroqRequest({
+  model: 'llama-3.3-70b-versatile',
+  messages: [...],  // keep existing messages
+  max_tokens: 1000,
+  temperature: 0.8
+});
+
+if (!response.ok) {
+  const errData = await response.json().catch(() => ({}));
+  return res.status(response.status).json({
+    error: response.status === 429
+      ? 'Rate limit reached. Please wait and try again.'
+      : 'AI service temporarily unavailable.'
+  });
+}
+
+STEP 3 — Update ai-detector.ts the same way
+
+Replace its Groq fetch call with makeGroqRequest()
+using the same pattern as STEP 2.
+
+STEP 4 — Remove the debug endpoint after confirming
+keys are visible. Actually keep it for now but add
+auth check so only you can see it:
+
+router.get('/api/groq-debug', (req, res) => {
+  const pw = req.query.pw;
+  if (pw !== process.env.ADMIN_PASSWORD) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  const raw = process.env.GROQ_API_KEY || '';
+  const keys = raw.split(',').map(k => k.trim()).filter(Boolean);
+  res.json({
+    totalKeys: keys.length,
+    keyLengths: keys.map(k => k.length),
+    firstChars: keys.map(k => k.substring(0, 8) + '...')
+  });
+});
+
+STEP 5 — Build and confirm zero errors
+pnpm build 2>&1
+
+Show all files changed and complete build output.

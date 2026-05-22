@@ -454,7 +454,7 @@ function UnifiedInboxSection() {
   // ── message opening ────────────────────────────────────────────────
   const openGMessage = async (msg: GuerrillaMessage) => {
     if (!gSession) return;
-    setSelectedId(msg.mail_id); setLoadingMsg(true); setSelectedO(null); setSelectedF(null);
+    setSelectedId(msg.mail_id); setLoadingMsg(true); setSelectedO(null); setSelectedG(null);
     try {
       const r = await fetch(`/api/guerrilla/message/${encodeURIComponent(msg.mail_id)}?sid_token=${encodeURIComponent(gSession.sid)}`, {
         signal: AbortSignal.timeout(12000),

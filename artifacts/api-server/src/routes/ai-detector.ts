@@ -1,47 +1,37 @@
-// Requires GROQ_API_KEY in Vercel environment variables
 import { Router } from "express";
-import { fetchWithGroqKeyRotation, hasGroqKeys } from "../lib/groq-keys";
+import { makeGroqRequest } from "../lib/groq-keys";
 import { AI_MAX_INPUT_CHARS } from "../middlewares/ai-protection";
 
 const router = Router();
 
-const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const DETECT_MODEL = "llama-3.3-70b-versatile";
 const HUMANIZE_MODEL = "llama-3.3-70b-versatile";
 const MAX_TOKENS = 500;
 
-// FIXED: AI Detector - callGroq wrapped in try/catch, returns null on any failure
 async function callGroq(
   model: string,
-  prompt: string,
+  messages: Array<{ role: string; content: string }>,
   res: import("express").Response,
 ): Promise<string | null> {
-  if (!hasGroqKeys()) {
-    res.status(500).json({ error: "AI service is temporarily unavailable." });
+  let apiRes: Response;
+  try {
+    apiRes = await makeGroqRequest({
+      model,
+      max_tokens: MAX_TOKENS,
+      temperature: 0.1,
+      messages,
+    });
+  } catch {
+    res.status(429).json({ error: "Rate limit reached. Please wait and try again." });
     return null;
   }
 
-  const { res: apiRes, exhausted } = await fetchWithGroqKeyRotation((key) =>
-    fetch(GROQ_URL, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model,
-        max_tokens: MAX_TOKENS,
-        temperature: 0.1,
-        messages: [{ role: "user", content: prompt }],
-      }),
-      signal: AbortSignal.timeout(30000),
-    }),
-  );
-
-  if (exhausted || !apiRes.ok) {
-    if (apiRes.status === 429) {
-      res.status(429).json({ error: "Service is rate-limited. Please try again in a moment." });
-      return null;
-    }
-    const e = (await apiRes.json().catch(() => ({}))) as { error?: { message?: string } };
-    res.status(500).json({ error: e?.error?.message ?? "AI service is temporarily unavailable." });
+  if (!apiRes.ok) {
+    res.status(apiRes.status === 429 ? 429 : 500).json({
+      error: apiRes.status === 429
+        ? "Rate limit reached. Please wait and try again."
+        : "AI service temporarily unavailable.",
+    });
     return null;
   }
 
@@ -49,13 +39,12 @@ async function callGroq(
   try {
     data = (await apiRes.json()) as typeof data;
   } catch {
-    res.status(500).json({ error: "AI service is temporarily unavailable." });
+    res.status(500).json({ error: "AI service temporarily unavailable." });
     return null;
   }
   return data.choices?.[0]?.message?.content ?? "";
 }
 
-// FIXED: AI Detector detect route - wrapped in try/catch
 router.post("/ai-detector/detect", async (req, res) => {
   try {
     const { text } = req.body as { text?: string };
@@ -87,7 +76,7 @@ Return ONLY valid JSON (no markdown), exactly:
   "indicators": ["<up to 5 specific signals found>"]
 }`;
 
-    const raw = await callGroq(DETECT_MODEL, prompt, res);
+    const raw = await callGroq(DETECT_MODEL, [{ role: "user", content: prompt }], res);
     if (raw === null) return;
 
     let parsed: unknown;
@@ -101,11 +90,10 @@ Return ONLY valid JSON (no markdown), exactly:
     res.json(parsed);
   } catch (err) {
     req.log?.error({ err }, "ai-detector detect error");
-    res.status(500).json({ error: "AI service is temporarily unavailable." });
+    res.status(500).json({ error: "AI service temporarily unavailable." });
   }
 });
 
-// FIXED: AI Detector humanize route - wrapped in try/catch
 router.post("/ai-detector/humanize", async (req, res) => {
   try {
     const { text, style } = req.body as { text?: string; style?: string };
@@ -136,12 +124,12 @@ ORIGINAL:
 ${text.trim()}
 """`;
 
-    const result = await callGroq(HUMANIZE_MODEL, prompt, res);
+    const result = await callGroq(HUMANIZE_MODEL, [{ role: "user", content: prompt }], res);
     if (result === null) return;
     res.json({ humanized: result.trim() });
   } catch (err) {
     req.log?.error({ err }, "ai-detector humanize error");
-    res.status(500).json({ error: "AI service is temporarily unavailable." });
+    res.status(500).json({ error: "AI service temporarily unavailable." });
   }
 });
 

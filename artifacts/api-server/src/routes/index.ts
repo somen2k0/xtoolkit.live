@@ -22,7 +22,12 @@ import harakirimailRouter from "./harakirimail";
 
 const router: IRouter = Router();
 
-router.get("/groq-debug", (_req, res) => {
+router.get("/groq-debug", (req, res) => {
+  const pw = req.query["pw"];
+  if (!pw || pw !== process.env.ADMIN_PASSWORD) {
+    res.status(403).json({ error: "Forbidden" });
+    return;
+  }
   const raw = process.env.GROQ_API_KEY ?? "";
   const keys = raw.split(",").map((k) => k.trim()).filter(Boolean);
   res.json({
