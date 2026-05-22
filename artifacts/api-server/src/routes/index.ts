@@ -18,6 +18,7 @@ import aiDetectorRouter from "./ai-detector";
 import tempmailGuerrillaRouter from "./tempmail-guerrilla";
 import tempmailOnesecmailRouter from "./tempmail-onesecmail";
 import tempmailFreemailRouter from "./tempmail-freemail";
+import tempmailMailgwRouter from "./tempmail-mailgw";
 import tempmailTemptfRouter from "./tempmail-temptf";
 
 const router: IRouter = Router();
@@ -32,6 +33,7 @@ router.use(ogPreviewRouter);
 router.use(tempmailGuerrillaRouter);
 router.use(tempmailOnesecmailRouter);
 router.use(tempmailFreemailRouter);
+router.use(tempmailMailgwRouter);
 router.use(tempmailTemptfRouter);
 
 // ─── AI routes — full protection stack ────────────────────────────────────────
