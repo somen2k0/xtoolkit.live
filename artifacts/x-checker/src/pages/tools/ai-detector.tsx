@@ -97,9 +97,10 @@ export default function AiDetector() {
       // FIXED: AI Detector - graceful error handling for non-JSON and 5xx responses
       let data: (DetectResult & { error?: string }) = {} as DetectResult & { error?: string };
       try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
-      if (!res.ok) { setError("AI service is temporarily unavailable. Please try again later."); return; }
+      if (res.status === 429) { setError("Rate limit reached. Please wait 30 seconds and try again."); return; }
+      if (!res.ok) { setError("AI service temporarily unavailable. Please try again later."); return; }
       setDetectResult(data);
-    } catch { setError("Network error. Please try again."); }
+    } catch { setError("AI service temporarily unavailable. Please try again later."); }
     finally { setDetecting(false); }
   };
 
@@ -116,9 +117,10 @@ export default function AiDetector() {
       // FIXED: AI Humanizer - graceful error handling for non-JSON and 5xx responses
       let data: { humanized?: string; error?: string } = {};
       try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
-      if (!res.ok) { setError("AI service is temporarily unavailable. Please try again later."); return; }
+      if (res.status === 429) { setError("Rate limit reached. Please wait 30 seconds and try again."); return; }
+      if (!res.ok) { setError("AI service temporarily unavailable. Please try again later."); return; }
       setHumanized(data.humanized ?? "");
-    } catch { setError("Network error. Please try again."); }
+    } catch { setError("AI service temporarily unavailable. Please try again later."); }
     finally { setHumanizing(false); }
   };
 
