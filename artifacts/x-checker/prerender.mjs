@@ -104,6 +104,7 @@ const STATIC_PAGES = [
     title: "Free Social Media Tools for X (Twitter) | X Toolkit",
     description:
       "Free social media tools for X (Twitter): account checker, profile link generator, @ formatter, bio generator, tweet scheduler, and more.",
+    categoryKey: "social-media",
   },
   {
     path: "/ai-writing-tools",
@@ -111,6 +112,7 @@ const STATIC_PAGES = [
     title: "Free AI Writing Tools - Bio Generator & AI Detector | X Toolkit",
     description:
       "Free AI writing tools: AI bio generator, AI content detector & humanizer, bio ideas, funny bios, and more. Powered by Groq's Llama model.",
+    categoryKey: "ai-writing",
   },
   {
     path: "/text-format-tools",
@@ -118,6 +120,7 @@ const STATIC_PAGES = [
     title: "Free Text & Formatting Tools Online | X Toolkit",
     description:
       "Free text formatting tools: character counter, tweet formatter, hashtag cleaner, font preview, case converter, and more. No signup needed.",
+    categoryKey: "text-formatting",
   },
   {
     path: "/developer-tools",
@@ -125,6 +128,7 @@ const STATIC_PAGES = [
     title: "Free Developer Tools - JSON, Base64, JWT, Regex & More | X Toolkit",
     description:
       "Free developer tools: JSON formatter, Base64 encoder, JWT decoder, regex tester, SQL formatter, UUID generator, YAML converter & more.",
+    categoryKey: "developer",
   },
   {
     path: "/seo-tools",
@@ -132,6 +136,7 @@ const STATIC_PAGES = [
     title: "Free SEO Tools - Meta Tags, Slug Generator & Keyword Checker | X Toolkit",
     description:
       "Free SEO tools: meta tag generator, URL slug generator, keyword density checker, robots.txt generator, OG image preview & more.",
+    categoryKey: "seo",
   },
   {
     path: "/email-tools",
@@ -139,6 +144,7 @@ const STATIC_PAGES = [
     title: "Free Email Tools - Temp Mail, Validator, Signature & More | X Toolkit",
     description:
       "Free email tools: temp mail, email validator, signature generator, subject line generator, spam checker, privacy checker & more.",
+    categoryKey: "email",
   },
   // Blog posts
   {
@@ -728,6 +734,55 @@ function jsonLdTag(obj) {
 }
 
 /**
+ * Builds the ItemList + BreadcrumbList schemas for a category landing page.
+ * Injected into static HTML so Google can read them without executing JavaScript.
+ * For the email category, temp-mail sub-routes are included as additional items.
+ */
+function buildCategoryPageSchemas(categoryKey, categoryLabel, canonicalUrl) {
+  const categoryTools = LIVE_TOOLS.filter((t) => t.category === categoryKey);
+
+  const baseItems = categoryTools.map((t, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: t.label,
+    url: `${SITE_URL}${t.href}`,
+  }));
+
+  const subRouteItems = categoryKey === "email"
+    ? TEMP_MAIL_SUB_ROUTES.map((r, i) => ({
+        "@type": "ListItem",
+        position: categoryTools.length + i + 1,
+        name: r.label,
+        url: `${SITE_URL}${r.path}`,
+      }))
+    : [];
+
+  const itemListElement = [...baseItems, ...subRouteItems];
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `Free ${categoryLabel} — X Toolkit`,
+    description: `Free online ${categoryLabel.toLowerCase()} — no signup required.`,
+    url: canonicalUrl,
+    numberOfItems: itemListElement.length,
+    itemListElement,
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Tools", item: `${SITE_URL}/tools` },
+      { "@type": "ListItem", position: 3, name: categoryLabel, item: canonicalUrl },
+    ],
+  };
+
+  return [jsonLdTag(itemListSchema), jsonLdTag(breadcrumb)].join("\n");
+}
+
+/**
  * Builds the SoftwareApplication + BreadcrumbList schemas for a tool page.
  * All recommended properties are included to pass Google Rich Results Test.
  */
@@ -864,7 +919,7 @@ function buildRootContent(pageData, tool) {
     `</div>`;
 }
 
-function generatePageHtml(template, { path, title, description, isHomepage, category }, tool) {
+function generatePageHtml(template, { path, title, description, isHomepage, category, categoryKey, label }, tool) {
   const canonicalUrl = `${SITE_URL}${path}`;
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(description);
@@ -887,10 +942,13 @@ function generatePageHtml(template, { path, title, description, isHomepage, cate
   const rootContent = buildRootContent({ path, title, description, isHomepage, category }, tool);
   html = html.replace('<div id="root"></div>', `<div id="root">${rootContent}</div>`);
 
-  // Tool and category pages get SoftwareApplication + BreadcrumbList.
+  // Category pages get ItemList + BreadcrumbList.
+  // Tool pages get SoftwareApplication + BreadcrumbList.
   // Homepage already has complete schemas from the template — no injection needed.
   let schemaBlock = "";
-  if (!isHomepage && (tool || category)) {
+  if (categoryKey) {
+    schemaBlock = buildCategoryPageSchemas(categoryKey, label, canonicalUrl);
+  } else if (!isHomepage && (tool || category)) {
     schemaBlock = buildToolSchema(
       tool || { label: title, seoDescription: description, id: "", category },
       canonicalUrl,
