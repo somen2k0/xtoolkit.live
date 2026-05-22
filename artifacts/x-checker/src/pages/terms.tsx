@@ -144,6 +144,7 @@ export default function Terms() {
         title="Terms of Service — X Toolkit"
         description="Terms of Service for X Toolkit. Free to use, no account required. Read our usage policies and service terms."
         path="/terms"
+        keywords="terms of service, terms and conditions, xtoolkit terms, free tools terms, usage policy"
       />
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-12 md:py-16">
 

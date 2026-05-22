@@ -133,6 +133,7 @@ export default function Privacy() {
         title="Privacy Policy — X Toolkit"
         description="X Toolkit's privacy policy. We collect the absolute minimum necessary to operate the service. No usernames, results, or personal data are ever stored."
         path="/privacy"
+        keywords="privacy policy, data privacy, no data collection, browser-based tools, xtoolkit privacy, free tools privacy"
       />
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-12 md:py-16">
 

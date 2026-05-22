@@ -64,8 +64,9 @@ export default function About() {
     <Layout>
       <SeoHead
         title="About X Toolkit — Free Tools for X, Developers & SEO"
-        description="Learn about X Toolkit — a free, privacy-first collection of 39+ tools for X (Twitter) creators, SEO professionals, and developers. No ads, no signup, no data stored."
+        description="X Toolkit offers 43+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work."
         path="/about"
+        keywords="x toolkit, free online tools, twitter tools, seo tools, developer tools, email tools, no signup tools"
       />
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-12 md:py-16">
 

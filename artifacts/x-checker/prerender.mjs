@@ -65,7 +65,7 @@ const STATIC_PAGES = [
   {
     path: "/about",
     label: "About",
-    title: "About X Toolkit - Free Tools for X, SEO & Developers",
+    title: "About X Toolkit — Free Tools for X, SEO & Developers",
     description:
       "X Toolkit offers 43+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work.",
   },
