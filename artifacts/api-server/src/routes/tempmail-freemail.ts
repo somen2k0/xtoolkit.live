@@ -2,41 +2,20 @@ import { Router, type IRouter } from "express";
 
 const router: IRouter = Router();
 
-const ALLORIGINS = "https://api.allorigins.win/raw?url=";
-const MAILDROP = "https://maildrop.cc/api";
+const MAILDROP_GRAPHQL = "https://api.maildrop.cc/graphql";
 
-function proxied(url: string): string {
-  return ALLORIGINS + encodeURIComponent(url);
-}
-
-/** Fetch from Maildrop and verify we got a JSON response (their API sometimes
- *  returns the HTML SPA instead of JSON when the endpoint has moved). */
-async function maildropFetch(path: string, timeoutMs = 10000): Promise<Response> {
-  const directUrl = `${MAILDROP}${path}`;
-
-  // Attempt 1: direct (no proxy)
+async function gqlFetch(query: string, timeoutMs = 10000): Promise<Response> {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), Math.min(timeoutMs, 5000));
-    const r = await fetch(directUrl, {
+    return await fetch(MAILDROP_GRAPHQL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ query }),
       signal: ctrl.signal,
-      headers: { Accept: "application/json" },
     });
-    clearTimeout(timer);
-    // Reject HTML responses — means the API endpoint no longer exists
-    const ct = r.headers.get("content-type") ?? "";
-    if (r.ok && ct.includes("json")) return r;
-  } catch {}
-
-  // Attempt 2: allorigins proxy
-  const proxyUrl = proxied(directUrl);
-  const ctrl2 = new AbortController();
-  const timer2 = setTimeout(() => ctrl2.abort(), timeoutMs);
-  try {
-    const r2 = await fetch(proxyUrl, { signal: ctrl2.signal });
-    return r2;
   } finally {
-    clearTimeout(timer2);
+    clearTimeout(timer);
   }
 }
 
@@ -53,12 +32,12 @@ function randomLogin(custom?: string): string {
   return `${f}${l}${n}`;
 }
 
-// GET /freemail/health — always healthy, /new is instant
+// GET /freemail/health
 router.get("/freemail/health", (_req, res) => {
   res.json({ ok: true });
 });
 
-// GET /freemail/new — instant: pure local generation, no external calls
+// GET /freemail/new
 router.get("/freemail/new", (req, res) => {
   const login = randomLogin(req.query["login"] as string | undefined);
   res.json({ email: `${login}@maildrop.cc`, login, domain: "maildrop.cc", token: login });
@@ -69,16 +48,19 @@ router.get("/freemail/inbox", async (req, res) => {
   const token = req.query["token"] as string | undefined;
   if (!token) { res.status(400).json({ error: "token required" }); return; }
   try {
-    const r = await maildropFetch(`/inbox/${encodeURIComponent(token)}`);
+    const query = `{ inbox(mailbox: ${JSON.stringify(token)}) { id headerfrom subject date } }`;
+    const r = await gqlFetch(query);
     if (!r.ok) { res.status(502).json({ error: "Provider temporarily unavailable" }); return; }
-    type MaildropMsg = { id: string; from?: string; fromFull?: string; subject?: string; date?: string };
-    const d = await r.json() as MaildropMsg[];
-    const msgs = Array.isArray(d) ? d.map(m => ({
+    type GqlMsg = { id: string; headerfrom?: string; subject?: string; date?: string };
+    type GqlResp = { data?: { inbox?: GqlMsg[] }; errors?: unknown[] };
+    const d = await r.json() as GqlResp;
+    if (d.errors || !d.data?.inbox) { res.status(502).json({ error: "Provider temporarily unavailable" }); return; }
+    const msgs = d.data.inbox.map(m => ({
       id: m.id,
-      from: m.from ?? m.fromFull ?? "",
+      from: m.headerfrom ?? "",
       subject: m.subject ?? "",
       date: m.date ?? "",
-    })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) : [];
+    })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     res.json(msgs);
   } catch {
     res.status(502).json({ error: "Provider temporarily unavailable" });
@@ -91,18 +73,21 @@ router.get("/freemail/message/:id", async (req, res) => {
   const token = req.query["token"] as string | undefined;
   if (!token) { res.status(400).json({ error: "token required" }); return; }
   try {
-    const r = await maildropFetch(`/inbox/${encodeURIComponent(token)}/${encodeURIComponent(id)}`);
+    const query = `{ message(mailbox: ${JSON.stringify(token)}, id: ${JSON.stringify(id)}) { id headerfrom subject date html } }`;
+    const r = await gqlFetch(query);
     if (!r.ok) { res.status(502).json({ error: "Provider temporarily unavailable" }); return; }
-    const d = await r.json() as {
-      id: string; from?: string; fromFull?: string; subject?: string; date?: string; body?: string; html?: string;
-    };
+    type GqlFullMsg = { id: string; headerfrom?: string; subject?: string; date?: string; html?: string };
+    type GqlResp = { data?: { message?: GqlFullMsg }; errors?: unknown[] };
+    const d = await r.json() as GqlResp;
+    if (d.errors || !d.data?.message) { res.status(502).json({ error: "Message not found" }); return; }
+    const m = d.data.message;
     res.json({
-      id: d.id,
-      from: d.from ?? d.fromFull ?? "",
-      subject: d.subject ?? "",
-      date: d.date ?? "",
-      body: d.html ?? d.body ?? "",
-      isHtml: !!d.html,
+      id: m.id,
+      from: m.headerfrom ?? "",
+      subject: m.subject ?? "",
+      date: m.date ?? "",
+      body: m.html ?? "",
+      isHtml: !!m.html,
     });
   } catch {
     res.status(502).json({ error: "Provider temporarily unavailable" });

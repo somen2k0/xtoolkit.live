@@ -143,13 +143,17 @@ router.get("/guerrilla/message/:id", async (req, res) => {
       mail_id?: string; mail_from?: string; mail_subject?: string;
       mail_timestamp?: string; mail_body?: string; mail_html?: string;
     };
+    const body = d.mail_html ?? d.mail_body ?? "";
+    // Guerrilla returns HTML content in mail_body (wrapped in <pre> or with tags) even
+    // when mail_html is absent. Detect HTML by checking for angle-bracket tags.
+    const isHtml = !!d.mail_html || /<[a-zA-Z][\s\S]*?>/m.test(body);
     res.json({
       id: d.mail_id ?? id,
       from: d.mail_from ?? "",
       subject: d.mail_subject ?? "",
       timestamp: d.mail_timestamp ?? "",
-      body: d.mail_html ?? d.mail_body ?? "",
-      isHtml: !!d.mail_html,
+      body,
+      isHtml,
     });
   } catch {
     res.status(502).json({ error: "Provider temporarily unavailable" });

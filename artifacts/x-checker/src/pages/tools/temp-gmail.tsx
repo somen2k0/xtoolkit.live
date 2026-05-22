@@ -127,8 +127,11 @@ function clearInboxSession(): void {
 // ── Helpers ────────────────────────────────────────────────────────
 
 function timeAgo(ts: string | number): string {
+  if (!ts || ts === 0 || ts === "0") return "";
   const n = typeof ts === "number" ? ts * 1000 : new Date(ts).getTime();
+  if (isNaN(n) || n <= 0) return "";
   const diff = Date.now() - n;
+  if (diff < 0) return "Just now";
   const m = Math.floor(diff / 60000);
   if (m < 1) return "Just now";
   if (m < 60) return `${m}m ago`;
