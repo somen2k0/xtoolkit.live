@@ -11,7 +11,7 @@ import { trackEvent } from "@/lib/analytics";
 import { getTopTools, getRecentlyViewed } from "@/hooks/use-local-analytics";
 import {
   CheckCircle2, Zap, Shield, Star, ArrowRight, Users,
-  TrendingUp, Clock, EyeOff, Mail, Flame,
+  TrendingUp, Clock, Mail,
 } from "lucide-react";
 
 const CATEGORY_ORDER: import("@/lib/tools-registry").CategoryKey[] = [
@@ -65,10 +65,10 @@ function StarRating({ count }: { count: number }) {
 }
 
 const PRIVACY_TOOLS_SPOTLIGHT = [
-  { href: "/tools/email-privacy-checker",  label: "Email Privacy Checker",  desc: "Score your address across 7 privacy factors", icon: EyeOff,   color: "text-purple-400",  bg: "bg-purple-400/10 border-purple-400/20" },
   { href: "/tools/masked-email-generator", label: "Masked Email Generator",  desc: "Create anonymous email aliases in seconds",  icon: Mail,    color: "text-cyan-400",    bg: "bg-cyan-400/10 border-cyan-400/20" },
-  { href: "/tools/spam-risk-checker",      label: "Spam Risk Checker",       desc: "Find out if your email triggers spam filters", icon: Shield, color: "text-amber-400",   bg: "bg-amber-400/10 border-amber-400/20" },
-  { href: "/tools/email-leak-checker",     label: "Email Leak Checker",      desc: "Check if your email address is exposed",     icon: Flame,   color: "text-red-400",     bg: "bg-red-400/10 border-red-400/20" },
+  { href: "/tools/spam-score-checker",     label: "Spam Score Checker",      desc: "Find out if your email triggers spam filters", icon: Shield, color: "text-amber-400",   bg: "bg-amber-400/10 border-amber-400/20" },
+  { href: "/tools/temp-mail",              label: "Temp Mail",               desc: "Instant disposable inbox, no signup",         icon: Mail,    color: "text-emerald-400", bg: "bg-emerald-400/10 border-emerald-400/20" },
+  { href: "/tools/email-validator",        label: "Email Validator",         desc: "Validate email syntax instantly in browser",  icon: Shield,  color: "text-blue-400",    bg: "bg-blue-400/10 border-blue-400/20" },
 ];
 
 function useScrollFade(threshold = 0.15) {
