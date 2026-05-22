@@ -437,7 +437,7 @@ function UnifiedInboxSection() {
               <ChevronDown className="h-3 w-3" />
             </Button>
             {showDomainDrop && (
-              <div className="absolute top-full left-0 mt-1 z-50 bg-card border border-border/60 rounded-xl shadow-xl overflow-hidden min-w-56 max-h-80 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-1 z-50 bg-card border border-border/60 rounded-xl shadow-xl min-w-56 max-h-80 overflow-y-auto">
                 {/* GuerrillaMail */}
                 <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/30 border-b border-border/30 sticky top-0">
                   GuerrillaMail ({GUERRILLA_DOMAINS.length})

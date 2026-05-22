@@ -134,7 +134,7 @@ function NavDropdown({
         <div className="h-px bg-border/40 mx-1 mb-2" />
 
         {/* Tools list */}
-        <ul className="space-y-0.5">
+        <ul className="space-y-0.5 max-h-[360px] overflow-y-auto">
           {category.tools.map((tool) => {
             const Icon = tool.icon;
             return (
