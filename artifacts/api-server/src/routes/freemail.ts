@@ -23,6 +23,16 @@ async function getDomains(): Promise<string[]> {
   }
 }
 
+// Health check
+router.get('/health', async (_req, res) => {
+  try {
+    const domains = await getDomains();
+    res.json({ ok: domains.length > 0 });
+  } catch {
+    res.json({ ok: false });
+  }
+});
+
 // Get domains
 router.get('/domains', async (req, res) => {
   try {

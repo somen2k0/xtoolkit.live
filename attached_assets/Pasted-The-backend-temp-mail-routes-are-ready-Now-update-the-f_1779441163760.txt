@@ -1,0 +1,68 @@
+The backend temp mail routes are ready. Now update the
+frontend Temp Email component to use all 3 providers
+with ~23 domains in the dropdown.
+
+STEP 1 — Find the current Temp Email frontend component
+Look in artifacts/x-checker/src/ for the temp mail page.
+Show me the current filename before changing anything.
+
+STEP 2 — Update the domain/provider logic
+
+Replace whatever provider logic currently exists with this:
+
+const GUERRILLA_DOMAINS = [
+  'guerrillamail.com', 'guerrillamail.info', 'guerrillamail.biz',
+  'guerrillamail.de', 'guerrillamail.net', 'guerrillamail.org',
+  'grr.la', 'sharklasers.com', 'guerrillamailblock.com', 'spam4.me'
+];
+
+On component mount, fetch dynamic domains for the other
+2 providers in parallel:
+
+const [onesecDomains, setOnesecDomains] = useState<string[]>([
+  '1secmail.com', '1secmail.net', '1secmail.org',
+  'wwjmp.com', 'esiix.com', 'xojxe.com', 'yoggm.com'
+]);
+
+const [gwDomains, setGwDomains] = useState<string[]>([
+  'mail.gw', 'mail.tm'
+]);
+
+useEffect(() => {
+  // Fetch 1secmail domains
+  fetch('/api/onesecmail/domains')
+    .then(r => r.json())
+    .then(d => { if (Array.isArray(d) && d.length) setOnesecDomains(d); })
+    .catch(() => {});
+
+  // Fetch mail.gw domains
+  fetch('/api/freemail/domains')
+    .then(r => r.json())
+    .then(d => { if (Array.isArray(d) && d.length) setGwDomains(d); })
+    .catch(() => {});
+}, []);
+
+STEP 3 — Build unified domain dropdown
+
+Show all domains grouped in dropdown:
+
+<optgroup label="── GuerrillaMail ──">
+  {GUERRILLA_DOMAINS.map(d => <option value={d}>{d}</option>)}
+</optgroup>
+<optgroup label="── 1secmail ──">
+  {onesecDomains.map(d => <option value={d}>{d}</option>)}
+</optgroup>
+<optgroup label="── Mail.gw ──">
+  {gwDomains.map(d => <option value={d}>{d}</option>)}
+</optgroup>
+
+Default selected domain: guerrillamail.com
+
+STEP 4 — Provider detection logic
+
+When user selects a domain or clicks "New Address",
+detect which provider to use based on the domain:
+
+const getProvider = (domain: string) => {
+  if (GUERRILLA_DOMAINS.includes(domain)) return 'guerrilla';
+  if (onesecDomains.includes(domain)

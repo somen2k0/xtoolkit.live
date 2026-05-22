@@ -4,6 +4,16 @@ const router = Router();
 const PROXY = (url: string) =>
   'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
 
+// Health check
+router.get('/health', async (_req, res) => {
+  try {
+    const response = await fetch(PROXY('https://api.guerrillamail.com/ajax.php?f=get_email_address'));
+    res.json({ ok: response.ok });
+  } catch {
+    res.json({ ok: false });
+  }
+});
+
 // Get new email address
 router.get('/new', async (req, res) => {
   try {

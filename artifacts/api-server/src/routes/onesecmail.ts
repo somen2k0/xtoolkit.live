@@ -22,12 +22,19 @@ router.get('/domains', async (req, res) => {
   }
 });
 
-// Create new inbox
+// Health check
+router.get('/health', (_req, res) => {
+  res.json({ ok: true });
+});
+
+// Create new inbox (accepts optional ?domain= to pin the domain)
 router.get('/new', (req, res) => {
   try {
-    const domains = FALLBACK_DOMAINS;
+    const { domain: requestedDomain } = req.query as { domain?: string };
     const login = Math.random().toString(36).substring(2, 10);
-    const domain = domains[Math.floor(Math.random() * domains.length)];
+    const domain = (requestedDomain && FALLBACK_DOMAINS.includes(requestedDomain))
+      ? requestedDomain
+      : FALLBACK_DOMAINS[Math.floor(Math.random() * FALLBACK_DOMAINS.length)]!;
     res.json({ login, domain, address: `${login}@${domain}` });
   } catch (err) {
     res.status(500).json({ error: '1secmail unavailable' });
