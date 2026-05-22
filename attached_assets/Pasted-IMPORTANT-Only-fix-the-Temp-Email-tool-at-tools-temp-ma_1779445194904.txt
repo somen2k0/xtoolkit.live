@@ -1,0 +1,220 @@
+IMPORTANT: Only fix the Temp Email tool at
+/tools/temp-mail (the main one with the inbox).
+Do NOT touch Temp Gmail, AI tools, or anything else.
+
+The goal: Temp Email should work exactly like a
+standard disposable email service — user gets an
+address instantly, emails appear in the inbox.
+
+===================================================
+STEP 1 — TEST FIRST before writing any code
+===================================================
+
+Run these curl commands in the Replit shell and
+paste the EXACT output of each before doing anything:
+
+TEST A — GuerrillaMail direct (no proxy):
+curl -s "https://api.guerrillamail.com/ajax.php?f=get_email_address&lang=en" \
+  -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+  -H "Referer: https://www.guerrillamail.com/"
+
+TEST B — GuerrillaMail via allorigins proxy:
+curl -s "https://api.allorigins.win/raw?url=https%3A%2F%2Fapi.guerrillamail.com%2Fajax.php%3Ff%3Dget_email_address%26lang%3Den"
+
+TEST C — 1secmail direct (no proxy):
+curl -s "https://www.1secmail.com/api/v1/?action=getDomainList"
+
+TEST D — 1secmail via allorigins proxy:
+curl -s "https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.1secmail.com%2Fapi%2Fv1%2F%3Faction%3DgetDomainList"
+
+Show all 4 outputs before proceeding to Step 2.
+Do not write any code yet.
+
+===================================================
+STEP 2 — Based on curl results, rewrite guerrilla.ts
+===================================================
+
+Use whichever approach worked in Step 1 (direct or proxy).
+Delete the current guerrilla.ts and replace with this
+clean version using the working approach:
+
+import { Router } from 'express';
+const router = Router();
+
+// Use whichever fetch method worked in Step 1
+// Direct: fetch('https://api.guerrillamail.com/ajax.php?...')
+// Proxy:  fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://api.guerrillamail.com/ajax.php?...'))
+
+const GUERRILLA_BASE = 'https://api.guerrillamail.com/ajax.php';
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Referer': 'https://www.guerrillamail.com/',
+  'Accept': 'application/json'
+};
+
+function buildUrl(params: string): string {
+  // Replace this with proxy wrapper if direct failed in Step 1
+  return `${GUERRILLA_BASE}?${params}`;
+}
+
+// GET /api/guerrilla/new
+router.get('/new', async (req, res) => {
+  try {
+    const r = await fetch(buildUrl('f=get_email_address&lang=en'), {
+      headers: HEADERS,
+      signal: AbortSignal.timeout(10000)
+    });
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// POST /api/guerrilla/set-user
+router.post('/set-user', async (req, res) => {
+  try {
+    const { user, sid_token } = req.body;
+    const r = await fetch(
+      buildUrl(`f=set_email_user&email_user=${encodeURIComponent(user)}&sid_token=${sid_token}&lang=en`),
+      { headers: HEADERS, signal: AbortSignal.timeout(10000) }
+    );
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GET /api/guerrilla/inbox?sid_token=X&seq=0
+router.get('/inbox', async (req, res) => {
+  try {
+    const { sid_token, seq } = req.query;
+    const r = await fetch(
+      buildUrl(`f=get_email_list&offset=0&sid_token=${sid_token}&seq=${seq || 0}`),
+      { headers: HEADERS, signal: AbortSignal.timeout(10000) }
+    );
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GET /api/guerrilla/message/:id?sid_token=X
+router.get('/message/:id', async (req, res) => {
+  try {
+    const { sid_token } = req.query;
+    const r = await fetch(
+      buildUrl(`f=fetch_email&email_id=${req.params.id}&sid_token=${sid_token}`),
+      { headers: HEADERS, signal: AbortSignal.timeout(10000) }
+    );
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+export default router;
+
+===================================================
+STEP 3 — Rewrite the Temp Email frontend component
+===================================================
+
+Delete current temp email component and replace with
+a clean simple version. Keep the same UI design but
+simplify all the logic:
+
+State needed:
+- email: string (the full email address)
+- sidToken: string (GuerrillaMail session token)
+- messages: array of inbox messages
+- selectedMessage: full message object or null
+- isLoading: boolean
+- domain: string (selected domain, default guerrillamail.com)
+
+const DOMAINS = [
+  'guerrillamail.com',
+  'guerrillamail.info', 
+  'guerrillamail.biz',
+  'guerrillamail.de',
+  'guerrillamail.net',
+  'guerrillamail.org',
+  'grr.la',
+  'sharklasers.com',
+  'guerrillamailblock.com',
+  'spam4.me'
+];
+
+const FIRST_NAMES = [
+  'james','john','robert','michael','william','david',
+  'richard','joseph','thomas','charles','mary','patricia',
+  'jennifer','linda','barbara','elizabeth','susan',
+  'jessica','sarah','karen','emma','oliver','noah',
+  'liam','sophia','lucas','mason','ethan','isabella'
+];
+
+const LAST_NAMES = [
+  'smith','johnson','williams','brown','jones','garcia',
+  'miller','davis','wilson','taylor','anderson','thomas',
+  'jackson','white','harris','martin','thompson','clark'
+];
+
+function randomName(): string {
+  const f = FIRST_NAMES[Math.floor(Math.random()*FIRST_NAMES.length)];
+  const l = LAST_NAMES[Math.floor(Math.random()*LAST_NAMES.length)];
+  const n = Math.floor(Math.random()*99);
+  return `${f}.${l}${n > 0 ? n : ''}`;
+}
+
+On component mount — createInbox():
+1. GET /api/guerrilla/new
+2. Store sid_token from response
+3. Call POST /api/guerrilla/set-user with 
+   { user: randomName(), sid_token }
+4. Set email from set-user response email_addr
+5. Start polling inbox every 15 seconds
+
+fetchInbox() function:
+GET /api/guerrilla/inbox?sid_token=TOKEN&seq=0
+Set messages from response.list array
+
+openMessage(id) function:
+GET /api/guerrilla/message/ID?sid_token=TOKEN
+Show full message in a panel
+
+New Address button:
+Call createInbox() again with same selected domain
+
+Copy button:
+Copy email address to clipboard, show toast "Copied!"
+
+Domain selector:
+Simple dropdown showing all 10 DOMAINS
+On change: call createInbox() with new domain
+
+Auto-refresh:
+useEffect with setInterval 15000ms calling fetchInbox()
+Clear interval on component unmount
+
+===================================================
+STEP 4 — Remove ALL other provider code from this
+component (1secmail, harakirimail, mail.gw, freemail)
+Keep ONLY GuerrillaMail logic. Clean and simple.
+===================================================
+
+===================================================
+STEP 5 — Build and confirm zero errors
+pnpm build 2>&1
+Show complete output.
+===================================================
+
+REMINDER: Do NOT touch these files at all:
+- Temp Gmail component
+- AI Bio Generator  
+- AI Text Detector
+- Any other tool
+- vercel.json
+- helmet CSP config
+Only change: guerrilla.ts backend + Temp Email frontend

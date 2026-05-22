@@ -1,0 +1,99 @@
+Curl tests confirmed:
+- GuerrillaMail DIRECT works perfectly (no proxy needed)
+- allorigins proxy FAILS (timeout)
+- 1secmail is 403 Forbidden (blocked completely)
+
+STEP 1 — Rewrite guerrilla.ts
+Delete current file and replace with direct calls only.
+NO proxy. NO allorigins. NO fallbacks.
+
+import { Router } from 'express';
+const router = Router();
+
+const BASE = 'https://api.guerrillamail.com/ajax.php';
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Referer': 'https://www.guerrillamail.com/',
+  'Accept': 'application/json, text/plain, */*',
+  'Accept-Language': 'en-US,en;q=0.9'
+};
+
+router.get('/new', async (req, res) => {
+  try {
+    const r = await fetch(`${BASE}?f=get_email_address&lang=en`,
+      { headers: HEADERS, signal: AbortSignal.timeout(10000) });
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+router.post('/set-user', async (req, res) => {
+  try {
+    const { user, sid_token } = req.body;
+    const r = await fetch(
+      `${BASE}?f=set_email_user&email_user=${encodeURIComponent(user)}&sid_token=${sid_token}&lang=en`,
+      { headers: HEADERS, signal: AbortSignal.timeout(10000) }
+    );
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+router.get('/inbox', async (req, res) => {
+  try {
+    const { sid_token, seq } = req.query;
+    const r = await fetch(
+      `${BASE}?f=get_email_list&offset=0&sid_token=${sid_token}&seq=${seq || 0}`,
+      { headers: HEADERS, signal: AbortSignal.timeout(10000) }
+    );
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+router.get('/message/:id', async (req, res) => {
+  try {
+    const { sid_token } = req.query;
+    const r = await fetch(
+      `${BASE}?f=fetch_email&email_id=${req.params.id}&sid_token=${sid_token}`,
+      { headers: HEADERS, signal: AbortSignal.timeout(10000) }
+    );
+    const data = await r.json();
+    res.json(data);
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+export default router;
+
+STEP 2 — Rewrite the Temp Email frontend component
+completely from scratch. Keep exact same UI/design.
+Only GuerrillaMail. No other providers.
+
+const DOMAINS = [
+  'guerrillamail.com', 'guerrillamail.info',
+  'guerrillamail.biz', 'guerrillamail.de',
+  'guerrillamail.net', 'guerrillamail.org',
+  'grr.la', 'sharklasers.com',
+  'guerrillamailblock.com', 'spam4.me'
+];
+
+const FIRST_NAMES = [
+  'james','john','robert','michael','william','david',
+  'richard','joseph','thomas','charles','mary','patricia',
+  'jennifer','linda','barbara','elizabeth','susan',
+  'jessica','sarah','karen','emma','oliver','noah',
+  'liam','sophia','lucas','mason','ethan','isabella'
+];
+
+const LAST_NAMES = [
+  'smith','johnson','williams','brown','jones','garcia',
+  'miller','davis','wilson','taylor','anderson','thomas',
+  'jackson','white','harri
