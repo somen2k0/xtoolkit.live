@@ -9,19 +9,11 @@ const HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
 };
 
-router.get('/domains', async (_req, res) => {
-  const domains: { domain: string; provider: string }[] = [];
-  try {
-    const r = await fetch(`${MAILTM_BASE}/domains`, { headers: HEADERS, signal: AbortSignal.timeout(8000) });
-    const data = await r.json() as { 'hydra:member'?: { domain: string }[] };
-    (data['hydra:member'] ?? []).forEach(d => domains.push({ domain: d.domain, provider: 'mailtm' }));
-  } catch (e) { console.log('Mail.tm domains failed:', e); }
-  try {
-    const r = await fetch(`${MAILGW_BASE}/domains`, { headers: HEADERS, signal: AbortSignal.timeout(8000) });
-    const data = await r.json() as { 'hydra:member'?: { domain: string }[] };
-    (data['hydra:member'] ?? []).forEach(d => domains.push({ domain: d.domain, provider: 'mailgw' }));
-  } catch (e) { console.log('Mail.gw domains failed:', e); }
-  res.json(domains);
+router.get('/domains', (_req, res) => {
+  res.json([
+    { domain: 'mail.tm', provider: 'mailtm' },
+    { domain: 'mail.gw', provider: 'mailgw' },
+  ]);
 });
 
 router.get('/new', async (req, res) => {

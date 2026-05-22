@@ -29,7 +29,7 @@ router.get('/new', async (_req, res) => {
       signal: AbortSignal.timeout(10000),
     });
     console.log('GuerrillaMail response status:', r.status);
-    const data = await r.json();
+    const data = await r.json() as Record<string, unknown>;
     console.log('GuerrillaMail data keys:', Object.keys(data));
     res.json(data);
   } catch (e: any) {
