@@ -111,6 +111,7 @@ router.get("/guerrilla/new", async (req, res) => {
       sid_token: finalSid,
       user: parts[0] ?? "user",
       domain: parts[1] ?? targetSite,
+      domains: GUERRILLA_DOMAINS,
     });
   } catch {
     res.status(502).json({ error: "Provider temporarily unavailable" });
@@ -130,7 +131,17 @@ router.get("/guerrilla/inbox", async (req, res) => {
         mail_timestamp: string; mail_read: string; mail_exerpt?: string;
       }>;
     };
-    res.json(Array.isArray(d.list) ? d.list : []);
+    // Normalise field names so the extension's normaliseGuerrilla() gets what it expects:
+    // mail_timestamp → mail_date, mail_exerpt (Guerrilla typo) → mail_excerpt
+    const messages = (d.list ?? []).map(m => ({
+      mail_id: m.mail_id,
+      mail_from: m.mail_from ?? "",
+      mail_subject: m.mail_subject ?? "",
+      mail_date: m.mail_timestamp ?? "",
+      mail_excerpt: m.mail_exerpt ?? "",
+      mail_body: "",
+    }));
+    res.json({ messages });
   } catch {
     res.status(502).json({ error: "Provider temporarily unavailable" });
   }
