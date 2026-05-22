@@ -211,10 +211,11 @@ function UnifiedInboxSection() {
       });
       if (!r2.ok) throw new Error("Failed to set username");
       const d2 = await r2.json() as { email_addr?: string; sid_token?: string };
-      const finalEmail = d2.email_addr ?? `${name}@${targetDomain ?? domain}`;
-      const parts = finalEmail.split("@");
-      const finalUser = parts[0] ?? name;
-      const finalDomain = parts[1] ?? targetDomain ?? domain;
+      const apiEmail = d2.email_addr ?? `${name}@${targetDomain ?? domain}`;
+      const apiUser = apiEmail.split("@")[0] ?? name;
+      const finalDomain = targetDomain ?? domain;
+      const finalUser = apiUser;
+      const finalEmail = `${finalUser}@${finalDomain}`;
       sidRef.current = token;
       setSid(token); setEmail(finalEmail); setUser(finalUser); setDomain(finalDomain);
       saveInboxSession(token, finalEmail, finalUser, finalDomain);
