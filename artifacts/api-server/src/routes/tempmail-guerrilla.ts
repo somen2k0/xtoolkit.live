@@ -16,16 +16,10 @@ function randomUSName(custom?: string): string {
   return `${f}.${l}`;
 }
 
-// All domains guerrilla mail supports
+// Only the domain that reliably works from server-side (set_email_user is blocked
+// for the alias domains, so we only expose the default one that always works)
 const GUERRILLA_DOMAINS = [
-  "guerrillamail.com",
-  "guerrillamail.info",
-  "guerrillamail.biz",
-  "guerrillamail.de",
-  "guerrillamail.net",
-  "guerrillamail.org",
-  "grr.la",
-  "spam4.me",
+  "guerrillamailblock.com",
 ];
 
 function proxied(url: string): string {
@@ -90,12 +84,10 @@ router.get("/guerrilla/new", async (req, res) => {
     let finalEmail = d1.email_addr;
     let finalSid   = d1.sid_token;
 
-    // Step 2: set a real US first.last name (always), and optionally a specific domain
+    // Step 2: set a real US first.last name — domain is always guerrillamailblock.com
+    // (set_email_user for other domains is blocked from server IPs)
     const usName = randomUSName(req.query["login"] as string | undefined);
-    const initialDomain = finalEmail.split("@")[1] ?? "";
-    const targetSite = (requestedDomain && GUERRILLA_DOMAINS.includes(requestedDomain))
-      ? requestedDomain
-      : GUERRILLA_DOMAINS.includes(initialDomain) ? initialDomain : "guerrillamail.com";
+    const targetSite = "guerrillamailblock.com";
     try {
       const r2 = await guerrillaFetch({
         f: "set_email_user",

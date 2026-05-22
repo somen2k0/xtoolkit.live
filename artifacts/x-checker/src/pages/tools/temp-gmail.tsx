@@ -201,9 +201,7 @@ function UnifiedInboxSection() {
     "oakon.com", "teihu.com",
   ]);
   const [availableGuerDomains, setAvailableGuerDomains] = useState<string[]>([
-    "guerrillamail.com", "guerrillamail.info", "guerrillamail.biz",
-    "guerrillamail.de", "guerrillamail.net", "guerrillamail.org",
-    "grr.la", "spam4.me",
+    "guerrillamailblock.com",
   ]);
   const { toast } = useToast();
   const refreshTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -392,7 +390,10 @@ function UnifiedInboxSection() {
   const switchProvider = useCallback(async (prov: InboxProv, domain?: string) => {
     setShowProviderDrop(false);
     const sameProvider = prov === activeProv;
-    const sameDomain   = prov !== "mailgw" || domain === oSessionRef.current?.domain;
+    const sameDomain =
+      prov === "guerrilla" ? domain === gSessionRef.current?.domain :
+      prov === "mailgw"    ? domain === oSessionRef.current?.domain :
+      true;
     if (sameProvider && sameDomain && !error) return;
     setSelectedG(null); setSelectedO(null); setSelectedF(null); setSelectedId(null);
     setSwitchingToProv(prov);
