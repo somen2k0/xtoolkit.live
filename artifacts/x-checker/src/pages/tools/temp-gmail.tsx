@@ -58,6 +58,17 @@ function generateLocalLogin(): string {
   return Array.from({ length: len }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
 }
 
+function generateNameLogin(): string {
+  const first = GMAIL_FIRST[Math.floor(Math.random() * GMAIL_FIRST.length)]!;
+  const last  = GMAIL_LAST[Math.floor(Math.random() * GMAIL_LAST.length)]!;
+  const num   = Math.floor(Math.random() * 90) + 10;
+  const roll  = Math.floor(Math.random() * 4);
+  if (roll === 0) return `${first}.${last}`;
+  if (roll === 1) return `${first}${last}`;
+  if (roll === 2) return `${first}.${last}${num}`;
+  return `${first}${last}${num}`;
+}
+
 const GMAIL_FIRST = ["james","john","robert","michael","william","david","richard","joseph","thomas","charles","christopher","daniel","matthew","anthony","mark","donald","steven","paul","andrew","joshua","kevin","brian","george","timothy","ronald","edward","jason","jeffrey","ryan","jacob","mary","patricia","jennifer","linda","barbara","elizabeth","susan","jessica","sarah","karen","lisa","nancy","betty","margaret","sandra","ashley","dorothy","kimberly","emily","donna","michelle","carol","amanda","melissa","deborah","stephanie","rebecca","sharon","laura","cynthia","kathleen","amy","angela","anna","brenda","pamela","emma","nicole","helen","samantha","katherine","diana","rachel"];
 const GMAIL_LAST = ["smith","johnson","williams","brown","jones","garcia","miller","davis","rodriguez","martinez","hernandez","lopez","gonzalez","wilson","anderson","thomas","taylor","moore","jackson","martin","lee","perez","thompson","white","harris","sanchez","clark","ramirez","lewis","robinson","walker","young","allen","king","wright","scott","torres","nguyen","hill","flores","green","adams","nelson","baker","hall","rivera","campbell","mitchell","carter","roberts"];
 
@@ -285,7 +296,7 @@ function UnifiedInboxSection() {
       if (!r.ok) return null;
       const d = await r.json() as { email_addr?: string; sid_token?: string; email_user?: string; email_domain?: string };
       if (!d.sid_token || !d.email_addr) return null;
-      const login = user ?? generateLocalLogin();
+      const login = user ?? generateNameLogin();
       const setR = await fetch(`${GUERRILLA_BASE}?f=set_email_user&email_user=${encodeURIComponent(login)}&sid_token=${encodeURIComponent(d.sid_token)}`);
       if (setR.ok) {
         const sd = await setR.json() as { email_addr?: string; sid_token?: string };
@@ -312,7 +323,7 @@ function UnifiedInboxSection() {
         }
       } catch {}
       const domain = domains[Math.floor(Math.random() * domains.length)]!;
-      const user = login ?? generateLocalLogin();
+      const user = login ?? generateNameLogin();
       const os: OSession = { login: user, domain, email: `${user}@${domain}` };
       oSessionRef.current = os; setOSession(os); saveInboxSession("secmailbox", os); return os;
     } catch { return null; }
@@ -333,7 +344,7 @@ function UnifiedInboxSection() {
         } catch {}
         if (!chosenDomain) chosenDomain = "mail.tm";
       }
-      const user = login ?? generateLocalLogin();
+      const user = login ?? generateNameLogin();
       const address = `${user}@${chosenDomain}`;
       const password = generateLocalLogin() + "!Aa1";
       const ar = await proxiedFetch(`${MAILTM_BASE}/accounts`, {
