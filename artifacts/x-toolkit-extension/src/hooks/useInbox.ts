@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Message, StoredState } from "../types";
 import {
   guerrillaInbox, normaliseGuerrilla,
-  onesecmailInbox, normaliseOnesec,
-  freemailInbox, normaliseFreemail,
+  mailgwInbox, normaliseMailgw,
+  maildropInbox, normaliseMaildrop,
   temptfMessages, normaliseTemptf,
-  guerrillaMessage, onesecmailMessage, freemailMessage,
+  guerrillaMessage, mailgwMessage, maildropMessage,
   temptfMessages as _temptf,
 } from "../lib/api";
 import { stripHtml, getIntro } from "../lib/otp";
@@ -16,7 +16,7 @@ export function useTempMailInbox(state: StoredState, ready: boolean) {
   // Extract only the values this hook actually needs so that unrelated storage
   // changes (e.g. seenMessageIds, lastPollAt written by the service worker)
   // do NOT recreate `fetch` and restart the interval with a full initial load.
-  const { tempMailProvider, guerrilla, onesecmail, freemail } = state;
+  const { tempMailProvider, guerrilla, mailgw, maildrop } = state;
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
@@ -26,8 +26,8 @@ export function useTempMailInbox(state: StoredState, ready: boolean) {
 
   const fetch = useCallback(async (isRefresh = false) => {
     if (tempMailProvider === "guerrilla" && !guerrilla) return;
-    if (tempMailProvider === "onesecmail" && !onesecmail) return;
-    if (tempMailProvider === "freemail" && !freemail) return;
+    if (tempMailProvider === "mailgw" && !mailgw) return;
+    if (tempMailProvider === "maildrop" && !maildrop) return;
 
     isRefresh ? setRefreshing(true) : setLoading(true);
     setError(null);
@@ -41,17 +41,17 @@ export function useTempMailInbox(state: StoredState, ready: boolean) {
           const norm = normaliseGuerrilla(m as Parameters<typeof normaliseGuerrilla>[0]);
           return { ...norm, intro: norm.intro || getIntro(stripHtml(norm.body)) };
         });
-      } else if (tempMailProvider === "onesecmail" && onesecmail) {
-        const data = await onesecmailInbox(onesecmail.login, onesecmail.domain);
+      } else if (tempMailProvider === "mailgw" && mailgw) {
+        const data = await mailgwInbox(mailgw.token);
         msgs = data.messages.map((m) => {
-          const norm = normaliseOnesec(m as Parameters<typeof normaliseOnesec>[0]);
+          const norm = normaliseMailgw(m as Parameters<typeof normaliseMailgw>[0]);
           return { ...norm, intro: getIntro(norm.subject) };
         });
-      } else if (tempMailProvider === "freemail" && freemail) {
-        const data = await freemailInbox(freemail.token);
+      } else if (tempMailProvider === "maildrop" && maildrop) {
+        const data = await maildropInbox(maildrop.token);
         msgs = data.messages.map((m) => {
-          const norm = normaliseFreemail(m as Parameters<typeof normaliseFreemail>[0]);
-          return { ...norm, intro: norm.intro };
+          const norm = normaliseMaildrop(m as Parameters<typeof normaliseMaildrop>[0]);
+          return { ...norm, intro: getIntro(norm.subject) };
         });
       }
 
@@ -73,7 +73,7 @@ export function useTempMailInbox(state: StoredState, ready: boolean) {
   // Only depend on the specific credentials, NOT the whole `state` object.
   // The full `state` changes every 15s when the service worker writes storage,
   // which would restart this effect and do a full initial load each time.
-  }, [tempMailProvider, guerrilla, onesecmail, freemail]);
+  }, [tempMailProvider, guerrilla, mailgw, maildrop]);
 
   useEffect(() => {
     if (!ready) return;
@@ -139,18 +139,18 @@ export async function fetchFullMessage(
   msgId: string,
   state: StoredState
 ): Promise<{ body: string; bodyContentType: "html" | "text" }> {
-  const { tempMailProvider, guerrilla, onesecmail, freemail } = state;
+  const { tempMailProvider, guerrilla, mailgw, maildrop } = state;
   if (tempMailProvider === "guerrilla" && guerrilla) {
     const m = await guerrillaMessage(msgId, guerrilla.sid_token);
     return { body: m.body || "", bodyContentType: "html" };
   }
-  if (tempMailProvider === "onesecmail" && onesecmail) {
-    const m = await onesecmailMessage(msgId, onesecmail.login, onesecmail.domain);
-    return { body: m.htmlBody || m.textBody || m.body || "", bodyContentType: "html" };
+  if (tempMailProvider === "mailgw" && mailgw) {
+    const m = await mailgwMessage(msgId, mailgw.token);
+    return { body: m.body || "", bodyContentType: m.isHtml ? "html" : "text" };
   }
-  if (tempMailProvider === "freemail" && freemail) {
-    const m = await freemailMessage(msgId, freemail.token);
-    return { body: m.htmlBody || m.textBody || "", bodyContentType: m.htmlBody ? "html" : "text" };
+  if (tempMailProvider === "maildrop" && maildrop) {
+    const m = await maildropMessage(msgId, maildrop.token);
+    return { body: m.body || "", bodyContentType: m.isHtml ? "html" : "text" };
   }
   throw new Error("No active inbox");
 }

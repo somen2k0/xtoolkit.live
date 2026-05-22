@@ -54,32 +54,33 @@ export function normaliseGuerrilla(m: RawGuerrillaMessage) {
   };
 }
 
-// ── 1secmail ───────────────────────────────────────────────────────────────
+// ── mail.gw ────────────────────────────────────────────────────────────────
 
-export async function onesecmailNew() {
-  return apiFetch<{ email: string; login: string; domain: string; domains: string[] }>("/api/onesecmail/new");
+export async function mailgwNew() {
+  return apiFetch<{ email: string; login: string; domain: string; token: string }>("/api/mailgw/new");
 }
 
-export async function onesecmailInbox(login: string, domain: string) {
-  return apiFetch<{ messages: RawOnesecMessage[] }>(`/api/onesecmail/inbox?login=${encodeURIComponent(login)}&domain=${encodeURIComponent(domain)}`);
+export async function mailgwInbox(token: string) {
+  const msgs = await apiFetch<RawMailgwMessage[]>(`/api/mailgw/inbox?token=${encodeURIComponent(token)}`);
+  return { messages: Array.isArray(msgs) ? msgs : [] };
 }
 
-export async function onesecmailMessage(id: string, login: string, domain: string) {
-  return apiFetch<{ body: string; htmlBody?: string; textBody?: string; from: string; subject: string; date: string }>(
-    `/api/onesecmail/message/${id}?login=${encodeURIComponent(login)}&domain=${encodeURIComponent(domain)}`
+export async function mailgwMessage(id: string, token: string) {
+  return apiFetch<{ id: string; from: string; subject: string; date: string; body: string; isHtml: boolean }>(
+    `/api/mailgw/message/${encodeURIComponent(id)}?token=${encodeURIComponent(token)}`
   );
 }
 
-interface RawOnesecMessage {
-  id: number;
+interface RawMailgwMessage {
+  id: string;
   from: string;
   subject: string;
   date: string;
 }
 
-export function normaliseOnesec(m: RawOnesecMessage) {
+export function normaliseMailgw(m: RawMailgwMessage) {
   return {
-    id: String(m.id),
+    id: m.id,
     from: m.from ?? "",
     subject: m.subject ?? "(no subject)",
     date: m.date ?? "",
@@ -89,39 +90,39 @@ export function normaliseOnesec(m: RawOnesecMessage) {
   };
 }
 
-// ── Freemail (mail.gw) ────────────────────────────────────────────────────
+// ── Maildrop.cc (via /api/freemail/*) ─────────────────────────────────────
 
-export async function freemailNew() {
+export async function maildropNew() {
   return apiFetch<{ email: string; login: string; domain: string; token: string }>("/api/freemail/new");
 }
 
-export async function freemailInbox(token: string) {
-  return apiFetch<{ messages: RawFreemailMessage[] }>(`/api/freemail/inbox?token=${encodeURIComponent(token)}`);
+export async function maildropInbox(token: string) {
+  const msgs = await apiFetch<RawMaildropMessage[]>(`/api/freemail/inbox?token=${encodeURIComponent(token)}`);
+  return { messages: Array.isArray(msgs) ? msgs : [] };
 }
 
-export async function freemailMessage(id: string, token: string) {
-  return apiFetch<{ id: string; from: string; subject: string; date: string; htmlBody?: string; textBody?: string }>(
+export async function maildropMessage(id: string, token: string) {
+  return apiFetch<{ id: string; from: string; subject: string; date: string; body: string; isHtml: boolean }>(
     `/api/freemail/message/${encodeURIComponent(id)}?token=${encodeURIComponent(token)}`
   );
 }
 
-interface RawFreemailMessage {
+interface RawMaildropMessage {
   id: string;
   from: string;
   subject: string;
   date: string;
-  textBody?: string;
 }
 
-export function normaliseFreemail(m: RawFreemailMessage) {
+export function normaliseMaildrop(m: RawMaildropMessage) {
   return {
     id: m.id,
     from: m.from ?? "",
     subject: m.subject ?? "(no subject)",
     date: m.date ?? "",
     body: "",
-    bodyContentType: "text" as const,
-    intro: m.textBody ?? "",
+    bodyContentType: "html" as const,
+    intro: "",
   };
 }
 

@@ -1,7 +1,7 @@
 import { StoredState, DEFAULT_STATE } from "../types";
 import {
   guerrillaInbox, normaliseGuerrilla,
-  onesecmailInbox, normaliseOnesec,
+  mailgwInbox, normaliseMailgw,
   temptfMessages, normaliseTemptf,
 } from "../lib/api";
 import { extractOTP, stripHtml } from "../lib/otp";
@@ -106,14 +106,16 @@ async function getState(): Promise<StoredState> {
 }
 
 function getActiveEmail(state: StoredState): string {
-  const { tempMailProvider, guerrilla, onesecmail } = state;
+  const { tempMailProvider, guerrilla, mailgw, maildrop } = state;
   if (tempMailProvider === "guerrilla") return guerrilla?.email ?? "";
-  return onesecmail?.email ?? "";
+  if (tempMailProvider === "mailgw") return mailgw?.email ?? "";
+  if (tempMailProvider === "maildrop") return maildrop?.email ?? "";
+  return "";
 }
 
 async function pollInbox(): Promise<void> {
   const state = await getState();
-  const { tempMailProvider, guerrilla, onesecmail, gmail, seenMessageIds } = state;
+  const { tempMailProvider, guerrilla, mailgw, gmail, seenMessageIds } = state;
 
   const allSeen = new Set(seenMessageIds ?? []);
   const newMessages: Array<{ from: string; subject: string; body: string }> = [];
@@ -125,9 +127,9 @@ async function pollInbox(): Promise<void> {
     if (tempMailProvider === "guerrilla" && guerrilla) {
       const data = await guerrillaInbox(guerrilla.sid_token);
       msgs = data.messages.map((m) => normaliseGuerrilla(m as Parameters<typeof normaliseGuerrilla>[0]));
-    } else if (tempMailProvider === "onesecmail" && onesecmail) {
-      const data = await onesecmailInbox(onesecmail.login, onesecmail.domain);
-      msgs = data.messages.map((m) => normaliseOnesec(m as Parameters<typeof normaliseOnesec>[0]));
+    } else if (tempMailProvider === "mailgw" && mailgw) {
+      const data = await mailgwInbox(mailgw.token);
+      msgs = data.messages.map((m) => normaliseMailgw(m as Parameters<typeof normaliseMailgw>[0]));
     }
 
     for (const msg of msgs) {

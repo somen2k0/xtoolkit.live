@@ -26,7 +26,12 @@
     "type": "module"
   },
   "permissions": ["storage", "notifications", "alarms", "contextMenus", "clipboardWrite"],
-  "host_permissions": ["https://xtoolkit.live/*"],
+  "host_permissions": [
+    "https://xtoolkit.live/*",
+    "https://api.guerrillamail.com/*",
+    "https://www.mail.gw/*",
+    "https://maildrop.cc/*"
+  ],
   "commands": {
     "copy-active-email": {
       "suggested_key": { "default": "Alt+Shift+C" },
