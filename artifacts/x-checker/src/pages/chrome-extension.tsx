@@ -10,7 +10,7 @@ import {
 const VERSION = "1.0.0";
 
 const features = [
-  { icon: Zap,        title: "Instant inbox generation",           desc: "Opens to a ready-to-use temp email the moment you click the icon. Powered by GuerrillaMail across 10 domains — sharklasers.com, grr.la, spam4.me, and more." },
+  { icon: Zap,        title: "Instant inbox generation",           desc: "Get a disposable email address instantly — multiple domains available, realistic addresses, auto-refresh every 15 seconds. No tab switching needed." },
   { icon: Key,        title: "OTP & verification code detection",  desc: "Automatically detects 4–8 digit codes and shows a 1-click copy button." },
   { icon: Bell,       title: "Desktop notifications",              desc: "Get alerted the moment a new email arrives — even when the popup is closed." },
   { icon: RefreshCw,  title: "Auto-refresh every 15 seconds",      desc: "Lightweight service worker keeps your inbox live in the background." },
@@ -53,9 +53,9 @@ export default function ChromeExtensionPage() {
     <Layout>
       <SeoHead
         title="X Toolkit Chrome Extension — Free Temp Email & OTP Detector"
-        description="Free Chrome extension for instant disposable email inboxes powered by GuerrillaMail across 10 domains. Auto-detects OTP codes, sends desktop notifications, and generates temp Gmail addresses — no signup needed."
+        description="Get instant disposable email inboxes and automatic OTP detection right in your Chrome toolbar. Free Chrome extension by X Toolkit."
         path="/chrome-extension"
-        keywords="temp email chrome extension, disposable email extension chrome, temporary email chrome extension free, throwaway email browser extension, otp auto copy chrome extension, temp mail extension, x toolkit chrome extension"
+        keywords="chrome extension temp mail, disposable email extension, temp email chrome, otp detector extension, throwaway email chrome, temporary email extension, disposable inbox chrome"
         faqs={faqs}
         extraSchemas={[
           {
