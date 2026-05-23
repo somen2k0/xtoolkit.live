@@ -400,12 +400,11 @@ export function Navbar() {
             <Link href="/chrome-extension">
               <button className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap border ${
                 location === "/chrome-extension"
-                  ? "bg-amber-500/20 text-amber-400 border-amber-500/40"
-                  : "bg-amber-500/8 text-amber-400 border-amber-500/25 hover:bg-amber-500/15"
+                  ? "bg-primary/20 text-primary border-primary/40"
+                  : "bg-primary/8 text-primary border-primary/25 hover:bg-primary/15"
               }`}>
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/></svg>
                 Extension
-                <span className="text-[9px] font-bold uppercase tracking-wide opacity-70">Soon</span>
               </button>
             </Link>
             <div className="hidden xl:flex items-center gap-1.5 text-xs text-muted-foreground">
