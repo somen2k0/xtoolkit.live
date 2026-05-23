@@ -46,6 +46,7 @@ export interface HistoryEntry {
 
 export interface StoredState {
   tempMailProvider: Provider;
+  guerrillaDomain: string;
   guerrilla: GuerrillaAccount | null;
   mailgw: MailgwAccount | null;
   maildrop: MaildropAccount | null;
@@ -56,8 +57,13 @@ export interface StoredState {
   lastPollAt: number;
 }
 
+export const GUERRILLA_DOMAINS = ["guerrillamail.com", "grr.la", "sharklasers.com", "spam4.me"] as const;
+export const ALL_TEMPMAIL_DOMAINS = [...GUERRILLA_DOMAINS, "mail.gw"] as const;
+export type TempmailDomain = typeof ALL_TEMPMAIL_DOMAINS[number];
+
 export const DEFAULT_STATE: StoredState = {
   tempMailProvider: "guerrilla",
+  guerrillaDomain: "guerrillamail.com",
   guerrilla: null,
   mailgw: null,
   maildrop: null,

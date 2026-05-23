@@ -1,0 +1,88 @@
+Add a domain switcher to the Chrome extension popup.
+Only touch files in artifacts/x-toolkit-extension.
+Do not touch the website code.
+
+===================================================
+WHAT TO ADD
+===================================================
+
+In the extension popup Temp Mail tab, add a small
+domain selector that lets users switch between
+available domains.
+
+Available domains to show:
+- guerrillamail.com (default)
+- grr.la
+- sharklasers.com
+- spam4.me
+- mail.gw
+
+===================================================
+HOW IT SHOULD LOOK
+===================================================
+
+Below the email address display, add a small
+dropdown/select that shows the current domain.
+
+Example UI:
+┌─────────────────────────────────┐
+│ sarah.thomas98@guerrillamail.com │  📋
+├─────────────────────────────────┤
+│ Domain: [guerrillamail.com ▼]   │
+├─────────────────────────────────┤
+│ 📬 INBOX                    🔄  │
+│ No messages yet                 │
+│ Refreshes every 15s             │
+└─────────────────────────────────┘
+
+Style the dropdown to match the existing dark theme
+of the extension (dark background, purple/indigo
+accent color #6366f1).
+
+===================================================
+HOW IT SHOULD WORK
+===================================================
+
+1. On load — default domain is guerrillamail.com
+
+2. When user selects a different domain:
+   - Generate new random realistic name
+   - Call background/API to create new inbox
+     with selected domain
+   - Update displayed email address
+   - Clear current inbox messages
+   - Start fresh polling for new inbox
+
+3. For GuerrillaMail domains (guerrillamail.com,
+   grr.la, sharklasers.com, spam4.me):
+   - Use existing GuerrillaMail API flow
+   - POST set-user with domain parameter
+
+4. For mail.gw domain:
+   - Use /api/freemail/new?provider=mailgw endpoint
+   - Store token for inbox polling
+   - GET /api/freemail/inbox?token=X&provider=mailgw
+
+5. Domain preference saved in chrome.storage.local
+   so it persists between popup opens
+
+===================================================
+IMPORTANT NOTES
+===================================================
+
+- Keep the exact same UI layout and dark theme
+- Domain dropdown should be compact — not take
+  much space
+- Label it "Domain:" or show a small globe icon 🌐
+- On domain switch show a small loading spinner
+  on the email address field
+- Keep all existing functionality intact
+  (copy, refresh, new address, Gmail tab, History)
+
+===================================================
+After changes:
+- Build the extension
+- Create updated ZIP file
+- List all files changed
+- Confirm ZIP is ready for Chrome Web Store
+===================================================

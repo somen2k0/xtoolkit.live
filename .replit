@@ -31,7 +31,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "pnpm install && PORT=5000 BASE_PATH=/ pnpm --filter @workspace/x-checker run dev"
+args = "pnpm --filter @workspace/api-server run dev & PORT=5000 pnpm --filter @workspace/x-checker run dev"
 waitForPort = 5000
 
 [agent]
