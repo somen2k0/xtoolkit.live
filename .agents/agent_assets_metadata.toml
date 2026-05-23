@@ -155,28 +155,28 @@ title = "screenshot-5-homepage (1280×800)"
 id = "59CGYwXvIrijZkktTJQcW"
 uri = "file://cws-screenshots/1-fresh-inbox.png"
 type = "image"
-title = "1 — Fresh Inbox (1280×800)"
+title = "1 — Fresh Inbox"
 
 [[outputs]]
 id = "t6XCamcaLUzQ_ZY103mkf"
 uri = "file://cws-screenshots/2-otp-detected.png"
 type = "image"
-title = "2 — OTP Detected (1280×800)"
+title = "2 — OTP Detected"
 
 [[outputs]]
 id = "S3cDbK4mdH0bySh0hNCW0"
 uri = "file://cws-screenshots/3-domain-dropdown.png"
 type = "image"
-title = "3 — Domain Dropdown (1280×800)"
+title = "3 — Domain Dropdown"
 
 [[outputs]]
 id = "7SuPmMmwoh7adhYb_0JDo"
 uri = "file://cws-screenshots/4-gmail-tab.png"
 type = "image"
-title = "4 — Gmail Tab (1280×800)"
+title = "4 — Gmail Tab"
 
 [[outputs]]
 id = "QXV43Lyb6KTiW0T_7C7ZS"
 uri = "file://cws-screenshots/5-message-open.png"
 type = "image"
-title = "5 — Message Open (1280×800)"
+title = "5 — Message Open"
