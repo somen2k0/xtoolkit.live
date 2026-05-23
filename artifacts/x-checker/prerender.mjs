@@ -226,11 +226,13 @@ const TEMP_MAIL_SUB_ROUTES = [
   },
   {
     path: "/tools/temp-mail/tempgmail",
-    label: "Temp Gmail",
-    title: "Temp Gmail — Temporary Gmail Address Tricks | X Toolkit",
+    label: "Temp Gmail Generator",
+    title: "Temp Gmail Generator — Free Temporary Gmail Address | X Toolkit",
     description:
-      "Use Gmail dot tricks and plus-addressing to create unlimited temporary Gmail addresses. Free guide and generator tool online.",
-    seoKeywords: "temp gmail, temporary gmail address, gmail dot trick, gmail plus trick, gmail alias generator, disposable gmail, unlimited gmail addresses",
+      "Generate a real temporary Gmail address instantly using Gmail dot tricks. Receive emails without using your real Gmail. Free, no signup, works everywhere Gmail is accepted.",
+    ogTitle: "Temp Gmail Generator — Free Temporary Gmail",
+    ogDescription: "Generate real @gmail.com addresses instantly. No signup. Works where disposable emails are blocked. Free temp gmail tool.",
+    seoKeywords: "temp gmail, temporary gmail, fake gmail generator, disposable gmail, temp gmail address, gmail dot trick, temporary gmail address, free temp gmail, gmail generator, temp gmail online, temporary gmail address free",
     category: "email",
     sitemapPriority: 0.90,
   },
@@ -246,6 +248,25 @@ const TEMP_MAIL_SUB_ROUTES = [
   },
 ];
 
+
+// Custom per-page JSON-LD schemas (injected in addition to the standard ones)
+const CUSTOM_PAGE_SCHEMAS = {
+  "/tools/temp-mail/tempgmail": {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Temp Gmail Generator",
+    url: "https://xtoolkit.live/tools/temp-mail/tempgmail",
+    description:
+      "Generate real temporary Gmail addresses using Gmail dot tricks. Free disposable Gmail generator, no signup required. Works on sites that block regular disposable emails.",
+    applicationCategory: "UtilitiesApplication",
+    keywords: "temp gmail, temporary gmail, fake gmail, disposable gmail, gmail generator",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  },
+};
 
 // PAGE_FAQS — sourced from component files. FAQPage JSON-LD is injected
 // by generatePageHtml() for every route that has an entry here.
@@ -802,10 +823,12 @@ function buildRootContent(pageData, tool) {
     `</div>`;
 }
 
-function generatePageHtml(template, { path, title, description, isHomepage, category, categoryKey, label }, tool) {
+function generatePageHtml(template, { path, title, description, ogTitle, ogDescription, isHomepage, category, categoryKey, label }, tool) {
   const canonicalUrl = `${SITE_URL}${path}`;
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(description);
+  const safeOgTitle = escapeHtml(ogTitle || title);
+  const safeOgDesc = escapeHtml(ogDescription || description);
 
   // For non-homepage pages, strip the homepage-only schemas (WebApplication,
   // ItemList) so they don't pollute tool and static pages.
@@ -813,8 +836,8 @@ function generatePageHtml(template, { path, title, description, isHomepage, cate
 
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${safeTitle}</title>`);
   html = html.replace(/(<meta\s+name="description"\s+content=")[^"]*(")/,  `$1${safeDesc}$2`);
-  html = html.replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/,  `$1${safeTitle}$2`);
-  html = html.replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/,  `$1${safeDesc}$2`);
+  html = html.replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/,  `$1${safeOgTitle}$2`);
+  html = html.replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/,  `$1${safeOgDesc}$2`);
   html = html.replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/,  `$1${canonicalUrl}$2`);
   html = html.replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/,  `$1${safeTitle}$2`);
   html = html.replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/,  `$1${safeDesc}$2`);
@@ -849,8 +872,11 @@ function generatePageHtml(template, { path, title, description, isHomepage, cate
   // Google can show these as rich results (expandable Q&A) in search.
   const faqSchema = buildFaqSchema(path);
 
+  // Custom per-page schema (e.g. WebApplication for tempgmail)
+  const customSchema = CUSTOM_PAGE_SCHEMAS[path] ? jsonLdTag(CUSTOM_PAGE_SCHEMAS[path]) : "";
+
   const noscriptBlock = buildNoscript({ path, title, description, isHomepage }, tool);
-  const parts = [schemaBlock, faqSchema, noscriptBlock].filter(Boolean);
+  const parts = [schemaBlock, customSchema, faqSchema, noscriptBlock].filter(Boolean);
   const injection = parts.join("\n");
   html = html.replace("</head>", `${injection}\n  </head>`);
 
@@ -951,8 +977,8 @@ function main() {
     const pageDir = join(DIST, ...segments);
     mkdirSync(pageDir, { recursive: true });
     const outputPath = join(pageDir, "index.html");
-    const page = { path: sub.path, title: sub.title, description: sub.description, category: sub.category };
-    const fakeTool = { label: sub.label, seoTitle: sub.title, seoDescription: sub.description, category: sub.category, id: sub.path };
+    const page = { path: sub.path, title: sub.title, description: sub.description, ogTitle: sub.ogTitle, ogDescription: sub.ogDescription, category: sub.category };
+    const fakeTool = { label: sub.label, seoTitle: sub.title, seoDescription: sub.description, seoKeywords: sub.seoKeywords, category: sub.category, id: sub.path };
     writeFileSync(outputPath, generatePageHtml(template, page, fakeTool), "utf-8");
     console.log(`  ✅ ${sub.path}`);
     count++;

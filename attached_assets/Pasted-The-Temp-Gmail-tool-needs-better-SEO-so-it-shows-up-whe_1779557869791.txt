@@ -1,0 +1,129 @@
+The Temp Gmail tool needs better SEO so it shows up
+when people search "temp gmail", "temporary gmail",
+"fake gmail" etc. Do NOT change the navigation.
+
+STEP 1 — Update meta tags for Temp Gmail page
+
+Find the meta tags for /tools/temp-mail/tempgmail
+in prerender.mjs or the component file.
+
+Update to:
+
+Title:
+"Temp Gmail Generator — Free Temporary Gmail Address | X Toolkit"
+
+Meta description:
+"Generate a real temporary Gmail address instantly
+using Gmail dot tricks. Receive emails without using
+your real Gmail. Free, no signup, works everywhere
+Gmail is accepted."
+
+Meta keywords:
+"temp gmail, temporary gmail, fake gmail generator,
+disposable gmail, temp gmail address, gmail dot trick,
+temporary gmail address, free temp gmail, gmail
+generator, temp gmail online, temporary gmail address
+free"
+
+STEP 2 — Add JSON-LD schema to Temp Gmail page
+
+In prerender.mjs, add this schema specifically for
+the tempgmail page:
+
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Temp Gmail Generator",
+  "url": "https://xtoolkit.live/tools/temp-mail/tempgmail",
+  "description": "Generate real temporary Gmail addresses
+    using Gmail dot tricks. Free disposable Gmail
+    generator, no signup required. Works on sites that
+    block regular disposable emails.",
+  "applicationCategory": "UtilitiesApplication",
+  "keywords": "temp gmail, temporary gmail, fake gmail,
+    disposable gmail, gmail generator",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+
+STEP 3 — Expand the "About this tool" section on
+the Temp Gmail page with SEO-rich content.
+
+Add these sections below the existing tool UI:
+
+Heading: "What is a Temp Gmail Generator?"
+Content (2 paragraphs):
+"A Temp Gmail Generator creates real @gmail.com
+email addresses that you can use for signups,
+verifications, and registrations without exposing
+your real Gmail. Unlike regular disposable email
+services, these addresses end in @gmail.com —
+making them accepted on sites that block throwaway
+email domains.
+
+Our free temporary Gmail generator uses Gmail's
+built-in dot trick feature. Gmail ignores dots in
+email addresses, so john.smith@gmail.com and
+johnsmith@gmail.com both deliver to the same inbox.
+This means you can generate unlimited unique Gmail
+variations that all forward to a real inbox."
+
+Heading: "Why Use a Temporary Gmail Address?"
+Add bullet points:
+- Works on sites that block disposable email domains
+- Real @gmail.com address — accepted everywhere
+- No need to create a new Google account
+- Protect your real Gmail from spam
+- Perfect for free trials, app signups, and testing
+- Generate unlimited variations instantly
+
+Heading: "How Does the Gmail Dot Trick Work?"
+Content (1 paragraph):
+"Gmail treats dots in email addresses as invisible.
+This means you@gmail.com, y.ou@gmail.com, and
+y.o.u@gmail.com all deliver to the same inbox.
+Our generator creates unique dot-trick variations
+of any Gmail address, giving you a fresh temporary
+address every time while still receiving emails in
+the original inbox."
+
+Heading: "Common Uses for Temp Gmail"
+Add bullet points:
+- Sign up for free trials without spam
+- Register on websites that require Gmail
+- Test email flows in development
+- Avoid promotional emails in your main inbox
+- Get multiple accounts on Gmail-only platforms
+- Bypass email verification on restricted sites
+
+STEP 4 — Add Temp Gmail to the sitemap priority
+
+In sitemap.xml or sitemap-tools.xml, make sure
+/tools/temp-mail/tempgmail has:
+<priority>0.9</priority>
+<changefreq>weekly</changefreq>
+
+This tells Google this is a high priority page.
+
+STEP 5 — Add internal links from related pages
+
+On these pages add a visible link/card to Temp Gmail:
+- /tools/temp-mail → "Need a @gmail.com address?
+  Try Temp Gmail Generator →"
+- /tools/masked-email-generator → "Related: Temp Gmail"
+- /tools/email-validator → "Related: Temp Gmail"
+- /tools/gmail-tricks → "Also try: Temp Gmail Generator"
+
+STEP 6 — Update og:title and og:description for
+tempgmail page specifically:
+
+og:title: "Temp Gmail Generator — Free Temporary Gmail"
+og:description: "Generate real @gmail.com addresses
+instantly. No signup. Works where disposable emails
+are blocked. Free temp gmail tool."
+
+Build, commit, push.
+Show all files changed.

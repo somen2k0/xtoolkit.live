@@ -928,6 +928,70 @@ function TempGmailTab() {
           </div>
         ))}
       </div>
+
+      {/* SEO content — What is a Temp Gmail Generator */}
+      <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-6">
+        <div className="space-y-3">
+          <h2 className="text-lg font-semibold">What is a Temp Gmail Generator?</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            A Temp Gmail Generator creates real @gmail.com email addresses that you can use for signups,
+            verifications, and registrations without exposing your real Gmail. Unlike regular disposable email
+            services, these addresses end in @gmail.com — making them accepted on sites that block throwaway
+            email domains.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Our free temporary Gmail generator uses Gmail's built-in dot trick feature. Gmail ignores dots in
+            email addresses, so john.smith@gmail.com and johnsmith@gmail.com both deliver to the same inbox.
+            This means you can generate unlimited unique Gmail variations that all forward to a real inbox.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <h2 className="text-lg font-semibold">Why Use a Temporary Gmail Address?</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            {[
+              "Works on sites that block disposable email domains",
+              "Real @gmail.com address — accepted everywhere",
+              "No need to create a new Google account",
+              "Protect your real Gmail from spam",
+              "Perfect for free trials, app signups, and testing",
+              "Generate unlimited variations instantly",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <span className="text-red-400 mt-0.5">•</span> {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h2 className="text-lg font-semibold">How Does the Gmail Dot Trick Work?</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Gmail treats dots in email addresses as invisible. This means you@gmail.com, y.ou@gmail.com, and
+            y.o.u@gmail.com all deliver to the same inbox. Our generator creates unique dot-trick variations
+            of any Gmail address, giving you a fresh temporary address every time while still receiving emails
+            in the original inbox.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <h2 className="text-lg font-semibold">Common Uses for Temp Gmail</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            {[
+              "Sign up for free trials without spam",
+              "Register on websites that require Gmail",
+              "Test email flows in development",
+              "Avoid promotional emails in your main inbox",
+              "Get multiple accounts on Gmail-only platforms",
+              "Bypass email verification on restricted sites",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <span className="text-red-400 mt-0.5">•</span> {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1092,6 +1156,19 @@ function GmailTricksTab() {
           <p className="text-xs text-muted-foreground/40">Dot variants and plus tags will appear here</p>
         </div>
       )}
+
+      {/* Internal link: Temp Gmail Generator */}
+      <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 flex items-center justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium">Also try: Temp Gmail Generator</p>
+          <p className="text-xs text-muted-foreground mt-0.5">Generate a ready-to-use @gmail.com address with live inbox — no real Gmail required.</p>
+        </div>
+        <Link href="/tools/temp-mail/tempgmail">
+          <Button size="sm" variant="outline" className="shrink-0 gap-1.5 text-xs border-red-500/30 text-red-400 hover:bg-red-500/10">
+            <Mail className="h-3.5 w-3.5" /> Try it →
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
@@ -1164,7 +1241,22 @@ export default function TempMail({ defaultTab = "disposable" }: { defaultTab?: T
       affiliateCategory="growth"
     >
       <div className="space-y-6">
-        {defaultTab === "disposable" && <UnifiedInboxSection />}
+        {defaultTab === "disposable" && (
+          <>
+            <UnifiedInboxSection />
+            <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 flex items-center justify-between gap-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium">Need a @gmail.com address?</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Our Temp Gmail Generator creates real @gmail.com addresses accepted everywhere — including sites that block disposable emails.</p>
+              </div>
+              <Link href="/tools/temp-mail/tempgmail">
+                <Button size="sm" variant="outline" className="shrink-0 gap-1.5 text-xs border-red-500/30 text-red-400 hover:bg-red-500/10">
+                  <Mail className="h-3.5 w-3.5" /> Try Temp Gmail →
+                </Button>
+              </Link>
+            </div>
+          </>
+        )}
         {defaultTab === "tempgmail" && <TempGmailTab />}
         {defaultTab === "gmail" && <GmailTricksTab />}
         <ExtensionBanner />
