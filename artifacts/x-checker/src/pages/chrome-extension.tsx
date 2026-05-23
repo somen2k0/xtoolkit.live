@@ -1,23 +1,22 @@
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
-import { Button } from "@/components/ui/button";
 import {
   Download, Star, Shield, Zap, Bell, Mail,
-  Copy, RefreshCw, History, Key, Puzzle,
+  Copy, RefreshCw, History, Key, Puzzle, Chrome,
 } from "lucide-react";
 
-const VERSION = "1.0.1";
+const VERSION = "1.0.0";
 const CWS_URL = "https://chromewebstore.google.com/detail/x-toolkit/TODO_REPLACE_WITH_REAL_ID";
 
 const features = [
-  { icon: Zap,       title: "Instant inbox generation",          desc: "Get a disposable email address instantly — multiple domains available, realistic addresses, auto-refresh every 15 seconds. No tab switching needed." },
-  { icon: Key,       title: "OTP & verification code detection", desc: "Automatically detects 4–8 digit codes and shows a 1-click copy button." },
-  { icon: Bell,      title: "Desktop notifications",             desc: "Get alerted the moment a new email arrives — even when the popup is closed." },
-  { icon: RefreshCw, title: "Auto-refresh every 15 seconds",     desc: "Lightweight service worker keeps your inbox live in the background." },
-  { icon: Mail,      title: "Temp Gmail & Gmail Tricks",         desc: "Generate a real temporary Gmail address with a live readable inbox." },
-  { icon: History,   title: "Inbox history",                     desc: "All generated addresses saved locally and survive browser restarts." },
-  { icon: Shield,    title: "Zero tracking, zero accounts",      desc: "No login, no data collection. Everything stored locally on your device." },
-  { icon: Copy,      title: "Keyboard shortcut",                 desc: "Press Alt+Shift+C anywhere to copy your active temp email — no popup needed." },
+  { icon: Zap,       title: "Instant Inbox",          desc: "Disposable email ready the moment you click. No setup, no tab switching." },
+  { icon: Key,       title: "OTP Detection",           desc: "Auto-detects 4–8 digit codes and surfaces a 1-click copy button instantly." },
+  { icon: Bell,      title: "Live Notifications",      desc: "Desktop alerts when mail arrives — even with the popup closed." },
+  { icon: RefreshCw, title: "Auto-Refresh",            desc: "Service worker polls every 15 seconds silently in the background." },
+  { icon: Mail,      title: "Temp Gmail",              desc: "Generate real temporary Gmail addresses with a live, readable inbox." },
+  { icon: History,   title: "Inbox History",           desc: "Every address saved locally — survives browser restarts." },
+  { icon: Shield,    title: "Zero Tracking",           desc: "No login, no data collection. Everything stays on your device." },
+  { icon: Copy,      title: "Alt+Shift+C Shortcut",    desc: "Copy your active email from any tab without opening the popup." },
 ];
 
 const faqs = [
@@ -38,6 +37,21 @@ const faqs = [
     a: "None. The extension stores your active inbox session and address history locally on your device using Chrome's storage API. Nothing is sent to any server beyond the API calls needed to generate and check your inbox.",
   },
 ];
+
+function AddToChrome({ size = "default" }: { size?: "default" | "lg" }) {
+  const pad = size === "lg" ? "px-8 py-4 text-base" : "px-6 py-3 text-sm";
+  return (
+    <a
+      href={CWS_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center gap-2.5 ${pad} rounded-xl font-bold text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50 transition-all duration-200 hover:-translate-y-0.5`}
+    >
+      <Download className="h-4 w-4" />
+      Add to Chrome — it's free
+    </a>
+  );
+}
 
 export default function ChromeExtensionPage() {
   return (
@@ -64,89 +78,122 @@ export default function ChromeExtensionPage() {
       />
 
       {/* ── Hero ── */}
-      <div className="relative overflow-hidden border-b border-border/40">
+      <div className="relative overflow-hidden">
+        {/* Rich background */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[420px] w-[700px] rounded-full bg-primary/10 blur-[120px]" />
-          <div className="absolute top-20 right-0 h-64 w-64 rounded-full bg-violet-600/8 blur-[80px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-violet-950/40 via-transparent to-transparent" />
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-violet-600/15 blur-[140px]" />
+          <div className="absolute top-10 right-10 h-72 w-72 rounded-full bg-purple-500/10 blur-[100px]" />
+          <div className="absolute top-10 left-10 h-56 w-56 rounded-full bg-indigo-600/10 blur-[80px]" />
         </div>
 
-        <div className="max-w-3xl mx-auto px-4 md:px-8 py-16 md:py-24 text-center">
-          <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-primary/10 border border-primary/25 shadow-lg shadow-primary/15 mb-6">
-            <Puzzle className="h-7 w-7 text-primary" />
+        <div className="max-w-4xl mx-auto px-4 md:px-8 py-20 md:py-32 text-center">
+          {/* Icon */}
+          <div className="inline-flex items-center justify-center h-20 w-20 rounded-3xl bg-gradient-to-br from-violet-600 to-purple-700 shadow-2xl shadow-violet-500/40 mb-8 ring-1 ring-violet-400/20">
+            <Puzzle className="h-9 w-9 text-white" />
           </div>
 
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/8 px-3 py-1 text-xs font-medium text-emerald-400 mb-5">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          {/* Live badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold text-emerald-300 mb-6">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             Free on the Chrome Web Store
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
-            X Toolkit{" "}
-            <span className="bg-gradient-to-r from-violet-400 to-primary bg-clip-text text-transparent">
-              Chrome Extension
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-5 leading-tight">
+            Temp email &amp; OTP{" "}
+            <span className="bg-gradient-to-r from-violet-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent">
+              in your toolbar
             </span>
           </h1>
 
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
-            Instant temp email, OTP detection, and Gmail tricks — right in your toolbar.
-            No website visit needed. Works on Chrome, Brave, Edge, and Arc.
+          <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+            Instant disposable inbox, automatic OTP detection, and Gmail tricks —
+            right in Chrome. No website visits. No signups. Just click and go.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Button asChild size="lg" className="gap-2 shadow-md shadow-primary/25 px-7">
-              <a href={CWS_URL} target="_blank" rel="noopener noreferrer">
-                <Download className="h-4 w-4" />
-                Add to Chrome — it's free
-              </a>
-            </Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <AddToChrome size="lg" />
+            <div className="flex items-center gap-2 text-white/50 text-sm">
+              <Chrome className="h-4 w-4" />
+              Works on Chrome, Brave, Edge &amp; Arc
+            </div>
           </div>
 
-          <p className="text-xs text-muted-foreground/50 mt-5 flex items-center justify-center gap-3">
-            <span className="flex items-center gap-1"><Star className="h-3 w-3 text-amber-400/60" /> Free forever</span>
-            <span>·</span>
+          {/* Trust strip */}
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/40 text-xs">
+            <span className="flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-amber-400" /> Free forever</span>
+            <span className="h-3 w-px bg-white/20" />
             <span>No account needed</span>
-            <span>·</span>
+            <span className="h-3 w-px bg-white/20" />
             <span>Manifest V3</span>
-          </p>
+            <span className="h-3 w-px bg-white/20" />
+            <span>111 KB</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Stats bar ── */}
+      <div className="border-y border-white/8 bg-white/[0.02]">
+        <div className="max-w-4xl mx-auto px-4 md:px-8 py-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/8">
+          {[
+            { val: "8",    label: "Built-in features" },
+            { val: "15s",  label: "Auto-refresh rate" },
+            { val: "0",    label: "Signups required" },
+            { val: "Free", label: "Always & forever" },
+          ].map(({ val, label }) => (
+            <div key={label} className="text-center px-4 py-2">
+              <div className="text-2xl font-extrabold text-white mb-0.5">{val}</div>
+              <div className="text-xs text-white/50">{label}</div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* ── Features grid ── */}
-      <div className="max-w-4xl mx-auto px-4 md:px-8 py-14">
-        <h2 className="text-xl font-semibold text-center mb-2">Everything you need, in one click</h2>
-        <p className="text-sm text-muted-foreground text-center mb-10">
-          Everything the web tool does — faster, from any tab, without leaving the page.
-        </p>
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Everything you need, in one click</h2>
+          <p className="text-white/60 text-lg">All the web tool's power — faster, from any tab, without leaving the page.</p>
+        </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="rounded-xl border border-border/50 bg-card/40 p-4 hover:border-primary/25 hover:bg-card/70 transition-all group">
-              <div className="h-8 w-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-3">
-                <Icon className="h-4 w-4 text-primary" />
+            <div
+              key={title}
+              className="group relative rounded-2xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] hover:border-violet-500/40 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-violet-500/10"
+            >
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-600/30 to-purple-600/20 border border-violet-500/20 flex items-center justify-center mb-4">
+                <Icon className="h-5 w-5 text-violet-300" />
               </div>
-              <p className="text-sm font-semibold mb-1 leading-snug group-hover:text-primary transition-colors">{title}</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
+              <p className="text-sm font-bold text-white mb-1.5 group-hover:text-violet-200 transition-colors">{title}</p>
+              <p className="text-xs text-white/55 leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* ── How it works ── */}
-      <div className="border-t border-border/40">
-        <div className="max-w-3xl mx-auto px-4 md:px-8 py-14">
-          <h2 className="text-xl font-semibold text-center mb-8">How it works</h2>
-          <div className="grid sm:grid-cols-3 gap-6">
+      <div className="relative overflow-hidden border-y border-white/8 bg-white/[0.015]">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-64 w-96 bg-violet-600/8 blur-[80px]" />
+        </div>
+        <div className="max-w-3xl mx-auto px-4 md:px-8 py-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Up and running in 30 seconds</h2>
+            <p className="text-white/60">Three steps. No friction.</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-8">
             {[
               { n: "1", title: "Install from Chrome Web Store", desc: "One click — Add to Chrome. No account, no email required." },
-              { n: "2", title: "Pin it to your toolbar",        desc: "Click the puzzle-piece icon, find X Toolkit, pin it." },
-              { n: "3", title: "Click to open your inbox",      desc: "Your temp email is ready instantly — copy and use." },
+              { n: "2", title: "Pin it to your toolbar",        desc: "Click the puzzle-piece icon, find X Toolkit, and pin it." },
+              { n: "3", title: "Click to open your inbox",      desc: "Your temp email is ready instantly — copy, paste, done." },
             ].map(({ n, title, desc }) => (
               <div key={n} className="text-center">
-                <div className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-primary/30 bg-primary/8 text-primary font-bold text-sm mb-3">
+                <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-violet-600 to-purple-700 text-white font-extrabold text-lg mb-4 shadow-lg shadow-violet-500/30">
                   {n}
                 </div>
-                <p className="text-sm font-semibold mb-1">{title}</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
+                <p className="text-base font-bold text-white mb-2">{title}</p>
+                <p className="text-sm text-white/55 leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -154,19 +201,21 @@ export default function ChromeExtensionPage() {
       </div>
 
       {/* ── Bottom CTA ── */}
-      <div className="border-t border-border/40 bg-primary/[0.03]">
-        <div className="max-w-3xl mx-auto px-4 md:px-8 py-12 text-center">
-          <Download className="h-6 w-6 text-primary/60 mx-auto mb-3" />
-          <h3 className="font-semibold text-lg mb-1">Install X Toolkit now</h3>
-          <p className="text-sm text-muted-foreground mb-6">
-            Free on the Chrome Web Store. No account, no signup — just install and go.
+      <div className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-t from-violet-950/30 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-80 w-[700px] bg-violet-600/12 blur-[120px]" />
+        </div>
+        <div className="max-w-2xl mx-auto px-4 md:px-8 py-24 text-center">
+          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 shadow-xl shadow-violet-500/30 mb-6">
+            <Download className="h-6 w-6 text-white" />
+          </div>
+          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4">Install X Toolkit now</h3>
+          <p className="text-white/60 text-lg mb-8 leading-relaxed">
+            Free on the Chrome Web Store. No account, no signup — just install and your first inbox is ready in seconds.
           </p>
-          <Button asChild size="lg" className="gap-2 shadow-md shadow-primary/25 px-7">
-            <a href={CWS_URL} target="_blank" rel="noopener noreferrer">
-              <Download className="h-4 w-4" />
-              Add to Chrome — it's free
-            </a>
-          </Button>
+          <AddToChrome size="lg" />
+          <p className="text-white/30 text-xs mt-6">No credit card · No account · Free forever</p>
         </div>
       </div>
     </Layout>
