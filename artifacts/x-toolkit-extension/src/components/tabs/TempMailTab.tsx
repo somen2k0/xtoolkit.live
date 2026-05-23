@@ -49,8 +49,15 @@ async function createInboxForDomain(
   try {
     const name = randomName();
     const renamed = await guerrillaSetUser(name, domain, session.sid_token);
-    if (renamed.email) finalAcc = renamed;
-  } catch { /* keep original session email */ }
+    // GuerrillaMail's API always returns email_addr with its default domain,
+    // ignoring the domain parameter. Build the display email manually instead.
+    const username = renamed.user || name;
+    finalAcc = { ...renamed, email: `${username}@${domain}`, domain };
+  } catch {
+    // set-user failed — fall back to the session username with the selected domain
+    const username = session.user || session.email.split("@")[0];
+    finalAcc = { ...session, email: `${username}@${domain}`, domain };
+  }
   const entry: HistoryEntry = { address: finalAcc.email, provider: "guerrilla", createdAt: Date.now() };
   setState({ guerrilla: finalAcc, tempMailProvider: "guerrilla", guerrillaDomain: domain, history: [entry, ...history.slice(0, 19)] });
 }
