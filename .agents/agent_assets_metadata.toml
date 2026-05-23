@@ -84,3 +84,9 @@ id = "jfpur39Q91SBSJPvH30nt"
 uri = "file://artifacts/x-toolkit-extension/x-toolkit-extension.zip"
 type = "unspecified"
 title = "x-toolkit-extension.zip (111.8 KB)"
+
+[[outputs]]
+id = "DledXj-_qqgUMFiMbSn_U"
+uri = "file://artifacts/x-toolkit-extension/public/icons/icon128.png"
+type = "image"
+title = "icon128.png (128×128, 27.8 KB)"
