@@ -63,6 +63,7 @@ export function CategoryLandingPage({ config }: { config: CategoryPageConfig }) 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
       { "@type": "ListItem", position: 2, name: "Tools", item: `${SITE_URL}/tools` },

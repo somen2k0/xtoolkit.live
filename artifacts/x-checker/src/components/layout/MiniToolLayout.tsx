@@ -63,6 +63,7 @@ export function MiniToolLayout({
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${SITE_URL}${path}#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
