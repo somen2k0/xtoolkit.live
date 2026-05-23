@@ -196,7 +196,7 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1 whitespace-nowrap ${
-          isActive ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/8"
+          isActive ? "bg-white/10 text-white" : "text-white hover:text-white hover:bg-white/8"
         }`}
       >
         {category.label}
@@ -237,7 +237,7 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap ${
-          isActive ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/8"
+          isActive ? "bg-white/10 text-white" : "text-white hover:text-white hover:bg-white/8"
         }`}
       >
         <Inbox className="h-3.5 w-3.5" />
@@ -373,7 +373,7 @@ export function Navbar() {
           <div className="hidden md:flex flex-1 items-center justify-center gap-0">
             <Link href="/">
               <button className={`px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-                location === "/" ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/8"
+                location === "/" ? "bg-white/10 text-white" : "text-white hover:text-white hover:bg-white/8"
               }`}>
                 Home
               </button>
@@ -387,7 +387,7 @@ export function Navbar() {
 
             <Link href="/about">
               <button className={`px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-                location === "/about" ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/8"
+                location === "/about" ? "bg-white/10 text-white" : "text-white hover:text-white hover:bg-white/8"
               }`}>
                 About
               </button>
@@ -398,11 +398,7 @@ export function Navbar() {
           <div className="flex items-center gap-1.5 shrink-0">
             <NavSearchDialog />
             <Link href="/chrome-extension">
-              <button className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap border ${
-                location === "/chrome-extension"
-                  ? "bg-primary/20 text-primary border-primary/40"
-                  : "bg-primary/8 text-primary border-primary/25 hover:bg-primary/15"
-              }`}>
+              <button className="hidden lg:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white whitespace-nowrap transition-all duration-200 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-[0_0_12px_rgba(139,92,246,0.5)] hover:shadow-[0_0_20px_rgba(139,92,246,0.75)] hover:-translate-y-px">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/></svg>
                 Extension
               </button>
