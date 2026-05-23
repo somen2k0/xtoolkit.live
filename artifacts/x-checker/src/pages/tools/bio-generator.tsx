@@ -158,6 +158,12 @@ export default function BioGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Refreshing a stale bio to better reflect your current work</li>
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Ghostwriting bios for clients, founders, or team members</li>
           </ul>
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-3 space-y-0.5">
+            <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Before you write the bio</p>
+            <p className="text-xs text-muted-foreground">
+              Check if accounts exist: <a href="/tools/x-account-checker" className="text-primary hover:underline font-medium">X Account Checker →</a>
+            </p>
+          </div>
         </div>
       </div>
     </MiniToolLayout>

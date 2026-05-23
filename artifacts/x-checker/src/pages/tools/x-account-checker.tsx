@@ -31,14 +31,12 @@ function formatDate(iso: string): string {
 }
 
 const FAQS = [
-  { q: "How do I check if a Twitter / X account is suspended?", a: "Paste the username (with or without @) into the box and click Check Status. The tool returns an instant result: Active, Suspended, or Not Found. You can check up to 100 accounts at once — no login required." },
-  { q: "What's the difference between Suspended, Not Found, and Active?", a: "Active means the account is live and publicly accessible. Suspended means X has suspended the account for a policy violation — the profile still exists but is locked. Not Found means the username doesn't exist or the account has been permanently deleted." },
-  { q: "Can I check if a Twitter account has been deleted or banned?", a: "Yes. Deleted accounts show as Not Found, and accounts banned by X show as Suspended. You can batch-check up to 100 usernames at once to quickly audit a large list." },
-  { q: "How many accounts can I check at once?", a: "Up to 100 usernames per batch — all checked in parallel so results return in a few seconds regardless of list size." },
-  { q: "Do I need an API key or X account to use this?", a: "No. The tool uses X's public guest API entirely server-side. There's no login, no API key, and no signup needed — it's completely free." },
-  { q: "Why might an account show as Unknown?", a: "X's API occasionally returns an ambiguous response, usually due to temporary rate limiting. Wait a few seconds and try again — it resolves on its own." },
-  { q: "Is my data stored or shared?", a: "No. Usernames are sent to our server only to proxy the X API call and are never logged, stored, or shared with third parties." },
-  { q: "Can I export the results?", a: "Yes — click Copy to copy results as tab-separated text you can paste directly into Excel, Google Sheets, or any spreadsheet app." },
+  { q: "Is the X Account Checker free?", a: "Yes, completely free with no signup required. Check up to 100 accounts per batch instantly." },
+  { q: "How many accounts can I check at once?", a: "You can check up to 100 Twitter/X usernames in a single batch for free." },
+  { q: "What data does the checker show?", a: "For each account the checker shows status (Active/Suspended/Deleted), follower count, following count, join date, verified badge, profile photo and display name." },
+  { q: "Can I check if a Twitter account is suspended?", a: "Yes. The tool instantly shows whether each account is Active, Suspended, or Deleted." },
+  { q: "Do I need a Twitter account or API key?", a: "No. The checker works without any Twitter login, API key, or credentials of any kind." },
+  { q: "Can I check celebrity or verified accounts?", a: "Yes. The tool works for any public Twitter/X account including verified and high-follower accounts." },
 ];
 
 export default function XAccountChecker() {
@@ -111,36 +109,37 @@ export default function XAccountChecker() {
 
   const softwareAppSchema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "X Account Checker",
+    "@type": "WebApplication",
+    "name": "X Account Checker — Bulk Twitter Status & Profile Checker",
     "url": "https://xtoolkit.live/tools/x-account-checker",
+    "description": "Bulk check Twitter/X account status with full profile data including followers, following, join date and verified badge. Check up to 100 accounts simultaneously for free. No signup required.",
     "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Web",
-    "description": "Bulk-check up to 100 X (Twitter) accounts to instantly see if they are active, suspended, or deleted. Free, no login or API key required.",
+    "keywords": "twitter account checker, bulk twitter checker, suspended account checker, x account checker, twitter follower checker, twitter profile checker",
+    "featureList": [
+      "Check up to 100 accounts simultaneously",
+      "Real-time Active/Suspended/Deleted status",
+      "Follower and following counts",
+      "Account join date",
+      "Verified badge detection",
+      "Profile photo and display name",
+      "No login or API key required",
+      "Free to use"
+    ],
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
-    },
-    "featureList": [
-      "Bulk check up to 100 X (Twitter) usernames at once",
-      "Detect active, suspended, banned, and deleted accounts",
-      "View follower count, following count, and join date",
-      "Profile picture and display name for active accounts",
-      "Blue-check / verified status indicator",
-      "No login, no API key, no signup required",
-      "Results returned in seconds"
-    ]
+    }
   };
 
   return (
     <MiniToolLayout
-      seoTitle="X Account Checker — Check Twitter Account Status Free"
-      seoDescription="Check if X (Twitter) accounts are active, suspended, or deleted. Bulk-check up to 100 usernames at once — see follower counts, profile data, and more. Free, no login needed."
-      seoKeywords="X account checker, Twitter account checker, check if Twitter account is suspended, bulk Twitter account checker, Twitter account status checker, check if X account is active, suspended Twitter account, deleted Twitter account checker, X account status, batch Twitter account check"
+      seoTitle="X Account Checker — Bulk Twitter Account Status, Followers & Profile Data | X Toolkit"
+      seoDescription="Bulk check Twitter/X account status with full profile data — followers, following, join date, verified badge. Check up to 100 accounts free. No signup. Instant results."
+      seoKeywords="twitter account checker, x account checker, bulk twitter checker, suspended account checker, twitter username checker, check twitter account status, bulk x account check, twitter follower checker, twitter verified checker, check twitter followers, suspended twitter account, deleted twitter account checker, free twitter checker, twitter profile checker"
       seoExtraSchemas={[softwareAppSchema]}
       icon={Search}
-      badge="Popular"
+      badge="Most Popular"
       title="X Account Checker"
       description="Bulk-check up to 100 X accounts — active, suspended, or deleted — in seconds. No login required."
       faqs={FAQS}
@@ -402,19 +401,61 @@ export default function XAccountChecker() {
         )}
 
         {/* About */}
-        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
-          <h2 className="text-lg font-semibold">About this tool</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            The X Account Checker lets you bulk-verify the status of up to 100 X (Twitter) usernames at once. It checks each account against X's public API and instantly tells you whether each account is <strong>active</strong>, <strong>suspended</strong>, or <strong>not found</strong> — useful for cleaning contact lists, verifying influencer accounts, or auditing followed lists.
-          </p>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Results are not stored — they're shown in real-time and cleared when you leave the page.
-          </p>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Cleaning a list of X accounts before an outreach campaign</li>
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Verifying that influencer or brand accounts are still active</li>
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Auditing a list of accounts exported from a third-party tool</li>
-          </ul>
+        <div className="space-y-6">
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">What is the X Account Checker?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              The X Account Checker is the most powerful free bulk Twitter/X account checker available online. Unlike other tools that only show Active or Suspended status, our checker returns complete profile data for every account — including real-time follower counts, following counts, join date, verified badge status, and profile photos.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Check up to 100 Twitter/X usernames simultaneously with no login, no API key, and no signup required. Results appear instantly with full profile details for every account.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">What Data Does It Show?</h2>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Account status</strong> — Active, Suspended, or Deleted</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Follower count</strong> — real-time follower numbers</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Following count</strong> — how many accounts they follow</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Join date</strong> — when the account was created</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Verified badge</strong> — blue/gold checkmark status</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Profile photo and display name</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Direct link to view the profile on X</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Bulk check up to 100 accounts at once</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">How Is This Different From Other Checkers?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Most free Twitter account checkers only tell you if an account exists or is suspended. X Toolkit's checker goes further — it returns the complete public profile snapshot for every username you check. This means you can verify influencer accounts, audit your following list, or research accounts at scale with real data, all completely free.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Who Uses This Tool?</h2>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Social media managers auditing follower lists</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Marketers verifying influencer account authenticity</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Researchers tracking Twitter/X account changes</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Agencies managing multiple client accounts</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Developers testing Twitter integrations</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Anyone verifying if a Twitter account is still active</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">How to Use the Bulk X Account Checker</h2>
+            <ol className="space-y-2 text-sm text-muted-foreground list-none">
+              <li className="flex items-start gap-3"><span className="text-primary font-semibold shrink-0 mt-0.5">1.</span> Enter up to 100 Twitter/X usernames (one per line or comma separated)</li>
+              <li className="flex items-start gap-3"><span className="text-primary font-semibold shrink-0 mt-0.5">2.</span> Click "Check Accounts"</li>
+              <li className="flex items-start gap-3"><span className="text-primary font-semibold shrink-0 mt-0.5">3.</span> View instant results with full profile data</li>
+              <li className="flex items-start gap-3"><span className="text-primary font-semibold shrink-0 mt-0.5">4.</span> Copy results to clipboard or export</li>
+            </ol>
+          </div>
+
         </div>
       </div>
     </MiniToolLayout>

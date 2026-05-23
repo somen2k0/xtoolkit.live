@@ -1,0 +1,237 @@
+Update the SEO content on /tools/x-account-checker
+to properly highlight all the powerful features.
+Do NOT change any UI or tool functionality.
+
+STEP 1 — Update meta tags
+
+Title:
+"X Account Checker — Bulk Twitter Account Status,
+Followers & Profile Data | X Toolkit"
+
+Meta description:
+"Bulk check Twitter/X account status with full profile
+data — followers, following, join date, verified badge.
+Check up to 100 accounts free. No signup. Instant results."
+
+Meta keywords:
+"twitter account checker, x account checker, bulk
+twitter checker, suspended account checker, twitter
+username checker, check twitter account status,
+bulk x account check, twitter follower checker,
+twitter verified checker, check twitter followers,
+suspended twitter account, deleted twitter account
+checker, free twitter checker, twitter profile checker"
+
+STEP 2 — Update JSON-LD schema
+
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "X Account Checker — Bulk Twitter Status & Profile Checker",
+  "url": "https://xtoolkit.live/tools/x-account-checker",
+  "description": "Bulk check Twitter/X account status
+    with full profile data including followers, following,
+    join date and verified badge. Check up to 100 accounts
+    simultaneously for free. No signup required.",
+  "applicationCategory": "UtilitiesApplication",
+  "keywords": "twitter account checker, bulk twitter
+    checker, suspended account checker, x account checker,
+    twitter follower checker, twitter profile checker",
+  "featureList": [
+    "Check up to 100 accounts simultaneously",
+    "Real-time Active/Suspended/Deleted status",
+    "Follower and following counts",
+    "Account join date",
+    "Verified badge detection",
+    "Profile photo and display name",
+    "No login or API key required",
+    "Free to use"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+
+STEP 3 — Replace "About this tool" section with
+this comprehensive SEO content:
+
+Heading: "What is the X Account Checker?"
+Content:
+"The X Account Checker is the most powerful free bulk
+Twitter/X account checker available online. Unlike
+other tools that only show Active or Suspended status,
+our checker returns complete profile data for every
+account — including real-time follower counts,
+following counts, join date, verified badge status,
+and profile photos.
+
+Check up to 100 Twitter/X usernames simultaneously
+with no login, no API key, and no signup required.
+Results appear instantly with full profile details
+for every account."
+
+Heading: "What Data Does It Show?"
+Bullet points:
+- Account status — Active, Suspended, or Deleted
+- Follower count — real-time follower numbers
+- Following count — how many accounts they follow
+- Join date — when the account was created
+- Verified badge — blue/gold checkmark status
+- Profile photo and display name
+- Direct link to view the profile on X
+- Bulk check up to 100 accounts at once
+
+Heading: "How Is This Different From Other Checkers?"
+Content:
+"Most free Twitter account checkers only tell you
+if an account exists or is suspended. X Toolkit's
+checker goes further — it returns the complete
+public profile snapshot for every username you
+check. This means you can verify influencer accounts,
+audit your following list, or research accounts at
+scale with real data, all completely free."
+
+Heading: "Who Uses This Tool?"
+Bullet points:
+- Social media managers auditing follower lists
+- Marketers verifying influencer account authenticity
+- Researchers tracking Twitter/X account changes
+- Agencies managing multiple client accounts
+- Developers testing Twitter integrations
+- Anyone verifying if a Twitter account is still active
+
+Heading: "How to Use the Bulk X Account Checker"
+Numbered steps:
+1. Enter up to 100 Twitter/X usernames
+   (one per line or comma separated)
+2. Click "Check Accounts"
+3. View instant results with full profile data
+4. Copy results to clipboard or export
+
+Heading: "Frequently Asked Questions"
+
+Q: Is the X Account Checker free?
+A: Yes, completely free with no signup required.
+   Check up to 100 accounts per batch instantly.
+
+Q: How many accounts can I check at once?
+A: You can check up to 100 Twitter/X usernames
+   in a single batch for free.
+
+Q: What data does the checker show?
+A: For each account the checker shows status
+   (Active/Suspended/Deleted), follower count,
+   following count, join date, verified badge,
+   profile photo and display name.
+
+Q: Can I check if a Twitter account is suspended?
+A: Yes. The tool instantly shows whether each
+   account is Active, Suspended, or Deleted.
+
+Q: Do I need a Twitter account or API key?
+A: No. The checker works without any Twitter
+   login, API key, or credentials of any kind.
+
+Q: Can I check celebrity or verified accounts?
+A: Yes. The tool works for any public Twitter/X
+   account including verified and high-follower
+   accounts.
+
+STEP 4 — Add FAQ JSON-LD schema:
+
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the X Account Checker free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, completely free with no signup
+          required. Check up to 100 accounts per
+          batch instantly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many accounts can I check at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can check up to 100 Twitter/X
+          usernames in a single batch for free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What data does the checker show?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For each account the checker shows
+          status (Active/Suspended/Deleted), follower
+          count, following count, join date, verified
+          badge, profile photo and display name."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I check if a Twitter account is suspended?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The tool instantly shows whether
+          each account is Active, Suspended, or Deleted."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a Twitter account or API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The checker works without any
+          Twitter login, API key, or credentials."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I check celebrity or verified accounts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The tool works for any public
+          Twitter/X account including verified and
+          high-follower accounts."
+      }
+    }
+  ]
+}
+
+STEP 5 — Update OG tags:
+og:title: "X Account Checker — Bulk Twitter Status,
+Followers & Profile Data"
+og:description: "Bulk check Twitter/X accounts with
+full profile data — followers, following, join date,
+verified badge. Check 100 accounts free. No signup."
+
+STEP 6 — Add internal links from these pages:
+- /tools/username-generator → "Check account status:
+  X Account Checker →"
+- /tools/tweet-formatter → "Verify accounts:
+  X Account Checker →"
+- /tools/bio-generator → "Check if accounts exist:
+  X Account Checker →"
+- /social-media-tools → Feature X Account Checker
+  as the #1 highlighted tool with a "Most Popular"
+  badge
+
+STEP 7 — Update sitemap:
+/tools/x-account-checker:
+<priority>0.9</priority>
+<changefreq>daily</changefreq>
+
+Note: changefreq is "daily" not "weekly" because
+account statuses change frequently — this signals
+to Google the tool has fresh real-time data.
+
+Build, commit, push.
+Show all files changed.

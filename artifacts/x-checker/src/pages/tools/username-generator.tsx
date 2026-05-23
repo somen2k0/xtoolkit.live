@@ -141,7 +141,7 @@ export default function UsernameGenerator() {
             <div className="rounded-xl border border-border/60 bg-muted/20 p-4 space-y-1 text-sm">
               <p className="font-semibold text-foreground/80 text-xs uppercase tracking-wide">Next step: Check availability</p>
               <p className="text-xs text-muted-foreground">
-                Copy a username and use the <a href="/tools/x-account-checker" className="text-primary hover:underline">Account Checker</a> to see if it's already taken.
+                Check account status: <a href="/tools/x-account-checker" className="text-primary hover:underline font-medium">X Account Checker →</a>
               </p>
             </div>
           </div>

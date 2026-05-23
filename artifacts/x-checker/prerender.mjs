@@ -251,6 +251,32 @@ const TEMP_MAIL_SUB_ROUTES = [
 
 // Custom per-page JSON-LD schemas (injected in addition to the standard ones)
 const CUSTOM_PAGE_SCHEMAS = {
+  "/tools/x-account-checker": {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "X Account Checker — Bulk Twitter Status & Profile Checker",
+    url: "https://xtoolkit.live/tools/x-account-checker",
+    description:
+      "Bulk check Twitter/X account status with full profile data including followers, following, join date and verified badge. Check up to 100 accounts simultaneously for free. No signup required.",
+    applicationCategory: "UtilitiesApplication",
+    keywords:
+      "twitter account checker, bulk twitter checker, suspended account checker, x account checker, twitter follower checker, twitter profile checker",
+    featureList: [
+      "Check up to 100 accounts simultaneously",
+      "Real-time Active/Suspended/Deleted status",
+      "Follower and following counts",
+      "Account join date",
+      "Verified badge detection",
+      "Profile photo and display name",
+      "No login or API key required",
+      "Free to use",
+    ],
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  },
   "/tools/temp-mail/tempgmail": {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -565,14 +591,12 @@ const PAGE_FAQS = {
     { q: "Is it safe to use UUIDs as primary keys?", a: "Yes. UUIDs are widely used as database primary keys, especially in distributed systems where auto-incrementing integers would create conflicts across multiple nodes. The main tradeoff is that UUIDs are larger (16 bytes vs 4-8 bytes) and can reduce index performance at very large scale." },
   ],
   "/tools/x-account-checker": [
-    { q: "How do I check if a Twitter / X account is suspended?", a: "Paste the username (with or without @) into the box and click Check Status. The tool returns an instant result: Active, Suspended, or Not Found. You can check up to 100 accounts at once — no login required." },
-    { q: "What's the difference between Suspended, Not Found, and Active?", a: "Active means the account is live and publicly accessible. Suspended means X has suspended the account for a policy violation — the profile still exists but is locked. Not Found means the username doesn't exist or the account has been permanently deleted." },
-    { q: "Can I check if a Twitter account has been deleted or banned?", a: "Yes. Deleted accounts show as Not Found, and accounts banned by X show as Suspended. You can batch-check up to 100 usernames at once to quickly audit a large list." },
-    { q: "How many accounts can I check at once?", a: "Up to 100 usernames per batch — all checked in parallel so results return in a few seconds regardless of list size." },
-    { q: "Do I need an API key or X account to use this?", a: "No. The tool uses X's public guest API entirely server-side. There's no login, no API key, and no signup needed — it's completely free." },
-    { q: "Why might an account show as Unknown?", a: "X's API occasionally returns an ambiguous response, usually due to temporary rate limiting. Wait a few seconds and try again — it resolves on its own." },
-    { q: "Is my data stored or shared?", a: "No. Usernames are sent to our server only to proxy the X API call and are never logged, stored, or shared with third parties." },
-    { q: "Can I export the results?", a: "Yes — click Copy to copy results as tab-separated text you can paste directly into Excel, Google Sheets, or any spreadsheet app." },
+    { q: "Is the X Account Checker free?", a: "Yes, completely free with no signup required. Check up to 100 accounts per batch instantly." },
+    { q: "How many accounts can I check at once?", a: "You can check up to 100 Twitter/X usernames in a single batch for free." },
+    { q: "What data does the checker show?", a: "For each account the checker shows status (Active/Suspended/Deleted), follower count, following count, join date, verified badge, profile photo and display name." },
+    { q: "Can I check if a Twitter account is suspended?", a: "Yes. The tool instantly shows whether each account is Active, Suspended, or Deleted." },
+    { q: "Do I need a Twitter account or API key?", a: "No. The checker works without any Twitter login, API key, or credentials of any kind." },
+    { q: "Can I check celebrity or verified accounts?", a: "Yes. The tool works for any public Twitter/X account including verified and high-follower accounts." },
   ],
   "/tools/yaml-json": [
     { q: "What is YAML?", a: "YAML (YAML Ain't Markup Language) is a human-readable data serialization format. It's widely used for configuration files — Docker Compose, Kubernetes, GitHub Actions, and many frameworks use YAML. It's easier to read than JSON because it uses indentation instead of braces and brackets." },
@@ -974,6 +998,8 @@ function main() {
       path: tool.href,
       title: tool.seoTitle || `${tool.label} | X Toolkit`,
       description: tool.seoDescription || tool.description,
+      ogTitle: tool.ogTitle,
+      ogDescription: tool.ogDescription,
       category: tool.category,
     };
     writeFileSync(outputPath, generatePageHtml(template, page, tool), "utf-8");

@@ -181,6 +181,12 @@ export default function TweetFormatter() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Converting speaking notes or outlines into numbered thread tweets</li>
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Formatting listicles and tips as readable tweet threads</li>
           </ul>
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-3 space-y-0.5">
+            <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Verify accounts before posting</p>
+            <p className="text-xs text-muted-foreground">
+              Verify accounts: <a href="/tools/x-account-checker" className="text-primary hover:underline font-medium">X Account Checker →</a>
+            </p>
+          </div>
         </div>
 
         {/* Expanded SEO content */}
