@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "X Toolkit – Free Temp Email & OTP Detector",
   "short_name": "X Toolkit",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Instant disposable email inbox + auto OTP detection. Generate temp mail, get notified, copy codes — no signup, no account, works from any tab.",
   "homepage_url": "https://xtoolkit.live/chrome-extension",
   "icons": {

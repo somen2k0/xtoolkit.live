@@ -29,7 +29,7 @@ title = "Screenshot 3 — Gmail tab with generated address variants"
 id = "u3XJY5ejdVqs6p4Miba7l"
 uri = "file://x-toolkit-extension-v1.0.0.zip"
 type = "unspecified"
-title = "X Toolkit Extension v1.0.0 (inbox fixes)"
+title = "X Toolkit Chrome Extension v1.0.0 — Production"
 
 [[outputs]]
 id = "O-K4EbCAK0c4vr61A9VP2"
@@ -48,3 +48,33 @@ id = "RUviEfs89a0h0EZWVJHtW"
 uri = "file://x-toolkit-extension-v1.0.1.zip"
 type = "unspecified"
 title = "X Toolkit Extension v1.0.1 — Inbox Fix"
+
+[[outputs]]
+id = "7ztwyn1ieB41PZACgN9Ej"
+uri = "file://screenshots/screenshot-1-chrome-extension-page.jpg"
+type = "image"
+title = "Screenshot 1 — Extension landing page"
+
+[[outputs]]
+id = "pRF2YvPQcJcHO2-Jq-Ere"
+uri = "file://screenshots/screenshot-2-temp-mail.jpg"
+type = "image"
+title = "Screenshot 2 — Temp Email tool"
+
+[[outputs]]
+id = "aqEZeMboj5GBY4vccpJnC"
+uri = "file://screenshots/screenshot-3-temp-gmail.jpg"
+type = "image"
+title = "Screenshot 3 — Temp Gmail tool"
+
+[[outputs]]
+id = "-bmiXG5JuS3ZbR1a1srtK"
+uri = "file://screenshots/screenshot-4-x-checker.jpg"
+type = "image"
+title = "Screenshot 4 — X Account Checker"
+
+[[outputs]]
+id = "6ToaT6cfaBoXYA3N88mH0"
+uri = "file://screenshots/screenshot-5-homepage.jpg"
+type = "image"
+title = "Screenshot 5 — Homepage"
