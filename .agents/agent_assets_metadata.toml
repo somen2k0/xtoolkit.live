@@ -90,3 +90,9 @@ id = "DledXj-_qqgUMFiMbSn_U"
 uri = "file://artifacts/x-toolkit-extension/public/icons/icon128.png"
 type = "image"
 title = "icon128.png (128×128, 27.8 KB)"
+
+[[outputs]]
+id = "uZMEdU6afTmSJ_G-VsVKT"
+uri = "file://icon-128-webstore.png"
+type = "image"
+title = "icon-128-webstore.png (128×128, solid background, 11.7 KB)"
