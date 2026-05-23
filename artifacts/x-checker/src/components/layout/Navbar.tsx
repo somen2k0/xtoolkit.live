@@ -196,7 +196,7 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1 whitespace-nowrap ${
-          isActive ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+          isActive ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/8"
         }`}
       >
         {category.label}
@@ -237,7 +237,7 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap ${
-          isActive ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+          isActive ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/8"
         }`}
       >
         <Inbox className="h-3.5 w-3.5" />
@@ -373,7 +373,7 @@ export function Navbar() {
           <div className="hidden md:flex flex-1 items-center justify-center gap-0">
             <Link href="/">
               <button className={`px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-                location === "/" ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                location === "/" ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/8"
               }`}>
                 Home
               </button>
@@ -387,7 +387,7 @@ export function Navbar() {
 
             <Link href="/about">
               <button className={`px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-                location === "/about" ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                location === "/about" ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/8"
               }`}>
                 About
               </button>
@@ -407,7 +407,7 @@ export function Navbar() {
                 Extension
               </button>
             </Link>
-            <div className="hidden xl:flex items-center gap-1.5 text-xs text-muted-foreground">
+            <div className="hidden xl:flex items-center gap-1.5 text-xs text-white/50">
               <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[11px]">Operational</span>
             </div>
