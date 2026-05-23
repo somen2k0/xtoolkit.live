@@ -188,7 +188,8 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
   const leave = useCallback(() => { timer.current = setTimeout(() => setOpen(false), 150); }, []);
   const close = useCallback(() => setOpen(false), []);
 
-  const isActive = currentPath === category.href || currentPath.startsWith(category.href + "/") || open;
+  const isActive = (category.items ?? []).some(item => currentPath === item.href) ||
+    open;
 
   return (
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
