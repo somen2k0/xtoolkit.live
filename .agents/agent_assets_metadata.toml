@@ -96,3 +96,57 @@ id = "uZMEdU6afTmSJ_G-VsVKT"
 uri = "file://icon-128-webstore.png"
 type = "image"
 title = "icon-128-webstore.png (128×128, solid background, 11.7 KB)"
+
+[[outputs]]
+id = "MUlEMkKQU4iuf9HNrmjZ4"
+uri = "file://screenshots/cws-screenshot-1-1280x800.png"
+type = "image"
+title = "cws-screenshot-1 (1280×800)"
+
+[[outputs]]
+id = "sYREd0lowIdrlmFu3mzo_"
+uri = "file://screenshots/cws-screenshot-2-1280x800.png"
+type = "image"
+title = "cws-screenshot-2 (1280×800)"
+
+[[outputs]]
+id = "qfYokDJMDiKFDMullJWdA"
+uri = "file://screenshots/cws-screenshot-3-1280x800.png"
+type = "image"
+title = "cws-screenshot-3 (1280×800)"
+
+[[outputs]]
+id = "T3zwo7ZDyjVknJCEOwtn7"
+uri = "file://screenshots/screenshot-1-chrome-extension-page-1280x800.png"
+type = "image"
+title = "screenshot-1-chrome-extension-page (1280×800)"
+
+[[outputs]]
+id = "n1_V6B9hicvs4Ke6OU-tZ"
+uri = "file://screenshots/screenshot-1-temp-mail-1280x800.png"
+type = "image"
+title = "screenshot-1-temp-mail (1280×800)"
+
+[[outputs]]
+id = "IrAu42GjQ9aG0Hctu14ME"
+uri = "file://screenshots/screenshot-2-temp-mail-1280x800.png"
+type = "image"
+title = "screenshot-2-temp-mail (1280×800)"
+
+[[outputs]]
+id = "lREM17foeIWnjT9mSBJGm"
+uri = "file://screenshots/screenshot-3-temp-gmail-1280x800.png"
+type = "image"
+title = "screenshot-3-temp-gmail (1280×800)"
+
+[[outputs]]
+id = "J0mQJVjOU2BY-_9KINZDR"
+uri = "file://screenshots/screenshot-4-x-checker-1280x800.png"
+type = "image"
+title = "screenshot-4-x-checker (1280×800)"
+
+[[outputs]]
+id = "DWSyi2fmgAP2rTxM3X_hC"
+uri = "file://screenshots/screenshot-5-homepage-1280x800.png"
+type = "image"
+title = "screenshot-5-homepage (1280×800)"
