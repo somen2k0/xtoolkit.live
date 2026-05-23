@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>X Toolkit Extension – Screenshot Mockups</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a2e;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .guide {
+    color: #8899aa;
+    font-size: 13px;
+    text-align: center;
+    background: #0f172a;
+    border: 1px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 14px 20px;
+    max-width: 900px;
+    line-height: 1.7;
+  }
+  .guide b { color: #60a5fa; }
+
+  .shot-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .shot-label {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  /* ── The popup shell ──────────────────────────────────────────────────── */
+  .popup {
+    width: 400px;
+    height: 580px;
+    background: #080c14;
+    color: #e7e9ea;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 8px 40px #000a, 0 0 0 1px #ffffff0d;
+    position: relative;
+    font-size: 13px;
+  }
+
+  /* top bar */
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid #1e2a3a;
+    flex-shrink: 0;
+  }
+  .topbar-logo { display: flex; align-items: center; gap: 6px; }
+  .topbar-title { font-weight: 700; font-size: 14px; color: #e7e9ea; letter-spacing: -0.2px; }
+  .topbar-sub { font-size: 11px; color: #71767b; margin-left: 2px; margin-top: 1px; }
+  .topbar-link {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 4px;
+    color: #7c3aed; text-decoration: none;
+    font-size: 10px; font-weight: 600;
+  }
+
+  /* email header row */
+  .email-header {
+    padding: 10px 12px 8px;
+    border-bottom: 1px solid #1e2a3a;
+    background: #0a1020;
+    flex-shrink: 0;
+  }
+  .email-row { display: flex; align-items: center; gap: 6px; }
+  .email-box {
+    flex: 1;
+    background: #0f1623;
+    border: 1px solid #1e2a3a;
+    border-radius: 8px;
+    padding: 6px 10px;
+    display: flex; align-items: center; gap: 4px;
+    min-width: 0;
+  }
+  .email-local { font-size: 13px; font-family: monospace; color: #1d9bf0; font-weight: 600; }
+  .email-domain { font-size: 13px; font-family: monospace; color: #71767b; }
+  .icon-btn {
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    background: #0f1623; border: 1px solid #1e2a3a;
+    border-radius: 8px; cursor: pointer; color: #71767b;
+    flex-shrink: 0;
+  }
+  .new-btn {
+    height: 32px; padding: 0 10px;
+    display: flex; align-items: center; gap: 4px;
+    background: #1d2e42; border: 1px solid #1d9bf0;
+    border-radius: 8px; cursor: pointer;
+    color: #1d9bf0; font-size: 12px; font-weight: 600; flex-shrink: 0;
+  }
+
+  /* domain selector */
+  .domain-row {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 12px 6px;
+    background: #070b12;
+    border-bottom: 1px solid #1e2a3a;
+    flex-shrink: 0;
+  }
+  .domain-label { color: #71767b; display: flex; align-items: center; gap: 4px; font-size: 11px; flex-shrink: 0; }
+  .domain-select {
+    flex: 1;
+    background: #0f1623;
+    border: 1px solid #1e2a3a;
+    border-radius: 6px;
+    color: #e7e9ea;
+    font-size: 11px;
+    padding: 3px 22px 3px 6px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2371767b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    outline: none;
+  }
+
+  /* inbox empty */
+  .inbox-empty {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 36px 20px; text-align: center;
+  }
+  .inbox-empty-icon { font-size: 32px; margin-bottom: 10px; }
+  .inbox-empty-text { color: #71767b; font-size: 13px; }
+  .inbox-empty-sub { color: #3d4753; font-size: 11px; margin-top: 6px; }
+
+  /* message row */
+  .msg-row {
+    display: flex; gap: 9px; align-items: flex-start;
+    padding: 10px 12px;
+    border-bottom: 1px solid #1e2a3a;
+    cursor: pointer;
+  }
+  .msg-row:hover { background: #0d1827; }
+  .avatar {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+  .msg-from { font-size: 12px; font-weight: 600; color: #e7e9ea; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+  .msg-time { font-size: 10px; color: #71767b; flex-shrink: 0; }
+  .msg-subject { font-size: 12px; color: #b0b8c1; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 2px; }
+  .msg-intro { font-size: 11px; color: #71767b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .verify-badge {
+    font-size: 9px; font-weight: 700; padding: 1px 5px;
+    background: #1a2e4a; color: #1d9bf0;
+    border-radius: 9999px; border: 1px solid #1d9bf044;
+    text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0;
+  }
+
+  /* bottom tab bar */
+  .tabbar {
+    display: flex;
+    border-top: 1px solid #1e2a3a;
+    background: #080c14;
+    flex-shrink: 0;
+  }
+  .tab-btn {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 8px 4px 7px;
+    background: none; border: none; cursor: pointer;
+    font-size: 10px; font-weight: 400; letter-spacing: 0.2px;
+  }
+  .tab-btn.active { color: #1d9bf0; border-top: 2px solid #1d9bf0; margin-top: -1px; font-weight: 600; }
+  .tab-btn.inactive { color: #71767b; border-top: 2px solid transparent; margin-top: -1px; }
+
+  /* footer promo */
+  .promo-footer {
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    padding: 5px 12px;
+    background: #050a10;
+    border-top: 1px solid #0f1e2e;
+    text-decoration: none; color: #3d5a7a;
+    font-size: 10px; flex-shrink: 0;
+  }
+  .promo-footer span.cta { color: #7c3aed; font-weight: 600; }
+
+  /* OTP card */
+  .otp-card {
+    margin: 10px 12px 0;
+    padding: 10px 12px;
+    background: linear-gradient(135deg, #0c2a1e 0%, #0a1f2e 100%);
+    border: 1px solid #00ba7c44;
+    border-radius: 10px;
+    display: flex; align-items: center; gap: 10px;
+    flex-shrink: 0;
+  }
+  .otp-code { font-size: 22px; font-weight: 800; color: #00ba7c; font-family: monospace; letter-spacing: 3px; }
+  .otp-copy-btn {
+    padding: 6px 10px;
+    background: #1a3a2a;
+    border: 1px solid #00ba7c66;
+    border-radius: 7px; color: #00ba7c;
+    font-size: 11px; font-weight: 600; cursor: pointer; flex-shrink: 0;
+  }
+
+  /* message view */
+  .msg-view-header {
+    padding: 8px 12px;
+    border-bottom: 1px solid #1e2a3a;
+    display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+  }
+  .back-btn {
+    width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer; color: #71767b; border-radius: 6px;
+  }
+  .msg-body-wrap { flex: 1; overflow: auto; padding: 10px 12px 12px; }
+  .otp-highlight {
+    margin: 10px 12px 0;
+    padding: 10px 12px;
+    background: #0c2a1e;
+    border: 1px solid #00ba7c44;
+    border-radius: 10px;
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  }
+  .otp-big { font-size: 24px; font-weight: 800; color: #00ba7c; font-family: monospace; letter-spacing: 4px; }
+
+  /* gmail sub-tabs */
+  .subtabs {
+    display: flex; gap: 4px; padding: 8px 12px;
+    border-bottom: 1px solid #1e2a3a; flex-shrink: 0;
+  }
+  .subtab {
+    flex: 1; padding: 5px 4px;
+    border-radius: 7px; cursor: pointer;
+    font-size: 11px; font-weight: 400;
+  }
+  .subtab.active { background: #1d2e42; border: 1px solid #1d9bf0; color: #1d9bf0; font-weight: 600; }
+  .subtab.inactive { background: #0f1623; border: 1px solid #1e2a3a; color: #71767b; }
+
+  .gmail-tip {
+    margin: 8px 12px 0;
+    padding: 8px 10px;
+    background: #0a1f2e; border: 1px solid #1d9bf022;
+    border-radius: 8px; font-size: 11px; color: #71767b; flex-shrink: 0;
+  }
+
+  /* dropdown overlay for shot 3 */
+  .dropdown-open-wrap { position: relative; }
+  .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: #0f1623;
+    border: 1px solid #6366f1;
+    border-radius: 7px;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0 8px 24px #000a;
+    margin-top: 2px;
+  }
+  .dropdown-option {
+    padding: 7px 10px;
+    font-size: 11px;
+    color: #e7e9ea;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 7px;
+    border-bottom: 1px solid #1e2a3a;
+  }
+  .dropdown-option:last-child { border-bottom: none; }
+  .dropdown-option.selected { background: #1a1f3a; color: #6366f1; font-weight: 600; }
+  .dropdown-option:not(.selected):hover { background: #141b2d; }
+  .dropdown-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+</style>
+</head>
+<body>
+
+<div class="guide">
+  <b>How to screenshot:</b> Right-click any popup below → Inspect → device toolbar → set 400×800 → ⋮ → Capture screenshot &nbsp;|&nbsp;
+  Or: press <b>F12</b>, then <b>Ctrl+Shift+P</b> → type <i>Capture screenshot</i> while hovering over the popup.
+  Each popup is exactly <b>400×580px</b> — the real extension size.
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHOT 1 — Fresh inbox, guerrillamail.com, empty
+═══════════════════════════════════════════════════════════════ -->
+<div class="shot-wrap">
+  <div class="shot-label">Screenshot 1 — Fresh inbox (guerrillamail.com)</div>
+  <div class="popup">
+
+    <!-- top bar -->
+    <div class="topbar">
+      <div class="topbar-logo">
+        <svg width="22" height="22" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="eBg1" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#09071a"/><stop offset="100%" stop-color="#110d24"/></linearGradient>
+            <linearGradient id="eFront1" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="45%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#4c1d95"/></linearGradient>
+          </defs>
+          <rect width="180" height="180" rx="36" fill="url(#eBg1)"/>
+          <g stroke="#2e1878" stroke-linecap="round" fill="none" transform="translate(2,2)"><line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/><line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/></g>
+          <g stroke="#2e1878" stroke-linecap="square" stroke-linejoin="miter" fill="none" transform="translate(2,2)"><polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/><polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/></g>
+          <g stroke="url(#eFront1)" stroke-linecap="round" fill="none"><line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/><line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/></g>
+          <g stroke="url(#eFront1)" stroke-linecap="square" stroke-linejoin="miter" fill="none"><polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/><polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/></g>
+        </svg>
+        <span class="topbar-title">X Toolkit</span>
+      </div>
+      <span class="topbar-sub">Temp Mail</span>
+      <a class="topbar-link" href="#">43+ tools <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    </div>
+
+    <!-- email header -->
+    <div class="email-header">
+      <div class="email-row">
+        <div class="email-box">
+          <span class="email-local">sarah.thomas76</span><span class="email-domain">@guerrillamail.com</span>
+        </div>
+        <div class="icon-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </div>
+        <div class="icon-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+        </div>
+        <button class="new-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New
+        </button>
+      </div>
+    </div>
+
+    <!-- domain row -->
+    <div class="domain-row">
+      <div class="domain-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span>Domain:</span>
+      </div>
+      <select class="domain-select">
+        <option selected>guerrillamail.com</option>
+        <option>grr.la</option>
+        <option>sharklasers.com</option>
+        <option>spam4.me</option>
+        <option>mail.gw</option>
+      </select>
+    </div>
+
+    <!-- inbox empty -->
+    <div class="inbox-empty" style="flex:1">
+      <div class="inbox-empty-icon">📭</div>
+      <div class="inbox-empty-text">No messages yet</div>
+      <div class="inbox-empty-sub">Refreshes every 15s automatically</div>
+    </div>
+
+    <!-- tab bar -->
+    <div class="tabbar">
+      <button class="tab-btn active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Temp Mail
+      </button>
+      <button class="tab-btn inactive">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18h-2V9.25L12 13 6 9.25V18H4V6h1.2l6.8 4.25L18.8 6H20v12z"/></svg>
+        Gmail
+      </button>
+      <button class="tab-btn inactive">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        History
+      </button>
+    </div>
+
+    <a class="promo-footer" href="#">
+      <span>Want 43+ more tools?</span>
+      <span class="cta">Visit xtoolkit.live →</span>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHOT 2 — Email received
+═══════════════════════════════════════════════════════════════ -->
+<div class="shot-wrap">
+  <div class="shot-label">Screenshot 2 — Email received</div>
+  <div class="popup">
+
+    <div class="topbar">
+      <div class="topbar-logo">
+        <svg width="22" height="22" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="eBg2" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#09071a"/><stop offset="100%" stop-color="#110d24"/></linearGradient><linearGradient id="eFront2" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="45%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#4c1d95"/></linearGradient></defs>
+          <rect width="180" height="180" rx="36" fill="url(#eBg2)"/>
+          <g stroke="url(#eFront2)" stroke-linecap="round" fill="none"><line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/><line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/></g>
+          <g stroke="url(#eFront2)" stroke-linecap="square" stroke-linejoin="miter" fill="none"><polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/><polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/></g>
+        </svg>
+        <span class="topbar-title">X Toolkit</span>
+      </div>
+      <span class="topbar-sub">Temp Mail</span>
+      <a class="topbar-link" href="#">43+ tools <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    </div>
+
+    <div class="email-header">
+      <div class="email-row">
+        <div class="email-box">
+          <span class="email-local">sarah.thomas76</span><span class="email-domain">@guerrillamail.com</span>
+        </div>
+        <div class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+        <div class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></div>
+        <button class="new-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New</button>
+      </div>
+    </div>
+
+    <div class="domain-row">
+      <div class="domain-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>Domain:</span></div>
+      <select class="domain-select"><option selected>guerrillamail.com</option><option>grr.la</option><option>sharklasers.com</option><option>spam4.me</option><option>mail.gw</option></select>
+    </div>
+
+    <!-- inbox with one message -->
+    <div style="flex:1; overflow:auto;">
+      <div class="msg-row">
+        <div class="avatar" style="background: hsl(196,50%,20%); color: hsl(196,70%,70%);">n</div>
+        <div style="flex:1; min-width:0;">
+          <div style="display:flex; align-items:center; gap:5px; margin-bottom:2px;">
+            <span class="msg-from">no-reply@gmail.com</span>
+            <span class="msg-time">Just now</span>
+          </div>
+          <div class="msg-subject">Hey, test email from Gmail 👋</div>
+          <div class="msg-intro">Just testing your X Toolkit extension inbox...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabbar">
+      <button class="tab-btn active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Temp Mail</button>
+      <button class="tab-btn inactive"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18h-2V9.25L12 13 6 9.25V18H4V6h1.2l6.8 4.25L18.8 6H20v12z"/></svg>Gmail</button>
+      <button class="tab-btn inactive"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</button>
+    </div>
+    <a class="promo-footer" href="#"><span>Want 43+ more tools?</span><span class="cta">Visit xtoolkit.live →</span></a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHOT 3 — Domain dropdown open
+═══════════════════════════════════════════════════════════════ -->
+<div class="shot-wrap">
+  <div class="shot-label">Screenshot 3 — Domain dropdown open</div>
+  <div class="popup">
+
+    <div class="topbar">
+      <div class="topbar-logo">
+        <svg width="22" height="22" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="eBg3" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#09071a"/><stop offset="100%" stop-color="#110d24"/></linearGradient><linearGradient id="eFront3" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="45%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#4c1d95"/></linearGradient></defs>
+          <rect width="180" height="180" rx="36" fill="url(#eBg3)"/>
+          <g stroke="url(#eFront3)" stroke-linecap="round" fill="none"><line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/><line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/></g>
+          <g stroke="url(#eFront3)" stroke-linecap="square" stroke-linejoin="miter" fill="none"><polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/><polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/></g>
+        </svg>
+        <span class="topbar-title">X Toolkit</span>
+      </div>
+      <span class="topbar-sub">Temp Mail</span>
+      <a class="topbar-link" href="#">43+ tools <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    </div>
+
+    <div class="email-header">
+      <div class="email-row">
+        <div class="email-box"><span class="email-local">sarah.thomas76</span><span class="email-domain">@guerrillamail.com</span></div>
+        <div class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+        <div class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></div>
+        <button class="new-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New</button>
+      </div>
+    </div>
+
+    <!-- domain row with dropdown expanded (simulated) -->
+    <div class="domain-row" style="position:relative; overflow:visible; z-index:10;">
+      <div class="domain-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>Domain:</span></div>
+      <div class="dropdown-open-wrap" style="flex:1; position:relative;">
+        <!-- closed face -->
+        <div style="display:flex; align-items:center; justify-content:space-between; background:#0f1623; border:1px solid #6366f1; border-radius:6px; padding:3px 6px; font-size:11px; color:#6366f1; font-weight:600; cursor:pointer;">
+          <span>guerrillamail.com</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+        </div>
+        <!-- open dropdown -->
+        <div class="dropdown-options">
+          <div class="dropdown-option selected">
+            <div class="dropdown-dot" style="background:#6366f1;"></div>
+            guerrillamail.com
+          </div>
+          <div class="dropdown-option">
+            <div class="dropdown-dot" style="background:#3d4753;"></div>
+            grr.la
+          </div>
+          <div class="dropdown-option">
+            <div class="dropdown-dot" style="background:#3d4753;"></div>
+            sharklasers.com
+          </div>
+          <div class="dropdown-option">
+            <div class="dropdown-dot" style="background:#3d4753;"></div>
+            spam4.me
+          </div>
+          <div class="dropdown-option" style="border-bottom:none;">
+            <div class="dropdown-dot" style="background:#3d4753;"></div>
+            mail.gw
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1; overflow:auto; position:relative; z-index:1;">
+      <div class="msg-row">
+        <div class="avatar" style="background:hsl(196,50%,20%); color:hsl(196,70%,70%);">n</div>
+        <div style="flex:1; min-width:0;">
+          <div style="display:flex; align-items:center; gap:5px; margin-bottom:2px;"><span class="msg-from">no-reply@gmail.com</span><span class="msg-time">Just now</span></div>
+          <div class="msg-subject">Hey, test email from Gmail 👋</div>
+          <div class="msg-intro">Just testing your X Toolkit extension inbox...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabbar">
+      <button class="tab-btn active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Temp Mail</button>
+      <button class="tab-btn inactive"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18h-2V9.25L12 13 6 9.25V18H4V6h1.2l6.8 4.25L18.8 6H20v12z"/></svg>Gmail</button>
+      <button class="tab-btn inactive"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</button>
+    </div>
+    <a class="promo-footer" href="#"><span>Want 43+ more tools?</span><span class="cta">Visit xtoolkit.live →</span></a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHOT 4 — Gmail tab
+═══════════════════════════════════════════════════════════════ -->
+<div class="shot-wrap">
+  <div class="shot-label">Screenshot 4 — Gmail tab</div>
+  <div class="popup">
+
+    <div class="topbar">
+      <div class="topbar-logo">
+        <svg width="22" height="22" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="eBg4" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#09071a"/><stop offset="100%" stop-color="#110d24"/></linearGradient><linearGradient id="eFront4" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="45%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#4c1d95"/></linearGradient></defs>
+          <rect width="180" height="180" rx="36" fill="url(#eBg4)"/>
+          <g stroke="url(#eFront4)" stroke-linecap="round" fill="none"><line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/><line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/></g>
+          <g stroke="url(#eFront4)" stroke-linecap="square" stroke-linejoin="miter" fill="none"><polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/><polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/></g>
+        </svg>
+        <span class="topbar-title">X Toolkit</span>
+      </div>
+      <span class="topbar-sub">Temp Mail</span>
+      <a class="topbar-link" href="#">43+ tools <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    </div>
+
+    <!-- Gmail sub-tabs -->
+    <div class="subtabs">
+      <button class="subtab active">Temp Gmail</button>
+      <button class="subtab inactive">Gmail Tricks</button>
+    </div>
+
+    <div class="email-header">
+      <div class="email-row">
+        <div class="email-box"><span class="email-local">sarah.t.homas76</span><span class="email-domain">@gmail.com</span></div>
+        <div class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+        <div class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></div>
+        <button class="new-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New</button>
+      </div>
+    </div>
+
+    <div class="gmail-tip">💡 Emails sent to any dot/plus variation of this address will appear here</div>
+
+    <div class="inbox-empty" style="flex:1; justify-content:center;">
+      <div class="inbox-empty-icon">📭</div>
+      <div class="inbox-empty-text">No messages yet · inbox updates every 15s</div>
+    </div>
+
+    <div class="tabbar">
+      <button class="tab-btn inactive"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Temp Mail</button>
+      <button class="tab-btn active"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18h-2V9.25L12 13 6 9.25V18H4V6h1.2l6.8 4.25L18.8 6H20v12z"/></svg>Gmail</button>
+      <button class="tab-btn inactive"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</button>
+    </div>
+    <a class="promo-footer" href="#"><span>Want 43+ more tools?</span><span class="cta">Visit xtoolkit.live →</span></a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHOT 5 — Message open with OTP
+═══════════════════════════════════════════════════════════════ -->
+<div class="shot-wrap">
+  <div class="shot-label">Screenshot 5 — Message open (OTP detected)</div>
+  <div class="popup">
+
+    <div class="topbar">
+      <div class="topbar-logo">
+        <svg width="22" height="22" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="eBg5" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#09071a"/><stop offset="100%" stop-color="#110d24"/></linearGradient><linearGradient id="eFront5" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="45%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#4c1d95"/></linearGradient></defs>
+          <rect width="180" height="180" rx="36" fill="url(#eBg5)"/>
+          <g stroke="url(#eFront5)" stroke-linecap="round" fill="none"><line x1="58" y1="44" x2="122" y2="136" stroke-width="21"/><line x1="122" y1="44" x2="58" y2="136" stroke-width="21"/></g>
+          <g stroke="url(#eFront5)" stroke-linecap="square" stroke-linejoin="miter" fill="none"><polyline points="46,38 31,38 31,142 46,142" stroke-width="10"/><polyline points="134,38 149,38 149,142 134,142" stroke-width="10"/></g>
+        </svg>
+        <span class="topbar-title">X Toolkit</span>
+      </div>
+      <span class="topbar-sub">Temp Mail</span>
+      <a class="topbar-link" href="#">43+ tools <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+    </div>
+
+    <!-- message view header -->
+    <div class="msg-view-header">
+      <button class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <div style="flex:1; min-width:0;">
+        <div style="font-size:13px; font-weight:600; color:#e7e9ea; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Your verification code is 847291</div>
+        <div style="font-size:11px; color:#71767b;">no-reply@gmail.com · Just now</div>
+      </div>
+    </div>
+
+    <!-- OTP highlight -->
+    <div class="otp-highlight">
+      <span style="font-size:16px;">🔑</span>
+      <div style="flex:1;">
+        <div style="font-size:10px; color:#71767b; margin-bottom:1px; text-transform:uppercase;">Verification Code</div>
+        <div class="otp-big">847291</div>
+      </div>
+      <button style="padding:6px 12px; background:#1a3a2a; border:1px solid #00ba7c66; border-radius:7px; color:#00ba7c; font-size:12px; font-weight:600; cursor:pointer;">Copy</button>
+    </div>
+
+    <!-- message body -->
+    <div class="msg-body-wrap">
+      <div style="font-size:12px; color:#c5cdd4; line-height:1.7;">
+        <p style="margin-bottom:10px;">Hi Sarah,</p>
+        <p style="margin-bottom:10px;">Please use the verification code below to complete your sign-up:</p>
+        <p style="font-size:20px; font-weight:700; color:#e7e9ea; letter-spacing:4px; margin-bottom:10px;">847291</p>
+        <p style="margin-bottom:8px;">This code expires in 10 minutes.</p>
+        <p style="color:#71767b;">If you did not request this, you can safely ignore this email.</p>
+      </div>
+    </div>
+
+    <div class="tabbar">
+      <button class="tab-btn active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Temp Mail</button>
+      <button class="tab-btn inactive"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18h-2V9.25L12 13 6 9.25V18H4V6h1.2l6.8 4.25L18.8 6H20v12z"/></svg>Gmail</button>
+      <button class="tab-btn inactive"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>History</button>
+    </div>
+    <a class="promo-footer" href="#"><span>Want 43+ more tools?</span><span class="cta">Visit xtoolkit.live →</span></a>
+  </div>
+</div>
+
+</body>
+</html>
