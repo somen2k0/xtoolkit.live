@@ -1,6 +1,9 @@
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import {
+  Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+} from "@/components/ui/accordion";
+import {
   Download, Star, Shield, Zap, Bell, Mail,
   Copy, RefreshCw, History, Key, Puzzle, Chrome,
 } from "lucide-react";
@@ -26,15 +29,31 @@ const faqs = [
   },
   {
     q: "Which browsers does the extension support?",
-    a: "The extension works on all Chromium-based browsers: Google Chrome, Brave, Microsoft Edge, Arc, and Opera. It uses Manifest V3.",
+    a: "The extension works on all Chromium-based browsers: Google Chrome, Brave, Microsoft Edge, Arc, and Opera. It uses Manifest V3 so it is compatible with all modern Chromium-based browsers.",
   },
   {
     q: "Is the extension free?",
-    a: "Yes, completely free. There are no premium tiers, no subscriptions, and no feature limits.",
+    a: "Yes, completely free. There are no premium tiers, no subscriptions, and no feature limits. All 8 built-in features are available immediately after install.",
   },
   {
     q: "What data does the extension collect?",
     a: "None. The extension stores your active inbox session and address history locally on your device using Chrome's storage API. Nothing is sent to any server beyond the API calls needed to generate and check your inbox.",
+  },
+  {
+    q: "How does the OTP detection work?",
+    a: "When a new email arrives in your disposable inbox, the extension scans the message body for sequences of 4–8 digits that look like verification or one-time-password codes. If one is found, a 1-click copy button appears so you can paste it without even reading the email.",
+  },
+  {
+    q: "Can I use the extension without installing it?",
+    a: "Yes — all the same tools (temp email, Gmail tricks, masked email) are available for free on the X Toolkit website at xtoolkit.live. The extension is simply a faster, always-accessible version that lives in your browser toolbar.",
+  },
+  {
+    q: "Will my email address stay the same between sessions?",
+    a: "Yes. Your generated address is saved locally and persists across browser restarts. You can also browse your full inbox history from previous sessions inside the extension popup.",
+  },
+  {
+    q: "How do I install the extension?",
+    a: "Click 'Add to Chrome' above, then confirm the prompt in your browser. Once installed, click the puzzle-piece icon in your toolbar, find X Toolkit, and pin it. Your first disposable inbox is created automatically — no setup needed.",
   },
 ];
 
@@ -198,6 +217,31 @@ export default function ChromeExtensionPage() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* ── FAQ ── */}
+      <div className="max-w-3xl mx-auto px-4 md:px-8 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Frequently asked questions</h2>
+          <p className="text-white/60">Everything you need to know before installing.</p>
+        </div>
+
+        <Accordion type="single" collapsible className="space-y-3">
+          {faqs.map((faq, i) => (
+            <AccordionItem
+              key={i}
+              value={`faq-${i}`}
+              className="rounded-xl border border-white/10 bg-white/[0.03] hover:border-violet-500/30 transition-colors px-5 !border-b-0 data-[state=open]:border-violet-500/40 data-[state=open]:bg-white/[0.05]"
+            >
+              <AccordionTrigger className="text-white/90 hover:text-white font-medium text-sm md:text-base py-5 hover:no-underline [&[data-state=open]]:text-violet-200">
+                {faq.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-white/60 text-sm leading-relaxed pb-5">
+                {faq.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
 
       {/* ── Bottom CTA ── */}
