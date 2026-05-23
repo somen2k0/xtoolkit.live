@@ -1,23 +1,23 @@
-import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { Button } from "@/components/ui/button";
 import {
-  Download, Star, Shield, Zap, Bell, Clock, Mail,
-  Copy, RefreshCw, History, Key, Check, Puzzle,
+  Download, Star, Shield, Zap, Bell, Mail,
+  Copy, RefreshCw, History, Key, Puzzle,
 } from "lucide-react";
 
-const VERSION = "1.0.0";
+const VERSION = "1.0.1";
+const CWS_URL = "https://chromewebstore.google.com/detail/x-toolkit/TODO_REPLACE_WITH_REAL_ID";
 
 const features = [
-  { icon: Zap,        title: "Instant inbox generation",           desc: "Get a disposable email address instantly — multiple domains available, realistic addresses, auto-refresh every 15 seconds. No tab switching needed." },
-  { icon: Key,        title: "OTP & verification code detection",  desc: "Automatically detects 4–8 digit codes and shows a 1-click copy button." },
-  { icon: Bell,       title: "Desktop notifications",              desc: "Get alerted the moment a new email arrives — even when the popup is closed." },
-  { icon: RefreshCw,  title: "Auto-refresh every 15 seconds",      desc: "Lightweight service worker keeps your inbox live in the background." },
-  { icon: Mail,       title: "Temp Gmail & Gmail Tricks",          desc: "Generate a real temporary Gmail address with a live readable inbox." },
-  { icon: History,    title: "Inbox history",                      desc: "All generated addresses saved locally and survive browser restarts." },
-  { icon: Shield,     title: "Zero tracking, zero accounts",       desc: "No login, no data collection. Everything stored locally on your device." },
-  { icon: Copy,       title: "Keyboard shortcut",                  desc: "Press Alt+Shift+C anywhere to copy your active temp email — no popup needed." },
+  { icon: Zap,       title: "Instant inbox generation",          desc: "Get a disposable email address instantly — multiple domains available, realistic addresses, auto-refresh every 15 seconds. No tab switching needed." },
+  { icon: Key,       title: "OTP & verification code detection", desc: "Automatically detects 4–8 digit codes and shows a 1-click copy button." },
+  { icon: Bell,      title: "Desktop notifications",             desc: "Get alerted the moment a new email arrives — even when the popup is closed." },
+  { icon: RefreshCw, title: "Auto-refresh every 15 seconds",     desc: "Lightweight service worker keeps your inbox live in the background." },
+  { icon: Mail,      title: "Temp Gmail & Gmail Tricks",         desc: "Generate a real temporary Gmail address with a live readable inbox." },
+  { icon: History,   title: "Inbox history",                     desc: "All generated addresses saved locally and survive browser restarts." },
+  { icon: Shield,    title: "Zero tracking, zero accounts",      desc: "No login, no data collection. Everything stored locally on your device." },
+  { icon: Copy,      title: "Keyboard shortcut",                 desc: "Press Alt+Shift+C anywhere to copy your active temp email — no popup needed." },
 ];
 
 const faqs = [
@@ -26,8 +26,8 @@ const faqs = [
     a: "X Toolkit is a free Chrome extension that gives you an instant disposable email inbox directly in your browser toolbar. It auto-generates a temporary email address, polls for new messages every 15 seconds, detects OTP verification codes automatically, and lets you generate temp Gmail addresses — all without visiting any website.",
   },
   {
-    q: "Which browsers will the extension support?",
-    a: "The extension will work on all Chromium-based browsers: Google Chrome, Brave, Microsoft Edge, Arc, and Opera. It uses Manifest V3. Firefox support is planned for a future release.",
+    q: "Which browsers does the extension support?",
+    a: "The extension works on all Chromium-based browsers: Google Chrome, Brave, Microsoft Edge, Arc, and Opera. It uses Manifest V3.",
   },
   {
     q: "Is the extension free?",
@@ -40,15 +40,6 @@ const faqs = [
 ];
 
 export default function ChromeExtensionPage() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleNotify(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubmitted(true);
-  }
-
   return (
     <Layout>
       <SeoHead
@@ -66,30 +57,27 @@ export default function ChromeExtensionPage() {
             applicationCategory: "BrowserApplication",
             operatingSystem: ["Chrome", "Brave", "Microsoft Edge", "Opera", "Arc"],
             softwareVersion: VERSION,
-            offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/PreOrder" },
-            description: "A free Chrome extension for generating instant disposable email inboxes, automatically detecting OTP codes, and creating temp Gmail addresses — coming soon.",
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+            description: "A free Chrome extension for generating instant disposable email inboxes and automatically detecting OTP codes.",
           },
         ]}
       />
 
       {/* ── Hero ── */}
       <div className="relative overflow-hidden border-b border-border/40">
-        {/* background blobs */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[420px] w-[700px] rounded-full bg-primary/10 blur-[120px]" />
           <div className="absolute top-20 right-0 h-64 w-64 rounded-full bg-violet-600/8 blur-[80px]" />
         </div>
 
         <div className="max-w-3xl mx-auto px-4 md:px-8 py-16 md:py-24 text-center">
-          {/* Icon */}
           <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-primary/10 border border-primary/25 shadow-lg shadow-primary/15 mb-6">
             <Puzzle className="h-7 w-7 text-primary" />
           </div>
 
-          {/* Coming soon badge */}
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/8 px-3 py-1 text-xs font-medium text-amber-400 mb-5">
-            <Clock className="h-3 w-3" />
-            Coming Soon
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/8 px-3 py-1 text-xs font-medium text-emerald-400 mb-5">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Free on the Chrome Web Store
           </div>
 
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
@@ -101,43 +89,31 @@ export default function ChromeExtensionPage() {
 
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
             Instant temp email, OTP detection, and Gmail tricks — right in your toolbar.
-            No website visit needed. Launching on the Chrome Web Store soon.
+            No website visit needed. Works on Chrome, Brave, Edge, and Arc.
           </p>
 
-          {/* Notify form */}
-          {submitted ? (
-            <div className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/8 px-5 py-3 text-sm text-emerald-400 font-medium">
-              <Check className="h-4 w-4" />
-              You're on the list — we'll email you when it launches!
-            </div>
-          ) : (
-            <form onSubmit={handleNotify} className="flex flex-col sm:flex-row gap-2.5 max-w-sm mx-auto">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                className="flex-1 rounded-xl border border-border/70 bg-card/60 px-4 py-2.5 text-sm outline-none placeholder:text-muted-foreground/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 transition"
-              />
-              <Button type="submit" className="gap-2 shadow-sm shadow-primary/20 whitespace-nowrap">
-                <Bell className="h-3.5 w-3.5" />
-                Notify me
-              </Button>
-            </form>
-          )}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Button asChild size="lg" className="gap-2 shadow-md shadow-primary/25 px-7">
+              <a href={CWS_URL} target="_blank" rel="noopener noreferrer">
+                <Download className="h-4 w-4" />
+                Add to Chrome — it's free
+              </a>
+            </Button>
+          </div>
 
-          {/* Social proof */}
-          <p className="text-xs text-muted-foreground/50 mt-4 flex items-center justify-center gap-1">
-            <Star className="h-3 w-3 text-amber-400/60" />
-            No spam · Notified once at launch · Unsubscribe anytime
+          <p className="text-xs text-muted-foreground/50 mt-5 flex items-center justify-center gap-3">
+            <span className="flex items-center gap-1"><Star className="h-3 w-3 text-amber-400/60" /> Free forever</span>
+            <span>·</span>
+            <span>No account needed</span>
+            <span>·</span>
+            <span>Manifest V3</span>
           </p>
         </div>
       </div>
 
       {/* ── Features grid ── */}
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-14">
-        <h2 className="text-xl font-semibold text-center mb-2">What's coming</h2>
+        <h2 className="text-xl font-semibold text-center mb-2">Everything you need, in one click</h2>
         <p className="text-sm text-muted-foreground text-center mb-10">
           Everything the web tool does — faster, from any tab, without leaving the page.
         </p>
@@ -155,10 +131,10 @@ export default function ChromeExtensionPage() {
         </div>
       </div>
 
-      {/* ── How it'll work ── */}
+      {/* ── How it works ── */}
       <div className="border-t border-border/40">
         <div className="max-w-3xl mx-auto px-4 md:px-8 py-14">
-          <h2 className="text-xl font-semibold text-center mb-8">How it'll work</h2>
+          <h2 className="text-xl font-semibold text-center mb-8">How it works</h2>
           <div className="grid sm:grid-cols-3 gap-6">
             {[
               { n: "1", title: "Install from Chrome Web Store", desc: "One click — Add to Chrome. No account, no email required." },
@@ -181,31 +157,16 @@ export default function ChromeExtensionPage() {
       <div className="border-t border-border/40 bg-primary/[0.03]">
         <div className="max-w-3xl mx-auto px-4 md:px-8 py-12 text-center">
           <Download className="h-6 w-6 text-primary/60 mx-auto mb-3" />
-          <h3 className="font-semibold text-lg mb-1">Be the first to install it</h3>
+          <h3 className="font-semibold text-lg mb-1">Install X Toolkit now</h3>
           <p className="text-sm text-muted-foreground mb-6">
-            The extension is in final testing. Drop your email and we'll ping you the moment it's live.
+            Free on the Chrome Web Store. No account, no signup — just install and go.
           </p>
-          {submitted ? (
-            <div className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/8 px-5 py-3 text-sm text-emerald-400 font-medium">
-              <Check className="h-4 w-4" />
-              You're on the list!
-            </div>
-          ) : (
-            <form onSubmit={handleNotify} className="flex flex-col sm:flex-row gap-2.5 max-w-sm mx-auto">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                className="flex-1 rounded-xl border border-border/70 bg-card/60 px-4 py-2.5 text-sm outline-none placeholder:text-muted-foreground/50 focus:border-primary/50 transition"
-              />
-              <Button type="submit" className="gap-2 shadow-sm shadow-primary/20 whitespace-nowrap">
-                <Bell className="h-3.5 w-3.5" />
-                Notify me
-              </Button>
-            </form>
-          )}
+          <Button asChild size="lg" className="gap-2 shadow-md shadow-primary/25 px-7">
+            <a href={CWS_URL} target="_blank" rel="noopener noreferrer">
+              <Download className="h-4 w-4" />
+              Add to Chrome — it's free
+            </a>
+          </Button>
         </div>
       </div>
     </Layout>
