@@ -78,3 +78,9 @@ id = "6ToaT6cfaBoXYA3N88mH0"
 uri = "file://screenshots/screenshot-5-homepage.jpg"
 type = "image"
 title = "Screenshot 5 — Homepage"
+
+[[outputs]]
+id = "jfpur39Q91SBSJPvH30nt"
+uri = "file://artifacts/x-toolkit-extension/x-toolkit-extension.zip"
+type = "unspecified"
+title = "x-toolkit-extension.zip (111.8 KB)"
