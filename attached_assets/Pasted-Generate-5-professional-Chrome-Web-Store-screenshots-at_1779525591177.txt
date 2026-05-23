@@ -1,0 +1,713 @@
+Generate 5 professional Chrome Web Store screenshots
+at exactly 1280x800 pixels each.
+
+Each screenshot shows a Mac-style browser window
+(like the one in the reference image) with the
+extension popup overlaying the right side.
+
+Use puppeteer to generate all 5.
+
+SETUP:
+npm install puppeteer
+
+Create file: generate-cws-screenshots.js
+
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+
+if (!fs.existsSync('cws-screenshots')) {
+  fs.mkdirSync('cws-screenshots');
+}
+
+const screenshots = [
+  {
+    name: '1-fresh-inbox',
+    html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1280px; height: 800px;
+    background: #0d0d1a;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .browser {
+    width: 1280px; height: 800px;
+    background: #1a1a2e;
+    position: absolute; top: 0; left: 0;
+  }
+  .browser-bar {
+    height: 52px;
+    background: #16213e;
+    display: flex; align-items: center;
+    padding: 0 16px; gap: 8px;
+    border-bottom: 1px solid #2a2a4a;
+  }
+  .dots { display: flex; gap: 6px; }
+  .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+  .url-bar {
+    flex: 1; height: 28px;
+    background: #0f0f1a;
+    border-radius: 6px;
+    display: flex; align-items: center;
+    padding: 0 12px;
+    color: #6b7280; font-size: 13px;
+    margin: 0 40px;
+  }
+  .url-text { color: #9ca3af; font-size: 13px; }
+  .page-content {
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .page-title {
+    font-size: 48px; font-weight: 700;
+    color: #ffffff; margin-bottom: 16px;
+  }
+  .page-subtitle {
+    font-size: 18px; color: #6b7280;
+  }
+  .mail-icon {
+    width: 80px; height: 80px;
+    margin: 60px auto;
+    opacity: 0.3;
+  }
+  /* Extension popup */
+  .extension {
+    position: absolute;
+    top: 52px; right: 0;
+    width: 380px;
+    height: 748px;
+    background: #0f0f1a;
+    border-left: 1px solid #1f1f3a;
+    display: flex; flex-direction: column;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.5);
+  }
+  .ext-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #1f1f3a;
+    display: flex; align-items: center;
+    justify-content: space-between;
+  }
+  .ext-logo {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ext-logo-icon {
+    width: 24px; height: 24px;
+    background: #6366f1;
+    border-radius: 6px;
+    display: flex; align-items: center;
+    justify-content: center;
+    color: white; font-weight: 700;
+    font-size: 12px;
+  }
+  .ext-logo-text {
+    font-weight: 600; color: #fff; font-size: 14px;
+  }
+  .ext-logo-sub {
+    color: #6b7280; font-size: 12px; margin-left: 4px;
+  }
+  .ext-tools-link {
+    color: #6366f1; font-size: 12px;
+  }
+  .email-bar {
+    margin: 12px;
+    background: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+  }
+  .email-text {
+    font-size: 13px; color: #6366f1;
+    font-weight: 500;
+  }
+  .email-actions {
+    display: flex; gap: 8px; align-items: center;
+  }
+  .btn-new {
+    background: #6366f1;
+    color: white; border: none;
+    border-radius: 6px; padding: 4px 10px;
+    font-size: 12px; font-weight: 600;
+    cursor: pointer;
+  }
+  .domain-bar {
+    margin: 0 12px 12px;
+    background: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    color: #9ca3af; font-size: 13px;
+  }
+  .domain-label {
+    display: flex; align-items: center; gap: 6px;
+    color: #6b7280; font-size: 12px;
+  }
+  .inbox-area {
+    flex: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: #4b5563;
+  }
+  .no-msg { font-size: 14px; color: #4b5563; margin-top: 12px; }
+  .refresh-text { font-size: 12px; color: #374151; margin-top: 4px; }
+  .ext-footer {
+    border-top: 1px solid #1f1f3a;
+    display: flex;
+  }
+  .tab {
+    flex: 1; padding: 12px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 4px;
+    color: #4b5563; font-size: 11px;
+    cursor: pointer;
+  }
+  .tab.active { color: #6366f1; border-top: 2px solid #6366f1; }
+  .tab-icon { font-size: 18px; }
+  .footer-link {
+    padding: 8px; text-align: center;
+    font-size: 11px; color: #4b5563;
+    border-top: 1px solid #1f1f3a;
+  }
+  .footer-link span { color: #6366f1; }
+</style>
+</head>
+<body>
+<div class="browser">
+  <div class="browser-bar">
+    <div class="dots">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+    </div>
+    <div class="url-bar">
+      <span class="url-text">🔒 xtoolkit.live/tools/temp-mail</span>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="page-title">Temp Mail</div>
+    <div class="page-subtitle">Instant disposable email — no signup needed</div>
+    <svg class="mail-icon" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5">
+      <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+    </svg>
+  </div>
+  <!-- Extension Popup -->
+  <div class="extension">
+    <div class="ext-header">
+      <div class="ext-logo">
+        <div class="ext-logo-icon">X</div>
+        <span class="ext-logo-text">X Toolkit</span>
+        <span class="ext-logo-sub">Temp Mail</span>
+      </div>
+      <span class="ext-tools-link">43+ tools ↗</span>
+    </div>
+    <div class="email-bar">
+      <span class="email-text">sarah.thomas76@guerrillamail.com</span>
+      <div class="email-actions">
+        <span style="color:#4b5563;font-size:16px">⧉</span>
+        <span style="color:#4b5563;font-size:16px">↻</span>
+        <button class="btn-new">+ New</button>
+      </div>
+    </div>
+    <div class="domain-bar">
+      <div class="domain-label">
+        <span>🌐</span> Domain:
+      </div>
+      <span style="color:#9ca3af">guerrillamail.com</span>
+      <span style="color:#4b5563">▾</span>
+    </div>
+    <div class="inbox-area">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.5">
+        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+      </svg>
+      <div class="no-msg">No messages yet</div>
+      <div class="refresh-text">Refreshes every 15s automatically</div>
+    </div>
+    <div class="footer-link">
+      Want 43+ more tools? <span>Visit xtoolkit.live →</span>
+    </div>
+    <div class="ext-footer">
+      <div class="tab active">
+        <span class="tab-icon">✉</span>
+        Temp Mail
+      </div>
+      <div class="tab">
+        <span class="tab-icon">M</span>
+        Gmail
+      </div>
+      <div class="tab">
+        <span class="tab-icon">🕐</span>
+        History
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`
+  },
+  {
+    name: '2-otp-detected',
+    html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1280px; height: 800px;
+    background: #0d0d1a;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    position: relative; overflow: hidden;
+  }
+  .browser { width: 1280px; height: 800px; background: #1a1a2e; position: absolute; top: 0; left: 0; }
+  .browser-bar { height: 52px; background: #16213e; display: flex; align-items: center; padding: 0 16px; gap: 8px; border-bottom: 1px solid #2a2a4a; }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+  .url-bar { flex: 1; height: 28px; background: #0f0f1a; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; margin: 0 40px; }
+  .url-text { color: #9ca3af; font-size: 13px; }
+  .page-content { padding: 80px 40px; text-align: center; }
+  .page-title { font-size: 48px; font-weight: 700; color: #ffffff; margin-bottom: 16px; }
+  .page-subtitle { font-size: 18px; color: #6b7280; }
+  .extension { position: absolute; top: 52px; right: 0; width: 380px; height: 748px; background: #0f0f1a; border-left: 1px solid #1f1f3a; display: flex; flex-direction: column; }
+  .ext-header { padding: 12px 16px; border-bottom: 1px solid #1f1f3a; display: flex; align-items: center; justify-content: space-between; }
+  .ext-logo { display: flex; align-items: center; gap: 8px; }
+  .ext-logo-icon { width: 24px; height: 24px; background: #6366f1; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 12px; }
+  .ext-logo-text { font-weight: 600; color: #fff; font-size: 14px; }
+  .ext-logo-sub { color: #6b7280; font-size: 12px; margin-left: 4px; }
+  .ext-tools-link { color: #6366f1; font-size: 12px; }
+  .email-bar { margin: 12px; background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .email-text { font-size: 13px; color: #6366f1; font-weight: 500; }
+  .btn-new { background: #6366f1; color: white; border: none; border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 600; }
+  .domain-bar { margin: 0 12px 12px; background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 8px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; color: #9ca3af; font-size: 13px; }
+  .otp-banner { margin: 0 12px 8px; background: #052e16; border: 1px solid #16a34a; border-radius: 8px; padding: 10px 12px; }
+  .otp-label { font-size: 10px; color: #16a34a; font-weight: 600; letter-spacing: 1px; margin-bottom: 4px; }
+  .otp-row { display: flex; align-items: center; justify-content: space-between; }
+  .otp-code { font-size: 24px; font-weight: 700; color: #4ade80; font-family: monospace; }
+  .otp-key { font-size: 16px; margin-right: 8px; }
+  .copy-btn { background: #16a34a; color: white; border: none; border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 600; }
+  .otp-from { font-size: 11px; color: #4b5563; margin-top: 4px; }
+  .email-list { flex: 1; overflow: hidden; }
+  .email-item { padding: 10px 12px; border-bottom: 1px solid #1f1f3a; display: flex; gap: 10px; align-items: flex-start; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 13px; flex-shrink: 0; }
+  .email-info { flex: 1; }
+  .email-from { font-size: 13px; color: #e5e7eb; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .otp-badge { background: #052e16; color: #4ade80; border: 1px solid #16a34a; border-radius: 4px; padding: 1px 6px; font-size: 10px; font-weight: 600; }
+  .email-subject { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .email-time { font-size: 11px; color: #4b5563; flex-shrink: 0; }
+  .footer-link { padding: 8px; text-align: center; font-size: 11px; color: #4b5563; border-top: 1px solid #1f1f3a; }
+  .footer-link span { color: #6366f1; }
+  .ext-footer { border-top: 1px solid #1f1f3a; display: flex; }
+  .tab { flex: 1; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #4b5563; font-size: 11px; }
+  .tab.active { color: #6366f1; border-top: 2px solid #6366f1; }
+</style>
+</head>
+<body>
+<div class="browser">
+  <div class="browser-bar">
+    <div class="dots">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+    </div>
+    <div class="url-bar"><span class="url-text">🔒 xtoolkit.live/tools/temp-mail</span></div>
+  </div>
+  <div class="page-content">
+    <div class="page-title">Temp Mail</div>
+    <div class="page-subtitle">Instant disposable email — no signup needed</div>
+  </div>
+  <div class="extension">
+    <div class="ext-header">
+      <div class="ext-logo">
+        <div class="ext-logo-icon">X</div>
+        <span class="ext-logo-text">X Toolkit</span>
+        <span class="ext-logo-sub">Temp Mail</span>
+      </div>
+      <span class="ext-tools-link">43+ tools ↗</span>
+    </div>
+    <div class="email-bar">
+      <span class="email-text">richard.taylor76@guerrillamail.com</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:#4b5563">⧉</span>
+        <span style="color:#4b5563">↻</span>
+        <button class="btn-new">+ New</button>
+      </div>
+    </div>
+    <div class="domain-bar">
+      <div style="display:flex;align-items:center;gap:6px;color:#6b7280;font-size:12px">🌐 Domain:</div>
+      <span>guerrillamail.com</span>
+      <span style="color:#4b5563">▾</span>
+    </div>
+    <div class="otp-banner">
+      <div class="otp-label">🔑 OTP CODE DETECTED</div>
+      <div class="otp-row">
+        <span class="otp-code">482916</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <div class="otp-from">noreply@accounts.google.com</div>
+    </div>
+    <div class="email-list">
+      <div class="email-item">
+        <div class="avatar" style="background:#4285f4">N</div>
+        <div class="email-info">
+          <div class="email-from">noreply@accounts.google.com <span class="otp-badge">OTP</span></div>
+          <div class="email-subject">Your verification code is 482916</div>
+        </div>
+        <div class="email-time">just now</div>
+      </div>
+      <div class="email-item">
+        <div class="avatar" style="background:#24292e">N</div>
+        <div class="email-info">
+          <div class="email-from">no-reply@github.com <span class="otp-badge">OTP</span></div>
+          <div class="email-subject">Confirm your email address</div>
+        </div>
+        <div class="email-time">4m ago</div>
+      </div>
+      <div class="email-item">
+        <div class="avatar" style="background:#000000">N</div>
+        <div class="email-info">
+          <div class="email-from">hello@notion.so</div>
+          <div class="email-subject">Welcome to Notion! Get started →</div>
+        </div>
+        <div class="email-time">18m ago</div>
+      </div>
+      <div class="email-item">
+        <div class="avatar" style="background:#000000">S</div>
+        <div class="email-info">
+          <div class="email-from">support@vercel.com</div>
+          <div class="email-subject">Your deployment is live</div>
+        </div>
+        <div class="email-time">1h ago</div>
+      </div>
+    </div>
+    <div class="footer-link">Want 43+ more tools? <span>Visit xtoolkit.live →</span></div>
+    <div class="ext-footer">
+      <div class="tab active">✉ Temp Mail</div>
+      <div class="tab">M Gmail</div>
+      <div class="tab">🕐 History</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`
+  },
+  {
+    name: '3-domain-dropdown',
+    html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1280px; height: 800px; background: #0d0d1a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; position: relative; overflow: hidden; }
+  .browser { width: 1280px; height: 800px; background: #1a1a2e; position: absolute; top: 0; left: 0; }
+  .browser-bar { height: 52px; background: #16213e; display: flex; align-items: center; padding: 0 16px; gap: 8px; border-bottom: 1px solid #2a2a4a; }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+  .url-bar { flex: 1; height: 28px; background: #0f0f1a; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; margin: 0 40px; }
+  .url-text { color: #9ca3af; font-size: 13px; }
+  .page-content { padding: 80px 40px; text-align: center; }
+  .page-title { font-size: 48px; font-weight: 700; color: #ffffff; margin-bottom: 16px; }
+  .page-subtitle { font-size: 18px; color: #6b7280; }
+  .extension { position: absolute; top: 52px; right: 0; width: 380px; height: 748px; background: #0f0f1a; border-left: 1px solid #1f1f3a; display: flex; flex-direction: column; }
+  .ext-header { padding: 12px 16px; border-bottom: 1px solid #1f1f3a; display: flex; align-items: center; justify-content: space-between; }
+  .ext-logo { display: flex; align-items: center; gap: 8px; }
+  .ext-logo-icon { width: 24px; height: 24px; background: #6366f1; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 12px; }
+  .ext-logo-text { font-weight: 600; color: #fff; font-size: 14px; }
+  .ext-logo-sub { color: #6b7280; font-size: 12px; margin-left: 4px; }
+  .ext-tools-link { color: #6366f1; font-size: 12px; }
+  .email-bar { margin: 12px; background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .email-text { font-size: 13px; color: #6366f1; font-weight: 500; }
+  .btn-new { background: #6366f1; color: white; border: none; border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 600; }
+  .domain-bar { margin: 0 12px 4px; background: #1a1a2e; border: 1px solid #6366f1; border-radius: 8px 8px 0 0; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .dropdown { margin: 0 12px 12px; background: #1a1a2e; border: 1px solid #2a2a4a; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; }
+  .domain-option { padding: 10px 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9ca3af; cursor: pointer; }
+  .domain-option.selected { background: #1e1e3f; color: #6366f1; }
+  .domain-option:hover { background: #1a1a2e; }
+  .domain-dot { width: 8px; height: 8px; border-radius: 50%; background: #4b5563; }
+  .domain-dot.active { background: #6366f1; }
+  .inbox-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #4b5563; }
+  .footer-link { padding: 8px; text-align: center; font-size: 11px; color: #4b5563; border-top: 1px solid #1f1f3a; }
+  .footer-link span { color: #6366f1; }
+  .ext-footer { border-top: 1px solid #1f1f3a; display: flex; }
+  .tab { flex: 1; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #4b5563; font-size: 11px; }
+  .tab.active { color: #6366f1; border-top: 2px solid #6366f1; }
+</style>
+</head>
+<body>
+<div class="browser">
+  <div class="browser-bar">
+    <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+    <div class="url-bar"><span class="url-text">🔒 xtoolkit.live/tools/temp-mail</span></div>
+  </div>
+  <div class="page-content">
+    <div class="page-title">Temp Mail</div>
+    <div class="page-subtitle">Instant disposable email — no signup needed</div>
+  </div>
+  <div class="extension">
+    <div class="ext-header">
+      <div class="ext-logo">
+        <div class="ext-logo-icon">X</div>
+        <span class="ext-logo-text">X Toolkit</span>
+        <span class="ext-logo-sub">Temp Mail</span>
+      </div>
+      <span class="ext-tools-link">43+ tools ↗</span>
+    </div>
+    <div class="email-bar">
+      <span class="email-text">sarah.thomas76@guerrillamail.com</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn-new">+ New</button>
+      </div>
+    </div>
+    <div class="domain-bar">
+      <div style="display:flex;align-items:center;gap:6px;color:#6b7280;font-size:12px">🌐 Domain:</div>
+      <span style="color:#6366f1">guerrillamail.com</span>
+      <span style="color:#6366f1">▴</span>
+    </div>
+    <div class="dropdown">
+      <div class="domain-option selected"><div class="domain-dot active"></div> guerrillamail.com</div>
+      <div class="domain-option"><div class="domain-dot"></div> grr.la</div>
+      <div class="domain-option"><div class="domain-dot"></div> sharklasers.com</div>
+      <div class="domain-option"><div class="domain-dot"></div> spam4.me</div>
+      <div class="domain-option"><div class="domain-dot"></div> mail.gw</div>
+    </div>
+    <div class="inbox-area">
+      <div style="font-size:14px;color:#4b5563">Select a domain to get started</div>
+    </div>
+    <div class="footer-link">Want 43+ more tools? <span>Visit xtoolkit.live →</span></div>
+    <div class="ext-footer">
+      <div class="tab active">✉ Temp Mail</div>
+      <div class="tab">M Gmail</div>
+      <div class="tab">🕐 History</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`
+  },
+  {
+    name: '4-gmail-tab',
+    html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1280px; height: 800px; background: #0d0d1a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; position: relative; overflow: hidden; }
+  .browser { width: 1280px; height: 800px; background: #1a1a2e; position: absolute; top: 0; left: 0; }
+  .browser-bar { height: 52px; background: #16213e; display: flex; align-items: center; padding: 0 16px; gap: 8px; border-bottom: 1px solid #2a2a4a; }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+  .url-bar { flex: 1; height: 28px; background: #0f0f1a; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; margin: 0 40px; }
+  .url-text { color: #9ca3af; font-size: 13px; }
+  .page-content { padding: 80px 40px; text-align: center; }
+  .page-title { font-size: 48px; font-weight: 700; color: #ffffff; margin-bottom: 16px; }
+  .page-subtitle { font-size: 18px; color: #6b7280; }
+  .extension { position: absolute; top: 52px; right: 0; width: 380px; height: 748px; background: #0f0f1a; border-left: 1px solid #1f1f3a; display: flex; flex-direction: column; }
+  .ext-header { padding: 12px 16px; border-bottom: 1px solid #1f1f3a; display: flex; align-items: center; justify-content: space-between; }
+  .ext-logo { display: flex; align-items: center; gap: 8px; }
+  .ext-logo-icon { width: 24px; height: 24px; background: #6366f1; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 12px; }
+  .ext-logo-text { font-weight: 600; color: #fff; font-size: 14px; }
+  .ext-logo-sub { color: #6b7280; font-size: 12px; margin-left: 4px; }
+  .ext-tools-link { color: #6366f1; font-size: 12px; }
+  .gmail-tabs { display: flex; margin: 12px; background: #1a1a2e; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a4a; }
+  .gmail-tab { flex: 1; padding: 8px; text-align: center; font-size: 12px; color: #6b7280; cursor: pointer; }
+  .gmail-tab.active { background: #6366f1; color: white; font-weight: 600; }
+  .gmail-email-bar { margin: 0 12px 12px; background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .gmail-email { font-size: 13px; color: #6366f1; font-weight: 500; font-family: monospace; }
+  .tip-box { margin: 0 12px 12px; background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #6b7280; }
+  .inbox-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .no-msg { font-size: 14px; color: #4b5563; margin-top: 12px; }
+  .refresh-text { font-size: 12px; color: #374151; margin-top: 4px; }
+  .footer-link { padding: 8px; text-align: center; font-size: 11px; color: #4b5563; border-top: 1px solid #1f1f3a; }
+  .footer-link span { color: #6366f1; }
+  .ext-footer { border-top: 1px solid #1f1f3a; display: flex; }
+  .tab { flex: 1; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #4b5563; font-size: 11px; }
+  .tab.active { color: #6366f1; border-top: 2px solid #6366f1; }
+</style>
+</head>
+<body>
+<div class="browser">
+  <div class="browser-bar">
+    <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+    <div class="url-bar"><span class="url-text">🔒 xtoolkit.live/tools/temp-mail/tempgmail</span></div>
+  </div>
+  <div class="page-content">
+    <div class="page-title">Temp Gmail</div>
+    <div class="page-subtitle">Generate real temporary Gmail addresses</div>
+  </div>
+  <div class="extension">
+    <div class="ext-header">
+      <div class="ext-logo">
+        <div class="ext-logo-icon">X</div>
+        <span class="ext-logo-text">X Toolkit</span>
+        <span class="ext-logo-sub">Temp Mail</span>
+      </div>
+      <span class="ext-tools-link">43+ tools ↗</span>
+    </div>
+    <div class="gmail-tabs">
+      <div class="gmail-tab active">Temp Gmail</div>
+      <div class="gmail-tab">Gmail Tricks</div>
+    </div>
+    <div class="gmail-email-bar">
+      <span class="gmail-email">sarah.t.homas76@gmail.com</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:#4b5563">⧉</span>
+        <span style="color:#4b5563">↻</span>
+        <button style="background:#6366f1;color:white;border:none;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600">+ New</button>
+      </div>
+    </div>
+    <div class="tip-box">
+      📌 Emails sent to any dot/plus variation of this address will appear here
+    </div>
+    <div class="inbox-area">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.5">
+        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+      </svg>
+      <div class="no-msg">No messages yet · inbox updates every 15s</div>
+    </div>
+    <div class="footer-link">Want 43+ more tools? <span>Visit xtoolkit.live →</span></div>
+    <div class="ext-footer">
+      <div class="tab">✉ Temp Mail</div>
+      <div class="tab active">M Gmail</div>
+      <div class="tab">🕐 History</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`
+  },
+  {
+    name: '5-message-open',
+    html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1280px; height: 800px; background: #0d0d1a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; position: relative; overflow: hidden; }
+  .browser { width: 1280px; height: 800px; background: #1a1a2e; position: absolute; top: 0; left: 0; }
+  .browser-bar { height: 52px; background: #16213e; display: flex; align-items: center; padding: 0 16px; gap: 8px; border-bottom: 1px solid #2a2a4a; }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+  .url-bar { flex: 1; height: 28px; background: #0f0f1a; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; margin: 0 40px; }
+  .url-text { color: #9ca3af; font-size: 13px; }
+  .page-content { padding: 80px 40px; text-align: center; }
+  .page-title { font-size: 48px; font-weight: 700; color: #ffffff; margin-bottom: 16px; }
+  .page-subtitle { font-size: 18px; color: #6b7280; }
+  .extension { position: absolute; top: 52px; right: 0; width: 380px; height: 748px; background: #0f0f1a; border-left: 1px solid #1f1f3a; display: flex; flex-direction: column; }
+  .msg-header { padding: 12px 16px; border-bottom: 1px solid #1f1f3a; display: flex; align-items: center; gap: 10px; }
+  .back-btn { color: #6366f1; font-size: 18px; cursor: pointer; }
+  .msg-subject { font-size: 13px; font-weight: 600; color: #e5e7eb; flex: 1; }
+  .msg-from { font-size: 11px; color: #6b7280; }
+  .msg-time { font-size: 11px; color: #4b5563; }
+  .otp-banner { margin: 12px; background: #052e16; border: 1px solid #16a34a; border-radius: 8px; padding: 12px; }
+  .otp-label { font-size: 10px; color: #16a34a; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+  .otp-row { display: flex; align-items: center; justify-content: space-between; }
+  .otp-code { font-size: 28px; font-weight: 700; color: #4ade80; font-family: monospace; letter-spacing: 4px; }
+  .copy-btn { background: #16a34a; color: white; border: none; border-radius: 6px; padding: 6px 16px; font-size: 13px; font-weight: 600; }
+  .msg-body { flex: 1; padding: 16px; color: #9ca3af; font-size: 13px; line-height: 1.6; overflow: hidden; }
+  .msg-body p { margin-bottom: 12px; }
+  .msg-code-block { font-size: 32px; font-weight: 700; color: #e5e7eb; font-family: monospace; letter-spacing: 8px; margin: 16px 0; }
+  .msg-expire { color: #6b7280; font-size: 12px; }
+  .footer-link { padding: 8px; text-align: center; font-size: 11px; color: #4b5563; border-top: 1px solid #1f1f3a; }
+  .footer-link span { color: #6366f1; }
+  .ext-footer { border-top: 1px solid #1f1f3a; display: flex; }
+  .tab { flex: 1; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #4b5563; font-size: 11px; }
+  .tab.active { color: #6366f1; border-top: 2px solid #6366f1; }
+</style>
+</head>
+<body>
+<div class="browser">
+  <div class="browser-bar">
+    <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+    <div class="url-bar"><span class="url-text">🔒 xtoolkit.live/tools/temp-mail</span></div>
+  </div>
+  <div class="page-content">
+    <div class="page-title">Temp Mail</div>
+    <div class="page-subtitle">Instant disposable email — no signup needed</div>
+  </div>
+  <div class="extension">
+    <div class="msg-header">
+      <span class="back-btn">←</span>
+      <div style="flex:1">
+        <div class="msg-subject">Your verification code is 847291</div>
+        <div style="display:flex;justify-content:space-between;margin-top:2px">
+          <span class="msg-from">noreply@accounts.google.com</span>
+          <span class="msg-time">Just now</span>
+        </div>
+      </div>
+    </div>
+    <div class="otp-banner">
+      <div class="otp-label">🔑 VERIFICATION CODE</div>
+      <div class="otp-row">
+        <span class="otp-code">847291</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+    </div>
+    <div class="msg-body">
+      <p>Hi Sarah,</p>
+      <p>Please use the verification code below to complete your sign-up:</p>
+      <div class="msg-code-block">847291</div>
+      <p class="msg-expire">This code expires in 10 minutes.</p>
+      <p style="margin-top:12px;color:#4b5563;font-size:12px">If you did not request this, you can safely ignore this email.</p>
+    </div>
+    <div class="footer-link">Want 43+ more tools? <span>Visit xtoolkit.live →</span></div>
+    <div class="ext-footer">
+      <div class="tab active">✉ Temp Mail</div>
+      <div class="tab">M Gmail</div>
+      <div class="tab">🕐 History</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`
+  }
+];
+
+(async () => {
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
+  for (const screenshot of screenshots) {
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1280, height: 800 });
+    await page.setContent(screenshot.html, { waitUntil: 'networkidle0' });
+    await page.waitForTimeout(500);
+    await page.screenshot({
+      path: `cws-screenshots/${screenshot.name}.png`,
+      fullPage: false
+    });
+    console.log(`✅ Captured: ${screenshot.name}.png`);
+    await page.close();
+  }
+
+  await browser.close();
+  console.log('🎉 All 5 screenshots saved to cws-screenshots/');
+})();
+
+Run:
+mkdir -p cws-screenshots
+node generate-cws-screenshots.js
+
+Download all 5 from cws-screenshots/ folder.
+Show output and confirm all 5 files created at 1280x800.
