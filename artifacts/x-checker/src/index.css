@@ -273,6 +273,30 @@ body::after {
 
 /* ── Floating orb styles ─────────────────────────────────────────────────── */
 
+/* ── Page-level themed orbs (rendered by Layout.tsx) ────────────────────── */
+
+.page-aurora {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  height: 65vh;
+  animation: aurora-shift 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.page-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(88px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* ── Legacy orbs (home.tsx hero section) ─────────────────────────────────── */
+
 .bg-orb {
   position: absolute;
   border-radius: 50%;

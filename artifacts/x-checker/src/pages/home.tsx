@@ -126,11 +126,6 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden">
-        {/* Animated background orbs */}
-        <div className="bg-orb bg-orb-1" />
-        <div className="bg-orb bg-orb-2" />
-        <div className="bg-orb bg-orb-3" />
-        <div className="bg-orb bg-orb-4" />
 
         {/* Star/dot background pattern */}
         <div

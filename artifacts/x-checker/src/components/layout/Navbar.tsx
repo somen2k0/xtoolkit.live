@@ -202,7 +202,7 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
             ? `${category.activeBg} ${category.color}`
-            : `text-muted-foreground hover:${category.color} hover:${category.bg}`
+            : `${category.color} opacity-75 hover:opacity-100 hover:${category.bg}`
         }`}
       >
         <Icon className="h-3.5 w-3.5 shrink-0" />
@@ -245,8 +245,8 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
         aria-expanded={open}
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
-            ? "bg-teal-500/10 text-teal-500 dark:text-teal-400"
-            : "text-muted-foreground hover:text-teal-500 dark:hover:text-teal-400 hover:bg-teal-500/10"
+            ? "bg-teal-500/10 text-teal-400"
+            : "text-teal-400 opacity-75 hover:opacity-100 hover:bg-teal-500/10"
         }`}
       >
         <Inbox className="h-3.5 w-3.5 shrink-0" />
@@ -381,7 +381,7 @@ export function Navbar() {
                 <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
                   location === "/"
                     ? "bg-background shadow-sm text-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background/60"
+                    : "text-foreground/70 hover:text-foreground hover:bg-background/60"
                 }`}>
                   <Home className="h-3.5 w-3.5 shrink-0" />
                   Home
@@ -398,7 +398,7 @@ export function Navbar() {
                 <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
                   location === "/about"
                     ? "bg-background shadow-sm text-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background/60"
+                    : "text-foreground/70 hover:text-foreground hover:bg-background/60"
                 }`}>
                   <Info className="h-3.5 w-3.5 shrink-0" />
                   About
