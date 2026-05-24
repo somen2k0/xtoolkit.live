@@ -320,7 +320,7 @@ function ToolStatus() {
     );
   }
 
-  const tools = Object.entries(data.tools);
+  const tools = Object.entries(data.tools).filter(([key]) => key !== "xAccountChecker");
   const enabledCount = tools.filter(([, t]) => t.enabled).length;
 
   return (
@@ -945,24 +945,6 @@ function AdminDashboard({ password }: { password: string }) {
         <HealthStatus password={password} />
       </section>
 
-      {/* Live Request Stats */}
-      <section className="space-y-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide flex items-center gap-2">
-          <TrendingUp className="h-3.5 w-3.5" />
-          Live Request Stats
-        </h2>
-        <LiveStats password={password} />
-      </section>
-
-      {/* Page Analytics */}
-      <section className="space-y-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide flex items-center gap-2">
-          <LineChart className="h-3.5 w-3.5" />
-          Page Analytics
-        </h2>
-        <PageAnalytics password={password} />
-      </section>
-
       {/* Stats Grid */}
       <section className="space-y-3">
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Site Overview</h2>
@@ -983,28 +965,10 @@ function AdminDashboard({ password }: { password: string }) {
         <ToolCategories />
       </section>
 
-      {/* Branding */}
-      <section className="space-y-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide flex items-center gap-2">
-          <Palette className="h-3.5 w-3.5" />
-          Branding Assets
-        </h2>
-        <p className="text-xs text-muted-foreground -mt-1">
-          Upload replacement files for favicons, social images, and extension icons. Changes apply immediately in development.
-        </p>
-        <BrandingPanel password={password} />
-      </section>
-
       {/* Tool Status */}
       <section className="space-y-3">
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Tool Status</h2>
         <ToolStatus />
-      </section>
-
-      {/* AI Cache */}
-      <section className="space-y-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">AI Cache & Server</h2>
-        <AiCachePanel password={password} />
       </section>
 
       {/* Quick Links */}
