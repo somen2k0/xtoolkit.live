@@ -10,7 +10,7 @@ import {
   Mail, ShieldCheck, Pencil, Shield, Tag, Clock,
   Minimize2, Code2, KeyRound, Regex, Database, Shuffle, ArrowLeftRight,
   ScanSearch, EyeOff, Newspaper, Calendar, Gauge, ShieldAlert, Inbox,
-  AlignLeft, QrCode, ImageIcon, Palette,
+  AlignLeft, QrCode, ImageIcon, Palette, Laugh,
 } from "lucide-react";
 import { TOTAL_LIVE } from "@/lib/tools-registry";
 import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
@@ -43,6 +43,7 @@ const NAV_CATEGORIES = [
       { icon: AlignLeft, label: "Word Counter", href: "/tools/word-counter", badge: "New" },
       { icon: Type, label: "Case Converter", href: "/tools/case-converter", badge: "New" },
       { icon: Calendar, label: "Tweet Scheduler", href: "/tools/tweet-scheduler", badge: "New" },
+      { icon: Laugh, label: "Funny Bio Ideas", href: "/tools/funny-bios", badge: "AI" },
     ],
     comingSoon: [],
   },

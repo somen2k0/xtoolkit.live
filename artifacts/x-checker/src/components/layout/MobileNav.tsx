@@ -7,7 +7,7 @@ import {
   Globe, Mail, ShieldCheck, Pencil, Inbox, Minimize2, KeyRound, Database,
   Shuffle, Shield, Tag, BarChart, Clock, ArrowLeftRight, ScanSearch,
   EyeOff, ShieldAlert, Newspaper, Calendar, Gauge,
-  AlignLeft, QrCode, ImageIcon,
+  AlignLeft, QrCode, ImageIcon, Laugh,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
@@ -43,6 +43,7 @@ const TOOL_CATEGORIES = [
       { icon: AtSign, label: "@ Formatter", desc: "Add/remove @ prefix in bulk", href: "/tools/at-formatter" },
       { icon: AtSign, label: "Username Generator", desc: "Unique X handle ideas", href: "/tools/username-generator" },
       { icon: Calendar, label: "Tweet Scheduler", desc: "Plan & export your content calendar", href: "/tools/tweet-scheduler", badge: "New" },
+      { icon: Laugh, label: "Funny Bio Ideas", desc: "30+ funny bios + AI generator", href: "/tools/funny-bios", badge: "AI" },
     ],
   },
   {
