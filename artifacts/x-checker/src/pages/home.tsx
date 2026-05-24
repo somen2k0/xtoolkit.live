@@ -134,20 +134,20 @@ export default function Home() {
 
         {/* Star/dot background pattern */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.18]"
+          className="absolute inset-0 pointer-events-none dark:opacity-[0.18] opacity-[0.07]"
           style={{
-            backgroundImage: "radial-gradient(circle at center, white 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle at center, currentColor 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
 
         <div className="max-w-6xl mx-auto px-4 md:px-8 pt-14 pb-12 md:pt-20 md:pb-16 text-center relative">
           {/* Glassmorphism card */}
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl shadow-2xl shadow-black/40 px-6 md:px-12 lg:px-16 py-10 md:py-14">
+          <div className="rounded-[2rem] border dark:border-white/10 border-border/60 dark:bg-white/[0.03] bg-background/80 backdrop-blur-xl dark:shadow-2xl dark:shadow-black/40 shadow-lg shadow-black/8 px-6 md:px-12 lg:px-16 py-10 md:py-14">
 
             <div className="hero-badge inline-flex mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-purple-200 text-xs font-medium backdrop-blur-md">
-                <Zap className="h-3.5 w-3.5 text-cyan-400" /> {TOTAL_LIVE}+ free tools · no signup required
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full dark:bg-white/5 bg-primary/8 dark:border-white/10 border border-primary/20 dark:text-purple-200 text-primary text-xs font-medium backdrop-blur-md">
+                <Zap className="h-3.5 w-3.5 dark:text-cyan-400 text-primary" /> {TOTAL_LIVE}+ free tools · no signup required
               </span>
             </div>
 
@@ -156,7 +156,7 @@ export default function Home() {
               <span className="text-shimmer">SEO, creators &amp; developers</span>
             </h1>
 
-            <p className="hero-subtitle text-lg md:text-xl text-blue-100/60 max-w-2xl mx-auto leading-relaxed mb-8 font-light">
+            <p className="hero-subtitle text-lg md:text-xl dark:text-blue-100/60 text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8 font-light">
               X account checker, AI bio generators, JSON formatter, Base64 encoder,
               text formatters — all free, all instant, all in one place.
             </p>
@@ -168,7 +168,7 @@ export default function Home() {
                 </Button>
               </Link>
               <a href="#categories">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto text-sm bg-white/5 hover:bg-white/10 backdrop-blur-md border-white/10 text-white hover:scale-[1.02] transition-all duration-200">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto text-sm dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white hover:scale-[1.02] transition-all duration-200">
                   See All Categories
                 </Button>
               </a>
@@ -181,11 +181,11 @@ export default function Home() {
                 { icon: Zap, text: "Instant results" },
                 { icon: Users, text: "Free forever" },
               ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-xl bg-white/[0.03] border border-white/[0.07] backdrop-blur-sm">
-                  <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center">
-                    <Icon className="h-4 w-4 text-purple-300" />
+                <div key={text} className="flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-xl dark:bg-white/[0.03] bg-muted/60 dark:border-white/[0.07] border border-border/60 backdrop-blur-sm">
+                  <div className="h-8 w-8 rounded-full dark:bg-white/5 bg-primary/10 flex items-center justify-center">
+                    <Icon className="h-4 w-4 dark:text-purple-300 text-primary" />
                   </div>
-                  <span className="text-[11px] font-medium text-purple-100/60 text-center leading-tight">{text}</span>
+                  <span className="text-[11px] font-medium dark:text-purple-100/60 text-muted-foreground text-center leading-tight">{text}</span>
                 </div>
               ))}
             </div>

@@ -436,10 +436,11 @@ export function Navbar() {
               variant="outline"
               size="sm"
               onClick={() => setShowFeedback(true)}
-              className="hidden 2xl:flex text-xs border-border/60 hover:bg-muted/50 gap-1.5 h-8"
+              className="hidden xl:flex text-xs border-border/60 hover:bg-muted/50 gap-1.5 h-8 px-2.5"
+              title="Send Feedback"
             >
-              <MessageSquare className="h-3.5 w-3.5" />
-              Feedback
+              <MessageSquare className="h-3.5 w-3.5 shrink-0" />
+              <span className="hidden 2xl:inline">Feedback</span>
             </Button>
 
             {/* Mobile hamburger */}
