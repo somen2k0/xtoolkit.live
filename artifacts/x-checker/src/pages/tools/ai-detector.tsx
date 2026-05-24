@@ -13,7 +13,7 @@ const FAQS = [
   { q: "How accurate is the detection?", a: "Detection uses Llama 3.3 70B, one of the strongest open models. Accuracy is high for clearly AI-generated or clearly human text. Short or heavily edited text may score as uncertain." },
   { q: "What does the humanizer do?", a: "The humanizer rewrites AI-generated text to sound natural and human — adding contractions, varying sentence length, removing AI transition phrases, and adding personality." },
   { q: "Is my text stored?", a: "No. Your text is processed instantly and immediately discarded. Nothing is stored on our servers." },
-  { q: "What's the text limit?", a: "Detection supports up to 8000 characters. Humanization supports up to 6000 characters. For longer content, process it in sections." },
+  { q: "What's the text limit?", a: "Detection supports up to 1,000 words. Humanization supports up to 6,000 characters. For longer content, process it in sections." },
 ];
 
 const HUMANIZE_STYLES = [
@@ -130,8 +130,10 @@ export default function AiDetector() {
     toast({ title: "Copied!" });
   };
 
+  const wordCount = (t: string) => t.trim() === '' ? 0 : t.trim().split(/\s+/).length;
+  const wCount = wordCount(text);
   const charCount = text.length;
-  const maxChars = tab === "detect" ? 8000 : 6000;
+  const maxChars = 6000;
 
   return (
     <MiniToolLayout
@@ -169,13 +171,27 @@ export default function AiDetector() {
             <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">
               {tab === "detect" ? "Text to Analyze" : "AI-Generated Text to Rewrite"}
             </label>
-            <span className={`text-[11px] font-mono ${charCount > maxChars ? "text-red-400" : "text-muted-foreground/60"}`}>
-              {charCount.toLocaleString()} / {maxChars.toLocaleString()}
+            <span className={`text-[11px] font-mono ${
+              tab === "detect"
+                ? (wCount >= 1000 ? "text-red-400" : wCount >= 900 ? "text-yellow-400" : "text-muted-foreground/60")
+                : (charCount > maxChars ? "text-red-400" : "text-muted-foreground/60")
+            }`}>
+              {tab === "detect"
+                ? `${wCount.toLocaleString()} / 1,000 words`
+                : `${charCount.toLocaleString()} / ${maxChars.toLocaleString()}`}
             </span>
           </div>
           <textarea
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => {
+              if (tab === "detect") {
+                const next = e.target.value;
+                if (wordCount(next) > 1000) return;
+                setText(next);
+              } else {
+                setText(e.target.value);
+              }
+            }}
             placeholder={
               tab === "detect"
                 ? "Paste any text here to check if it was written by AI…"
@@ -184,10 +200,16 @@ export default function AiDetector() {
             rows={8}
             className="w-full rounded-xl border border-border/60 bg-background/60 px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-purple-400/30 placeholder:text-muted-foreground/40 leading-relaxed"
           />
-          {tab === "detect" && charCount > 3000 && (
-            <p className="text-[11px] text-yellow-400/80 flex items-center gap-1.5">
+          {tab === "detect" && (
+            <p className={`text-[11px] flex items-center gap-1.5 ${
+              wCount >= 1000 ? "text-red-400/80" : wCount >= 900 ? "text-yellow-400/80" : "text-muted-foreground/50"
+            }`}>
               <AlertCircle className="h-3 w-3 shrink-0" />
-              Note: Analysis limited to first 3,000 characters for free tier usage.
+              {wCount >= 1000
+                ? `${wCount.toLocaleString()}/1,000 words — limit reached`
+                : wCount >= 900
+                ? `${wCount.toLocaleString()}/1,000 words — approaching limit`
+                : "Analysis limited to 1,000 words for optimal accuracy."}
             </p>
           )}
         </div>
@@ -225,7 +247,7 @@ export default function AiDetector() {
         <div className="flex flex-wrap gap-2">
           {tab === "detect" ? (
             <>
-              <Button onClick={detect} disabled={detecting || charCount > maxChars || !text.trim()}
+              <Button onClick={detect} disabled={detecting || wCount > 1000 || !text.trim()}
                 className="gap-2 bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6">
                 {detecting ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
                 {detecting ? "Analyzing…" : "Detect AI Content"}

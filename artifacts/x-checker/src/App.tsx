@@ -59,6 +59,7 @@ const AiDetector = lazy(() => import("@/pages/tools/ai-detector"));
 const ProfileLinkGenerator = lazy(() => import("@/pages/tools/profile-link-generator"));
 const AtFormatter = lazy(() => import("@/pages/tools/at-formatter"));
 const BioGenerator = lazy(() => import("@/pages/tools/bio-generator"));
+const FunnyBios = lazy(() => import("@/pages/tools/funny-bios"));
 // Email privacy tools (lazy)
 const MaskedEmailGenerator = lazy(() => import("@/pages/tools/masked-email-generator"));
 // Previously coming-soon tools (lazy)
@@ -192,7 +193,7 @@ function TrackedRouter() {
           {/* Redirects for removed/renamed tools */}
           <Route path="/tools/bio-ideas">{() => <Redirect to="/tools/bio-generator" />}</Route>
           <Route path="/tools/aesthetic-bios">{() => <Redirect to="/tools/bio-generator" />}</Route>
-          <Route path="/tools/funny-bios">{() => <Redirect to="/tools/bio-generator" />}</Route>
+          <Route path="/tools/funny-bios" component={FunnyBios} />
           <Route path="/tools/professional-bios">{() => <Redirect to="/tools/bio-generator" />}</Route>
           <Route path="/tools/name-ideas">{() => <Redirect to="/tools/username-generator" />}</Route>
           <Route path="/tools/backlink-analyzer">{() => <Redirect to="/tools/keyword-density" />}</Route>

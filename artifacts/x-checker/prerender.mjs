@@ -352,6 +352,14 @@ const PAGE_FAQS = {
     { q: "Can I regenerate if I don't like the results?", a: "Yes — click Regenerate to get 3 new bios with the same topic and tone." },
     { q: "Does my data get stored?", a: "No. Your topic and tone are sent to the API to generate bios and immediately discarded. Nothing is stored." },
   ],
+  "/tools/funny-bios": [
+    { q: "Can a funny Twitter bio help me get more followers?", a: "Yes! Humor is one of the strongest bio strategies for building a personality-driven audience. A witty bio makes you memorable and gives people a reason to follow." },
+    { q: "How do I make my Twitter bio funny?", a: "The most effective techniques are: self-deprecating humor, subverting expectations, understatement, and absurdism. Keep it short — punchlines land better when concise." },
+    { q: "Should a funny bio also include professional info?", a: "It depends on your goal. If you're building a personal brand, include a brief professional note alongside the humor — for example, 'Software engineer by day, chaos agent by night'." },
+    { q: "What are the best funny Twitter bios?", a: "The best funny bios are relatable, short, and feel authentic. They often play on universal experiences: being tired, procrastinating, loving food, or struggling with adult responsibilities." },
+    { q: "How many characters is the Twitter bio limit?", a: "Twitter limits bios to 160 characters. Most of these funny bios are well under that limit, giving you room to add your own details, emojis, or location." },
+    { q: "How does the AI funny bio generator work?", a: "Enter your niche or personality, pick a humor style (sarcastic, self-deprecating, witty, or random), and click Generate. The AI writes 3 original funny bios tailored to you." },
+  ],
   "/tools/case-converter": [
     { q: "What is a case converter?", a: "A case converter transforms text between different letter-case styles — such as UPPERCASE, lowercase, camelCase, snake_case, and more. It's useful for formatting code variables, titles, slugs, and any text that needs a specific style." },
     { q: "What is camelCase?", a: "camelCase writes compound words with the first word lowercase and each subsequent word starting with a capital letter — like 'myVariableName'. It's widely used in JavaScript, Java, and many other languages for variable and function names." },

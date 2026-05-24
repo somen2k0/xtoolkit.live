@@ -1,0 +1,139 @@
+Two updates needed:
+
+===================================================
+UPDATE 1 — Restore /tools/funny-bios page with
+AI bio generation powered by Groq
+===================================================
+
+Create a new page at /tools/funny-bios that:
+
+PART A — Static funny bio templates section
+Show 30 funny bio templates as a browsable list.
+Organize in categories:
+
+Sarcastic:
+- "Professional overthinker. Amateur everything else."
+- "I put the 'pro' in procrastination."
+- "Fluent in sarcasm, English, and song lyrics."
+- "Not lazy, just on energy saving mode."
+- "My hobbies include eating and complaining about being full."
+- "I'm not arguing, I'm just explaining why I'm right."
+- "5'11 but I tell people I'm 6'0. Just kidding, I'm 5'11."
+- "Currently pretending to be a functioning adult."
+
+Funny & Relatable:
+- "Will delete later — said 3 years ago."
+- "Here for a good time, not a long time."
+- "Sleep. Eat. Tweet. Repeat."
+- "Professional napper. Amateur adult."
+- "I followed a diet once. It was the worst 20 minutes of my life."
+- "My bed is a magical place where I suddenly remember everything I forgot to do."
+- "I'm on a seafood diet. I see food and I eat it."
+- "Trying to be a rainbow in someone's cloud. Failing spectacularly."
+
+Witty:
+- "404: Bio not found."
+- "I'm not weird, I'm limited edition."
+- "CEO of doing things tomorrow."
+- "Spreading smiles and occasionally Wi-Fi passwords."
+- "I speak fluent Netflix."
+- "Part-time genius, full-time disaster."
+- "Making mistakes so you don't have to."
+- "Currently starring in my own reality show: 'How Did I Get Here?'"
+
+Self-aware:
+- "Please lower your expectations."
+- "Warning: contains traces of sarcasm."
+- "I'm the person your mother warned you about."
+- "Professionally confused since [birth year]."
+- "Trying to adult. It's not going well."
+
+PART B — AI Funny Bio Generator section
+Add an AI generator above or below the static list:
+
+UI elements:
+- Input: "Your niche or personality" (placeholder:
+  "e.g. developer, foodie, gym rat, student")
+- Input: "Style" dropdown:
+  Sarcastic / Self-deprecating / Witty / Random
+- Button: "Generate Funny Bios"
+- Output: Shows 3 AI-generated funny bios
+
+Backend: Use existing /api/generate-bio endpoint
+but pass a system prompt focused on humor:
+
+In the bio.ts backend route, detect if a "funny"
+or "humor" flag is passed and use this system prompt:
+
+"You are a witty social media bio writer specializing
+in funny, self-deprecating, and sarcastic Twitter/X
+bios. Generate 3 short, genuinely funny bios (max
+160 chars each) based on the user's niche. Use
+wordplay, irony, relatable humor, and wit. Avoid
+clichés. Make people actually laugh."
+
+Pass flag from frontend: { niche, tone: "funny" }
+
+PART C — SEO meta tags
+
+Title: "Funny Twitter/X Bio Ideas (2025) — 50+
+Funny Bios + AI Generator | X Toolkit"
+
+Meta description: "Browse 50+ funny Twitter/X bio
+ideas and generate custom funny bios with AI.
+Sarcastic, witty, and self-deprecating bio templates.
+Free, no signup required."
+
+Meta keywords:
+"funny twitter bios, funny x bios, funny bio ideas,
+funny twitter bio generator, witty twitter bios,
+sarcastic twitter bio, funny bio for twitter,
+funny bios 2025, twitter bio funny, funniest
+twitter bios"
+
+PART D — Add to sitemap and prerender
+Add /tools/funny-bios to:
+- prerender.mjs page list
+- sitemap-tools.xml with priority 0.8
+
+===================================================
+UPDATE 2 — AI Text Detector max words = 1000
+===================================================
+
+Currently the AI Text Detector allows 8000 characters.
+Change the limit to 1000 words (approximately 6000
+characters but count by words not characters).
+
+In the AI detector frontend component:
+
+1. Change the counter from characters to WORDS:
+   Show "X / 1,000 words" instead of "X / 8,000"
+
+2. Add word count function:
+   const wordCount = (text: string) =>
+     text.trim() === '' ? 0 :
+     text.trim().split(/\s+/).length;
+
+3. Show warning when approaching limit:
+   - At 900 words: yellow warning
+     "900/1000 words — approaching limit"
+   - At 1000 words: red warning
+     "1000/1000 words — limit reached"
+   - Prevent typing beyond 1000 words
+
+4. Update the backend truncation in ai-detector.ts:
+   Change from slicing at 3000 characters to
+   slicing at first 1000 words:
+   
+   const words = text.trim().split(/\s+/);
+   const truncated = words.slice(0, 1000).join(' ');
+
+5. Remove the yellow notice about "3000 characters"
+   and replace with:
+   "Analysis limited to 1,000 words for optimal
+   accuracy."
+
+===================================================
+Build, commit, push.
+Show all files changed.
+===================================================

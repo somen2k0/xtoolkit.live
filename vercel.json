@@ -77,7 +77,7 @@
     { "source": "/tools/email-ab-tester", "destination": "/tools/subject-line-generator", "permanent": true },
     { "source": "/tools/bio-ideas", "destination": "/tools/bio-generator", "permanent": true },
     { "source": "/tools/aesthetic-bios", "destination": "/tools/bio-generator", "permanent": true },
-    { "source": "/tools/funny-bios", "destination": "/tools/bio-generator", "permanent": true },
+
     { "source": "/tools/follower-analyzer", "destination": "/tools/x-account-checker", "permanent": true },
     { "source": "/tools/profile-audit", "destination": "/tools/x-account-checker", "permanent": true },
     { "source": "/tools/spam-risk-checker", "destination": "/tools/spam-score-checker", "permanent": true },

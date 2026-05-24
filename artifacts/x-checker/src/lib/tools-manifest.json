@@ -75,6 +75,19 @@
     "tags": ["bio", "ai", "generator", "twitter", "profile", "groq"]
   },
   {
+    "id": "funny-bios",
+    "href": "/tools/funny-bios",
+    "label": "Funny Bio Ideas",
+    "description": "Browse 30+ funny Twitter/X bios and generate custom funny bios with AI.",
+    "seoTitle": "Funny Twitter/X Bio Ideas (2025) — 30+ Funny Bios + AI Generator | X Toolkit",
+    "seoDescription": "Browse 30+ funny Twitter/X bio ideas and generate custom funny bios with AI. Sarcastic, witty, and self-deprecating bio templates. Free, no signup required.",
+    "seoKeywords": "funny twitter bios, funny x bios, funny bio ideas, funny twitter bio generator, witty twitter bios, sarcastic twitter bio, funny bio for twitter, funny bios 2025, twitter bio funny, funniest twitter bios",
+    "category": "ai-writing",
+    "badge": "AI",
+    "sitemapPriority": 0.8,
+    "tags": ["bio", "funny", "humor", "sarcastic", "witty", "twitter", "ai"]
+  },
+  {
     "id": "username-generator",
     "href": "/tools/username-generator",
     "label": "Username Generator",

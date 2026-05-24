@@ -20,14 +20,31 @@ router.post("/generate-bio", async (req, res) => {
       return;
     }
 
+    const isFunny = tone?.startsWith("funny") ?? false;
+    const funnyStyle = isFunny ? (tone?.split("-").slice(1).join("-") || "random") : null;
     const toneText =
-      tone && tone.trim().length > 0 ? tone.trim() : "professional and engaging";
+      tone && tone.trim().length > 0 && !isFunny ? tone.trim() : "professional and engaging";
 
     const nonce = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
-    const systemMessage = `You are an expert X (Twitter) bio copywriter known for producing wildly creative, memorable bios. Every set of 3 bios you write must be completely different from each other in angle, vocabulary, structure, and emotional tone. Never repeat phrasing across bios. Request ID: ${nonce}`;
+    const systemMessage = isFunny
+      ? `You are a witty social media bio writer specializing in funny, self-deprecating, and sarcastic Twitter/X bios. Generate 3 short, genuinely funny bios (max 160 chars each) based on the user's niche. Use wordplay, irony, relatable humor, and wit. Avoid clichés. Make people actually laugh. Request ID: ${nonce}`
+      : `You are an expert X (Twitter) bio copywriter known for producing wildly creative, memorable bios. Every set of 3 bios you write must be completely different from each other in angle, vocabulary, structure, and emotional tone. Never repeat phrasing across bios. Request ID: ${nonce}`;
 
-    const userMessage = `Write 3 unique X (Twitter) bios for someone whose niche/topic is: "${topic.trim()}".
+    const userMessage = isFunny
+      ? `Write 3 unique funny X (Twitter) bios for someone whose niche/personality is: "${topic.trim()}".
+Humor style requested: ${funnyStyle ?? "random"}.
+
+Hard rules:
+- Every bio must be under 160 characters
+- Each bio must take a completely different comedic angle
+- Use the requested humor style (sarcastic = dry wit, self-deprecating = laugh at yourself, witty = clever wordplay, random = absurdist)
+- No generic filler, no emoji overload, no cringe
+- Make each bio feel like something a real, funny person would actually write
+
+Return ONLY a raw JSON array of exactly 3 strings. No markdown, no explanation, no extra text.
+Example: ["Bio one here", "Bio two here", "Bio three here"]`
+      : `Write 3 unique X (Twitter) bios for someone whose niche/topic is: "${topic.trim()}".
 Tone style requested: ${toneText}.
 
 Hard rules:
