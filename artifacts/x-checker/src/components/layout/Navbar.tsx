@@ -27,10 +27,11 @@ const NAV_CATEGORIES = [
     key: "x-tools",
     label: "X Tools",
     icon: AtSign,
-    color: "text-blue-500 dark:text-blue-400",
+    color: "text-blue-400",
     activeBg: "bg-blue-500/10",
     bg: "bg-blue-400/10",
     glowColor: "hsl(217 91% 60% / 0.28)",
+    glowClass: "nav-glow-blue",
     href: "/social-media-tools",
     tools: [
       { icon: Search, label: "Account Checker", href: "/tools/x-account-checker", badge: "Popular" },
@@ -54,10 +55,11 @@ const NAV_CATEGORIES = [
     key: "dev-tools",
     label: "Dev Tools",
     icon: Code2,
-    color: "text-orange-500 dark:text-orange-400",
+    color: "text-orange-400",
     activeBg: "bg-orange-500/10",
     bg: "bg-orange-400/10",
     glowColor: "hsl(25 95% 58% / 0.28)",
+    glowClass: "nav-glow-orange",
     href: "/developer-tools",
     tools: [
       { icon: FileJson, label: "JSON Formatter", href: "/tools/json-formatter", badge: "Popular" },
@@ -83,10 +85,11 @@ const NAV_CATEGORIES = [
     key: "seo",
     label: "SEO Tools",
     icon: TrendingUp,
-    color: "text-pink-500 dark:text-pink-400",
+    color: "text-pink-400",
     activeBg: "bg-pink-500/10",
     bg: "bg-pink-400/10",
     glowColor: "hsl(330 80% 62% / 0.28)",
+    glowClass: "nav-glow-pink",
     href: "/seo-tools",
     tools: [
       { icon: Globe, label: "Meta Tag Generator", href: "/tools/meta-tag-generator", badge: "Popular" },
@@ -103,10 +106,11 @@ const NAV_CATEGORIES = [
     key: "email",
     label: "Email Tools",
     icon: Mail,
-    color: "text-cyan-500 dark:text-cyan-400",
+    color: "text-cyan-400",
     activeBg: "bg-cyan-500/10",
     bg: "bg-cyan-400/10",
     glowColor: "hsl(187 90% 55% / 0.28)",
+    glowClass: "nav-glow-cyan",
     href: "/email-tools",
     tools: [
       { icon: Pencil, label: "Subject Line Generator", href: "/tools/subject-line-generator" },
@@ -203,10 +207,10 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${category.glowClass} ${
           isActive
             ? `${category.activeBg} ${category.color} nav-active-pulse`
-            : `${category.color} opacity-75 hover:opacity-100 hover:${category.bg}`
+            : `${category.color} hover:${category.bg}`
         }`}
         style={isActive ? ({ "--nav-glow-color": category.glowColor } as React.CSSProperties) : undefined}
       >
@@ -248,10 +252,10 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-teal ${
           isActive
             ? "bg-teal-500/10 text-teal-400 nav-active-pulse"
-            : "text-teal-400 opacity-75 hover:opacity-100 hover:bg-teal-500/10"
+            : "text-teal-400 hover:bg-teal-500/10"
         }`}
         style={isActive ? ({ "--nav-glow-color": "hsl(168 80% 52% / 0.28)" } as React.CSSProperties) : undefined}
       >
@@ -384,10 +388,10 @@ export function Navbar() {
           <div className="hidden md:flex flex-1 items-center justify-center">
             <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-muted/50 border border-violet-500/15 shadow-inner shadow-black/[0.08] dark:shadow-black/30">
               <Link href="/">
-                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
+                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
                   location === "/"
                     ? "bg-background shadow-sm text-foreground"
-                    : "text-foreground/70 hover:text-foreground hover:bg-background/60"
+                    : "text-foreground hover:bg-background/60"
                 }`}>
                   <Home className="h-3.5 w-3.5 shrink-0" />
                   Home
@@ -401,10 +405,10 @@ export function Navbar() {
               <TempMailNavItem currentPath={location} />
 
               <Link href="/about">
-                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
+                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
                   location === "/about"
                     ? "bg-background shadow-sm text-foreground"
-                    : "text-foreground/70 hover:text-foreground hover:bg-background/60"
+                    : "text-foreground hover:bg-background/60"
                 }`}>
                   <Info className="h-3.5 w-3.5 shrink-0" />
                   About

@@ -305,6 +305,14 @@ body::after {
   animation: nav-active-glow 2.8s ease-in-out infinite;
 }
 
+/* Nav item text glow — always on */
+.nav-glow-blue   { text-shadow: 0 0 10px hsl(217 91% 60% / 0.7), 0 0 22px hsl(217 91% 60% / 0.35); }
+.nav-glow-orange { text-shadow: 0 0 10px hsl(25 95% 58% / 0.7),  0 0 22px hsl(25 95% 58% / 0.35); }
+.nav-glow-pink   { text-shadow: 0 0 10px hsl(330 80% 62% / 0.7), 0 0 22px hsl(330 80% 62% / 0.35); }
+.nav-glow-cyan   { text-shadow: 0 0 10px hsl(187 90% 55% / 0.7), 0 0 22px hsl(187 90% 55% / 0.35); }
+.nav-glow-teal   { text-shadow: 0 0 10px hsl(168 80% 52% / 0.7), 0 0 22px hsl(168 80% 52% / 0.35); }
+.nav-glow-white  { text-shadow: 0 0 10px hsl(0 0% 100% / 0.55),  0 0 20px hsl(0 0% 100% / 0.25); }
+
 .page-orb {
   position: absolute;
   border-radius: 50%;
