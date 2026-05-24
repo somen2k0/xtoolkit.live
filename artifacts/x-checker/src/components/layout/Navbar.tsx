@@ -199,15 +199,15 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
             ? `${category.activeBg} ${category.color}`
             : `text-muted-foreground hover:${category.color} hover:${category.bg}`
         }`}
       >
-        <Icon className="h-3 w-3 shrink-0" />
+        <Icon className="h-3.5 w-3.5 shrink-0" />
         {category.label}
-        <ChevronDown className={`h-2.5 w-2.5 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`h-3 w-3 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
       </button>
       {open && <NavDropdown category={category} onClose={close} />}
     </div>
@@ -243,15 +243,15 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
             ? "bg-teal-500/10 text-teal-500 dark:text-teal-400"
             : "text-muted-foreground hover:text-teal-500 dark:hover:text-teal-400 hover:bg-teal-500/10"
         }`}
       >
-        <Inbox className="h-3 w-3 shrink-0" />
+        <Inbox className="h-3.5 w-3.5 shrink-0" />
         Temp Mail
-        <ChevronDown className={`h-2.5 w-2.5 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`h-3 w-3 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open && (
@@ -310,11 +310,13 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-border/50 bg-background/85 backdrop-blur-lg shadow-sm shadow-black/[0.04] dark:shadow-black/20">
-        {/* Gradient accent line at the bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent pointer-events-none" />
+      <nav className="sticky top-0 z-50 border-b border-violet-500/20 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/20 dark:shadow-violet-950/30">
+        {/* Gradient accent line at the bottom — vivid */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/80 to-transparent pointer-events-none" />
+        {/* Subtle top highlight */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-2">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-2">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
@@ -374,14 +376,14 @@ export function Navbar() {
 
           {/* Desktop nav — command bar style with icon + label */}
           <div className="hidden md:flex flex-1 items-center justify-center">
-            <div className="flex items-center gap-0 px-1 py-0.5 rounded-2xl bg-muted/60 border border-border/60 shadow-inner shadow-black/[0.03] dark:shadow-black/20">
+            <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-muted/50 border border-violet-500/15 shadow-inner shadow-black/[0.08] dark:shadow-black/30">
               <Link href="/">
-                <button className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
+                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
                   location === "/"
                     ? "bg-background shadow-sm text-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-background/60"
                 }`}>
-                  <Home className="h-3 w-3 shrink-0" />
+                  <Home className="h-3.5 w-3.5 shrink-0" />
                   Home
                 </button>
               </Link>
@@ -393,12 +395,12 @@ export function Navbar() {
               <TempMailNavItem currentPath={location} />
 
               <Link href="/about">
-                <button className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
+                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
                   location === "/about"
                     ? "bg-background shadow-sm text-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-background/60"
                 }`}>
-                  <Info className="h-3 w-3 shrink-0" />
+                  <Info className="h-3.5 w-3.5 shrink-0" />
                   About
                 </button>
               </Link>
@@ -410,7 +412,7 @@ export function Navbar() {
             <NavSearchDialog />
 
             <Link href="/chrome-extension">
-              <button className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white whitespace-nowrap transition-all duration-200 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_20px_rgba(139,92,246,0.65)] hover:-translate-y-px">
+              <button className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-white whitespace-nowrap transition-all duration-200 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-[0_0_18px_rgba(139,92,246,0.55)] hover:shadow-[0_0_28px_rgba(139,92,246,0.75)] hover:-translate-y-px">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/></svg>
                 Extension
               </button>

@@ -220,8 +220,8 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     background-image:
-      radial-gradient(ellipse 80% 50% at 20% -5%, hsl(270 80% 60% / 0.26), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 10%, hsl(200 90% 60% / 0.18), transparent);
+      radial-gradient(ellipse 80% 50% at 20% -5%, hsl(270 80% 60% / 0.42), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 10%, hsl(200 90% 60% / 0.30), transparent);
   }
 
   html:not(.dark) body {
@@ -257,10 +257,10 @@ body::after {
   top: -20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 80vw;
-  height: 60vh;
-  background: radial-gradient(ellipse at 30% center, hsl(258 82% 66% / 0.22), transparent 60%),
-              radial-gradient(ellipse at 70% center, hsl(195 90% 60% / 0.16), transparent 60%);
+  width: 90vw;
+  height: 65vh;
+  background: radial-gradient(ellipse at 30% center, hsl(258 82% 66% / 0.38), transparent 60%),
+              radial-gradient(ellipse at 70% center, hsl(195 90% 60% / 0.28), transparent 60%);
   animation: aurora-shift 8s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
@@ -282,9 +282,9 @@ body::after {
 }
 
 .bg-orb-1 {
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(circle, hsl(270 82% 65% / 0.40) 0%, transparent 70%);
+  width: 720px;
+  height: 720px;
+  background: radial-gradient(circle, hsl(270 85% 65% / 0.58) 0%, transparent 70%);
   top: -15%;
   left: -12%;
   mix-blend-mode: screen;
@@ -292,9 +292,9 @@ body::after {
 }
 
 .bg-orb-2 {
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, hsl(195 90% 62% / 0.32) 0%, transparent 70%);
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, hsl(195 90% 62% / 0.46) 0%, transparent 70%);
   top: 15%;
   right: -10%;
   mix-blend-mode: screen;
@@ -302,9 +302,9 @@ body::after {
 }
 
 .bg-orb-3 {
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, hsl(160 80% 55% / 0.24) 0%, transparent 70%);
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, hsl(160 80% 55% / 0.36) 0%, transparent 70%);
   bottom: 5%;
   left: 25%;
   mix-blend-mode: screen;
@@ -312,9 +312,9 @@ body::after {
 }
 
 .bg-orb-4 {
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, hsl(240 90% 72% / 0.28) 0%, transparent 70%);
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, hsl(240 90% 72% / 0.40) 0%, transparent 70%);
   bottom: 20%;
   right: 15%;
   mix-blend-mode: screen;
