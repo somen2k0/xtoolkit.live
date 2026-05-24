@@ -124,16 +124,16 @@
   --opaque-button-border-intensity: -6;
 
   /* Slate blue-gray — professional, not pitch black */
-  --background: 222 20% 12%;
+  --background: 222 22% 9%;
   --foreground: 215 22% 92%;
 
-  --card: 222 18% 16%;
+  --card: 222 20% 14%;
   --card-foreground: 215 22% 92%;
-  --card-border: 222 16% 24%;
+  --card-border: 222 18% 22%;
 
-  --popover: 222 20% 10%;
+  --popover: 222 22% 8%;
   --popover-foreground: 215 22% 92%;
-  --popover-border: 222 16% 22%;
+  --popover-border: 222 18% 20%;
 
   --primary: 258 82% 70%;
   --primary-foreground: 0 0% 100%;

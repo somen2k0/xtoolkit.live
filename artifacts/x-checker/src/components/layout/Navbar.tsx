@@ -314,7 +314,7 @@ export function Navbar() {
         {/* Gradient accent line at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-4 md:px-6 h-12 flex items-center justify-between gap-2">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-2">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
