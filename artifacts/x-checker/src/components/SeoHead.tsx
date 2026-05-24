@@ -64,24 +64,6 @@ export function SeoHead({ title, description, path, keywords, faqs, extraSchemas
 
     const injectedScripts: HTMLScriptElement[] = [];
 
-    if (faqs && faqs.length > 0) {
-      const el = document.createElement("script");
-      el.id = "faq-schema";
-      el.type = "application/ld+json";
-      el.textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "@id": `${canonicalUrl}#faq`,
-        mainEntity: faqs.map(({ q, a }) => ({
-          "@type": "Question",
-          name: q,
-          acceptedAnswer: { "@type": "Answer", text: a },
-        })),
-      });
-      document.head.appendChild(el);
-      injectedScripts.push(el);
-    }
-
     if (extraSchemas && extraSchemas.length > 0) {
       extraSchemas.forEach((schema, i) => {
         const el = document.createElement("script");
