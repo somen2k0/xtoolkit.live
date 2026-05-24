@@ -1,309 +1,299 @@
 import { useState } from "react";
 import {
   Search, AtSign, Code2, TrendingUp, Mail, Inbox, Sparkles,
-  FileJson, Globe, ShieldCheck, Hash, Link2, Lock, Minimize2,
-  ChevronDown, Home, Info, MessageSquare, Menu, ArrowRight,
-  Zap, Shield, Clock, Users,
+  FileJson, Globe, ShieldCheck, Hash, Lock,
+  ArrowRight, Zap, Shield, Clock, Users, Star,
+  Terminal, Layers, BarChart3, ChevronRight,
 } from "lucide-react";
 
-const DOMAIN = "a3a7575d-7562-453d-a6b5-b2000c40d0f1-00-88es2oz8cpj8.sisko.replit.dev";
-
 const TOOLS = [
-  { icon: Search,    label: "X Account Checker",      badge: "Popular", color: "text-blue-400",   bg: "bg-blue-400/10",   href: "#" },
-  { icon: Sparkles,  label: "AI Bio Generator",        badge: "AI",      color: "text-purple-400", bg: "bg-purple-400/10", href: "#" },
-  { icon: FileJson,  label: "JSON Formatter",          badge: "Popular", color: "text-orange-400", bg: "bg-orange-400/10", href: "#" },
-  { icon: Globe,     label: "Meta Tag Generator",      badge: "Popular", color: "text-pink-400",   bg: "bg-pink-400/10",   href: "#" },
-  { icon: Mail,      label: "Temp Email",              badge: "",        color: "text-cyan-400",   bg: "bg-cyan-400/10",   href: "#" },
-  { icon: ShieldCheck, label: "Email Validator",       badge: "New",     color: "text-emerald-400",bg: "bg-emerald-400/10",href: "#" },
-  { icon: Hash,      label: "Hashtag Formatter",       badge: "",        color: "text-blue-400",   bg: "bg-blue-400/10",   href: "#" },
-  { icon: Link2,     label: "URL Encoder / Decoder",   badge: "",        color: "text-orange-400", bg: "bg-orange-400/10", href: "#" },
-  { icon: Lock,      label: "Base64 Encoder",          badge: "",        color: "text-orange-400", bg: "bg-orange-400/10", href: "#" },
-  { icon: Minimize2, label: "CSS Minifier",            badge: "",        color: "text-orange-400", bg: "bg-orange-400/10", href: "#" },
-  { icon: TrendingUp, label: "Keyword Density",        badge: "",        color: "text-pink-400",   bg: "bg-pink-400/10",   href: "#" },
-  { icon: Inbox,     label: "Temp Mail Inbox",         badge: "New",     color: "text-cyan-400",   bg: "bg-cyan-400/10",   href: "#" },
+  { icon: Search,    label: "X Account Checker",    badge: "Popular", tag: "X Tools",    color: "#60a5fa", glow: "rgba(96,165,250,0.15)" },
+  { icon: Sparkles,  label: "AI Bio Generator",     badge: "AI",      tag: "X Tools",    color: "#c084fc", glow: "rgba(192,132,252,0.15)" },
+  { icon: FileJson,  label: "JSON Formatter",       badge: "Popular", tag: "Dev Tools",  color: "#fb923c", glow: "rgba(251,146,60,0.15)" },
+  { icon: Globe,     label: "Meta Tag Generator",   badge: "Popular", tag: "SEO",        color: "#f472b6", glow: "rgba(244,114,182,0.15)" },
+  { icon: Mail,      label: "Temp Email",           badge: "",        tag: "Email",      color: "#22d3ee", glow: "rgba(34,211,238,0.15)" },
+  { icon: ShieldCheck,label:"Email Validator",      badge: "New",     tag: "Email",      color: "#4ade80", glow: "rgba(74,222,128,0.15)" },
+  { icon: Hash,      label: "Hashtag Formatter",    badge: "",        tag: "X Tools",    color: "#60a5fa", glow: "rgba(96,165,250,0.15)" },
+  { icon: Lock,      label: "Base64 Encoder",       badge: "",        tag: "Dev Tools",  color: "#fb923c", glow: "rgba(251,146,60,0.15)" },
 ];
 
-const BADGE: Record<string, string> = {
-  Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
-  New:     "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI:      "bg-purple-400/15 text-purple-400 border-purple-400/30",
-};
+const STATS = [
+  { value: "44+",    label: "Free Tools",   icon: Layers },
+  { value: "0",      label: "Sign‑ups",     icon: Users },
+  { value: "100%",   label: "Free Forever", icon: Shield },
+  { value: "∞",      label: "Usage Limit",  icon: Zap },
+];
 
 const CATEGORIES = [
-  { icon: AtSign,    label: "X Tools",    color: "text-blue-400",    bg: "bg-blue-400/10",    count: 14 },
-  { icon: Code2,     label: "Dev Tools",  color: "text-orange-400",  bg: "bg-orange-400/10",  count: 16 },
-  { icon: TrendingUp,label: "SEO Tools",  color: "text-pink-400",    bg: "bg-pink-400/10",    count: 7  },
-  { icon: Mail,      label: "Email Tools",color: "text-cyan-400",    bg: "bg-cyan-400/10",    count: 6  },
-  { icon: Inbox,     label: "Temp Mail",  color: "text-teal-400",    bg: "bg-teal-400/10",    count: 3  },
+  { icon: AtSign,    label: "X Tools",     count: 14, color: "#60a5fa", active: true },
+  { icon: Code2,     label: "Dev Tools",   count: 16, color: "#fb923c", active: false },
+  { icon: TrendingUp,label: "SEO Tools",   count: 7,  color: "#f472b6", active: false },
+  { icon: Mail,      label: "Email Tools", count: 6,  color: "#22d3ee", active: false },
+  { icon: Inbox,     label: "Temp Mail",   count: 3,  color: "#2dd4bf", active: false },
 ];
 
-const TRUST = [
-  { icon: Shield, label: "No data stored" },
-  { icon: Users,  label: "No login required" },
-  { icon: Zap,    label: "Instant results" },
-  { icon: Clock,  label: "Free forever" },
-];
+const BADGE_STYLE: Record<string, { bg: string; color: string; border: string }> = {
+  Popular: { bg: "rgba(251,191,36,0.1)",  color: "#fbbf24", border: "rgba(251,191,36,0.25)" },
+  AI:      { bg: "rgba(192,132,252,0.1)", color: "#c084fc", border: "rgba(192,132,252,0.25)" },
+  New:     { bg: "rgba(74,222,128,0.1)",  color: "#4ade80", border: "rgba(74,222,128,0.25)" },
+};
 
 export function Homepage() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [activecat, setActivecat] = useState("X Tools");
 
   return (
-    <div
-      className="min-h-screen font-sans antialiased"
-      style={{
-        background: "hsl(222, 20%, 13%)",
-        color: "hsl(215, 18%, 88%)",
-        fontFamily: "'Inter', system-ui, sans-serif",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* Background aurora */}
+    <div style={{
+      minHeight: "100vh",
+      background: "#0d1117",
+      color: "#e2e8f0",
+      fontFamily: "'Inter', system-ui, sans-serif",
+      position: "relative",
+      overflowX: "hidden",
+    }}>
+      {/* Subtle top glow */}
       <div style={{
-        position: "fixed", top: "-20%", left: "50%", transform: "translateX(-50%)",
-        width: "80vw", height: "60vh", pointerEvents: "none", zIndex: 0,
-        background: "radial-gradient(ellipse at 30% center, hsl(258 82% 66% / 0.13), transparent 60%), radial-gradient(ellipse at 70% center, hsl(195 90% 60% / 0.09), transparent 60%)",
-      }} />
-      {/* Background grid */}
-      <div style={{
-        position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0,
-        backgroundImage: "linear-gradient(hsl(220 20% 90% / 0.03) 1px, transparent 1px), linear-gradient(90deg, hsl(220 20% 90% / 0.03) 1px, transparent 1px)",
-        backgroundSize: "40px 40px",
+        position: "fixed", top: -200, left: "50%", transform: "translateX(-50%)",
+        width: 800, height: 500, borderRadius: "50%",
+        background: "radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%)",
+        pointerEvents: "none",
       }} />
 
-      {/* NAVBAR */}
+      {/* ── NAVBAR ─────────────────────────────────────────── */}
       <nav style={{
         position: "sticky", top: 0, zIndex: 50,
-        borderBottom: "1px solid hsl(222 16% 23% / 0.6)",
-        background: "hsl(222 20% 13% / 0.88)",
-        backdropFilter: "blur(16px)",
-        boxShadow: "0 1px 0 0 hsl(258 82% 66% / 0.18)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        background: "rgba(13,17,23,0.85)",
+        backdropFilter: "blur(20px)",
       }}>
-        {/* Violet accent line */}
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, height: "1px",
-          background: "linear-gradient(to right, transparent, hsl(258 82% 66% / 0.45), transparent)",
-        }} />
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", height: 48, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", height: 52, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           {/* Logo */}
-          <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-            <div style={{ width: 28, height: 28, borderRadius: 8, overflow: "hidden", boxShadow: "0 0 12px hsl(258 82% 66% / 0.35)" }}>
-              <svg width="28" height="28" viewBox="0 0 180 180" fill="none">
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ width: 30, height: 30, borderRadius: 8, overflow: "hidden", boxShadow: "0 0 16px rgba(124,58,237,0.5)" }}>
+              <svg width="30" height="30" viewBox="0 0 180 180" fill="none">
                 <defs>
-                  <linearGradient id="bg" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop offset="0%" stopColor="#09071a"/><stop offset="100%" stopColor="#110d24"/></linearGradient>
-                  <linearGradient id="fr" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0%" stopColor="#c4b5fd"/><stop offset="45%" stopColor="#7c3aed"/><stop offset="100%" stopColor="#4c1d95"/></linearGradient>
+                  <linearGradient id="b" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop stopColor="#09071a"/><stop offset="1" stopColor="#110d24"/></linearGradient>
+                  <linearGradient id="f" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse"><stop stopColor="#c4b5fd"/><stop offset=".45" stopColor="#7c3aed"/><stop offset="1" stopColor="#4c1d95"/></linearGradient>
                 </defs>
-                <rect width="180" height="180" rx="36" fill="url(#bg)"/>
-                <g stroke="url(#fr)" strokeLinecap="round" fill="none"><line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/></g>
-                <g stroke="url(#fr)" strokeLinecap="square" strokeLinejoin="miter" fill="none"><polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/></g>
+                <rect width="180" height="180" rx="36" fill="url(#b)"/>
+                <g stroke="url(#f)" strokeLinecap="round" fill="none"><line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/></g>
+                <g stroke="url(#f)" strokeLinecap="square" fill="none"><polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/></g>
               </svg>
             </div>
-            <span style={{ fontWeight: 600, fontSize: 14, color: "hsl(215 18% 88%)", letterSpacing: "-0.01em" }}>X Toolkit</span>
-            <span style={{
-              fontSize: 10, fontWeight: 600, padding: "1px 6px", borderRadius: 20,
-              border: "1px solid hsl(258 80% 68% / 0.35)", color: "hsl(258 80% 72%)",
-              background: "hsl(258 80% 68% / 0.08)",
-            }}>44+ Tools</span>
+            <span style={{ fontWeight: 700, fontSize: 15, letterSpacing: "-0.02em", color: "#f1f5f9" }}>X Toolkit</span>
+            <div style={{ height: 16, width: 1, background: "rgba(255,255,255,0.12)", margin: "0 4px" }} />
+            <span style={{ fontSize: 11, color: "#94a3b8", fontWeight: 500 }}>44+ free tools</span>
           </div>
-
-          {/* Desktop nav pill */}
-          <div style={{
-            display: "flex", alignItems: "center", gap: 2, padding: "3px 4px",
-            borderRadius: 18, background: "hsl(222 16% 19% / 0.7)",
-            border: "1px solid hsl(222 16% 23% / 0.7)",
-            boxShadow: "inset 0 1px 0 0 hsl(215 18% 88% / 0.03)",
-          }}>
-            {[
-              { icon: Home, label: "Home", active: true },
-              { icon: AtSign, label: "X Tools", active: false },
-              { icon: Code2, label: "Dev Tools", active: false },
-              { icon: TrendingUp, label: "SEO Tools", active: false },
-              { icon: Mail, label: "Email Tools", active: false },
-              { icon: Inbox, label: "Temp Mail", active: false },
-              { icon: Info, label: "About", active: false },
-            ].map(({ icon: Icon, label, active }) => (
-              <button key={label} style={{
-                display: "flex", alignItems: "center", gap: 4, padding: "4px 10px",
-                borderRadius: 14, fontSize: 11, fontWeight: 600, border: "none", cursor: "pointer",
-                background: active ? "hsl(222 20% 17%)" : "transparent",
-                color: active ? "hsl(215 18% 88%)" : "hsl(215 12% 56%)",
-                boxShadow: active ? "0 1px 3px hsl(222 20% 8% / 0.3)" : "none",
-                transition: "all 0.15s",
-                whiteSpace: "nowrap",
-              }}>
-                <Icon size={11} />
-                {label}
-                {["X Tools","Dev Tools","SEO Tools","Email Tools","Temp Mail"].includes(label) && (
-                  <ChevronDown size={9} style={{ opacity: 0.6 }} />
-                )}
-              </button>
+          {/* Nav links */}
+          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            {["Home","X Tools","Dev Tools","SEO Tools","Email Tools","Temp Mail","About"].map((item, i) => (
+              <button key={item} style={{
+                padding: "5px 11px", borderRadius: 8, fontSize: 12, fontWeight: 500,
+                background: i === 0 ? "rgba(255,255,255,0.08)" : "transparent",
+                color: i === 0 ? "#f1f5f9" : "#64748b",
+                border: "none", cursor: "pointer",
+              }}>{item}</button>
             ))}
           </div>
-
-          {/* Right side */}
-          <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
+          {/* CTA */}
+          <div style={{ display: "flex", gap: 8 }}>
             <button style={{
-              display: "flex", alignItems: "center", justifyContent: "center",
-              width: 30, height: 30, borderRadius: 8, border: "1px solid hsl(222 16% 23%)",
-              background: "hsl(222 16% 19% / 0.5)", color: "hsl(215 12% 56%)", cursor: "pointer",
+              padding: "7px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600,
+              border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.05)",
+              color: "#94a3b8", cursor: "pointer", display: "flex", alignItems: "center", gap: 6,
             }}>
-              <Search size={14} />
+              <Search size={13} /> Search
             </button>
             <button style={{
-              display: "flex", alignItems: "center", gap: 6, padding: "6px 12px",
-              borderRadius: 8, fontSize: 12, fontWeight: 700, color: "#fff", border: "none",
-              cursor: "pointer", whiteSpace: "nowrap",
-              background: "linear-gradient(135deg, hsl(258 80% 60%), hsl(270 80% 55%))",
-              boxShadow: "0 0 14px hsl(258 80% 60% / 0.4)",
-            }}>
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/></svg>
-              Extension
-            </button>
-            <button style={{
-              display: "flex", alignItems: "center", gap: 6, padding: "5px 10px",
-              borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: "pointer",
-              border: "1px solid hsl(222 16% 23%)", background: "hsl(222 16% 19% / 0.5)",
-              color: "hsl(215 12% 60%)",
-            }}>
-              <MessageSquare size={13} />
-              Feedback
-            </button>
+              padding: "7px 16px", borderRadius: 8, fontSize: 12, fontWeight: 700,
+              background: "linear-gradient(135deg, #7c3aed, #6d28d9)",
+              color: "#fff", border: "none", cursor: "pointer",
+              boxShadow: "0 0 20px rgba(124,58,237,0.4), inset 0 1px 0 rgba(255,255,255,0.1)",
+            }}>Extension →</button>
           </div>
         </div>
       </nav>
 
-      {/* HERO */}
-      <div style={{ position: "relative", zIndex: 1, padding: "72px 24px 56px", textAlign: "center", maxWidth: 860, margin: "0 auto" }}>
+      {/* ── HERO ───────────────────────────────────────────── */}
+      <section style={{ padding: "80px 24px 64px", textAlign: "center", position: "relative" }}>
+        {/* Badge */}
         <div style={{
-          display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 14px",
-          borderRadius: 24, border: "1px solid hsl(258 80% 68% / 0.3)",
-          background: "hsl(258 80% 68% / 0.08)", marginBottom: 28,
-          fontSize: 12, fontWeight: 600, color: "hsl(258 80% 78%)",
+          display: "inline-flex", alignItems: "center", gap: 6,
+          padding: "5px 14px 5px 8px", borderRadius: 100,
+          border: "1px solid rgba(124,58,237,0.3)",
+          background: "rgba(124,58,237,0.08)",
+          marginBottom: 32, cursor: "pointer",
         }}>
-          <Zap size={12} />
-          44+ free tools · no signup required
+          <span style={{
+            fontSize: 10, fontWeight: 700, background: "#7c3aed",
+            color: "#fff", padding: "2px 7px", borderRadius: 100,
+          }}>NEW</span>
+          <span style={{ fontSize: 12, color: "#a78bfa", fontWeight: 500 }}>44 tools, no account needed</span>
+          <ChevronRight size={13} style={{ color: "#a78bfa" }} />
         </div>
 
-        <h1 style={{ fontSize: 62, fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.08, marginBottom: 20, color: "hsl(215 18% 92%)" }}>
-          Free online tools for
-        </h1>
         <h1 style={{
-          fontSize: 62, fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.08, marginBottom: 24,
-          background: "linear-gradient(90deg, hsl(270 80% 72%), hsl(240 90% 80%), hsl(195 90% 70%), hsl(240 85% 75%), hsl(270 80% 72%))",
+          fontSize: 68, fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.06,
+          margin: "0 auto 20px",
+          background: "linear-gradient(180deg, #f8fafc 0%, #94a3b8 100%)",
           WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-          backgroundSize: "200% auto",
         }}>
-          SEO, creators &amp; developers
+          Free online tools for<br />
+          <span style={{
+            background: "linear-gradient(135deg, #a78bfa 0%, #818cf8 40%, #38bdf8 100%)",
+            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+          }}>developers & creators</span>
         </h1>
-        <p style={{ fontSize: 17, lineHeight: 1.65, color: "hsl(215 12% 60%)", marginBottom: 36, maxWidth: 580, margin: "0 auto 36px" }}>
-          X account checker, AI bio generators, JSON formatter, Base64 encoder,
-          text formatters — all free, all instant, all in one place.
+
+        <p style={{
+          fontSize: 18, lineHeight: 1.7, color: "#64748b",
+          maxWidth: 540, margin: "0 auto 40px",
+        }}>
+          X account checker, AI bios, JSON formatter, Base64 encoder — instant results, no login, no limits.
         </p>
 
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginBottom: 40 }}>
+        <div style={{ display: "flex", gap: 12, justifyContent: "center", marginBottom: 60 }}>
           <button style={{
-            display: "flex", alignItems: "center", gap: 8, padding: "13px 28px",
-            borderRadius: 12, fontSize: 15, fontWeight: 700, color: "#fff",
-            border: "none", cursor: "pointer",
-            background: "linear-gradient(135deg, hsl(258 80% 60%), hsl(270 80% 55%))",
-            boxShadow: "0 0 28px hsl(258 80% 60% / 0.45), 0 4px 16px hsl(258 80% 60% / 0.25)",
+            display: "flex", alignItems: "center", gap: 8,
+            padding: "14px 28px", borderRadius: 12, fontSize: 15, fontWeight: 700,
+            background: "linear-gradient(135deg, #7c3aed, #6d28d9)",
+            color: "#fff", border: "none", cursor: "pointer",
+            boxShadow: "0 0 32px rgba(124,58,237,0.5), 0 4px 24px rgba(124,58,237,0.3)",
           }}>
-            Browse All Tools
-            <ArrowRight size={15} />
+            Browse All Tools <ArrowRight size={16} />
           </button>
           <button style={{
-            padding: "13px 28px", borderRadius: 12, fontSize: 15, fontWeight: 600, cursor: "pointer",
-            border: "1px solid hsl(222 16% 26%)", background: "hsl(222 18% 17% / 0.8)",
-            color: "hsl(215 18% 80%)",
+            padding: "14px 28px", borderRadius: 12, fontSize: 15, fontWeight: 600,
+            border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)",
+            color: "#cbd5e1", cursor: "pointer",
           }}>
-            See All Categories
+            View Categories
           </button>
         </div>
 
-        {/* Trust badges */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-          {TRUST.map(({ icon: Icon, label }) => (
+        {/* Stats bar */}
+        <div style={{
+          display: "inline-flex", gap: 0,
+          borderRadius: 16, overflow: "hidden",
+          border: "1px solid rgba(255,255,255,0.07)",
+          background: "rgba(255,255,255,0.03)",
+        }}>
+          {STATS.map(({ value, label, icon: Icon }, i) => (
             <div key={label} style={{
-              display: "flex", alignItems: "center", gap: 6, padding: "6px 14px",
-              borderRadius: 20, background: "hsl(222 18% 17%)", border: "1px solid hsl(222 16% 23%)",
-              fontSize: 11, fontWeight: 500, color: "hsl(215 12% 58%)",
+              padding: "16px 32px", textAlign: "center",
+              borderRight: i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
             }}>
-              <Icon size={11} style={{ opacity: 0.7 }} />
-              {label}
+              <div style={{ fontSize: 26, fontWeight: 800, color: "#f1f5f9", letterSpacing: "-0.03em" }}>{value}</div>
+              <div style={{ fontSize: 11, color: "#475569", fontWeight: 500, marginTop: 2 }}>{label}</div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* CATEGORIES ROW */}
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 1100, margin: "0 auto", padding: "0 24px 40px" }}>
-        <div style={{ display: "flex", gap: 10, overflowX: "auto" }}>
-          {CATEGORIES.map(({ icon: Icon, label, color, bg, count }) => (
-            <button key={label} style={{
-              display: "flex", alignItems: "center", gap: 8, padding: "8px 16px",
-              borderRadius: 12, border: "1px solid hsl(222 16% 23%)",
-              background: "hsl(222 18% 17%)", cursor: "pointer", flexShrink: 0,
-              fontSize: 12, fontWeight: 600, color: "hsl(215 18% 80%)",
-              transition: "all 0.15s",
-            }}>
-              <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 26, height: 26, borderRadius: 8, background: bg }}>
-                <Icon size={13} className={color} style={{ color: color.replace("text-", "").replace("-400", "") }} />
-              </span>
-              {label}
-              <span style={{
-                fontSize: 10, fontWeight: 700, padding: "1px 6px", borderRadius: 20,
-                background: "hsl(222 16% 22%)", color: "hsl(215 12% 55%)",
-              }}>{count}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* TOOLS GRID */}
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 1100, margin: "0 auto", padding: "0 24px 60px" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: "hsl(215 18% 88%)" }}>Popular Tools</h2>
-          <span style={{ fontSize: 12, color: "hsl(215 12% 56%)", cursor: "pointer" }}>View all →</span>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}>
-          {TOOLS.map(({ icon: Icon, label, badge, color, bg }) => (
-            <div key={label} style={{
-              display: "flex", alignItems: "center", gap: 10, padding: "12px 14px",
-              borderRadius: 12, border: "1px solid hsl(222 16% 23%)",
-              background: "hsl(222 18% 17%)", cursor: "pointer",
-              transition: "all 0.2s",
-            }}>
-              <div style={{ width: 32, height: 32, borderRadius: 9, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: bg }}>
-                <Icon size={15} style={{ color: color.includes("blue") ? "#60a5fa" : color.includes("purple") ? "#c084fc" : color.includes("orange") ? "#fb923c" : color.includes("pink") ? "#f472b6" : color.includes("cyan") ? "#22d3ee" : color.includes("emerald") ? "#34d399" : "#60a5fa" }} />
-              </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 12, fontWeight: 600, color: "hsl(215 18% 84%)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  {label}
-                </div>
-              </div>
-              {badge && (
+      {/* ── TOOLS SECTION ─────────────────────────────────── */}
+      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 80px" }}>
+        {/* Category filters */}
+        <div style={{ display: "flex", gap: 8, marginBottom: 28 }}>
+          {CATEGORIES.map(({ icon: Icon, label, count, color }) => {
+            const isActive = activecat === label;
+            return (
+              <button
+                key={label}
+                onClick={() => setActivecat(label)}
+                style={{
+                  display: "flex", alignItems: "center", gap: 7,
+                  padding: "8px 16px", borderRadius: 10, fontSize: 12, fontWeight: 600,
+                  cursor: "pointer", transition: "all 0.15s",
+                  border: isActive ? `1px solid ${color}40` : "1px solid rgba(255,255,255,0.07)",
+                  background: isActive ? `${color}12` : "rgba(255,255,255,0.03)",
+                  color: isActive ? color : "#475569",
+                }}
+              >
+                <Icon size={13} />
+                {label}
                 <span style={{
-                  fontSize: 9, fontWeight: 700, padding: "2px 6px", borderRadius: 20,
-                  border: "1px solid",
-                  ...(badge === "Popular" ? { background: "hsl(38 90% 50% / 0.12)", color: "hsl(38 90% 65%)", borderColor: "hsl(38 90% 50% / 0.3)" }
-                    : badge === "AI"      ? { background: "hsl(270 80% 65% / 0.12)", color: "hsl(270 80% 75%)", borderColor: "hsl(270 80% 65% / 0.3)" }
-                    : badge === "New"     ? { background: "hsl(142 70% 44% / 0.12)", color: "hsl(142 70% 60%)", borderColor: "hsl(142 70% 44% / 0.3)" }
-                    : {}),
-                }}>{badge}</span>
-              )}
+                  fontSize: 10, fontWeight: 700, padding: "1px 6px", borderRadius: 100,
+                  background: isActive ? `${color}20` : "rgba(255,255,255,0.05)",
+                  color: isActive ? color : "#475569",
+                }}>{count}</span>
+              </button>
+            );
+          })}
+          <div style={{ flex: 1 }} />
+          <span style={{ fontSize: 12, color: "#475569", display: "flex", alignItems: "center" }}>
+            View all tools →
+          </span>
+        </div>
+
+        {/* Tools grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
+          {TOOLS.map(({ icon: Icon, label, badge, color, glow }) => (
+            <div
+              key={label}
+              style={{
+                padding: "18px", borderRadius: 14, cursor: "pointer",
+                border: "1px solid rgba(255,255,255,0.06)",
+                background: "rgba(255,255,255,0.03)",
+                transition: "all 0.2s",
+                position: "relative", overflow: "hidden",
+              }}
+            >
+              {/* Subtle corner glow */}
+              <div style={{
+                position: "absolute", top: -20, right: -20, width: 80, height: 80,
+                borderRadius: "50%", background: glow, pointerEvents: "none",
+              }} />
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 14 }}>
+                <div style={{
+                  width: 38, height: 38, borderRadius: 10,
+                  background: `${color}14`,
+                  border: `1px solid ${color}25`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <Icon size={17} style={{ color }} />
+                </div>
+                {badge && (
+                  <span style={{
+                    fontSize: 9, fontWeight: 700, padding: "2px 7px",
+                    borderRadius: 100, border: `1px solid ${BADGE_STYLE[badge].border}`,
+                    background: BADGE_STYLE[badge].bg, color: BADGE_STYLE[badge].color,
+                  }}>{badge}</span>
+                )}
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: "#e2e8f0", lineHeight: 1.4 }}>{label}</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 10 }}>
+                <span style={{ fontSize: 11, color: "#475569" }}>Open tool</span>
+                <ArrowRight size={11} style={{ color: "#475569" }} />
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* FOOTER */}
+      {/* ── BOTTOM FEATURE BAR ────────────────────────────── */}
       <div style={{
-        position: "relative", zIndex: 1, borderTop: "1px solid hsl(222 16% 22%)",
-        padding: "24px", textAlign: "center",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+        background: "rgba(255,255,255,0.015)",
+        padding: "28px 24px",
       }}>
-        <p style={{ fontSize: 11, color: "hsl(215 12% 48%)" }}>
-          © 2025 X Toolkit — Free tools for developers, creators & SEO professionals
-        </p>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", gap: 32 }}>
+            {[
+              { icon: Shield, label: "No data stored" },
+              { icon: Users,  label: "No login required" },
+              { icon: Zap,    label: "Instant results" },
+              { icon: Clock,  label: "Free forever" },
+            ].map(({ icon: Icon, label }) => (
+              <div key={label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <Icon size={14} style={{ color: "#475569" }} />
+                <span style={{ fontSize: 12, color: "#475569", fontWeight: 500 }}>{label}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 6px #4ade80" }} />
+            <span style={{ fontSize: 11, color: "#475569" }}>All systems operational</span>
+          </div>
+        </div>
       </div>
     </div>
   );
