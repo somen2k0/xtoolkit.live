@@ -30,6 +30,7 @@ const NAV_CATEGORIES = [
     color: "text-blue-500 dark:text-blue-400",
     activeBg: "bg-blue-500/10",
     bg: "bg-blue-400/10",
+    glowColor: "hsl(217 91% 60% / 0.28)",
     href: "/social-media-tools",
     tools: [
       { icon: Search, label: "Account Checker", href: "/tools/x-account-checker", badge: "Popular" },
@@ -56,6 +57,7 @@ const NAV_CATEGORIES = [
     color: "text-orange-500 dark:text-orange-400",
     activeBg: "bg-orange-500/10",
     bg: "bg-orange-400/10",
+    glowColor: "hsl(25 95% 58% / 0.28)",
     href: "/developer-tools",
     tools: [
       { icon: FileJson, label: "JSON Formatter", href: "/tools/json-formatter", badge: "Popular" },
@@ -84,6 +86,7 @@ const NAV_CATEGORIES = [
     color: "text-pink-500 dark:text-pink-400",
     activeBg: "bg-pink-500/10",
     bg: "bg-pink-400/10",
+    glowColor: "hsl(330 80% 62% / 0.28)",
     href: "/seo-tools",
     tools: [
       { icon: Globe, label: "Meta Tag Generator", href: "/tools/meta-tag-generator", badge: "Popular" },
@@ -103,6 +106,7 @@ const NAV_CATEGORIES = [
     color: "text-cyan-500 dark:text-cyan-400",
     activeBg: "bg-cyan-500/10",
     bg: "bg-cyan-400/10",
+    glowColor: "hsl(187 90% 55% / 0.28)",
     href: "/email-tools",
     tools: [
       { icon: Pencil, label: "Subject Line Generator", href: "/tools/subject-line-generator" },
@@ -201,9 +205,10 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
         aria-expanded={open}
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
-            ? `${category.activeBg} ${category.color}`
+            ? `${category.activeBg} ${category.color} nav-active-pulse`
             : `${category.color} opacity-75 hover:opacity-100 hover:${category.bg}`
         }`}
+        style={isActive ? ({ "--nav-glow-color": category.glowColor } as React.CSSProperties) : undefined}
       >
         <Icon className="h-3.5 w-3.5 shrink-0" />
         {category.label}
@@ -245,9 +250,10 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
         aria-expanded={open}
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
-            ? "bg-teal-500/10 text-teal-400"
+            ? "bg-teal-500/10 text-teal-400 nav-active-pulse"
             : "text-teal-400 opacity-75 hover:opacity-100 hover:bg-teal-500/10"
         }`}
+        style={isActive ? ({ "--nav-glow-color": "hsl(168 80% 52% / 0.28)" } as React.CSSProperties) : undefined}
       >
         <Inbox className="h-3.5 w-3.5 shrink-0" />
         Temp Mail
