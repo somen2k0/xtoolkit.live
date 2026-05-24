@@ -8,5 +8,7 @@ export const modules: ModuleMap = {
   "./components/mockups/navbar-redesign/Floating.tsx": () => import("../components/mockups/navbar-redesign/Floating.tsx"),
   "./components/mockups/navbar-redesign/GlassNav.tsx": () => import("../components/mockups/navbar-redesign/GlassNav.tsx"),
   "./components/mockups/navbar-redesign/Light.tsx": () => import("../components/mockups/navbar-redesign/Light.tsx"),
-  "./components/mockups/navbar-redesign/Minimal.tsx": () => import("../components/mockups/navbar-redesign/Minimal.tsx")
+  "./components/mockups/navbar-redesign/Minimal.tsx": () => import("../components/mockups/navbar-redesign/Minimal.tsx"),
+  "./components/mockups/xtoolkit/Homepage.tsx": () => import("../components/mockups/xtoolkit/Homepage.tsx"),
+  "./components/mockups/xtoolkit/Navbar.tsx": () => import("../components/mockups/xtoolkit/Navbar.tsx")
 };
