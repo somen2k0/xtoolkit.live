@@ -1,218 +1,208 @@
 import { useState } from "react";
 import { Sun, Moon, Home, AtSign, Code2, TrendingUp, Mail, Inbox, Info, ChevronDown, Search, Sparkles, MessageSquare } from "lucide-react";
 
-function ThemePill({ theme, onToggle }: { theme: "dark" | "light"; onToggle: () => void }) {
-  return (
-    <button
-      onClick={onToggle}
-      aria-label="Toggle theme"
-      className="relative flex items-center gap-0.5 p-1 rounded-full transition-all duration-200 shadow-sm border"
-      style={{ background: "rgba(0,0,0,0.04)", borderColor: "rgba(0,0,0,0.1)" }}
-    >
-      <span className={`flex items-center justify-center h-6 w-6 rounded-full transition-all duration-200 ${
-        theme === "light"
-          ? "text-amber-500"
-          : "text-black/25"
-      }`}
-      style={theme === "light" ? {
-        background: "rgba(251,191,36,0.15)",
-        boxShadow: "0 0 8px rgba(251,191,36,0.35)"
-      } : {}}
-      >
-        <Sun className="h-3.5 w-3.5" />
-      </span>
-      <span className={`flex items-center justify-center h-6 w-6 rounded-full transition-all duration-200 ${
-        theme === "dark"
-          ? "text-indigo-500"
-          : "text-black/25"
-      }`}
-      style={theme === "dark" ? {
-        background: "rgba(99,102,241,0.15)",
-        boxShadow: "0 0 8px rgba(99,102,241,0.35)"
-      } : {}}
-      >
-        <Moon className="h-3.5 w-3.5" />
-      </span>
-    </button>
-  );
-}
-
 const NAV_ITEMS = [
-  { icon: Home, label: "Home", active: true },
-  { icon: AtSign, label: "X Tools", color: "#3b82f6", hoverBg: "rgba(59,130,246,0.08)" },
-  { icon: Code2, label: "Dev Tools", color: "#f97316", hoverBg: "rgba(249,115,22,0.08)" },
-  { icon: TrendingUp, label: "SEO Tools", color: "#ec4899", hoverBg: "rgba(236,72,153,0.08)" },
-  { icon: Mail, label: "Email Tools", color: "#06b6d4", hoverBg: "rgba(6,182,212,0.08)" },
-  { icon: Inbox, label: "Temp Mail", color: "#14b8a6", hoverBg: "rgba(20,184,166,0.08)" },
-  { icon: Info, label: "About" },
+  { icon: Home, label: "Home", active: true, color: "" },
+  { icon: AtSign, label: "X Tools", color: "#2563eb" },
+  { icon: Code2, label: "Dev Tools", color: "#ea580c" },
+  { icon: TrendingUp, label: "SEO Tools", color: "#db2777" },
+  { icon: Mail, label: "Email Tools", color: "#0891b2" },
+  { icon: Inbox, label: "Temp Mail", color: "#0d9488" },
+  { icon: Info, label: "About", color: "" },
 ];
 
 export function Light() {
-  const [theme, setTheme] = useState<"dark" | "light">("light");
+  const [active, setActive] = useState("Home");
 
   return (
-    <div
-      className="min-h-screen font-['Inter']"
-      style={{ background: "hsl(228 25% 96%)", color: "hsl(228 40% 12%)" }}
-    >
-      {/* Navbar */}
-      <nav
-        className="sticky top-0 z-50 border-b backdrop-blur-lg shadow-sm"
-        style={{
-          background: "hsla(228,25%,96%,0.85)",
-          borderColor: "hsla(220,13%,91%,0.9)",
-          boxShadow: "0 1px 12px rgba(0,0,0,0.06)"
-        }}
-      >
-        {/* Bottom gradient accent */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.4), transparent)" }}
-        />
+    <div style={{ minHeight: "100vh", background: "#f0f2f8", color: "#1a1f36", fontFamily: "Inter, system-ui, sans-serif", margin: 0, padding: 0 }}>
 
-        <div className="max-w-6xl mx-auto px-4 md:px-6 h-12 flex items-center justify-between gap-2">
+      {/* ── Navbar ── */}
+      <nav style={{
+        position: "sticky", top: 0, zIndex: 50,
+        background: "rgba(240,242,248,0.88)",
+        backdropFilter: "blur(16px)",
+        borderBottom: "1px solid rgba(0,0,0,0.08)",
+        boxShadow: "0 1px 16px rgba(0,0,0,0.07)"
+      }}>
+        {/* Violet accent line */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(124,58,237,0.4), transparent)" }} />
+
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", height: 48, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+
           {/* Logo */}
-          <div className="flex items-center gap-2 shrink-0 cursor-pointer">
-            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-md">
+          <div style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", flexShrink: 0 }}>
+            <div style={{ width: 28, height: 28, borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 10px rgba(124,58,237,0.25)" }}>
               <svg width="28" height="28" viewBox="0 0 180 180" fill="none">
                 <defs>
-                  <linearGradient id="lBg" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="lBg2" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#09071a"/><stop offset="100%" stopColor="#110d24"/>
                   </linearGradient>
-                  <linearGradient id="lFront" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="lF2" x1="35" y1="30" x2="145" y2="150" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#c4b5fd"/><stop offset="45%" stopColor="#7c3aed"/><stop offset="100%" stopColor="#4c1d95"/>
                   </linearGradient>
                 </defs>
-                <rect width="180" height="180" rx="36" fill="url(#lBg)"/>
+                <rect width="180" height="180" rx="36" fill="url(#lBg2)"/>
                 <g stroke="#2e1878" strokeLinecap="round" fill="none" transform="translate(2,2)">
-                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/>
+                  <line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
                 </g>
-                <g stroke="url(#lFront)" strokeLinecap="round" fill="none">
-                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
+                <g stroke="url(#lF2)" strokeLinecap="round" fill="none">
+                  <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/>
+                  <line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
                 </g>
-                <g stroke="url(#lFront)" strokeLinecap="square" fill="none">
-                  <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
+                <g stroke="url(#lF2)" strokeLinecap="square" fill="none">
+                  <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/>
+                  <polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
                 </g>
               </svg>
             </div>
-            <span className="font-semibold text-sm tracking-tight" style={{ color: "hsl(228 40% 12%)" }}>X Toolkit</span>
-            <span
-              className="hidden lg:inline-flex text-[10px] font-medium px-1.5 py-0.5 rounded-full border"
-              style={{ borderColor: "rgba(124,58,237,0.25)", color: "#7c3aed", background: "rgba(124,58,237,0.06)" }}
-            >
-              44+ Tools
-            </span>
+            <span style={{ fontWeight: 600, fontSize: 14, letterSpacing: "-0.02em", color: "#1a1f36" }}>X Toolkit</span>
+            <span style={{ fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: 999, border: "1px solid rgba(124,58,237,0.22)", color: "#7c3aed", background: "rgba(124,58,237,0.07)" }}>44+ Tools</span>
           </div>
 
           {/* Command bar */}
-          <div className="hidden md:flex flex-1 items-center justify-center">
-            <div
-              className="flex items-center gap-0 px-1 py-0.5 rounded-2xl border"
-              style={{
-                background: "rgba(0,0,0,0.04)",
-                borderColor: "rgba(0,0,0,0.09)",
-                boxShadow: "inset 0 1px 3px rgba(0,0,0,0.05)"
-              }}
-            >
-              {NAV_ITEMS.map(({ icon: Icon, label, active, color }) => (
-                <button
-                  key={label}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap"
-                  style={active
-                    ? { background: "#fff", color: "hsl(228 40% 12%)", boxShadow: "0 1px 4px rgba(0,0,0,0.1)" }
-                    : { color: color || "rgba(0,0,0,0.4)" }
-                  }
-                >
-                  <Icon className="h-3 w-3 shrink-0" />
-                  {label}
-                  {color && !active && <ChevronDown className="h-2.5 w-2.5 opacity-50" />}
-                </button>
-              ))}
+          <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+            <div style={{
+              display: "flex", alignItems: "center", gap: 0,
+              padding: "3px 4px", borderRadius: 18,
+              background: "rgba(0,0,0,0.05)",
+              border: "1px solid rgba(0,0,0,0.09)",
+              boxShadow: "inset 0 1px 3px rgba(0,0,0,0.06)"
+            }}>
+              {NAV_ITEMS.map(({ icon: Icon, label, color }) => {
+                const isActive = active === label;
+                return (
+                  <button
+                    key={label}
+                    onClick={() => setActive(label)}
+                    style={{
+                      display: "flex", alignItems: "center", gap: 4,
+                      padding: "4px 10px", borderRadius: 12, border: "none", cursor: "pointer",
+                      fontSize: 11, fontWeight: 600, whiteSpace: "nowrap", transition: "all 0.15s",
+                      background: isActive ? "#fff" : "transparent",
+                      color: isActive ? "#1a1f36" : (color || "rgba(0,0,0,0.38)"),
+                      boxShadow: isActive ? "0 1px 4px rgba(0,0,0,0.12)" : "none"
+                    }}
+                  >
+                    <Icon size={11} style={{ flexShrink: 0 }} />
+                    {label}
+                    {color && <ChevronDown size={9} style={{ opacity: 0.5 }} />}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-1.5 shrink-0">
+          <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
             {/* Search */}
-            <button
-              className="p-1.5 rounded-lg transition-colors"
-              style={{ color: "rgba(0,0,0,0.35)" }}
-            >
-              <Search className="h-4 w-4" />
+            <button style={{ background: "none", border: "none", cursor: "pointer", padding: 6, borderRadius: 8, color: "rgba(0,0,0,0.35)", display: "flex" }}>
+              <Search size={15} />
             </button>
 
             {/* Theme pill */}
-            <ThemePill theme={theme} onToggle={() => setTheme(t => t === "dark" ? "light" : "dark")} />
+            <div style={{
+              display: "flex", alignItems: "center", gap: 2,
+              padding: 4, borderRadius: 999,
+              border: "1px solid rgba(0,0,0,0.1)",
+              background: "rgba(0,0,0,0.04)"
+            }}>
+              <span style={{
+                display: "flex", alignItems: "center", justifyContent: "center",
+                width: 24, height: 24, borderRadius: 999,
+                color: "#d97706",
+                background: "rgba(245,158,11,0.14)",
+                boxShadow: "0 0 8px rgba(245,158,11,0.35)"
+              }}>
+                <Sun size={13} />
+              </span>
+              <span style={{
+                display: "flex", alignItems: "center", justifyContent: "center",
+                width: 24, height: 24, borderRadius: 999,
+                color: "rgba(0,0,0,0.25)", background: "transparent"
+              }}>
+                <Moon size={13} />
+              </span>
+            </div>
 
             {/* Extension CTA */}
-            <button
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white whitespace-nowrap transition-all duration-200"
-              style={{
-                background: "linear-gradient(135deg, #7c3aed, #9333ea)",
-                boxShadow: "0 0 14px rgba(124,58,237,0.3)"
-              }}
-            >
+            <button style={{
+              display: "flex", alignItems: "center", gap: 6,
+              padding: "6px 12px", borderRadius: 8, border: "none", cursor: "pointer",
+              fontSize: 12, fontWeight: 700, color: "#fff", whiteSpace: "nowrap",
+              background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+              boxShadow: "0 2px 14px rgba(124,58,237,0.28)"
+            }}>
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/>
               </svg>
               Extension
             </button>
 
-            <button className="p-1.5 rounded-lg transition-colors" style={{ color: "rgba(0,0,0,0.3)" }}>
-              <MessageSquare className="h-4 w-4" />
+            <button style={{ background: "none", border: "none", cursor: "pointer", padding: 6, borderRadius: 8, color: "rgba(0,0,0,0.3)", display: "flex" }}>
+              <MessageSquare size={15} />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
-      <div className="flex flex-col items-center justify-center pt-20 px-6 text-center">
-        <div
-          className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full border mb-8"
-          style={{ background: "rgba(0,0,0,0.04)", borderColor: "rgba(0,0,0,0.1)", color: "rgba(0,0,0,0.5)" }}
-        >
-          <Sparkles className="h-3 w-3 text-violet-500" />
+      {/* ── Hero ── */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 80, paddingLeft: 24, paddingRight: 24, textAlign: "center" }}>
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: 8,
+          fontSize: 12, fontWeight: 500, padding: "6px 14px", borderRadius: 999,
+          border: "1px solid rgba(0,0,0,0.1)", background: "rgba(0,0,0,0.04)",
+          color: "rgba(0,0,0,0.5)", marginBottom: 32
+        }}>
+          <Sparkles size={12} style={{ color: "#7c3aed" }} />
           44+ free tools · no signup required
         </div>
 
-        <h1 className="text-5xl font-bold tracking-tight mb-4" style={{ color: "hsl(228 40% 12%)" }}>
+        <div style={{ fontSize: 48, fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 12, color: "#1a1f36" }}>
           Free online tools for
-        </h1>
-        <h1
-          className="text-5xl font-bold tracking-tight mb-6"
-          style={{ background: "linear-gradient(135deg, #3b82f6, #7c3aed, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
-        >
+        </div>
+        <div style={{
+          fontSize: 48, fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 20,
+          background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #0891b2 100%)",
+          WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
+        }}>
           SEO, creators &amp; developers
-        </h1>
-        <p style={{ color: "rgba(0,0,0,0.45)", maxWidth: 520, lineHeight: 1.6 }}>
-          X account checker, AI bio generators, JSON formatter, Base64 encoder,<br />
+        </div>
+        <p style={{ color: "rgba(0,0,0,0.45)", maxWidth: 520, lineHeight: 1.65, fontSize: 15, marginTop: 0 }}>
+          X account checker, AI bio generators, JSON formatter, Base64 encoder,
           text formatters — all free, all instant, all in one place.
         </p>
 
-        <div className="flex gap-3 mt-8">
-          <button
-            className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
-            style={{ background: "linear-gradient(135deg, #7c3aed, #9333ea)", boxShadow: "0 4px 16px rgba(124,58,237,0.25)" }}
-          >
+        <div style={{ display: "flex", gap: 12, marginTop: 32 }}>
+          <button style={{
+            padding: "10px 22px", borderRadius: 12, border: "none", cursor: "pointer",
+            fontSize: 14, fontWeight: 600, color: "#fff",
+            background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+            boxShadow: "0 4px 18px rgba(124,58,237,0.28)"
+          }}>
             Browse All Tools →
           </button>
-          <button
-            className="px-5 py-2.5 rounded-xl text-sm font-semibold border"
-            style={{ borderColor: "rgba(0,0,0,0.15)", color: "rgba(0,0,0,0.65)", background: "#fff" }}
-          >
+          <button style={{
+            padding: "10px 22px", borderRadius: 12, cursor: "pointer",
+            fontSize: 14, fontWeight: 600,
+            border: "1px solid rgba(0,0,0,0.14)",
+            color: "rgba(0,0,0,0.6)", background: "#fff"
+          }}>
             See All Categories
           </button>
         </div>
 
-        {/* Theme toggle indicator */}
-        <div className="mt-16 flex flex-col items-center gap-3">
-          <p className="text-xs font-medium" style={{ color: "rgba(0,0,0,0.3)" }}>ACTIVE THEME</p>
-          <div
-            className="flex items-center gap-2 px-4 py-2 rounded-full border"
-            style={{ borderColor: "rgba(245,158,11,0.3)", background: "rgba(245,158,11,0.08)" }}
-          >
-            <Sun className="h-4 w-4 text-amber-500" />
-            <span className="text-sm font-semibold text-amber-600">Light Mode</span>
+        {/* Active theme badge */}
+        <div style={{ marginTop: 64, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", color: "rgba(0,0,0,0.28)", textTransform: "uppercase" }}>Active Theme</span>
+          <div style={{
+            display: "flex", alignItems: "center", gap: 8,
+            padding: "8px 18px", borderRadius: 999,
+            border: "1px solid rgba(245,158,11,0.28)", background: "rgba(245,158,11,0.08)"
+          }}>
+            <Sun size={15} style={{ color: "#d97706" }} />
+            <span style={{ fontSize: 13, fontWeight: 600, color: "#b45309" }}>Light Mode</span>
           </div>
         </div>
       </div>
