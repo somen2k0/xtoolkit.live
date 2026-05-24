@@ -52,7 +52,7 @@ export function aiDailyRateLimiter(
 
 // ─── Input validation ─────────────────────────────────────────────────────────
 
-export const AI_MAX_INPUT_CHARS = 1500;
+export const AI_MAX_INPUT_CHARS = 6000;
 
 /** Strip raw and escaped HTML tags from a string. */
 function stripHtml(str: string): string {
