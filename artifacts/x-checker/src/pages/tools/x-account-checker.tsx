@@ -107,37 +107,11 @@ export default function XAccountChecker() {
   const suspendedCount = results.filter(r => r.status === "suspended").length;
   const notFoundCount = results.filter(r => r.status === "not_found").length;
 
-  const softwareAppSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "X Account Checker — Bulk Twitter Status & Profile Checker",
-    "url": "https://xtoolkit.live/tools/x-account-checker",
-    "description": "Bulk check Twitter/X account status with full profile data including followers, following, join date and verified badge. Check up to 100 accounts simultaneously for free. No signup required.",
-    "applicationCategory": "UtilitiesApplication",
-    "keywords": "twitter account checker, bulk twitter checker, suspended account checker, x account checker, twitter follower checker, twitter profile checker",
-    "featureList": [
-      "Check up to 100 accounts simultaneously",
-      "Real-time Active/Suspended/Deleted status",
-      "Follower and following counts",
-      "Account join date",
-      "Verified badge detection",
-      "Profile photo and display name",
-      "No login or API key required",
-      "Free to use"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  };
-
   return (
     <MiniToolLayout
       seoTitle="X Account Checker — Bulk Twitter Account Status, Followers & Profile Data | X Toolkit"
       seoDescription="Bulk check Twitter/X account status with full profile data — followers, following, join date, verified badge. Check up to 100 accounts free. No signup. Instant results."
       seoKeywords="twitter account checker, x account checker, bulk twitter checker, suspended account checker, twitter username checker, check twitter account status, bulk x account check, twitter follower checker, twitter verified checker, check twitter followers, suspended twitter account, deleted twitter account checker, free twitter checker, twitter profile checker"
-      seoExtraSchemas={[softwareAppSchema]}
       icon={Search}
       badge="Most Popular"
       title="X Account Checker"

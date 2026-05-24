@@ -2,21 +2,15 @@ import { useEffect } from "react";
 
 const SITE_URL = "https://xtoolkit.live";
 
-interface Faq {
-  q: string;
-  a: string;
-}
-
 interface SeoHeadProps {
   title: string;
   description: string;
   path?: string;
   keywords?: string;
-  faqs?: Faq[];
   extraSchemas?: object[];
 }
 
-export function SeoHead({ title, description, path, keywords, faqs, extraSchemas }: SeoHeadProps) {
+export function SeoHead({ title, description, path, keywords, extraSchemas }: SeoHeadProps) {
   useEffect(() => {
     const canonicalUrl = path ? `${SITE_URL}${path}` : SITE_URL;
 
@@ -87,7 +81,7 @@ export function SeoHead({ title, description, path, keywords, faqs, extraSchemas
       canonicalEl?.setAttribute("href", prevCanonical);
       injectedScripts.forEach((el) => el.remove());
     };
-  }, [title, description, path, keywords, faqs, extraSchemas]);
+  }, [title, description, path, keywords, extraSchemas]);
 
   return null;
 }

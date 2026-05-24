@@ -80,7 +80,6 @@ export default function ChromeExtensionPage() {
         description="Get instant disposable email inboxes and automatic OTP detection right in your Chrome toolbar. Free Chrome extension by X Toolkit."
         path="/chrome-extension"
         keywords="chrome extension temp mail, disposable email extension, temp email chrome, otp detector extension, throwaway email chrome, temporary email extension, disposable inbox chrome"
-        faqs={faqs}
         extraSchemas={[
           {
             "@context": "https://schema.org",

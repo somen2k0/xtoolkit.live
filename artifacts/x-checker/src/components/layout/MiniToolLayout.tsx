@@ -94,7 +94,6 @@ export function MiniToolLayout({
         title={seoTitle}
         description={seoDescription}
         keywords={resolvedKeywords}
-        faqs={faqs}
         path={path}
         extraSchemas={allExtraSchemas}
       />

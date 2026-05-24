@@ -111,7 +111,6 @@ export function CategoryLandingPage({ config }: { config: CategoryPageConfig }) 
         title={seoTitle}
         description={seoDescription}
         path={path}
-        faqs={faqs}
         extraSchemas={extraSchemas}
       />
 
