@@ -312,9 +312,9 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
+      <nav className="sticky top-0 z-50 border-b border-border/50 bg-background/85 backdrop-blur-lg shadow-sm shadow-black/[0.04] dark:shadow-black/20">
         {/* Gradient accent line at the bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-purple-500/40 via-indigo-500/30 to-cyan-500/40 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-12 flex items-center justify-between gap-2">
 
@@ -376,7 +376,7 @@ export function Navbar() {
 
           {/* Desktop nav — command bar style with icon + label */}
           <div className="hidden md:flex flex-1 items-center justify-center">
-            <div className="flex items-center gap-0 px-1 py-0.5 rounded-2xl bg-muted/50 border border-border/40">
+            <div className="flex items-center gap-0 px-1 py-0.5 rounded-2xl bg-muted/60 border border-border/60 shadow-inner shadow-black/[0.03] dark:shadow-black/20">
               <Link href="/">
                 <button className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
                   location === "/"
@@ -411,13 +411,26 @@ export function Navbar() {
           <div className="flex items-center gap-1 shrink-0">
             <NavSearchDialog />
 
-            {/* Theme toggle */}
+            {/* Theme toggle — pill style */}
             <button
               onClick={toggle}
               aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              className="relative flex items-center gap-0.5 p-1 rounded-full border border-border/50 bg-muted/40 hover:bg-muted/70 transition-all duration-200 shadow-sm"
             >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              <span className={`flex items-center justify-center h-6 w-6 rounded-full transition-all duration-200 ${
+                theme === "light"
+                  ? "bg-amber-400/20 text-amber-500 shadow-[0_0_8px_rgba(251,191,36,0.4)]"
+                  : "text-muted-foreground/50"
+              }`}>
+                <Sun className="h-3.5 w-3.5" />
+              </span>
+              <span className={`flex items-center justify-center h-6 w-6 rounded-full transition-all duration-200 ${
+                theme === "dark"
+                  ? "bg-indigo-500/20 text-indigo-400 shadow-[0_0_8px_rgba(99,102,241,0.4)]"
+                  : "text-muted-foreground/50"
+              }`}>
+                <Moon className="h-3.5 w-3.5" />
+              </span>
             </button>
 
             <Link href="/chrome-extension">
@@ -548,7 +561,13 @@ export function Navbar() {
                 onClick={toggle}
                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors text-left"
               >
-                {theme === "dark" ? <Sun className="h-4 w-4 shrink-0" /> : <Moon className="h-4 w-4 shrink-0" />}
+                <span className={`flex items-center justify-center h-6 w-6 rounded-full transition-all duration-200 ${
+                  theme === "light"
+                    ? "bg-amber-400/20 text-amber-500"
+                    : "bg-indigo-500/20 text-indigo-400"
+                }`}>
+                  {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+                </span>
                 {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
               </button>
 
