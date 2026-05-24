@@ -48,7 +48,7 @@ isCanvasWorkflow = true
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "PORT=8000 pnpm --filter @workspace/mockup-sandbox run dev"
+args = "PORT=8000 BASE_PATH=/__mockup/ pnpm --filter @workspace/mockup-sandbox run dev"
 waitForPort = 8000
 
 [agent]
