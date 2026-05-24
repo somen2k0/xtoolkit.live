@@ -446,7 +446,7 @@ export function Navbar() {
 
             {/* Mobile hamburger */}
             <button
-              className="md:hidden p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              className="md:hidden p-1.5 rounded-md text-foreground hover:bg-muted/50 transition-colors nav-glow-white"
               onClick={() => { setMenuOpen((v) => !v); setMobileExpanded(null); }}
               aria-label="Toggle menu"
             >
@@ -461,8 +461,8 @@ export function Navbar() {
             <div className="px-4 py-3 space-y-1 max-h-[80vh] overflow-y-auto">
 
               <Link href="/" onClick={closeMenu}>
-                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-left ${
-                  location === "/" ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left nav-glow-white ${
+                  location === "/" ? "bg-muted/60 text-foreground" : "text-foreground hover:bg-muted/50"
                 }`}>
                   <Home className="h-4 w-4 shrink-0" />
                   Home
@@ -475,12 +475,12 @@ export function Navbar() {
                 return (
                   <div key={cat.key} className="rounded-lg overflow-hidden border border-border/30">
                     <button
-                      className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors text-left bg-muted/20"
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium hover:bg-muted/50 transition-colors text-left bg-muted/20 ${cat.glowClass}`}
                       onClick={() => setMobileExpanded(expanded ? null : cat.key)}
                     >
                       <CatIcon className={`h-4 w-4 shrink-0 ${cat.color}`} />
                       <span className={`text-sm font-semibold flex-1 ${cat.color}`}>{cat.label}</span>
-                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 opacity-60 ${expanded ? "rotate-180" : ""}`} />
                     </button>
                     {expanded && (
                       <div className="bg-muted/10 px-2 py-1.5 space-y-0.5">
@@ -514,12 +514,12 @@ export function Navbar() {
               {/* Temp Mail mobile */}
               <div className="rounded-lg overflow-hidden border border-border/30">
                 <button
-                  className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors text-left bg-muted/20"
+                  className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium hover:bg-muted/50 transition-colors text-left bg-muted/20 nav-glow-teal"
                   onClick={() => setMobileExpanded(mobileExpanded === "temp-mail" ? null : "temp-mail")}
                 >
-                  <Inbox className="h-4 w-4 shrink-0 text-teal-500 dark:text-teal-400" />
-                  <span className="text-sm font-semibold flex-1 text-teal-500 dark:text-teal-400">Temp Mail</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileExpanded === "temp-mail" ? "rotate-180" : ""}`} />
+                  <Inbox className="h-4 w-4 shrink-0 text-teal-400" />
+                  <span className="text-sm font-semibold flex-1 text-teal-400">Temp Mail</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 opacity-60 ${mobileExpanded === "temp-mail" ? "rotate-180" : ""}`} />
                 </button>
                 {mobileExpanded === "temp-mail" && (
                   <div className="bg-muted/10 px-2 py-1.5 space-y-0.5">
@@ -536,8 +536,8 @@ export function Navbar() {
               </div>
 
               <Link href="/about" onClick={closeMenu}>
-                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-left ${
-                  location === "/about" ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left nav-glow-white ${
+                  location === "/about" ? "bg-muted/60 text-foreground" : "text-foreground hover:bg-muted/50"
                 }`}>
                   <Info className="h-4 w-4 shrink-0" />
                   About
