@@ -124,25 +124,25 @@
   --opaque-button-border-intensity: -6;
 
   /* Slate blue-gray — professional, not pitch black */
-  --background: 222 20% 13%;
-  --foreground: 215 18% 88%;
+  --background: 222 20% 12%;
+  --foreground: 215 22% 92%;
 
-  --card: 222 18% 17%;
-  --card-foreground: 215 18% 88%;
+  --card: 222 18% 16%;
+  --card-foreground: 215 22% 92%;
   --card-border: 222 16% 24%;
 
-  --popover: 222 20% 11%;
-  --popover-foreground: 215 18% 88%;
+  --popover: 222 20% 10%;
+  --popover-foreground: 215 22% 92%;
   --popover-border: 222 16% 22%;
 
-  --primary: 258 80% 68%;
+  --primary: 258 82% 70%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 222 16% 22%;
-  --secondary-foreground: 215 18% 88%;
+  --secondary: 222 16% 21%;
+  --secondary-foreground: 215 22% 92%;
 
-  --muted: 222 16% 19%;
-  --muted-foreground: 215 12% 56%;
+  --muted: 222 16% 18%;
+  --muted-foreground: 215 14% 62%;
 
   --accent: 258 80% 68%;
   --accent-foreground: 0 0% 100%;
@@ -186,8 +186,8 @@
 }
 
 @keyframes aurora-shift {
-  0%, 100% { opacity: 0.12; transform: scaleX(1) scaleY(1); }
-  50%       { opacity: 0.18; transform: scaleX(1.15) scaleY(1.2); }
+  0%, 100% { opacity: 0.18; transform: scaleX(1) scaleY(1); }
+  50%       { opacity: 0.28; transform: scaleX(1.15) scaleY(1.2); }
 }
 
 @keyframes pulse-ring {
@@ -220,8 +220,8 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     background-image:
-      radial-gradient(ellipse 80% 50% at 20% -5%, hsl(270 80% 60% / 0.18), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 10%, hsl(200 90% 60% / 0.12), transparent);
+      radial-gradient(ellipse 80% 50% at 20% -5%, hsl(270 80% 60% / 0.26), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 10%, hsl(200 90% 60% / 0.18), transparent);
   }
 
   html:not(.dark) body {
@@ -259,8 +259,8 @@ body::after {
   transform: translateX(-50%);
   width: 80vw;
   height: 60vh;
-  background: radial-gradient(ellipse at 30% center, hsl(258 82% 66% / 0.14), transparent 60%),
-              radial-gradient(ellipse at 70% center, hsl(195 90% 60% / 0.10), transparent 60%);
+  background: radial-gradient(ellipse at 30% center, hsl(258 82% 66% / 0.22), transparent 60%),
+              radial-gradient(ellipse at 70% center, hsl(195 90% 60% / 0.16), transparent 60%);
   animation: aurora-shift 8s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
@@ -282,9 +282,9 @@ body::after {
 }
 
 .bg-orb-1 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, hsl(270 80% 65% / 0.28) 0%, transparent 70%);
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, hsl(270 82% 65% / 0.40) 0%, transparent 70%);
   top: -15%;
   left: -12%;
   mix-blend-mode: screen;
@@ -292,9 +292,9 @@ body::after {
 }
 
 .bg-orb-2 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, hsl(195 90% 60% / 0.22) 0%, transparent 70%);
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, hsl(195 90% 62% / 0.32) 0%, transparent 70%);
   top: 15%;
   right: -10%;
   mix-blend-mode: screen;
@@ -302,9 +302,9 @@ body::after {
 }
 
 .bg-orb-3 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, hsl(160 80% 55% / 0.15) 0%, transparent 70%);
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, hsl(160 80% 55% / 0.24) 0%, transparent 70%);
   bottom: 5%;
   left: 25%;
   mix-blend-mode: screen;
@@ -312,9 +312,9 @@ body::after {
 }
 
 .bg-orb-4 {
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, hsl(240 90% 70% / 0.18) 0%, transparent 70%);
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, hsl(240 90% 72% / 0.28) 0%, transparent 70%);
   bottom: 20%;
   right: 15%;
   mix-blend-mode: screen;
@@ -324,7 +324,7 @@ body::after {
 /* ── Hero entrance animation helpers ────────────────────────────────────── */
 
 .hero-badge {
-  animation: fade-up 0.6s ease-out 0.1s both, badge-glow 4s ease-in-out 1s infinite;
+  animation: fade-up 0.6s ease-out 0.1s both;
 }
 
 .hero-title {
