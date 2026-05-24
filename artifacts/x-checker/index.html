@@ -42,9 +42,18 @@
     <meta name="twitter:image" content="https://xtoolkit.live/opengraph.png" />
     <meta name="twitter:image:alt" content="X Toolkit — 43+ free online tools for X, SEO, developers and creators" />
 
+    <!-- Theme init: apply class before paint to avoid flash -->
+    <script>
+      (function() {
+        var t = localStorage.getItem('theme') || 'dark';
+        if (t === 'dark') document.documentElement.classList.add('dark');
+      })();
+    </script>
+
     <!-- Anti-FOUC: instant dark background + loading screen before React mounts -->
     <style>
       html, body { background-color: hsl(240, 18%, 4%); margin: 0; padding: 0; }
+      html:not(.dark), html:not(.dark) body { background-color: hsl(0, 0%, 98%); }
       #app-loader {
         position: fixed;
         inset: 0;

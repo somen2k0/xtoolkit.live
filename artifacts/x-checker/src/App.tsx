@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { CookieBanner } from "@/components/CookieBanner";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { usePageTracking } from "@/hooks/use-track";
+import { ThemeProvider } from "@/lib/theme";
 import { Loader2 } from "lucide-react";
 import NotFound from "@/pages/not-found";
 import AdminPage from "@/pages/admin";
@@ -238,16 +239,18 @@ function TrackedRouter() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <TrackedRouter />
-          <CookieBanner />
-          <MobileNav />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <TrackedRouter />
+            <CookieBanner />
+            <MobileNav />
+          </WouterRouter>
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

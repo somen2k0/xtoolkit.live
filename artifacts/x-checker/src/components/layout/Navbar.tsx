@@ -10,10 +10,11 @@ import {
   Mail, ShieldCheck, Pencil, Shield, Tag, Clock,
   Minimize2, Code2, KeyRound, Regex, Database, Shuffle, ArrowLeftRight,
   ScanSearch, EyeOff, Newspaper, Calendar, Gauge, ShieldAlert, Inbox,
-  AlignLeft, QrCode, ImageIcon, Palette, Laugh,
+  AlignLeft, QrCode, ImageIcon, Palette, Laugh, Sun, Moon,
 } from "lucide-react";
 import { TOTAL_LIVE } from "@/lib/tools-registry";
 import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
+import { useTheme } from "@/lib/theme";
 
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
@@ -26,7 +27,9 @@ const NAV_CATEGORIES = [
   {
     key: "x-tools",
     label: "X Tools",
-    color: "text-blue-400",
+    icon: AtSign,
+    color: "text-blue-500 dark:text-blue-400",
+    activeBg: "bg-blue-500/10",
     bg: "bg-blue-400/10",
     href: "/social-media-tools",
     tools: [
@@ -50,7 +53,9 @@ const NAV_CATEGORIES = [
   {
     key: "dev-tools",
     label: "Dev Tools",
-    color: "text-orange-400",
+    icon: Code2,
+    color: "text-orange-500 dark:text-orange-400",
+    activeBg: "bg-orange-500/10",
     bg: "bg-orange-400/10",
     href: "/developer-tools",
     tools: [
@@ -76,7 +81,9 @@ const NAV_CATEGORIES = [
   {
     key: "seo",
     label: "SEO Tools",
-    color: "text-pink-400",
+    icon: TrendingUp,
+    color: "text-pink-500 dark:text-pink-400",
+    activeBg: "bg-pink-500/10",
     bg: "bg-pink-400/10",
     href: "/seo-tools",
     tools: [
@@ -93,7 +100,9 @@ const NAV_CATEGORIES = [
   {
     key: "email",
     label: "Email Tools",
-    color: "text-cyan-400",
+    icon: Mail,
+    color: "text-cyan-500 dark:text-cyan-400",
+    activeBg: "bg-cyan-500/10",
     bg: "bg-cyan-400/10",
     href: "/email-tools",
     tools: [
@@ -119,22 +128,18 @@ function NavDropdown({
     <div
       className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 z-50
         rounded-xl border border-border/60 bg-background/98 backdrop-blur-xl
-        shadow-2xl shadow-black/30 animate-in fade-in slide-in-from-top-1 duration-150"
+        shadow-2xl shadow-black/20 animate-in fade-in slide-in-from-top-1 duration-150"
     >
       <div className="p-2">
-        {/* View all link */}
         <Link href={category.href} onClick={onClose}>
-          <div className={`flex items-center justify-between px-3 py-2 rounded-lg mb-1 hover:bg-muted/60 transition-colors cursor-pointer`}>
+          <div className="flex items-center justify-between px-3 py-2 rounded-lg mb-1 hover:bg-muted/60 transition-colors cursor-pointer">
             <span className={`text-xs font-bold uppercase tracking-wider ${category.color}`}>
               All {category.label}
             </span>
             <span className="text-xs text-muted-foreground">View all →</span>
           </div>
         </Link>
-
         <div className="h-px bg-border/40 mx-1 mb-2" />
-
-        {/* Tools list */}
         <ul className="space-y-0.5 max-h-[360px] overflow-y-auto">
           {category.tools.map((tool) => {
             const Icon = tool.icon;
@@ -157,8 +162,6 @@ function NavDropdown({
             );
           })}
         </ul>
-
-        {/* Coming soon */}
         {category.comingSoon && category.comingSoon.length > 0 && (
           <>
             <div className="h-px bg-border/40 mx-1 my-2" />
@@ -189,20 +192,23 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
   const leave = useCallback(() => { timer.current = setTimeout(() => setOpen(false), 150); }, []);
   const close = useCallback(() => setOpen(false), []);
 
-  const isActive = (category.tools ?? []).some((item: { href: string }) => currentPath === item.href) ||
-    open;
+  const isActive = (category.tools ?? []).some((item: { href: string }) => currentPath === item.href) || open;
+  const Icon = category.icon;
 
   return (
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1 whitespace-nowrap ${
-          isActive ? "bg-white/10 text-white" : "text-white hover:text-white hover:bg-white/8"
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
+          isActive
+            ? `${category.activeBg} ${category.color}`
+            : `text-muted-foreground hover:${category.color} hover:${category.bg}`
         }`}
       >
+        <Icon className="h-3.5 w-3.5 shrink-0" />
         {category.label}
-        <ChevronDown className={`h-3 w-3 transition-transform duration-150 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`h-3 w-3 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
       </button>
       {open && <NavDropdown category={category} onClose={close} />}
     </div>
@@ -238,21 +244,22 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap ${
-          isActive ? "bg-white/10 text-white" : "text-white hover:text-white hover:bg-white/8"
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
+          isActive
+            ? "bg-teal-500/10 text-teal-500 dark:text-teal-400"
+            : "text-muted-foreground hover:text-teal-500 dark:hover:text-teal-400 hover:bg-teal-500/10"
         }`}
       >
-        <Inbox className="h-3.5 w-3.5" />
+        <Inbox className="h-3.5 w-3.5 shrink-0" />
         Temp Mail
-        <ChevronDown className={`h-3 w-3 transition-transform duration-150 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`h-3 w-3 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 z-50 rounded-xl border border-border/60 bg-background/98 backdrop-blur-xl shadow-2xl shadow-black/30 animate-in fade-in slide-in-from-top-1 duration-150">
+        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 z-50 rounded-xl border border-border/60 bg-background/98 backdrop-blur-xl shadow-2xl shadow-black/20 animate-in fade-in slide-in-from-top-1 duration-150">
           <div className="p-2">
-            {/* Inbox tools */}
             <div className="px-3 pt-1.5 pb-1 flex items-center justify-between">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400">Inbox Tools</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-500 dark:text-cyan-400">Inbox Tools</span>
               <Link href="/email-tools" onClick={close}>
                 <span className="text-[10px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">All Email Tools →</span>
               </Link>
@@ -261,7 +268,7 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
               {TEMP_MAIL_ITEMS.map(({ icon: Icon, label, href, desc }) => (
                 <Link key={href} href={href} onClick={close}>
                   <div className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer ${currentPath === href ? "bg-muted/40" : ""}`}>
-                    <Icon className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+                    <Icon className="h-3.5 w-3.5 text-cyan-500 dark:text-cyan-400 shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="text-xs font-medium group-hover:text-primary transition-colors">{label}</div>
                       <div className="text-[10px] text-muted-foreground truncate">{desc}</div>
@@ -270,19 +277,15 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
                 </Link>
               ))}
             </div>
-
-            {/* Divider */}
             <div className="h-px bg-border/40 mx-1 my-1.5" />
-
-            {/* Privacy cluster */}
             <div className="px-3 pb-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400">Privacy Tools</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-purple-500 dark:text-purple-400">Privacy Tools</span>
             </div>
             <div className="space-y-0.5">
               {PRIVACY_ITEMS.map(({ icon: Icon, label, href, desc }) => (
                 <Link key={href} href={href} onClick={close}>
                   <div className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer ${currentPath === href ? "bg-muted/40" : ""}`}>
-                    <Icon className="h-3.5 w-3.5 text-purple-400 shrink-0" />
+                    <Icon className="h-3.5 w-3.5 text-purple-500 dark:text-purple-400 shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="text-xs font-medium group-hover:text-primary transition-colors">{label}</div>
                       <div className="text-[10px] text-muted-foreground truncate">{desc}</div>
@@ -303,17 +306,21 @@ export function Navbar() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const { theme, toggle } = useTheme();
 
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
       <nav className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-2">
+        {/* Gradient accent line at the bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-purple-500/40 via-indigo-500/30 to-cyan-500/40 pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-12 flex items-center justify-between gap-2">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-lg shadow-violet-600/50 shrink-0">
+            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-lg shadow-violet-600/30 shrink-0">
               <svg width="28" height="28" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="nBg" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
@@ -330,10 +337,8 @@ export function Navbar() {
                     <stop offset="100%" stopColor="#7c3aed" stopOpacity="0"/>
                   </radialGradient>
                 </defs>
-                {/* Background */}
                 <rect width="180" height="180" rx="36" fill="url(#nBg)"/>
                 <rect width="180" height="180" rx="36" fill="url(#nGlow)"/>
-                {/* 3D extrusion layers — darkest to lightest */}
                 <g stroke="#120a2e" strokeLinecap="round" fill="none" transform="translate(6,6)">
                   <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
                 </g>
@@ -352,63 +357,81 @@ export function Navbar() {
                 <g stroke="#2e1878" strokeLinecap="square" strokeLinejoin="miter" fill="none" transform="translate(2,2)">
                   <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
                 </g>
-                {/* Front face */}
                 <g stroke="url(#nFront)" strokeLinecap="round" fill="none">
                   <line x1="58" y1="44" x2="122" y2="136" strokeWidth="21"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="21"/>
                 </g>
                 <g stroke="url(#nFront)" strokeLinecap="square" strokeLinejoin="miter" fill="none">
                   <polyline points="46,38 31,38 31,142 46,142" strokeWidth="10"/><polyline points="134,38 149,38 149,142 134,142" strokeWidth="10"/>
                 </g>
-                {/* Specular highlight */}
                 <g stroke="white" strokeLinecap="round" fill="none" opacity="0.18">
                   <line x1="58" y1="44" x2="122" y2="136" strokeWidth="5"/><line x1="122" y1="44" x2="58" y2="136" strokeWidth="5"/>
                 </g>
               </svg>
             </div>
-            <span className="font-semibold text-foreground tracking-tight">X Toolkit</span>
+            <span className="font-semibold text-sm text-foreground tracking-tight">X Toolkit</span>
             <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-primary/30 text-primary bg-primary/8 px-1.5 py-0">
               {TOTAL_LIVE}+ Tools
             </Badge>
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex flex-1 items-center justify-center gap-0">
-            <Link href="/">
-              <button className={`px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-                location === "/" ? "bg-white/10 text-white" : "text-white hover:text-white hover:bg-white/8"
-              }`}>
-                Home
-              </button>
-            </Link>
+          {/* Desktop nav — command bar style with icon + label */}
+          <div className="hidden md:flex flex-1 items-center justify-center">
+            <div className="flex items-center gap-0.5 px-1.5 py-1 rounded-2xl bg-muted/50 border border-border/40">
+              <Link href="/">
+                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
+                  location === "/"
+                    ? "bg-background shadow-sm text-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background/60"
+                }`}>
+                  <Home className="h-3.5 w-3.5 shrink-0" />
+                  Home
+                </button>
+              </Link>
 
-            {NAV_CATEGORIES.map((cat) => (
-              <NavItem key={cat.key} category={cat} currentPath={location} />
-            ))}
+              {NAV_CATEGORIES.map((cat) => (
+                <NavItem key={cat.key} category={cat} currentPath={location} />
+              ))}
 
-            <TempMailNavItem currentPath={location} />
+              <TempMailNavItem currentPath={location} />
 
-            <Link href="/about">
-              <button className={`px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-                location === "/about" ? "bg-white/10 text-white" : "text-white hover:text-white hover:bg-white/8"
-              }`}>
-                About
-              </button>
-            </Link>
+              <Link href="/about">
+                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
+                  location === "/about"
+                    ? "bg-background shadow-sm text-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background/60"
+                }`}>
+                  <Info className="h-3.5 w-3.5 shrink-0" />
+                  About
+                </button>
+              </Link>
+            </div>
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-1.5 shrink-0">
+          <div className="flex items-center gap-1 shrink-0">
             <NavSearchDialog />
+
+            {/* Theme toggle */}
+            <button
+              onClick={toggle}
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+
             <Link href="/chrome-extension">
-              <button className="hidden lg:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white whitespace-nowrap transition-all duration-200 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-[0_0_12px_rgba(139,92,246,0.5)] hover:shadow-[0_0_20px_rgba(139,92,246,0.75)] hover:-translate-y-px">
+              <button className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white whitespace-nowrap transition-all duration-200 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_20px_rgba(139,92,246,0.65)] hover:-translate-y-px">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/></svg>
                 Extension
               </button>
             </Link>
-            <div className="hidden xl:flex items-center gap-1.5 text-xs text-white/50">
-              <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+
+            <div className="hidden xl:flex items-center gap-1.5 text-xs text-muted-foreground pl-1">
+              <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-[11px]">Operational</span>
             </div>
+
             <Button
               variant="outline"
               size="sm"
@@ -418,6 +441,7 @@ export function Navbar() {
               <MessageSquare className="h-3.5 w-3.5" />
               Feedback
             </Button>
+
             {/* Mobile hamburger */}
             <button
               className="md:hidden p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
@@ -445,34 +469,33 @@ export function Navbar() {
 
               {NAV_CATEGORIES.map((cat) => {
                 const expanded = mobileExpanded === cat.key;
+                const CatIcon = cat.icon;
                 return (
                   <div key={cat.key} className="rounded-lg overflow-hidden border border-border/30">
                     <button
                       className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors text-left bg-muted/20"
                       onClick={() => setMobileExpanded(expanded ? null : cat.key)}
                     >
+                      <CatIcon className={`h-4 w-4 shrink-0 ${cat.color}`} />
                       <span className={`text-sm font-semibold flex-1 ${cat.color}`}>{cat.label}</span>
                       <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
                     </button>
-
                     {expanded && (
-                      <div className="px-2 py-2 space-y-0.5 bg-muted/10">
+                      <div className="bg-muted/10 px-2 py-1.5 space-y-0.5">
                         <Link href={cat.href} onClick={closeMenu}>
-                          <div className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-muted/60 transition-colors cursor-pointer mb-1">
-                            <span className="text-xs font-semibold text-foreground">Browse all {cat.label}</span>
-                            <span className="text-xs text-muted-foreground">→</span>
+                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold text-primary hover:bg-muted/50 transition-colors">
+                            View all {cat.label} →
                           </div>
                         </Link>
-
                         {cat.tools.map((tool) => {
-                          const Icon = tool.icon;
+                          const TIcon = tool.icon;
                           return (
-                            <Link key={tool.label} href={tool.href} onClick={closeMenu}>
-                              <div className="flex items-center gap-2.5 px-3 py-2 rounded-md hover:bg-muted/60 transition-colors cursor-pointer">
-                                <Icon className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-                                <span className="text-sm font-medium text-foreground flex-1">{tool.label}</span>
+                            <Link key={tool.href} href={tool.href} onClick={closeMenu}>
+                              <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+                                <TIcon className="h-3.5 w-3.5 shrink-0" />
+                                {tool.label}
                                 {tool.badge && (
-                                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full border ${BADGE_STYLES[tool.badge] ?? ""}`}>
+                                  <span className={`ml-auto text-[9px] font-bold px-1.5 py-0.5 rounded-full border shrink-0 ${BADGE_STYLES[tool.badge] ?? ""}`}>
                                     {tool.badge}
                                   </span>
                                 )}
@@ -480,78 +503,32 @@ export function Navbar() {
                             </Link>
                           );
                         })}
-
-                        {cat.comingSoon && cat.comingSoon.length > 0 && (
-                          <>
-                            <div className="h-px bg-border/40 mx-1 my-1.5" />
-                            <div className="flex items-center gap-1.5 px-3 py-1">
-                              <Clock className="h-3 w-3 text-muted-foreground/50" />
-                              <span className="text-[10px] font-semibold text-muted-foreground/50 uppercase tracking-wider">Coming Soon</span>
-                            </div>
-                            {cat.comingSoon.map((name) => (
-                              <div key={name} className="flex items-center gap-2.5 px-3 py-1.5 opacity-40 cursor-default">
-                                <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground shrink-0" />
-                                <span className="text-sm text-muted-foreground">{name}</span>
-                              </div>
-                            ))}
-                          </>
-                        )}
                       </div>
                     )}
                   </div>
                 );
               })}
 
-              {/* Temp Mail mobile section */}
+              {/* Temp Mail mobile */}
               <div className="rounded-lg overflow-hidden border border-border/30">
                 <button
                   className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors text-left bg-muted/20"
                   onClick={() => setMobileExpanded(mobileExpanded === "temp-mail" ? null : "temp-mail")}
                 >
-                  <Inbox className="h-4 w-4 text-cyan-400 shrink-0" />
-                  <span className="text-sm font-semibold flex-1 text-cyan-400">Temp Mail</span>
+                  <Inbox className="h-4 w-4 shrink-0 text-teal-500 dark:text-teal-400" />
+                  <span className="text-sm font-semibold flex-1 text-teal-500 dark:text-teal-400">Temp Mail</span>
                   <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileExpanded === "temp-mail" ? "rotate-180" : ""}`} />
                 </button>
                 {mobileExpanded === "temp-mail" && (
-                  <div className="px-2 py-2 bg-muted/10">
-                    {/* Inbox Tools */}
-                    <div className="flex items-center justify-between px-3 pt-1 pb-1.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400">Inbox Tools</span>
-                      <Link href="/email-tools" onClick={closeMenu}>
-                        <span className="text-[10px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">All Email Tools →</span>
+                  <div className="bg-muted/10 px-2 py-1.5 space-y-0.5">
+                    {TEMP_MAIL_ITEMS.map(({ icon: Icon, label, href }) => (
+                      <Link key={href} href={href} onClick={closeMenu}>
+                        <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+                          <Icon className="h-3.5 w-3.5 shrink-0" />
+                          {label}
+                        </div>
                       </Link>
-                    </div>
-                    <div className="space-y-0.5 mb-2">
-                      {TEMP_MAIL_ITEMS.map(({ icon: Icon, label, href, desc }) => (
-                        <Link key={href} href={href} onClick={closeMenu}>
-                          <div className="flex items-center gap-2.5 px-3 py-2 rounded-md hover:bg-muted/60 transition-colors cursor-pointer">
-                            <Icon className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
-                            <div className="flex-1 min-w-0">
-                              <div className="text-sm font-medium text-foreground">{label}</div>
-                              <div className="text-xs text-muted-foreground truncate">{desc}</div>
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                    {/* Privacy Tools */}
-                    <div className="h-px bg-border/40 mx-1 mb-2" />
-                    <div className="px-3 pb-1.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400">Privacy Tools</span>
-                    </div>
-                    <div className="space-y-0.5">
-                      {PRIVACY_ITEMS.map(({ icon: Icon, label, href, desc }) => (
-                        <Link key={href} href={href} onClick={closeMenu}>
-                          <div className="flex items-center gap-2.5 px-3 py-2 rounded-md hover:bg-muted/60 transition-colors cursor-pointer">
-                            <Icon className="h-3.5 w-3.5 text-purple-400 shrink-0" />
-                            <div className="flex-1 min-w-0">
-                              <div className="text-sm font-medium text-foreground">{label}</div>
-                              <div className="text-xs text-muted-foreground truncate">{desc}</div>
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
+                    ))}
                   </div>
                 )}
               </div>
@@ -565,20 +542,30 @@ export function Navbar() {
                 </button>
               </Link>
 
+              {/* Mobile theme toggle */}
               <button
-                onClick={() => { setShowFeedback(true); closeMenu(); }}
-                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                onClick={toggle}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors text-left"
               >
-                <MessageSquare className="h-4 w-4 shrink-0" />
-                Feedback
+                {theme === "dark" ? <Sun className="h-4 w-4 shrink-0" /> : <Moon className="h-4 w-4 shrink-0" />}
+                {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
               </button>
 
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => { setShowFeedback(true); closeMenu(); }}
+                className="w-full justify-start gap-3 h-10 text-sm font-medium border-border/60"
+              >
+                <MessageSquare className="h-4 w-4" />
+                Send Feedback
+              </Button>
             </div>
           </div>
         )}
       </nav>
 
-      <FeedbackModal open={showFeedback} onOpenChange={setShowFeedback} />
+      <FeedbackModal open={showFeedback} onClose={() => setShowFeedback(false)} />
     </>
   );
 }
