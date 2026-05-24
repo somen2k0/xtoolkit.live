@@ -10,11 +10,10 @@ import {
   Mail, ShieldCheck, Pencil, Shield, Tag, Clock,
   Minimize2, Code2, KeyRound, Regex, Database, Shuffle, ArrowLeftRight,
   ScanSearch, EyeOff, Newspaper, Calendar, Gauge, ShieldAlert, Inbox,
-  AlignLeft, QrCode, ImageIcon, Palette, Laugh, Sun, Moon,
+  AlignLeft, QrCode, ImageIcon, Palette, Laugh,
 } from "lucide-react";
 import { TOTAL_LIVE } from "@/lib/tools-registry";
 import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
-import { useTheme } from "@/lib/theme";
 
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
@@ -306,7 +305,6 @@ export function Navbar() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const { theme, toggle } = useTheme();
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -410,28 +408,6 @@ export function Navbar() {
           {/* Right side */}
           <div className="flex items-center gap-1 shrink-0">
             <NavSearchDialog />
-
-            {/* Theme toggle — pill style */}
-            <button
-              onClick={toggle}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="relative flex items-center gap-0.5 p-1 rounded-full border border-border/50 bg-muted/40 hover:bg-muted/70 transition-all duration-200 shadow-sm"
-            >
-              <span className={`flex items-center justify-center h-6 w-6 rounded-full transition-all duration-200 ${
-                theme === "light"
-                  ? "bg-amber-400/20 text-amber-500 shadow-[0_0_8px_rgba(251,191,36,0.4)]"
-                  : "text-muted-foreground/50"
-              }`}>
-                <Sun className="h-3.5 w-3.5" />
-              </span>
-              <span className={`flex items-center justify-center h-6 w-6 rounded-full transition-all duration-200 ${
-                theme === "dark"
-                  ? "bg-indigo-500/20 text-indigo-400 shadow-[0_0_8px_rgba(99,102,241,0.4)]"
-                  : "text-muted-foreground/50"
-              }`}>
-                <Moon className="h-3.5 w-3.5" />
-              </span>
-            </button>
 
             <Link href="/chrome-extension">
               <button className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white whitespace-nowrap transition-all duration-200 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_20px_rgba(139,92,246,0.65)] hover:-translate-y-px">
@@ -556,21 +532,6 @@ export function Navbar() {
                 </button>
               </Link>
 
-              {/* Mobile theme toggle */}
-              <button
-                onClick={toggle}
-                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors text-left"
-              >
-                <span className={`flex items-center justify-center h-6 w-6 rounded-full transition-all duration-200 ${
-                  theme === "light"
-                    ? "bg-amber-400/20 text-amber-500"
-                    : "bg-indigo-500/20 text-indigo-400"
-                }`}>
-                  {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-                </span>
-                {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              </button>
-
               <Button
                 variant="outline"
                 size="sm"
@@ -585,7 +546,7 @@ export function Navbar() {
         )}
       </nav>
 
-      <FeedbackModal open={showFeedback} onClose={() => setShowFeedback(false)} />
+      <FeedbackModal open={showFeedback} onOpenChange={setShowFeedback} />
     </>
   );
 }
