@@ -1,113 +1,166 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  life: number;          // 0→1, counts down
+  decay: number;         // how fast it dies
+  size: number;
+  hue: number;
+  isStar: boolean;       // star shape vs circle
+}
 
 export function CursorGlow() {
-  const [visible, setVisible] = useState(false);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const orbRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-
-  const mouse = useRef({ x: -300, y: -300 });
-  const orb = useRef({ x: -300, y: -300 });
-  const ring = useRef({ x: -300, y: -300 });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particles = useRef<Particle[]>([]);
+  const mouse = useRef({ x: -999, y: -999, px: -999, py: -999 });
   const raf = useRef<number>();
+  const active = useRef(false);
 
   useEffect(() => {
     const isFine = window.matchMedia("(pointer: fine)").matches;
     if (!isFine) return;
 
-    document.body.style.cursor = "none";
-    setVisible(true);
+    const canvas = canvasRef.current!;
+    const ctx = canvas.getContext("2d")!;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
 
     const onMove = (e: MouseEvent) => {
-      mouse.current = { x: e.clientX, y: e.clientY };
+      mouse.current.px = mouse.current.x;
+      mouse.current.py = mouse.current.y;
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
+      active.current = true;
+
+      const dx = mouse.current.x - mouse.current.px;
+      const dy = mouse.current.y - mouse.current.py;
+      const speed = Math.sqrt(dx * dx + dy * dy);
+
+      // More particles when moving faster
+      const count = Math.min(Math.ceil(speed * 0.35) + 1, 10);
+
+      for (let i = 0; i < count; i++) {
+        const t = i / count;
+        // Interpolate spawn position along movement path
+        const spawnX = mouse.current.px + dx * t + (Math.random() - 0.5) * 3;
+        const spawnY = mouse.current.py + dy * t + (Math.random() - 0.5) * 3;
+
+        // Tail goes opposite to travel direction, with spread
+        const angle = Math.atan2(dy, dx) + Math.PI + (Math.random() - 0.5) * 0.8;
+        const tailSpeed = speed * 0.04 + Math.random() * 0.8;
+
+        const isStar = Math.random() > 0.45;
+
+        // Color: mix of violet, white, gold for a shooting star feel
+        const colorRoll = Math.random();
+        const hue = colorRoll < 0.45 ? 258 + Math.random() * 30   // violet-purple
+                  : colorRoll < 0.75 ? 45  + Math.random() * 20   // gold-yellow
+                  :                    0;                           // white (hsl 0 0% 100%)
+        const isSaturated = hue !== 0;
+
+        particles.current.push({
+          x: spawnX,
+          y: spawnY,
+          vx: Math.cos(angle) * tailSpeed,
+          vy: Math.sin(angle) * tailSpeed,
+          life: 1,
+          decay: 0.022 + Math.random() * 0.028,
+          size: isStar ? 1.2 + Math.random() * 2 : 0.8 + Math.random() * 1.8,
+          hue: isSaturated ? hue : 0,
+          isStar,
+        });
+      }
     };
-    const onLeave = () => setVisible(false);
-    const onEnter = () => setVisible(true);
 
     window.addEventListener("mousemove", onMove, { passive: true });
-    document.documentElement.addEventListener("mouseleave", onLeave);
-    document.documentElement.addEventListener("mouseenter", onEnter);
+
+    // Draw a 4-point sparkle star
+    const drawStar = (ctx: CanvasRenderingContext2D, size: number) => {
+      const outer = size * 2.2;
+      const inner = size * 0.45;
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) {
+        const angle = (i * Math.PI) / 4;
+        const r = i % 2 === 0 ? outer : inner;
+        if (i === 0) ctx.moveTo(Math.cos(angle) * r, Math.sin(angle) * r);
+        else ctx.lineTo(Math.cos(angle) * r, Math.sin(angle) * r);
+      }
+      ctx.closePath();
+    };
 
     const tick = () => {
-      // Dot snaps instantly
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${mouse.current.x - 4}px, ${mouse.current.y - 4}px)`;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Remove dead particles
+      particles.current = particles.current.filter(p => p.life > 0);
+
+      for (const p of particles.current) {
+        // Physics
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.04;        // gentle gravity
+        p.vx *= 0.98;        // air drag
+        p.life -= p.decay;
+
+        const alpha = Math.max(0, p.life * p.life); // ease-out fade
+
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.translate(p.x, p.y);
+
+        if (p.isStar) {
+          // Sparkle / 4-point star
+          const lightness = p.hue === 0 ? "98%" : "80%";
+          const saturation = p.hue === 0 ? "0%" : "90%";
+          ctx.fillStyle = `hsl(${p.hue} ${saturation} ${lightness})`;
+          ctx.shadowColor = p.hue === 0
+            ? "hsl(258 80% 88%)"
+            : `hsl(${p.hue} 90% 70%)`;
+          ctx.shadowBlur = 8;
+          // slight random rotation per frame
+          ctx.rotate(p.life * 3);
+          drawStar(ctx, p.size);
+          ctx.fill();
+        } else {
+          // Small glowing circle
+          const lightness = p.hue === 0 ? "96%" : "78%";
+          const saturation = p.hue === 0 ? "0%" : "85%";
+          ctx.fillStyle = `hsl(${p.hue} ${saturation} ${lightness})`;
+          ctx.shadowColor = `hsl(${p.hue === 0 ? 258 : p.hue} 85% 70%)`;
+          ctx.shadowBlur = 6;
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
       }
-      // Ring — medium lag (lerp 0.18)
-      ring.current.x += (mouse.current.x - ring.current.x) * 0.18;
-      ring.current.y += (mouse.current.y - ring.current.y) * 0.18;
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${ring.current.x - 18}px, ${ring.current.y - 18}px)`;
-      }
-      // Orb — slow trailing glow (lerp 0.07)
-      orb.current.x += (mouse.current.x - orb.current.x) * 0.07;
-      orb.current.y += (mouse.current.y - orb.current.y) * 0.07;
-      if (orbRef.current) {
-        orbRef.current.style.transform = `translate(${orb.current.x - 180}px, ${orb.current.y - 180}px)`;
-      }
+
       raf.current = requestAnimationFrame(tick);
     };
     raf.current = requestAnimationFrame(tick);
 
     return () => {
-      document.body.style.cursor = "";
+      window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMove);
-      document.documentElement.removeEventListener("mouseleave", onLeave);
-      document.documentElement.removeEventListener("mouseenter", onEnter);
       if (raf.current) cancelAnimationFrame(raf.current);
     };
   }, []);
 
-  if (!visible) return null;
-
   return (
-    <>
-      {/* Large trailing glow orb */}
-      <div
-        ref={orbRef}
-        className="pointer-events-none fixed top-0 left-0 will-change-transform"
-        style={{
-          zIndex: 99998,
-          width: 360,
-          height: 360,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, hsl(258 82% 66% / 0.13) 0%, hsl(195 90% 60% / 0.06) 45%, transparent 70%)",
-          filter: "blur(2px)",
-        }}
-        aria-hidden
-      />
-
-      {/* Medium ring — subtle outline circle */}
-      <div
-        ref={ringRef}
-        className="pointer-events-none fixed top-0 left-0 will-change-transform"
-        style={{
-          zIndex: 99999,
-          width: 36,
-          height: 36,
-          borderRadius: "50%",
-          border: "1px solid hsl(258 82% 72% / 0.45)",
-          boxShadow: "0 0 8px 1px hsl(258 82% 66% / 0.25)",
-          backdropFilter: "none",
-          transition: "width 0.15s, height 0.15s, border-color 0.15s",
-        }}
-        aria-hidden
-      />
-
-      {/* Precise cursor dot */}
-      <div
-        ref={dotRef}
-        className="pointer-events-none fixed top-0 left-0 will-change-transform"
-        style={{
-          zIndex: 100000,
-          width: 8,
-          height: 8,
-          borderRadius: "50%",
-          background: "hsl(258 82% 80%)",
-          boxShadow: "0 0 6px 2px hsl(258 82% 66% / 0.70), 0 0 14px 4px hsl(258 82% 66% / 0.30)",
-        }}
-        aria-hidden
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0"
+      style={{ zIndex: 99999 }}
+      aria-hidden
+    />
   );
 }
