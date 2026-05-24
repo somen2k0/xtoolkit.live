@@ -200,15 +200,15 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
+        className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
             ? `${category.activeBg} ${category.color}`
             : `text-muted-foreground hover:${category.color} hover:${category.bg}`
         }`}
       >
-        <Icon className="h-3.5 w-3.5 shrink-0" />
+        <Icon className="h-3 w-3 shrink-0" />
         {category.label}
-        <ChevronDown className={`h-3 w-3 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`h-2.5 w-2.5 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
       </button>
       {open && <NavDropdown category={category} onClose={close} />}
     </div>
@@ -244,15 +244,15 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
+        className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
             ? "bg-teal-500/10 text-teal-500 dark:text-teal-400"
             : "text-muted-foreground hover:text-teal-500 dark:hover:text-teal-400 hover:bg-teal-500/10"
         }`}
       >
-        <Inbox className="h-3.5 w-3.5 shrink-0" />
+        <Inbox className="h-3 w-3 shrink-0" />
         Temp Mail
-        <ChevronDown className={`h-3 w-3 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`h-2.5 w-2.5 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open && (
@@ -376,14 +376,14 @@ export function Navbar() {
 
           {/* Desktop nav — command bar style with icon + label */}
           <div className="hidden md:flex flex-1 items-center justify-center">
-            <div className="flex items-center gap-0.5 px-1.5 py-1 rounded-2xl bg-muted/50 border border-border/40">
+            <div className="flex items-center gap-0 px-1 py-0.5 rounded-2xl bg-muted/50 border border-border/40">
               <Link href="/">
-                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
+                <button className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
                   location === "/"
                     ? "bg-background shadow-sm text-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-background/60"
                 }`}>
-                  <Home className="h-3.5 w-3.5 shrink-0" />
+                  <Home className="h-3 w-3 shrink-0" />
                   Home
                 </button>
               </Link>
@@ -395,12 +395,12 @@ export function Navbar() {
               <TempMailNavItem currentPath={location} />
 
               <Link href="/about">
-                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
+                <button className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all duration-150 whitespace-nowrap ${
                   location === "/about"
                     ? "bg-background shadow-sm text-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-background/60"
                 }`}>
-                  <Info className="h-3.5 w-3.5 shrink-0" />
+                  <Info className="h-3 w-3 shrink-0" />
                   About
                 </button>
               </Link>
@@ -427,7 +427,7 @@ export function Navbar() {
               </button>
             </Link>
 
-            <div className="hidden xl:flex items-center gap-1.5 text-xs text-muted-foreground pl-1">
+            <div className="hidden 2xl:flex items-center gap-1.5 text-xs text-muted-foreground pl-1">
               <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-[11px]">Operational</span>
             </div>
@@ -436,7 +436,7 @@ export function Navbar() {
               variant="outline"
               size="sm"
               onClick={() => setShowFeedback(true)}
-              className="hidden xl:flex text-xs border-border/60 hover:bg-muted/50 gap-1.5 h-8"
+              className="hidden 2xl:flex text-xs border-border/60 hover:bg-muted/50 gap-1.5 h-8"
             >
               <MessageSquare className="h-3.5 w-3.5" />
               Feedback
