@@ -1,0 +1,342 @@
+4 pages were crawled by Google but not indexed due
+to thin content. Expand the content on each page
+significantly below the tool UI.
+
+Do NOT change any tool functionality or UI.
+Only add content sections below the existing
+"About this tool" section.
+
+===================================================
+PAGE 1 — /tools/tweet-formatter
+===================================================
+
+Add these sections below existing content:
+
+Heading: "What is a Tweet Thread Formatter?"
+Content:
+"A tweet thread formatter helps you split long-form
+content into properly sized tweet chunks that fit
+within Twitter/X's 280 character limit. Instead of
+manually counting characters and splitting text,
+our formatter does it automatically — preserving
+word boundaries and adding thread numbering so your
+audience can follow along easily.
+
+Tweet threads are one of the most powerful formats
+on Twitter/X for sharing in-depth knowledge, stories,
+and tutorials. Studies show that threads get 3-5x
+more engagement than single tweets because they keep
+readers scrolling and interacting."
+
+Heading: "How to Write Viral Tweet Threads"
+Bullet points:
+- Start with a hook — your first tweet must stop
+  the scroll. Lead with a bold claim, surprising
+  stat, or compelling question
+- One idea per tweet — don't cram multiple points
+  into one tweet. Each tweet should make one clear point
+- Use numbered format — "1/" or "1/10" tells readers
+  there's more coming and increases completion rate
+- End with a call to action — ask readers to retweet,
+  follow, or share their thoughts
+- Keep sentences short — Twitter readers scan fast.
+  Short punchy sentences perform better than long ones
+- Add visuals — threads with images or videos get
+  significantly more impressions
+
+Heading: "Tweet Thread Best Practices"
+Content:
+"The best tweet threads follow a simple structure:
+hook → context → main points → conclusion → CTA.
+Your opening tweet is the most important — if it
+doesn't grab attention, nobody reads the rest.
+Use numbers, strong opinions, or counterintuitive
+ideas to make people stop scrolling.
+
+Threads between 5-15 tweets perform best. Too short
+and you don't provide enough value. Too long and
+you lose readers before the end. Aim for the sweet
+spot where every tweet adds value and builds on
+the previous one."
+
+Heading: "Who Uses Tweet Thread Formatters?"
+Bullet points:
+- Content creators sharing knowledge and tutorials
+- Founders building in public and sharing updates
+- Marketers repurposing long-form content for Twitter
+- Writers sharing stories and essays in thread format
+- Educators breaking down complex topics
+- Journalists covering breaking news in real time
+
+Heading: "Frequently Asked Questions"
+Q: What is the Twitter/X character limit?
+A: Twitter/X allows 280 characters per tweet for
+   standard accounts. Twitter Blue/X Premium subscribers
+   get up to 25,000 characters per tweet.
+
+Q: How do I number my tweet thread?
+A: Common formats are "1/", "1/10", or "(1)" at the
+   start or end of each tweet. Our formatter adds
+   numbering automatically.
+
+Q: How long should a tweet thread be?
+A: 5-15 tweets is the sweet spot. Threads under 5
+   tweets feel incomplete. Over 15 tweets lose most
+   readers before the end.
+
+===================================================
+PAGE 2 — /tools/hashtag-formatter
+===================================================
+
+Add these sections:
+
+Heading: "What is a Hashtag Formatter?"
+Content:
+"A hashtag formatter processes and organizes your
+hashtags for maximum impact on Twitter/X and other
+social media platforms. Whether you need to add #
+symbols to a list of keywords, remove duplicates,
+sort alphabetically, or format hashtags for a
+specific platform, our free tool handles it instantly.
+
+Proper hashtag formatting can significantly increase
+your content's discoverability. Posts with well-chosen
+hashtags reach audiences beyond your existing followers
+who are actively searching for that topic."
+
+Heading: "How to Use Hashtags Effectively on X/Twitter"
+Bullet points:
+- Use 1-3 hashtags per tweet — Twitter's algorithm
+  favors posts with fewer, more relevant hashtags.
+  Unlike Instagram, more hashtags on Twitter actually
+  hurts reach
+- Choose specific over generic — #ContentMarketing
+  reaches a targeted audience while #Marketing is
+  too broad and competitive
+- Research trending hashtags — use Twitter's explore
+  page to find trending topics relevant to your content
+- Create branded hashtags — unique hashtags for your
+  brand or campaign help track conversations and
+  build community
+- Mix popular and niche — combine one popular hashtag
+  with one or two niche ones for maximum exposure
+- Never use irrelevant hashtags — hashtag stuffing
+  with unrelated tags hurts credibility and reach
+
+Heading: "Hashtag Best Practices by Platform"
+Content:
+"Different platforms have different hashtag norms.
+On Twitter/X, 1-3 targeted hashtags perform best —
+the platform's algorithm deprioritizes posts that
+look spammy. Instagram allows up to 30 hashtags and
+rewards posts that use relevant ones strategically.
+LinkedIn works best with 3-5 professional hashtags.
+Our formatter helps you prepare hashtag sets for
+any platform quickly."
+
+Heading: "Common Hashtag Mistakes to Avoid"
+Bullet points:
+- Using too many hashtags on Twitter — reduces
+  engagement and looks spammy
+- Using only popular hashtags — your content gets
+  buried instantly in high-volume tags
+- Ignoring niche hashtags — smaller hashtags have
+  more engaged, targeted audiences
+- Not researching hashtags before using — some
+  hashtags have negative connotations or are used
+  by communities you don't want to associate with
+- Using the same hashtags every post — mix them up
+  to reach different audiences
+
+Heading: "Frequently Asked Questions"
+Q: How many hashtags should I use on Twitter/X?
+A: 1-3 hashtags per tweet is optimal. More than
+   3 hashtags can reduce engagement and make your
+   post look spammy to Twitter's algorithm.
+
+Q: Can I use spaces in hashtags?
+A: No. Hashtags cannot contain spaces. Use camel
+   case (HashtagFormatter) or no separator for
+   multi-word hashtags.
+
+Q: Do hashtags work the same on all platforms?
+A: No. Instagram supports up to 30 hashtags.
+   Twitter/X works best with 1-3. LinkedIn recommends
+   3-5. Our formatter works for all platforms.
+
+===================================================
+PAGE 3 — /tools/username-generator
+===================================================
+
+Add these sections:
+
+Heading: "What is an X/Twitter Username Generator?"
+Content:
+"An X/Twitter username generator creates unique,
+available username ideas based on your name, niche,
+or keywords. Your username is one of the first things
+people see on Twitter/X — it appears in your profile
+URL, every tweet you post, and every mention of your
+account. Choosing the right username can significantly
+impact your discoverability and brand recognition.
+
+Our free username generator creates multiple variations
+instantly, helping you find a handle that's memorable,
+relevant to your niche, and available on the platform."
+
+Heading: "How to Choose the Perfect X/Twitter Username"
+Bullet points:
+- Keep it short — usernames under 15 characters are
+  easier to remember and take up less space in mentions
+- Make it relevant — your username should reflect your
+  name, brand, or niche so people know what to expect
+- Avoid numbers and underscores if possible — they
+  make usernames harder to remember and type
+- Be consistent across platforms — use the same handle
+  on Twitter, Instagram, and LinkedIn for easy discovery
+- Think long term — choose a username you'll be happy
+  with as your audience grows. Changing handles later
+  can confuse followers
+- Check availability — make sure your chosen username
+  isn't taken or too similar to an existing account
+
+Heading: "Why Your X/Twitter Username Matters"
+Content:
+"Your Twitter/X username (@handle) is your permanent
+identity on the platform. It appears in your profile
+URL (twitter.com/yourhandle), every tweet you post,
+and every time someone mentions or tags you. A strong
+username builds brand recognition, makes you easier
+to find in search, and helps people remember you.
+
+Accounts with clear, relevant usernames grow faster
+because they're easier to discover through search and
+more memorable after first contact. Our generator
+creates options that balance personality with
+professionalism."
+
+Heading: "Username Ideas by Niche"
+Content:
+"Different niches have different username conventions.
+Tech and developer accounts often use their real name
+or a technical handle. Content creators combine their
+name with their topic (e.g. @JohnCodes, @SarahWrites).
+Business accounts typically use their brand name or
+a close variation. Personal brands work best with
+real names or a memorable nickname that reflects
+your personality and expertise."
+
+Heading: "Frequently Asked Questions"
+Q: How long can a Twitter/X username be?
+A: Twitter/X usernames can be between 1 and 15
+   characters long. They can contain letters,
+   numbers, and underscores only.
+
+Q: Can I change my Twitter/X username?
+A: Yes. You can change your username in Twitter/X
+   settings at any time. Your followers, tweets,
+   and account data are preserved but your old
+   username becomes available for others to claim.
+
+Q: What characters are allowed in Twitter usernames?
+A: Only letters (a-z), numbers (0-9), and underscores
+   (_) are allowed. No spaces, hyphens, or special
+   characters.
+
+===================================================
+PAGE 4 — /tools/timezone-converter
+===================================================
+
+Add these sections:
+
+Heading: "What is a Timezone Converter?"
+Content:
+"A timezone converter instantly translates times
+between different time zones around the world,
+accounting for daylight saving time (DST) changes
+automatically. Whether you're scheduling a meeting
+with a remote team, coordinating a live event for
+a global audience, or figuring out when to post
+on social media for maximum engagement, our free
+timezone converter gives you accurate results
+instantly.
+
+With teams increasingly distributed across countries
+and continents, timezone conversion has become an
+essential daily task for millions of professionals."
+
+Heading: "Most Common Timezone Conversions"
+Add a table:
+| Timezone | Abbreviation | UTC Offset |
+| UTC | UTC | +0:00 |
+| Eastern Time | EST/EDT | -5:00/-4:00 |
+| Central Time | CST/CDT | -6:00/-5:00 |
+| Mountain Time | MST/MDT | -7:00/-6:00 |
+| Pacific Time | PST/PDT | -8:00/-7:00 |
+| India Standard Time | IST | +5:30 |
+| Central European Time | CET/CEST | +1:00/+2:00 |
+| Japan Standard Time | JST | +9:00 |
+| Australian Eastern Time | AEST/AEDT | +10:00/+11:00 |
+| Gulf Standard Time | GST | +4:00 |
+
+Heading: "Understanding Daylight Saving Time"
+Content:
+"Daylight Saving Time (DST) shifts clocks forward
+by one hour in spring and back in autumn in many
+countries. This means the time difference between
+two locations can change by an hour depending on
+the time of year. The US, Canada, most of Europe,
+and Australia observe DST — but India, Japan, China,
+and most of Asia and Africa do not.
+
+Our timezone converter automatically accounts for
+DST so you always get the correct current time
+difference without needing to manually track which
+regions are currently observing DST."
+
+Heading: "Tips for Scheduling Across Timezones"
+Bullet points:
+- Always confirm the timezone when scheduling —
+  don't assume. Always specify the timezone when
+  sharing meeting times internationally
+- Use UTC as a reference — UTC never changes for
+  DST, making it the most reliable reference point
+  for international coordination
+- Schedule in the overlap window — find the hours
+  that fall within business hours for all participants
+  to avoid early morning or late night calls
+- Add world clock to your phone — keep 3-4 key
+  timezones visible on your device if you work
+  internationally
+- Be aware of half-hour timezones — India (+5:30),
+  Iran (+3:30), and a few others use 30-minute
+  offsets that often surprise people
+
+Heading: "Frequently Asked Questions"
+Q: What is UTC?
+A: UTC (Coordinated Universal Time) is the primary
+   time standard by which the world regulates clocks.
+   It never observes daylight saving time, making it
+   the most stable reference point for international
+   scheduling.
+
+Q: Does India observe daylight saving time?
+A: No. India Standard Time (IST, UTC+5:30) does not
+   observe daylight saving time and remains constant
+   throughout the year.
+
+Q: Why does the time difference between countries
+   change throughout the year?
+A: Because different countries start and end daylight
+   saving time on different dates, the offset between
+   them can shift by an hour during transition periods.
+
+===================================================
+After all 4 pages updated:
+- Run pnpm build
+- Confirm 68 pages, zero errors
+- git add -A
+- git commit -m "Expand content on 4 thin pages for SEO"
+- git push origin main
+- Show all files changed
+===================================================

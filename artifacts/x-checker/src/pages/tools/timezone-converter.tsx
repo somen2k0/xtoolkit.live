@@ -287,6 +287,16 @@ export default function TimezoneConverter() {
         <div className="space-y-8 pt-6 border-t border-border/40">
 
           <section className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6">
+            <h2 className="text-lg font-semibold">What is a Timezone Converter?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              A timezone converter instantly translates times between different time zones around the world, accounting for daylight saving time (DST) changes automatically. Whether you're scheduling a meeting with a remote team, coordinating a live event for a global audience, or figuring out when to post on social media for maximum engagement, our free timezone converter gives you accurate results instantly.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              With teams increasingly distributed across countries and continents, timezone conversion has become an essential daily task for millions of professionals. This tool uses the full IANA timezone database — the same standard used by operating systems worldwide — so every conversion is accurate for the exact date selected, including all DST transitions.
+            </p>
+          </section>
+
+          <section className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6">
             <h2 className="text-lg font-semibold">Why timezone conversion matters</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               In a globally connected world, getting the time right across timezones is one of the most common — and most consequential — everyday challenges. A missed conversion can mean showing up an hour late to a client call, launching a product at the wrong time for your biggest market, or sending an email campaign at 3 AM for half your audience. As remote work has made cross-timezone collaboration the norm rather than the exception, accurate timezone conversion has become a daily necessity for millions of professionals, developers, marketers, and creators.
@@ -348,6 +358,57 @@ export default function TimezoneConverter() {
               <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Find the overlap window.</strong> When teams span more than 3 timezones, look for the 2–3 hour window that falls during business hours everywhere — usually late morning US East Coast time overlaps with afternoon in Europe.</span></li>
               <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Send calendar invites, not times.</strong> Calendar apps handle timezone conversion automatically when you use proper invites — so recipients always see the correct local time without manual math.</span></li>
             </ul>
+          </section>
+
+          <section className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6">
+            <h2 className="text-lg font-semibold">Most Common Timezone Abbreviations</h2>
+            <div className="overflow-x-auto rounded-xl border border-border/60">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border/60 bg-muted/30">
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Timezone</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Abbreviation</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">UTC Offset</th>
+                  </tr>
+                </thead>
+                <tbody className="text-muted-foreground">
+                  {[
+                    { name: "UTC", abbr: "UTC", offset: "+0:00" },
+                    { name: "Eastern Time", abbr: "EST / EDT", offset: "−5:00 / −4:00" },
+                    { name: "Central Time", abbr: "CST / CDT", offset: "−6:00 / −5:00" },
+                    { name: "Mountain Time", abbr: "MST / MDT", offset: "−7:00 / −6:00" },
+                    { name: "Pacific Time", abbr: "PST / PDT", offset: "−8:00 / −7:00" },
+                    { name: "India Standard Time", abbr: "IST", offset: "+5:30" },
+                    { name: "Central European Time", abbr: "CET / CEST", offset: "+1:00 / +2:00" },
+                    { name: "Japan Standard Time", abbr: "JST", offset: "+9:00" },
+                    { name: "Australian Eastern Time", abbr: "AEST / AEDT", offset: "+10:00 / +11:00" },
+                    { name: "Gulf Standard Time", abbr: "GST", offset: "+4:00" },
+                  ].map((row, i) => (
+                    <tr key={row.abbr} className={`border-b border-border/40 ${i % 2 === 0 ? "bg-background/20" : ""}`}>
+                      <td className="px-4 py-2.5 text-foreground/80">{row.name}</td>
+                      <td className="px-4 py-2.5 font-mono font-semibold text-primary">{row.abbr}</td>
+                      <td className="px-4 py-2.5 font-mono text-xs">{row.offset}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6">
+            <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {[
+                { q: "What is UTC?", a: "UTC (Coordinated Universal Time) is the primary time standard by which the world regulates clocks. It never observes daylight saving time, making it the most stable reference point for international scheduling." },
+                { q: "Does India observe daylight saving time?", a: "No. India Standard Time (IST, UTC+5:30) does not observe daylight saving time and remains constant throughout the year." },
+                { q: "Why does the time difference between countries change throughout the year?", a: "Because different countries start and end daylight saving time on different dates, the offset between them can shift by an hour during transition periods. Use UTC as a stable reference point to avoid confusion." },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl border border-border/50 bg-background/30 p-4 space-y-1">
+                  <p className="text-sm font-semibold text-foreground/90">{q}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+                </div>
+              ))}
+            </div>
           </section>
 
         </div>

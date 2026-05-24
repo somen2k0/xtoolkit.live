@@ -186,6 +186,23 @@ export default function UsernameGenerator() {
         <div className="space-y-8 pt-2">
 
           <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">What is an X/Twitter Username Generator?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              An X/Twitter username generator creates unique, available username ideas based on your name, niche, or keywords. Your username is one of the first things people see on Twitter/X — it appears in your profile URL, every tweet you post, and every mention of your account. Choosing the right username can significantly impact your discoverability and brand recognition.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Our free username generator creates multiple variations instantly, helping you find a handle that's memorable, relevant to your niche, and available on the platform. It generates creative combinations using prefixes, suffixes, connectors, and wordplay — giving you dozens of options to compare in seconds.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Username Ideas by Niche</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Different niches have different username conventions. Tech and developer accounts often use their real name or a technical handle. Content creators combine their name with their topic (e.g. @JohnCodes, @SarahWrites). Business accounts typically use their brand name or a close variation. Personal brands work best with real names or a memorable nickname that reflects your personality and expertise.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
             <h2 className="text-lg font-semibold">How to choose the perfect X username</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Your X username — the @handle that appears in your profile URL, mentions, and every reply you make — is one of the most permanent decisions you'll make on the platform. While you can change it, doing so breaks any existing @mentions of you, costs you SEO authority built on your old handle's URL, and creates confusion for existing followers. Getting it right the first time matters. The ideal username is short (under 12 characters), easy to spell from hearing it spoken aloud, and either your real name, your brand name, or a niche-specific variation that immediately signals what you're about.
@@ -231,6 +248,22 @@ export default function UsernameGenerator() {
                       <span key={e} className="font-mono text-xs bg-muted/50 border border-border/50 rounded px-2 py-0.5 text-foreground/70">{e}</span>
                     ))}
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {[
+                { q: "How long can a Twitter/X username be?", a: "Twitter/X usernames can be between 1 and 15 characters long. They can contain letters, numbers, and underscores only." },
+                { q: "Can I change my Twitter/X username?", a: "Yes. You can change your username in Twitter/X settings at any time. Your followers, tweets, and account data are preserved — but your old username immediately becomes available for others to claim." },
+                { q: "What characters are allowed in Twitter usernames?", a: "Only letters (a–z), numbers (0–9), and underscores (_) are allowed. No spaces, hyphens, or special characters. Usernames are not case-sensitive." },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl border border-border/50 bg-background/30 p-4 space-y-1">
+                  <p className="text-sm font-semibold text-foreground/90">{q}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
                 </div>
               ))}
             </div>

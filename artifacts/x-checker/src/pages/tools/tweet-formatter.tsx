@@ -276,6 +276,54 @@ export default function TweetFormatter() {
             </div>
           </div>
 
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">What is a Tweet Thread Formatter?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              A tweet thread formatter helps you split long-form content into properly sized tweet chunks that fit within Twitter/X's 280 character limit. Instead of manually counting characters and splitting text, our formatter does it automatically — preserving word boundaries and adding thread numbering so your audience can follow along easily.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Tweet threads are one of the most powerful formats on Twitter/X for sharing in-depth knowledge, stories, and tutorials. Studies show that threads get 3–5× more engagement than single tweets because they keep readers scrolling and interacting with each tweet in the series.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Tweet Thread Best Practices</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              The best tweet threads follow a simple structure: hook → context → main points → conclusion → CTA. Your opening tweet is the most important — if it doesn't grab attention, nobody reads the rest. Use numbers, strong opinions, or counterintuitive ideas to make people stop scrolling.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Threads between 5–15 tweets perform best. Too short and you don't provide enough value. Too long and you lose readers before the end. Aim for the sweet spot where every tweet adds value and builds on the previous one.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Who Uses Tweet Thread Formatters?</h2>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Content creators sharing knowledge and tutorials</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Founders building in public and sharing product updates</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Marketers repurposing long-form content for Twitter</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Writers sharing stories and essays in thread format</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Educators breaking down complex topics into digestible steps</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Journalists covering breaking news in real time</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {[
+                { q: "What is the Twitter/X character limit?", a: "Twitter/X allows 280 characters per tweet for standard accounts. Twitter Blue/X Premium subscribers get up to 25,000 characters per tweet." },
+                { q: "How do I number my tweet thread?", a: "Common formats are \"1/\", \"1/10\", or \"(1)\" at the start or end of each tweet. Our formatter adds numbering automatically so you don't have to count or label manually." },
+                { q: "How long should a tweet thread be?", a: "5–15 tweets is the sweet spot. Threads under 5 tweets feel incomplete. Over 15 tweets lose most readers before the end — engagement drops sharply after tweet 10." },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl border border-border/50 bg-background/30 p-4 space-y-1">
+                  <p className="text-sm font-semibold text-foreground/90">{q}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </MiniToolLayout>

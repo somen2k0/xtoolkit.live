@@ -200,6 +200,55 @@ export default function HashtagFormatter() {
             </ul>
           </div>
 
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Hashtag Best Practices by Platform</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Different platforms have different hashtag norms. On Twitter/X, 1–3 targeted hashtags perform best — the platform's algorithm deprioritizes posts that look spammy. Instagram allows up to 30 hashtags and rewards posts that use relevant ones strategically. LinkedIn works best with 3–5 professional hashtags. Our formatter helps you prepare hashtag sets for any platform quickly.
+            </p>
+            <div className="overflow-x-auto rounded-xl border border-border/60">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border/60 bg-muted/30">
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Platform</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Recommended count</th>
+                    <th className="text-left px-4 py-2.5 font-semibold text-foreground/80">Notes</th>
+                  </tr>
+                </thead>
+                <tbody className="text-muted-foreground">
+                  {[
+                    { platform: "Twitter / X", count: "1–3", note: "Fewer is better. More than 3 reduces engagement." },
+                    { platform: "Instagram", count: "5–15", note: "Up to 30 allowed. Mix popular and niche tags." },
+                    { platform: "LinkedIn", count: "3–5", note: "Professional, relevant tags only." },
+                    { platform: "TikTok", count: "3–6", note: "Include trending + niche + brand tags." },
+                    { platform: "YouTube", count: "3–8", note: "Tags in description improve search discovery." },
+                  ].map((row, i) => (
+                    <tr key={row.platform} className={`border-b border-border/40 ${i % 2 === 0 ? "bg-background/20" : ""}`}>
+                      <td className="px-4 py-2.5 font-medium text-foreground/80">{row.platform}</td>
+                      <td className="px-4 py-2.5 font-mono text-primary">{row.count}</td>
+                      <td className="px-4 py-2.5 text-xs">{row.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+            <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {[
+                { q: "How many hashtags should I use on Twitter/X?", a: "1–3 hashtags per tweet is optimal. More than 3 hashtags can reduce engagement and make your post look spammy to Twitter's algorithm." },
+                { q: "Can I use spaces in hashtags?", a: "No. Hashtags cannot contain spaces. Use CamelCase (#HashtagFormatter) or no separator for multi-word hashtags. Our formatter handles this automatically." },
+                { q: "Do hashtags work the same on all platforms?", a: "No. Instagram supports up to 30 hashtags. Twitter/X works best with 1–3. LinkedIn recommends 3–5. Our formatter works for all platforms — prepare your list and choose the right count for each." },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl border border-border/50 bg-background/30 p-4 space-y-1">
+                  <p className="text-sm font-semibold text-foreground/90">{q}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </MiniToolLayout>

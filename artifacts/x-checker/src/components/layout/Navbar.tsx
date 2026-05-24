@@ -188,7 +188,7 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
   const leave = useCallback(() => { timer.current = setTimeout(() => setOpen(false), 150); }, []);
   const close = useCallback(() => setOpen(false), []);
 
-  const isActive = (category.items ?? []).some(item => currentPath === item.href) ||
+  const isActive = (category.tools ?? []).some((item: { href: string }) => currentPath === item.href) ||
     open;
 
   return (
