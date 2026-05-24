@@ -28,7 +28,7 @@ const NAV_CATEGORIES = [
     label: "X Tools",
     color: "text-blue-400",
     bg: "bg-blue-400/10",
-    href: "/tools",
+    href: "/social-media-tools",
     tools: [
       { icon: Search, label: "Account Checker", href: "/tools/x-account-checker", badge: "Popular" },
       { icon: Sparkles, label: "AI Bio Generator", href: "/tools/bio-generator", badge: "AI" },
