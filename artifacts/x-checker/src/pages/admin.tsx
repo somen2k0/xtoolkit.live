@@ -10,7 +10,7 @@ import {
   BarChart3, DollarSign, Search,
   Server, AlertTriangle, Clock, Star, TrendingUp,
   Cpu, Database, LineChart, MousePointerClick, Layers,
-  ImageIcon, Upload, Palette,
+  ImageIcon, Upload, Palette, KeyRound, Timer,
 } from "lucide-react";
 import { ALL_TOOLS, CATEGORIES, TOTAL_LIVE, type CategoryKey } from "@/lib/tools-registry";
 
@@ -872,44 +872,255 @@ function BrandingPanel({ password }: { password: string }) {
   );
 }
 
+// ── API Keys Status ─────────────────────────────────────────────────────────
+
+const KEY_META: Record<string, { label: string; description: string; docsUrl: string }> = {
+  GROQ_API_KEY: {
+    label: "Groq API Key",
+    description: "Powers AI Bio Generator, AI Detector & AI Humanizer",
+    docsUrl: "https://console.groq.com",
+  },
+  WEB3FORMS_KEY: {
+    label: "Web3Forms Key",
+    description: "Enables the server-side contact / feedback form",
+    docsUrl: "https://web3forms.com",
+  },
+  ADMIN_PASSWORD: {
+    label: "Admin Password",
+    description: "Protects this admin panel",
+    docsUrl: "",
+  },
+};
+
+function ApiKeysPanel() {
+  const [data, setData] = useState<HealthData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetch_ = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/health");
+      if (res.ok) setData(await res.json() as HealthData);
+    } catch { /* silent */ }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { fetch_(); }, [fetch_]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center gap-2 text-sm text-muted-foreground py-4">
+        <Loader2 className="h-4 w-4 animate-spin" /> Loading key status…
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="rounded-lg border border-red-500/30 bg-red-500/5 px-4 py-3 text-sm text-red-400 flex gap-2">
+        <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
+        Could not reach the health endpoint.
+      </div>
+    );
+  }
+
+  const seen = new Set<string>();
+  const keyRows: { key: string; set: boolean }[] = [];
+
+  Object.entries(data.tools)
+    .filter(([toolKey]) => toolKey !== "xAccountChecker")
+    .forEach(([, tool]) => {
+      if (tool.requires && !seen.has(tool.requires)) {
+        seen.add(tool.requires);
+        keyRows.push({ key: tool.requires, set: tool.enabled });
+      }
+    });
+
+  const setCount = keyRows.filter((r) => r.set).length;
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <KeyRound className="h-3.5 w-3.5" />
+        <span>{setCount} of {keyRows.length} keys configured</span>
+        <Button variant="ghost" size="sm" onClick={fetch_} className="h-6 w-6 p-0 ml-auto">
+          <RefreshCw className="h-3 w-3" />
+        </Button>
+      </div>
+      <div className="rounded-xl border border-border/60 bg-card overflow-hidden divide-y divide-border/40">
+        {keyRows.map(({ key, set }) => {
+          const meta = KEY_META[key];
+          return (
+            <div key={key} className="flex items-center gap-3 px-4 py-3">
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${set ? "bg-green-500/10" : "bg-red-500/10"}`}>
+                <KeyRound className={`h-3.5 w-3.5 ${set ? "text-green-400" : "text-red-400"}`} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <p className="text-sm font-medium font-mono">{key}</p>
+                  {meta?.label && (
+                    <span className="text-xs text-muted-foreground hidden sm:inline">· {meta.label}</span>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground truncate">{meta?.description ?? "Required env variable"}</p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                {set ? (
+                  <Badge className="bg-green-500/10 text-green-400 border-green-500/20 text-[10px] gap-1">
+                    <CheckCircle2 className="h-2.5 w-2.5" /> Set
+                  </Badge>
+                ) : (
+                  <Badge className="bg-red-500/10 text-red-400 border-red-500/20 text-[10px] gap-1">
+                    <XCircle className="h-2.5 w-2.5" /> Missing
+                  </Badge>
+                )}
+                {meta?.docsUrl && (
+                  <a
+                    href={meta.docsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Health Check ───────────────────────────────────────────────────────────
 
+interface EndpointResult {
+  label: string;
+  path: string;
+  status: "loading" | "ok" | "error";
+  ms: number | null;
+}
+
 function HealthStatus({ password }: { password: string }) {
-  const [status, setStatus] = useState<"loading" | "ok" | "error">("loading");
+  const ENDPOINTS = [
+    { label: "Liveness", path: "/api/healthz" },
+    { label: "Health & Tools", path: "/api/health" },
+    { label: "Admin Status", path: "/api/admin/status" },
+  ];
+
+  const [results, setResults] = useState<EndpointResult[]>(
+    ENDPOINTS.map((e) => ({ ...e, status: "loading", ms: null }))
+  );
+  const [uptime, setUptime] = useState<string>("");
   const [lastChecked, setLastChecked] = useState<string>("");
 
   const check = useCallback(async () => {
-    setStatus("loading");
-    try {
-      const res = await fetch("/api/healthz", {
-        headers: { "x-admin-password": password },
-      });
-      setStatus(res.ok ? "ok" : "error");
-    } catch {
-      setStatus("error");
-    }
+    setResults(ENDPOINTS.map((e) => ({ ...e, status: "loading", ms: null })));
+
+    await Promise.all(
+      ENDPOINTS.map(async (endpoint, i) => {
+        const t0 = performance.now();
+        try {
+          const res = await fetch(endpoint.path, {
+            headers: { "x-admin-password": password },
+          });
+          const ms = Math.round(performance.now() - t0);
+          if (endpoint.path === "/api/health" && res.ok) {
+            const d = await res.json() as HealthData;
+            setUptime(d.uptime.label);
+          }
+          setResults((prev) => {
+            const next = [...prev];
+            next[i] = { ...endpoint, status: res.ok ? "ok" : "error", ms };
+            return next;
+          });
+        } catch {
+          const ms = Math.round(performance.now() - t0);
+          setResults((prev) => {
+            const next = [...prev];
+            next[i] = { ...endpoint, status: "error", ms };
+            return next;
+          });
+        }
+      })
+    );
+
     setLastChecked(new Date().toLocaleTimeString());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [password]);
 
   useEffect(() => { check(); }, [check]);
 
+  const allOk = results.every((r) => r.status === "ok");
+  const anyError = results.some((r) => r.status === "error");
+  const anyLoading = results.some((r) => r.status === "loading");
+
+  const overallStatus = anyLoading ? "loading" : anyError ? "error" : "ok";
+
   return (
-    <div className="flex items-center justify-between p-3 rounded-lg border border-border/60 bg-card">
-      <div className="flex items-center gap-2.5">
-        <div className={`w-2.5 h-2.5 rounded-full ${
-          status === "ok" ? "bg-green-400 animate-pulse" :
-          status === "error" ? "bg-red-400" : "bg-yellow-400 animate-pulse"
-        }`} />
-        <div>
-          <p className="text-sm font-medium">
-            {status === "loading" ? "Checking server…" : status === "ok" ? "All systems operational" : "Server error"}
-          </p>
-          {lastChecked && <p className="text-xs text-muted-foreground">Last checked {lastChecked}</p>}
+    <div className="space-y-3">
+      {/* Summary bar */}
+      <div className="flex items-center justify-between p-3 rounded-lg border border-border/60 bg-card">
+        <div className="flex items-center gap-2.5">
+          <div className={`w-2.5 h-2.5 rounded-full ${
+            overallStatus === "ok" ? "bg-green-400 animate-pulse" :
+            overallStatus === "error" ? "bg-red-400" : "bg-yellow-400 animate-pulse"
+          }`} />
+          <div>
+            <p className="text-sm font-medium">
+              {overallStatus === "loading" ? "Checking endpoints…" :
+               allOk ? "All systems operational" : "One or more endpoints failed"}
+            </p>
+            <div className="flex items-center gap-3 mt-0.5">
+              {lastChecked && <p className="text-xs text-muted-foreground">Last checked {lastChecked}</p>}
+              {uptime && (
+                <p className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Timer className="h-3 w-3" /> Uptime: {uptime}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
+        <Button variant="ghost" size="sm" onClick={check} className="h-7 w-7 p-0">
+          <RefreshCw className={`h-3.5 w-3.5 ${anyLoading ? "animate-spin" : ""}`} />
+        </Button>
       </div>
-      <Button variant="ghost" size="sm" onClick={check} className="h-7 w-7 p-0">
-        <RefreshCw className={`h-3.5 w-3.5 ${status === "loading" ? "animate-spin" : ""}`} />
-      </Button>
+
+      {/* Per-endpoint rows */}
+      <div className="rounded-xl border border-border/60 bg-card overflow-hidden divide-y divide-border/40">
+        {results.map((r) => (
+          <div key={r.path} className="flex items-center gap-3 px-4 py-3">
+            {r.status === "loading" ? (
+              <Loader2 className="h-4 w-4 text-muted-foreground animate-spin shrink-0" />
+            ) : r.status === "ok" ? (
+              <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0" />
+            ) : (
+              <XCircle className="h-4 w-4 text-red-400 shrink-0" />
+            )}
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium">{r.label}</p>
+              <p className="text-[11px] text-muted-foreground font-mono">{r.path}</p>
+            </div>
+            {r.ms !== null && (
+              <span className={`text-xs font-mono tabular-nums ${
+                r.ms < 200 ? "text-green-400" : r.ms < 600 ? "text-yellow-400" : "text-red-400"
+              }`}>
+                {r.ms}ms
+              </span>
+            )}
+            {r.status !== "loading" && (
+              <Badge className={`text-[10px] shrink-0 ${
+                r.status === "ok"
+                  ? "bg-green-500/10 text-green-400 border-green-500/20"
+                  : "bg-red-500/10 text-red-400 border-red-500/20"
+              }`}>
+                {r.status === "ok" ? "200 OK" : "Error"}
+              </Badge>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -939,10 +1150,22 @@ function AdminDashboard({ password }: { password: string }) {
         </Badge>
       </div>
 
-      {/* Server Health */}
+      {/* Health Check */}
       <section className="space-y-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Server Status</h2>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide flex items-center gap-2">
+          <Activity className="h-3.5 w-3.5" />
+          Health Check
+        </h2>
         <HealthStatus password={password} />
+      </section>
+
+      {/* API Keys Status */}
+      <section className="space-y-3">
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide flex items-center gap-2">
+          <KeyRound className="h-3.5 w-3.5" />
+          API Keys Status
+        </h2>
+        <ApiKeysPanel />
       </section>
 
       {/* Stats Grid */}
