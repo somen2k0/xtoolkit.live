@@ -1,6 +1,7 @@
 import { useLocation } from "wouter";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { CursorGlow } from "@/components/CursorGlow";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -146,6 +147,7 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-[100dvh] bg-background text-foreground font-sans selection:bg-primary/30 flex flex-col">
+      <CursorGlow />
       {/* Page-specific background orbs — fixed, behind everything */}
       <div
         className="fixed inset-0 pointer-events-none overflow-hidden"
