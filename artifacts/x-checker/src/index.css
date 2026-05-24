@@ -62,7 +62,7 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 240 18% 4%;
+  --background: 228 47% 8%;
   --foreground: 220 20% 92%;
 
   --card: 240 15% 7%;
@@ -115,11 +115,11 @@
 }
 
 .dark {
-  --background: 240 18% 4%;
+  --background: 228 47% 8%;
   --foreground: 220 20% 92%;
-  --card: 240 15% 7%;
+  --card: 228 40% 10%;
   --card-foreground: 220 20% 92%;
-  --card-border: 240 12% 13%;
+  --card-border: 228 30% 16%;
   --popover: 240 15% 7%;
   --popover-foreground: 220 20% 92%;
   --popover-border: 240 12% 13%;
@@ -201,7 +201,8 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     background-image:
-      radial-gradient(ellipse 70% 45% at 50% -10%, hsl(258 82% 66% / 0.12), transparent);
+      radial-gradient(ellipse 80% 50% at 20% -5%, hsl(270 80% 60% / 0.18), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 10%, hsl(200 90% 60% / 0.12), transparent);
   }
 }
 
@@ -228,7 +229,8 @@ body::after {
   transform: translateX(-50%);
   width: 80vw;
   height: 60vh;
-  background: radial-gradient(ellipse at center, hsl(258 82% 66% / 0.12), transparent 70%);
+  background: radial-gradient(ellipse at 30% center, hsl(258 82% 66% / 0.14), transparent 60%),
+              radial-gradient(ellipse at 70% center, hsl(195 90% 60% / 0.10), transparent 60%);
   animation: aurora-shift 8s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
@@ -250,30 +252,43 @@ body::after {
 }
 
 .bg-orb-1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, hsl(258 82% 66% / 0.12) 0%, transparent 70%);
-  top: -10%;
-  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, hsl(270 80% 65% / 0.28) 0%, transparent 70%);
+  top: -15%;
+  left: -12%;
+  mix-blend-mode: screen;
   animation: orb-float-1 18s ease-in-out infinite;
 }
 
 .bg-orb-2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, hsl(240 82% 70% / 0.09) 0%, transparent 70%);
-  top: 20%;
-  right: -8%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, hsl(195 90% 60% / 0.22) 0%, transparent 70%);
+  top: 15%;
+  right: -10%;
+  mix-blend-mode: screen;
   animation: orb-float-2 22s ease-in-out infinite;
 }
 
 .bg-orb-3 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, hsl(270 70% 60% / 0.08) 0%, transparent 70%);
-  bottom: 10%;
-  left: 30%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, hsl(160 80% 55% / 0.15) 0%, transparent 70%);
+  bottom: 5%;
+  left: 25%;
+  mix-blend-mode: screen;
   animation: orb-float-3 16s ease-in-out infinite;
+}
+
+.bg-orb-4 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, hsl(240 90% 70% / 0.18) 0%, transparent 70%);
+  bottom: 20%;
+  right: 15%;
+  mix-blend-mode: screen;
+  animation: orb-float-1 20s ease-in-out infinite reverse;
 }
 
 /* ── Hero entrance animation helpers ────────────────────────────────────── */
@@ -303,11 +318,11 @@ body::after {
 .text-shimmer {
   background: linear-gradient(
     90deg,
-    hsl(258 82% 72%),
-    hsl(280 90% 80%),
-    hsl(258 82% 66%),
-    hsl(240 80% 75%),
-    hsl(258 82% 72%)
+    hsl(270 80% 72%),
+    hsl(240 90% 80%),
+    hsl(195 90% 70%),
+    hsl(240 85% 75%),
+    hsl(270 80% 72%)
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
