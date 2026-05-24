@@ -106,6 +106,8 @@ export function GroqKeyManager({ compact = false }: GroqKeyManagerProps) {
       <div className="space-y-1.5">
         <div className="flex gap-2">
           <input
+            id="groq-api-key"
+            name="groq-api-key"
             type="password"
             value={newKey}
             onChange={(e) => { setNewKey(e.target.value); setAddError(null); }}

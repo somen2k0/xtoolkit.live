@@ -168,14 +168,14 @@ export default function QrCodeGenerator() {
                 <div className="space-y-1.5">
                   <Label className="text-sm font-medium">Foreground Color</Label>
                   <div className="flex items-center gap-2">
-                    <input type="color" value={fg} onChange={(e) => setFg(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 bg-background/60 cursor-pointer p-0.5" />
+                    <input id="qr-fg-color" name="qr-fg-color" type="color" value={fg} onChange={(e) => setFg(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 bg-background/60 cursor-pointer p-0.5" />
                     <Input value={fg} onChange={(e) => setFg(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
                   </div>
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-sm font-medium">Background Color</Label>
                   <div className="flex items-center gap-2">
-                    <input type="color" value={bg} onChange={(e) => setBg(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 bg-background/60 cursor-pointer p-0.5" />
+                    <input id="qr-bg-color" name="qr-bg-color" type="color" value={bg} onChange={(e) => setBg(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 bg-background/60 cursor-pointer p-0.5" />
                     <Input value={bg} onChange={(e) => setBg(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
                   </div>
                 </div>

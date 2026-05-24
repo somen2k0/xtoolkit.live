@@ -1038,6 +1038,8 @@ function GmailTricksTab() {
           <div className="flex-1 flex items-center gap-2 bg-muted/30 border border-border/60 rounded-lg px-3 py-2.5">
             <Mail className="h-4 w-4 text-muted-foreground shrink-0" />
             <input
+              id="gmail-input"
+              name="gmail-input"
               type="text"
               value={inputEmail}
               onChange={(e) => setInputEmail(e.target.value)}
@@ -1105,6 +1107,8 @@ function GmailTricksTab() {
                 <div className="flex-1 flex items-center gap-2 bg-muted/30 border border-border/60 rounded-lg px-3 py-2">
                   <span className="font-mono text-xs text-muted-foreground shrink-0">{username}+</span>
                   <input
+                    id="plus-tag"
+                    name="plus-tag"
                     value={customTag}
                     onChange={(e) => setCustomTag(e.target.value.replace(/[^a-z0-9._-]/gi, ""))}
                     placeholder="customtag"

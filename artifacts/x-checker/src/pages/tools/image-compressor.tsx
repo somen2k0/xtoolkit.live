@@ -193,7 +193,7 @@ export default function ImageCompressor() {
               onClick={() => inputRef.current?.click()}
               className={`flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed p-10 cursor-pointer transition-colors ${dragging ? "border-primary/60 bg-primary/5" : "border-border/60 bg-muted/20 hover:bg-muted/40 hover:border-border"}`}
             >
-              <input ref={inputRef} type="file" accept=".jpg,.jpeg,.png,.webp" multiple className="hidden" onChange={(e) => processFiles(e.target.files)} />
+              <input ref={inputRef} id="image-file-upload" name="image-file-upload" type="file" accept=".jpg,.jpeg,.png,.webp" multiple className="hidden" onChange={(e) => processFiles(e.target.files)} />
               <div className="h-12 w-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
                 <Upload className="h-5 w-5 text-primary" />
               </div>

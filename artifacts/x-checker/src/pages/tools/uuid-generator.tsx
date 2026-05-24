@@ -90,11 +90,11 @@ export default function UuidGenerator() {
           </div>
           <div className="flex items-center gap-3">
             <label className="flex items-center gap-1.5 cursor-pointer text-xs text-muted-foreground hover:text-foreground">
-              <input type="checkbox" checked={uppercase} onChange={(e) => setUppercase(e.target.checked)} className="rounded" />
+              <input id="uppercase" name="uppercase" type="checkbox" checked={uppercase} onChange={(e) => setUppercase(e.target.checked)} className="rounded" />
               Uppercase
             </label>
             <label className="flex items-center gap-1.5 cursor-pointer text-xs text-muted-foreground hover:text-foreground">
-              <input type="checkbox" checked={noDashes} onChange={(e) => setNoDashes(e.target.checked)} className="rounded" />
+              <input id="no-dashes" name="no-dashes" type="checkbox" checked={noDashes} onChange={(e) => setNoDashes(e.target.checked)} className="rounded" />
               No dashes
             </label>
           </div>

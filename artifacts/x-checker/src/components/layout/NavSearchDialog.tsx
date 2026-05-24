@@ -59,6 +59,8 @@ export function NavSearchDialog() {
             <Search className="h-4 w-4 text-muted-foreground shrink-0" />
             <input
               ref={inputRef}
+              id="nav-search"
+              name="nav-search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search tools…"

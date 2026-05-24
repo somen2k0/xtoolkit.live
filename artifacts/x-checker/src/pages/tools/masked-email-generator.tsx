@@ -133,6 +133,8 @@ export default function MaskedEmailGenerator() {
 
           <div className="flex gap-2">
             <input
+              id="gmail-username"
+              name="gmail-username"
               value={baseGmail}
               onChange={e => setBaseGmail(e.target.value)}
               onKeyDown={e => e.key === "Enter" && generateVariants()}

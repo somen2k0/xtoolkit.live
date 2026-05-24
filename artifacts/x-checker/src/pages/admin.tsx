@@ -772,6 +772,8 @@ function BrandingPanel({ password }: { password: string }) {
     <div className="space-y-6">
       <input
         ref={fileInputRef}
+        id="asset-file-upload"
+        name="asset-file-upload"
         type="file"
         accept="image/*,.ico,.svg"
         className="hidden"

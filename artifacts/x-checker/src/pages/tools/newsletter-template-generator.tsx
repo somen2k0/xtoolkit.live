@@ -238,7 +238,7 @@ export default function NewsletterTemplateGenerator() {
             <div className="space-y-1">
               <label className="text-xs text-muted-foreground">Accent Color</label>
               <div className="flex gap-2 items-center">
-                <input type="color" value={cfg.accentColor} onChange={e => setField("accentColor", e.target.value)} className="h-8 w-12 rounded border border-border/60 bg-background/60 cursor-pointer p-0.5" />
+                <input id="newsletter-accent-color" name="newsletter-accent-color" type="color" value={cfg.accentColor} onChange={e => setField("accentColor", e.target.value)} className="h-8 w-12 rounded border border-border/60 bg-background/60 cursor-pointer p-0.5" />
                 <Input value={cfg.accentColor} onChange={e => setField("accentColor", e.target.value)} className="text-sm bg-background/60 border-border/60 h-8 font-mono" />
               </div>
             </div>

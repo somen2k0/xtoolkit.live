@@ -169,6 +169,8 @@ export default function TimezoneConverter() {
             <div className="space-y-1.5">
               <label className="text-xs text-muted-foreground">Date & Time</label>
               <input
+                id="datetime-input"
+                name="datetime-input"
                 type="datetime-local"
                 value={dateInput}
                 onChange={(e) => setDateInput(e.target.value)}
@@ -259,6 +261,8 @@ export default function TimezoneConverter() {
             Add Timezone
           </p>
           <input
+            id="timezone-search"
+            name="timezone-search"
             type="text"
             placeholder="Search timezones... (e.g. London, Tokyo, New_York)"
             value={zoneSearch}

@@ -148,6 +148,8 @@ export default function FunnyBios() {
             <div className="space-y-1.5">
               <label className="text-xs font-medium text-foreground/70">Your niche or personality</label>
               <input
+                id="niche-input"
+                name="niche-input"
                 type="text"
                 value={niche}
                 onChange={(e) => setNiche(e.target.value)}

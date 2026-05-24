@@ -133,6 +133,8 @@ export default function SpamRiskChecker() {
         <div className="rounded-xl border border-border/60 bg-card/40 p-5">
           <div className="flex gap-2">
             <input
+              id="spam-email"
+              name="spam-email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               onKeyDown={e => e.key === "Enter" && check()}

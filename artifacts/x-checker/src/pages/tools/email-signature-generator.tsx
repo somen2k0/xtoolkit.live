@@ -213,6 +213,8 @@ export default function EmailSignatureGenerator() {
               <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Accent Color</label>
               <div className="flex items-center gap-3">
                 <input
+                  id="accent-color"
+                  name="accent-color"
                   type="color"
                   value={data.accentColor}
                   onChange={e => setData(d => ({ ...d, accentColor: e.target.value }))}

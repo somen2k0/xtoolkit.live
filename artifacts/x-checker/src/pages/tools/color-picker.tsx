@@ -142,6 +142,8 @@ export default function ColorPicker() {
               <div className="flex flex-col items-center gap-4">
                 <div className="relative">
                   <input
+                    id="color-picker"
+                    name="color-picker"
                     type="color"
                     value={hex}
                     onChange={(e) => applyColor(e.target.value)}
@@ -192,7 +194,7 @@ export default function ColorPicker() {
                 <div className="space-y-1.5">
                   <Label className="text-xs text-muted-foreground">Compare against color</Label>
                   <div className="flex gap-2 items-center">
-                    <input type="color" value={contrastHex} onChange={(e) => setContrastHex(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 cursor-pointer p-0.5" />
+                    <input id="contrast-color" name="contrast-color" type="color" value={contrastHex} onChange={(e) => setContrastHex(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 cursor-pointer p-0.5" />
                     <Input value={contrastHex} onChange={(e) => setContrastHex(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
                   </div>
                 </div>

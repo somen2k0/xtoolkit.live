@@ -178,6 +178,8 @@ export default function OgImagePreview() {
             <div className="relative flex-1">
               <Globe className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/50" />
               <input
+                id="og-url"
+                name="og-url"
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}

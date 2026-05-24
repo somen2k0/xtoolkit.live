@@ -106,6 +106,8 @@ export default function RegexTester() {
             <div className="flex items-center gap-2">
               <span className="text-muted-foreground font-mono text-sm shrink-0">/</span>
               <input
+                id="regex-pattern"
+                name="regex-pattern"
                 value={pattern}
                 onChange={(e) => setPattern(e.target.value)}
                 placeholder="Enter regex pattern..."
