@@ -21,16 +21,21 @@ async function callGroq(
       temperature: 0.1,
       messages,
     });
-  } catch {
-    res.status(429).json({ error: "Rate limit reached. Please wait and try again." });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : "";
+    if (msg.includes("No GROQ API keys")) {
+      res.status(503).json({ error: "AI features are not configured. Please add a GROQ_API_KEY." });
+    } else {
+      res.status(429).json({ error: "All AI keys are rate-limited. Please wait 30 seconds and try again." });
+    }
     return null;
   }
 
   if (!apiRes.ok) {
     res.status(apiRes.status === 429 ? 429 : 500).json({
       error: apiRes.status === 429
-        ? "Rate limit reached. Please wait and try again."
-        : "AI service temporarily unavailable.",
+        ? "Rate limit reached. Please wait 30 seconds and try again."
+        : "AI service temporarily unavailable. Please try again later.",
     });
     return null;
   }

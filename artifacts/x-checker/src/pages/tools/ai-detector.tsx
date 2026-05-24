@@ -97,8 +97,7 @@ export default function AiDetector() {
       // FIXED: AI Detector - graceful error handling for non-JSON and 5xx responses
       let data: (DetectResult & { error?: string }) = {} as DetectResult & { error?: string };
       try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
-      if (res.status === 429) { setError("Too many requests. Please wait 30 seconds and try again."); return; }
-      if (!res.ok) { setError("AI service temporarily unavailable. Please try again later."); return; }
+      if (!res.ok) { setError(data.error ?? "AI service temporarily unavailable. Please try again later."); return; }
       setDetectResult(data);
     } catch { setError("AI service temporarily unavailable. Please try again later."); }
     finally { setDetecting(false); }
@@ -116,8 +115,7 @@ export default function AiDetector() {
       });
       let data: { humanized?: string; error?: string } = {};
       try { data = await res.json() as typeof data; } catch { /* non-JSON response */ }
-      if (res.status === 429) { setError("Too many requests. Please wait 30 seconds and try again."); return; }
-      if (!res.ok) { setError("AI service temporarily unavailable. Please try again later."); return; }
+      if (!res.ok) { setError(data.error ?? "AI service temporarily unavailable. Please try again later."); return; }
       setHumanized(data.humanized ?? "");
     } catch { setError("AI service temporarily unavailable. Please try again later."); }
     finally { setHumanizing(false); }

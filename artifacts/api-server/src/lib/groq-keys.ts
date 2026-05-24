@@ -39,12 +39,18 @@ export async function makeGroqRequest(body: object): Promise<Response> {
         continue;
       }
 
+      // Invalid/expired key — try next key
+      if (res.status === 401) {
+        console.log(`Key ${key.substring(0, 8)}... unauthorized, trying next`);
+        continue;
+      }
+
       // Server error — try next key
       if (!res.ok && res.status >= 500) {
         continue;
       }
 
-      // Success or client error (4xx) — return as-is
+      // Success or other client error (4xx) — return as-is
       return res;
     } catch (err) {
       lastError = err as Error;
