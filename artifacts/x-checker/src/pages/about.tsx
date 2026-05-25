@@ -55,7 +55,7 @@ const categories = [
   {
     icon: Mail,
     name: "Email Tools",
-    desc: "Disposable email inboxes across 16 domains, email validator, email signature generator, subject line generator, and more.",
+    desc: "Disposable email inboxes across 9 domains, email validator, email signature generator, subject line generator, and more.",
   },
 ];
 

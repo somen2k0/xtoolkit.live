@@ -1520,10 +1520,104 @@ export default function TempMail({ defaultTab = "disposable" }: { defaultTab?: T
                 </Button>
               </Link>
             </div>
+            <div className="space-y-6 pt-2">
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">What is Temp Email?</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Temp Email gives you an instant disposable email inbox with no account or signup required. Get a fresh throwaway email address in one click and start receiving emails immediately across 9 domains.
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Unlike your real email, temp email addresses are completely anonymous. Use them for website signups, free trials, app registrations, or any situation where you don't want to share your real inbox.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">How is Temp Email Different from Temp Gmail?</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Temp Email uses dedicated disposable email domains (guerrillamail.com, mail.gw, mail.tm etc.) that are completely separate from Gmail. These addresses are fully throwaway — no connection to your real identity.
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Temp Gmail on the other hand generates real @gmail.com addresses using the dot trick, which work on sites that block disposable email domains but are linked to a real Gmail inbox.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">When to Use Temp Email</h2>
+                <ul className="space-y-1.5">
+                  {[
+                    "Signing up for websites you don't fully trust",
+                    "Getting free trials without spam in your real inbox",
+                    "Receiving one-time verification codes anonymously",
+                    "Testing email flows as a developer",
+                    "Avoiding marketing emails from online shopping",
+                    "Any signup where you don't want to share your real email address",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">Available Domains</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Choose from 9 domains across 3 providers: GuerrillaMail (guerrillamail.com, grr.la, sharklasers.com, spam4.me), Mail.tm (wshu.net), and Mail.gw (oakon.com and others). Each domain works the same way — pick whichever one works best for your signup.
+                </p>
+              </div>
+            </div>
           </>
         )}
         {defaultTab === "tempgmail" && <TempGmailTab />}
-        {defaultTab === "gmail" && <GmailTricksTab />}
+        {defaultTab === "gmail" && (
+          <>
+            <GmailTricksTab />
+            <div className="space-y-6 pt-2">
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">What are Gmail Tricks?</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Gmail has two built-in features that let you create unlimited email aliases from a single Gmail account: the dot trick and plus addressing. Our Gmail Tricks generator creates these variations instantly so you can use different addresses for different services while all emails land in your one Gmail inbox.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">The Gmail Dot Trick Explained</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Gmail ignores dots (.) in email addresses. This means john.doe@gmail.com, johndoe@gmail.com, and j.o.h.n.d.o.e@gmail.com all deliver to the exact same inbox. You can use any dot variation as a unique address for signups — and easily filter emails by the alias you used.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">The Gmail Plus Trick Explained</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Gmail also ignores anything after a plus (+) sign. So johndoe+amazon@gmail.com, johndoe+netflix@gmail.com, and johndoe+spam@gmail.com all go to johndoe@gmail.com. This is perfect for tracking which services are selling your email — if you get spam at yourname+company@gmail.com you know exactly who shared your data.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">Gmail Tricks vs Temp Gmail vs Temp Email</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Gmail Tricks uses <strong>your own Gmail account</strong> — emails go to your real inbox. Temp Gmail generates a real @gmail.com address you can check without using your own account. Temp Email gives you a completely disposable inbox on a throwaway domain.
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Use Gmail Tricks when you want to track and filter emails in your real inbox. Use Temp Gmail when you need a @gmail.com that isn't linked to you. Use Temp Email when you want complete anonymity.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-3">
+                <h2 className="text-base font-semibold">When to Use Gmail Tricks</h2>
+                <ul className="space-y-1.5">
+                  {[
+                    "Track which services share or sell your email",
+                    "Organize incoming emails by service or project",
+                    "Sign up for services while keeping your real email address private",
+                    "Create unique addresses for each subscription to easily unsubscribe",
+                    "Filter newsletters and promotional emails automatically",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </>
+        )}
         <ExtensionBanner />
       </div>
     </MiniToolLayout>

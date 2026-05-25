@@ -1,0 +1,426 @@
+Complete site-wide cleanup. Fix ALL issues found
+across every page in one go.
+
+===================================================
+STEP 1 — FIND ALL WRONG VALUES FIRST
+===================================================
+
+Run these and show ALL output before changing anything:
+
+grep -rn "55+" artifacts/x-checker/src --include="*.tsx" --include="*.ts"
+grep -rn "55+" prerender.mjs
+grep -rn "55+" artifacts/x-checker/index.html
+grep -rn "43+" artifacts/x-checker/src --include="*.tsx" --include="*.ts"
+grep -rn "43+" prerender.mjs
+grep -rn "55 free" artifacts/x-checker/src --include="*.tsx"
+grep -rn "all 55" artifacts/x-checker/src --include="*.tsx"
+grep -rn "all 43" artifacts/x-checker/src --include="*.tsx"
+grep -rn "16 domains" artifacts/x-checker/src --include="*.tsx"
+grep -rn "Browse all 55" artifacts/x-checker/src --include="*.tsx"
+grep -rn "Browse all 43" artifacts/x-checker/src --include="*.tsx"
+
+Show every match before proceeding.
+
+===================================================
+STEP 2 — FIX ALL WRONG TOOL COUNTS
+===================================================
+
+In prerender.mjs:
+- Change ALL "55+" → "44+"
+- Change ALL "43+" → "44+"
+- Change ALL "55 free tools" → "44 free tools"
+- Change ALL "43 free tools" → "44 free tools"
+- Change ALL "Browse all 55" → "Browse all 44"
+- Change ALL "Browse all 43" → "Browse all 44"
+- Change ALL "all 55" → "all 44"
+- Change ALL "all 43" → "all 44"
+
+In artifacts/x-checker/index.html:
+- Same replacements as above
+
+In artifacts/x-checker/src/pages/about.tsx:
+- Change ALL "55+" → "44+"
+- Change ALL "43+" → "44+"
+- Change "Browse all 55" → "Browse all 44"
+- Change "Browse all 43" → "Browse all 44"
+
+In ALL other .tsx files found in STEP 1:
+- Apply same replacements
+
+===================================================
+STEP 3 — FIX og:image:alt GLOBALLY
+===================================================
+
+In prerender.mjs find the DEFAULT og:image:alt
+that is applied globally to all pages.
+
+Change from ANY of these:
+"X Toolkit — 55+ free online tools..."
+"X Toolkit — 43+ free online tools..."
+
+To:
+"X Toolkit — 44+ free online tools for X, SEO,
+developers and creators"
+
+Also find any page-specific ogImageAlt overrides
+that show "55+" or "43+" and update to "44+".
+
+After fix run:
+grep -n "55+" prerender.mjs
+grep -n "43+" prerender.mjs
+Should return ZERO results.
+
+===================================================
+STEP 4 — FIX TITLE CONSISTENCY (hyphen → em dash)
+===================================================
+
+Find all page titles using hyphen " - " and
+replace with em dash " — ":
+
+In prerender.mjs and tools-manifest.json:
+- "About X Toolkit - Free Tools..." →
+  "About X Toolkit — Free Tools for X, SEO & Developers"
+- "Meta Tag Generator - SEO Title..." →
+  "Meta Tag Generator — SEO Title & Description Generator"
+- "X Account Checker - Bulk Check..." →
+  "X Account Checker — Bulk Twitter Account Status,
+  Followers & Profile Data"
+- "Temp Mail - Free Disposable..." →
+  "Temp Mail — Free Disposable Temporary Email Inbox"
+
+Search for all titles with " - " pattern:
+grep -n " - " prerender.mjs
+grep -n " - " artifacts/x-checker/src/data/tools-manifest.json
+
+Fix every one found.
+
+===================================================
+STEP 5 — FIX GENERIC META KEYWORDS GLOBALLY
+===================================================
+
+Currently most pages use this wrong generic keyword:
+"X account checker, Twitter account checker, bulk
+account checker, JSON formatter, Base64 encoder..."
+
+In prerender.mjs find where meta-keywords is set
+for each page. If there is a global fallback keyword
+being used, replace it with empty string so
+tool-specific keywords from tools-manifest.json
+are always used instead.
+
+For static pages add these specific keywords:
+
+about page:
+"x toolkit, free online tools, twitter tools,
+developer tools, seo tools, temp mail, free tools
+no signup, online toolkit, 44 free tools"
+
+privacy page:
+"x toolkit privacy policy, data privacy, no data
+collection, browser-based tools, free tools privacy,
+google adsense privacy"
+
+terms page:
+"x toolkit terms of service, terms and conditions,
+free tools terms, usage policy, acceptable use"
+
+chrome-extension page:
+"chrome extension temp mail, disposable email
+extension, temp email chrome, otp detector extension,
+guerrillamail chrome, free chrome extension,
+otp auto detection chrome"
+
+contact page:
+"contact x toolkit, support, feedback, bug report,
+tool suggestion, contact form"
+
+For tool pages that still have generic keywords,
+update tools-manifest.json seoKeywords field:
+
+/tools/temp-mail:
+"temp mail, temporary email, disposable email,
+throwaway email, fake email, guerrillamail,
+free temp email, no signup email, temp email address,
+10 minute mail, burner email, anonymous email,
+disposable inbox, temp mail online"
+
+/tools/json-formatter:
+"json formatter, json beautifier, json validator,
+format json online, json pretty print, json viewer,
+json editor, beautify json, free json formatter,
+json syntax checker, json minifier"
+
+/tools/meta-tag-generator:
+"meta tag generator, seo meta tags, og tags generator,
+open graph generator, twitter card generator, serp
+preview, meta description generator, seo tags,
+title tag generator, meta tag checker"
+
+/tools/jwt-decoder:
+"jwt decoder, decode jwt token, jwt inspector,
+json web token decoder, jwt payload, jwt header,
+decode bearer token, jwt online decoder, jwt parser,
+jwt verifier"
+
+/tools/regex-tester:
+"regex tester, regular expression tester, regex101,
+test regex online, regex matcher, regex debugger,
+javascript regex tester, regex validator online,
+regex pattern tester"
+
+/tools/base64:
+"base64 encoder decoder, base64 encode, base64 decode,
+encode base64 online, decode base64 string, base64
+converter, base64 to text, text to base64, base64
+online tool"
+
+/tools/uuid-generator:
+"uuid generator, guid generator, random uuid, uuid v4,
+generate uuid online, unique id generator, uuid creator,
+free uuid generator, uuid v4 generator"
+
+/tools/url-encoder:
+"url encoder decoder, percent encoding, encode url,
+decode url, url encoding online, url decode online,
+percent encode url, url escape characters, url parser"
+
+===================================================
+STEP 6 — FIX DEAD RELATED TOOL LINKS
+===================================================
+
+Fix related tools for these pages in prerender.mjs
+or the component files:
+
+/tools/temp-mail — remove dead links and replace:
+REMOVE:
+- /tools/email-username-generator
+- /tools/plain-text-formatter
+- /tools/email-character-counter
+
+ADD:
+- Temp Gmail → /tools/temp-mail/tempgmail
+- Masked Email Generator → /tools/masked-email-generator
+- Email Validator → /tools/email-validator
+- Email Signature Generator → /tools/email-signature-generator
+- Spam Score Checker → /tools/spam-score-checker
+
+/tools/x-account-checker — remove dead links:
+REMOVE:
+- /tools/follower-analyzer
+- /tools/profile-audit
+
+ADD:
+- Bio Generator → /tools/bio-generator
+- Username Generator → /tools/username-generator
+
+===================================================
+STEP 7 — FIX "16 DOMAINS" TEXT
+===================================================
+
+Find and fix "16 domains" appearing in the
+Email Tools category description:
+
+grep -rn "16 domains" artifacts/x-checker/src --include="*.tsx"
+
+Change to:
+"Disposable email inboxes across 9 domains,
+email validator, email signature generator,
+subject line generator, and more."
+
+===================================================
+STEP 8 — FIX NAV DROPDOWN DESCRIPTIONS
+===================================================
+
+Find the navbar component or navigation config
+where the 3 Temp Mail submenu items are defined.
+
+Update descriptions to be clearly distinct:
+
+Temp Email:
+description: "Instant disposable inbox — 9 domains,
+no signup, auto-refreshes every 15s"
+
+Temp Gmail:
+description: "Real @gmail.com address — works where
+disposable emails are blocked"
+
+Gmail Tricks:
+description: "Generate unlimited aliases from your
+own Gmail using dot & plus tricks"
+
+===================================================
+STEP 9 — ADD "ABOUT THIS TOOL" SECTIONS TO
+ALL 3 TEMP MAIL PAGES
+===================================================
+
+Add distinct content below tool UI on each page:
+
+--- /tools/temp-mail/tempemail ---
+
+Heading: "What is Temp Email?"
+Content:
+"Temp Email gives you an instant disposable email
+inbox with no account or signup required. Get a
+fresh throwaway email address in one click and
+start receiving emails immediately across 9 domains.
+
+Unlike your real email, temp email addresses are
+completely anonymous. Use them for website signups,
+free trials, app registrations, or any situation
+where you don't want to share your real inbox."
+
+Heading: "How is Temp Email Different from Temp Gmail?"
+Content:
+"Temp Email uses dedicated disposable email domains
+(guerrillamail.com, mail.gw, mail.tm etc.) that
+are completely separate from Gmail. These addresses
+are fully throwaway — no connection to your real
+identity. Temp Gmail on the other hand generates
+real @gmail.com addresses using the dot trick,
+which work on sites that block disposable email
+domains but are linked to a real Gmail inbox."
+
+Heading: "When to Use Temp Email"
+Bullet points:
+- Signing up for websites you don't fully trust
+- Getting free trials without spam in your real inbox
+- Receiving one-time verification codes anonymously
+- Testing email flows as a developer
+- Avoiding marketing emails from online shopping
+- Any signup where you don't want to share your
+  real email address
+
+Heading: "Available Domains"
+Content:
+"Choose from 9 domains across 3 providers:
+GuerrillaMail (guerrillamail.com, grr.la,
+sharklasers.com, spam4.me), Mail.tm (wshu.net),
+and Mail.gw (oakon.com and others). Each domain
+works the same way — pick whichever one works
+best for your signup."
+
+Heading: "Frequently Asked Questions"
+Q: How long does a temp email last?
+A: GuerrillaMail inboxes last 1 hour of inactivity.
+   Mail.tm and Mail.gw inboxes last up to 24 hours.
+   You can always generate a new address instantly.
+
+Q: Can I send emails from a temp email address?
+A: No. Temp Email is receive-only. It's designed
+   for receiving verification codes and signup
+   confirmations only.
+
+Q: Is temp email safe to use?
+A: Yes for receiving emails. Never use temp email
+   for anything important — these are public inboxes
+   that expire automatically.
+
+Q: Will websites accept my temp email address?
+A: Most websites accept temp email domains. Some
+   sites specifically block known disposable email
+   domains. For those sites, use our Temp Gmail
+   tool which provides real @gmail.com addresses.
+
+--- /tools/temp-mail/tempgmail ---
+(Already has good content from previous optimization
+— just make sure it's still there and correct)
+
+--- /tools/temp-mail/gmail-tricks ---
+
+Heading: "What are Gmail Tricks?"
+Content:
+"Gmail has two built-in features that let you create
+unlimited email aliases from a single Gmail account:
+the dot trick and plus addressing. Our Gmail Tricks
+generator creates these variations instantly so you
+can use different addresses for different services
+while all emails land in your one Gmail inbox."
+
+Heading: "The Gmail Dot Trick Explained"
+Content:
+"Gmail ignores dots (.) in email addresses. This
+means john.doe@gmail.com, johndoe@gmail.com, and
+j.o.h.n.d.o.e@gmail.com all deliver to the exact
+same inbox. You can use any dot variation as a
+unique address for signups — and easily filter
+emails by the alias you used."
+
+Heading: "The Gmail Plus Trick Explained"
+Content:
+"Gmail also ignores anything after a plus (+) sign.
+So johndoe+amazon@gmail.com, johndoe+netflix@gmail.com,
+and johndoe+spam@gmail.com all go to johndoe@gmail.com.
+This is perfect for tracking which services are
+selling your email — if you get spam at
+yourname+company@gmail.com you know exactly who
+shared your data."
+
+Heading: "Gmail Tricks vs Temp Gmail vs Temp Email"
+Content:
+"Gmail Tricks uses YOUR OWN Gmail account — emails
+go to your real inbox. Temp Gmail generates a
+real @gmail.com address you can check without
+using your own account. Temp Email gives you
+a completely disposable inbox on a throwaway
+domain. Use Gmail Tricks when you want to track
+and filter emails in your real inbox. Use Temp
+Gmail when you need a @gmail.com that isn't
+linked to you. Use Temp Email when you want
+complete anonymity."
+
+Heading: "When to Use Gmail Tricks"
+Bullet points:
+- Track which services share or sell your email
+- Organize incoming emails by service or project
+- Sign up for services while keeping your real
+  email address private
+- Create unique addresses for each subscription
+  to easily unsubscribe
+- Filter newsletters and promotional emails
+  automatically
+
+Heading: "Frequently Asked Questions"
+Q: Do Gmail dot trick addresses still work in 2025?
+A: Yes. Gmail has supported this feature since
+   its launch and continues to support it today.
+
+Q: Can I use Gmail plus tricks to avoid spam?
+A: Yes. Use yourname+servicename@gmail.com for
+   signups. If you receive spam at that address
+   you know that service shared your data. You
+   can then create a filter to auto-delete emails
+   sent to that alias.
+
+Q: Is there a limit to how many Gmail aliases I can create?
+A: No. Gmail dot and plus tricks create unlimited
+   variations. There is no limit on how many
+   different aliases you can use.
+
+Q: Will websites accept Gmail plus addresses?
+A: Most websites accept plus addresses. Some
+   specifically block them. For those sites use
+   the Temp Gmail tool instead.
+
+===================================================
+STEP 10 — FINAL VERIFICATION
+===================================================
+
+After all changes run:
+grep -rn "55+" artifacts/x-checker/src prerender.mjs artifacts/x-checker/index.html
+grep -rn "43+" artifacts/x-checker/src prerender.mjs artifacts/x-checker/index.html
+grep -rn "all 55" artifacts/x-checker/src prerender.mjs
+grep -rn "all 43" artifacts/x-checker/src prerender.mjs
+grep -rn "16 domains" artifacts/x-checker/src
+
+ALL should return ZERO results.
+
+Then run:
+pnpm build
+Confirm zero errors and 68+ pages prerendered.
+
+git add -A
+git commit -m "Complete site-wide fix: counts, og:image:alt, keywords, dead links, temp mail content"
+git push origin main
+
+Show ALL files changed.
+===================================================

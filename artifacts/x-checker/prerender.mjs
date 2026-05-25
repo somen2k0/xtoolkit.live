@@ -68,6 +68,7 @@ const STATIC_PAGES = [
     title: "About X Toolkit — Free Tools for X, SEO & Developers",
     description:
       "X Toolkit offers 44+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work.",
+    seoKeywords: "x toolkit, free online tools, twitter tools, developer tools, seo tools, temp mail, free tools no signup, online toolkit, 44 free tools",
   },
   {
     path: "/pricing",
@@ -82,6 +83,7 @@ const STATIC_PAGES = [
     title: "Privacy Policy | X Toolkit",
     description:
       "Read X Toolkit's privacy policy. We don't store your data, usernames, or results. All tools run in your browser with no data collection.",
+    seoKeywords: "x toolkit privacy policy, data privacy, no data collection, browser-based tools, free tools privacy, google adsense privacy",
   },
   {
     path: "/terms",
@@ -89,6 +91,7 @@ const STATIC_PAGES = [
     title: "Terms of Service | X Toolkit",
     description:
       "Read X Toolkit's terms of service. Free to use, no warranty. By using the tools you agree to these terms.",
+    seoKeywords: "x toolkit terms of service, terms and conditions, free tools terms, usage policy, acceptable use",
   },
   {
     path: "/blog",
@@ -109,7 +112,7 @@ const STATIC_PAGES = [
   {
     path: "/ai-writing-tools",
     label: "AI Writing Tools",
-    title: "Free AI Writing Tools - Bio Generator & AI Detector | X Toolkit",
+    title: "Free AI Writing Tools — Bio Generator & AI Detector | X Toolkit",
     description:
       "Free AI writing tools: AI bio generator, AI content detector & humanizer, bio ideas, funny bios, and more. Powered by Groq's Llama model.",
     categoryKey: "ai-writing",
@@ -125,7 +128,7 @@ const STATIC_PAGES = [
   {
     path: "/developer-tools",
     label: "Developer Tools",
-    title: "Free Developer Tools - JSON, Base64, JWT, Regex & More | X Toolkit",
+    title: "Free Developer Tools — JSON, Base64, JWT, Regex & More | X Toolkit",
     description:
       "Free developer tools: JSON formatter, Base64 encoder, JWT decoder, regex tester, SQL formatter, UUID generator, YAML converter & more.",
     categoryKey: "developer",
@@ -133,7 +136,7 @@ const STATIC_PAGES = [
   {
     path: "/seo-tools",
     label: "SEO Tools",
-    title: "Free SEO Tools - Meta Tags, Slug Generator & Keyword Checker | X Toolkit",
+    title: "Free SEO Tools — Meta Tags, Slug Generator & Keyword Checker | X Toolkit",
     description:
       "Free SEO tools: meta tag generator, URL slug generator, keyword density checker, robots.txt generator, OG image preview & more.",
     categoryKey: "seo",
@@ -141,7 +144,7 @@ const STATIC_PAGES = [
   {
     path: "/email-tools",
     label: "Email Tools",
-    title: "Free Email Tools - Temp Mail, Validator, Signature & More | X Toolkit",
+    title: "Free Email Tools — Temp Mail, Validator, Signature & More | X Toolkit",
     description:
       "Free email tools: temp mail, email validator, signature generator, subject line generator, spam checker, privacy checker & more.",
     categoryKey: "email",
@@ -202,6 +205,7 @@ const STATIC_PAGES = [
     title: "X Toolkit Chrome Extension — Free Temp Email & OTP Detector",
     description:
       "The free X Toolkit Chrome Extension gives you instant disposable email inboxes, automatic OTP code detection, temp Gmail address generation, and Gmail dot & plus-tag tricks — all from your browser toolbar.",
+    seoKeywords: "chrome extension temp mail, disposable email extension, temp email chrome, otp detector extension, guerrillamail chrome, free chrome extension, otp auto detection chrome",
   },
   {
     path: "/contact",
@@ -209,6 +213,7 @@ const STATIC_PAGES = [
     title: "Contact Us | X Toolkit",
     description:
       "Get in touch with the X Toolkit team. Report a bug, suggest a feature, or ask a question. We read every message.",
+    seoKeywords: "contact x toolkit, support, feedback, bug report, tool suggestion, contact form",
   },
 ];
 
@@ -865,7 +870,7 @@ function buildRootContent(pageData, tool) {
     `</div>`;
 }
 
-function generatePageHtml(template, { path, title, description, ogTitle, ogDescription, isHomepage, category, categoryKey, label }, tool) {
+function generatePageHtml(template, { path, title, description, ogTitle, ogDescription, isHomepage, category, categoryKey, label, seoKeywords: pageStaticKeywords }, tool) {
   const canonicalUrl = `${SITE_URL}${path}`;
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(description);
@@ -887,7 +892,7 @@ function generatePageHtml(template, { path, title, description, ogTitle, ogDescr
 
   // Per-page keywords: inject from tool manifest's seoKeywords field so every
   // page gets unique keywords instead of the generic site-wide fallback.
-  const pageKeywords = tool?.seoKeywords;
+  const pageKeywords = tool?.seoKeywords ?? pageStaticKeywords;
   if (pageKeywords) {
     html = html.replace(/(<meta\s+name="keywords"\s+content=")[^"]*(")/,  `$1${escapeHtml(pageKeywords)}$2`);
   }

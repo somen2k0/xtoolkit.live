@@ -84,7 +84,7 @@ export default function TempGmailExplained() {
         <li><strong>Dot trick:</strong> When you need a second registration on a site you already use with your real Gmail, and the site doesn't accept completely different domains.</li>
         <li><strong>Plus trick:</strong> When you want to track which services share your address and apply inbox filters — but you're comfortable with your real address being technically visible.</li>
         <li><strong>Real temp Gmail:</strong> When a service specifically requires a <code>@gmail.com</code> domain and you don't want to use your actual Gmail address.</li>
-        <li><strong>Standard temp mail:</strong> When any domain is accepted and you want maximum privacy. 16 domains available through our Temp Mail tool.</li>
+        <li><strong>Standard temp mail:</strong> When any domain is accepted and you want maximum privacy. 9 domains available through our Temp Mail tool.</li>
         <li><strong>Permanent alias:</strong> When you need ongoing access to the account without privacy compromises.</li>
       </ul>
 

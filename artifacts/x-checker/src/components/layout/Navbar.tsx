@@ -224,9 +224,9 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
 }
 
 const TEMP_MAIL_ITEMS = [
-  { icon: Inbox,  label: "Temp Email",   href: "/tools/temp-mail/tempemail",  desc: "Anonymous throwaway inbox" },
-  { icon: Mail,   label: "Temp Gmail",   href: "/tools/temp-mail/tempgmail",  desc: "Real temporary Gmail address" },
-  { icon: Hash,   label: "Gmail Tricks", href: "/tools/temp-mail/gmail-tricks", desc: "Dot & plus-tag variants" },
+  { icon: Inbox,  label: "Temp Email",   href: "/tools/temp-mail/tempemail",  desc: "Instant disposable inbox — 9 domains, no signup, auto-refreshes every 15s" },
+  { icon: Mail,   label: "Temp Gmail",   href: "/tools/temp-mail/tempgmail",  desc: "Real @gmail.com address — works where disposable emails are blocked" },
+  { icon: Hash,   label: "Gmail Tricks", href: "/tools/temp-mail/gmail-tricks", desc: "Generate unlimited aliases from your own Gmail using dot & plus tricks" },
 ];
 
 const PRIVACY_ITEMS = [

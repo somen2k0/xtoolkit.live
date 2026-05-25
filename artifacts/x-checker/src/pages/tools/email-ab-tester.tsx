@@ -15,7 +15,7 @@ const faqs = [
 
 const relatedTools = [
   { title: "Subject Line Generator", href: "/tools/subject-line-generator", description: "Generate high-converting email subject lines." },
-  { title: "Email Character Counter", href: "/tools/email-character-counter", description: "Count characters for subject lines and preview text." },
+  { title: "Email Validator", href: "/tools/email-validator", description: "Validate email address syntax instantly." },
   { title: "Spam Score Checker", href: "/tools/spam-score-checker", description: "Check your subject line for spam trigger words." },
 ];
 

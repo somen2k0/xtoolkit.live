@@ -59,7 +59,7 @@ const relatedTools = [
   { title: "Subject Line Generator", href: "/tools/subject-line-generator", description: "Generate high-converting email subject lines." },
   { title: "Email Signature Generator", href: "/tools/email-signature-generator", description: "Build a professional email signature." },
   { title: "Character Counter", href: "/tools/character-counter", description: "Count characters for tweets, bios, and any text." },
-  { title: "Plain Text Formatter", href: "/tools/plain-text-formatter", description: "Convert HTML emails to clean plain text." },
+  { title: "Spam Score Checker", href: "/tools/spam-score-checker", description: "Check your email for spam trigger words before sending." },
 ];
 
 export default function EmailCharacterCounter() {

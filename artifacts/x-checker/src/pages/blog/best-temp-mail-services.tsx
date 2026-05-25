@@ -30,10 +30,10 @@ export default function BestTempMailServices() {
 
       <h2>1. X Toolkit Temp Mail — Best Overall Free Option</h2>
       <p><strong>Best for:</strong> General use, developer testing, everyday throwaway signups.</p>
-      <p>Our built-in <strong>Temp Mail</strong> tool gives you access to <strong>16 domains</strong> from a single interface — one of the widest domain selections available. This matters because many services blocklist specific disposable domains, so having more options means you'll almost always find one that works.</p>
+      <p>Our built-in <strong>Temp Mail</strong> tool gives you access to <strong>9 domains</strong> from a single interface — one of the widest domain selections available. This matters because many services blocklist specific disposable domains, so having more options means you'll almost always find one that works.</p>
       <p><strong>Key features:</strong></p>
       <ul>
-        <li>16 domains — rotate automatically if one is blocked</li>
+        <li>9 domains — rotate automatically if one is blocked</li>
         <li>Custom username — choose your own local part</li>
         <li>Session persists across page refreshes</li>
         <li>Auto-refresh every 15 seconds</li>
@@ -66,7 +66,7 @@ export default function BestTempMailServices() {
 
       <h2>Summary: Which Service to Use</h2>
       <ul>
-        <li><strong>General use / widest domain selection:</strong> X Toolkit Temp Mail (16 domains, persistent session)</li>
+        <li><strong>General use / widest domain selection:</strong> X Toolkit Temp Mail (9 domains, persistent session)</li>
         <li><strong>Public shared team testing:</strong> Mailinator</li>
         <li><strong>Maximum simplicity:</strong> 10MinuteMail</li>
         <li><strong>Mobile:</strong> Temp-Mail.org</li>

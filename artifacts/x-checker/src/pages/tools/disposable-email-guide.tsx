@@ -35,7 +35,7 @@ const WHEN_TO_USE = [
 ];
 
 const PROVIDERS_TABLE = [
-  { name: "X Toolkit Temp Mail", desc: "16 domains, browser-persistent session, custom usernames, no signup required", bestFor: "All general use", internal: true, href: "/tools/temp-mail/tempemail" },
+  { name: "X Toolkit Temp Mail", desc: "9 domains, browser-persistent session, custom usernames, no signup required", bestFor: "All general use", internal: true, href: "/tools/temp-mail/tempemail" },
   { name: "10MinuteMail", desc: "Self-destructing inbox, simple UI, 10-minute default lifetime", bestFor: "Ultra-quick one-time use", href: "https://10minutemail.com" },
   { name: "Mailinator", desc: "Unlimited public inboxes, no creation needed, powerful API for devs", bestFor: "Developers & QA teams", href: "https://mailinator.com" },
 ];
@@ -49,7 +49,7 @@ const faqs = [
 ];
 
 const relatedTools = [
-  { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a disposable inbox instantly — no signup, 16 domains." },
+  { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a disposable inbox instantly — no signup, 9 domains." },
   { title: "Alias Email Explainer", href: "/tools/alias-email-explainer", description: "When to use permanent aliases instead of disposable email." },
   { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous email aliases." },
   { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your real email's privacy characteristics." },
@@ -75,7 +75,7 @@ export default function DisposableEmailGuide() {
         <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/5 p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <h2 className="font-semibold text-cyan-400 mb-1">Need a temp email right now?</h2>
-            <p className="text-sm text-muted-foreground">Open a throwaway inbox in one click — no account, no signup, 16 domains.</p>
+            <p className="text-sm text-muted-foreground">Open a throwaway inbox in one click — no account, no signup, 9 domains.</p>
           </div>
           <Link href="/tools/temp-mail/tempemail">
             <button className="inline-flex items-center gap-2 bg-cyan-500 text-black text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-cyan-400 transition-colors shrink-0 whitespace-nowrap">

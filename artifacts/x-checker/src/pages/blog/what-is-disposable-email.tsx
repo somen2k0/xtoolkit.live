@@ -92,7 +92,7 @@ export default function WhatIsDisposableEmail() {
         <li><strong>Custom usernames</strong> — so you can choose a memorable address</li>
         <li><strong>Fast delivery</strong> — emails arrive within seconds</li>
       </ul>
-      <p>Our <strong>Temp Mail</strong> tool supports 16 domains, lets you customize your username and switch domains, and preserves your session across refreshes — all for free, with no signup.</p>
+      <p>Our <strong>Temp Mail</strong> tool supports 9 domains, lets you customize your username and switch domains, and preserves your session across refreshes — all for free, with no signup.</p>
 
       <h2>When Should You Use Your Real Email?</h2>
       <p>Disposable email isn't right for everything. Use your real email for:</p>

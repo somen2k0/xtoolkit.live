@@ -125,8 +125,8 @@ const faqs = [
 
 const relatedTools = [
   { title: "Subject Line Generator", href: "/tools/subject-line-generator", description: "Generate high-converting email subject lines." },
-  { title: "Email Username Generator", href: "/tools/email-username-generator", description: "Generate professional email address formats." },
-  { title: "Email Character Counter", href: "/tools/email-character-counter", description: "Count characters for subject and preview text." },
+  { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate anonymous email aliases to protect your real inbox." },
+  { title: "Spam Score Checker", href: "/tools/spam-score-checker", description: "Check your email for spam trigger words and signals." },
 ];
 
 export default function EmailSignatureGenerator() {
