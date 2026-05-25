@@ -127,6 +127,187 @@ function dotVariants(name: string): string[] {
 
 const PLUS_TAGS = ["newsletters","shopping","social","spam","work","promo","subscriptions","alerts","updates","receipts","travel","finance","health","gaming","news","jobs","events","school","personal","test","noreply","signup","deals","banking","govt","apps","temp","dev","backup","bulk"];
 
+// ── Email display utilities ────────────────────────────────────────
+
+function htmlToPlainText(html: string): string {
+  return html
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<\/div>/gi, "\n")
+    .replace(/<\/tr>/gi, "\n")
+    .replace(/<\/td>/gi, " ")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/g, "'")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+const OTP_LABELED_RE = /(?:code|otp|pin|password|verification|token)[:\s]+(\d{4,8})/gi;
+
+function detectOTP(text: string): string | null {
+  OTP_LABELED_RE.lastIndex = 0;
+  const labeled = OTP_LABELED_RE.exec(text);
+  if (labeled) return labeled[1]!;
+
+  const lower = text.toLowerCase();
+  const sixDigit = /\b(\d{6})\b/g;
+  let m: RegExpExecArray | null;
+  while ((m = sixDigit.exec(text)) !== null) {
+    const ctx = lower.substring(Math.max(0, m.index - 80), Math.min(lower.length, m.index + 80));
+    if (/code|otp|verify|verification|confirm|pin|password|token|authenticate|enter/.test(ctx)) return m[1]!;
+  }
+  sixDigit.lastIndex = 0;
+  const anyFix = sixDigit.exec(text);
+  if (anyFix) return anyFix[1]!;
+
+  for (const len of [4, 5, 7, 8]) {
+    const re = new RegExp(`\\b(\\d{${len}})\\b`, "g");
+    while ((m = re.exec(text)) !== null) {
+      const ctx = lower.substring(Math.max(0, m.index - 80), Math.min(lower.length, m.index + 80));
+      if (/code|otp|verify|verification|confirm|pin|password|token|authenticate|enter/.test(ctx)) return m[1]!;
+    }
+  }
+  return null;
+}
+
+function sanitizeEmailHtml(html: string, otpCode: string | null): string {
+  let out = html
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/\sstyle=["'][^"']*["']/gi, "")
+    .replace(/\scolor=["'][^"']*["']/gi, "")
+    .replace(/\sbgcolor=["'][^"']*["']/gi, "")
+    .replace(/\son\w+=["'][^"']*["']/gi, "")
+    .replace(/href=["']javascript:[^"']*["']/gi, 'href="#"')
+    .replace(/<a(\s[^>]*)>/gi, (_match, attrs) => {
+      const clean = attrs
+        .replace(/\starget=["'][^"']*["']/gi, "")
+        .replace(/\srel=["'][^"']*["']/gi, "");
+      return `<a${clean} target="_blank" rel="noopener noreferrer">`;
+    })
+    .replace(/<table(\s[^>]*)?>/gi, '<table$1 style="width:100%!important;border-collapse:collapse">');
+
+  if (otpCode) {
+    out = out.replace(
+      new RegExp(`\\b(${otpCode})\\b`, "g"),
+      `<span style="background:rgba(16,185,129,0.2);color:#4ade80;padding:2px 6px;border-radius:4px;font-weight:700;font-family:monospace">$1</span>`,
+    );
+  }
+  return out;
+}
+
+function EmailMessageBody({ body, isHtml }: { body: string; isHtml: boolean }) {
+  const [otpCopied, setOtpCopied] = useState(false);
+  const [bodyCopied, setBodyCopied] = useState(false);
+  const plainText = isHtml ? htmlToPlainText(body) : body;
+  const otp = detectOTP(plainText);
+  const sanitizedHtml = isHtml ? sanitizeEmailHtml(body, otp) : null;
+
+  const copyOtp = () => {
+    if (!otp) return;
+    navigator.clipboard.writeText(otp);
+    setOtpCopied(true);
+    setTimeout(() => setOtpCopied(false), 2000);
+  };
+
+  const copyBody = () => {
+    navigator.clipboard.writeText(plainText);
+    setBodyCopied(true);
+    setTimeout(() => setBodyCopied(false), 2000);
+  };
+
+  const bodyStyle: React.CSSProperties = {
+    background: "#0f0f1a",
+    color: "#e2e8f0",
+    fontFamily: "inherit",
+    fontSize: "14px",
+    lineHeight: "1.6",
+    padding: "16px",
+    borderRadius: "8px",
+    border: "1px solid rgba(99,102,241,0.15)",
+    maxWidth: "100%",
+    wordBreak: "break-word",
+    overflowX: "hidden",
+    WebkitUserSelect: "text",
+    userSelect: "text",
+  };
+
+  return (
+    <div className="space-y-3">
+      {otp && (
+        <div style={{
+          background: "rgba(16,185,129,0.1)",
+          border: "1px solid rgba(16,185,129,0.3)",
+          borderRadius: "8px",
+          padding: "12px 16px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "12px",
+        }}>
+          <div>
+            <div style={{ fontSize: "10px", color: "#10b981", fontWeight: 600, letterSpacing: "1px", marginBottom: "4px" }}>
+              VERIFICATION CODE
+            </div>
+            <div style={{ fontSize: "28px", color: "#4ade80", fontWeight: 700, fontFamily: "monospace", letterSpacing: "4px" }}>
+              {otp}
+            </div>
+          </div>
+          <button
+            onClick={copyOtp}
+            style={{
+              background: otpCopied ? "#059669" : "#10b981",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              padding: "8px 16px",
+              fontWeight: 600,
+              fontSize: "14px",
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+              flexShrink: 0,
+              transition: "background 0.2s",
+            }}
+          >
+            {otpCopied ? "Copied!" : "Copy"}
+          </button>
+        </div>
+      )}
+
+      {sanitizedHtml !== null ? (
+        <div style={bodyStyle} dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
+      ) : (
+        <pre style={{ ...bodyStyle, whiteSpace: "pre-wrap" }}>{body}</pre>
+      )}
+
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <button
+          onClick={copyBody}
+          style={{
+            fontSize: "12px",
+            color: bodyCopied ? "#10b981" : "rgba(148,163,184,0.7)",
+            background: "transparent",
+            border: "1px solid rgba(148,163,184,0.2)",
+            borderRadius: "6px",
+            padding: "5px 12px",
+            cursor: "pointer",
+            transition: "all 0.2s",
+          }}
+        >
+          {bodyCopied ? "Copied!" : "Copy email text"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ── FAQ / related ──────────────────────────────────────────────────
 
 const faqs = [
@@ -557,11 +738,9 @@ function UnifiedInboxSection() {
                 </div>
               </div>
               <div className="flex-1 overflow-auto p-4" style={{ maxHeight: "360px" }}>
-                {selectedMsg.body ? (
-                  selectedMsg.isHtml
-                    ? <div className="prose prose-invert prose-sm max-w-none text-sm" dangerouslySetInnerHTML={{ __html: selectedMsg.body }} />
-                    : <pre className="text-sm text-foreground/80 whitespace-pre-wrap font-sans leading-relaxed">{selectedMsg.body}</pre>
-                ) : <p className="text-sm text-muted-foreground">(Empty message)</p>}
+                {selectedMsg.body
+                  ? <EmailMessageBody body={selectedMsg.body} isHtml={selectedMsg.isHtml} />
+                  : <p className="text-sm text-muted-foreground">(Empty message)</p>}
               </div>
             </>
           ) : loadingMsg ? (
@@ -886,15 +1065,9 @@ function TempGmailTab() {
                   </div>
                 </div>
                 <div className="flex-1 overflow-auto p-4" style={{ maxHeight: "340px" }}>
-                  {selected.body ? (
-                    selected.bodyContentType === "html" ? (
-                      <div className="prose prose-invert prose-sm max-w-none text-sm" dangerouslySetInnerHTML={{ __html: selected.body }} />
-                    ) : (
-                      <pre className="text-sm text-foreground/80 whitespace-pre-wrap font-sans leading-relaxed">{selected.body}</pre>
-                    )
-                  ) : (
-                    <p className="text-sm text-muted-foreground/60">(Empty message)</p>
-                  )}
+                  {selected.body
+                    ? <EmailMessageBody body={selected.body} isHtml={selected.bodyContentType === "html"} />
+                    : <p className="text-sm text-muted-foreground/60">(Empty message)</p>}
                 </div>
               </>
             ) : (

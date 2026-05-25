@@ -1,0 +1,167 @@
+Improve the email message body display and OTP
+detection in both Temp Email and Temp Gmail tools.
+Only fix these 2 specific things. Do not change
+any other functionality.
+
+===================================================
+FIX 1 — MESSAGE BODY DISPLAY
+===================================================
+
+When an email message is opened and displayed,
+the message body currently shows raw HTML with
+mixed colors and styling from the sender that
+looks broken on our dark theme.
+
+Fix the message display:
+
+1. Strip all inline styles and colors from the
+   email HTML before rendering:
+   
+   Create a function sanitizeEmailHtml(html: string):
+   - Remove all style="" attributes
+   - Remove all color="" attributes  
+   - Remove all bgcolor="" attributes
+   - Remove all font color attributes
+   - Keep structure (p, br, div, table, td, th)
+   - Keep links (a href) but make them open in
+     new tab with target="_blank"
+   - Remove script tags completely
+   - Remove any inline JavaScript
+
+2. Apply consistent styling to the message body:
+   - Background: #0f0f1a (site dark background)
+   - Text color: #e2e8f0 (bright readable white)
+   - Font: same as site font family
+   - Font size: 14px
+   - Line height: 1.6
+   - Padding: 16px
+   - Border radius: 8px
+   - Border: 1px solid rgba(99, 102, 241, 0.15)
+   - Max width: 100%
+   - Word wrap: break-word
+   - Overflow-x: hidden (prevent horizontal scroll)
+
+3. For plain text emails (no HTML):
+   - Wrap in <pre> style with white-space: pre-wrap
+   - Same styling as above
+
+4. On mobile specifically:
+   - Font size: 13px
+   - Padding: 12px
+   - Make sure tables are responsive:
+     table { width: 100% !important; }
+     td { display: block !important; width: 100% !important; }
+
+===================================================
+FIX 2 — OTP AUTO-DETECTION AND COPY
+===================================================
+
+Add automatic OTP detection and a prominent copy
+button when a message is opened.
+
+Create a function detectOTP(text: string): string | null
+that finds OTP codes in email content:
+
+const OTP_PATTERNS = [
+  /\b(\d{4})\b/g,           // 4-digit OTP
+  /\b(\d{5})\b/g,           // 5-digit OTP  
+  /\b(\d{6})\b/g,           // 6-digit OTP (most common)
+  /\b(\d{7})\b/g,           // 7-digit OTP
+  /\b(\d{8})\b/g,           // 8-digit OTP
+  /code[:\s]+(\d{4,8})/gi,  // "code: 123456"
+  /otp[:\s]+(\d{4,8})/gi,   // "OTP: 123456"
+  /pin[:\s]+(\d{4,8})/gi,   // "PIN: 123456"
+  /password[:\s]+(\d{4,8})/gi, // "password: 123456"
+  /verification[:\s]+(\d{4,8})/gi, // "verification: 123456"
+  /token[:\s]+(\d{4,8})/gi, // "token: 123456"
+];
+
+Priority: prefer 6-digit codes near words like
+"code", "otp", "verify", "verification", "pin"
+
+When an email is opened:
+1. Run detectOTP on the plain text version of body
+2. If OTP found — show a prominent banner ABOVE
+   the message body:
+
+OTP Banner design:
+- Background: rgba(16, 185, 129, 0.1) (green tint)
+- Border: 1px solid rgba(16, 185, 129, 0.3)
+- Border radius: 8px
+- Padding: 12px 16px
+- Display: flex, align-items: center, justify-content: space-between
+
+Left side:
+- Small label: "VERIFICATION CODE" 
+  (10px, #10b981, font-weight: 600, letter-spacing: 1px)
+- Large OTP number: 
+  (28px, #4ade80, font-weight: 700, font-family: monospace,
+   letter-spacing: 4px)
+
+Right side:
+- "Copy" button:
+  background: #10b981
+  color: white
+  border: none
+  border-radius: 6px
+  padding: 8px 16px
+  font-weight: 600
+  font-size: 14px
+  cursor: pointer
+
+On copy button click:
+- navigator.clipboard.writeText(otpCode)
+- Button text changes to "Copied!" for 2 seconds
+- Button background changes to #059669
+- Then reverts back to "Copy"
+
+3. Also highlight the OTP number inside the
+   message body itself:
+   - Wrap detected OTP in a span with:
+     background: rgba(16, 185, 129, 0.2)
+     color: #4ade80
+     padding: 2px 6px
+     border-radius: 4px
+     font-weight: 700
+     font-family: monospace
+
+===================================================
+FIX 3 — MOBILE TEXT SELECTION
+===================================================
+
+On mobile, text in the message body is not
+selectable. Fix this:
+
+Add these CSS properties to the message body:
+-webkit-user-select: text !important;
+-moz-user-select: text !important;
+-ms-user-select: text !important;
+user-select: text !important;
+-webkit-touch-callout: default !important;
+
+This enables text selection on iOS and Android.
+
+===================================================
+FIX 4 — COPY ENTIRE EMAIL BUTTON
+===================================================
+
+Add a "Copy email text" button at the bottom of
+every opened message:
+
+- Small button, secondary style
+- Text: "Copy email text"
+- On click: copies the plain text version of the
+  email body to clipboard
+- Confirmation: "Copied!" for 2 seconds
+
+This helps mobile users who can't easily select text.
+
+===================================================
+Apply these fixes to BOTH:
+- Temp Email component (disposable inbox)
+- Temp Gmail component (gmail dot trick inbox)
+
+Do NOT change any other functionality.
+Build, commit, push.
+Show all files changed.
+===================================================
