@@ -66,6 +66,20 @@ async function temptfPost(
   }
 }
 
+// GET /api/temptf/health
+// Quick reachability check — returns { available: boolean } with a 4s timeout.
+router.get("/temptf/health", async (_req, res) => {
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4000);
+    const r = await fetch(TEMPTF, { method: "HEAD", signal: ctrl.signal });
+    clearTimeout(timer);
+    res.json({ available: r.ok || r.status < 500 });
+  } catch {
+    res.json({ available: false });
+  }
+});
+
 // POST /api/temptf/generate
 // Body: { type: "dot" | "plus" }
 router.post("/temptf/generate", async (req, res) => {

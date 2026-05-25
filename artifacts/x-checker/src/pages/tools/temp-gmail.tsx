@@ -787,6 +787,22 @@ function UnifiedInboxSection() {
 // ── Tab 2: Temp Gmail (temp.tf via backend) ─────────────────────────
 
 const GMAIL_REFRESH_MS = 15000;
+const GMAIL_CACHE_KEY = "xt_tempgmail_session";
+const GMAIL_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+function saveCachedGmail(email: string): void {
+  try { localStorage.setItem(GMAIL_CACHE_KEY, JSON.stringify({ email, savedAt: Date.now() })); } catch {}
+}
+
+function loadCachedGmail(): string | null {
+  try {
+    const raw = localStorage.getItem(GMAIL_CACHE_KEY);
+    if (!raw) return null;
+    const d = JSON.parse(raw) as { email: string; savedAt: number };
+    if (Date.now() - d.savedAt > GMAIL_CACHE_TTL) { localStorage.removeItem(GMAIL_CACHE_KEY); return null; }
+    return d.email;
+  } catch { return null; }
+}
 
 interface TempTfMessage {
   id: string;
@@ -802,12 +818,15 @@ function TempGmailTab() {
   const [email, setEmail] = useState<string | null>(null);
   const [messages, setMessages] = useState<TempTfMessage[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [generating, setGenerating] = useState(false);
+  const [generating, setGenerating] = useState(true);
   const [loadingMsgs, setLoadingMsgs] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [countdown, setCountdown] = useState(GMAIL_REFRESH_MS / 1000);
   const [gmailType, setGmailType] = useState<"dot" | "plus">("dot");
+  const [retryAttempt, setRetryAttempt] = useState(0);
+  const [serviceDown, setServiceDown] = useState(false);
+  const [usingCache, setUsingCache] = useState(false);
   const { toast } = useToast();
   const initialized = useRef(false);
   const refreshTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -876,12 +895,16 @@ function TempGmailTab() {
     stopPolling();
     setGenerating(true);
     setError(null);
+    setServiceDown(false);
+    setUsingCache(false);
     setEmail(null);
     setMessages([]);
     setSelectedId(null);
+    setRetryAttempt(0);
     emailRef.current = null;
     for (let attempt = 0; attempt < 3; attempt++) {
-      if (attempt > 0) await sleep(1800);
+      setRetryAttempt(attempt);
+      if (attempt > 0) await sleep(2000);
       try {
         const r = await fetch("/api/temptf/generate", {
           method: "POST",
@@ -891,14 +914,10 @@ function TempGmailTab() {
         });
         const d = await r.json() as { email?: string; error?: string };
         if (!r.ok || !d.email) {
-          if (attempt === 2) {
-            const addr = generateLocalGmailAddress(gmailType);
-            emailRef.current = addr; setEmail(addr);
-            setError("Inbox checking is temporarily unavailable. You can still use the address for sign-ups.");
-            setGenerating(false); return;
-          }
-          continue;
+          if (attempt < 2) continue;
+          break;
         }
+        saveCachedGmail(d.email);
         emailRef.current = d.email;
         setEmail(d.email);
         await fetchMessages(d.email);
@@ -906,14 +925,20 @@ function TempGmailTab() {
         setGenerating(false);
         return;
       } catch {
-        if (attempt === 2) {
-          const addr = generateLocalGmailAddress(gmailType);
-          emailRef.current = addr; setEmail(addr);
-          setError("Inbox checking is temporarily unavailable. You can still use the address for sign-ups.");
-          setGenerating(false); return;
-        }
+        if (attempt < 2) continue;
       }
     }
+    // All retries failed — try cached session first
+    const cached = loadCachedGmail();
+    if (cached) {
+      emailRef.current = cached;
+      setEmail(cached);
+      setUsingCache(true);
+      setGenerating(false);
+      return;
+    }
+    // No cached session — full service-down state
+    setServiceDown(true);
     setGenerating(false);
   }, [fetchMessages, startPolling, stopPolling, gmailType]);
 
@@ -927,7 +952,26 @@ function TempGmailTab() {
   useEffect(() => {
     if (initialized.current) return;
     initialized.current = true;
-    generate();
+    // Solution 4: health check first — skip the 3×retry wait when service is clearly down
+    fetch("/api/temptf/health", { signal: AbortSignal.timeout(5000) })
+      .then(r => r.json())
+      .then((d: { available?: boolean }) => {
+        if (d.available === false) {
+          const cached = loadCachedGmail();
+          if (cached) {
+            emailRef.current = cached;
+            setEmail(cached);
+            setUsingCache(true);
+            setGenerating(false);
+          } else {
+            setServiceDown(true);
+            setGenerating(false);
+          }
+        } else {
+          generate();
+        }
+      })
+      .catch(() => generate());
   }, [generate]);
 
   useEffect(() => () => stopPolling(), [stopPolling]);
@@ -944,7 +988,10 @@ function TempGmailTab() {
             <p className="text-[10px] text-muted-foreground uppercase tracking-wide font-semibold">Your temporary @gmail.com address</p>
             {generating ? (
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Loader2 className="h-4 w-4 animate-spin" /> Generating address…
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {retryAttempt > 0
+                  ? `Connecting to Gmail service… (attempt ${retryAttempt + 1}/3)`
+                  : "Connecting to Gmail service…"}
               </div>
             ) : email ? (
               <p className="font-mono text-base font-semibold text-foreground break-all">{email}</p>
@@ -991,8 +1038,49 @@ function TempGmailTab() {
         </div>
       </div>
 
+      {/* Service-down UI (Solution 1 + 2) */}
+      {serviceDown && !generating && (
+        <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-5 space-y-3">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="h-5 w-5 text-red-400 shrink-0 mt-0.5" />
+            <div className="flex-1 space-y-1">
+              <p className="text-sm font-semibold text-red-300">Gmail service is temporarily unavailable</p>
+              <p className="text-xs text-red-300/70">The inbox provider could not be reached after 3 attempts. Try again in a few minutes, or use Temp Email instead.</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button size="sm" onClick={() => generate()} disabled={generating}
+              className="text-xs gap-1.5 bg-red-500 hover:bg-red-400 text-white font-semibold">
+              <RefreshCw className="h-3.5 w-3.5" />Try Again
+            </Button>
+            <Button size="sm" variant="outline" asChild
+              className="text-xs gap-1.5 border-red-500/40 text-red-300 hover:bg-red-500/10">
+              <a href="/tools/temp-mail">Use Temp Email Instead →</a>
+            </Button>
+          </div>
+          <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 flex items-center gap-2">
+            <Zap className="h-4 w-4 text-amber-400 shrink-0" />
+            <p className="text-xs text-amber-300">
+              <span className="font-semibold">Inbox temporarily unavailable</span> — use the <span className="font-semibold">Gmail Tricks</span> tab to generate a dot-trick address for your own Gmail, with no API needed.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Cache session notice (Solution 3) */}
+      {usingCache && !serviceDown && (
+        <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 flex items-center gap-3">
+          <AlertCircle className="h-5 w-5 text-amber-400 shrink-0" />
+          <p className="text-sm text-amber-300 flex-1">Showing your last session — inbox may not refresh. <span className="opacity-70">(Cached for 1 hour)</span></p>
+          <Button size="sm" variant="outline" onClick={() => generate()} disabled={generating}
+            className="text-xs gap-1.5 border-amber-500/40 text-amber-300 hover:bg-amber-500/10 shrink-0">
+            <RefreshCw className={`h-3.5 w-3.5 ${generating ? "animate-spin" : ""}`} />Retry
+          </Button>
+        </div>
+      )}
+
       {/* Error banner */}
-      {error && (
+      {error && !serviceDown && (
         <div className="rounded-xl border border-orange-500/30 bg-orange-500/10 p-4 flex items-center gap-3">
           <AlertCircle className="h-5 w-5 text-orange-400 shrink-0" />
           <p className="text-sm text-orange-300 flex-1">{error}</p>

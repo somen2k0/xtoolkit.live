@@ -1,0 +1,76 @@
+The Temp Gmail tool sometimes fails to load because
+temp.tf API is unavailable. Fix with these improvements:
+
+SOLUTION 1 — Better error handling and retry logic
+
+In the Temp Gmail frontend component, when
+temp.tf fails to generate a new address:
+
+1. Retry automatically up to 3 times with 2 second
+   delay between retries:
+
+async function createWithRetry(maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const result = await createTempGmail();
+      if (result) return result;
+    } catch (e) {
+      if (i < maxRetries - 1) {
+        await new Promise(r => setTimeout(r, 2000));
+        continue;
+      }
+    }
+  }
+  throw new Error('Service temporarily unavailable');
+}
+
+2. Show a loading state during retries:
+   "Connecting to Gmail service... (attempt 2/3)"
+
+3. If all retries fail, show a friendly message:
+   "Gmail service is temporarily unavailable.
+    Try again in a few minutes or use
+    Temp Email instead."
+   
+   With a button: "Use Temp Email Instead →"
+   linking to /tools/temp-mail
+
+SOLUTION 2 — Add Gmail Tricks as fallback
+
+When temp.tf is down, automatically switch to
+showing the Gmail Tricks tab which works 100%
+offline (pure frontend, no API needed).
+
+Show a banner:
+"Inbox temporarily unavailable — use Gmail Tricks
+to generate a dot-trick address for your own Gmail"
+
+SOLUTION 3 — Cache last working session
+
+Store the last successfully generated Gmail address
+in localStorage with a 1-hour TTL.
+
+If temp.tf fails on page load, show the cached
+address with a notice:
+"Showing your last session — inbox may not refresh"
+
+This way users always see something useful even
+when the API is down.
+
+SOLUTION 4 — Backend health check endpoint
+
+Add GET /api/temptf/health that pings temp.tf
+and returns { available: true/false }
+
+Frontend checks health on load:
+- If available → proceed normally
+- If unavailable → immediately show fallback UI
+  without waiting for timeout
+
+This prevents the long loading spinner when
+temp.tf is down.
+
+Apply all 4 solutions to the Temp Gmail component.
+Do not touch Temp Email or any other files.
+Build, commit, push.
+Show all files changed.
