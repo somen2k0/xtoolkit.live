@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 const VERSION = "1.0.0";
-const CWS_URL = "https://chromewebstore.google.com/detail/x-toolkit/TODO_REPLACE_WITH_REAL_ID";
+const CWS_URL = "https://chromewebstore.google.com/detail/x-toolkit-%E2%80%93-free-temp-ema/hljbngagmdgbkobicpoandphffbaafno";
 
 const features = [
   { icon: Zap,       title: "Instant Inbox",          desc: "Disposable email ready the moment you click. No setup, no tab switching." },
