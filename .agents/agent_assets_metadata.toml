@@ -180,3 +180,9 @@ id = "QXV43Lyb6KTiW0T_7C7ZS"
 uri = "file://cws-screenshots/5-message-open.png"
 type = "image"
 title = "5 — Message Open"
+
+[[outputs]]
+id = "Ubb03bhHaF_jRsiCQMkk0"
+uri = "file://artifacts/x-toolkit-extension/x-toolkit-extension-v1.1.0.zip"
+type = "unspecified"
+title = "x-toolkit-extension-v1.1.0.zip"
