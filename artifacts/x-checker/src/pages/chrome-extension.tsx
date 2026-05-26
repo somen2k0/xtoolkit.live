@@ -10,6 +10,7 @@ import {
 
 const VERSION = "1.0.0";
 const CWS_URL = "https://chromewebstore.google.com/detail/x-toolkit-%E2%80%93-free-temp-ema/hljbngagmdgbkobicpoandphffbaafno";
+const CWS_REVIEW_URL = "https://chromewebstore.google.com/detail/x-toolkit-%E2%80%93-free-temp-ema/hljbngagmdgbkobicpoandphffbaafno/reviews";
 
 const features = [
   { icon: Zap,       title: "Instant Inbox",          desc: "Disposable email ready the moment you click. No setup, no tab switching." },
@@ -241,6 +242,39 @@ export default function ChromeExtensionPage() {
             </AccordionItem>
           ))}
         </Accordion>
+      </div>
+
+      {/* ── Review prompt ── */}
+      <div className="max-w-2xl mx-auto px-4 md:px-8 pb-4">
+        <div className="relative rounded-2xl border border-amber-400/20 bg-gradient-to-br from-amber-500/8 via-amber-400/5 to-transparent p-8 text-center overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute inset-0 rounded-2xl bg-white/[0.02]" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-40 w-64 bg-amber-500/10 blur-[60px]" />
+          </div>
+
+          <div className="flex items-center justify-center gap-1 mb-4">
+            {[1,2,3,4,5].map((i) => (
+              <Star key={i} className="h-6 w-6 fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Enjoying X Toolkit?</h3>
+          <p className="text-white/55 text-sm leading-relaxed mb-6 max-w-md mx-auto">
+            A quick review on the Chrome Web Store helps others discover it and takes less than 60 seconds. We read every single one.
+          </p>
+
+          <a
+            href={CWS_REVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-amber-900 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-200 hover:-translate-y-0.5"
+          >
+            <Star className="h-4 w-4 fill-amber-900" />
+            Leave a review
+          </a>
+
+          <p className="text-white/25 text-xs mt-4">Opens the Chrome Web Store · Takes &lt;60 seconds</p>
+        </div>
       </div>
 
       {/* ── Bottom CTA ── */}
