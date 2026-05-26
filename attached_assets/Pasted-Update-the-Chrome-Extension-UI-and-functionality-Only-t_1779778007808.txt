@@ -1,0 +1,171 @@
+Update the Chrome Extension UI and functionality.
+Only touch files in artifacts/x-toolkit-extension.
+Do NOT touch the website code.
+===================================================
+UPDATE 1 — OTP DETECTION UI (like website)
+===================================================
+Currently OTP is detected but the UI is basic.
+Update to match the website's green banner style:
+When an email is opened and OTP is detected,
+show a prominent banner ABOVE the message body:
+OTP Banner:
+- Background: rgba(16, 185, 129, 0.15)
+- Border: 1px solid rgba(16, 185, 129, 0.4)
+- Border radius: 8px
+- Padding: 10px 12px
+- Margin: 8px 12px
+Left side:
+- Label: "VERIFICATION CODE"
+  font-size: 9px, color: #10b981,
+  font-weight: 600, letter-spacing: 1px
+- OTP number: font-size: 24px, color: #4ade80,
+  font-weight: 700, font-family: monospace,
+  letter-spacing: 4px
+Right side:
+- "Copy" button:
+  background: #10b981
+  color: white
+  border: none
+  border-radius: 6px
+  padding: 6px 14px
+  font-weight: 600
+  font-size: 12px
+On copy click:
+- navigator.clipboard.writeText(otpCode)
+- Button shows "Copied!" for 2 seconds
+- Button background: #059669
+Also highlight OTP inside message body:
+Wrap detected OTP in span:
+background: rgba(16, 185, 129, 0.2)
+color: #4ade80
+padding: 2px 4px
+border-radius: 3px
+font-weight: 700
+font-family: monospace
+OTP detection patterns (improve existing):
+const OTP_PATTERNS = [
+  /\b(\d{4})\b/g,
+  /\b(\d{5})\b/g,
+  /\b(\d{6})\b/g,
+  /\b(\d{7})\b/g,
+  /\b(\d{8})\b/g,
+  /(?:code|otp|pin|password|token|verification)[:\s]+(\d{4,8})/gi,
+  /(\d{4,8})(?:\s+is\s+your)/gi,
+  /your\s+(?:code|otp|pin)[:\s]+(\d{4,8})/gi,
+];
+Priority: prefer 6-digit codes near keywords
+like "code", "verify", "otp", "pin"
+===================================================
+UPDATE 2 — MAKE TEMP GMAIL MORE PROMINENT
+===================================================
+Currently Gmail tab is the 2nd tab at bottom.
+Make it more visible:
+1. Rename bottom tabs:
+   - "Temp Mail" → "Disposable"
+   - "Gmail" → "Temp Gmail" (with Gmail G icon)
+   - "History" → "History"
+2. On the Gmail tab, improve the header:
+   Add a subtitle below the email address:
+   "Works where disposable emails are blocked"
+   Color: #6b7280, font-size: 11px
+3. Add a prominent badge on Gmail tab:
+   Small green badge: "✓ Gmail accepted"
+   This reminds users why Temp Gmail is special
+4. When Gmail service (temp.tf) is unavailable:
+   Show friendly message:
+   "Gmail service temporarily unavailable.
+    Try Disposable Email instead →"
+   With button linking to Temp Mail tab
+5. Make the Temp Gmail tab icon more distinctive:
+   Use the Gmail M icon or a distinctive color
+   to differentiate from regular Temp Mail tab
+===================================================
+UPDATE 3 — DOMAIN SWITCHER IMPROVEMENTS
+===================================================
+Current domain dropdown works but needs polish:
+1. Group domains with clear labels:
+   
+   ─── Disposable Domains ───
+   • guerrillamail.com  ← default, show "Recommended"
+   • grr.la
+   • sharklasers.com
+   • spam4.me
+   ─── Privacy Domains ───
+   • mail.gw
+   • wshu.net (mail.tm)
+2. Add domain status indicator:
+   - Green dot = working this session
+   - Grey dot = not yet tried
+   - Red dot = failed this session
+   Only mark as failed AFTER actual attempt fails
+   Default all to grey dot on load
+3. Show tooltip on hover for each domain:
+   guerrillamail.com → "Most reliable"
+   grr.la → "Short & memorable"
+   sharklasers.com → "Fun alternative"
+   spam4.me → "Anti-spam focused"
+   mail.gw → "Privacy focused"
+   wshu.net → "Mail.tm network"
+4. After switching domain:
+   - Show loading spinner on email field
+   - Generate new realistic name automatically
+   - Clear old inbox messages
+   - Update displayed email instantly
+===================================================
+UPDATE 4 — GENERAL UI POLISH
+===================================================
+1. Message body improvements:
+   - Strip all inline styles from HTML emails
+   - Apply consistent dark theme styling:
+     background: #0f0f1a
+     color: #e2e8f0
+     font-size: 13px
+     line-height: 1.6
+     padding: 12px
+   - Make text selectable on all platforms:
+     user-select: text !important
+     -webkit-user-select: text !important
+2. Add "Copy email text" button at bottom
+   of every opened message for easy copying
+   on mobile/small screens
+3. Inbox empty state improvement:
+   Instead of just "No messages yet"
+   Show:
+   "No messages yet"
+   "Refreshes every 15s automatically"
+   Small envelope icon
+   + tip: "Pro tip: Use Temp Gmail for sites
+   that block disposable emails →"
+   (clickable, switches to Gmail tab)
+4. Loading states:
+   When creating new inbox show:
+   "Getting your inbox ready..."
+   With a subtle pulse animation on the
+   email address field
+5. Error states:
+   When any API fails show specific message:
+   - GuerrillaMail fail: "Switching to backup
+     provider automatically..."
+   - All providers fail: "Service temporarily
+     unavailable. Please try again in a moment."
+   Never show raw error messages to users
+
+===================================================
+UPDATE 5 — REBUILD AND PACKAGE
+===================================================
+Update These things also focused on Temp Gmail and Temp Email both not only Temp Email
+
+* Title from package
+* Summary from package
+
+===================================================
+UPDATE 6 — REBUILD AND PACKAGE
+===================================================
+After all changes:
+1. Build the extension: pnpm build (extension only)
+2. Create new ZIP file: x-toolkit-extension-v1.1.0.zip
+3. Show all files changed
+4. Confirm ZIP is ready for Chrome Web Store update
+Also update manifest.json version from "1.0.0"
+to "1.1.0" to reflect this update.
+===================================================

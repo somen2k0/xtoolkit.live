@@ -13,21 +13,41 @@ export function stripHtml(html: string): string {
     .trim();
 }
 
-const OTP_PATTERNS: RegExp[] = [
-  /(?:verification|confirm(?:ation)?|one.?time|security|access|login|sign.?in|auth(?:entication)?)\s*(?:code|pin|otp|number|token)[^a-z0-9]*([A-Z0-9]{4,8})/i,
-  /(?:code|otp|pin)[^a-z0-9:\s]*[:\s]+([A-Z0-9]{4,8})\b/i,
-  /\b([0-9]{6})\b/,
-  /\b([0-9]{4})\b/,
-  /\b([0-9]{8})\b/,
-  /\b([A-Z0-9]{6})\b/,
-];
-
 export function extractOTP(text: string): string | null {
-  for (const pattern of OTP_PATTERNS) {
+  if (!text) return null;
+
+  // Priority 1: keyword-adjacent patterns (most reliable signal)
+  const keywordPatterns: RegExp[] = [
+    /(?:code|otp|pin|password|token|verification)[:\s]+(\d{4,8})/i,
+    /(\d{4,8})(?:\s+is\s+your)/i,
+    /your\s+(?:code|otp|pin)[:\s]+(\d{4,8})/i,
+    /(?:verification|confirm(?:ation)?|one.?time|security|access|login|sign.?in|auth(?:entication)?)\s*(?:code|pin|otp|number|token)[^a-z0-9]*(\d{4,8})/i,
+  ];
+  for (const pattern of keywordPatterns) {
     const match = text.match(pattern);
     if (match?.[1]) return match[1];
   }
+
+  // Priority 2: 6-digit number (most common OTP length)
+  const sixDigit = text.match(/\b(\d{6})\b/);
+  if (sixDigit?.[1]) return sixDigit[1];
+
+  // Priority 3: other lengths in order of commonality
+  for (const len of [4, 5, 7, 8]) {
+    const m = text.match(new RegExp(`\\b(\\d{${len}})\\b`));
+    if (m?.[1]) return m[1];
+  }
+
   return null;
+}
+
+export function highlightOTP(html: string, otp: string): string {
+  if (!otp || !html) return html;
+  const escaped = otp.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return html.replace(
+    new RegExp(`\\b${escaped}\\b`, "g"),
+    `<span style="background:rgba(16,185,129,0.2);color:#4ade80;padding:2px 4px;border-radius:3px;font-weight:700;font-family:monospace">${otp}</span>`,
+  );
 }
 
 export function isVerificationEmail(subject: string, from: string): boolean {
@@ -38,12 +58,11 @@ export function isVerificationEmail(subject: string, from: string): boolean {
 export function formatDate(dateStr: string): string {
   try {
     if (!dateStr) return "—";
-    // Guerrilla Mail (and some others) return Unix timestamps as numeric strings.
-    // If the whole string is a number, treat it as seconds-since-epoch.
     const asNumber = Number(dateStr);
-    const d = !isNaN(asNumber) && dateStr.trim() !== ""
-      ? new Date(asNumber * 1000)
-      : new Date(dateStr);
+    const d =
+      !isNaN(asNumber) && dateStr.trim() !== ""
+        ? new Date(asNumber * 1000)
+        : new Date(dateStr);
 
     if (isNaN(d.getTime())) return "—";
 

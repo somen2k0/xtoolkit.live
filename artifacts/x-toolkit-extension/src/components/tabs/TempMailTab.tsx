@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { StoredState, HistoryEntry, GUERRILLA_DOMAINS, ALL_TEMPMAIL_DOMAINS, TempmailDomain } from "../../types";
 import { useTempMailInbox, fetchFullMessage } from "../../hooks/useInbox";
 import { EmailHeader } from "../EmailHeader";
@@ -22,6 +22,7 @@ interface Props {
   setState: (s: Partial<StoredState>) => void;
   patch: <K extends keyof StoredState>(key: K, val: StoredState[K]) => void;
   ready: boolean;
+  onSwitchToGmail?: () => void;
 }
 
 function getActiveEmail(state: StoredState): string {
@@ -43,18 +44,14 @@ async function createInboxForDomain(
     setState({ mailgw: acc, tempMailProvider: "mailgw", guerrillaDomain: domain, history: [entry, ...history.slice(0, 19)] });
     return;
   }
-  // Guerrilla domain
   const session = await guerrillaNew();
   let finalAcc = session;
   try {
     const name = randomName();
     const renamed = await guerrillaSetUser(name, domain, session.sid_token);
-    // GuerrillaMail's API always returns email_addr with its default domain,
-    // ignoring the domain parameter. Build the display email manually instead.
     const username = renamed.user || name;
     finalAcc = { ...renamed, email: `${username}@${domain}`, domain };
   } catch {
-    // set-user failed — fall back to the session username with the selected domain
     const username = session.user || session.email.split("@")[0];
     finalAcc = { ...session, email: `${username}@${domain}`, domain };
   }
@@ -74,7 +71,7 @@ async function createInbox(setState: (s: Partial<StoredState>) => void, history:
     const entry: HistoryEntry = { address: finalAcc.email, provider: "guerrilla", createdAt: Date.now() };
     setState({ guerrilla: finalAcc, tempMailProvider: "guerrilla", guerrillaDomain: "guerrillamail.com", history: [entry, ...history.slice(0, 19)] });
     return;
-  } catch { /* fall through to next provider */ }
+  } catch { /* fall through */ }
 
   try {
     const acc = await mailgwNew();
@@ -88,20 +85,40 @@ async function createInbox(setState: (s: Partial<StoredState>) => void, history:
   setState({ maildrop: acc, tempMailProvider: "maildrop", history: [entry, ...history.slice(0, 19)] });
 }
 
-function GlobeIcon() {
+type DomainStatus = "untried" | "ok" | "fail";
+
+const DOMAIN_GROUPS = [
+  {
+    label: "Disposable Domains",
+    domains: [
+      { value: "guerrillamail.com" as TempmailDomain, badge: "Recommended", tooltip: "Most reliable" },
+      { value: "grr.la" as TempmailDomain, tooltip: "Short & memorable" },
+      { value: "sharklasers.com" as TempmailDomain, tooltip: "Fun alternative" },
+      { value: "spam4.me" as TempmailDomain, tooltip: "Anti-spam focused" },
+    ],
+  },
+  {
+    label: "Privacy Domains",
+    domains: [
+      { value: "mail.gw" as TempmailDomain, tooltip: "Privacy focused" },
+    ],
+  },
+];
+
+function StatusDot({ status }: { status: DomainStatus }) {
+  const color = status === "ok" ? "#10b981" : status === "fail" ? "#ef4444" : "#3d4753";
   return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="2" y1="12" x2="22" y2="12" />
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-    </svg>
+    <span style={{
+      width: 6, height: 6, borderRadius: "50%",
+      background: color, display: "inline-block", flexShrink: 0,
+    }} />
   );
 }
 
 function SpinnerIcon() {
   return (
     <svg
-      width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+      width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
       strokeLinecap="round"
       style={{ animation: "spin 0.8s linear infinite" }}
     >
@@ -111,74 +128,147 @@ function SpinnerIcon() {
   );
 }
 
+function GlobeIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+  );
+}
+
 interface DomainSelectorProps {
   currentDomain: string;
   switching: boolean;
-  hasInbox: boolean;
   onSwitch: (domain: TempmailDomain) => void;
+  domainStatus: Record<string, DomainStatus>;
 }
 
-function DomainSelector({ currentDomain, switching, hasInbox, onSwitch }: DomainSelectorProps) {
-  const isGuerrillaFamily = (GUERRILLA_DOMAINS as readonly string[]).includes(currentDomain);
-  const displayDomain = currentDomain === "mail.gw" ? "mail.gw" : (isGuerrillaFamily ? currentDomain : "guerrillamail.com");
+function DomainSelector({ currentDomain, switching, onSwitch, domainStatus }: DomainSelectorProps) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
 
   return (
     <div
+      ref={ref}
       style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
+        position: "relative",
         padding: "5px 12px 6px",
         background: "#070b12",
-        borderBottom: "1px solid #1e2a3a",
+        borderBottom: open ? "none" : "1px solid #1e2a3a",
+        zIndex: open ? 50 : "auto",
       }}
     >
-      <span style={{ color: "#71767b", display: "flex", alignItems: "center", gap: 4, fontSize: 11, flexShrink: 0 }}>
-        {switching ? <SpinnerIcon /> : <GlobeIcon />}
-        <span>Domain:</span>
-      </span>
-      <select
-        value={displayDomain}
+      {/* Trigger */}
+      <button
+        onClick={() => !switching && setOpen(!open)}
         disabled={switching}
-        onChange={(e) => {
-          if (!hasInbox && e.target.value !== currentDomain) {
-            onSwitch(e.target.value as TempmailDomain);
-            return;
-          }
-          onSwitch(e.target.value as TempmailDomain);
-        }}
         style={{
-          flex: 1,
+          width: "100%",
+          display: "flex", alignItems: "center", gap: 6,
           background: "#0f1623",
-          border: "1px solid " + (switching ? "#6366f144" : "#1e2a3a"),
-          borderRadius: 6,
+          border: `1px solid ${open ? "#1d9bf044" : "#1e2a3a"}`,
+          borderRadius: 6, padding: "4px 8px",
           color: switching ? "#71767b" : "#e7e9ea",
-          fontSize: 11,
-          padding: "3px 6px",
-          cursor: switching ? "not-allowed" : "pointer",
-          outline: "none",
-          appearance: "none",
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2371767b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right 6px center",
-          paddingRight: 22,
+          fontSize: 11, cursor: switching ? "not-allowed" : "pointer",
+          textAlign: "left",
         }}
       >
-        {ALL_TEMPMAIL_DOMAINS.map((d) => (
-          <option key={d} value={d} style={{ background: "#0f1623", color: "#e7e9ea" }}>
-            {d}
-          </option>
-        ))}
-      </select>
+        <span style={{ color: "#71767b", display: "flex", alignItems: "center" }}>
+          {switching ? <SpinnerIcon /> : <GlobeIcon />}
+        </span>
+        <span style={{ color: "#71767b", fontSize: 10, flexShrink: 0 }}>Domain:</span>
+        <StatusDot status={domainStatus[currentDomain] ?? "untried"} />
+        <span style={{ flex: 1, fontFamily: "monospace", fontSize: 11 }}>{currentDomain}</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#71767b" strokeWidth="2.5" strokeLinecap="round">
+          <polyline points={open ? "18 15 12 9 6 15" : "6 9 12 15 18 9"} />
+        </svg>
+      </button>
+
+      {/* Dropdown */}
+      {open && (
+        <div style={{
+          position: "absolute",
+          top: "100%", left: 12, right: 12,
+          background: "#0f1623",
+          border: "1px solid #1e2a3a",
+          borderRadius: "0 0 8px 8px",
+          overflow: "hidden",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+          zIndex: 100,
+        }}>
+          {DOMAIN_GROUPS.map((group) => (
+            <div key={group.label}>
+              <div style={{
+                padding: "5px 10px 3px",
+                fontSize: 9, color: "#3d4753",
+                fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px",
+                borderTop: "1px solid #1e2a3a",
+              }}>
+                {group.label}
+              </div>
+              {group.domains.map(({ value, badge, tooltip }) => (
+                <button
+                  key={value}
+                  title={tooltip}
+                  onClick={() => {
+                    setOpen(false);
+                    if (value !== currentDomain) onSwitch(value);
+                  }}
+                  style={{
+                    width: "100%",
+                    display: "flex", alignItems: "center", gap: 7,
+                    padding: "6px 10px",
+                    background: value === currentDomain ? "#1e2a3a" : "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: value === currentDomain ? "#e7e9ea" : "#b0b8c1",
+                    fontSize: 11, textAlign: "left",
+                    transition: "background 0.1s",
+                  }}
+                  onMouseEnter={(e) => { if (value !== currentDomain) e.currentTarget.style.background = "#141e2e"; }}
+                  onMouseLeave={(e) => { if (value !== currentDomain) e.currentTarget.style.background = "none"; }}
+                >
+                  <StatusDot status={domainStatus[value] ?? "untried"} />
+                  <span style={{ flex: 1, fontFamily: "monospace" }}>{value}</span>
+                  {badge && (
+                    <span style={{
+                      fontSize: 8, background: "#7c3aed22", color: "#a78bfa",
+                      border: "1px solid #7c3aed44", borderRadius: 3,
+                      padding: "1px 4px", flexShrink: 0,
+                    }}>
+                      {badge}
+                    </span>
+                  )}
+                  {value === currentDomain && (
+                    <span style={{ fontSize: 10, color: "#1d9bf0", flexShrink: 0 }}>✓</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-export function TempMailTab({ state, setState, patch: _patch, ready }: Props) {
+export function TempMailTab({ state, setState, patch: _patch, ready, onSwitchToGmail }: Props) {
   const [creating, setCreating] = useState(false);
   const [switching, setSwitching] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [domainStatus, setDomainStatus] = useState<Record<string, DomainStatus>>({});
 
   const { messages, loading, refreshing, error, refresh } = useTempMailInbox(state, ready);
   const email = getActiveEmail(state);
@@ -192,8 +282,8 @@ export function TempMailTab({ state, setState, patch: _patch, ready }: Props) {
     setSelectedId(null);
     try {
       await createInbox(setState, state.history);
-    } catch (err) {
-      setCreateError(err instanceof Error ? err.message : "Could not create inbox. Please try again.");
+    } catch {
+      setCreateError("Service temporarily unavailable. Please try again in a moment.");
     } finally {
       setCreating(false);
     }
@@ -206,8 +296,10 @@ export function TempMailTab({ state, setState, patch: _patch, ready }: Props) {
     setSelectedId(null);
     try {
       await createInboxForDomain(domain, setState, state.history);
-    } catch (err) {
-      setCreateError(err instanceof Error ? err.message : `Could not create inbox for ${domain}. Please try again.`);
+      setDomainStatus((prev) => ({ ...prev, [domain]: "ok" }));
+    } catch {
+      setDomainStatus((prev) => ({ ...prev, [domain]: "fail" }));
+      setCreateError(`Could not create inbox for ${domain}. Please try another domain.`);
     } finally {
       setSwitching(false);
     }
@@ -241,12 +333,12 @@ export function TempMailTab({ state, setState, patch: _patch, ready }: Props) {
       <DomainSelector
         currentDomain={currentDomain}
         switching={switching}
-        hasInbox={!!email}
         onSwitch={handleDomainSwitch}
+        domainStatus={domainStatus}
       />
 
       {createError && (
-        <div style={{ margin: "8px 12px 0", padding: "8px 10px", background: "#2a1515", border: "1px solid #f4212e44", borderRadius: 8, fontSize: 12, color: "#f4212e" }}>
+        <div style={{ margin: "8px 12px 0", padding: "8px 10px", background: "#2a1515", border: "1px solid #f4212e44", borderRadius: 8, fontSize: 12, color: "#f4212e", flexShrink: 0 }}>
           {createError}
         </div>
       )}
@@ -271,13 +363,21 @@ export function TempMailTab({ state, setState, patch: _patch, ready }: Props) {
               Generate Inbox
             </button>
           </div>
+        ) : creating || switching ? (
+          <div style={{ padding: "40px 20px", textAlign: "center" }}>
+            <div style={{ fontSize: 30, marginBottom: 10 }}>⏳</div>
+            <div style={{ color: "#71767b", fontSize: 13, animation: "pulse 1.5s infinite" }}>
+              {switching ? `Switching to ${currentDomain}…` : "Getting your inbox ready…"}
+            </div>
+          </div>
         ) : (
           <InboxList
             messages={messages}
-            loading={(loading && !creating && !switching) || switching}
+            loading={loading && !creating && !switching}
             error={error}
             onSelect={setSelectedId}
             onRetry={refresh}
+            onSwitchToGmail={onSwitchToGmail}
           />
         )}
       </div>

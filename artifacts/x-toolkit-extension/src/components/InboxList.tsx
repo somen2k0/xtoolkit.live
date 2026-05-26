@@ -8,6 +8,7 @@ interface InboxListProps {
   onSelect: (id: string) => void;
   onRetry: () => void;
   emptyText?: string;
+  onSwitchToGmail?: () => void;
 }
 
 function VerifyBadge() {
@@ -69,7 +70,7 @@ function Avatar({ from }: { from: string }) {
   );
 }
 
-export function InboxList({ messages, loading, error, onSelect, onRetry, emptyText = "No messages yet" }: InboxListProps) {
+export function InboxList({ messages, loading, error, onSelect, onRetry, emptyText = "No messages yet", onSwitchToGmail }: InboxListProps) {
   if (loading) return <Skeleton />;
 
   if (error) {
@@ -93,10 +94,24 @@ export function InboxList({ messages, loading, error, onSelect, onRetry, emptyTe
 
   if (!messages.length) {
     return (
-      <div style={{ padding: "36px 20px", textAlign: "center" }}>
-        <div style={{ fontSize: 32, marginBottom: 10 }}>📭</div>
-        <div style={{ color: "#71767b", fontSize: 13 }}>{emptyText}</div>
-        <div style={{ color: "#3d4753", fontSize: 11, marginTop: 6 }}>Refreshes every 15s automatically</div>
+      <div style={{ padding: "28px 20px", textAlign: "center" }}>
+        <div style={{ fontSize: 30, marginBottom: 8 }}>📭</div>
+        <div style={{ color: "#71767b", fontSize: 13, marginBottom: 4 }}>{emptyText}</div>
+        <div style={{ color: "#3d4753", fontSize: 11, marginBottom: onSwitchToGmail ? 14 : 0 }}>
+          Refreshes every 15s automatically
+        </div>
+        {onSwitchToGmail && (
+          <button
+            onClick={onSwitchToGmail}
+            style={{
+              background: "none", border: "none", cursor: "pointer",
+              color: "#1d9bf0", fontSize: 11, padding: "4px 0",
+              textDecoration: "underline",
+            }}
+          >
+            Pro tip: Use Temp Gmail for sites that block disposable emails →
+          </button>
+        )}
       </div>
     );
   }

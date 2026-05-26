@@ -12,6 +12,7 @@ interface Props {
   setState: (s: Partial<StoredState>) => void;
   patch: <K extends keyof StoredState>(key: K, val: StoredState[K]) => void;
   ready: boolean;
+  onSwitchToDisposable?: () => void;
 }
 
 type GmailSubTab = "inbox" | "tricks";
@@ -74,7 +75,6 @@ function GmailTricksPanel() {
 
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "10px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
-      {/* Input */}
       <div style={{ display: "flex", gap: 6 }}>
         <input
           value={input}
@@ -96,7 +96,6 @@ function GmailTricksPanel() {
 
       {username && (
         <>
-          {/* Dot trick */}
           <div style={{ background: "#0a1020", border: "1px solid #1e2a3a", borderRadius: 10, overflow: "hidden" }}>
             <div style={{ padding: "8px 12px", borderBottom: "1px solid #1e2a3a", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <span style={{ fontSize: 11, fontWeight: 700, color: "#1d9bf0" }}>Dot Trick</span>
@@ -127,7 +126,6 @@ function GmailTricksPanel() {
             )}
           </div>
 
-          {/* Plus trick */}
           <div style={{ background: "#0a1020", border: "1px solid #1e2a3a", borderRadius: 10, overflow: "hidden" }}>
             <div style={{ padding: "8px 12px", borderBottom: "1px solid #1e2a3a", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <span style={{ fontSize: 11, fontWeight: 700, color: "#9b59b6" }}>Plus Trick</span>
@@ -176,7 +174,7 @@ function GmailTricksPanel() {
   );
 }
 
-export function GmailTab({ state, setState, patch: _patch, ready }: Props) {
+export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisposable }: Props) {
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -185,6 +183,9 @@ export function GmailTab({ state, setState, patch: _patch, ready }: Props) {
   const { messages, loading, refreshing, error, refresh } = useGmailInbox(state, ready);
   const email = state.gmail?.email ?? "";
   const selectedMsg = messages.find((m) => m.id === selectedId) ?? null;
+
+  const isServiceError = (msg: string) =>
+    /unavailable|service|5\d\d|timeout|failed/i.test(msg);
 
   const handleNew = useCallback(async () => {
     setCreating(true);
@@ -199,7 +200,12 @@ export function GmailTab({ state, setState, patch: _patch, ready }: Props) {
         history: [entry, ...state.history.slice(0, 19)],
       });
     } catch (err) {
-      setCreateError(err instanceof Error ? err.message : "Failed to generate address");
+      const msg = err instanceof Error ? err.message : "Failed to generate address";
+      if (isServiceError(msg)) {
+        setCreateError("Gmail service temporarily unavailable.");
+      } else {
+        setCreateError(msg);
+      }
     } finally {
       setCreating(false);
     }
@@ -253,19 +259,42 @@ export function GmailTab({ state, setState, patch: _patch, ready }: Props) {
             badge={messages.length}
           />
 
-          {createError && (
-            <div style={{ margin: "8px 12px 0", padding: "8px 10px", background: "#2a1515", border: "1px solid #f4212e44", borderRadius: 8, fontSize: 12, color: "#f4212e" }}>
-              {createError}
-            </div>
-          )}
-
+          {/* Gmail accepted badge + subtitle */}
           {email && !creating && (
             <div style={{
               margin: "8px 12px 0", padding: "8px 10px",
-              background: "#0a1f2e", border: "1px solid #1d9bf022",
-              borderRadius: 8, fontSize: 11, color: "#71767b", flexShrink: 0,
+              background: "#0a1a10", border: "1px solid #10b98122",
+              borderRadius: 8, display: "flex", alignItems: "center", gap: 8, flexShrink: 0,
             }}>
-              💡 Emails sent to any dot/plus variation of this address will appear here
+              <span style={{
+                fontSize: 9, fontWeight: 700, padding: "2px 6px",
+                background: "#10b98120", color: "#10b981",
+                border: "1px solid #10b98140", borderRadius: 4,
+                letterSpacing: "0.5px", flexShrink: 0,
+              }}>
+                ✓ Gmail accepted
+              </span>
+              <span style={{ fontSize: 11, color: "#6b7280" }}>
+                Works where disposable emails are blocked
+              </span>
+            </div>
+          )}
+
+          {/* Error state */}
+          {createError && (
+            <div style={{ margin: "8px 12px 0", padding: "8px 10px", background: "#2a1515", border: "1px solid #f4212e44", borderRadius: 8, fontSize: 12, color: "#f4212e", flexShrink: 0 }}>
+              <div style={{ marginBottom: onSwitchToDisposable ? 6 : 0 }}>{createError}</div>
+              {onSwitchToDisposable && (
+                <button
+                  onClick={onSwitchToDisposable}
+                  style={{
+                    background: "none", border: "none", cursor: "pointer",
+                    color: "#1d9bf0", fontSize: 11, padding: 0, fontWeight: 600,
+                  }}
+                >
+                  Try Disposable Email instead →
+                </button>
+              )}
             </div>
           )}
 
@@ -275,10 +304,21 @@ export function GmailTab({ state, setState, patch: _patch, ready }: Props) {
 
           <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column", marginTop: 8 }}>
             {!email && !creating ? (
-              <div style={{ padding: "32px 20px", textAlign: "center" }}>
-                <div style={{ fontSize: 32, marginBottom: 10 }}>📧</div>
-                <div style={{ color: "#71767b", fontSize: 13, marginBottom: 6 }}>Generate a temp Gmail address</div>
-                <div style={{ color: "#3d4753", fontSize: 11, marginBottom: 16 }}>Works with Gmail dot-trick — receive emails instantly</div>
+              <div style={{ padding: "28px 20px", textAlign: "center" }}>
+                <div style={{ fontSize: 30, marginBottom: 8 }}>📧</div>
+                <div style={{ color: "#71767b", fontSize: 13, marginBottom: 4 }}>Generate a temp Gmail address</div>
+                <div style={{ color: "#3d4753", fontSize: 11, marginBottom: 6 }}>
+                  Works with Gmail dot-trick — receive emails instantly
+                </div>
+                <div style={{
+                  display: "inline-flex", alignItems: "center", gap: 6,
+                  background: "#0a1a10", border: "1px solid #10b98130",
+                  borderRadius: 20, padding: "4px 10px", marginBottom: 14,
+                }}>
+                  <span style={{ fontSize: 9, color: "#10b981", fontWeight: 700 }}>✓ Gmail accepted</span>
+                  <span style={{ fontSize: 10, color: "#6b7280" }}>— works where disposable emails are blocked</span>
+                </div>
+                <div style={{ display: "block" }} />
                 <button
                   onClick={() => void handleNew()}
                   style={{

@@ -8,7 +8,7 @@ type Tab = "tempmail" | "gmail" | "history";
 
 const SITE_URL = "https://xtoolkit.live";
 
-function MailIcon({ size = 18 }: { size?: number }) {
+function DisposableIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -19,8 +19,9 @@ function MailIcon({ size = 18 }: { size?: number }) {
 
 function GmailIcon({ size = 18 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20 18h-2V9.25L12 13 6 9.25V18H4V6h1.2l6.8 4.25L18.8 6H20v12z" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11A2.5 2.5 0 0 1 19.5 20h-15A2.5 2.5 0 0 1 2 17.5V6.5z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+      <path d="M2 7l8.293 5.862a3 3 0 0 0 3.414 0L22 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   );
 }
@@ -47,12 +48,12 @@ function ExternalLinkIcon() {
 const TABS: { id: Tab; label: string; icon: (p: { active: boolean }) => React.ReactNode }[] = [
   {
     id: "tempmail",
-    label: "Temp Mail",
-    icon: ({ active }) => <MailIcon size={active ? 20 : 18} />,
+    label: "Disposable",
+    icon: ({ active }) => <DisposableIcon size={active ? 20 : 18} />,
   },
   {
     id: "gmail",
-    label: "Gmail",
+    label: "Temp Gmail",
     icon: ({ active }) => <GmailIcon size={active ? 20 : 18} />,
   },
   {
@@ -132,29 +133,44 @@ export function App() {
           </div>
           <span style={{ fontWeight: 700, fontSize: 14, color: "#e7e9ea", letterSpacing: "-0.2px" }}>X Toolkit</span>
         </div>
-        <span style={{ fontSize: 11, color: "#71767b", marginLeft: 2, marginTop: 1 }}>Temp Mail</span>
+        <span style={{ fontSize: 11, color: "#71767b", marginLeft: 2, marginTop: 1 }}>Temp Email & Gmail</span>
         <div style={{ flex: 1 }} />
-        {/* Website promotion link */}
         <a
           href={SITE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          title="43+ free tools at xtoolkit.live"
+          title="44+ free tools at xtoolkit.live"
           style={{
             display: "flex", alignItems: "center", gap: 4,
             color: "#7c3aed", textDecoration: "none",
             fontSize: 10, fontWeight: 600,
           }}
         >
-          43+ tools
+          44+ tools
           <ExternalLinkIcon />
         </a>
       </div>
 
       {/* Main content */}
       <div style={{ flex: 1, overflow: "hidden", position: "relative" }}>
-        {tab === "tempmail" && <TempMailTab state={state} setState={setState} patch={patch} ready={ready} />}
-        {tab === "gmail" && <GmailTab state={state} setState={setState} patch={patch} ready={ready} />}
+        {tab === "tempmail" && (
+          <TempMailTab
+            state={state}
+            setState={setState}
+            patch={patch}
+            ready={ready}
+            onSwitchToGmail={() => setTab("gmail")}
+          />
+        )}
+        {tab === "gmail" && (
+          <GmailTab
+            state={state}
+            setState={setState}
+            patch={patch}
+            ready={ready}
+            onSwitchToDisposable={() => setTab("tempmail")}
+          />
+        )}
         {tab === "history" && <HistoryTab state={state} patch={patch} setTab={setTab} />}
       </div>
 
@@ -212,7 +228,7 @@ export function App() {
           flexShrink: 0,
         }}
       >
-        <span>Want 43+ more tools?</span>
+        <span>Want 44+ more tools?</span>
         <span style={{ color: "#7c3aed", fontWeight: 600 }}>Visit xtoolkit.live →</span>
       </a>
     </div>

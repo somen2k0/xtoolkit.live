@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Message } from "../types";
-import { extractOTP, formatDate, stripHtml } from "../lib/otp";
+import { extractOTP, formatDate, stripHtml, highlightOTP } from "../lib/otp";
 
 interface MessageViewProps {
   message: Message;
@@ -16,11 +16,25 @@ function BackIcon() {
   );
 }
 
+function sanitizeAndTheme(html: string, otp: string | null): string {
+  let clean = html
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/\sstyle="[^"]*"/gi, "")
+    .replace(/\sstyle='[^']*'/gi, "")
+    .replace(/\sbgcolor="[^"]*"/gi, "")
+    .replace(/\scolor="[^"]*"/gi, "")
+    .replace(/\sface="[^"]*"/gi, "");
+  if (otp) clean = highlightOTP(clean, otp);
+  return clean;
+}
+
 export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
   const [body, setBody] = useState(message.body ?? "");
   const [bodyType, setBodyType] = useState<"html" | "text">(message.bodyContentType ?? "text");
   const [loading, setLoading] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [otpCopied, setOtpCopied] = useState(false);
+  const [textCopied, setTextCopied] = useState(false);
 
   useEffect(() => {
     if (!message.body && fetchBody) {
@@ -35,12 +49,10 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
   const plainText = bodyType === "html" ? stripHtml(body) : body;
   const otp = extractOTP(plainText) ?? extractOTP(message.subject);
 
-  const copyOTP = async () => {
+  const copyOTP = useCallback(async () => {
     if (!otp) return;
     try {
       await navigator.clipboard.writeText(otp);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
     } catch {
       const el = document.createElement("textarea");
       el.value = otp;
@@ -48,15 +60,31 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
       el.select();
       document.execCommand("copy");
       document.body.removeChild(el);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
     }
-  };
+    setOtpCopied(true);
+    setTimeout(() => setOtpCopied(false), 2000);
+  }, [otp]);
+
+  const copyText = useCallback(async () => {
+    const text = plainText || body;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const el = document.createElement("textarea");
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+    setTextCopied(true);
+    setTimeout(() => setTextCopied(false), 2000);
+  }, [plainText, body]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", animation: "fade-in 0.2s ease" }}>
       {/* Header */}
-      <div style={{ padding: "8px 12px 8px", borderBottom: "1px solid #1e2a3a", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+      <div style={{ padding: "8px 12px", borderBottom: "1px solid #1e2a3a", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
         <button
           onClick={onBack}
           style={{ width: 30, height: 30, display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", cursor: "pointer", color: "#71767b", borderRadius: 6 }}
@@ -73,60 +101,108 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
         </div>
       </div>
 
-      {/* OTP highlight */}
+      {/* OTP Banner */}
       {otp && (
         <div style={{
-          margin: "10px 12px 0",
+          margin: "8px 12px 0",
           padding: "10px 12px",
-          background: "#0c2a1e",
-          border: "1px solid #00ba7c44",
-          borderRadius: 10,
+          background: "rgba(16, 185, 129, 0.15)",
+          border: "1px solid rgba(16, 185, 129, 0.4)",
+          borderRadius: 8,
           display: "flex",
           alignItems: "center",
-          gap: 10,
+          gap: 12,
           flexShrink: 0,
         }}>
-          <span style={{ fontSize: 16 }}>🔑</span>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 10, color: "#71767b", marginBottom: 1, textTransform: "uppercase" }}>Verification Code</div>
-            <div style={{ fontSize: 24, fontWeight: 800, color: "#00ba7c", fontFamily: "monospace", letterSpacing: "4px" }}>{otp}</div>
+            <div style={{ fontSize: 9, color: "#10b981", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 3 }}>
+              Verification Code
+            </div>
+            <div style={{ fontSize: 24, color: "#4ade80", fontWeight: 700, fontFamily: "monospace", letterSpacing: "4px", lineHeight: 1 }}>
+              {otp}
+            </div>
           </div>
           <button
             onClick={() => void copyOTP()}
             style={{
-              padding: "6px 12px", background: copied ? "#00ba7c22" : "#1a3a2a",
-              border: `1px solid ${copied ? "#00ba7c" : "#00ba7c66"}`,
-              borderRadius: 7, color: "#00ba7c", fontSize: 12, fontWeight: 600, cursor: "pointer",
-              transition: "all 0.15s",
+              padding: "6px 14px",
+              background: otpCopied ? "#059669" : "#10b981",
+              border: "none",
+              borderRadius: 6,
+              color: "#fff",
+              fontSize: 12,
+              fontWeight: 600,
+              cursor: "pointer",
+              flexShrink: 0,
+              transition: "background 0.15s",
             }}
           >
-            {copied ? "Copied!" : "Copy"}
+            {otpCopied ? "Copied!" : "Copy"}
           </button>
         </div>
       )}
 
       {/* Body */}
-      <div style={{ flex: 1, overflow: "auto", padding: "10px 12px 12px" }}>
+      <div style={{ flex: 1, overflow: "auto" }}>
         {loading ? (
-          <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 4 }}>
+          <div style={{ padding: "12px", display: "flex", flexDirection: "column", gap: 8 }}>
             {[1, 0.7, 0.85, 0.5, 0.9].map((w, i) => (
               <div key={i} style={{ width: `${w * 100}%`, height: 11, background: "#1e2a3a", borderRadius: 4, animation: "pulse 1.5s infinite" }} />
             ))}
           </div>
         ) : bodyType === "html" ? (
           <div
-            style={{ fontSize: 12, color: "#c5cdd4", lineHeight: 1.6 }}
-            dangerouslySetInnerHTML={{ __html: body
-              .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
-              .replace(/style="[^"]*background[^"]*"/gi, "")
-            }}
+            style={{
+              background: "#0f0f1a",
+              color: "#e2e8f0",
+              fontSize: 13,
+              lineHeight: 1.6,
+              padding: 12,
+              userSelect: "text",
+              WebkitUserSelect: "text",
+            } as React.CSSProperties}
+            dangerouslySetInnerHTML={{ __html: sanitizeAndTheme(body, otp) }}
           />
         ) : (
-          <pre style={{ fontSize: 12, color: "#c5cdd4", lineHeight: 1.6, whiteSpace: "pre-wrap", fontFamily: "inherit" }}>
+          <pre style={{
+            background: "#0f0f1a",
+            color: "#e2e8f0",
+            fontSize: 13,
+            lineHeight: 1.6,
+            padding: 12,
+            whiteSpace: "pre-wrap",
+            fontFamily: "inherit",
+            margin: 0,
+            userSelect: "text",
+            WebkitUserSelect: "text",
+          } as React.CSSProperties}>
             {body || "No content"}
           </pre>
         )}
       </div>
+
+      {/* Copy email text button */}
+      {!loading && (body || plainText) && (
+        <div style={{ padding: "8px 12px", borderTop: "1px solid #1e2a3a", flexShrink: 0 }}>
+          <button
+            onClick={() => void copyText()}
+            style={{
+              width: "100%",
+              padding: "6px 12px",
+              background: textCopied ? "#1a2e1a" : "#0f1623",
+              border: `1px solid ${textCopied ? "#10b98144" : "#1e2a3a"}`,
+              borderRadius: 8,
+              color: textCopied ? "#10b981" : "#71767b",
+              fontSize: 11,
+              fontWeight: 600,
+              cursor: "pointer",
+              transition: "all 0.15s",
+            }}
+          >
+            {textCopied ? "✓ Text copied!" : "Copy email text"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
