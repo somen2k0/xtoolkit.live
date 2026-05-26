@@ -166,8 +166,8 @@ export default function SchemaGenerator() {
 
   return (
     <MiniToolLayout
-      seoTitle="JSON-LD Schema Generator — Free Structured Data Markup Generator"
-      seoDescription="Generate JSON-LD structured data schema markup for SEO. Supports Article, FAQ, LocalBusiness, Product, Person, and WebSite schemas. Free, instant, no login."
+      seoTitle="JSON-LD Schema Generator — Free Structured Data Builder | X Toolkit"
+      seoDescription="Generate JSON-LD structured data for your website instantly. Supports Article, FAQ, Product, BreadcrumbList, Organization and more. Free schema markup generator, no signup required."
       icon={Code2}
       badge="SEO Tool"
       title="Schema Generator"
@@ -326,19 +326,63 @@ export default function SchemaGenerator() {
         )}
 
         {/* About */}
-        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
-          <h2 className="text-lg font-semibold">About this tool</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            The Schema Markup Generator creates JSON-LD structured data for your web pages — including Article, Product, FAQ, LocalBusiness, and more. Structured data helps search engines understand your content and can unlock rich results like star ratings, FAQs, and product prices directly in Google search.
-          </p>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            JSON-LD is Google's preferred format for structured data and can be dropped into your page's <code className="text-xs font-mono bg-muted/60 rounded px-1">{"<head>"}</code> without modifying your HTML structure.
-          </p>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding FAQ schema to enable FAQ rich results in Google search</li>
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding Article schema to improve news article indexing and display</li>
-            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding LocalBusiness schema to enhance your Google Business appearance</li>
-          </ul>
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-6">
+          <div className="space-y-3">
+            <h2 className="text-lg font-semibold">About this tool</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              The JSON-LD Schema Generator creates valid structured data markup for your web pages — including Article, Product, FAQ, LocalBusiness, and more. Structured data helps search engines understand your content and can unlock rich results like star ratings, FAQs, and product prices directly in Google search.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              JSON-LD is Google's preferred format for structured data and can be dropped into your page's <code className="text-xs font-mono bg-muted/60 rounded px-1">{"<head>"}</code> without modifying your existing HTML structure.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <h2 className="text-base font-semibold">Why Use Structured Data?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Structured data helps Google understand your content and display rich results in search — star ratings, FAQ dropdowns, breadcrumbs, and more. Pages with valid JSON-LD schema consistently rank higher and get more clicks than pages without it.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <h2 className="text-base font-semibold">Supported Schema Types</h2>
+            <ul className="space-y-2">
+              {[
+                { type: "Article", desc: "Blog posts and news articles — enables article rich results with headline, author, and date." },
+                { type: "FAQPage", desc: "Q&A content — can expand your search listing with FAQ dropdowns, doubling your SERP real estate." },
+                { type: "Product", desc: "E-commerce products — enables star ratings, price, and availability directly in search results." },
+                { type: "LocalBusiness", desc: "Restaurants, shops, services — improves Google Maps and local pack appearance." },
+                { type: "WebSite", desc: "Site-level schema with SearchAction — can add a sitelinks search box directly in Google results." },
+                { type: "Person", desc: "Author and personal profiles — links your name to your website, social profiles, and job title." },
+                { type: "BreadcrumbList", desc: "Navigation breadcrumbs — shows your site's hierarchy in search results instead of a plain URL." },
+                { type: "Organization", desc: "Company or brand identity — associates your logo, contact info, and social profiles with your brand." },
+              ].map(({ type, desc }) => (
+                <li key={type} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <span className="text-primary font-semibold shrink-0 min-w-[110px]">{type}</span>
+                  <span>{desc}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-3">
+            <h2 className="text-base font-semibold">How to Add Schema to Your Website</h2>
+            <ol className="space-y-2">
+              {[
+                "Select your schema type and fill in the fields above.",
+                "Click Generate Schema to produce valid JSON-LD output.",
+                "Click Copy with <script> tag to copy the ready-to-paste markup.",
+                "Paste the <script type=\"application/ld+json\"> block into your page's <head> section.",
+                "Test your implementation with Google's Rich Results Test (search.google.com/test/rich-results).",
+                "Deploy and monitor your Search Console Enhancements tab for rich result eligibility.",
+              ].map((step, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary text-xs font-semibold mt-0.5">{i + 1}</span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </MiniToolLayout>

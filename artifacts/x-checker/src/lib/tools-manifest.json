@@ -435,9 +435,9 @@
     "href": "/tools/schema-generator",
     "label": "Schema Generator",
     "description": "Generate JSON-LD structured data markup for Article, FAQ, Product, LocalBusiness, and more.",
-    "seoTitle": "Schema Generator — Free JSON-LD Structured Data Markup Tool | X Toolkit",
-    "seoDescription": "Generate JSON-LD structured data for Article, FAQ, Product, LocalBusiness, and more schema types. Free schema markup generator online.",
-    "seoKeywords": "schema generator, json-ld generator, structured data generator, rich results tool, faq schema, article schema, schema markup tool",
+    "seoTitle": "JSON-LD Schema Generator — Free Structured Data Builder | X Toolkit",
+    "seoDescription": "Generate JSON-LD structured data for your website instantly. Supports Article, FAQ, Product, BreadcrumbList, Organization and more. Free schema markup generator, no signup required.",
+    "seoKeywords": "schema generator, json-ld generator, structured data generator, schema markup generator, json ld schema, schema.org generator, rich results generator, structured data markup, faq schema generator, article schema generator, product schema generator, free schema generator online",
     "category": "seo",
     "badge": "New",
     "tags": ["seo", "schema", "json-ld", "structured data", "rich results", "faq", "article"]
