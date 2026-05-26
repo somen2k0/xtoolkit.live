@@ -15,7 +15,7 @@
   <!-- Blog hub -->
   <url>
     <loc>https://xtoolkit.live/blog</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -33,7 +33,7 @@
   <!-- High intent / evergreen: "what is disposable email" is a top TOFU query -->
   <url>
     <loc>https://xtoolkit.live/blog/what-is-disposable-email</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
@@ -41,7 +41,7 @@
   <!-- Comparison content: high CTR, commercial intent -->
   <url>
     <loc>https://xtoolkit.live/blog/best-temp-mail-services</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
@@ -49,7 +49,7 @@
   <!-- Comparison: "temp mail vs gmail" — very high search volume -->
   <url>
     <loc>https://xtoolkit.live/blog/temp-mail-vs-gmail</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -57,7 +57,7 @@
   <!-- Trust/safety content: converts users still on the fence -->
   <url>
     <loc>https://xtoolkit.live/blog/is-temp-mail-safe</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -65,7 +65,7 @@
   <!-- Explainer: captures "why do websites ask for email" queries -->
   <url>
     <loc>https://xtoolkit.live/blog/why-websites-ask-email-verification</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
   </url>
@@ -73,7 +73,7 @@
   <!-- Temp Gmail: captures Gmail-specific temp mail queries -->
   <url>
     <loc>https://xtoolkit.live/blog/temp-gmail-explained</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
   </url>
