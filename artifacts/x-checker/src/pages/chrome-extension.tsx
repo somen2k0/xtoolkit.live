@@ -58,6 +58,81 @@ const faqs = [
   },
 ];
 
+function ExtensionPopupMockup() {
+  return (
+    <div className="relative select-none">
+      <div className="absolute inset-0 rounded-2xl bg-violet-600/20 blur-[50px] scale-110" />
+      <div className="relative w-[272px] rounded-xl overflow-hidden shadow-2xl shadow-violet-900/70 ring-1 ring-white/10">
+        {/* Browser chrome bar */}
+        <div className="bg-[#202124] px-3 py-2 flex items-center gap-2 border-b border-white/5">
+          <div className="flex gap-1.5">
+            <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+            <div className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+            <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+          </div>
+          <div className="flex-1 text-[9px] text-white/25 font-mono text-center">X Toolkit</div>
+          <div className="h-4 w-4 rounded bg-violet-500/30 flex items-center justify-center">
+            <Puzzle className="h-2.5 w-2.5 text-violet-300" />
+          </div>
+        </div>
+        {/* Popup body */}
+        <div className="bg-[#0f0f1a] p-3">
+          {/* Tabs */}
+          <div className="flex gap-1 mb-3 bg-white/5 rounded-lg p-1">
+            {["Inbox", "Gmail", "Tricks"].map((tab, i) => (
+              <div key={tab} className={`flex-1 text-center py-1 rounded-md text-[9px] font-semibold ${i === 0 ? "bg-violet-600/50 text-violet-200" : "text-white/30"}`}>{tab}</div>
+            ))}
+          </div>
+          {/* Address bar */}
+          <div className="rounded-lg bg-white/5 border border-white/8 px-2.5 py-2 mb-2 flex items-center justify-between gap-2">
+            <div className="min-w-0">
+              <div className="text-[7px] text-white/30 mb-0.5 uppercase tracking-wide">Active inbox</div>
+              <div className="text-[9px] text-violet-300 font-mono truncate">xktoolkit@guerrillamail.com</div>
+            </div>
+            <div className="rounded bg-white/8 p-1 shrink-0"><Copy className="h-2.5 w-2.5 text-white/40" /></div>
+          </div>
+          {/* OTP card */}
+          <div className="rounded-lg bg-emerald-500/12 border border-emerald-400/25 px-2.5 py-2 mb-2">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="flex items-center gap-1 mb-1">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[7px] font-bold text-emerald-400 uppercase tracking-wider">OTP detected</span>
+                </div>
+                <div className="text-[22px] font-extrabold text-white tracking-[0.15em] leading-none">847291</div>
+              </div>
+              <div className="rounded-md bg-emerald-500/25 border border-emerald-400/30 px-2.5 py-1.5 text-[9px] font-bold text-emerald-300">Copy</div>
+            </div>
+            <div className="text-[7px] text-white/30 mt-1 truncate">From: verify@github.com</div>
+          </div>
+          {/* Email list */}
+          <div className="space-y-0.5">
+            {[
+              { from: "GitHub", subj: "Your 2FA code: 847291", time: "just now", hi: true },
+              { from: "Netflix", subj: "Welcome — confirm your email", time: "3m", hi: false },
+              { from: "Notion", subj: "Verify your account", time: "1h", hi: false },
+            ].map((email, i) => (
+              <div key={i} className={`flex items-center gap-2 px-1.5 py-1.5 rounded-md ${email.hi ? "bg-white/5" : "opacity-40"}`}>
+                <div className={`h-5 w-5 rounded-full shrink-0 flex items-center justify-center text-[8px] font-bold ${email.hi ? "bg-violet-500/30 text-violet-300" : "bg-white/8 text-white/40"}`}>{email.from[0]}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[8px] font-semibold text-white/70 truncate">{email.from}</div>
+                  <div className="text-[7px] text-white/40 truncate">{email.subj}</div>
+                </div>
+                <div className="text-[7px] text-white/25 shrink-0">{email.time}</div>
+              </div>
+            ))}
+          </div>
+          {/* Footer */}
+          <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-between">
+            <div className="flex items-center gap-1 text-[7px] text-white/25"><RefreshCw className="h-2.5 w-2.5" /> Auto-refresh</div>
+            <div className="flex items-center gap-1 text-[7px] text-emerald-400/70"><div className="h-1.5 w-1.5 rounded-full bg-emerald-400/70 animate-pulse" />15s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AddToChrome({ size = "default" }: { size?: "default" | "lg" }) {
   const pad = size === "lg" ? "px-8 py-4 text-base" : "px-6 py-3 text-sm";
   return (
@@ -77,10 +152,10 @@ export default function ChromeExtensionPage() {
   return (
     <Layout>
       <SeoHead
-        title="X Toolkit Chrome Extension — Free Temp Email & OTP Detector"
-        description="Get instant disposable email inboxes and automatic OTP detection right in your Chrome toolbar. Free Chrome extension by X Toolkit."
+        title="Free Temp Email Chrome Extension — Disposable Inbox & OTP Detector | X Toolkit"
+        description="Instant disposable email inbox and automatic OTP detection in your Chrome toolbar. Free Chrome extension — no signup required. Works on Chrome, Brave, Edge & Arc."
         path="/chrome-extension"
-        keywords="chrome extension temp mail, disposable email extension, temp email chrome, otp detector extension, throwaway email chrome, temporary email extension, disposable inbox chrome"
+        keywords="temp email chrome extension, disposable email chrome extension, otp detector chrome extension, temporary email extension chrome, free disposable email extension, otp code detector chrome, temp mail extension, throwaway email chrome extension, disposable inbox extension"
         extraSchemas={[
           {
             "@context": "https://schema.org",
@@ -106,47 +181,57 @@ export default function ChromeExtensionPage() {
           <div className="absolute top-10 left-10 h-56 w-56 rounded-full bg-indigo-600/10 blur-[80px]" />
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 md:px-8 py-20 md:py-32 text-center">
-          {/* Icon */}
-          <div className="inline-flex items-center justify-center h-20 w-20 rounded-3xl bg-gradient-to-br from-violet-600 to-purple-700 shadow-2xl shadow-violet-500/40 mb-8 ring-1 ring-violet-400/20">
-            <Puzzle className="h-9 w-9 text-white" />
-          </div>
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* Live badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold text-emerald-300 mb-6">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            Free on the Chrome Web Store
-          </div>
+            {/* ── Left: text ── */}
+            <div className="text-center lg:text-left">
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
+                <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 shadow-xl shadow-violet-500/40 ring-1 ring-violet-400/20 shrink-0">
+                  <Puzzle className="h-7 w-7 text-white" />
+                </div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Live on Chrome Web Store
+                </div>
+              </div>
 
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-5 leading-tight">
-            Temp email &amp; OTP{" "}
-            <span className="bg-gradient-to-r from-violet-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent">
-              in your toolbar
-            </span>
-          </h1>
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-5 leading-tight">
+                Temp email &amp; OTP{" "}
+                <span className="bg-gradient-to-r from-violet-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent">
+                  in your toolbar
+                </span>
+              </h1>
 
-          <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
-            Instant disposable inbox, automatic OTP detection, and Gmail tricks —
-            right in Chrome. No website visits. No signups. Just click and go.
-          </p>
+              <p className="text-white/70 text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mb-8">
+                Instant disposable inbox, automatic OTP detection, and Gmail tricks —
+                right in Chrome. No website visits. No signups. Just click and go.
+              </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <AddToChrome size="lg" />
-            <div className="flex items-center gap-2 text-white/50 text-sm">
-              <Chrome className="h-4 w-4" />
-              Works on Chrome, Brave, Edge &amp; Arc
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-6">
+                <AddToChrome size="lg" />
+                <div className="flex items-center gap-2 text-white/50 text-sm">
+                  <Chrome className="h-4 w-4" />
+                  Chrome, Brave, Edge &amp; Arc
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-white/40 text-xs">
+                <span className="flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-amber-400" /> Free forever</span>
+                <span className="h-3 w-px bg-white/20" />
+                <span>No account needed</span>
+                <span className="h-3 w-px bg-white/20" />
+                <span>Manifest V3</span>
+                <span className="h-3 w-px bg-white/20" />
+                <span>111 KB</span>
+              </div>
             </div>
-          </div>
 
-          {/* Trust strip */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/40 text-xs">
-            <span className="flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-amber-400" /> Free forever</span>
-            <span className="h-3 w-px bg-white/20" />
-            <span>No account needed</span>
-            <span className="h-3 w-px bg-white/20" />
-            <span>Manifest V3</span>
-            <span className="h-3 w-px bg-white/20" />
-            <span>111 KB</span>
+            {/* ── Right: popup mockup ── */}
+            <div className="hidden lg:flex justify-center items-center">
+              <ExtensionPopupMockup />
+            </div>
+
           </div>
         </div>
       </div>
@@ -188,6 +273,42 @@ export default function ChromeExtensionPage() {
               <p className="text-xs text-white/55 leading-relaxed">{desc}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* ── Without / With comparison ── */}
+      <div className="max-w-4xl mx-auto px-4 md:px-8 pb-16">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Extension vs. visiting the website</h2>
+          <p className="text-white/45 text-sm">The same tools — 10× faster to access.</p>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-6">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="h-6 w-6 rounded-full bg-white/8 flex items-center justify-center text-white/35 text-[10px] font-bold">✕</div>
+              <span className="text-sm font-semibold text-white/40">Without extension</span>
+            </div>
+            <ul className="space-y-3">
+              {["Open a new browser tab", "Type xtoolkit.live", "Navigate to Temp Mail", "Copy your email address", "Switch back to your original tab", "Come back to manually refresh"].map(item => (
+                <li key={item} className="flex items-center gap-2.5 text-sm text-white/35">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/15 shrink-0" />{item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-violet-500/25 bg-violet-500/5 p-6">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="h-6 w-6 rounded-full bg-violet-500/30 flex items-center justify-center text-violet-300 text-[10px] font-bold">✓</div>
+              <span className="text-sm font-semibold text-violet-300">With X Toolkit Extension</span>
+            </div>
+            <ul className="space-y-3">
+              {["Click the toolbar icon", "Inbox is already open", "Address auto-generated", "OTP auto-detected with copy button", "Never leave your current tab", "Auto-refreshes every 15 seconds"].map(item => (
+                <li key={item} className="flex items-center gap-2.5 text-sm text-white/80">
+                  <span className="h-1.5 w-1.5 rounded-full bg-violet-400 shrink-0" />{item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 

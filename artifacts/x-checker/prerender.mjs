@@ -202,10 +202,10 @@ const STATIC_PAGES = [
   {
     path: "/chrome-extension",
     label: "Chrome Extension",
-    title: "X Toolkit Chrome Extension — Free Temp Email & OTP Detector",
+    title: "Free Temp Email Chrome Extension — Disposable Inbox & OTP Detector | X Toolkit",
     description:
-      "The free X Toolkit Chrome Extension gives you instant disposable email inboxes, automatic OTP code detection, temp Gmail address generation, and Gmail dot & plus-tag tricks — all from your browser toolbar.",
-    seoKeywords: "chrome extension temp mail, disposable email extension, temp email chrome, otp detector extension, guerrillamail chrome, free chrome extension, otp auto detection chrome",
+      "Instant disposable email inbox and automatic OTP detection in your Chrome toolbar. Free Chrome extension — no signup required. Works on Chrome, Brave, Edge & Arc.",
+    seoKeywords: "temp email chrome extension, disposable email chrome extension, otp detector chrome extension, temporary email extension chrome, free disposable email extension, otp code detector chrome, temp mail extension, throwaway email chrome extension, disposable inbox extension, chrome extension email",
   },
   {
     path: "/contact",
