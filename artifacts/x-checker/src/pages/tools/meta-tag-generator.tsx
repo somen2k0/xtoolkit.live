@@ -57,9 +57,9 @@ const faqs = [
 ];
 
 const relatedTools = [
+  { title: "JSON-LD Schema Generator", href: "/tools/schema-generator", description: "Generate structured data markup for Article, FAQ, Product, and more." },
   { title: "URL Slug Generator", href: "/tools/url-slug-generator", description: "Convert titles into clean SEO-friendly URLs." },
   { title: "Keyword Density Checker", href: "/tools/keyword-density", description: "Check keyword frequency in your article text." },
-  { title: "Character Counter", href: "/tools/character-counter", description: "Count characters for tweets and bios." },
   { title: "JSON Formatter", href: "/tools/json-formatter", description: "Format and validate JSON with real-time error detection." },
 ];
 

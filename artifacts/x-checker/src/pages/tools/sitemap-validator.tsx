@@ -135,9 +135,9 @@ const faqs = [
 ];
 
 const relatedTools = [
+  { title: "JSON-LD Schema Generator", href: "/tools/schema-generator", description: "Generate structured data markup for Article, FAQ, Product, and more." },
   { title: "Robots.txt Generator", href: "/tools/robots-txt-generator", description: "Generate a robots.txt file for your website." },
   { title: "Meta Tag Generator", href: "/tools/meta-tag-generator", description: "Generate SEO title, description, and Open Graph tags." },
-  { title: "URL Slug Generator", href: "/tools/url-slug-generator", description: "Convert titles into clean SEO-friendly URLs." },
 ];
 
 export default function SitemapValidator() {

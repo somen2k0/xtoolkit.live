@@ -1,0 +1,219 @@
+The Schema Generator page is getting 126 impressions
+for JSON-LD keywords but 0 clicks because it ranks
+at position 62. We need to optimize it aggressively
+to reach page 1.
+
+Target keywords (from real Search Console data):
+- "json ld schema generator" (23 impressions)
+- "json ld generator" (12 impressions)
+- "jsonld generator" (12 impressions)
+- "json-ld schema generator" (10 impressions)
+- "ld json generator" (9 impressions)
+- "json ld builder" (6 impressions)
+
+===================================================
+STEP 1 — Update meta title
+===================================================
+
+New title (include exact keyword phrases):
+"JSON-LD Schema Generator — Free JSON LD Builder
+& Structured Data Generator | X Toolkit"
+
+This title contains:
+- "JSON-LD Schema Generator" (23 impressions keyword)
+- "JSON LD Builder" (6 impressions keyword)
+- "Structured Data Generator"
+
+===================================================
+STEP 2 — Update meta description
+===================================================
+
+New description (compelling, keyword-rich, 155 chars):
+"Free JSON-LD schema generator and builder. Create
+structured data markup for Article, FAQ, Product,
+BreadcrumbList & more. No signup. Instant results."
+
+===================================================
+STEP 3 — Update meta keywords
+===================================================
+
+"json ld schema generator, json ld generator,
+jsonld generator, json-ld schema generator,
+ld json generator, ld json schema generator,
+json-ld generator, json ld builder, json ld code
+generator, schema json ld generator, structured
+data generator, json ld markup generator,
+schema markup generator, json ld schema tool,
+free json ld generator, json ld schema markup"
+
+===================================================
+STEP 4 — Update page H1 heading
+===================================================
+
+Change the main H1 on the schema generator page
+from whatever it currently says to:
+"JSON-LD Schema Generator"
+
+This must match the primary keyword exactly.
+
+===================================================
+STEP 5 — Expand About section with keyword-rich
+content targeting ALL search queries found
+===================================================
+
+Replace existing about section with:
+
+Heading: "What is a JSON-LD Schema Generator?"
+Content:
+"A JSON-LD schema generator creates structured data
+markup that helps search engines understand your
+content. JSON-LD (JavaScript Object Notation for
+Linked Data) is Google's preferred format for
+structured data — it's easy to add to any page
+without touching your HTML content.
+
+Our free JSON-LD generator supports all major
+schema.org types and produces valid markup you
+can paste directly into your website's head section.
+No signup, no account, completely free."
+
+Heading: "What is JSON-LD and Why Does It Matter?"
+Content:
+"JSON-LD is a method of encoding linked data using
+JSON format. Google, Bing, and other search engines
+read JSON-LD structured data to better understand
+your pages and potentially display rich results —
+like star ratings, FAQ dropdowns, breadcrumbs,
+event dates, and product prices directly in search
+results.
+
+Pages with valid JSON-LD schema consistently get
+higher click-through rates because rich results
+stand out visually in search. A FAQ schema can
+add expandable questions directly below your
+search result, significantly increasing the
+space your result takes up on the page."
+
+Heading: "Supported Schema Types"
+Content with all types listed:
+"Our JSON-LD schema generator supports these
+schema.org types:
+
+Article — For blog posts, news articles, and
+editorial content. Helps Google display author,
+date, and headline in search results.
+
+FAQ Page — Creates expandable question-answer
+pairs directly in Google search results. One of
+the highest-impact schema types for CTR.
+
+Product — For e-commerce pages. Displays price,
+availability, and ratings in search results.
+
+BreadcrumbList — Shows your site's navigation
+path in search results (Home > Category > Page).
+
+Organization — Displays your business information
+in the knowledge panel including logo, contact
+info, and social profiles.
+
+Local Business — For physical businesses. Shows
+address, hours, phone number, and rating in local
+search and Google Maps.
+
+Website — Identifies your website to Google and
+enables the search box feature in some results.
+
+Person — For author and personal profile pages.
+Displays name, job title, and social profiles."
+
+Heading: "How to Add JSON-LD to Your Website"
+Numbered steps:
+1. Choose your schema type from the dropdown
+2. Fill in the required fields in the form
+3. Click Generate to create your JSON-LD code
+4. Copy the generated script tag
+5. Paste it inside the <head> section of your
+   HTML or in your CMS's custom code section
+6. Test it using Google's Rich Results Test at
+   search.google.com/test/rich-results
+
+Heading: "JSON-LD vs Microdata vs RDFa"
+Content:
+"There are three ways to add structured data to
+your website: JSON-LD, Microdata, and RDFa.
+Google strongly recommends JSON-LD because it
+keeps your structured data separate from your
+HTML content — making it easier to add, update,
+and maintain. JSON-LD is added as a script block
+and doesn't interfere with your page's visual
+design or HTML structure at all."
+
+Heading: "Frequently Asked Questions"
+
+Q: Is JSON-LD schema free to use?
+A: Yes. JSON-LD structured data is an open
+   standard developed by schema.org and is
+   completely free to implement on any website.
+
+Q: Does JSON-LD schema directly improve rankings?
+A: JSON-LD schema doesn't directly boost rankings
+   but it enables rich results which increase
+   click-through rates. Higher CTR signals to
+   Google that your content is valuable, which
+   can indirectly improve rankings over time.
+
+Q: How do I test if my JSON-LD schema is valid?
+A: Use Google's free Rich Results Test at
+   search.google.com/test/rich-results or
+   Google's Schema Markup Validator at
+   validator.schema.org
+
+Q: What is the difference between JSON-LD and
+   JSON schema?
+A: JSON-LD is structured data markup for search
+   engines using schema.org vocabulary. JSON Schema
+   is a different specification used to validate
+   JSON data structure in APIs and applications.
+   They are unrelated despite similar names.
+
+Q: Can I use multiple JSON-LD schemas on one page?
+A: Yes. You can include multiple JSON-LD script
+   blocks on a single page for different schema
+   types. For example a page can have both an
+   Article schema and a BreadcrumbList schema.
+
+===================================================
+STEP 6 — Update OG tags specifically for this page
+===================================================
+
+ogTitle: "JSON-LD Schema Generator — Free JSON LD
+Builder | X Toolkit"
+
+ogDescription: "Generate valid JSON-LD structured
+data instantly. Supports Article, FAQ, Product,
+BreadcrumbList and more. Free, no signup required."
+
+===================================================
+STEP 7 — Update sitemap
+===================================================
+
+/tools/schema-generator:
+<priority>0.95</priority>
+<changefreq>weekly</changefreq>
+
+===================================================
+STEP 8 — Add internal links from related pages
+===================================================
+
+On these pages add "Related: JSON-LD Schema
+Generator" link to /tools/schema-generator:
+- /tools/meta-tag-generator
+- /tools/robots-txt-generator
+- /tools/sitemap-validator
+- /seo-tools category page
+
+===================================================
+Build, commit, push.
+Show all files changed.
+===================================================

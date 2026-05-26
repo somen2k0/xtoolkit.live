@@ -8,11 +8,11 @@ import { useToast } from "@/hooks/use-toast";
 import { useToolView } from "@/hooks/use-track";
 
 const faqs = [
-  { q: "What is schema markup?", a: "Schema markup is structured data added to your HTML that helps search engines understand your content. It uses vocabulary from Schema.org and is formatted as JSON-LD, Microdata, or RDFa. JSON-LD is Google's preferred format." },
-  { q: "Does schema markup directly improve rankings?", a: "Schema doesn't directly boost rankings, but it enables rich results (star ratings, FAQs, breadcrumbs in SERPs) which significantly improve click-through rates. Higher CTR signals quality to Google and can indirectly improve rankings." },
-  { q: "Which schema types are most valuable for SEO?", a: "FAQ Schema, Article Schema, Product Schema (with reviews), LocalBusiness Schema, and BreadcrumbList are the most impactful. FAQ Schema is particularly effective — it can double your SERP real estate." },
-  { q: "How do I add schema markup to my website?", a: "Paste the JSON-LD script tag in the <head> section of your HTML, or just before </body>. In WordPress, use a plugin like RankMath or Yoast. In React/Next.js, use a <script type='application/ld+json'> tag." },
-  { q: "How do I test if my schema is valid?", a: "Use Google's Rich Results Test (search.google.com/test/rich-results) or Schema.org's Markup Validator. After deploying, check Google Search Console's Enhancements section for rich result eligibility." },
+  { q: "Is JSON-LD schema free to use?", a: "Yes. JSON-LD structured data is an open standard developed by schema.org and is completely free to implement on any website." },
+  { q: "Does JSON-LD schema directly improve rankings?", a: "JSON-LD schema doesn't directly boost rankings but it enables rich results which increase click-through rates. Higher CTR signals to Google that your content is valuable, which can indirectly improve rankings over time." },
+  { q: "How do I test if my JSON-LD schema is valid?", a: "Use Google's free Rich Results Test at search.google.com/test/rich-results or Google's Schema Markup Validator at validator.schema.org" },
+  { q: "What is the difference between JSON-LD and JSON schema?", a: "JSON-LD is structured data markup for search engines using schema.org vocabulary. JSON Schema is a different specification used to validate JSON data structure in APIs and applications. They are unrelated despite similar names." },
+  { q: "Can I use multiple JSON-LD schemas on one page?", a: "Yes. You can include multiple JSON-LD script blocks on a single page for different schema types. For example a page can have both an Article schema and a BreadcrumbList schema." },
 ];
 
 const relatedTools = [
@@ -166,11 +166,11 @@ export default function SchemaGenerator() {
 
   return (
     <MiniToolLayout
-      seoTitle="JSON-LD Schema Generator — Free Structured Data Builder | X Toolkit"
-      seoDescription="Generate JSON-LD structured data for your website instantly. Supports Article, FAQ, Product, BreadcrumbList, Organization and more. Free schema markup generator, no signup required."
+      seoTitle="JSON-LD Schema Generator — Free JSON LD Builder & Structured Data Generator | X Toolkit"
+      seoDescription="Free JSON-LD schema generator and builder. Create structured data markup for Article, FAQ, Product, BreadcrumbList & more. No signup. Instant results."
       icon={Code2}
       badge="SEO Tool"
-      title="Schema Generator"
+      title="JSON-LD Schema Generator"
       description="Generate valid JSON-LD structured data markup for your website. Choose a schema type, fill in the fields, and copy the ready-to-use script tag — no coding required."
       faqs={faqs}
       relatedTools={relatedTools}
@@ -328,37 +328,41 @@ export default function SchemaGenerator() {
         {/* About */}
         <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-6">
           <div className="space-y-3">
-            <h2 className="text-lg font-semibold">About this tool</h2>
+            <h2 className="text-lg font-semibold">What is a JSON-LD Schema Generator?</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              The JSON-LD Schema Generator creates valid structured data markup for your web pages — including Article, Product, FAQ, LocalBusiness, and more. Structured data helps search engines understand your content and can unlock rich results like star ratings, FAQs, and product prices directly in Google search.
+              A JSON-LD schema generator creates structured data markup that helps search engines understand your content. JSON-LD (JavaScript Object Notation for Linked Data) is Google's preferred format for structured data — it's easy to add to any page without touching your HTML content.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              JSON-LD is Google's preferred format for structured data and can be dropped into your page's <code className="text-xs font-mono bg-muted/60 rounded px-1">{"<head>"}</code> without modifying your existing HTML structure.
+              Our free JSON-LD generator supports all major schema.org types and produces valid markup you can paste directly into your website's head section. No signup, no account, completely free.
             </p>
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-base font-semibold">Why Use Structured Data?</h2>
+            <h2 className="text-base font-semibold">What is JSON-LD and Why Does It Matter?</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Structured data helps Google understand your content and display rich results in search — star ratings, FAQ dropdowns, breadcrumbs, and more. Pages with valid JSON-LD schema consistently rank higher and get more clicks than pages without it.
+              JSON-LD is a method of encoding linked data using JSON format. Google, Bing, and other search engines read JSON-LD structured data to better understand your pages and potentially display rich results — like star ratings, FAQ dropdowns, breadcrumbs, event dates, and product prices directly in search results.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Pages with valid JSON-LD schema consistently get higher click-through rates because rich results stand out visually in search. A FAQ schema can add expandable questions directly below your search result, significantly increasing the space your result takes up on the page.
             </p>
           </div>
 
           <div className="space-y-3">
             <h2 className="text-base font-semibold">Supported Schema Types</h2>
-            <ul className="space-y-2">
+            <p className="text-sm text-muted-foreground leading-relaxed">Our JSON-LD schema generator supports these schema.org types:</p>
+            <ul className="space-y-2.5">
               {[
-                { type: "Article", desc: "Blog posts and news articles — enables article rich results with headline, author, and date." },
-                { type: "FAQPage", desc: "Q&A content — can expand your search listing with FAQ dropdowns, doubling your SERP real estate." },
-                { type: "Product", desc: "E-commerce products — enables star ratings, price, and availability directly in search results." },
-                { type: "LocalBusiness", desc: "Restaurants, shops, services — improves Google Maps and local pack appearance." },
-                { type: "WebSite", desc: "Site-level schema with SearchAction — can add a sitelinks search box directly in Google results." },
-                { type: "Person", desc: "Author and personal profiles — links your name to your website, social profiles, and job title." },
-                { type: "BreadcrumbList", desc: "Navigation breadcrumbs — shows your site's hierarchy in search results instead of a plain URL." },
-                { type: "Organization", desc: "Company or brand identity — associates your logo, contact info, and social profiles with your brand." },
+                { type: "Article", desc: "For blog posts, news articles, and editorial content. Helps Google display author, date, and headline in search results." },
+                { type: "FAQ Page", desc: "Creates expandable question-answer pairs directly in Google search results. One of the highest-impact schema types for CTR." },
+                { type: "Product", desc: "For e-commerce pages. Displays price, availability, and ratings in search results." },
+                { type: "BreadcrumbList", desc: "Shows your site's navigation path in search results (Home > Category > Page)." },
+                { type: "Organization", desc: "Displays your business information in the knowledge panel including logo, contact info, and social profiles." },
+                { type: "Local Business", desc: "For physical businesses. Shows address, hours, phone number, and rating in local search and Google Maps." },
+                { type: "Website", desc: "Identifies your website to Google and enables the search box feature in some results." },
+                { type: "Person", desc: "For author and personal profile pages. Displays name, job title, and social profiles." },
               ].map(({ type, desc }) => (
                 <li key={type} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <span className="text-primary font-semibold shrink-0 min-w-[110px]">{type}</span>
+                  <span className="text-primary font-semibold shrink-0 min-w-[115px]">{type}</span>
                   <span>{desc}</span>
                 </li>
               ))}
@@ -366,15 +370,15 @@ export default function SchemaGenerator() {
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-base font-semibold">How to Add Schema to Your Website</h2>
+            <h2 className="text-base font-semibold">How to Add JSON-LD to Your Website</h2>
             <ol className="space-y-2">
               {[
-                "Select your schema type and fill in the fields above.",
-                "Click Generate Schema to produce valid JSON-LD output.",
-                "Click Copy with <script> tag to copy the ready-to-paste markup.",
-                "Paste the <script type=\"application/ld+json\"> block into your page's <head> section.",
-                "Test your implementation with Google's Rich Results Test (search.google.com/test/rich-results).",
-                "Deploy and monitor your Search Console Enhancements tab for rich result eligibility.",
+                "Choose your schema type from the selector above.",
+                "Fill in the required fields in the form.",
+                "Click Generate to create your JSON-LD code.",
+                "Copy the generated script tag.",
+                <>Paste it inside the <code className="text-xs font-mono bg-muted/60 rounded px-1">{"<head>"}</code> section of your HTML or in your CMS's custom code section.</>,
+                "Test it using Google's Rich Results Test at search.google.com/test/rich-results",
               ].map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary text-xs font-semibold mt-0.5">{i + 1}</span>
@@ -382,6 +386,13 @@ export default function SchemaGenerator() {
                 </li>
               ))}
             </ol>
+          </div>
+
+          <div className="space-y-3">
+            <h2 className="text-base font-semibold">JSON-LD vs Microdata vs RDFa</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              There are three ways to add structured data to your website: JSON-LD, Microdata, and RDFa. Google strongly recommends JSON-LD because it keeps your structured data separate from your HTML content — making it easier to add, update, and maintain. JSON-LD is added as a script block and doesn't interfere with your page's visual design or HTML structure at all.
+            </p>
           </div>
         </div>
       </div>
