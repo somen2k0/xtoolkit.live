@@ -104,7 +104,7 @@ export default function NameIdeas() {
 
   return (
     <MiniToolLayout
-      seoTitle="Twitter Name Ideas (2025) — 50+ Display Name Ideas for Every Niche"
+      seoTitle="Twitter Name Ideas (2026) — 50+ Display Name Ideas for Every Niche"
       seoDescription="Browse 50+ Twitter display name ideas for tech, creator, business, personal brand, aesthetic, and funny accounts. Copy any name idea instantly."
       icon={Users}
       badge="50+ Ideas"

@@ -83,7 +83,7 @@ export default function AestheticBios() {
 
   return (
     <MiniToolLayout
-      seoTitle="Aesthetic Twitter Bio Ideas (2025) — Soft, Dark, Minimal & More"
+      seoTitle="Aesthetic Twitter Bio Ideas (2026) — Soft, Dark, Minimal & More"
       seoDescription="Copy aesthetic Twitter bio ideas for every vibe: soft girl, dark academia, minimalist, vintage, vaporwave, and cottagecore. 30+ templates to copy instantly."
       icon={Palette}
       badge="30+ Aesthetic Bios"

@@ -30,7 +30,7 @@ const ARTICLES = [
   {
     slug: "best-temp-mail-services",
     href: "/blog/best-temp-mail-services",
-    title: "Best Temp Mail Services (2025)",
+    title: "Best Temp Mail Services (2026)",
     description: "8 top disposable email providers compared on privacy, features, reliability, and ease of use.",
     readTime: "7 min",
     category: "Comparison",

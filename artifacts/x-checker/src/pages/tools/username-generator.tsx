@@ -89,7 +89,7 @@ export default function UsernameGenerator() {
 
   return (
     <MiniToolLayout
-      seoTitle="Twitter Username Generator — Find Unique @Handles in 2025"
+      seoTitle="Twitter Username Generator — Find Unique @Handles in 2026"
       seoDescription="Generate unique Twitter username ideas based on your name or keyword. Get 20 creative @handle suggestions with prefixes, suffixes, and variations. Free tool."
       icon={AtSign}
       badge="Free Tool"

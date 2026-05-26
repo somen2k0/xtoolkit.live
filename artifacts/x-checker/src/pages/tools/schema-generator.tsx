@@ -201,13 +201,13 @@ export default function SchemaGenerator() {
           {schemaType === "Article" && (
             <div className="space-y-3">
               {[
-                { key: "headline", label: "Headline / Title", placeholder: "How to Build Better SEO in 2025" },
+                { key: "headline", label: "Headline / Title", placeholder: "How to Build Better SEO in 2026" },
                 { key: "description", label: "Description", placeholder: "A brief description of the article" },
                 { key: "author", label: "Author Name", placeholder: "Jane Smith" },
                 { key: "publisher", label: "Publisher Name", placeholder: "YourBlog.com" },
                 { key: "url", label: "Article URL", placeholder: "https://yourblog.com/article" },
                 { key: "image", label: "Featured Image URL", placeholder: "https://yourblog.com/image.jpg" },
-                { key: "datePublished", label: "Published Date", placeholder: "2025-01-15" },
+                { key: "datePublished", label: "Published Date", placeholder: "2026-01-15" },
               ].map(({ key, label, placeholder }) => (
                 <div key={key} className="space-y-1">
                   <label className="text-xs text-muted-foreground">{label}</label>

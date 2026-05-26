@@ -123,9 +123,9 @@ export default function FunnyBios() {
 
   return (
     <MiniToolLayout
-      seoTitle="Funny Twitter/X Bio Ideas (2025) — 30+ Funny Bios + AI Generator | X Toolkit"
+      seoTitle="Funny Twitter/X Bio Ideas (2026) — 30+ Funny Bios + AI Generator | X Toolkit"
       seoDescription="Browse 30+ funny Twitter/X bio ideas and generate custom funny bios with AI. Sarcastic, witty, and self-deprecating bio templates. Free, no signup required."
-      seoKeywords="funny twitter bios, funny x bios, funny bio ideas, funny twitter bio generator, witty twitter bios, sarcastic twitter bio, funny bio for twitter, funny bios 2025, twitter bio funny, funniest twitter bios"
+      seoKeywords="funny twitter bios, funny x bios, funny bio ideas, funny twitter bio generator, witty twitter bios, sarcastic twitter bio, funny bio for twitter, funny bios 2026, twitter bio funny, funniest twitter bios"
       icon={Smile}
       badge="30+ Examples"
       title="Funny Twitter/X Bio Ideas"

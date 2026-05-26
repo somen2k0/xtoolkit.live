@@ -4,18 +4,18 @@ import { BookOpen, Mail, Shield, EyeOff } from "lucide-react";
 export default function WhatIsDisposableEmail() {
   return (
     <BlogLayout
-      seoTitle="What Is Disposable Email? Complete Guide (2025)"
-      seoDescription="Everything you need to know about disposable email addresses: how they work, why people use them, risks, and the best free services. Updated 2025."
+      seoTitle="What Is Disposable Email? Complete Guide (2026)"
+      seoDescription="Everything you need to know about disposable email addresses: how they work, why people use them, risks, and the best free services. Updated 2026."
       title="What Is Disposable Email? A Complete Guide"
       description="Disposable email lets you receive messages without exposing your real address. Here's how it works, when to use it, and what to watch out for."
       icon={BookOpen}
       readTime="6 min read"
-      publishDate="2025"
+      publishDate="2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "Temp Mail vs Gmail — What's the Difference?", href: "/blog/temp-mail-vs-gmail", description: "Side-by-side comparison of temporary email and Gmail.", readTime: "5 min" },
         { title: "Is Temp Mail Safe to Use?", href: "/blog/is-temp-mail-safe", description: "Security analysis of temporary email services.", readTime: "4 min" },
-        { title: "Best Temp Mail Services (2025)", href: "/blog/best-temp-mail-services", description: "Top disposable email providers compared.", readTime: "7 min" },
+        { title: "Best Temp Mail Services (2026)", href: "/blog/best-temp-mail-services", description: "Top disposable email providers compared.", readTime: "7 min" },
       ]}
       relatedTools={[
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a throwaway inbox instantly.", icon: Mail },

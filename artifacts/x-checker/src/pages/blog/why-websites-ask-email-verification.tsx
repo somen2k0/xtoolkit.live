@@ -4,13 +4,13 @@ import { HelpCircle, Mail, Shield, EyeOff } from "lucide-react";
 export default function WhyWebsitesAskEmailVerification() {
   return (
     <BlogLayout
-      seoTitle="Why Websites Ask for Email Verification — Explained (2025)"
+      seoTitle="Why Websites Ask for Email Verification — Explained (2026)"
       seoDescription="Why do websites require email verification? The real business and technical reasons — and what it means for your privacy. Plus how to protect yourself."
       title="Why Websites Ask for Email Verification"
       description="The actual business and technical reasons behind every 'please verify your email' prompt — and what it really means for your data."
       icon={HelpCircle}
       readTime="4 min read"
-      publishDate="2025"
+      publishDate="2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "How disposable email bypasses verification.", readTime: "6 min" },

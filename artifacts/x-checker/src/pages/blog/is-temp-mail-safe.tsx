@@ -4,13 +4,13 @@ import { Shield, Mail, EyeOff, AlertTriangle } from "lucide-react";
 export default function IsTempMailSafe() {
   return (
     <BlogLayout
-      seoTitle="Is Temp Mail Safe to Use? Security Analysis (2025)"
-      seoDescription="Is temporary email safe? An honest analysis of the real risks, what temp mail protects against, and when you should never use it. Updated 2025."
+      seoTitle="Is Temp Mail Safe to Use? Security Analysis (2026)"
+      seoDescription="Is temporary email safe? An honest analysis of the real risks, what temp mail protects against, and when you should never use it. Updated 2026."
       title="Is Temp Mail Safe to Use?"
       description="An honest look at what temp mail actually protects you from, the real risks involved, and exactly when you should and shouldn't use it."
       icon={Shield}
       readTime="4 min read"
-      publishDate="2025"
+      publishDate="2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "Complete guide to temporary email.", readTime: "6 min" },

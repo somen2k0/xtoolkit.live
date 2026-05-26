@@ -5,12 +5,12 @@ export default function TempGmailExplained() {
   return (
     <BlogLayout
       seoTitle="Temp Gmail Explained — Gmail Dot Trick, Plus Trick & Real Temp Addresses"
-      seoDescription="What is a temp Gmail? How the Gmail dot trick and plus trick work, how to get a real temporary Gmail address, and when each method is useful. 2025 guide."
+      seoDescription="What is a temp Gmail? How the Gmail dot trick and plus trick work, how to get a real temporary Gmail address, and when each method is useful. 2026 guide."
       title="Temp Gmail Explained"
       description="How to get a temporary Gmail-style address using the dot trick, plus trick, or a real Gmail-linked disposable inbox — and when each approach is the right choice."
       icon={Mail}
       readTime="4 min read"
-      publishDate="2025"
+      publishDate="2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "Temp Mail vs Gmail", href: "/blog/temp-mail-vs-gmail", description: "Full comparison of temporary email and real Gmail.", readTime: "5 min" },

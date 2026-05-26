@@ -91,7 +91,7 @@ export default function ProfessionalBios() {
 
   return (
     <MiniToolLayout
-      seoTitle="Professional Twitter Bios (2025) — Templates for Every Industry"
+      seoTitle="Professional Twitter Bios (2026) — Templates for Every Industry"
       seoDescription="Copy professional Twitter bio templates for tech, marketing, finance, healthcare, legal, HR, design and more. 35+ templates — replace brackets with your details."
       icon={Briefcase}
       badge="35+ Templates"

@@ -43,7 +43,7 @@ export function BlogLayout({
   description,
   icon: Icon,
   readTime = "5 min read",
-  publishDate = "2025",
+  publishDate = "2026",
   category = "Email & Privacy",
   relatedArticles = [],
   relatedTools = [],

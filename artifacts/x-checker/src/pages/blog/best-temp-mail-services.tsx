@@ -4,13 +4,13 @@ import { Star, Mail, Shield, EyeOff } from "lucide-react";
 export default function BestTempMailServices() {
   return (
     <BlogLayout
-      seoTitle="Best Temp Mail Services (2025) — Top Disposable Email Providers"
-      seoDescription="The best temporary email services compared for 2025: free tiers, domain count, privacy, inbox persistence, and unique features. Find the right one for you."
-      title="Best Temp Mail Services (2025)"
+      seoTitle="Best Temp Mail Services (2026) — Top Disposable Email Providers"
+      seoDescription="The best temporary email services compared for 2026: free tiers, domain count, privacy, inbox persistence, and unique features. Find the right one for you."
+      title="Best Temp Mail Services (2026)"
       description="We compared the top temporary email providers on privacy, features, reliability, and ease of use. Here's which one to use for each situation."
       icon={Star}
       readTime="7 min read"
-      publishDate="2025"
+      publishDate="2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "Complete guide to disposable email addresses.", readTime: "6 min" },

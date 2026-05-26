@@ -138,7 +138,7 @@ export default function BioIdeas() {
 
   return (
     <MiniToolLayout
-      seoTitle="Twitter Bio Ideas Generator — Bio Templates for Every Niche (2025)"
+      seoTitle="Twitter Bio Ideas Generator — Bio Templates for Every Niche (2026)"
       seoDescription="Get free Twitter bio ideas for developers, entrepreneurs, creators, marketers, designers and more. Pick a niche, get 4 ready-to-use bio templates instantly."
       icon={Sparkles}
       badge="Free Bio Generator"

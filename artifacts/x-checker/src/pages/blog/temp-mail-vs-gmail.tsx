@@ -4,13 +4,13 @@ import { ArrowLeftRight, Mail, Shield, EyeOff } from "lucide-react";
 export default function TempMailVsGmail() {
   return (
     <BlogLayout
-      seoTitle="Temp Mail vs Gmail — Key Differences Explained (2025)"
+      seoTitle="Temp Mail vs Gmail — Key Differences Explained (2026)"
       seoDescription="Temp mail vs Gmail: a clear comparison of temporary email and permanent Google accounts. When to use each, privacy differences, and what Gmail can't do."
       title="Temp Mail vs Gmail — What's the Difference?"
       description="A clear, honest comparison of temporary email services and Gmail. When each is the right choice, and what Google can't offer that temp mail can."
       icon={ArrowLeftRight}
       readTime="5 min read"
-      publishDate="2025"
+      publishDate="2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "Complete guide to temporary email addresses.", readTime: "6 min" },
