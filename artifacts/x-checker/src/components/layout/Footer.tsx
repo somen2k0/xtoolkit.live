@@ -166,6 +166,8 @@ export function Footer() {
               {!subscribed ? (
                 <div className="flex flex-col gap-2">
                   <Input
+                    id="footer-newsletter-email"
+                    name="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

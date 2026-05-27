@@ -42,6 +42,8 @@ export function EmailCapture({
         {!submitted ? (
           <form onSubmit={handleSubmit} className="flex gap-2">
             <Input
+              id="email-capture-inline"
+              name="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -76,6 +78,8 @@ export function EmailCapture({
           {!submitted ? (
             <form onSubmit={handleSubmit} className="flex gap-2 w-full sm:w-auto">
               <Input
+                id="email-capture-banner"
+                name="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -111,6 +115,8 @@ export function EmailCapture({
       {!submitted ? (
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
           <Input
+            id="email-capture-default"
+            name="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
