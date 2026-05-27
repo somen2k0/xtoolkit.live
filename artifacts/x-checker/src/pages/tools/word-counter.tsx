@@ -167,6 +167,70 @@ export default function WordCounter() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Analyzing keyword density in SEO content</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Paste or type your text into the input area — works with any language or content type.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Word count, character count, sentence count, and paragraph count update instantly as you type.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Check the colored progress bars for platform-specific limits — green means within limits, yellow means approaching, red means over.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> View the top keywords section to see which words appear most frequently in your text.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Use "Copy Stats" to copy all metrics as plain text for reporting, sharing, or documentation.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Writers and bloggers</strong> checking article or essay word counts to meet editorial requirements.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Social media managers</strong> staying within platform character limits before posting.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Students</strong> verifying essay length requirements and reading time estimates for assignments.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">SEO writers</strong> hitting minimum word count targets for competitive search rankings.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Email marketers</strong> optimizing subject line length for maximum open rates on mobile devices.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Copywriters</strong> analyzing keyword density to ensure balanced, natural content for SEO.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Students, bloggers, content writers, social media managers, copywriters, and SEO professionals all rely on word counting tools daily. Any professional who creates written content needs to know character and word counts — whether for platform limits, client requirements, or SEO targets. Academic writers use it to hit exact word counts required for essays and reports. Journalists use it to match editorial space requirements. The tool is also popular with non-native English speakers who write in English and want to accurately gauge the length of their content.
+          </p>
+        </div>
+
+        {/* Platform limits and SEO */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Platform character limits explained</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Different platforms have strict character limits that directly affect how your content appears. Twitter/X allows 280 characters per tweet — exceeding this means you can't post. LinkedIn posts support up to 3,000 characters but only show the first 210 before a "see more" button in the feed. Instagram captions allow 2,200 characters but only display the first 125 in the feed. Email subject lines should stay under 60 characters to display fully on mobile devices, where over 60% of emails are now opened. Meta descriptions should be 150–160 characters for full display in Google search results.
+          </p>
+          <h3 className="text-sm font-semibold text-foreground/80">Word count and SEO</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Word count is one of many factors that can influence search rankings. While Google doesn't have a minimum word count requirement, studies consistently show that longer, more comprehensive content tends to rank better for competitive keywords. Most SEO professionals recommend a minimum of 1,000 words for blog posts targeting competitive keywords, and 300+ words for all indexed pages. Quality matters more than quantity — every word should add value for the reader.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "What is the character limit for Twitter/X?", a: "Twitter/X allows 280 characters per tweet for standard accounts. Twitter Blue/X Premium subscribers can post up to 25,000 characters in long-form posts. Your profile bio is limited to 160 characters separately." },
+              { q: "Does this tool count spaces as characters?", a: "Yes, the default character count includes spaces — which matches how most platforms count characters. The tool also shows 'characters without spaces' separately so you can see both figures at once." },
+              { q: "What is the ideal meta description length?", a: "Google typically displays meta descriptions up to 155–160 characters. Descriptions longer than this get truncated with '...' in search results, which can reduce click-through rates. Aim for 140–160 characters and include your primary keyword naturally." },
+              { q: "How many words should a blog post have?", a: "For SEO purposes, aim for 1,000–1,500 words for competitive topics and 500–800 words for less competitive long-tail keywords. Quality matters more than quantity — every word should add value. Very long posts (3,000+ words) often rank well for high-competition terms when they're genuinely comprehensive." },
+              { q: "What is reading time and how is it calculated?", a: "Reading time is estimated based on the average adult reading speed of approximately 238 words per minute. A 1,000 word article takes approximately 4 minutes to read at this speed. The estimate rounds up to the nearest half-minute." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -78,6 +78,11 @@ const IsTempMailSafe = lazy(() => import("@/pages/blog/is-temp-mail-safe"));
 const WhyWebsitesAskEmailVerification = lazy(() => import("@/pages/blog/why-websites-ask-email-verification"));
 const TempGmailExplained = lazy(() => import("@/pages/blog/temp-gmail-explained"));
 const HowToUseTempEmailExtension = lazy(() => import("@/pages/blog/how-to-use-temp-email-extension"));
+const WhatIsJsonLd = lazy(() => import("@/pages/blog/what-is-json-ld"));
+const WhatIsBase64 = lazy(() => import("@/pages/blog/what-is-base64"));
+const TwitterBioTips = lazy(() => import("@/pages/blog/twitter-bio-tips"));
+const WhatIsUuid = lazy(() => import("@/pages/blog/what-is-uuid"));
+const UrlEncodingGuide = lazy(() => import("@/pages/blog/url-encoding-guide"));
 // Category pages (lazy)
 const AiWritingTools = lazy(() => import("@/pages/categories/ai-writing-tools"));
 const SocialMediaTools = lazy(() => import("@/pages/categories/social-media-tools"));
@@ -218,6 +223,11 @@ function TrackedRouter() {
           <Route path="/blog/why-websites-ask-email-verification" component={WhyWebsitesAskEmailVerification} />
           <Route path="/blog/temp-gmail-explained" component={TempGmailExplained} />
           <Route path="/blog/how-to-use-temp-email-extension" component={HowToUseTempEmailExtension} />
+          <Route path="/blog/what-is-json-ld" component={WhatIsJsonLd} />
+          <Route path="/blog/what-is-base64" component={WhatIsBase64} />
+          <Route path="/blog/twitter-bio-tips" component={TwitterBioTips} />
+          <Route path="/blog/what-is-uuid" component={WhatIsUuid} />
+          <Route path="/blog/url-encoding-guide" component={UrlEncodingGuide} />
 
           {/* Category landing pages */}
           <Route path="/ai-writing-tools" component={AiWritingTools} />

@@ -111,6 +111,66 @@ export default function ProfileLinkGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Preparing a "follow these accounts" roundup for a blog post or report</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Enter one or more Twitter/X usernames — one per line, comma-separated, or space-separated. The @ symbol is optional.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Profile URLs are generated instantly as you type — no button click needed.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Get direct profile URLs for every username in the format <code className="text-xs font-mono bg-muted/60 rounded px-1">https://x.com/username</code>.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> Copy individual links by hovering over a row, or copy all links at once with "Copy All".</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Paste the links into spreadsheets, documents, newsletters, or outreach tools — they're ready to use immediately.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Social media managers</strong> building client profile reference lists for reporting and monitoring.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Researchers</strong> creating reference lists of accounts to track for studies or competitive analysis.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Marketers</strong> building influencer contact lists with clickable profile links for outreach spreadsheets.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Developers</strong> generating test data URLs for Twitter app testing and QA environments.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Content creators</strong> linking to collaborators and guests in show notes, newsletters, or blog posts.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">PR teams</strong> building journalist and media contact databases with direct profile access.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Social media managers, growth marketers, PR professionals, and researchers use profile link generators to quickly build lists of Twitter/X profile URLs. Instead of manually typing twitter.com/username for dozens or hundreds of accounts, this tool generates all links instantly. Agencies use it when onboarding clients to compile competitor profile lists. Newsletters use it to add clickable attribution links. Podcast producers use it to credit guests in show notes.
+          </p>
+        </div>
+
+        {/* Twitter/X URL formats */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Twitter/X profile URL formats explained</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Twitter/X profile URLs work in two formats: <code className="text-xs font-mono bg-muted/60 rounded px-1">https://twitter.com/username</code> (old format, still works) and <code className="text-xs font-mono bg-muted/60 rounded px-1">https://x.com/username</code> (new format after the platform's rebranding). Both URLs redirect to the same profile — the platform automatically redirects twitter.com links to x.com. Our generator creates links in the canonical <code className="text-xs font-mono bg-muted/60 rounded px-1">x.com</code> format, which is the current official URL scheme.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "What format does a Twitter/X profile URL use?", a: "https://x.com/username is the current canonical format after Twitter's rebranding to X. The older https://twitter.com/username format still works and automatically redirects to the same profile. Both point to the same account." },
+              { q: "Can I generate links for multiple profiles at once?", a: "Yes — paste any number of usernames (one per line, comma-separated, or space-separated) and the tool generates all profile URLs instantly. There is no hard limit on the number of usernames you can process." },
+              { q: "Do generated links work for private accounts?", a: "The links are generated correctly for any username format. Whether a visitor can actually see the profile depends on the account's privacy settings — private accounts require a follow request that the account owner must approve." },
+              { q: "Is there a limit to how many links I can generate?", a: "No limit. Process as many usernames as you need in a single batch. The tool processes everything instantly in your browser with no server calls required." },
+              { q: "Can I export the generated links to a spreadsheet?", a: "Yes. Click 'Copy All' and paste the links into any spreadsheet application like Excel or Google Sheets. Each URL will be on its own row, ready to use as clickable links in your document." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

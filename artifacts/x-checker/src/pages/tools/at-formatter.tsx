@@ -129,6 +129,66 @@ export default function AtFormatter() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Formatting usernames from a CRM export for outreach</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Paste your list of usernames — one per line. They can include or omit the @ symbol in any mix.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Choose <strong className="text-foreground/80">Add @</strong> to prefix every username with @ (for social media mentions), or <strong className="text-foreground/80">Remove @</strong> to strip the @ prefix (for CRM tools or spreadsheets).</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> The result updates instantly as you type — no button click needed.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> Copy individual usernames by hovering over any row, or copy the entire list with "Copy All".</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Paste the formatted list into your tweet, CRM, outreach tool, or spreadsheet.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Cleaning scraped username data</strong> for consistency before importing into another tool.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Formatting handle lists</strong> for Twitter mention posts where the @ prefix is required.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Preparing usernames for CRM or outreach tools</strong> that expect handles without the @ symbol.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Standardizing data in social media spreadsheets</strong> where mixed formatting causes import errors.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Processing bulk lists for social media campaigns</strong> where hundreds of handles need consistent formatting.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Converting between formats</strong> when switching between tools that have different username format expectations.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Social media managers, growth hackers, data analysts, and marketers use the @ formatter when working with large lists of Twitter/X handles. Data consistency is critical when usernames are used in automated tools, APIs, or imported into CRM systems. A list that mixes @username and username (without @) can break imports, cause duplicate detection to fail, and create inconsistencies in reporting. Our formatter ensures every handle in a list is in exactly the right format for whatever tool you're using.
+          </p>
+        </div>
+
+        {/* Why consistent formatting matters */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Why consistent username formatting matters</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Different tools have different expectations for username format. Twitter's mention system requires the @ symbol — typing <code className="text-xs font-mono bg-muted/60 rounded px-1">@username</code> in a tweet creates a clickable mention. Many CRMs and outreach tools expect usernames <em>without</em> the @ symbol, and including it breaks their lookup functions. Spreadsheets used for data analysis work better with clean, consistent data. When you're working with hundreds or thousands of usernames from multiple sources, a mix of formats becomes a data quality problem. Our formatter resolves this in one click regardless of list size.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "What does the @ formatter do exactly?", a: "It adds or removes the @ symbol from Twitter/X usernames in bulk. Handles any size list instantly — processing is done in your browser with no server calls, so there are no rate limits or delays." },
+              { q: "Can I process hundreds of usernames at once?", a: "Yes. Paste any number of usernames — one per line — and the formatter processes all of them instantly. There is no hard limit on the number of usernames you can format in a single operation." },
+              { q: "What if my list has mixed formats (some with @, some without)?", a: "The formatter detects which usernames already have @ and which don't, then applies the operation correctly to all of them. Choosing 'Add @' won't double-add the symbol to usernames that already have it." },
+              { q: "Does it validate usernames?", a: "The formatter checks for basic Twitter/X username format rules — usernames must be alphanumeric with underscores, and no longer than 15 characters. Invalid entries are still processed but the result may not be a valid Twitter handle." },
+              { q: "Can I use this for Instagram or other platforms?", a: "Yes. The @ symbol format is standard across Twitter/X, Instagram, TikTok, and most social platforms. The formatter works for any @ handle list, regardless of which platform the usernames are from." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

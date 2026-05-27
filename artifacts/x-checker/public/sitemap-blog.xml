@@ -78,4 +78,44 @@
     <priority>0.78</priority>
   </url>
 
+  <!-- JSON-LD: developer/SEO educational content -->
+  <url>
+    <loc>https://xtoolkit.live/blog/what-is-json-ld</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- Base64: high-volume developer evergreen query -->
+  <url>
+    <loc>https://xtoolkit.live/blog/what-is-base64</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- Twitter bio tips: social media / creator audience -->
+  <url>
+    <loc>https://xtoolkit.live/blog/twitter-bio-tips</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- UUID: developer evergreen, high search volume -->
+  <url>
+    <loc>https://xtoolkit.live/blog/what-is-uuid</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- URL encoding: developer fundamentals, broad search intent -->
+  <url>
+    <loc>https://xtoolkit.live/blog/url-encoding-guide</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
 </urlset>

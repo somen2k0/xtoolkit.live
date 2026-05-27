@@ -200,6 +200,41 @@ const STATIC_PAGES = [
       "Step-by-step guide: install the X Toolkit Chrome Extension, generate a disposable inbox, auto-copy OTP codes, use temp Gmail, and get background notifications from your toolbar.",
   },
   {
+    path: "/blog/what-is-json-ld",
+    label: "What Is JSON-LD?",
+    title: "What Is JSON-LD? Structured Data for SEO Explained | X Toolkit Blog",
+    description:
+      "JSON-LD is the recommended way to add structured data to web pages. Learn how it works, which Schema.org types to use, and how to implement it for rich results.",
+  },
+  {
+    path: "/blog/what-is-base64",
+    label: "What Is Base64?",
+    title: "What Is Base64 Encoding? Complete Developer Guide | X Toolkit Blog",
+    description:
+      "Base64 encoding converts binary data to ASCII text for safe transmission. Complete guide covering how it works, where it appears, and when to use it.",
+  },
+  {
+    path: "/blog/twitter-bio-tips",
+    label: "Twitter/X Bio Tips",
+    title: "Twitter/X Bio Tips — How to Write a Bio That Gets Followers | X Toolkit Blog",
+    description:
+      "Your Twitter/X bio is 160 characters to convince someone to follow you. Proven structure, examples by niche, and the mistakes most accounts make.",
+  },
+  {
+    path: "/blog/what-is-uuid",
+    label: "What Is a UUID?",
+    title: "What Is a UUID? Format, Versions & Use Cases Explained | X Toolkit Blog",
+    description:
+      "UUIDs are 128-bit identifiers used in databases, APIs, and distributed systems. Covers format, UUID v1 vs v4 vs v7, and when to use UUIDs vs auto-increment IDs.",
+  },
+  {
+    path: "/blog/url-encoding-guide",
+    label: "URL Encoding Guide",
+    title: "URL Encoding Guide — What Is Percent Encoding | X Toolkit Blog",
+    description:
+      "URL encoding (percent encoding) converts unsafe characters for safe use in URLs. Complete guide covering how it works, reserved characters, and common developer mistakes.",
+  },
+  {
     path: "/chrome-extension",
     label: "Chrome Extension",
     title: "Free Temp Email Chrome Extension — Disposable Inbox & OTP Detector | X Toolkit",

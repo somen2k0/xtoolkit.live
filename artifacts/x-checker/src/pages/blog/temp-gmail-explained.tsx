@@ -90,6 +90,25 @@ export default function TempGmailExplained() {
 
       <h2>Try It Now</h2>
       <p>Our <strong>Temp Gmail</strong> tool generates a real temporary Gmail address for verification purposes. Our <strong>Gmail Tricks</strong> generator shows all possible dot and plus variants for any Gmail username. Both are free, require no signup, and work directly in your browser.</p>
+
+      <h2>Privacy Implications of Each Method</h2>
+      <p>It's worth being clear about the privacy level each method provides. The dot trick and plus trick offer <em>zero privacy</em> — your real Gmail username is immediately visible from the email address itself. Anyone who receives email from <code>j.o.h.n@gmail.com</code> or <code>you+shopping@gmail.com</code> knows your real address trivially. These methods are useful for inbox organization and duplicate detection bypass, not for privacy.</p>
+      <p>Real temp Gmail addresses via shared inbox services provide <em>partial anonymity</em> — the @gmail.com domain doesn't reveal your identity, but the inbox is shared with potentially thousands of others. Never use this method for anything sensitive. For actual email privacy, use standard temp mail (non-Gmail domain) or a permanent alias service like SimpleLogin, which generates truly anonymous forwarding addresses.</p>
+
+      <h2>When Each Method Succeeds and Fails</h2>
+      <p>The dot trick works on sites that check for email uniqueness but don't normalize Gmail addresses (many smaller services don't know that Gmail ignores dots). It fails on services that do normalize Gmail addresses — Google's own properties do, and increasingly more sites are catching up. The plus trick works for inbox filtering but fails for privacy everywhere, since the base address is trivially extractable. Real temp Gmail works on sites that require @gmail.com but fails if the site has already seen high abuse from Gmail-based temp mail services and added additional detection.</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <p><strong>Does the Gmail dot trick work on Google's own services?</strong><br />No. Google normalizes Gmail addresses internally and treats all dot variants as the same account. You cannot create multiple Google accounts using the same username with different dot placements — Google will recognize them as the same address. The dot trick works on third-party sites that don't apply the same normalization.</p>
+
+      <p><strong>Can I use the Gmail plus trick to create multiple Netflix or Spotify accounts?</strong><br />Netflix, Spotify, and most major services are aware of the plus trick and strip the plus tag before checking for duplicates. <code>you+trial@gmail.com</code> is stored as <code>you@gmail.com</code> in their database. This method no longer works for creating duplicate accounts on services that have implemented plus-stripping.</p>
+
+      <p><strong>Is using a shared Gmail inbox (Temp Gmail) safe?</strong><br />For email verification only — yes, it's fine. For anything sensitive — absolutely not. Shared temp Gmail inboxes are accessible to many people using the same underlying Gmail account's dot variants. Never use them to receive passwords, one-time codes for important accounts, or any personal information.</p>
+
+      <p><strong>How many dot variants does a Gmail address have?</strong><br />It depends on username length. A 10-character username can have 2⁹ = 512 dot variants (each of the 9 spaces between characters can have a dot or not). Our Gmail Tricks generator shows all valid variants for any username, which you can use for inbox filtering, testing, or secondary registrations on services that don't normalize Gmail addresses.</p>
+
+      <p><strong>What is the best method to avoid email tracking when signing up for services?</strong><br />For maximum protection: use a standard temp mail address (not Gmail-based) for throwaway signups, or a permanent alias service like SimpleLogin for services you'll actually use. Neither your real address nor any information traceable to you appears in these addresses. Gmail tricks don't provide this level of protection since your real address is always recoverable from the variant.</p>
     </BlogLayout>
   );
 }

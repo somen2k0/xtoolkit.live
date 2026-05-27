@@ -225,6 +225,69 @@ export default function JwtDecoder() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Inspecting custom claims in API tokens during development</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Paste your JWT token into the input field — the full token including all three dot-separated parts.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> The decoder instantly splits the token into header, payload, and signature, and decodes the Base64URL-encoded header and payload.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> View the decoded JSON for each section — includes all claims, algorithm info, and token type.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> Check the expiration status — the tool shows the human-readable expiry date and warns clearly if the token has already expired.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Copy individual sections or the full decoded token for use in debugging or documentation.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Debugging 401 Unauthorized errors</strong> — inspect the token to verify claims match what your API expects.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Verifying token expiry</strong> — check whether a token's <code className="text-xs font-mono bg-muted/60 rounded px-1">exp</code> claim explains why authentication is failing.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Inspecting OAuth tokens</strong> from providers like Auth0, Okta, Firebase, or your own auth server.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Understanding token structure</strong> for developers learning JWT-based authentication for the first time.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Checking custom claims</strong> like user roles, permissions, or tenant IDs encoded in your application's tokens.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Comparing tokens</strong> before and after a refresh to verify claims updated as expected.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Backend developers, frontend engineers, DevOps engineers, and security professionals working with modern authentication systems use JWT decoders constantly. Whenever authentication breaks — a user can't log in, an API returns 401, or a session expires unexpectedly — inspecting the JWT is typically the first debugging step. This tool saves time by showing all the relevant information immediately without requiring custom code to decode and pretty-print the token.
+          </p>
+        </div>
+
+        {/* Understanding JWT structure */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Understanding JWT structure</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            A JWT consists of three Base64URL-encoded parts separated by dots: <code className="text-xs font-mono bg-muted/60 rounded px-1">header.payload.signature</code>. The header specifies the algorithm used to sign the token (HS256, RS256, ES256, etc.) and the token type (JWT). The payload contains the actual claims — the data being communicated, including registered claims like <code className="text-xs font-mono bg-muted/60 rounded px-1">sub</code>, <code className="text-xs font-mono bg-muted/60 rounded px-1">iat</code>, <code className="text-xs font-mono bg-muted/60 rounded px-1">exp</code>, and any custom claims your application adds. The signature is a cryptographic hash that verifies the token hasn't been tampered with — it can only be verified with the original secret or public key.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Importantly: the header and payload are only Base64URL-encoded, not encrypted. Anyone with access to a JWT can decode and read the payload. Never store sensitive data (passwords, credit card numbers, private information) in JWT payloads — they are visible to anyone who holds the token.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">More frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "Why am I getting a 401 error even with a valid JWT?", a: "Check your token's exp claim — if it's expired, your server will reject it. Also verify the aud (audience) and iss (issuer) claims match what your server expects. Mismatched audiences and issuers are common causes of 401 errors that aren't immediately obvious. Copy the token here to inspect all claims in seconds." },
+              { q: "What is Base64URL encoding and how is it different from Base64?", a: "Base64URL is a URL-safe variant of Base64 that replaces + with - and / with _, and omits padding = characters. This ensures the encoded string can be safely included in URLs and HTTP headers without escaping. JWT uses Base64URL (not regular Base64) for its header and payload sections." },
+              { q: "Can I use this tool with tokens from Auth0, Firebase, or other providers?", a: "Yes. JWTs follow the RFC 7519 standard regardless of which provider generates them. Tokens from Auth0, Firebase Authentication, Okta, AWS Cognito, Supabase, and any other standards-compliant auth provider can be decoded with this tool." },
+              { q: "Is it safe to paste my production JWT here?", a: "This tool decodes JWTs entirely in your browser — no data leaves your device. However, best practice is to treat any JWT as a sensitive credential: rotate your tokens after any debugging session that involved sharing them, and never paste JWTs into untrusted third-party tools." },
+              { q: "What is the 'alg: none' JWT vulnerability?", a: "The 'none' algorithm is a known JWT vulnerability where an attacker modifies the header to set alg to 'none' and strips the signature, hoping the server accepts unsigned tokens. Well-implemented JWT libraries reject 'alg: none' by default. When you decode a JWT and see 'alg': 'none' in the header, this is a red flag indicating a potentially malicious or misconfigured token." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

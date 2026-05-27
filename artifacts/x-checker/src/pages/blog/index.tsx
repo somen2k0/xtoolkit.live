@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome } from "lucide-react";
+import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon } from "lucide-react";
 
 const ARTICLES = [
   {
@@ -82,6 +82,61 @@ const ARTICLES = [
     color: "text-cyan-400",
     bg: "bg-cyan-400/10 border-cyan-400/20",
   },
+  {
+    slug: "what-is-json-ld",
+    href: "/blog/what-is-json-ld",
+    title: "What Is JSON-LD? Structured Data for SEO Explained",
+    description: "JSON-LD is the modern way to add structured data to web pages. How it works, Schema.org types, and why it matters for rich results in Google.",
+    readTime: "7 min",
+    category: "SEO",
+    icon: Code,
+    color: "text-orange-400",
+    bg: "bg-orange-400/10 border-orange-400/20",
+  },
+  {
+    slug: "what-is-base64",
+    href: "/blog/what-is-base64",
+    title: "What Is Base64 Encoding? A Complete Developer Guide",
+    description: "Base64 converts binary data to ASCII text for safe transmission. How it works, where you encounter it, and when to use it in your own projects.",
+    readTime: "6 min",
+    category: "Developer",
+    icon: Binary,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10 border-sky-400/20",
+  },
+  {
+    slug: "twitter-bio-tips",
+    href: "/blog/twitter-bio-tips",
+    title: "Twitter/X Bio Tips — How to Write a Bio That Gets Followers",
+    description: "Your Twitter/X bio is 160 characters to convince someone to follow you. Proven tips, examples, and the mistakes most people make.",
+    readTime: "6 min",
+    category: "Social Media",
+    icon: User,
+    color: "text-pink-400",
+    bg: "bg-pink-400/10 border-pink-400/20",
+  },
+  {
+    slug: "what-is-uuid",
+    href: "/blog/what-is-uuid",
+    title: "What Is a UUID? Format, Versions & Use Cases Explained",
+    description: "UUIDs are 128-bit identifiers used in databases, APIs, and distributed systems. Format, v1 vs v4 vs v7, and when to use UUIDs vs auto-increment.",
+    readTime: "6 min",
+    category: "Developer",
+    icon: Hash,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10 border-sky-400/20",
+  },
+  {
+    slug: "url-encoding-guide",
+    href: "/blog/url-encoding-guide",
+    title: "URL Encoding Guide — What Is Percent Encoding and How It Works",
+    description: "URL encoding converts unsafe characters into percent-escaped sequences. How it works, which characters need encoding, and common developer mistakes.",
+    readTime: "5 min",
+    category: "Developer",
+    icon: LinkIcon,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10 border-sky-400/20",
+  },
 ];
 
 const CATEGORY_BADGE: Record<string, string> = {
@@ -89,6 +144,9 @@ const CATEGORY_BADGE: Record<string, string> = {
   Comparison: "bg-amber-400/10 text-amber-400 border-amber-400/25",
   Security: "bg-emerald-400/10 text-emerald-400 border-emerald-400/25",
   Explainer: "bg-purple-400/10 text-purple-400 border-purple-400/25",
+  SEO: "bg-orange-400/10 text-orange-400 border-orange-400/25",
+  Developer: "bg-sky-400/10 text-sky-400 border-sky-400/25",
+  "Social Media": "bg-pink-400/10 text-pink-400 border-pink-400/25",
 };
 
 export default function BlogIndex() {

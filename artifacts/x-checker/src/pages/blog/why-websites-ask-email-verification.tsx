@@ -84,6 +84,22 @@ export default function WhyWebsitesAskEmailVerification() {
         <li>Use your <strong>real email</strong> only for critical accounts (banking, government, professional services)</li>
       </ol>
       <p>This maximizes both convenience and privacy without sacrificing account recovery for the things that actually matter.</p>
+
+      <h2>How to Identify Cynical vs Legitimate Email Gates</h2>
+      <p>Not every email gate is a marketing tactic. Here's a quick mental filter for deciding whether to use your real address or a temp one: Ask whether you would care if you lost access to this account permanently. If the answer is no — it's a free trial, a gated whitepaper, a one-time forum signup — use temp mail. If the answer is yes — it's a service you'll pay for, a platform you'll keep, an account linked to your finances — use your real email or a permanent alias.</p>
+      <p>Also consider whether the service's core value proposition requires ongoing email communication. A news site offering gated articles primarily wants your email for their newsletter — temp mail is appropriate. A project management tool you're trialing with real work data needs your real email for account recovery and team invitations — real email is appropriate.</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <p><strong>Why do some websites immediately send marketing emails after verification?</strong><br />The moment you verify your email, your address is added to their marketing database as a "verified contact" with explicit consent. Depending on their email automation setup, a welcome sequence, drip campaign, or promotional newsletter may trigger automatically. This is why using temp mail for low-stakes signups is effective — the marketing goes to an inbox you've already abandoned.</p>
+
+      <p><strong>Can a website verify my email is real without sending a verification link?</strong><br />Yes. Services use real-time email verification APIs (ZeroBounce, NeverBounce, Bouncer) to check whether an email address is deliverable before allowing signup. These APIs check the domain's MX records, validate the format, and in some cases test whether the mailbox accepts messages without actually sending one. This is why some services detect disposable emails even without completing the verification flow.</p>
+
+      <p><strong>Why do banks require verified email while social apps are more lenient?</strong><br />Banks operate under regulatory frameworks (KYC — Know Your Customer) that require documented, verifiable identity. Email verification is one layer of a multi-factor identity verification process. Social apps are primarily interested in engagement and advertising reach — verification serves marketing purposes more than security ones, so enforcement is less strict.</p>
+
+      <p><strong>Is double opt-in required by law?</strong><br />Not universally. GDPR in Europe requires clear affirmative consent before sending marketing emails, and double opt-in (verifying via email) is the industry-standard way to document that consent. CAN-SPAM in the US does not specifically require double opt-in, but requires an easy unsubscribe mechanism. CASL in Canada requires express consent. Most responsible email marketers use double opt-in regardless of legal requirements because it improves list quality.</p>
+
+      <p><strong>What is a disposable email detector and how does it work?</strong><br />Disposable email detectors are services (usually offered as an API) that maintain databases of known temporary email domains. When you submit an email address during signup, the service checks it against this list in real time. If your domain (e.g., tempmail.net) is on the list, the signup is rejected. These databases are updated regularly but are never 100% complete — less popular or newer disposable domains often slip through.</p>
     </BlogLayout>
   );
 }

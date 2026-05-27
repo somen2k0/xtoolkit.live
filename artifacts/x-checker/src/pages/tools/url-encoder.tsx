@@ -180,6 +180,78 @@ export default function UrlEncoder() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Preparing data for API calls that require URL-encoded form bodies</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Paste your URL or text into the input field — works with full URLs, query parameters, or any plain text.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Select <strong className="text-foreground/80">Encode</strong> mode to convert special characters to percent-encoded format (spaces → %20, &amp; → %26, etc.).</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Select <strong className="text-foreground/80">Decode</strong> mode to convert percent-encoded text back to readable format.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> The output updates in real time — no button click needed.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Use "Swap" to instantly reverse the operation and decode what you just encoded.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Encoding query parameters</strong> for REST API requests that contain spaces, special characters, or non-ASCII text.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Decoding URLs</strong> received from web services, server logs, or analytics platforms to make them human-readable.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Fixing broken URLs</strong> in emails or documents that contain unencoded spaces or ampersands.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Building URL strings programmatically</strong> and verifying the encoding looks correct before using in production.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Debugging URL-related issues</strong> in web apps where parameters aren't being passed correctly.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Encoding form data</strong> for HTTP POST requests with <code className="text-xs font-mono bg-muted/60 rounded px-1">application/x-www-form-urlencoded</code> content type.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Web developers, API developers, backend engineers, and QA testers use URL encoding tools constantly. Anyone working with HTTP requests, REST APIs, or web applications regularly encounters the need to encode and decode URLs. Frontend developers use it when building fetch requests with dynamic parameters. Backend developers use it to verify that incoming request parameters are correctly encoded. DevOps engineers use it to debug URL-related issues in nginx logs and redirects.
+          </p>
+        </div>
+
+        {/* Understanding URL encoding */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Understanding URL encoding</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            URLs can only safely contain certain characters from the ASCII character set. When URLs need to include characters outside this safe set — like spaces, ampersands, equals signs, or non-English characters — those characters must be percent-encoded. Percent encoding replaces unsafe characters with a % sign followed by the character's two-digit hexadecimal ASCII code. For example, a space becomes %20 and &amp; becomes %26.
+          </p>
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-4 space-y-2">
+            <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Common encoding examples</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+              {[["space", "%20"], ["&", "%26"], ["=", "%3D"], ["+", "%2B"], ["/", "%2F"], ["?", "%3F"], ["#", "%23"], ["@", "%40"]].map(([char, enc]) => (
+                <div key={char} className="flex items-center gap-2 text-muted-foreground">
+                  <span className="text-foreground/80">{char}</span>
+                  <span className="text-muted-foreground/50">→</span>
+                  <span className="text-primary/80">{enc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "What is URL encoding?", a: "URL encoding (also called percent encoding) converts characters that are not allowed in URLs into a safe format for transmission. Spaces become %20, ampersands become %26, and so on. It ensures URLs are valid and parseable by browsers and servers." },
+              { q: "When do I need to URL encode a string?", a: "Whenever passing special characters in query parameters, form data, or API requests. Characters like spaces, &, =, and non-ASCII characters have special meaning in URLs and must be encoded to be treated as data rather than URL structure." },
+              { q: "What is the difference between URL encoding and Base64 encoding?", a: "URL encoding converts characters to percent-escaped sequences specifically for use in URLs. Base64 converts binary data (like images or files) to ASCII text for safe transmission. They serve completely different purposes and should not be confused." },
+              { q: "Why does + sometimes appear in URLs instead of %20 for spaces?", a: "In HTML form data (application/x-www-form-urlencoded), spaces are encoded as + instead of %20. In regular URL query strings, spaces should be %20. Both are valid in their respective contexts, but mixing them can cause bugs when decoding." },
+              { q: "What is double URL encoding?", a: "Double encoding happens when an already-encoded URL gets encoded again — turning %20 into %2520 (% itself gets encoded to %25). This is usually a bug in code that encodes data twice. Our decoder handles both single and double-encoded URLs and will decode them step by step." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

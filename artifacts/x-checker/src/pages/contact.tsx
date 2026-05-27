@@ -169,6 +169,18 @@ export default function Contact() {
           </div>
           <span className="font-medium text-foreground">support@xtoolkit.live</span>
         </div>
+
+        <div className="mt-8 rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3 text-left">
+          <h2 className="text-sm font-semibold">What we can help with</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Bug reports</strong> — if a tool isn't working correctly, describe the issue and include your browser and operating system.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Tool suggestions</strong> — ideas for new tools that would help you or your team. We build based on user demand.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Feature requests</strong> — improvements or additions to existing tools. Be specific about what you'd like to see.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Content corrections</strong> — if you spot an error in any of our guides, blog posts, or tool descriptions.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Business inquiries</strong> — partnerships, advertising, or integration questions.</span></li>
+          </ul>
+          <p className="text-xs text-muted-foreground pt-1">We typically respond within 1–2 business days. For urgent issues, include "URGENT" in your subject line.</p>
+        </div>
       </div>
     </Layout>
   );

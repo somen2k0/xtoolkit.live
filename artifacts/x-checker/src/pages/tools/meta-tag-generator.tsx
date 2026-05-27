@@ -296,6 +296,69 @@ export default function MetaTagGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Generating Twitter Card markup for better click-through rates on X</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Enter your page title and meta description — character counters show when you're within optimal ranges.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Optionally add Open Graph-specific title and description if you want social previews to differ from search snippets.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Enter your OG image URL (1200×630px recommended) and canonical URL for the page.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> Choose your Twitter Card type — summary for small thumbnail, summary_large_image for banner-style previews.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Copy the complete generated HTML and paste it into your page's <code className="text-xs font-mono bg-muted/60 rounded px-1">&lt;head&gt;</code> section.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">New website or landing page launch</strong> — ensure every page has complete, optimized meta tags from day one.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Blog post SEO</strong> — generate unique titles and descriptions for each post to avoid duplicate meta tag warnings.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Social media share optimization</strong> — set custom OG images and titles so links look professional when shared on LinkedIn, Slack, or Discord.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Twitter/X link previews</strong> — configure Twitter Card tags to get large image previews instead of plain text links.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">E-commerce product pages</strong> — ensure product pages have optimized titles that appear correctly in Google Shopping and social shares.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Technical SEO audits</strong> — generate the correct meta tag HTML for pages that are missing or have incorrect tags.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            SEO professionals, web developers, content marketers, and site owners use meta tag generators to ensure their pages are correctly configured for both search engines and social sharing. Getting meta tags right is one of the most fundamental on-page SEO tasks — it affects how your pages appear in Google search results and what users see when your content is shared on social media. Agencies use this tool to quickly generate meta tag templates for client sites, while individual bloggers use it to ensure each post looks its best when shared.
+          </p>
+        </div>
+
+        {/* Why meta tags matter for SEO */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Why meta tags matter for SEO and social sharing</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Meta tags are HTML elements in your page's <code className="text-xs font-mono bg-muted/60 rounded px-1">&lt;head&gt;</code> that provide metadata about the page to search engines and social platforms. Google uses your title tag as the primary clickable headline in search results, and your meta description as the descriptive snippet below it. While Google sometimes rewrites these to better match a user's query, a well-written title and description significantly improve click-through rates when they do appear.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Open Graph tags serve a completely different purpose: they control how your page appears when shared on Facebook, LinkedIn, Slack, WhatsApp, iMessage, and other platforms. Without OG tags, these platforms guess your title, description, and image — often producing poor results. With OG tags, you control exactly how your link previews appear. Twitter Card tags serve the same purpose specifically for X (Twitter), which has its own tag format separate from Open Graph.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">More frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "Does changing meta tags immediately affect my Google ranking?", a: "Meta tag changes don't directly affect ranking, but they affect click-through rate — how many users click your result in search. A better title and description that matches search intent typically increases CTR, which can indirectly improve your position over time. Changes take effect when Google re-crawls your page, which can take days to weeks." },
+              { q: "How do I test my Open Graph tags after adding them?", a: "Use the Facebook Sharing Debugger (developers.facebook.com/tools/debug/) to preview and validate OG tags. LinkedIn has its own Post Inspector, and Twitter/X has its Card Validator. These tools show exactly what the preview will look like and highlight any errors. They also let you clear cached previews if you updated tags on an existing page." },
+              { q: "Should I use different OG title/description from my SEO title/description?", a: "Not always, but sometimes. For social sharing, a slightly more engaging, benefit-focused title can work better than an SEO-optimized title. Our generator lets you set different values for SEO vs. OG — if you don't set OG-specific values, it uses the SEO values as fallback, which works fine in most cases." },
+              { q: "What happens if I don't add a canonical tag?", a: "Without a canonical tag, Google may index multiple versions of the same page (http vs https, www vs non-www, with vs without trailing slash) as separate pages, potentially splitting your ranking signals. The canonical tag tells Google which version is the 'real' one and consolidates signals to that URL. Add it to every page using the exact URL format you want indexed." },
+              { q: "What is the robots meta tag and should I add it?", a: "The robots meta tag tells search engines whether to index a page and follow its links. The default (no robots tag) means index and follow. You only need it if you want to prevent indexing (noindex) — for example, thank-you pages, duplicate content, admin pages, and staging environments. Our generator doesn't add a robots tag by default since most pages should be indexed." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

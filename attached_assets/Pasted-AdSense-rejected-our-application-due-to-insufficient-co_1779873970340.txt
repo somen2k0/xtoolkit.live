@@ -1,0 +1,1217 @@
+AdSense rejected our application due to insufficient
+content. We need to fix this before resubmitting.
+
+DO NOT touch any tool functionality or UI.
+Only add content sections below existing tool UI.
+
+===================================================
+PRIORITY 1 — ADD CONTENT TO 10 THIN TOOL PAGES
+===================================================
+
+For each page below add this structure:
+- Intro paragraph (3-4 sentences)
+- "How it works" section (4-5 steps)
+- "Common use cases" (5-6 bullet points)
+- "Who uses this tool" section (1 paragraph)
+- FAQ section (5 Q&As minimum)
+
+Minimum 800 readable words per page.
+Do not pad with repetitive content — add real
+value with examples, explanations, and use cases.
+
+--- /tools/bio-generator ---
+
+Intro:
+"The AI Bio Generator creates professional Twitter/X
+bios in seconds using Llama 3.3 70B. Enter your
+niche or profession and get 3 unique bio options
+instantly — no writing skills needed. Whether
+you're a developer, marketer, creator, or business
+owner, our AI writes bios that capture your
+personality and expertise."
+
+How it works:
+1. Enter your niche or topic (e.g. developer,
+   marketer, fitness coach, entrepreneur)
+2. Optionally add a tone preference (professional,
+   witty, minimal, motivational, casual)
+3. Click Generate Bios
+4. Get 3 unique AI-written bios instantly
+5. Copy your favorite and paste into Twitter/X
+6. Regenerate as many times as you want for free
+
+Use cases:
+- New Twitter/X users setting up their profile
+- Professionals building their personal brand
+- Content creators showcasing their niche
+- Businesses setting up company profiles
+- Anyone refreshing their social media presence
+- Job seekers highlighting their expertise
+
+Who uses this tool:
+"Our AI bio generator is used by social media
+managers, entrepreneurs, freelancers, content
+creators, and professionals across every industry.
+Anyone who wants a compelling Twitter/X bio
+without spending hours writing and rewriting
+uses this tool to get great results in seconds."
+
+Why your Twitter/X bio matters:
+"Your Twitter/X bio is the first thing people
+see when they visit your profile. You have
+160 characters to explain who you are, what
+you do, and why someone should follow you.
+A compelling bio increases your follower
+conversion rate — the percentage of profile
+visitors who actually hit follow. Studies show
+that profiles with clear, well-written bios
+get significantly more followers than those
+with empty or generic descriptions."
+
+Tips for a great Twitter/X bio:
+- State clearly what you do in the first line
+- Include relevant keywords for your niche
+- Add a touch of personality or humor
+- Include a call to action (follow for X, link in bio)
+- Use emojis sparingly for visual appeal
+- Mention your location if relevant to your audience
+- Include notable achievements or credentials
+
+FAQ:
+Q: How does the AI bio generator work?
+A: It uses Groq's Llama 3.3 70B language model
+   to generate contextually relevant, engaging
+   Twitter/X bios based on your niche and tone
+   preferences. Each generation produces 3 unique
+   options so you can choose the best fit.
+
+Q: Is the bio generator free to use?
+A: Yes, completely free with no signup required.
+   Generate as many bios as you need with no
+   daily limits.
+
+Q: Can I use the generated bio directly?
+A: Yes. The generated bios are ready to use.
+   You can copy them directly to your Twitter/X
+   profile or customize them further to add
+   personal details like your location or website.
+
+Q: How long should a Twitter/X bio be?
+A: Twitter/X allows up to 160 characters for
+   your bio. Our generator creates bios that
+   fit within this limit while maximizing impact.
+   Shorter bios (under 120 characters) often
+   perform better as they're easier to read at
+   a glance.
+
+Q: Can I generate bios for a business account?
+A: Yes. Enter your business type and niche
+   in the input field. The AI will generate
+   professional bios appropriate for business
+   accounts including company voice and value
+   proposition.
+
+--- /tools/css-minifier ---
+
+Intro:
+"The CSS Minifier reduces your CSS file size by
+removing whitespace, comments, and unnecessary
+characters without changing how your styles work.
+Smaller CSS files load faster, improving your
+site's performance scores and user experience.
+A typical CSS file can be reduced by 20-50%
+through minification — making it one of the
+easiest performance wins available."
+
+How it works:
+1. Paste your CSS code into the input field
+2. Click Minify CSS
+3. Get your compressed CSS code instantly
+4. Copy the minified output
+5. Replace your original CSS file or link
+   with the minified version in production
+
+Use cases:
+- Optimizing CSS before deploying to production
+- Reducing page load time for better Core Web Vitals
+- Compressing large CSS frameworks like Bootstrap
+- Improving Google PageSpeed Insights scores
+- Reducing bandwidth usage on high-traffic sites
+- Meeting performance budgets for web projects
+
+Who uses this tool:
+"Web developers, frontend engineers, and site
+owners use CSS minification as a standard part
+of their deployment process. Performance-focused
+developers minify all CSS, JavaScript, and HTML
+before pushing to production to ensure the fastest
+possible load times for users."
+
+Understanding CSS minification:
+"When you write CSS, you naturally include spaces,
+line breaks, and comments to make your code
+readable. Browsers don't need any of this — they
+only care about the actual property and value
+declarations. CSS minification strips everything
+the browser ignores, leaving only the essential
+code. The visual result of minified CSS is
+100% identical to the original."
+
+How much can CSS be compressed:
+"The compression ratio depends on how your CSS
+is written. Hand-written CSS with lots of
+comments and whitespace typically compresses
+50-70%. Pre-processed CSS from tools like Sass
+or Less compresses 20-40%. Even small reductions
+matter for high-traffic sites — saving 50KB
+per page load across 100,000 daily visitors
+saves 5GB of bandwidth daily."
+
+FAQ:
+Q: What does CSS minification do?
+A: CSS minification removes all unnecessary
+   characters from CSS code — spaces, line breaks,
+   comments, and redundant semicolons — without
+   changing the visual output. This reduces file
+   size typically by 20-50%.
+
+Q: Is minified CSS safe to use in production?
+A: Yes. Minification only removes characters
+   that browsers ignore anyway. The visual result
+   is identical to the original CSS. Always keep
+   your original unminified CSS for development.
+
+Q: How much does CSS minification reduce file size?
+A: Typically 20-50% for hand-written CSS and
+   10-30% for already-optimized frameworks.
+   The more comments and whitespace in your CSS,
+   the bigger the reduction.
+
+Q: Should I minify CSS manually or use a build tool?
+A: For small projects, manual minification using
+   our tool works perfectly. For larger projects
+   with automated deployments, build tools like
+   Webpack, Vite, or Parcel can automate CSS
+   minification as part of your build process.
+
+Q: Can I un-minify CSS to make it readable again?
+A: Yes — our CSS minifier also works as a CSS
+   beautifier. Paste minified CSS and click
+   Format to get properly indented, readable
+   CSS back.
+
+--- /tools/word-counter ---
+
+Intro:
+"The Word Counter tool instantly counts words,
+characters, sentences, and paragraphs in any
+text. It updates in real time as you type so
+you always know exactly where you stand. Whether
+you're a writer, student, marketer, or developer,
+our word counter gives you all the stats you need
+in one place — including platform-specific limits
+for Twitter, LinkedIn, Instagram, and more."
+
+How it works:
+1. Paste or type your text in the input area
+2. Word count, character count, sentences, and
+   paragraphs update in real time as you type
+3. Check colored progress bars for platform limits
+4. View keyword density to see your most used words
+5. Copy stats as text for reporting or reference
+
+Use cases:
+- Writers checking article or essay word counts
+- Social media managers staying within character limits
+- Students verifying essay length requirements
+- SEO writers hitting minimum word count targets
+- Email marketers optimizing subject line length
+- Bloggers meeting editorial word count guidelines
+
+Who uses this tool:
+"Students, bloggers, content writers, social media
+managers, copywriters, and SEO professionals all
+rely on word counting tools daily. Any professional
+who creates written content needs to know character
+and word counts — whether for platform limits,
+client requirements, or SEO targets."
+
+Understanding word count for SEO:
+"Word count is one of many factors that can
+influence search rankings. While Google doesn't
+have a minimum word count requirement, studies
+consistently show that longer, more comprehensive
+content tends to rank better for competitive
+keywords. Most SEO professionals recommend a
+minimum of 1,000 words for blog posts targeting
+competitive keywords, and 300+ words for all
+indexed pages."
+
+Platform character limits explained:
+"Different platforms have strict character limits
+that directly affect how your content appears.
+Twitter/X allows 280 characters per tweet —
+exceeding this truncates your message. LinkedIn
+posts support up to 3,000 characters but show
+only the first 210 before a 'see more' button.
+Instagram captions allow 2,200 characters but
+only show the first 125 in the feed. Email
+subject lines should stay under 60 characters
+to display fully on mobile devices."
+
+FAQ:
+Q: What is the character limit for Twitter/X?
+A: Twitter/X allows 280 characters per tweet
+   for standard accounts. Twitter Blue/X Premium
+   subscribers can post up to 25,000 characters.
+
+Q: Does this count spaces as characters?
+A: Yes. The default character count includes
+   spaces. The tool also shows character count
+   without spaces separately.
+
+Q: What is the ideal meta description length?
+A: Google typically displays meta descriptions
+   up to 155-160 characters. Descriptions longer
+   than this get truncated in search results.
+
+Q: How many words should a blog post have?
+A: For SEO purposes, aim for 1,000-1,500 words
+   for competitive topics and 500-800 words for
+   less competitive long-tail keywords. Quality
+   matters more than quantity — every word should
+   add value for the reader.
+
+Q: What is reading time and how is it calculated?
+A: Reading time is estimated based on an average
+   reading speed of 200-250 words per minute.
+   A 1,000 word article takes approximately
+   4-5 minutes to read.
+
+--- /tools/url-encoder ---
+
+Intro:
+"The URL Encoder and Decoder converts special
+characters in URLs to their percent-encoded
+equivalents and back. This is essential for
+working with APIs, query parameters, and web
+addresses that contain spaces or special
+characters. Whether you're building web
+applications, debugging API calls, or working
+with query strings, our URL encoder handles
+it instantly and accurately."
+
+How it works:
+1. Paste your URL or text into the input field
+2. Click Encode to convert special characters
+   to percent-encoded format (%20, %26, etc.)
+3. Click Decode to convert percent-encoded
+   text back to readable format
+4. Copy the result for use in your project
+5. Switch between encode and decode modes freely
+
+Use cases:
+- Encoding query parameters for REST API requests
+- Decoding URLs received from web services
+- Fixing broken URLs that contain spaces
+- Building URL strings programmatically
+- Debugging URL-related issues in web apps
+- Encoding form data for HTTP POST requests
+
+Who uses this tool:
+"Web developers, API developers, backend engineers,
+and QA testers use URL encoding tools constantly.
+Anyone working with HTTP requests, REST APIs,
+or web applications regularly encounters the
+need to encode and decode URLs — making this
+one of the most essential developer utilities."
+
+Understanding URL encoding:
+"URLs can only contain certain characters from
+the ASCII character set. When URLs need to include
+characters outside this safe set — like spaces,
+ampersands, equals signs, or non-English
+characters — those characters must be percent-
+encoded. Percent encoding replaces unsafe
+characters with a % sign followed by the
+character's two-digit hexadecimal ASCII code.
+For example, a space becomes %20 and & becomes %26."
+
+Common URL encoding examples:
+"Space → %20, & → %26, = → %3D, + → %2B,
+/ → %2F, ? → %3F, # → %23, @ → %40
+These are the characters most commonly
+encountered when working with query strings
+and API parameters."
+
+FAQ:
+Q: What is URL encoding?
+A: URL encoding (also called percent encoding)
+   converts characters that are not allowed in
+   URLs into a safe format for transmission.
+   Spaces become %20, ampersands become %26,
+   and so on.
+
+Q: When do I need to URL encode a string?
+A: Whenever passing special characters in query
+   parameters, form data, or API requests.
+   Characters like spaces, &, =, and non-ASCII
+   characters must be encoded.
+
+Q: What is the difference between URL encoding
+   and Base64 encoding?
+A: URL encoding converts characters to percent-
+   escaped sequences for URLs. Base64 converts
+   binary data to ASCII text. They serve completely
+   different purposes.
+
+Q: Why does + sometimes appear in URLs instead of %20?
+A: In form data (application/x-www-form-urlencoded),
+   spaces are encoded as + instead of %20. In
+   regular URLs, spaces should be encoded as %20.
+   Both are valid in their respective contexts.
+
+Q: What is double URL encoding?
+A: Double encoding happens when an already-encoded
+   URL gets encoded again — turning %20 into %2520.
+   This is usually a bug. Our decoder handles
+   both single and double encoded URLs correctly.
+
+--- /tools/character-counter ---
+
+Intro:
+"The Character Counter tool counts characters,
+words, sentences, and paragraphs in real time.
+It shows platform-specific limits for Twitter/X,
+LinkedIn, Instagram, email subjects, and meta
+descriptions so you always stay within bounds.
+Whether you're crafting a tweet, writing a meta
+description, or composing an email subject line,
+our character counter ensures your content fits
+perfectly every time."
+
+How it works:
+1. Type or paste your text into the input area
+2. Character count, word count, and other stats
+   update instantly as you type
+3. Watch colored progress bars for each platform
+   — green means you're within limits
+4. Yellow warning appears at 80% of the limit
+5. Red alert appears when you exceed the limit
+6. Copy your perfectly sized content
+
+Use cases:
+- Social media managers writing platform-specific posts
+- SEO professionals optimizing meta descriptions
+- Email marketers crafting subject lines
+- Twitter/X users staying within 280 characters
+- LinkedIn users writing within post limits
+- Developers testing input validation limits
+
+Who uses this tool:
+"Content writers, social media managers, SEO
+specialists, email marketers, and developers
+use character counters as part of their daily
+workflow. Staying within platform character
+limits is non-negotiable for professional
+content — our tool makes it effortless."
+
+Why character count matters per platform:
+"Each platform has specific limits that affect
+how your content is displayed. On Twitter/X,
+posts exceeding 280 characters simply can't
+be posted. On Google search results, titles
+over 60 characters get truncated with '...'
+reducing click-through rates. Email subject
+lines over 60 characters get cut off on mobile
+devices where 60% of emails are opened. Meta
+descriptions over 160 characters get truncated
+in search results. These limits exist for good
+reasons — and our tool helps you respect them."
+
+FAQ:
+Q: What is the character limit for Twitter/X?
+A: Twitter/X allows 280 characters per tweet
+   for standard accounts. X Premium subscribers
+   get up to 25,000 characters per post.
+
+Q: Does this tool count spaces as characters?
+A: Yes by default. The tool also shows
+   character count without spaces separately.
+
+Q: What is the ideal meta description length?
+A: 150-160 characters. Google truncates longer
+   descriptions in search results.
+
+Q: What is the LinkedIn post character limit?
+A: LinkedIn posts support up to 3,000 characters
+   but only show 210 characters before a
+   "see more" button in the feed.
+
+Q: Does character count affect SEO?
+A: Directly for title tags (50-60 chars ideal)
+   and meta descriptions (150-160 chars ideal).
+   For content, Google has no strict character
+   minimum but longer comprehensive content
+   generally ranks better for competitive terms.
+
+--- /tools/sql-formatter ---
+
+Intro:
+"The SQL Formatter instantly beautifies and
+formats SQL queries with proper indentation,
+line breaks, and keyword capitalization. Complex
+queries with multiple JOINs, subqueries, and
+WHERE clauses become immediately readable.
+Whether you're debugging a production query,
+reviewing a colleague's code, or preparing
+SQL for documentation, our formatter makes
+any SQL instantly readable."
+
+How it works:
+1. Paste your SQL query into the input field
+2. Click Format SQL
+3. Get properly indented, readable SQL instantly
+4. Copy the formatted output
+5. Use in your database editor or documentation
+
+Use cases:
+- Making complex JOIN queries readable for debugging
+- Formatting auto-generated SQL from ORMs
+- Standardizing SQL code style across a team
+- Preparing SQL queries for code review
+- Creating readable SQL for documentation
+- Cleaning up minified or compressed SQL
+
+Who uses this tool:
+"Database developers, backend engineers, data
+analysts, and SQL developers use formatters
+regularly. Any developer who works with databases
+encounters messy, unformatted SQL — whether
+from ORMs, query builders, legacy code, or
+copy-pasted examples. Our formatter cleans it
+up instantly."
+
+Understanding SQL formatting:
+"Well-formatted SQL is easier to read, review,
+and debug. Standard SQL formatting conventions
+include: uppercase keywords (SELECT, FROM, WHERE,
+JOIN), consistent indentation for subqueries and
+conditions, each major clause on its own line,
+and aligned column names in SELECT statements.
+Our formatter applies all these conventions
+automatically."
+
+SQL formatting best practices:
+"Always format SQL before committing to version
+control. Unformatted SQL in code reviews is
+harder to review and more likely to contain
+bugs. Use consistent keyword casing — most
+style guides recommend uppercase SQL keywords.
+Add comments to complex queries explaining
+the business logic. Format SQL in stored
+procedures and views, not just ad-hoc queries."
+
+FAQ:
+Q: Which SQL dialects does the formatter support?
+A: Standard SQL compatible with MySQL, PostgreSQL,
+   SQLite, SQL Server, and most relational databases.
+
+Q: Does SQL formatting change query execution?
+A: No. Formatting only changes whitespace and
+   capitalization. Query logic and results are
+   completely unchanged.
+
+Q: What is the difference between SQL formatting
+   and SQL minification?
+A: Formatting adds whitespace for readability.
+   Minification removes whitespace to reduce size.
+   Use formatting for development and code review.
+
+Q: Can I format stored procedures and functions?
+A: Yes. The formatter handles complex SQL including
+   stored procedures, functions, triggers, and
+   any multi-statement SQL blocks.
+
+Q: What is SQL beautification?
+A: SQL beautification and SQL formatting mean
+   the same thing — converting messy, hard-to-read
+   SQL into properly indented, consistently
+   capitalized, readable code.
+
+--- /tools/uuid-generator ---
+
+Intro:
+"The UUID Generator creates universally unique
+identifiers instantly. Generate single or bulk
+UUIDs in version 4 format for databases, APIs,
+session tokens, file names, and any application
+requiring guaranteed unique identifiers. Our
+generator uses cryptographically secure random
+number generation to ensure true uniqueness
+with every generation."
+
+How it works:
+1. Click Generate to create a new UUID v4
+2. Copy the UUID to clipboard with one click
+3. Use bulk generation for 5, 10, or 20 UUIDs
+4. Each UUID is cryptographically random
+5. Use directly in your code, database, or API
+
+Use cases:
+- Database primary keys for distributed systems
+- Unique session and transaction identifiers
+- REST API resource identifiers
+- File naming to prevent conflicts
+- Test data generation for development
+- Idempotency keys for API requests
+
+Who uses this tool:
+"Software developers, database architects, API
+developers, and DevOps engineers generate UUIDs
+constantly. Any distributed system, microservices
+architecture, or scalable web application relies
+on UUIDs to uniquely identify records without
+requiring a central ID-generating authority."
+
+Understanding UUIDs in depth:
+"A UUID (Universally Unique Identifier) is a
+128-bit number used to uniquely identify
+information. UUID version 4 is randomly generated
+using a cryptographically secure pseudorandom
+number generator. The probability of generating
+two identical UUID v4s is approximately 1 in
+5.3 undecillion — making collisions essentially
+impossible in any real-world application.
+
+UUIDs are represented as 32 hexadecimal digits
+displayed in 5 groups separated by hyphens:
+xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+The 4 in the third group indicates version 4.
+The y in the fourth group is always 8, 9, a, or b."
+
+UUID vs other ID types:
+"Auto-increment integers (1, 2, 3...) are simple
+but expose your data volume and are prone to
+enumeration attacks. UUIDs are random and reveal
+nothing about your data. Snowflake IDs combine
+timestamp and machine ID for time-ordered unique
+IDs. NanoIDs are shorter URL-safe alternatives.
+UUID v4 remains the most widely supported and
+understood format across all programming languages
+and databases."
+
+FAQ:
+Q: What is a UUID?
+A: A UUID is a 128-bit identifier that is
+   unique across all systems without requiring
+   a central registry. Version 4 UUIDs are
+   randomly generated.
+
+Q: What is the difference between UUID v1 and v4?
+A: UUID v1 uses timestamp and MAC address.
+   UUID v4 is purely random. V4 is preferred
+   for most uses as it doesn't expose system info.
+
+Q: Can two UUIDs ever be the same?
+A: Theoretically yes but practically impossible.
+   The probability is approximately 1 in 5.3
+   undecillion.
+
+Q: Should I use UUID or auto-increment for database IDs?
+A: UUIDs are better for distributed systems,
+   microservices, and APIs where you need IDs
+   before inserting to a database. Auto-increment
+   is simpler for small applications with a
+   single database.
+
+Q: What is a GUID? Is it the same as UUID?
+A: GUID (Globally Unique Identifier) is Microsoft's
+   term for UUID. They are the same thing with
+   different names — GUIDs use the same format
+   and generation algorithm as UUIDs.
+
+--- /tools/profile-link-generator ---
+
+Intro:
+"The Profile Link Generator creates direct
+Twitter/X profile URLs for any username instantly.
+Generate single links or process hundreds of
+usernames in bulk — perfect for social media
+managers, researchers, marketers, and developers
+who need quick access to multiple Twitter/X
+profiles without manually typing URLs."
+
+How it works:
+1. Enter one or more Twitter/X usernames
+   (one per line or comma-separated)
+2. Click Generate Links
+3. Get direct profile URLs for every username
+4. Copy individual links or all links at once
+5. Use in spreadsheets, documents, or outreach tools
+
+Use cases:
+- Social media managers building client profile lists
+- Researchers creating reference lists of accounts
+- Marketers building influencer contact lists
+- Developers generating test data for Twitter apps
+- Content creators linking to collaborators
+- PR teams building journalist contact databases
+
+Who uses this tool:
+"Social media managers, growth marketers,
+PR professionals, and researchers use profile
+link generators to quickly build lists of
+Twitter/X profile URLs. Instead of manually
+typing twitter.com/username for hundreds of
+accounts, our tool generates all links instantly."
+
+Twitter/X URL formats explained:
+"Twitter/X profile URLs work in two formats:
+https://twitter.com/username (old format, still works)
+https://x.com/username (new format after rebranding)
+Both URLs redirect to the same profile. Our
+generator creates links in both formats so you
+can use whichever is appropriate for your use case."
+
+FAQ:
+Q: What format does a Twitter/X profile URL use?
+A: https://twitter.com/username or
+   https://x.com/username — both work and
+   redirect to the same profile.
+
+Q: Can I generate links for multiple profiles at once?
+A: Yes. Enter usernames separated by commas or
+   one per line to generate bulk profile links.
+
+Q: Do generated links work for private accounts?
+A: The links are generated correctly for any
+   username. Visibility depends on the account's
+   privacy settings.
+
+Q: Is there a limit to how many links I can generate?
+A: No limit. Process as many usernames as you
+   need in a single batch.
+
+Q: Can I export the generated links to a spreadsheet?
+A: Yes. Copy all generated links and paste them
+   into any spreadsheet application like Excel
+   or Google Sheets.
+
+--- /tools/at-formatter ---
+
+Intro:
+"The @ Formatter adds or removes the @ symbol
+from Twitter/X usernames in bulk. Whether you're
+cleaning up a scraped list of handles, formatting
+data for an outreach tool, or preparing usernames
+for a spreadsheet, our formatter processes your
+entire list instantly with a single click."
+
+How it works:
+1. Paste your list of usernames
+   (with or without @ symbol)
+2. Choose Add @ or Remove @
+3. Click Format
+4. Get your consistently formatted list instantly
+5. Copy the result for use in any tool or document
+
+Use cases:
+- Cleaning scraped username data for consistency
+- Formatting handle lists for Twitter mention posts
+- Preparing usernames for CRM or outreach tools
+- Standardizing data in social media spreadsheets
+- Processing bulk lists for social media campaigns
+- Converting username formats between different tools
+
+Who uses this tool:
+"Social media managers, growth hackers, data
+analysts, and marketers use the @ formatter
+when working with large lists of Twitter/X
+handles. Data consistency is critical when
+usernames are used in automated tools, and
+our formatter ensures every handle is in
+exactly the right format."
+
+Why consistent username formatting matters:
+"Different tools have different expectations
+for username format. Twitter's mention system
+requires the @ symbol (e.g. @username). Many
+CRMs and outreach tools expect usernames WITHOUT
+the @ symbol. Spreadsheets used for analysis
+work better with clean data. When you're working
+with hundreds of usernames, manually adding or
+removing @ symbols is error-prone and time-consuming.
+Our formatter handles any list size instantly."
+
+FAQ:
+Q: What does the @ formatter do exactly?
+A: It adds or removes the @ symbol from
+   Twitter/X usernames in bulk. Processes
+   any size list instantly.
+
+Q: Can I process hundreds of usernames at once?
+A: Yes. Paste any number of usernames — one
+   per line or comma-separated — and the
+   formatter processes all of them instantly.
+
+Q: Does it validate usernames?
+A: Yes. It checks basic Twitter/X username
+   format rules and flags invalid usernames.
+
+Q: What if my list has mixed formats?
+A: The formatter detects which usernames already
+   have @ and which don't, then applies the
+   operation consistently to all of them.
+
+Q: Can I use this for Instagram or other platforms?
+A: Yes. The @ symbol format is used across
+   Twitter/X, Instagram, TikTok, and most
+   social platforms. The formatter works for
+   any @ handle list.
+
+--- /tools/font-preview ---
+
+Intro:
+"The Font Preview tool lets you see how Unicode
+text fonts look before using them in your
+Twitter/X bio, posts, social media captions,
+or anywhere that supports Unicode text. Preview
+your text in bold, italic, script, monospace,
+double-struck, and many other Unicode styles
+simultaneously — then copy your preferred style
+with one click."
+
+How it works:
+1. Type your text in the input field
+2. See your text rendered instantly in all
+   available Unicode font styles simultaneously
+3. Scroll through styles to find your favorite
+4. Click any style to copy that version
+5. Paste directly into Twitter/X, Instagram,
+   or any platform supporting Unicode
+
+Use cases:
+- Creating stylish Twitter/X bios with unique fonts
+- Making social media posts stand out visually
+- Adding bold or italic emphasis in platforms
+   that don't support markdown formatting
+- Creating aesthetic usernames and display names
+- Designing eye-catching headlines and captions
+- Adding visual variety to social media content
+
+Who uses this tool:
+"Content creators, social media influencers,
+Twitter/X power users, and anyone who wants
+their profile or posts to stand out visually
+use Unicode font tools. The ability to use
+bold, italic, or script text in places that
+normally only support plain text makes content
+immediately more eye-catching."
+
+Understanding Unicode fonts:
+"What appear to be different fonts are actually
+different Unicode characters that look like
+styled versions of regular letters. The bold A
+(𝗔) and the regular A are completely different
+Unicode code points — they just look similar.
+This is why they work in text fields that
+don't support HTML or rich text formatting.
+Twitter/X bios, Instagram captions, and most
+social media text fields fully support Unicode,
+making these styled characters widely accessible."
+
+Available font styles:
+"Our font preview includes: Bold, Italic, Bold
+Italic, Script, Bold Script, Fraktur (Gothic),
+Double-Struck (Blackboard Bold), Monospace,
+Sans-Serif, Sans-Serif Bold, Sans-Serif Italic,
+Circled, Squared, Fullwidth, and more. Each
+style gives your text a completely different
+visual character — from professional bold to
+playful script to technical monospace."
+
+FAQ:
+Q: What are Unicode fonts?
+A: Characters from the Unicode standard that
+   look like styled letter variants. They work
+   in any text field supporting Unicode.
+
+Q: Will Unicode fonts work on all platforms?
+A: Most modern platforms support Unicode
+   including Twitter/X, Instagram, Facebook,
+   LinkedIn, and WhatsApp.
+
+Q: Can I use Unicode fonts in my Twitter/X bio?
+A: Yes. Twitter/X fully supports Unicode
+   characters in bios, display names, and tweets.
+
+Q: Why do some Unicode characters show as boxes?
+A: Some devices or older operating systems
+   don't have fonts that include all Unicode
+   characters. This is a device limitation,
+   not an issue with the characters themselves.
+
+Q: Are Unicode styled characters searchable?
+A: No. 𝗕𝗼𝗹𝗱 text and Bold text are different
+   Unicode characters. Search engines and
+   platform search functions treat them as
+   different characters, so styled text won't
+   appear in keyword searches.
+
+===================================================
+PRIORITY 2 — REWRITE BLOG: best-temp-mail-services
+===================================================
+
+Completely rewrite /blog/best-temp-mail-services
+Current: 350 words, too short, self-promotional
+Target: 1000+ words, neutral, genuinely helpful
+
+Title: "Best Temp Mail Services in 2025 —
+Honest Comparison of Free Disposable Email Tools"
+
+Introduction (150 words):
+"Temporary email services protect your real inbox
+from spam, data breaches, and unwanted marketing
+emails. Whether you need a quick throwaway address
+for a one-time signup or a more reliable disposable
+inbox for ongoing privacy, choosing the right
+temp mail service matters.
+
+We tested 10+ temp mail services in 2025 to
+compare reliability, domain variety, inbox speed,
+ease of use, and privacy features. This guide
+covers the best free options — including services
+that work on sites that try to block disposable
+emails — so you can make an informed choice."
+
+Section: "What to Look for in a Temp Mail Service"
+(150 words):
+"Not all temp mail services are equal. The best
+ones offer multiple domains so you have options
+when one is blocked, fast inbox refresh so you
+don't miss verification emails, no signup required
+so your privacy is protected from the start,
+reliable uptime so the service works when you
+need it, and a clean UI that works well on mobile.
+
+Some services also offer additional features like
+OTP auto-detection, Chrome extensions, and
+support for Gmail-style addresses. Consider which
+features matter most for your use case before
+choosing a service."
+
+Section: "Best Temp Mail Services in 2025"
+
+Service 1: GuerrillaMail
+"GuerrillaMail has been around since 2006 and
+remains one of the most reliable free temp mail
+services. It offers 10 domains, instant inbox,
+and keeps emails for 1 hour. The API is public
+and stable, making it popular with developers.
+Best for: users who want a reliable, well-
+established service with multiple domain options."
+Pros: 10 domains, stable, no signup, long history
+Cons: 1-hour email retention, known to blocklists
+
+Service 2: Mail.tm
+"Mail.tm provides clean disposable email with
+a modern interface. Emails persist longer than
+GuerrillaMail. Requires account creation but
+no personal information needed.
+Best for: users who need longer email retention."
+Pros: Modern UI, longer retention, stable API
+Cons: Requires account creation, fewer domains
+
+Service 3: 10 Minute Mail
+"10 Minute Mail gives you a temporary address
+that expires in exactly 10 minutes (extendable).
+Simple, no-frills, and effective for quick
+verifications.
+Best for: users who want the simplest possible
+temp email experience."
+Pros: Simple, fast, visible timer
+Cons: Very short lifespan, single domain
+
+Service 4: Temp Mail (temp-mail.org)
+"One of the most popular temp mail services with
+a large user base. Offers multiple domains and
+a clean mobile app.
+Best for: mobile users who want a dedicated app."
+Pros: Mobile app, multiple domains, popular
+Cons: Shows ads, some domains frequently blocked
+
+Service 5: X Toolkit Temp Email
+"X Toolkit offers disposable email across 9 domains
+from 3 providers in one unified interface. Unique
+features include automatic OTP detection and a
+Chrome extension that works without switching tabs.
+Best for: users who want multiple providers in one
+place with developer-friendly features like OTP
+detection and Temp Gmail support."
+Pros: 9 domains, OTP detection, Chrome extension,
+no signup, Temp Gmail included
+Cons: Newer service, smaller user base than established
+alternatives
+
+Section: "When Regular Temp Mail Gets Blocked"
+(150 words):
+"Some websites maintain blocklists of known
+disposable email domains. When you try to sign
+up with a GuerrillaMail or similar address, the
+site immediately rejects it. This is frustrating
+but there's a solution.
+
+Gmail dot trick addresses are real @gmail.com
+addresses that work on every site — because Gmail
+is never on any blocklist. Using a dot trick
+variation like j.o.h.n@gmail.com is a real Gmail
+address that receives email in the john@gmail.com
+inbox. Services like X Toolkit's Temp Gmail
+generator create these variations automatically."
+
+Section: "How to Choose the Right Service" (100 words):
+"Use GuerrillaMail or Mail.tm for most everyday
+temp email needs. Use a Temp Gmail generator when
+sites block disposable email domains. Use 10 Minute
+Mail when you need the fastest, simplest option.
+Use X Toolkit when you want all options in one
+place plus OTP auto-detection.
+
+The best temp mail service is the one that works
+for your specific use case. Bookmark 2-3 options
+so you're never stuck when one service is blocked."
+
+FAQ section (5 Q&As):
+Q: Are temp mail services legal?
+A: Yes. Disposable email addresses are completely
+   legal. They are simply email addresses that
+   expire automatically.
+
+Q: Can websites detect temp mail addresses?
+A: Some websites use domain blocklists. Using a
+   Temp Gmail address (@gmail.com) bypasses these
+   blocklists entirely.
+
+Q: How long do temp emails last?
+A: GuerrillaMail: 1 hour. Mail.tm: 24 hours.
+   10 Minute Mail: 10 minutes (extendable).
+
+Q: Is it safe to use temp email for important accounts?
+A: Never. Temp email is for one-time use only.
+   Never use for banking, social media, or any
+   account you need long-term.
+
+Q: What is the best free temp mail service in 2025?
+A: GuerrillaMail for reliability and domain variety.
+   X Toolkit for OTP detection and Temp Gmail.
+   10 Minute Mail for simplicity.
+
+===================================================
+PRIORITY 3 — EXPAND 5 SHORT BLOG POSTS TO 900+ WORDS
+===================================================
+
+For each blog post below, expand to 900+ words
+by adding these sections if not present:
+
+1. More detailed explanations of key concepts
+2. Real-world examples and use cases
+3. Step-by-step guides where applicable
+4. A "Frequently Asked Questions" section
+   with 5 Q&As minimum
+5. A "Related tools" section at the end
+
+Files to expand:
+/blog/what-is-disposable-email
+/blog/temp-mail-vs-gmail
+/blog/is-temp-mail-safe
+/blog/why-websites-ask-email-verification
+/blog/temp-gmail-explained
+
+Show current word count for each file before
+expanding, and new word count after expanding.
+
+===================================================
+PRIORITY 4 — ADD 5 NEW BLOG POSTS (TOPIC DIVERSITY)
+===================================================
+
+Google flagged topic diversity as an issue.
+All current blogs cover the same narrow topic.
+Create these 5 new blog posts on different topics:
+
+1. /blog/what-is-json-ld
+Title: "What is JSON-LD? A Beginner's Guide to
+Structured Data for SEO"
+900+ words covering:
+- What JSON-LD is and why Google recommends it
+- How JSON-LD differs from Microdata and RDFa
+- Most important schema types for websites
+- Step by step: how to add JSON-LD to any website
+- How to test JSON-LD with Google's tools
+- Common JSON-LD mistakes to avoid
+- Link to /tools/schema-generator
+
+2. /blog/what-is-base64
+Title: "What is Base64 Encoding? A Complete Guide
+for Developers"
+900+ words covering:
+- What Base64 encoding is
+- Why Base64 was invented and when to use it
+- How Base64 encoding works technically
+- Common uses: images in CSS, API authentication,
+  email attachments, JWT tokens
+- Base64 vs other encoding methods
+- Code examples in JavaScript and Python
+- Link to /tools/base64
+
+3. /blog/twitter-bio-tips
+Title: "How to Write the Perfect Twitter/X Bio
+in 2025 — Tips, Examples & Templates"
+900+ words covering:
+- Why your Twitter/X bio matters for growth
+- The 160 character limit and how to use it well
+- What to always include in your bio
+- Bio examples by niche (developer, creator,
+  marketer, entrepreneur, student)
+- Common bio mistakes that hurt your profile
+- How to use emojis effectively
+- Link to /tools/bio-generator and /tools/funny-bios
+
+4. /blog/what-is-uuid
+Title: "What is a UUID? A Complete Guide to
+Unique Identifiers for Developers"
+900+ words covering:
+- What UUIDs are and why they exist
+- UUID versions explained (v1, v3, v4, v5)
+- When to use UUID vs auto-increment IDs
+- UUID performance in databases
+- How to generate UUIDs in different languages
+- Real-world UUID use cases
+- Link to /tools/uuid-generator
+
+5. /blog/url-encoding-guide
+Title: "URL Encoding Explained — A Developer's
+Guide to Percent Encoding"
+900+ words covering:
+- What URL encoding is and why it exists
+- Which characters need to be encoded
+- Percent encoding vs form encoding
+- URL encoding in different programming languages
+- Common URL encoding mistakes and how to fix them
+- URL encoding in REST APIs
+- Link to /tools/url-encoder
+
+Each new blog post must:
+- Have proper meta title and description
+  in prerender.mjs
+- Be added to the blog index page
+- Be added to prerender.mjs static pages list
+- Be added to sitemap-tools.xml
+- Have internal links to relevant tools
+- Be 900+ words of genuinely helpful content
+
+===================================================
+PRIORITY 5 — SMALL FIXES
+===================================================
+
+1. /contact — add this paragraph after the form:
+"We typically respond within 24-48 hours.
+For bug reports, please include your browser
+version and a description of what you expected
+to happen. For tool suggestions, tell us what
+problem you're trying to solve and we'll consider
+adding it to our roadmap."
+
+2. /tools/jwt-decoder — add FAQ section:
+
+Q: What is a JWT token?
+A: A JWT (JSON Web Token) is an open standard
+   for securely transmitting information between
+   parties as a JSON object. It consists of three
+   parts: header, payload, and signature,
+   each Base64Url encoded and separated by dots.
+
+Q: Is it safe to decode a JWT online?
+A: Our JWT decoder runs entirely in your browser.
+   No data is sent to any server. Your tokens
+   are never transmitted or stored anywhere.
+
+Q: Can I verify a JWT signature with this tool?
+A: This tool decodes the header and payload for
+   inspection. Signature verification requires
+   the secret key or public key used to sign
+   the token.
+
+Q: What information is in a JWT payload?
+A: The payload contains claims — statements about
+   the user and additional metadata. Common claims
+   include user ID (sub), expiration time (exp),
+   issued at time (iat), and custom application data.
+
+Q: What does "JWT expired" mean?
+A: JWTs contain an expiration claim (exp) with a
+   Unix timestamp. When the current time exceeds
+   this timestamp, the token is expired and should
+   be rejected by the server. Decode the token to
+   check the exp value.
+
+3. /tools/meta-tag-generator — add FAQ section:
+
+Q: What are meta tags?
+A: Meta tags are HTML elements providing information
+   about a webpage to search engines and social
+   media. The most important are title, meta
+   description, and Open Graph tags.
+
+Q: Do meta tags directly affect Google rankings?
+A: The title tag is a ranking factor. Meta
+   description doesn't directly affect rankings
+   but affects click-through rate which indirectly
+   influences rankings over time.
+
+Q: What are Open Graph tags?
+A: OG tags control how your content appears when
+   shared on Facebook, Twitter, LinkedIn, and Slack.
+   They define the title, description, and image
+   shown in link previews.
+
+Q: What is the ideal title tag length?
+A: 50-60 characters. Longer titles get truncated
+   in Google search results with "..." which can
+   reduce click-through rates.
+
+Q: What happens if I don't have meta tags?
+A: Google will auto-generate a title and description
+   from your page content — usually poorly. Without
+   OG tags, social media shares show generic previews.
+   Always set meta tags for any page you want found
+   or shared.
+
+===================================================
+FINAL STEPS
+===================================================
+
+After ALL changes:
+
+1. Run pnpm build
+   Confirm zero errors
+   Confirm 73+ pages prerendered (68 existing
+   + 5 new blog posts)
+
+2. Show word counts for all expanded/new pages:
+   - Each of the 10 tool pages (target: 800+ words)
+   - best-temp-mail-services blog (target: 1000+)
+   - Each of 5 expanded blog posts (target: 900+)
+   - Each of 5 new blog posts (target: 900+)
+
+3. git add -A
+   git commit -m "AdSense fix: expand content,
+   new blog posts, topic diversity"
+   git push origin main
+
+4. Show ALL files changed
+
+DO NOT change any tool UI or functionality.
+DO NOT remove any existing content.
+ONLY ADD content below existing tool UI sections.
+===================================================

@@ -130,6 +130,69 @@ export default function FontPreview() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Creating aesthetic usernames or display names with special characters</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Type your text in the input field above — letters and numbers convert best. Spaces and punctuation remain unchanged.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> See your text rendered instantly in all available Unicode font styles simultaneously — no need to select styles one by one.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Scroll through styles to find your favorite — bold, italic, script, monospace, fraktur, double-struck, and many more.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> Hover over any style card and click <strong className="text-foreground/80">Copy</strong> to copy that version to your clipboard.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Paste directly into Twitter/X, Instagram, TikTok, LinkedIn, or any platform supporting Unicode text.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Creating stylish Twitter/X bios</strong> with bold or script text that stands out from plain-text profiles.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Making social media posts stand out</strong> visually with styled text when the platform doesn't support markdown.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Adding emphasis</strong> to key words or phrases in tweets and captions without HTML or markdown support.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Creating aesthetic display names</strong> on platforms that allow Unicode in name fields.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Designing eye-catching headlines and captions</strong> for Instagram, TikTok, and LinkedIn content.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Adding visual variety</strong> to social media content to increase engagement and stop-the-scroll appeal.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Content creators, social media influencers, Twitter/X power users, and anyone who wants their profile or posts to stand out visually use Unicode font tools. The ability to use bold, italic, or script text in places that normally only support plain text makes content immediately more eye-catching and distinctive. Profile designers use it to create memorable bios. Aesthetic accounts use it for their distinct visual identity. Marketers use styled text to draw attention to key phrases in promotional posts.
+          </p>
+        </div>
+
+        {/* Understanding Unicode fonts */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Understanding Unicode fonts</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            What appear to be "different fonts" are actually different Unicode characters that look like styled versions of regular letters. The bold 𝗔 and the regular A are completely different Unicode code points — they just look visually similar. This is why they work in text fields that don't support HTML or rich text formatting: Twitter/X bios, Instagram captions, and most social media text fields fully support Unicode, making these styled characters work everywhere plain text is accepted.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Available styles include: Bold, Italic, Bold Italic, Script, Bold Script, Fraktur (Gothic), Double-Struck (Blackboard Bold), Monospace, Sans-Serif, Sans-Serif Bold, Sans-Serif Italic, Circled characters, and more. Each style gives your text a completely different visual character — from professional bold to playful script to technical monospace.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "What are Unicode fonts?", a: "Unicode fonts are characters from the Unicode standard that visually resemble styled letter variants — bold, italic, script, monospace, etc. They're actual character code points, not formatting, so they work in any text field that supports Unicode (which includes almost all modern platforms)." },
+              { q: "Will Unicode fonts work on all platforms?", a: "Most modern platforms fully support Unicode including Twitter/X, Instagram, Facebook, LinkedIn, WhatsApp, Telegram, and Discord. Some older apps or platforms may render unsupported characters as boxes or question marks, but this is increasingly rare." },
+              { q: "Can I use Unicode fonts in my Twitter/X bio?", a: "Yes. Twitter/X fully supports Unicode characters in bios, display names, and tweets. This is why you see profiles with styled text in their bios — they're using Unicode mathematical characters that look like different fonts." },
+              { q: "Why do some Unicode characters show as boxes on some devices?", a: "Some devices or older operating systems don't include fonts that cover all Unicode character ranges. This is a device/OS limitation, not an issue with the characters themselves. Modern devices (iOS 15+, Android 10+, Windows 10+) support virtually all Unicode characters." },
+              { q: "Are Unicode styled characters searchable on Twitter/X?", a: "No. 𝗕𝗼𝗹𝗱 text and Bold text are different Unicode code points. Platform search functions treat them as different characters, so content in styled Unicode won't appear when users search for the plain-text version of those words. Keep this in mind for hashtags and key terms you want to be discoverable." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

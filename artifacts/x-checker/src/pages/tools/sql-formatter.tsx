@@ -191,6 +191,69 @@ export default function SqlFormatter() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Documenting SQL queries in technical specifications or READMEs</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Paste your SQL query into the input field — works with queries of any length or complexity.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Click <strong className="text-foreground/80">Format SQL</strong> to apply proper indentation and uppercase all SQL keywords.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Get your formatted, readable SQL instantly in the output panel.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> Copy the result or download it as a <code className="text-xs font-mono bg-muted/60 rounded px-1">.sql</code> file.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Use <strong className="text-foreground/80">Minify SQL</strong> to compress formatted SQL back to a single line for embedding in code.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Making complex JOIN queries readable</strong> — multi-table queries with 5+ joins become immediately understandable.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Formatting auto-generated SQL from ORMs</strong> like Sequelize, Prisma, Hibernate, or Entity Framework.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Standardizing SQL code style</strong> across a team so all queries follow the same formatting conventions.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Preparing SQL for code review</strong> — reviewers can read and understand queries much faster when they're properly formatted.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Creating readable SQL for documentation</strong> — API docs, README files, and technical specs need human-readable queries.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Cleaning up legacy SQL</strong> — old stored procedures and views written without formatting standards become maintainable again.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Database developers, backend engineers, data analysts, and SQL developers use formatters regularly. Any developer who works with databases encounters messy, unformatted SQL — whether from ORMs, query builders, legacy code, or examples copied from Stack Overflow. Data analysts use it to format long analytical queries before sharing them with colleagues. Database administrators use it to review stored procedures and views. Backend engineers use it to format queries for inclusion in technical documentation.
+          </p>
+        </div>
+
+        {/* Understanding SQL formatting */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Understanding SQL formatting best practices</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Well-formatted SQL is easier to read, review, and debug. Standard SQL formatting conventions include: uppercase keywords (SELECT, FROM, WHERE, JOIN), consistent indentation for subqueries and conditions, each major clause on its own line, and aligned column names in SELECT statements. These conventions aren't enforced by databases — SQL is case-insensitive and whitespace-agnostic — but they make a significant difference in readability and maintainability.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Always format SQL before committing it to version control. Unformatted SQL in code reviews is harder to review and more likely to contain subtle bugs. Consistent formatting also makes it much easier to use diff tools to compare query changes over time.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "Which SQL dialects does the formatter support?", a: "Standard SQL compatible with MySQL, PostgreSQL, SQLite, SQL Server, MariaDB, and most relational databases. The formatter applies universal conventions — uppercase keywords, consistent indentation — that work correctly across all major SQL dialects." },
+              { q: "Does SQL formatting change how the query executes?", a: "No. Formatting only changes whitespace and keyword capitalization. SQL is whitespace-agnostic and case-insensitive for keywords, so the query logic, execution plan, and results are completely unchanged by formatting." },
+              { q: "What is the difference between SQL formatting and SQL minification?", a: "Formatting adds whitespace and indentation for human readability. Minification removes whitespace to reduce size. Use formatting for development, code review, and documentation. Use minification when embedding queries in code or configuration files where line breaks would cause issues." },
+              { q: "Can I format stored procedures and functions?", a: "Yes. The formatter handles complex SQL including multi-statement blocks, stored procedures, functions, triggers, and queries with subqueries and CTEs. Paste the entire procedure and it will be formatted correctly." },
+              { q: "What is SQL beautification?", a: "SQL beautification and SQL formatting are the same thing — converting messy, hard-to-read SQL into properly indented, consistently capitalized, readable code. The terms are interchangeable." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

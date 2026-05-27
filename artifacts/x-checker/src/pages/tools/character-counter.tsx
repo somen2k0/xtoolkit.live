@@ -158,6 +158,69 @@ export default function CharacterCounter() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Verifying email subject line or meta description length</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Type or paste your text into the input area above — works with any language or content.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Character count, word count, line count, and reading time update instantly as you type.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Watch the colored progress bars for each platform — green means you're within limits, yellow means you're approaching the limit (80%+).</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> A red indicator appears when you exceed a platform's limit, showing exactly how many characters you're over.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Edit your text directly in the input area until it fits, then copy your perfectly sized content.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Social media managers</strong> writing platform-specific posts and needing to stay within character limits.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">SEO professionals</strong> optimizing meta descriptions to the ideal 150–160 character range.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Email marketers</strong> crafting subject lines under 60 characters for full display on mobile devices.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Twitter/X users</strong> drafting tweets and monitoring the 280-character limit in real time.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">LinkedIn users</strong> writing posts within limits and knowing how much shows before the "see more" cutoff.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Developers</strong> testing input validation limits for textarea and input fields in their applications.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Content writers, social media managers, SEO specialists, email marketers, and developers use character counters as part of their daily workflow. Staying within platform character limits is non-negotiable for professional content — exceeding limits means your tweet won't post, your meta description gets truncated, or your email subject disappears on mobile. This tool makes it effortless to monitor and stay within limits while writing, eliminating the frustration of editing after the fact.
+          </p>
+        </div>
+
+        {/* Why character count matters */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Why character count matters per platform</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Each platform has specific limits that affect how your content is displayed — and the consequences of exceeding them vary. On Twitter/X, posts exceeding 280 characters simply cannot be published. On Google search results, titles over 60 characters get truncated with "..." reducing click-through rates. Email subject lines over 60 characters get cut off on mobile devices where the majority of emails are opened. Meta descriptions over 160 characters get truncated in search results. LinkedIn posts show only the first 210 characters before a "see more" link in the feed.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            These limits exist for good reasons — they're calibrated to typical screen sizes and reading patterns. Respecting them ensures your content displays exactly as intended, maximizing engagement and effectiveness.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "What is the character limit for Twitter/X?", a: "Twitter/X allows 280 characters per tweet for standard accounts. X Premium subscribers get up to 25,000 characters per post for long-form content. Your profile bio is limited to 160 characters, and your display name is limited to 50 characters." },
+              { q: "Does this tool count spaces as characters?", a: "Yes by default — spaces count as characters on every major platform. The tool also shows character count without spaces separately so you can see both figures. Most platforms including Twitter count spaces as characters." },
+              { q: "What is the ideal meta description length?", a: "150–160 characters is ideal. Google truncates longer descriptions in search results with '...'. Aim for 140–160 characters to ensure full display while still having room to include your primary keyword and a call-to-action." },
+              { q: "What is the LinkedIn post character limit?", a: "LinkedIn posts support up to 3,000 characters but only show approximately 210 characters before a 'see more' button in the feed. The most important information should appear in those first 210 characters to capture attention before the reader has to click to expand." },
+              { q: "Does character count affect SEO?", a: "Directly for title tags (50–60 characters ideal) and meta descriptions (150–160 characters ideal) — these affect how your page appears in search results. For body content, Google has no strict character or word minimum, but longer, more comprehensive content generally performs better for competitive search terms." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

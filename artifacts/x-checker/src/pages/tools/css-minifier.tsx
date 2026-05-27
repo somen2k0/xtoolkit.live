@@ -213,6 +213,69 @@ export default function CssMinifier() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Reducing page weight for better Core Web Vitals scores</li>
           </ul>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Paste your CSS code into the input field — any valid CSS including selectors, media queries, and keyframes.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Click <strong className="text-foreground/80">Minify CSS</strong> to remove all whitespace, comments, and redundant characters.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Get your compressed CSS code instantly — see the percentage of space saved in the output panel.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> Copy the minified output or download it as a <code className="text-xs font-mono bg-muted/60 rounded px-1">.min.css</code> file.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Replace your original CSS file with the minified version in production to improve load speed.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Optimizing CSS before deploying to production</strong> — a standard step in any performance-conscious workflow.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Reducing page load time</strong> for better Google Core Web Vitals scores and improved user experience.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Compressing large CSS frameworks</strong> like Bootstrap, Tailwind, or custom design systems.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Improving Google PageSpeed Insights scores</strong> by eliminating render-blocking CSS weight.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Reducing bandwidth usage</strong> on high-traffic sites — 50KB saved per page × 100,000 visitors = 5GB bandwidth daily.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Unminifying third-party CSS</strong> to understand or debug stylesheets received from other developers.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Web developers, frontend engineers, and site owners use CSS minification as a standard part of their deployment process. Performance-focused developers minify all CSS, JavaScript, and HTML before pushing to production to ensure the fastest possible load times for users. Freelancers use it for quick one-off optimizations before handing off projects. SEO professionals use CSS minification as part of technical SEO audits to improve page speed scores.
+          </p>
+        </div>
+
+        {/* Understanding CSS minification */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Understanding CSS minification</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            When you write CSS, you naturally include spaces, line breaks, and comments to make your code readable. Browsers don't need any of this — they only care about the actual property and value declarations. CSS minification strips everything the browser ignores, leaving only the essential code. The visual result of minified CSS is 100% identical to the original — your website looks exactly the same.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The compression ratio depends on how your CSS is written. Hand-written CSS with lots of comments and whitespace typically compresses 50–70%. Pre-processed CSS from tools like Sass or Less compresses 20–40%. Even small reductions matter significantly for high-traffic sites — saving 50KB per page load across 100,000 daily visitors saves 5GB of bandwidth every day. This directly impacts hosting costs and user experience on slower connections.
+          </p>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "What does CSS minification do exactly?", a: "CSS minification removes all unnecessary characters from CSS code — spaces, line breaks, comments, and redundant semicolons — without changing the visual output. This reduces file size typically by 20–50%, resulting in faster page loads." },
+              { q: "Is minified CSS safe to use in production?", a: "Yes, completely safe. Minification only removes characters that browsers ignore anyway. The visual result is 100% identical to the original CSS. Always keep your original unminified CSS for development so you can make future edits easily." },
+              { q: "How much does CSS minification reduce file size?", a: "Typically 20–50% for hand-written CSS and 10–30% for already-optimized or pre-processed CSS. The more comments and whitespace in your original CSS, the bigger the reduction. Bootstrap's CSS, for example, compresses from ~200KB to ~160KB." },
+              { q: "Should I minify CSS manually or use a build tool?", a: "For small projects or one-off optimizations, manual minification using our tool works perfectly. For larger projects with automated deployments, build tools like Webpack, Vite, or Parcel can automate CSS minification as part of your build process so you never have to think about it." },
+              { q: "Can I beautify minified CSS to make it readable again?", a: "Yes — our CSS minifier also works as a CSS beautifier/formatter. Paste any minified CSS and click Format to get properly indented, readable CSS back. This is useful when you receive minified stylesheets and need to understand or debug them." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

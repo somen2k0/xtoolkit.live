@@ -165,6 +165,76 @@ export default function BioGenerator() {
             </p>
           </div>
         </div>
+
+        {/* How it works */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">1.</span> Enter your niche or topic — for example, "AI startup founder", "fitness coach", or "freelance designer".</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">2.</span> Optionally add a tone preference: professional, witty, minimal, motivational, casual, bold, or any style you prefer.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">3.</span> Click Generate Bios — the AI processes your inputs in seconds using Groq's Llama 3.3 70B model.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">4.</span> Get 3 unique AI-written bios instantly, each within X's 160-character limit.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">5.</span> Copy your favorite and paste directly into your Twitter/X profile settings.</li>
+            <li className="flex items-start gap-3"><span className="text-primary font-bold shrink-0 w-5">6.</span> Regenerate as many times as you want for free — no limits, no signup required.</li>
+          </ol>
+        </div>
+
+        {/* Common use cases */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common use cases</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">New Twitter/X users</strong> setting up their profile for the first time and unsure what to write.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Professionals</strong> building a personal brand and wanting a bio that reflects their expertise concisely.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Content creators</strong> who need to showcase their niche and attract the right followers.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Businesses</strong> setting up company profiles and needing a concise, professional description.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Anyone refreshing</strong> a stale bio that no longer reflects their current work or interests.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <span><strong className="text-foreground/80">Job seekers</strong> wanting to highlight their expertise and make a strong first impression on recruiters.</span></li>
+          </ul>
+        </div>
+
+        {/* Who uses this tool */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Who uses this tool</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Our AI bio generator is used by social media managers, entrepreneurs, freelancers, content creators, and professionals across every industry. Anyone who wants a compelling Twitter/X bio without spending hours writing and rewriting uses this tool to get great results in seconds. Social media agencies use it to create bios for entire client rosters at once, while individual creators use it to test different positioning angles before committing to one.
+          </p>
+        </div>
+
+        {/* Why your Twitter/X bio matters */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Why your Twitter/X bio matters</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Your Twitter/X bio is the first thing people see when they visit your profile. You have 160 characters to explain who you are, what you do, and why someone should follow you. A compelling bio increases your follower conversion rate — the percentage of profile visitors who actually hit follow. Studies show that profiles with clear, well-written bios get significantly more followers than those with empty or generic descriptions. Your bio also appears in search results on the platform, making it one of the most important pieces of content on your entire profile.
+          </p>
+          <h3 className="text-sm font-semibold text-foreground/80">Tips for a great Twitter/X bio</h3>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> State clearly what you do in the first line — don't make people guess.</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Include relevant keywords for your niche to appear in platform search results.</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Add a touch of personality or humor to make your bio memorable and human.</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Include a call to action — "follow for X", "DMs open", or "link in bio".</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Use emojis sparingly for visual appeal — 1–3 emojis max.</li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Mention notable achievements or credentials that establish instant credibility.</li>
+          </ul>
+        </div>
+
+        {/* Additional FAQ */}
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently asked questions</h2>
+          <div className="space-y-5">
+            {[
+              { q: "How does the AI bio generator work?", a: "It uses Groq's Llama 3.3 70B language model to generate contextually relevant, engaging Twitter/X bios based on your niche and tone preferences. Each generation produces 3 unique options so you can choose the best fit or mix elements from multiple results." },
+              { q: "Is the bio generator free to use?", a: "Yes, completely free with no signup required. Generate as many bios as you need with no daily limits. There are no credits, no paywalls, and no account required." },
+              { q: "Can I use the generated bio directly?", a: "Yes. The generated bios are ready to use. You can copy them directly to your Twitter/X profile or customize them further to add personal details like your location, website, or specific achievements." },
+              { q: "How long should a Twitter/X bio be?", a: "Twitter/X allows up to 160 characters for your bio. Our generator creates bios that fit within this limit while maximizing impact. Shorter bios (under 120 characters) often perform better as they're easier to read at a glance and leave room for emojis or symbols." },
+              { q: "Can I generate bios for a business account?", a: "Yes. Enter your business type and niche in the input field (e.g. 'SaaS project management tool' or 'local coffee roaster'). The AI will generate professional bios appropriate for business accounts, including company voice and value proposition." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );
