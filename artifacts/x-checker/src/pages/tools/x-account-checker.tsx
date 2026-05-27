@@ -140,6 +140,8 @@ export default function XAccountChecker() {
           </CardHeader>
           <CardContent className="space-y-4">
             <Textarea
+              id="account-checker-input"
+              name="account-checker-input"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={"elonmusk\n@jack\nsama\nOpenAI"}
