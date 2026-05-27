@@ -77,7 +77,7 @@ export default function ProfileAudit() {
       <div className="space-y-5">
         <div className="space-y-1.5">
           <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Your X Username (optional)</label>
-          <Input value={username} onChange={e => setUsername(e.target.value)} placeholder="@username" className="text-sm bg-background/60 border-border/60 focus-visible:ring-primary/40" />
+          <Input id="profile-username" name="profile-username" value={username} onChange={e => setUsername(e.target.value)} placeholder="@username" className="text-sm bg-background/60 border-border/60 focus-visible:ring-primary/40" />
         </div>
 
         <div className="space-y-3">

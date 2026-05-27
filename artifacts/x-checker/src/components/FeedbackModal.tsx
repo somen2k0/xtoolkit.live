@@ -112,13 +112,13 @@ export function FeedbackModal({ open, onOpenChange }: FeedbackModalProps) {
                   <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">
                     Name <span className="font-normal normal-case tracking-normal text-muted-foreground">(optional)</span>
                   </label>
-                  <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="text-sm bg-background/60 border-border/60 focus-visible:ring-primary/40" />
+                  <Input id="feedback-name" name="feedback-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="text-sm bg-background/60 border-border/60 focus-visible:ring-primary/40" />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">
                     Email <span className="font-normal normal-case tracking-normal text-muted-foreground">(optional)</span>
                   </label>
-                  <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="text-sm bg-background/60 border-border/60 focus-visible:ring-primary/40" />
+                  <Input id="feedback-email" name="feedback-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="text-sm bg-background/60 border-border/60 focus-visible:ring-primary/40" />
                 </div>
               </div>
 

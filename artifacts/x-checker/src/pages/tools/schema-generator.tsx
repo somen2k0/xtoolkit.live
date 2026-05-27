@@ -211,7 +211,7 @@ export default function SchemaGenerator() {
               ].map(({ key, label, placeholder }) => (
                 <div key={key} className="space-y-1">
                   <label className="text-xs text-muted-foreground">{label}</label>
-                  <Input value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
+                  <Input id={`schema-${key}`} name={`schema-${key}`} value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
                 </div>
               ))}
             </div>
@@ -222,8 +222,8 @@ export default function SchemaGenerator() {
               {faqEntries.map((entry, i) => (
                 <div key={i} className="space-y-2 rounded-lg border border-border/40 bg-background/30 p-3">
                   <label className="text-xs text-muted-foreground font-medium">Q&A #{i + 1}</label>
-                  <Input value={entry.q} onChange={e => setFaqField(i, "q", e.target.value)} placeholder="Question text" className="text-sm bg-background/60 border-border/60 h-8" />
-                  <Textarea value={entry.a} onChange={e => setFaqField(i, "a", e.target.value)} placeholder="Answer text" className="text-sm bg-background/60 border-border/60 resize-none" rows={2} />
+                  <Input id={`faq-q-${i}`} name={`faq-q-${i}`} value={entry.q} onChange={e => setFaqField(i, "q", e.target.value)} placeholder="Question text" className="text-sm bg-background/60 border-border/60 h-8" />
+                  <Textarea id={`faq-a-${i}`} name={`faq-a-${i}`} value={entry.a} onChange={e => setFaqField(i, "a", e.target.value)} placeholder="Answer text" className="text-sm bg-background/60 border-border/60 resize-none" rows={2} />
                 </div>
               ))}
               <Button variant="outline" size="sm" onClick={() => setFaqEntries(prev => [...prev, { q: "", a: "" }])} className="border-border/60 text-xs gap-1">
@@ -247,7 +247,7 @@ export default function SchemaGenerator() {
               ].map(({ key, label, placeholder }) => (
                 <div key={key} className="space-y-1">
                   <label className="text-xs text-muted-foreground">{label}</label>
-                  <Input value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
+                  <Input id={`schema-${key}`} name={`schema-${key}`} value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
                 </div>
               ))}
             </div>
@@ -268,7 +268,7 @@ export default function SchemaGenerator() {
               ].map(({ key, label, placeholder }) => (
                 <div key={key} className="space-y-1">
                   <label className="text-xs text-muted-foreground">{label}</label>
-                  <Input value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
+                  <Input id={`schema-${key}`} name={`schema-${key}`} value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
                 </div>
               ))}
             </div>
@@ -283,7 +283,7 @@ export default function SchemaGenerator() {
               ].map(({ key, label, placeholder }) => (
                 <div key={key} className="space-y-1">
                   <label className="text-xs text-muted-foreground">{label}</label>
-                  <Input value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
+                  <Input id={`schema-${key}`} name={`schema-${key}`} value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
                 </div>
               ))}
             </div>
@@ -301,7 +301,7 @@ export default function SchemaGenerator() {
               ].map(({ key, label, placeholder }) => (
                 <div key={key} className="space-y-1">
                   <label className="text-xs text-muted-foreground">{label}</label>
-                  <Input value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
+                  <Input id={`schema-${key}`} name={`schema-${key}`} value={fields[key] || ""} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
                 </div>
               ))}
             </div>

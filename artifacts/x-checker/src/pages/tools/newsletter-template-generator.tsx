@@ -232,14 +232,14 @@ export default function NewsletterTemplateGenerator() {
             ].map(({ key, label, placeholder }) => (
               <div key={key} className="space-y-1">
                 <label className="text-xs text-muted-foreground">{label}</label>
-                <Input value={cfg[key]} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
+                <Input id={`newsletter-${key}`} name={`newsletter-${key}`} value={cfg[key]} onChange={e => setField(key, e.target.value)} placeholder={placeholder} className="text-sm bg-background/60 border-border/60 h-8" />
               </div>
             ))}
             <div className="space-y-1">
               <label className="text-xs text-muted-foreground">Accent Color</label>
               <div className="flex gap-2 items-center">
                 <input id="newsletter-accent-color" name="newsletter-accent-color" type="color" value={cfg.accentColor} onChange={e => setField("accentColor", e.target.value)} className="h-8 w-12 rounded border border-border/60 bg-background/60 cursor-pointer p-0.5" />
-                <Input value={cfg.accentColor} onChange={e => setField("accentColor", e.target.value)} className="text-sm bg-background/60 border-border/60 h-8 font-mono" />
+                <Input id="newsletter-accent-hex" name="newsletter-accent-hex" value={cfg.accentColor} onChange={e => setField("accentColor", e.target.value)} className="text-sm bg-background/60 border-border/60 h-8 font-mono" />
               </div>
             </div>
           </div>

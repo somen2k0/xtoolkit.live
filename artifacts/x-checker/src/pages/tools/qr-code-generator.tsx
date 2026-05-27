@@ -105,42 +105,42 @@ export default function QrCodeGenerator() {
               {inputType === "url" && (
                 <div className="space-y-1.5">
                   <Label className="text-sm font-medium">URL</Label>
-                  <Input value={fields.url ?? ""} onChange={(e) => setField("url", e.target.value)} placeholder="https://example.com" className="bg-background/60 border-border/60" />
+                  <Input id="qr-url" name="qr-url" value={fields.url ?? ""} onChange={(e) => setField("url", e.target.value)} placeholder="https://example.com" className="bg-background/60 border-border/60" />
                 </div>
               )}
               {inputType === "text" && (
                 <div className="space-y-1.5">
                   <Label className="text-sm font-medium">Text</Label>
-                  <Input value={fields.text ?? ""} onChange={(e) => setField("text", e.target.value)} placeholder="Your text here" className="bg-background/60 border-border/60" />
+                  <Input id="qr-text" name="qr-text" value={fields.text ?? ""} onChange={(e) => setField("text", e.target.value)} placeholder="Your text here" className="bg-background/60 border-border/60" />
                 </div>
               )}
               {inputType === "email" && (
                 <div className="space-y-3">
                   <div className="space-y-1.5">
                     <Label className="text-sm font-medium">Email Address</Label>
-                    <Input value={fields.email ?? ""} onChange={(e) => setField("email", e.target.value)} placeholder="name@example.com" className="bg-background/60 border-border/60" />
+                    <Input id="qr-email" name="qr-email" value={fields.email ?? ""} onChange={(e) => setField("email", e.target.value)} placeholder="name@example.com" className="bg-background/60 border-border/60" />
                   </div>
                   <div className="space-y-1.5">
                     <Label className="text-sm font-medium">Subject (optional)</Label>
-                    <Input value={fields.subject ?? ""} onChange={(e) => setField("subject", e.target.value)} placeholder="Hello!" className="bg-background/60 border-border/60" />
+                    <Input id="qr-subject" name="qr-subject" value={fields.subject ?? ""} onChange={(e) => setField("subject", e.target.value)} placeholder="Hello!" className="bg-background/60 border-border/60" />
                   </div>
                 </div>
               )}
               {inputType === "phone" && (
                 <div className="space-y-1.5">
                   <Label className="text-sm font-medium">Phone Number</Label>
-                  <Input value={fields.phone ?? ""} onChange={(e) => setField("phone", e.target.value)} placeholder="+1234567890" className="bg-background/60 border-border/60" />
+                  <Input id="qr-phone" name="qr-phone" value={fields.phone ?? ""} onChange={(e) => setField("phone", e.target.value)} placeholder="+1234567890" className="bg-background/60 border-border/60" />
                 </div>
               )}
               {inputType === "wifi" && (
                 <div className="space-y-3">
                   <div className="space-y-1.5">
                     <Label className="text-sm font-medium">Network Name (SSID)</Label>
-                    <Input value={fields.ssid ?? ""} onChange={(e) => setField("ssid", e.target.value)} placeholder="MyWiFiNetwork" className="bg-background/60 border-border/60" />
+                    <Input id="qr-ssid" name="qr-ssid" value={fields.ssid ?? ""} onChange={(e) => setField("ssid", e.target.value)} placeholder="MyWiFiNetwork" className="bg-background/60 border-border/60" />
                   </div>
                   <div className="space-y-1.5">
                     <Label className="text-sm font-medium">Password</Label>
-                    <Input value={fields.wifiPassword ?? ""} onChange={(e) => setField("wifiPassword", e.target.value)} placeholder="WiFi password" type="password" className="bg-background/60 border-border/60" />
+                    <Input id="qr-wifi-password" name="qr-wifi-password" value={fields.wifiPassword ?? ""} onChange={(e) => setField("wifiPassword", e.target.value)} placeholder="WiFi password" type="password" className="bg-background/60 border-border/60" />
                   </div>
                   <div className="space-y-1.5">
                     <Label className="text-sm font-medium">Security</Label>
@@ -169,14 +169,14 @@ export default function QrCodeGenerator() {
                   <Label className="text-sm font-medium">Foreground Color</Label>
                   <div className="flex items-center gap-2">
                     <input id="qr-fg-color" name="qr-fg-color" type="color" value={fg} onChange={(e) => setFg(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 bg-background/60 cursor-pointer p-0.5" />
-                    <Input value={fg} onChange={(e) => setFg(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
+                    <Input id="qr-fg-hex" name="qr-fg-hex" value={fg} onChange={(e) => setFg(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
                   </div>
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-sm font-medium">Background Color</Label>
                   <div className="flex items-center gap-2">
                     <input id="qr-bg-color" name="qr-bg-color" type="color" value={bg} onChange={(e) => setBg(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 bg-background/60 cursor-pointer p-0.5" />
-                    <Input value={bg} onChange={(e) => setBg(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
+                    <Input id="qr-bg-hex" name="qr-bg-hex" value={bg} onChange={(e) => setBg(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
                   </div>
                 </div>
               </div>

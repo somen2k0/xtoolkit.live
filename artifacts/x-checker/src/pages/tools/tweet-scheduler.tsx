@@ -105,7 +105,7 @@ export default function TweetScheduler() {
           <div className="flex gap-3 flex-wrap">
             <div className="flex-1 min-w-[140px] space-y-1">
               <label className="text-xs font-medium text-muted-foreground">Date</label>
-              <Input type="date" value={date} onChange={e => setDate(e.target.value)} className="text-sm bg-background/60 border-border/60 h-9" />
+              <Input id="schedule-date" name="schedule-date" type="date" value={date} onChange={e => setDate(e.target.value)} className="text-sm bg-background/60 border-border/60 h-9" />
             </div>
             <div className="w-32 space-y-1">
               <label className="text-xs font-medium text-muted-foreground">Time</label>

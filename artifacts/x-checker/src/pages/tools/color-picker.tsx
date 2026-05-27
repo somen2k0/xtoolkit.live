@@ -195,7 +195,7 @@ export default function ColorPicker() {
                   <Label className="text-xs text-muted-foreground">Compare against color</Label>
                   <div className="flex gap-2 items-center">
                     <input id="contrast-color" name="contrast-color" type="color" value={contrastHex} onChange={(e) => setContrastHex(e.target.value)} className="h-9 w-12 rounded-md border border-border/60 cursor-pointer p-0.5" />
-                    <Input value={contrastHex} onChange={(e) => setContrastHex(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
+                    <Input id="contrast-hex" name="contrast-hex" value={contrastHex} onChange={(e) => setContrastHex(e.target.value)} className="font-mono text-sm bg-background/60 border-border/60 h-9" />
                   </div>
                 </div>
                 {contrastResult && (

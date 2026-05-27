@@ -499,7 +499,7 @@ export default function Tools() {
                     <CardDescription>Paste usernames to generate X profile links instantly.</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <Textarea value={profileInput} onChange={(e) => setProfileInput(e.target.value)} placeholder={"elonmusk\n@jack\nsama"} className="min-h-[120px] font-mono text-sm bg-background/60 border-border/60 resize-y focus-visible:ring-primary/40 placeholder:text-muted-foreground/40" />
+                    <Textarea id="profile-input" name="profile-input" value={profileInput} onChange={(e) => setProfileInput(e.target.value)} placeholder={"elonmusk\n@jack\nsama"} className="min-h-[120px] font-mono text-sm bg-background/60 border-border/60 resize-y focus-visible:ring-primary/40 placeholder:text-muted-foreground/40" />
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">{profileUsernames.length} username{profileUsernames.length !== 1 ? "s" : ""}</span>
                       <Button variant="outline" size="sm" disabled={!profileLinks.length} onClick={handleCopyAllLinks} className="text-xs border-border/60">
@@ -546,11 +546,11 @@ export default function Tools() {
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-foreground/70">What's your niche or topic? <span className="text-destructive">*</span></label>
-                      <Input value={bioTopic} onChange={(e) => setBioTopic(e.target.value)} placeholder="e.g. AI startup founder, fitness coach, crypto trader" className="bg-background/60 border-border/60 focus-visible:ring-primary/40 text-sm" />
+                      <Input id="bio-topic" name="bio-topic" value={bioTopic} onChange={(e) => setBioTopic(e.target.value)} placeholder="e.g. AI startup founder, fitness coach, crypto trader" className="bg-background/60 border-border/60 focus-visible:ring-primary/40 text-sm" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-foreground/70">Tone (optional)</label>
-                      <Input value={bioTone} onChange={(e) => setBioTone(e.target.value)} placeholder="e.g. professional, witty, minimal, motivational" className="bg-background/60 border-border/60 focus-visible:ring-primary/40 text-sm" />
+                      <Input id="bio-tone" name="bio-tone" value={bioTone} onChange={(e) => setBioTone(e.target.value)} placeholder="e.g. professional, witty, minimal, motivational" className="bg-background/60 border-border/60 focus-visible:ring-primary/40 text-sm" />
                     </div>
                     <Button onClick={handleGenerateBio} disabled={bioLoading || !bioTopic.trim()} className="w-full shadow-sm shadow-primary/15">
                       {bioLoading ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Generating…</> : <><Sparkles className="h-4 w-4 mr-2" /> Generate Bios</>}
@@ -605,7 +605,7 @@ export default function Tools() {
                         </Button>
                       ))}
                     </div>
-                    <Textarea value={atInput} onChange={(e) => setAtInput(e.target.value)} placeholder={"elonmusk\n@jack\nsama"} className="min-h-[150px] font-mono text-sm bg-background/60 border-border/60 resize-y focus-visible:ring-primary/40 placeholder:text-muted-foreground/40" />
+                    <Textarea id="at-input" name="at-input" value={atInput} onChange={(e) => setAtInput(e.target.value)} placeholder={"elonmusk\n@jack\nsama"} className="min-h-[150px] font-mono text-sm bg-background/60 border-border/60 resize-y focus-visible:ring-primary/40 placeholder:text-muted-foreground/40" />
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">{atLines.length} username{atLines.length !== 1 ? "s" : ""}</span>
                       <Button variant="outline" size="sm" disabled={!atLines.length} onClick={() => setAtInput("")} className="text-xs border-border/60">
