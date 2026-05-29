@@ -186,3 +186,9 @@ id = "Ubb03bhHaF_jRsiCQMkk0"
 uri = "file://artifacts/x-toolkit-extension/x-toolkit-extension-v1.1.0.zip"
 type = "unspecified"
 title = "x-toolkit-extension-v1.1.0.zip"
+
+[[outputs]]
+id = "M9IaLOyM5lZazGZKLZpQb"
+uri = "file://artifacts/x-toolkit-extension/extension.zip"
+type = "unspecified"
+title = "X Toolkit Extension v1.1.1"
