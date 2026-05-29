@@ -12,6 +12,16 @@ interface Particle {
   isStar: boolean;       // star shape vs circle
 }
 
+function checkIsMobile(): boolean {
+  if (typeof window === "undefined") return true;
+  return (
+    /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+    window.innerWidth < 768 ||
+    "ontouchstart" in window ||
+    !window.matchMedia("(pointer: fine)").matches
+  );
+}
+
 export function CursorGlow() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<Particle[]>([]);
@@ -19,11 +29,11 @@ export function CursorGlow() {
   const raf = useRef<number>();
   const active = useRef(false);
 
+  // Skip entirely on mobile — avoids being picked as LCP candidate
+  const isMobile = checkIsMobile();
+
   useEffect(() => {
-    const isFine = window.matchMedia("(pointer: fine)").matches;
-    const isMobileUA = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const isMobile = isMobileUA || window.innerWidth < 768 || "ontouchstart" in window;
-    if (!isFine || isMobile) return;
+    if (isMobile) return;
 
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
@@ -156,6 +166,8 @@ export function CursorGlow() {
       if (raf.current) cancelAnimationFrame(raf.current);
     };
   }, []);
+
+  if (isMobile) return null;
 
   return (
     <canvas
