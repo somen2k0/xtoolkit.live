@@ -21,7 +21,8 @@ export function CursorGlow() {
 
   useEffect(() => {
     const isFine = window.matchMedia("(pointer: fine)").matches;
-    if (!isFine) return;
+    const isMobile = window.innerWidth < 768 || "ontouchstart" in window;
+    if (!isFine || isMobile) return;
 
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;

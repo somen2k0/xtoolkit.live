@@ -1,0 +1,100 @@
+Fix these 3 issues:
+
+===================================================
+FIX 1 — Mobile Performance (LCP 6.4s too slow)
+===================================================
+
+The mobile performance score is 63 with LCP of
+6.4 seconds. Main causes to fix:
+
+1. DISABLE shooting star particle animation on
+   mobile devices completely.
+
+   In the particle/cursor effect component, add:
+   
+   useEffect(() => {
+     // Disable on mobile/touch devices
+     if (window.innerWidth < 768 ||
+         'ontouchstart' in window) {
+       return; // Don't initialize particles
+     }
+     // ... existing particle code
+   }, []);
+
+2. REDUCE homepage hero animation complexity
+   on mobile. Find Framer Motion animations in
+   the hero section and add:
+   
+   const prefersReducedMotion =
+     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   
+   const isMobile = window.innerWidth < 768;
+   
+   If isMobile or prefersReducedMotion:
+   - Set all animation durations to 0
+   - Remove stagger delays
+   - Remove complex entrance animations
+
+3. ADD loading="lazy" to all images below
+   the fold on the homepage.
+
+4. In the homepage component, defer loading
+   of tool category cards that are below the
+   fold using Intersection Observer or
+   React.lazy with a scroll trigger.
+
+5. Add this to index.html <head> for faster
+   initial paint:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+===================================================
+FIX 2 — http://xtoolkit.live redirect issue
+===================================================
+
+Google is seeing http://xtoolkit.live/ as a
+separate URL. Add explicit HTTP to HTTPS redirect
+in vercel.json:
+
+In vercel.json add to redirects array:
+{
+  "source": "/:path*",
+  "has": [
+    {
+      "type": "header",
+      "key": "x-forwarded-proto",
+      "value": "http"
+    }
+  ],
+  "destination": "https://xtoolkit.live/:path*",
+  "permanent": true
+}
+
+===================================================
+FIX 3 — aesthetic-bios redirect confusion
+===================================================
+
+The /tools/aesthetic-bios page appears in both
+"page with redirect" and "crawled not indexed"
+lists. This means the redirect exists but is
+not working correctly.
+
+Check vercel.json — find the aesthetic-bios
+redirect and make sure it uses permanent: true
+and points to a valid live page:
+
+{
+  "source": "/tools/aesthetic-bios",
+  "destination": "/tools/bio-generator",
+  "permanent": true
+}
+
+Also add a canonical tag in the bio-generator
+page pointing to itself to help Google understand
+the redirect chain.
+
+===================================================
+Build, commit, push.
+Show all files changed.
+===================================================
