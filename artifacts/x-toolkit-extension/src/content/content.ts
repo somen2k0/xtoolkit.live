@@ -289,10 +289,23 @@
     popup.style.display = "block";
   }
 
+  // ── Check if an input is actually visible to the user ─────────
+  function isInputVisible(input: HTMLInputElement): boolean {
+    const rect = input.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return false;
+    const style = window.getComputedStyle(input);
+    if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") return false;
+    // Must be at least partially within the viewport
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return false;
+    if (rect.right < 0 || rect.left > window.innerWidth) return false;
+    return true;
+  }
+
   // ── Inject logo trigger button ────────────────────────────────
   function injectBtn(input: HTMLInputElement) {
     if (injectedInputs.has(input)) return;
     if (input.closest("[data-xtoolkit='1']")) return;
+    if (!isInputVisible(input)) return;
     injectedInputs.add(input);
 
     const btn = document.createElement("button");
@@ -333,7 +346,19 @@
   // ── Scan document for email inputs ────────────────────────────
   function scanInputs() {
     document.querySelectorAll<HTMLInputElement>(EMAIL_SELECTORS).forEach((el) => {
-      if (!injectedInputs.has(el)) injectBtn(el);
+      if (!injectedInputs.has(el)) {
+        injectBtn(el);
+      } else {
+        // Already injected — show/hide button based on current visibility
+        const btn = inputButtonMap.get(el);
+        if (btn) {
+          if (isInputVisible(el)) {
+            positionBtn(btn, el);
+          } else {
+            btn.style.display = "none";
+          }
+        }
+      }
     });
   }
 

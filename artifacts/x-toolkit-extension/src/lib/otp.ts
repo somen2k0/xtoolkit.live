@@ -17,13 +17,14 @@ export function stripHtml(html: string): string {
 export function extractOTP(text: string): string | null {
   if (!text) return null;
 
-  // Priority 1: keyword-adjacent alphanumeric codes (e.g. "RI2-DDX" in subject)
+  // Priority 1: keyword-adjacent alphanumeric codes (e.g. "F75-51S", "RI2-DDX" in subject)
   const alphaNumPatterns: RegExp[] = [
-    // "code: RI2-DDX" or "code is RI2-DDX" — alphanum with dash separator
-    /(?:code|otp|token|verification|confirm(?:ation)?)[\s:]+([A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6})/i,
-    // standalone dash-separated alphanum code adjacent to keyword anywhere in sentence
-    /\b([A-Z]{1,4}[0-9]{1,4}[-–—][A-Z]{1,4}[0-9]{0,4})\b/,
-    /\b([A-Z0-9]{2,4}[-–—][A-Z0-9]{2,4}[-–—][A-Z0-9]{2,4})\b/,
+    // "code: F75-51S" or "code is F75-51S" — any alphanum with dash separator
+    /(?:code|otp|token|verification|confirm(?:ation)?)[\s:\r\n]+([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8})/i,
+    // Three-part dash-separated code (e.g. "ABC-123-XYZ")
+    /\b([A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6})\b/i,
+    // Two-part dash-separated alphanumeric code — any mix of letters & digits (e.g. "F75-51S", "RI2-DDX")
+    /\b([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8})\b/i,
   ];
   for (const pattern of alphaNumPatterns) {
     const match = text.match(pattern);
