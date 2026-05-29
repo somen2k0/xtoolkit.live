@@ -166,51 +166,6 @@ export function App() {
         </a>
       </div>
 
-      {/* Auto-copy OTP toggle bar */}
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "5px 14px",
-        background: state.otpAutoCopy !== false ? "rgba(16,185,129,0.06)" : "transparent",
-        borderBottom: "1px solid #0f1e2e",
-        flexShrink: 0,
-        transition: "background 0.2s",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-          <span style={{ fontSize: 13 }}>⚡</span>
-          <span style={{ fontSize: 11, color: state.otpAutoCopy !== false ? "#10b981" : "#71767b", fontWeight: 500 }}>
-            Auto-copy OTP
-          </span>
-          {state.otpAutoCopy !== false && (
-            <span style={{
-              fontSize: 9, fontWeight: 700, color: "#10b981",
-              background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.3)",
-              borderRadius: 3, padding: "1px 5px", letterSpacing: "0.4px",
-            }}>ON</span>
-          )}
-        </div>
-        <button
-          onClick={() => patch("otpAutoCopy", state.otpAutoCopy === false ? true : false)}
-          style={{
-            width: 34, height: 18,
-            borderRadius: 9,
-            background: state.otpAutoCopy !== false ? "#10b981" : "#1e2a3a",
-            border: "none", cursor: "pointer", padding: 0,
-            position: "relative", transition: "background 0.2s", flexShrink: 0,
-          }}
-          title={state.otpAutoCopy !== false ? "Disable auto-copy" : "Enable auto-copy"}
-        >
-          <span style={{
-            position: "absolute", top: 2,
-            left: state.otpAutoCopy !== false ? 18 : 2,
-            width: 14, height: 14,
-            borderRadius: "50%", background: "#fff",
-            transition: "left 0.18s",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
-            display: "block",
-          }} />
-        </button>
-      </div>
-
       {/* Main content */}
       <div style={{ flex: 1, overflow: "hidden", position: "relative" }}>
         {tab === "tempmail" && (

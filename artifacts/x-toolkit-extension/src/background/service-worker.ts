@@ -174,35 +174,19 @@ async function pollInbox(): Promise<void> {
   const text = stripHtml(latest.body);
   const otp = extractOTP(text) ?? extractOTP(latest.subject);
 
-  // ── Auto-copy OTP to clipboard ────────────────────────────────────────
-  let otpCopied = false;
-  if (otp && state.otpAutoCopy !== false) {
-    try {
-      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-      const tab = tabs[0];
-      if (tab?.id) {
-        await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: (code: string) => navigator.clipboard.writeText(code),
-          args: [otp],
-        });
-        otpCopied = true;
-      }
-    } catch {
-      // Clipboard access may be blocked on some pages — fail silently
-    }
+  // ── Store latest OTP for content script popup ────────────────────────
+  if (otp) {
+    await chrome.storage.local.set({ latestOtp: otp });
   }
 
   const notificationBody = otp
-    ? otpCopied
-      ? `✓ Copied: ${otp} — from ${latest.from}`
-      : `Code: ${otp} — from ${latest.from}`
+    ? `Code: ${otp} — from ${latest.from}`
     : `${latest.subject} — from ${latest.from}`;
 
   chrome.notifications.create(`msg-${Date.now()}`, {
     type: "basic",
     iconUrl: chrome.runtime.getURL("icons/icon48.png"),
-    title: totalNew > 1 ? `${totalNew} new messages` : otp ? (otpCopied ? "OTP copied to clipboard!" : "New OTP received") : "New email arrived",
+    title: totalNew > 1 ? `${totalNew} new messages` : otp ? "New OTP received" : "New email arrived",
     message: notificationBody,
     priority: 2,
   });

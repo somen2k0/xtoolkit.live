@@ -55,7 +55,6 @@ export interface StoredState {
   history: HistoryEntry[];
   seenMessageIds: string[];
   lastPollAt: number;
-  otpAutoCopy: boolean;
 }
 
 export const GUERRILLA_DOMAINS = ["guerrillamail.com", "grr.la", "sharklasers.com", "spam4.me"] as const;
@@ -73,7 +72,6 @@ export const DEFAULT_STATE: StoredState = {
   history: [],
   seenMessageIds: [],
   lastPollAt: 0,
-  otpAutoCopy: true,
 };
 
 export interface InboxState {
