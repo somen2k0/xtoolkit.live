@@ -351,6 +351,7 @@ function UnifiedInboxSection() {
   const [loadingMsg, setLoadingMsg] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [countdown, setCountdown] = useState(REFRESH_MS / 1000);
+  const [readIds, setReadIds] = useState<Set<string>>(new Set());
   const [copied, setCopied] = useState(false);
   const [showDomainDrop, setShowDomainDrop] = useState(false);
   const [freemailDomains, setFreemailDomains] = useState<{ domain: string; provider: string }[]>([]);
@@ -706,7 +707,10 @@ function UnifiedInboxSection() {
               <Inbox className="h-3.5 w-3.5 text-muted-foreground" />
               <span className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Inbox</span>
               {unread > 0 && (
-                <span className="h-4 min-w-4 px-1 text-[10px] rounded-full flex items-center justify-center font-bold bg-cyan-500 text-black">{unread}</span>
+                <span className="h-4 min-w-4 px-1.5 text-[10px] rounded-full flex items-center justify-center font-bold bg-cyan-500 text-black">{unread} new</span>
+              )}
+              {loadingMsgs && messages.length > 0 && (
+                <span className="text-[10px] text-muted-foreground/50">Checking…</span>
               )}
             </div>
             <button onClick={() => sid && fetchInbox(sid)} disabled={loadingMsgs}
@@ -721,33 +725,48 @@ function UnifiedInboxSection() {
               </div>
             )}
             {!creating && !loadingMsgs && messages.length === 0 && (
-              <div className="flex flex-col items-center justify-center py-10 gap-2 text-center px-4">
-                <MailOpen className="h-8 w-8 text-muted-foreground/20" />
-                <p className="text-sm text-muted-foreground/60">No messages yet</p>
-                <p className="text-xs text-muted-foreground/40">Send an email to this address</p>
+              <div className="flex flex-col items-center justify-center py-10 gap-3 text-center px-4">
+                <div className="h-12 w-12 rounded-xl bg-muted/20 border border-border/40 flex items-center justify-center">
+                  <MailOpen className="h-6 w-6 text-muted-foreground/30" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground/60 font-medium">No messages yet</p>
+                  <p className="text-xs text-muted-foreground/40 mt-0.5">Emails sent here appear instantly</p>
+                </div>
+                <div className="inline-flex items-center gap-1.5 bg-muted/30 border border-border/40 rounded-full px-3 py-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="text-[11px] text-muted-foreground/60">Auto-checking in <span className="text-cyan-400 font-semibold">{countdown}s</span></span>
+                </div>
               </div>
             )}
             {messages.map(msg => {
               const sender = msg.mail_from || "Unknown";
               const avatarChar = (sender.split("@")[0]?.[0] ?? "?").toUpperCase();
               const hue = sender.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
-              const isUnread = msg.mail_read === "0";
+              const isUnread = msg.mail_read === "0" && !readIds.has(msg.mail_id);
               return (
-                <button key={msg.mail_id} onClick={() => openMessage(msg)}
-                  className={`w-full text-left px-3 py-2.5 transition-colors hover:bg-muted/30 border-b border-border/20 last:border-b-0 flex items-start gap-3 ${selectedId === msg.mail_id ? "bg-muted/20" : ""}`}>
+                <button key={msg.mail_id}
+                  onClick={() => { setReadIds(prev => new Set([...prev, msg.mail_id])); openMessage(msg); }}
+                  className={`w-full text-left px-3 py-2.5 transition-colors hover:bg-muted/30 border-b border-border/20 last:border-b-0 flex items-start gap-3 ${selectedId === msg.mail_id ? "bg-muted/20" : ""}`}
+                  style={{ borderLeft: `3px solid ${isUnread ? "rgb(34,211,238)" : "transparent"}` }}>
                   <div className="h-8 w-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold mt-0.5"
-                    style={{ background: `hsl(${hue},45%,18%)`, color: `hsl(${hue},65%,65%)` }}>
+                    style={{ background: `hsl(${hue},45%,18%)`, color: `hsl(${hue},65%,65%)`, border: `1.5px solid hsl(${hue},45%,28%)` }}>
                     {avatarChar}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 justify-between">
                       <p className={`text-xs truncate ${isUnread ? "font-semibold text-foreground" : "text-foreground/60"}`}>{sender}</p>
-                      <span className="text-[10px] text-muted-foreground/40 shrink-0">{timeAgo(msg.mail_timestamp)}</span>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        {isUnread && <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />}
+                        <span className="text-[10px] text-muted-foreground/40">{timeAgo(msg.mail_timestamp)}</span>
+                      </div>
                     </div>
                     <p className={`text-sm truncate mt-0.5 ${isUnread ? "font-semibold text-foreground" : "text-foreground/60"}`}>
                       {msg.mail_subject || "(No subject)"}
                     </p>
-                    {isUnread && <span className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-400 mt-1" />}
+                    {msg.mail_exerpt && (
+                      <p className="text-[11px] truncate mt-0.5 text-muted-foreground/40">{msg.mail_exerpt}</p>
+                    )}
                   </div>
                 </button>
               );
@@ -854,6 +873,7 @@ function TempGmailTab() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [countdown, setCountdown] = useState(GMAIL_REFRESH_MS / 1000);
+  const [readIds, setReadIds] = useState<Set<string>>(new Set());
   const [gmailType, setGmailType] = useState<"dot" | "plus">("dot");
   const [retryAttempt, setRetryAttempt] = useState(0);
   const [serviceDown, setServiceDown] = useState(false);
@@ -1151,8 +1171,13 @@ function TempGmailTab() {
               <div className="flex items-center gap-2">
                 <Inbox className="h-3.5 w-3.5 text-muted-foreground" />
                 <span className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Inbox</span>
-                {messages.length > 0 && (
-                  <span className="h-4 min-w-4 px-1 text-[10px] bg-red-500 text-white rounded-full flex items-center justify-center font-bold">{messages.length}</span>
+                {messages.filter(m => !readIds.has(m.id)).length > 0 && (
+                  <span className="h-4 min-w-4 px-1.5 text-[10px] bg-red-500 text-white rounded-full flex items-center justify-center font-bold">
+                    {messages.filter(m => !readIds.has(m.id)).length} new
+                  </span>
+                )}
+                {loadingMsgs && messages.length > 0 && (
+                  <span className="text-[10px] text-muted-foreground/50">Checking…</span>
                 )}
               </div>
               <button onClick={() => email && fetchMessages(email)} disabled={loadingMsgs}
@@ -1167,29 +1192,45 @@ function TempGmailTab() {
                 </div>
               )}
               {!loadingMsgs && messages.length === 0 && !error && (
-                <div className="flex flex-col items-center justify-center py-8 gap-2 text-center px-4">
-                  <MailOpen className="h-7 w-7 text-muted-foreground/20" />
-                  <p className="text-sm text-muted-foreground/60">No messages yet</p>
-                  <p className="text-xs text-muted-foreground/40">Send an email here — auto-checks every {GMAIL_REFRESH_MS / 1000}s</p>
+                <div className="flex flex-col items-center justify-center py-8 gap-3 text-center px-4">
+                  <div className="h-12 w-12 rounded-xl bg-muted/20 border border-border/40 flex items-center justify-center">
+                    <MailOpen className="h-6 w-6 text-muted-foreground/30" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground/60 font-medium">No messages yet</p>
+                    <p className="text-xs text-muted-foreground/40 mt-0.5">Emails sent here appear instantly</p>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 bg-muted/30 border border-border/40 rounded-full px-3 py-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-red-400 animate-pulse" />
+                    <span className="text-[11px] text-muted-foreground/60">Auto-checking in <span className="text-red-400 font-semibold">{countdown}s</span></span>
+                  </div>
                 </div>
               )}
               {messages.map((msg) => {
                 const sender = msg.from || "Unknown";
                 const avatarChar = (sender.split("@")[0]?.[0] ?? "?").toUpperCase();
                 const hue = sender.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
+                const isUnread = !readIds.has(msg.id);
                 return (
-                  <button key={msg.id} onClick={() => setSelectedId(selectedId === msg.id ? null : msg.id)}
-                    className={`w-full text-left px-3 py-2.5 transition-colors hover:bg-muted/30 border-b border-border/20 last:border-b-0 flex items-start gap-3 ${selectedId === msg.id ? "bg-muted/20" : ""}`}>
+                  <button key={msg.id}
+                    onClick={() => { setReadIds(prev => new Set([...prev, msg.id])); setSelectedId(selectedId === msg.id ? null : msg.id); }}
+                    className={`w-full text-left px-3 py-2.5 transition-colors hover:bg-muted/30 border-b border-border/20 last:border-b-0 flex items-start gap-3 ${selectedId === msg.id ? "bg-muted/20" : ""}`}
+                    style={{ borderLeft: `3px solid ${isUnread ? "rgb(248,113,113)" : "transparent"}` }}>
                     <div className="h-8 w-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold mt-0.5"
-                      style={{ background: `hsl(${hue},45%,18%)`, color: `hsl(${hue},65%,65%)` }}>
+                      style={{ background: `hsl(${hue},45%,18%)`, color: `hsl(${hue},65%,65%)`, border: `1.5px solid hsl(${hue},45%,28%)` }}>
                       {avatarChar}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="text-xs font-semibold text-foreground truncate">{sender}</p>
-                        <span className="text-[10px] text-muted-foreground/40 shrink-0">{timeAgo(msg.date)}</span>
+                      <div className="flex items-center gap-1.5 justify-between">
+                        <p className={`text-xs truncate ${isUnread ? "font-semibold text-foreground" : "text-foreground/60"}`}>{sender}</p>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          {isUnread && <span className="h-1.5 w-1.5 rounded-full bg-red-400" />}
+                          <span className="text-[10px] text-muted-foreground/40">{timeAgo(msg.date)}</span>
+                        </div>
                       </div>
-                      <p className="text-sm truncate mt-0.5 font-semibold text-foreground">{msg.subject || "(No subject)"}</p>
+                      <p className={`text-sm truncate mt-0.5 ${isUnread ? "font-semibold text-foreground" : "text-foreground/60"}`}>
+                        {msg.subject || "(No subject)"}
+                      </p>
                     </div>
                   </button>
                 );
