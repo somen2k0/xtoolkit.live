@@ -26,6 +26,13 @@
     "type": "module"
   },
   "permissions": ["storage", "notifications", "alarms", "contextMenus", "clipboardWrite", "activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "host_permissions": [
     "https://xtoolkit.live/*",
     "https://api.guerrillamail.com/*",

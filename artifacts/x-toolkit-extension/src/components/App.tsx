@@ -3,7 +3,6 @@ import { useStorage } from "../hooks/useStorage";
 import { TempMailTab } from "./tabs/TempMailTab";
 import { GmailTab } from "./tabs/GmailTab";
 import { HistoryTab } from "./tabs/HistoryTab";
-import type { FillEmail } from "./EmailHeader";
 
 type Tab = "tempmail" | "gmail" | "history";
 
@@ -65,14 +64,6 @@ const TABS: { id: Tab; label: string; icon: (p: { active: boolean }) => React.Re
   },
 ];
 
-function getDisposableEmail(state: ReturnType<typeof useStorage>["state"]): string {
-  const { tempMailProvider, guerrilla, mailgw, maildrop } = state;
-  if (tempMailProvider === "guerrilla") return guerrilla?.email ?? "";
-  if (tempMailProvider === "mailgw") return mailgw?.email ?? "";
-  if (tempMailProvider === "maildrop") return maildrop?.email ?? "";
-  return "";
-}
-
 export function App() {
   const [tab, setTabState] = useState<Tab>("tempmail");
   const { state, setState, patch, ready } = useStorage();
@@ -90,51 +81,6 @@ export function App() {
     setTabState(newTab);
     chrome.storage.local.set({ [TAB_STORAGE_KEY]: newTab });
   }, []);
-
-  const handleFillPage = useCallback(async (address: string) => {
-    try {
-      const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      if (!activeTab?.id) return;
-      await chrome.scripting.executeScript({
-        target: { tabId: activeTab.id },
-        func: (emailToFill: string) => {
-          const selectors = [
-            'input[type="email"]',
-            'input[name*="email" i]',
-            'input[id*="email" i]',
-            'input[placeholder*="email" i]',
-            'input[autocomplete="email"]',
-            'input[autocomplete="username"]',
-          ].join(", ");
-          const inputs = document.querySelectorAll<HTMLInputElement>(selectors);
-          let filled = 0;
-          inputs.forEach((input) => {
-            const proto = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value");
-            if (proto?.set) proto.set.call(input, emailToFill);
-            input.dispatchEvent(new Event("input", { bubbles: true }));
-            input.dispatchEvent(new Event("change", { bubbles: true }));
-            filled++;
-          });
-          return filled;
-        },
-        args: [address],
-      });
-    } catch {
-    }
-  }, []);
-
-  const disposableEmail = getDisposableEmail(state);
-  const gmailEmail = state.gmail?.email ?? "";
-
-  const fillEmailsForDisposable: FillEmail[] = [
-    ...(disposableEmail ? [{ label: "Disposable", address: disposableEmail }] : []),
-    ...(gmailEmail ? [{ label: "Temp Gmail", address: gmailEmail }] : []),
-  ];
-
-  const fillEmailsForGmail: FillEmail[] = [
-    ...(gmailEmail ? [{ label: "Temp Gmail", address: gmailEmail }] : []),
-    ...(disposableEmail ? [{ label: "Disposable", address: disposableEmail }] : []),
-  ];
 
   return (
     <div
@@ -229,8 +175,6 @@ export function App() {
             patch={patch}
             ready={ready}
             onSwitchToGmail={() => setTab("gmail")}
-            fillEmails={fillEmailsForDisposable}
-            onFillPage={handleFillPage}
           />
         )}
         {tab === "gmail" && (
@@ -240,8 +184,6 @@ export function App() {
             patch={patch}
             ready={ready}
             onSwitchToDisposable={() => setTab("tempmail")}
-            fillEmails={fillEmailsForGmail}
-            onFillPage={handleFillPage}
           />
         )}
         {tab === "history" && <HistoryTab state={state} patch={patch} setTab={setTab} />}

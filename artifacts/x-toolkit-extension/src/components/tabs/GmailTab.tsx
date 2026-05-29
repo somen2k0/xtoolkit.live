@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { StoredState, HistoryEntry } from "../../types";
 import { useGmailInbox, fetchFullGmailMessage } from "../../hooks/useInbox";
-import { EmailHeader, FillEmail } from "../EmailHeader";
+import { EmailHeader } from "../EmailHeader";
 import { InboxList } from "../InboxList";
 import { OTPCard } from "../OTPCard";
 import { MessageView } from "../MessageView";
@@ -13,8 +13,6 @@ interface Props {
   patch: <K extends keyof StoredState>(key: K, val: StoredState[K]) => void;
   ready: boolean;
   onSwitchToDisposable?: () => void;
-  fillEmails?: FillEmail[];
-  onFillPage?: (address: string) => Promise<void>;
 }
 
 type GmailSubTab = "inbox" | "tricks";
@@ -176,7 +174,7 @@ function GmailTricksPanel() {
   );
 }
 
-export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisposable, fillEmails, onFillPage }: Props) {
+export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisposable }: Props) {
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -259,8 +257,6 @@ export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisp
             onNew={() => void handleNew()}
             onRefresh={refresh}
             badge={messages.length}
-            fillEmails={fillEmails}
-            onFillPage={onFillPage}
           />
 
           {/* Gmail accepted badge + subtitle */}

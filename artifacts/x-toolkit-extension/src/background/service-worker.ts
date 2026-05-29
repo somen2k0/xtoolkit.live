@@ -191,3 +191,36 @@ async function pollInbox(): Promise<void> {
 chrome.action.onClicked.addListener(() => {
   void chrome.action.setBadgeText({ text: "" });
 });
+
+// ── Message handlers (content script ↔ background) ────────────────────────
+
+chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+  if (msg.type === "GENERATE_NEW_DISPOSABLE") {
+    generateNewDisposable()
+      .then((email) => sendResponse({ email }))
+      .catch(() => sendResponse({ email: null }));
+    return true;
+  }
+});
+
+async function generateNewDisposable(): Promise<string> {
+  const r = await fetch(
+    "https://api.guerrillamail.com/ajax.php?f=get_email_address&lang=en",
+    { signal: AbortSignal.timeout(10000) },
+  );
+  const d = await r.json() as {
+    email_addr?: string; sid_token?: string; alias?: string;
+  };
+  if (!d.email_addr || !d.sid_token) throw new Error("No email returned");
+  await chrome.storage.local.set({
+    guerrilla: {
+      email: d.email_addr,
+      user: d.alias ?? d.email_addr.split("@")[0] ?? "",
+      domain: "guerrillamail.com",
+      sid_token: d.sid_token,
+      domains: [],
+    },
+    tempMailProvider: "guerrilla",
+  });
+  return d.email_addr;
+}
