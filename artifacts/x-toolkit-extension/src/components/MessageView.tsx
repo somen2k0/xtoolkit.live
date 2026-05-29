@@ -16,6 +16,16 @@ function BackIcon() {
   );
 }
 
+const SAFE_EMAIL_STYLES = `
+<style>
+  img { max-width: 100% !important; height: auto !important; display: block; }
+  table { max-width: 100% !important; width: 100% !important; border-collapse: collapse; }
+  td, th { word-break: break-word; }
+  a { color: #60a5fa !important; }
+  body, html { background: transparent !important; }
+</style>
+`;
+
 function sanitizeAndTheme(html: string, otp: string | null): string {
   let clean = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
@@ -27,7 +37,7 @@ function sanitizeAndTheme(html: string, otp: string | null): string {
     .replace(/\scolor="[^"]*"/gi, "")
     .replace(/\sface="[^"]*"/gi, "");
   if (otp) clean = highlightOTP(clean, otp);
-  return clean;
+  return SAFE_EMAIL_STYLES + clean;
 }
 
 export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
