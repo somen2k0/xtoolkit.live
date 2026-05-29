@@ -17,18 +17,27 @@ export function stripHtml(html: string): string {
 export function extractOTP(text: string): string | null {
   if (!text) return null;
 
-  // Priority 1: keyword-adjacent alphanumeric codes (e.g. "F75-51S", "RI2-DDX" in subject)
+  // Priority 0: code alone on its own line — strongest possible signal
+  // e.g. xAI emails put the code on its own line after "use the code below"
+  for (const line of text.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    const soloMatch = /^([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8}(?:[-–—][A-Z0-9]{2,8})?)$/i.exec(trimmed);
+    if (soloMatch?.[1]) return soloMatch[1].toUpperCase();
+  }
+
+  // Priority 1: keyword immediately adjacent OR keyword on this line → code on the next line
   const alphaNumPatterns: RegExp[] = [
-    // "code: F75-51S" or "code is F75-51S" — any alphanum with dash separator
-    /(?:code|otp|token|verification|confirm(?:ation)?)[\s:\r\n]+([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8})/i,
-    // Three-part dash-separated code (e.g. "ABC-123-XYZ")
+    // "code: XUY-WEF" or "code is XUY-WEF" (inline)
+    /(?:code|otp|token|verification|confirm(?:ation)?)[\s:]+([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8})/i,
+    // keyword on this line, code on the very next line (xAI-style layout)
+    /(?:code|otp|token|verification|confirm(?:ation)?)[^\n]{0,80}\n\s*([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8})/i,
+    // three-part code with at least one digit (e.g. "ABC-123-XYZ")
     /\b([A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6})\b/i,
-    // Two-part dash-separated alphanumeric code — any mix of letters & digits (e.g. "F75-51S", "RI2-DDX")
+    // two-part alphanumeric code — requires at least one digit to avoid CSS property names
     /\b([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8})\b/i,
   ];
   for (const pattern of alphaNumPatterns) {
     const match = text.match(pattern);
-    // Must contain at least one digit — prevents matching CSS names like FONT-FAMILY
     if (match?.[1] && /\d/.test(match[1])) return match[1].toUpperCase();
   }
 
