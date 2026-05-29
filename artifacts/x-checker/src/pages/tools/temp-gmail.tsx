@@ -152,11 +152,14 @@ function htmlToPlainText(html: string): string {
 function detectOTP(text: string): string | null {
   if (!text) return null;
 
-  // Priority 1: alphanumeric dash-separated codes (e.g. "RI2-DDX")
+  // Priority 1: alphanumeric dash-separated codes (e.g. "F75-51S", "RI2-DDX")
   const alphaNumPatterns: RegExp[] = [
-    /(?:code|otp|token|verification|confirm(?:ation)?)[\s:]+([A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6})/i,
-    /\b([A-Z]{1,4}[0-9]{1,4}[-–—][A-Z]{1,4}[0-9]{0,4})\b/,
-    /\b([A-Z0-9]{2,4}[-–—][A-Z0-9]{2,4}[-–—][A-Z0-9]{2,4})\b/,
+    // keyword immediately followed (incl. newline) by a dash-separated code
+    /(?:code|otp|token|verification|confirm(?:ation)?)[\s:\r\n]+([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8})/i,
+    // three-part code (e.g. "ABC-123-XYZ")
+    /\b([A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6})\b/i,
+    // two-part alphanumeric code — any mix of letters & digits on either side
+    /\b([A-Z0-9]{2,8}[-–—][A-Z0-9]{2,8})\b/i,
   ];
   for (const pattern of alphaNumPatterns) {
     const match = text.match(pattern);
