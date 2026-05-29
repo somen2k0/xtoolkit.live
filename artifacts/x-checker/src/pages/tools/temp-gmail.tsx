@@ -163,7 +163,8 @@ function detectOTP(text: string): string | null {
   ];
   for (const pattern of alphaNumPatterns) {
     const match = text.match(pattern);
-    if (match?.[1]) return match[1].toUpperCase();
+    // Must contain at least one digit — prevents matching CSS names like FONT-FAMILY
+    if (match?.[1] && /\d/.test(match[1])) return match[1].toUpperCase();
   }
 
   // Priority 2: keyword-adjacent numeric codes
@@ -178,13 +179,17 @@ function detectOTP(text: string): string | null {
     if (match?.[1]) return match[1];
   }
 
+  // Strip hex color values (e.g. #333333, #fff) before digit-only fallbacks
+  // to avoid picking up CSS color codes as OTPs
+  const textNoHex = text.replace(/#[0-9a-f]{3,8}\b/gi, "");
+
   // Priority 3: 6-digit number
-  const sixDigit = text.match(/\b(\d{6})\b/);
+  const sixDigit = textNoHex.match(/\b(\d{6})\b/);
   if (sixDigit?.[1]) return sixDigit[1];
 
   // Priority 4: other digit lengths
   for (const len of [4, 5, 7, 8]) {
-    const m = text.match(new RegExp(`\\b(\\d{${len}})\\b`));
+    const m = textNoHex.match(new RegExp(`\\b(\\d{${len}})\\b`));
     if (m?.[1]) return m[1];
   }
 
