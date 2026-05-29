@@ -195,7 +195,7 @@ function extractImgSizeFromStyle(styleVal: string): string {
   return attrs;
 }
 
-const EMAIL_IMG_CAP = `<style>img{max-width:min(100%,200px)!important;height:auto!important;display:block}</style>`;
+const EMAIL_IMG_CAP = `<style>img{max-width:min(100%,120px)!important;height:auto!important;display:block}</style>`;
 
 function sanitizeEmailHtml(html: string, otpCode: string | null): string {
   let out = html
