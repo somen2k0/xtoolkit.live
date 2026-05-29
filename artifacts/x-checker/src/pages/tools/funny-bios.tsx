@@ -13,6 +13,7 @@ type FilterCategory = "all" | Category;
 interface BioItem { text: string; category: Category; }
 
 const FUNNY_BIOS: BioItem[] = [
+  // Sarcastic (13)
   { text: "Professional overthinker. Amateur everything else.", category: "sarcastic" },
   { text: "I put the 'pro' in procrastination.", category: "sarcastic" },
   { text: "Fluent in sarcasm, English, and song lyrics.", category: "sarcastic" },
@@ -21,6 +22,12 @@ const FUNNY_BIOS: BioItem[] = [
   { text: "I'm not arguing, I'm just explaining why I'm right.", category: "sarcastic" },
   { text: "5'11 but I tell people I'm 6'0. Just kidding, I'm 5'11.", category: "sarcastic" },
   { text: "Currently pretending to be a functioning adult.", category: "sarcastic" },
+  { text: "Professionally average since birth.", category: "sarcastic" },
+  { text: "I smile because I have no idea what's going on.", category: "sarcastic" },
+  { text: "Currently surviving on caffeine and low expectations.", category: "sarcastic" },
+  { text: "Definitely not procrastinating right now.", category: "sarcastic" },
+  { text: "I contain multitudes. Most of them tired.", category: "sarcastic" },
+  // Relatable (13)
   { text: "Will delete later — said 3 years ago.", category: "relatable" },
   { text: "Here for a good time, not a long time.", category: "relatable" },
   { text: "Sleep. Eat. Tweet. Repeat.", category: "relatable" },
@@ -29,6 +36,12 @@ const FUNNY_BIOS: BioItem[] = [
   { text: "My bed is a magical place where I suddenly remember everything I forgot to do.", category: "relatable" },
   { text: "I'm on a seafood diet. I see food and I eat it.", category: "relatable" },
   { text: "Trying to be a rainbow in someone's cloud. Failing spectacularly.", category: "relatable" },
+  { text: "Emotionally attached to fictional characters.", category: "relatable" },
+  { text: "In a committed relationship with my bed.", category: "relatable" },
+  { text: "Powered by anxiety and iced coffee.", category: "relatable" },
+  { text: "Living proof that googling symptoms is a terrible idea.", category: "relatable" },
+  { text: "Trying to find the Wi-Fi password of life.", category: "relatable" },
+  // Witty (13)
   { text: "404: Bio not found.", category: "witty" },
   { text: "I'm not weird, I'm limited edition.", category: "witty" },
   { text: "CEO of doing things tomorrow.", category: "witty" },
@@ -37,11 +50,25 @@ const FUNNY_BIOS: BioItem[] = [
   { text: "Part-time genius, full-time disaster.", category: "witty" },
   { text: "Making mistakes so you don't have to.", category: "witty" },
   { text: "Currently starring in my own reality show: 'How Did I Get Here?'", category: "witty" },
+  { text: "Technically an adult. Emotionally, still loading.", category: "witty" },
+  { text: "Expert at starting things. Terrible at finishing.", category: "witty" },
+  { text: "Too caffeinated to care.", category: "witty" },
+  { text: "My hobbies include misreading social cues.", category: "witty" },
+  { text: "Overthinking is just cardio for the brain. I'm very fit.", category: "witty" },
+  // Self-Aware (13)
   { text: "Please lower your expectations.", category: "self-aware" },
   { text: "Warning: contains traces of sarcasm.", category: "self-aware" },
   { text: "I'm the person your mother warned you about.", category: "self-aware" },
   { text: "Professionally confused since [birth year].", category: "self-aware" },
   { text: "Trying to adult. It's not going well.", category: "self-aware" },
+  { text: "I never finish anyth—", category: "self-aware" },
+  { text: "Works best when left alone.", category: "self-aware" },
+  { text: "Not a morning person. Or an afternoon person. Or an evening person.", category: "self-aware" },
+  { text: "Professionally mediocre. Personally chaotic.", category: "self-aware" },
+  { text: "Still figuring it out. Updates pending.", category: "self-aware" },
+  { text: "My vibe is 'accidentally showed up to the wrong meeting'.", category: "self-aware" },
+  { text: "Existing loudly despite all odds.", category: "self-aware" },
+  { text: "Currently accepting applications for someone who has their life together.", category: "self-aware" },
 ];
 
 const CATEGORY_LABELS: Record<FilterCategory, string> = {
@@ -123,13 +150,13 @@ export default function FunnyBios() {
 
   return (
     <MiniToolLayout
-      seoTitle="Funny Twitter/X Bio Ideas (2026) — 30+ Funny Bios + AI Generator | X Toolkit"
-      seoDescription="Browse 30+ funny Twitter/X bio ideas and generate custom funny bios with AI. Sarcastic, witty, and self-deprecating bio templates. Free, no signup required."
-      seoKeywords="funny twitter bios, funny x bios, funny bio ideas, funny twitter bio generator, witty twitter bios, sarcastic twitter bio, funny bio for twitter, funny bios 2026, twitter bio funny, funniest twitter bios"
+      seoTitle="Funny Twitter/X Bio Ideas (2026) — 50+ Funny Bios + Free AI Generator | X Toolkit"
+      seoDescription="Browse 50+ genuinely funny Twitter/X bio ideas — sarcastic, witty, and self-deprecating. Plus generate custom funny bios with AI. Free, no signup, copy and paste instantly."
+      seoKeywords="funny twitter bios, funny x bios, funny bio ideas, funny twitter bio generator, witty twitter bios, sarcastic twitter bio, funny bio for twitter, funny bios 2026, twitter bio funny, funniest twitter bios, self deprecating twitter bio, relatable twitter bio"
       icon={Smile}
-      badge="30+ Examples"
-      title="Funny Twitter/X Bio Ideas"
-      description="Browse 30+ ready-to-use funny bios organized by style, or generate custom funny bios with AI. Sarcastic, witty, relatable, self-aware — click any bio to copy it instantly."
+      badge="50+ Examples"
+      title="Funny Twitter/X Bio Ideas (2026)"
+      description="Browse 50+ genuinely funny, ready-to-use bios — sarcastic, witty, relatable, and self-aware. Or generate a custom funny bio with AI. Click any bio to copy instantly."
       faqs={faqs}
       relatedTools={relatedTools}
       affiliateCategory="scheduling"
@@ -253,6 +280,70 @@ export default function FunnyBios() {
         <p className="text-xs text-muted-foreground/70 text-center">
           Click any bio to copy it instantly · {filtered.length} bios shown
         </p>
+
+        {/* Guide section — SEO content */}
+        <div className="space-y-6 pt-4 border-t border-border/40">
+
+          <div className="space-y-3">
+            <h2 className="text-lg font-bold text-foreground">How to Write a Funny Twitter/X Bio</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Your Twitter/X bio is the first thing people read when they land on your profile. A funny bio instantly signals personality, makes you memorable, and gives people a concrete reason to hit Follow. But writing humor in 160 characters is harder than it looks. Here are the techniques that actually work.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="rounded-xl border border-border/50 bg-card/50 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-foreground">1. Use the Rule of Three</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                List two normal things, then break the pattern with something absurd. "Sleep. Eat. Tweet. Repeat." works because the rhythm is satisfying and the loop is relatable. "Software engineer by day, professional overthinker by night, asleep by 9pm" follows the same structure.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border/50 bg-card/50 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-foreground">2. Subvert Expectations</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Set up a serious-sounding start, then undercut it. "CEO of doing things tomorrow" works because CEO sounds impressive — until you read what the company does. The surprise is the punchline. "Spreading smiles and occasionally Wi-Fi passwords" does the same thing.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border/50 bg-card/50 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-foreground">3. Be Specific, Not Vague</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                "Funny person" is not funny. Specific details are. "I followed a diet once. It was the worst 20 minutes of my life." is funny because of the specificity — 20 minutes. The precision makes it feel true, and truth makes humor land. Specificity is the difference between a shrug and a laugh.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border/50 bg-card/50 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-foreground">4. Self-Deprecation Builds Trust</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Poking fun at yourself signals confidence and approachability. "Please lower your expectations" is funny because it's disarmingly honest. People trust accounts that don't take themselves too seriously. Self-aware humor is also safe — you're the subject, so no one gets offended.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border/50 bg-card/50 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-foreground">5. Reference Universal Experiences</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                The funniest bios tap into things everyone has felt: procrastinating, being tired, loving food, hating mornings, doom-scrolling. "My bed is a magical place where I suddenly remember everything I forgot to do" is relatable to virtually anyone. Relatability = shares and follows.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border/50 bg-card/50 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-foreground">6. Keep It Under 160 Characters</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Twitter enforces a 160-character bio limit. Punchlines work best when tight — every word should earn its place. Read your bio out loud. If you stumble anywhere, cut that part. The bios in this collection are all well under the limit, leaving room for emojis, location, or a link.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <h2 className="text-lg font-bold text-foreground">Which Style of Funny Bio Works Best in 2026?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Based on what performs well on X in 2026, <strong className="text-foreground">self-aware and sarcastic bios</strong> consistently generate the most profile engagement. Audiences have grown tired of hustle-culture bios stuffed with titles and achievements. A bio that says "Professionally confused since birth" stands out far more than "🚀 Founder | Speaker | Investor."
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Witty one-liners</strong> work best for creators, developers, and anyone building a personal brand — they communicate personality in seconds. <strong className="text-foreground">Relatable humor</strong> works best for lifestyle, food, and entertainment accounts because the audience connection is immediate. <strong className="text-foreground">Self-deprecating bios</strong> are safest across all niches since they never risk punching at others.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              If you're unsure which direction to take, use the AI generator above. Enter your niche or personality type, pick a humor style, and get three original options tailored to you — no generic templates, no filler phrases.
+            </p>
+          </div>
+
+        </div>
       </div>
     </MiniToolLayout>
   );
