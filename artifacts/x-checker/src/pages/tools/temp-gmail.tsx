@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, memo } from "react";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -249,7 +249,7 @@ function sanitizeEmailHtml(html: string, otpCode: string | null): string {
   return EMAIL_IMG_CAP + out;
 }
 
-function EmailMessageBody({ body, isHtml, subject }: { body: string; isHtml: boolean; subject?: string }) {
+const EmailMessageBody = memo(function EmailMessageBody({ body, isHtml, subject }: { body: string; isHtml: boolean; subject?: string }) {
   const [otpCopied, setOtpCopied] = useState(false);
   const [bodyCopied, setBodyCopied] = useState(false);
   const plainText = isHtml ? htmlToPlainText(body) : body;
@@ -352,7 +352,7 @@ function EmailMessageBody({ body, isHtml, subject }: { body: string; isHtml: boo
       </div>
     </div>
   );
-}
+});
 
 // ── FAQ / related ──────────────────────────────────────────────────
 
