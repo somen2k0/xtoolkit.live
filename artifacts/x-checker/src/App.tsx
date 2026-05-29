@@ -8,17 +8,21 @@ import { MobileNav } from "@/components/layout/MobileNav";
 import { usePageTracking } from "@/hooks/use-track";
 import { ThemeProvider } from "@/lib/theme";
 import { Loader2 } from "lucide-react";
+
+// Eagerly loaded only for 404 (tiny, needed on every route)
 import NotFound from "@/pages/not-found";
-import AdminPage from "@/pages/admin";
-import Home from "@/pages/home";
-import ChromeExtension from "@/pages/chrome-extension";
-import CwsScreenshots from "@/pages/cws-screenshots";
-import Tools from "@/pages/tools";
-import About from "@/pages/about";
-import Privacy from "@/pages/privacy";
-import Terms from "@/pages/terms";
-import Pricing from "@/pages/pricing";
-import Contact from "@/pages/contact";
+
+// All top-level pages lazy-loaded to keep the initial bundle minimal
+const Home = lazy(() => import("@/pages/home"));
+const AdminPage = lazy(() => import("@/pages/admin"));
+const ChromeExtension = lazy(() => import("@/pages/chrome-extension"));
+const CwsScreenshots = lazy(() => import("@/pages/cws-screenshots"));
+const Tools = lazy(() => import("@/pages/tools"));
+const About = lazy(() => import("@/pages/about"));
+const Privacy = lazy(() => import("@/pages/privacy"));
+const Terms = lazy(() => import("@/pages/terms"));
+const Pricing = lazy(() => import("@/pages/pricing"));
+const Contact = lazy(() => import("@/pages/contact"));
 // Lazy-loaded tool pages
 const UsernameGenerator = lazy(() => import("@/pages/tools/username-generator"));
 const HashtagFormatter = lazy(() => import("@/pages/tools/hashtag-formatter"));

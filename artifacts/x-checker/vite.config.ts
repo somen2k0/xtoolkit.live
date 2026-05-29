@@ -57,24 +57,29 @@ export default defineConfig({
     sourcemap: false,
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 500,
     rollupOptions: {
       onwarn(warning, warn) {
         if (warning.code === "SOURCEMAP_ERROR") return;
         warn(warning);
       },
       output: {
-        manualChunks: {
-          "vendor-react": ["react", "react-dom"],
-          "vendor-query": ["@tanstack/react-query"],
-          "vendor-ui": [
-            "@radix-ui/react-accordion",
-            "@radix-ui/react-dialog",
-            "@radix-ui/react-select",
-            "@radix-ui/react-tooltip",
-            "@radix-ui/react-avatar",
-          ],
-          "vendor-router": ["wouter"],
+        manualChunks(id) {
+          if (id.includes("node_modules/react/") || id.includes("node_modules/react-dom/") || id.includes("node_modules/scheduler/")) {
+            return "vendor-react";
+          }
+          if (id.includes("node_modules/@tanstack/")) {
+            return "vendor-query";
+          }
+          if (id.includes("node_modules/wouter/")) {
+            return "vendor-router";
+          }
+          if (id.includes("node_modules/lucide-react/")) {
+            return "vendor-icons";
+          }
+          if (id.includes("node_modules/@radix-ui/")) {
+            return "vendor-ui";
+          }
         },
       },
     },
