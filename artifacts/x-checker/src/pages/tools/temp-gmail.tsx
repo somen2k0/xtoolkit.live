@@ -77,10 +77,10 @@ const REFRESH_MS = 15000;
 const INBOX_STORAGE_KEY = "xt_inbox_session_g";
 const SESSION_TTL = 3 * 60 * 60 * 1000;
 
-interface PersistedInbox { sid: string; email: string; user: string; domain: string; savedAt: number }
+interface PersistedInbox { sid: string; email: string; user: string; domain: string; savedAt: number; freemailToken?: string; freemailProvider?: string }
 
-function saveInboxSession(sid: string, email: string, user: string, domain: string): void {
-  try { localStorage.setItem(INBOX_STORAGE_KEY, JSON.stringify({ sid, email, user, domain, savedAt: Date.now() })); } catch {}
+function saveInboxSession(sid: string, email: string, user: string, domain: string, freemailToken?: string, freemailProvider?: string): void {
+  try { localStorage.setItem(INBOX_STORAGE_KEY, JSON.stringify({ sid, email, user, domain, savedAt: Date.now(), freemailToken, freemailProvider })); } catch {}
 }
 
 function loadInboxSession(): PersistedInbox | null {
@@ -482,14 +482,17 @@ function UnifiedInboxSection() {
       if (d.error) throw new Error(d.error);
       if (!d.address || !d.token) throw new Error("Invalid response from provider");
       const parts = d.address.split("@");
+      const finalUser = parts[0] ?? "";
+      const finalDomain = parts[1] ?? targetDomain;
       freemailTokenRef.current = d.token;
       freemailProviderRef.current = provider;
       activeProviderRef.current = "freemail";
       sidRef.current = "";
       setSid("");
       setEmail(d.address);
-      setUser(parts[0] ?? "");
-      setDomain(parts[1] ?? targetDomain);
+      setUser(finalUser);
+      setDomain(finalDomain);
+      saveInboxSession("", d.address, finalUser, finalDomain, d.token, provider);
       await fetchFreemailInbox(d.token, provider);
       startPolling();
     } catch (e: any) {
@@ -556,7 +559,14 @@ function UnifiedInboxSection() {
       })
       .catch(() => {});
     const saved = loadInboxSession();
-    if (saved) {
+    if (saved && saved.freemailToken && saved.freemailProvider) {
+      freemailTokenRef.current = saved.freemailToken;
+      freemailProviderRef.current = saved.freemailProvider;
+      activeProviderRef.current = "freemail";
+      sidRef.current = "";
+      setSid(""); setEmail(saved.email); setUser(saved.user); setDomain(saved.domain);
+      fetchFreemailInbox(saved.freemailToken, saved.freemailProvider).then(() => startPolling());
+    } else if (saved && saved.sid) {
       sidRef.current = saved.sid;
       activeProviderRef.current = "guerrilla";
       setSid(saved.sid); setEmail(saved.email); setUser(saved.user); setDomain(saved.domain);
@@ -978,10 +988,28 @@ function TempGmailTab() {
             setGenerating(false);
           }
         } else {
-          generate();
+          const cached = loadCachedGmail();
+          if (cached) {
+            emailRef.current = cached;
+            setEmail(cached);
+            setGenerating(false);
+            fetchMessages(cached).then(() => startPolling(cached));
+          } else {
+            generate();
+          }
         }
       })
-      .catch(() => generate());
+      .catch(() => {
+        const cached = loadCachedGmail();
+        if (cached) {
+          emailRef.current = cached;
+          setEmail(cached);
+          setGenerating(false);
+          fetchMessages(cached).then(() => startPolling(cached));
+        } else {
+          generate();
+        }
+      });
   }, [generate]);
 
   useEffect(() => () => stopPolling(), [stopPolling]);
