@@ -201,6 +201,12 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       .catch(() => sendResponse({ email: null }));
     return true;
   }
+  if (msg.type === "GENERATE_NEW_GMAIL") {
+    generateNewGmail()
+      .then((email) => sendResponse({ email }))
+      .catch(() => sendResponse({ email: null }));
+    return true;
+  }
 });
 
 async function generateNewDisposable(): Promise<string> {
@@ -223,4 +229,21 @@ async function generateNewDisposable(): Promise<string> {
     tempMailProvider: "guerrilla",
   });
   return d.email_addr;
+}
+
+async function generateNewGmail(): Promise<string> {
+  const r = await fetch("https://xtoolkit.live/api/temptf/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ type: "dot" }),
+    signal: AbortSignal.timeout(12000),
+  });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  const d = await r.json() as { email?: string };
+  if (!d.email) throw new Error("No email returned");
+  await chrome.storage.local.set({
+    gmail: { email: d.email },
+    gmailProvider: "gmail",
+  });
+  return d.email;
 }

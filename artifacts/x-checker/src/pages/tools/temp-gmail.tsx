@@ -727,20 +727,31 @@ function UnifiedInboxSection() {
                 <p className="text-xs text-muted-foreground/40">Send an email to this address</p>
               </div>
             )}
-            {messages.map(msg => (
-              <button key={msg.mail_id} onClick={() => openMessage(msg)}
-                className={`w-full text-left px-4 py-3 transition-colors hover:bg-muted/30 border-b border-border/30 last:border-b-0 ${selectedId === msg.mail_id ? "bg-muted/20" : ""}`}>
-                <div className="flex items-start justify-between gap-2">
+            {messages.map(msg => {
+              const sender = msg.mail_from || "Unknown";
+              const avatarChar = (sender.split("@")[0]?.[0] ?? "?").toUpperCase();
+              const hue = sender.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
+              const isUnread = msg.mail_read === "0";
+              return (
+                <button key={msg.mail_id} onClick={() => openMessage(msg)}
+                  className={`w-full text-left px-3 py-2.5 transition-colors hover:bg-muted/30 border-b border-border/20 last:border-b-0 flex items-start gap-3 ${selectedId === msg.mail_id ? "bg-muted/20" : ""}`}>
+                  <div className="h-8 w-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold mt-0.5"
+                    style={{ background: `hsl(${hue},45%,18%)`, color: `hsl(${hue},65%,65%)` }}>
+                    {avatarChar}
+                  </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-foreground/70 truncate">{msg.mail_from || "Unknown"}</p>
-                    <p className={`text-sm truncate mt-0.5 ${msg.mail_read === "0" ? "font-semibold text-foreground" : "text-foreground/70"}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <p className={`text-xs truncate ${isUnread ? "font-semibold text-foreground" : "text-foreground/60"}`}>{sender}</p>
+                      <span className="text-[10px] text-muted-foreground/40 shrink-0">{timeAgo(msg.mail_timestamp)}</span>
+                    </div>
+                    <p className={`text-sm truncate mt-0.5 ${isUnread ? "font-semibold text-foreground" : "text-foreground/60"}`}>
                       {msg.mail_subject || "(No subject)"}
                     </p>
+                    {isUnread && <span className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-400 mt-1" />}
                   </div>
-                  <span className="text-[10px] text-muted-foreground/50 shrink-0 mt-0.5">{timeAgo(msg.mail_timestamp)}</span>
-                </div>
-              </button>
-            ))}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -1162,18 +1173,27 @@ function TempGmailTab() {
                   <p className="text-xs text-muted-foreground/40">Send an email here — auto-checks every {GMAIL_REFRESH_MS / 1000}s</p>
                 </div>
               )}
-              {messages.map((msg) => (
-                <button key={msg.id} onClick={() => setSelectedId(selectedId === msg.id ? null : msg.id)}
-                  className={`w-full text-left px-4 py-3 transition-colors hover:bg-muted/30 border-b border-border/30 last:border-b-0 ${selectedId === msg.id ? "bg-muted/20" : ""}`}>
-                  <div className="flex items-start justify-between gap-2">
+              {messages.map((msg) => {
+                const sender = msg.from || "Unknown";
+                const avatarChar = (sender.split("@")[0]?.[0] ?? "?").toUpperCase();
+                const hue = sender.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
+                return (
+                  <button key={msg.id} onClick={() => setSelectedId(selectedId === msg.id ? null : msg.id)}
+                    className={`w-full text-left px-3 py-2.5 transition-colors hover:bg-muted/30 border-b border-border/20 last:border-b-0 flex items-start gap-3 ${selectedId === msg.id ? "bg-muted/20" : ""}`}>
+                    <div className="h-8 w-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold mt-0.5"
+                      style={{ background: `hsl(${hue},45%,18%)`, color: `hsl(${hue},65%,65%)` }}>
+                      {avatarChar}
+                    </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold text-foreground/70 truncate">{msg.from || "Unknown"}</p>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-xs font-semibold text-foreground truncate">{sender}</p>
+                        <span className="text-[10px] text-muted-foreground/40 shrink-0">{timeAgo(msg.date)}</span>
+                      </div>
                       <p className="text-sm truncate mt-0.5 font-semibold text-foreground">{msg.subject || "(No subject)"}</p>
                     </div>
-                    <span className="text-[10px] text-muted-foreground/50 shrink-0 mt-0.5">{timeAgo(msg.date)}</span>
-                  </div>
-                </button>
-              ))}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
