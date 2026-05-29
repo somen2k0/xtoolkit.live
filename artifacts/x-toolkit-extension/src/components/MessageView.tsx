@@ -18,7 +18,7 @@ function BackIcon() {
 
 const SAFE_EMAIL_STYLES = `
 <style>
-  img { max-width: 100% !important; height: auto !important; display: block; }
+  img { max-width: min(100%, 200px) !important; height: auto !important; display: block; }
   table { max-width: 100% !important; width: 100% !important; border-collapse: collapse; }
   td, th { word-break: break-word; }
   a { color: #60a5fa !important; }

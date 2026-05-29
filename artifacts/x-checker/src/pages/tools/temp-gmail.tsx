@@ -195,6 +195,8 @@ function extractImgSizeFromStyle(styleVal: string): string {
   return attrs;
 }
 
+const EMAIL_IMG_CAP = `<style>img{max-width:min(100%,200px)!important;height:auto!important;display:block}</style>`;
+
 function sanitizeEmailHtml(html: string, otpCode: string | null): string {
   let out = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
@@ -224,7 +226,7 @@ function sanitizeEmailHtml(html: string, otpCode: string | null): string {
       `<span style="background:rgba(16,185,129,0.2);color:#4ade80;padding:2px 6px;border-radius:4px;font-weight:700;font-family:monospace">$1</span>`,
     );
   }
-  return out;
+  return EMAIL_IMG_CAP + out;
 }
 
 function EmailMessageBody({ body, isHtml }: { body: string; isHtml: boolean }) {
