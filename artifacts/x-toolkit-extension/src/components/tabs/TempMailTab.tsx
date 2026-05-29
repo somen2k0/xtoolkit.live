@@ -378,6 +378,8 @@ export function TempMailTab({ state, setState, patch: _patch, ready, onSwitchToG
             onSelect={setSelectedId}
             onRetry={refresh}
             onSwitchToGmail={onSwitchToGmail}
+            accentColor="#7c3aed"
+            refreshing={refreshing}
           />
         )}
       </div>

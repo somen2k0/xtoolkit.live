@@ -338,6 +338,8 @@ export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisp
                 onSelect={setSelectedId}
                 onRetry={refresh}
                 emptyText="No messages yet · inbox updates every 15s"
+                accentColor="#1d9bf0"
+                refreshing={refreshing}
               />
             )}
           </div>
