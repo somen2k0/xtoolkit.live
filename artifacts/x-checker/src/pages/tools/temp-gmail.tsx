@@ -186,11 +186,25 @@ function stripOrphanedCss(text: string): string {
     .trim();
 }
 
+function extractImgSizeFromStyle(styleVal: string): string {
+  const wm = /\bwidth\s*:\s*([\d.]+)\s*px/i.exec(styleVal);
+  const hm = /\bheight\s*:\s*([\d.]+)\s*px/i.exec(styleVal);
+  let attrs = "";
+  if (wm) attrs += ` width="${Math.round(Number(wm[1]))}"`;
+  if (hm) attrs += ` height="${Math.round(Number(hm[1]))}"`;
+  return attrs;
+}
+
 function sanitizeEmailHtml(html: string, otpCode: string | null): string {
   let out = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
     .replace(/<!--[\s\S]*?-->/g, "")
+    // Preserve width/height from img inline styles before stripping all styles
+    .replace(/<img([^>]*?)style=["']([^"']*)["']([^>]*?)>/gi, (_m, before, styleVal, after) => {
+      const extras = extractImgSizeFromStyle(styleVal);
+      return `<img${before}${extras}${after}>`;
+    })
     .replace(/\sstyle=["'][^"']*["']/gi, "")
     .replace(/\scolor=["'][^"']*["']/gi, "")
     .replace(/\sbgcolor=["'][^"']*["']/gi, "")

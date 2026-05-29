@@ -26,11 +26,27 @@ const SAFE_EMAIL_STYLES = `
 </style>
 `;
 
+function extractImgSize(styleVal: string): string {
+  const wm = /\bwidth\s*:\s*([\d.]+)\s*px/i.exec(styleVal);
+  const hm = /\bheight\s*:\s*([\d.]+)\s*px/i.exec(styleVal);
+  let attrs = "";
+  if (wm) attrs += ` width="${Math.round(Number(wm[1]))}"`;
+  if (hm) attrs += ` height="${Math.round(Number(hm[1]))}"`;
+  return attrs;
+}
+
 function sanitizeAndTheme(html: string, otp: string | null): string {
   let clean = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
     .replace(/(?:\*|@?[a-z][a-z0-9-,\s.]*)(?:[^<>{}]*)\{[^<>{}]*\}/gi, "")
+    // Preserve width/height from img inline styles before stripping all styles
+    .replace(/<img([^>]*?)style="([^"]*)"([^>]*?)>/gi, (_m, before, styleVal, after) => {
+      return `<img${before}${extractImgSize(styleVal)}${after}>`;
+    })
+    .replace(/<img([^>]*?)style='([^']*)'([^>]*?)>/gi, (_m, before, styleVal, after) => {
+      return `<img${before}${extractImgSize(styleVal)}${after}>`;
+    })
     .replace(/\sstyle="[^"]*"/gi, "")
     .replace(/\sstyle='[^']*'/gi, "")
     .replace(/\sbgcolor="[^"]*"/gi, "")
