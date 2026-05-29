@@ -13,6 +13,7 @@
   let popup: HTMLElement | null = null;
   let currentInput: HTMLInputElement | null = null;
   let closeTimer: ReturnType<typeof setTimeout> | null = null;
+  let showDebounce: ReturnType<typeof setTimeout> | null = null;
 
   function scheduleClose() {
     if (closeTimer) clearTimeout(closeTimer);
@@ -32,7 +33,7 @@
     const rect = input.getBoundingClientRect();
     const scrollY = window.scrollY || document.documentElement.scrollTop;
     const scrollX = window.scrollX || document.documentElement.scrollLeft;
-    const popupWidth = 288;
+    const popupWidth = 272;
     let top = rect.bottom + scrollY + 6;
     let left = rect.left + scrollX;
     if (rect.left + popupWidth > window.innerWidth - 12) {
@@ -54,27 +55,6 @@
     hidePopup();
   }
 
-  function makeSection(label: string): HTMLDivElement {
-    const el = document.createElement("div");
-    Object.assign(el.style, {
-      fontSize: "10px",
-      color: "#9ca3af",
-      fontWeight: "700",
-      textTransform: "uppercase",
-      letterSpacing: "0.8px",
-      padding: "6px 8px 3px",
-      fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
-    } as CSSStyleDeclaration);
-    el.textContent = label;
-    return el;
-  }
-
-  function makeSep(): HTMLDivElement {
-    const el = document.createElement("div");
-    Object.assign(el.style, { height: "1px", background: "#f3f4f6", margin: "4px 0" } as CSSStyleDeclaration);
-    return el;
-  }
-
   function makeBtn(opts: {
     label: string;
     sublabel?: string;
@@ -83,15 +63,17 @@
     borderColor?: string;
     onClick: (e: MouseEvent) => void;
     mono?: boolean;
+    bold?: boolean;
   }): HTMLButtonElement {
     const el = document.createElement("button");
     el.type = "button";
     Object.assign(el.style, {
       display: "flex",
-      alignItems: "center",
+      flexDirection: "column",
+      alignItems: "flex-start",
       width: "100%",
-      padding: "9px 10px",
-      marginBottom: "3px",
+      padding: "9px 12px",
+      marginBottom: "4px",
       border: `1px solid ${opts.borderColor ?? "transparent"}`,
       borderRadius: "8px",
       cursor: "pointer",
@@ -101,53 +83,46 @@
       boxSizing: "border-box",
       outline: "none",
       transition: "filter 0.1s",
-      gap: "8px",
       textAlign: "left",
     } as CSSStyleDeclaration);
 
-    const textWrap = document.createElement("div");
-    textWrap.style.flex = "1";
-    textWrap.style.minWidth = "0";
-    textWrap.style.overflow = "hidden";
-
     const mainLine = document.createElement("div");
     Object.assign(mainLine.style, {
-      fontSize: opts.mono ? "12px" : "13px",
-      fontWeight: "600",
+      fontSize: opts.mono ? "12.5px" : "13px",
+      fontWeight: opts.bold !== false ? "600" : "500",
       fontFamily: opts.mono ? "monospace,monospace" : "inherit",
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
       color: opts.color,
-      lineHeight: "1.3",
+      lineHeight: "1.35",
+      width: "100%",
     } as CSSStyleDeclaration);
     mainLine.textContent = opts.label;
-    textWrap.appendChild(mainLine);
+    el.appendChild(mainLine);
 
     if (opts.sublabel) {
       const sub = document.createElement("div");
       Object.assign(sub.style, {
         fontSize: "10px",
         color: opts.color,
-        opacity: "0.65",
-        marginTop: "1px",
+        opacity: "0.7",
+        marginTop: "2px",
         lineHeight: "1.2",
       } as CSSStyleDeclaration);
       sub.textContent = opts.sublabel;
-      textWrap.appendChild(sub);
+      el.appendChild(sub);
     }
 
-    el.appendChild(textWrap);
-
-    el.addEventListener("mouseover", () => { el.style.filter = "brightness(0.93)"; });
+    el.addEventListener("mouseover", () => { el.style.filter = "brightness(0.92)"; });
     el.addEventListener("mouseout", () => { el.style.filter = ""; });
     el.addEventListener("mousedown", (e) => e.preventDefault());
     el.addEventListener("click", opts.onClick);
     return el;
   }
 
-  function setLoadingState(btn: HTMLButtonElement, loading: boolean, originalLabel: string) {
-    const mainLine = btn.querySelector("div > div") as HTMLElement | null;
+  function setLoadingText(btn: HTMLButtonElement, loading: boolean, originalLabel: string) {
+    const mainLine = btn.querySelector("div") as HTMLElement | null;
     if (mainLine) mainLine.textContent = loading ? "Generating…" : originalLabel;
     btn.style.opacity = loading ? "0.55" : "1";
     btn.style.cursor = loading ? "default" : "pointer";
@@ -188,7 +163,7 @@
         borderRadius: "12px",
         boxShadow: "0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10)",
         padding: "6px",
-        width: "288px",
+        width: "272px",
         fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
         border: "1px solid rgba(0,0,0,0.08)",
         display: "none",
@@ -201,44 +176,11 @@
 
     popup.innerHTML = "";
 
-    // ── Header ─────────────────────────────────────────────────────
-    const header = document.createElement("div");
-    Object.assign(header.style, {
-      display: "flex",
-      alignItems: "center",
-      gap: "6px",
-      padding: "4px 6px 7px",
-    } as CSSStyleDeclaration);
-
-    const logoSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    logoSvg.setAttribute("width", "14");
-    logoSvg.setAttribute("height", "14");
-    logoSvg.setAttribute("viewBox", "0 0 24 24");
-    logoSvg.setAttribute("fill", "none");
-    logoSvg.setAttribute("stroke", "#7c3aed");
-    logoSvg.setAttribute("stroke-width", "2");
-    logoSvg.setAttribute("stroke-linecap", "round");
-    logoSvg.innerHTML = '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>';
-
-    const headerText = document.createElement("span");
-    Object.assign(headerText.style, {
-      fontSize: "11px",
-      color: "#374151",
-      fontWeight: "700",
-      letterSpacing: "0.1px",
-    } as CSSStyleDeclaration);
-    headerText.textContent = "X Toolkit – Autofill";
-
-    header.appendChild(logoSvg);
-    header.appendChild(headerText);
-    popup.appendChild(header);
-
-    // ── Fill section ───────────────────────────────────────────────
+    // ── Email fill buttons ─────────────────────────────────────────
     if (disposable) {
-      popup.appendChild(makeSection("Temp Email"));
       popup.appendChild(makeBtn({
         label: disposable,
-        sublabel: "Click to fill",
+        sublabel: "Temp Email — click to fill",
         bg: "#7c3aed",
         color: "#ffffff",
         onClick: () => fillInput(input, disposable),
@@ -247,10 +189,9 @@
     }
 
     if (gmail) {
-      popup.appendChild(makeSection("Temp Gmail"));
       popup.appendChild(makeBtn({
         label: gmail,
-        sublabel: "Click to fill — Gmail accepted",
+        sublabel: "Temp Gmail — Gmail accepted",
         bg: "#1d4ed8",
         color: "#ffffff",
         onClick: () => fillInput(input, gmail),
@@ -258,17 +199,22 @@
       }));
     }
 
-    popup.appendChild(makeSep());
+    // ── Thin divider ───────────────────────────────────────────────
+    const sep = document.createElement("div");
+    Object.assign(sep.style, { height: "1px", background: "#f3f4f6", margin: "2px 0 6px" } as CSSStyleDeclaration);
+    popup.appendChild(sep);
 
-    // ── Generate new section ───────────────────────────────────────
+    // ── Generate new temp mail button ──────────────────────────────
+    const newEmailLabel = "↻  Generate a new temp mail";
     const newEmailBtn = makeBtn({
-      label: "↻  New Temp Email",
+      label: newEmailLabel,
       bg: "#f9fafb",
       color: "#374151",
       borderColor: "#e5e7eb",
+      bold: false,
       onClick: async (e) => {
         e.preventDefault();
-        setLoadingState(newEmailBtn, true, "↻  New Temp Email");
+        setLoadingText(newEmailBtn, true, newEmailLabel);
         try {
           const resp = await chrome.runtime.sendMessage({ type: "GENERATE_NEW_DISPOSABLE" });
           if (resp?.email && currentInput) fillInput(currentInput, resp.email as string);
@@ -278,42 +224,31 @@
     });
     popup.appendChild(newEmailBtn);
 
-    const newGmailBtn = makeBtn({
-      label: "↻  New Temp Gmail",
-      bg: "#f9fafb",
-      color: "#374151",
-      borderColor: "#e5e7eb",
-      onClick: async (e) => {
-        e.preventDefault();
-        setLoadingState(newGmailBtn, true, "↻  New Temp Gmail");
-        try {
-          const resp = await chrome.runtime.sendMessage({ type: "GENERATE_NEW_GMAIL" });
-          if (resp?.email && currentInput) fillInput(currentInput, resp.email as string);
-        } catch { /* ignore */ }
-        hidePopup();
-      },
-    });
-    popup.appendChild(newGmailBtn);
-
-    popup.appendChild(makeSep());
-
-    const dashBtn = makeBtn({
-      label: "Open Dashboard  ↗",
+    // ── Dashboard button ───────────────────────────────────────────
+    popup.appendChild(makeBtn({
+      label: "Dashboard  ↗",
       bg: "#f9fafb",
       color: "#6b7280",
       borderColor: "#e5e7eb",
+      bold: false,
       onClick: () => { window.open("https://xtoolkit.live/tools/temp-mail", "_blank"); hidePopup(); },
-    });
-    popup.appendChild(dashBtn);
+    }));
 
     positionPopup(popup, input);
     popup.style.display = "block";
   }
 
-  document.addEventListener("focusin", (e) => {
-    const t = e.target as HTMLElement;
-    if (t.matches && t.matches(EMAIL_SELECTORS)) void showPopup(t as HTMLInputElement);
-  }, true);
+  function tryShow(target: EventTarget | null) {
+    if (!(target instanceof HTMLElement)) return;
+    if (target.matches && target.matches(EMAIL_SELECTORS)) {
+      if (showDebounce) clearTimeout(showDebounce);
+      showDebounce = setTimeout(() => void showPopup(target as HTMLInputElement), 50);
+    }
+  }
+
+  // ── Event listeners ────────────────────────────────────────────────────
+  document.addEventListener("focusin", (e) => tryShow(e.target), true);
+  document.addEventListener("click",   (e) => tryShow(e.target), true);
 
   document.addEventListener("focusout", (e) => {
     const t = e.target as HTMLElement;
@@ -338,4 +273,23 @@
   window.addEventListener("resize", () => {
     if (popup && popup.style.display !== "none" && currentInput) positionPopup(popup, currentInput);
   });
+
+  // ── MutationObserver: catch dynamically added inputs (SPAs) ────────────
+  const observer = new MutationObserver(() => {
+    // Re-check if already-focused element is an email input (catches SPA navigation)
+    const active = document.activeElement;
+    if (active instanceof HTMLInputElement && active.matches(EMAIL_SELECTORS)) {
+      if (!popup || popup.style.display === "none") {
+        if (showDebounce) clearTimeout(showDebounce);
+        showDebounce = setTimeout(() => void showPopup(active), 100);
+      }
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // ── Check if an email input is already focused when script loads ───────
+  const alreadyFocused = document.activeElement;
+  if (alreadyFocused instanceof HTMLInputElement && alreadyFocused.matches(EMAIL_SELECTORS)) {
+    void showPopup(alreadyFocused);
+  }
 })();
