@@ -149,31 +149,42 @@ function htmlToPlainText(html: string): string {
     .trim();
 }
 
-const OTP_LABELED_RE = /(?:code|otp|pin|password|verification|token)[:\s]+(\d{4,8})/gi;
-
 function detectOTP(text: string): string | null {
-  OTP_LABELED_RE.lastIndex = 0;
-  const labeled = OTP_LABELED_RE.exec(text);
-  if (labeled) return labeled[1]!;
+  if (!text) return null;
 
-  const lower = text.toLowerCase();
-  const sixDigit = /\b(\d{6})\b/g;
-  let m: RegExpExecArray | null;
-  while ((m = sixDigit.exec(text)) !== null) {
-    const ctx = lower.substring(Math.max(0, m.index - 80), Math.min(lower.length, m.index + 80));
-    if (/code|otp|verify|verification|confirm|pin|password|token|authenticate|enter/.test(ctx)) return m[1]!;
+  // Priority 1: alphanumeric dash-separated codes (e.g. "RI2-DDX")
+  const alphaNumPatterns: RegExp[] = [
+    /(?:code|otp|token|verification|confirm(?:ation)?)[\s:]+([A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6})/i,
+    /\b([A-Z]{1,4}[0-9]{1,4}[-–—][A-Z]{1,4}[0-9]{0,4})\b/,
+    /\b([A-Z0-9]{2,4}[-–—][A-Z0-9]{2,4}[-–—][A-Z0-9]{2,4})\b/,
+  ];
+  for (const pattern of alphaNumPatterns) {
+    const match = text.match(pattern);
+    if (match?.[1]) return match[1].toUpperCase();
   }
-  sixDigit.lastIndex = 0;
-  const anyFix = sixDigit.exec(text);
-  if (anyFix) return anyFix[1]!;
 
+  // Priority 2: keyword-adjacent numeric codes
+  const keywordPatterns: RegExp[] = [
+    /(?:code|otp|pin|password|token|verification)[:\s]+(\d{4,8})/i,
+    /(\d{4,8})(?:\s+is\s+your)/i,
+    /your\s+(?:code|otp|pin)[:\s]+(\d{4,8})/i,
+    /(?:verification|confirm(?:ation)?|one.?time|security|access|login|sign.?in|auth(?:entication)?)\s*(?:code|pin|otp|number|token)[^a-z0-9]*(\d{4,8})/i,
+  ];
+  for (const pattern of keywordPatterns) {
+    const match = text.match(pattern);
+    if (match?.[1]) return match[1];
+  }
+
+  // Priority 3: 6-digit number
+  const sixDigit = text.match(/\b(\d{6})\b/);
+  if (sixDigit?.[1]) return sixDigit[1];
+
+  // Priority 4: other digit lengths
   for (const len of [4, 5, 7, 8]) {
-    const re = new RegExp(`\\b(\\d{${len}})\\b`, "g");
-    while ((m = re.exec(text)) !== null) {
-      const ctx = lower.substring(Math.max(0, m.index - 80), Math.min(lower.length, m.index + 80));
-      if (/code|otp|verify|verification|confirm|pin|password|token|authenticate|enter/.test(ctx)) return m[1]!;
-    }
+    const m = text.match(new RegExp(`\\b(\\d{${len}})\\b`));
+    if (m?.[1]) return m[1];
   }
+
   return null;
 }
 
@@ -201,6 +212,7 @@ function sanitizeEmailHtml(html: string, otpCode: string | null): string {
   let out = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<button[^>]*>[\s\S]*?<\/button>/gi, "")
     .replace(/<!--[\s\S]*?-->/g, "")
     // Preserve width/height from img inline styles before stripping all styles
     .replace(/<img([^>]*?)style=["']([^"']*)["']([^>]*?)>/gi, (_m, before, styleVal, after) => {
@@ -229,11 +241,11 @@ function sanitizeEmailHtml(html: string, otpCode: string | null): string {
   return EMAIL_IMG_CAP + out;
 }
 
-function EmailMessageBody({ body, isHtml }: { body: string; isHtml: boolean }) {
+function EmailMessageBody({ body, isHtml, subject }: { body: string; isHtml: boolean; subject?: string }) {
   const [otpCopied, setOtpCopied] = useState(false);
   const [bodyCopied, setBodyCopied] = useState(false);
   const plainText = isHtml ? htmlToPlainText(body) : body;
-  const otp = detectOTP(plainText);
+  const otp = detectOTP(plainText) ?? (subject ? detectOTP(subject) : null);
   const sanitizedHtml = isHtml ? sanitizeEmailHtml(stripOrphanedCss(body), otp) : null;
 
   const copyOtp = () => {
@@ -805,7 +817,7 @@ function UnifiedInboxSection() {
               </div>
               <div className="flex-1 overflow-auto p-4" style={{ maxHeight: "360px" }}>
                 {selectedMsg.body
-                  ? <EmailMessageBody body={selectedMsg.body} isHtml={selectedMsg.isHtml} />
+                  ? <EmailMessageBody body={selectedMsg.body} isHtml={selectedMsg.isHtml} subject={selectedMsg.subject} />
                   : <p className="text-sm text-muted-foreground">(Empty message)</p>}
               </div>
             </>
@@ -1269,7 +1281,7 @@ function TempGmailTab() {
                 </div>
                 <div className="flex-1 overflow-auto p-4" style={{ maxHeight: "340px" }}>
                   {selected.body
-                    ? <EmailMessageBody body={selected.body} isHtml={selected.bodyContentType === "html"} />
+                    ? <EmailMessageBody body={selected.body} isHtml={selected.bodyContentType === "html"} subject={selected.subject} />
                     : <p className="text-sm text-muted-foreground/60">(Empty message)</p>}
                 </div>
               </>
