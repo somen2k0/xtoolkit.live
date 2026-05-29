@@ -416,16 +416,34 @@ body::after {
     display: none !important;
   }
 
-  /* Remove backdrop-blur from hero glassmorphism card */
-  .hero-glass {
+  /* Remove ALL backdrop-blur on mobile — every blur layer delays paint */
+  .hero-glass,
+  .hero-glass-card {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background: var(--color-background) !important;
+    background: rgba(15, 15, 31, 0.95) !important;
+    border: 1px solid rgba(99, 102, 241, 0.2) !important;
+    box-shadow: none !important;
+    border-radius: 1rem !important;
+  }
+
+  /* Kill backdrop-blur on badge and trust items too */
+  .hero-section [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   /* Hide the dot grid pattern — repeated radial-gradient across full screen */
   .hero-dot-pattern {
     display: none !important;
+  }
+
+  /* STEP 5: Force immediate render — zero out all animation delays in hero */
+  .hero-section,
+  .hero-section * {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

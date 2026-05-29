@@ -9,11 +9,11 @@ import { usePageTracking } from "@/hooks/use-track";
 import { ThemeProvider } from "@/lib/theme";
 import { Loader2 } from "lucide-react";
 
-// Eagerly loaded only for 404 (tiny, needed on every route)
+// Eagerly loaded — Home is the LCP page, lazy-loading it adds a fatal 2-3s delay
+import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
 
-// All top-level pages lazy-loaded to keep the initial bundle minimal
-const Home = lazy(() => import("@/pages/home"));
+// All other top-level pages lazy-loaded to keep the initial bundle minimal
 const AdminPage = lazy(() => import("@/pages/admin"));
 const ChromeExtension = lazy(() => import("@/pages/chrome-extension"));
 const CwsScreenshots = lazy(() => import("@/pages/cws-screenshots"));

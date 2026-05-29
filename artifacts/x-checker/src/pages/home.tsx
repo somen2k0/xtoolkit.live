@@ -125,7 +125,7 @@ export default function Home() {
       />
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden">
+      <section className="hero-section relative overflow-hidden">
 
         {/* Star/dot background pattern — hidden on mobile */}
         <div
@@ -138,7 +138,7 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto px-4 md:px-8 pt-14 pb-12 md:pt-20 md:pb-16 text-center relative">
           {/* Glassmorphism card */}
-          <div className="hero-glass rounded-[2rem] border dark:border-white/10 border-border/60 dark:bg-white/[0.03] bg-background/80 backdrop-blur-xl dark:shadow-2xl dark:shadow-black/40 shadow-lg shadow-black/8 px-6 md:px-12 lg:px-16 py-10 md:py-14">
+          <div className="hero-glass hero-glass-card rounded-[2rem] border dark:border-white/10 border-border/60 dark:bg-white/[0.03] bg-background/80 backdrop-blur-xl dark:shadow-2xl dark:shadow-black/40 shadow-lg shadow-black/8 px-6 md:px-12 lg:px-16 py-10 md:py-14">
 
             <div className="hero-badge inline-flex mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full dark:bg-white/5 bg-primary/8 dark:border-white/10 border border-primary/20 dark:text-purple-200 text-primary text-xs font-medium backdrop-blur-md">
