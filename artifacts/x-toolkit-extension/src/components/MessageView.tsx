@@ -20,6 +20,7 @@ function sanitizeAndTheme(html: string, otp: string | null): string {
   let clean = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/(?:\*|@?[a-z][a-z0-9-,\s.]*)(?:[^<>{}]*)\{[^<>{}]*\}/gi, "")
     .replace(/\sstyle="[^"]*"/gi, "")
     .replace(/\sstyle='[^']*'/gi, "")
     .replace(/\sbgcolor="[^"]*"/gi, "")

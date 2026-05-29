@@ -9,6 +9,7 @@ export function stripHtml(html: string): string {
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
+    .replace(/(?:\*|@?[a-z][a-z0-9-,\s.]*)(?:[^{}]*)\{[^{}]*\}/gi, "")
     .replace(/\s{2,}/g, " ")
     .trim();
 }

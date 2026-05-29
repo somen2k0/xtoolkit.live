@@ -1,3 +1,5 @@
+import { stripHtml, getIntro } from "./otp";
+
 const API_BASE = "https://xtoolkit.live";
 
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
@@ -64,6 +66,8 @@ interface RawGuerrillaMessage {
 }
 
 export function normaliseGuerrilla(m: RawGuerrillaMessage) {
+  const rawExcerpt = m.mail_excerpt ?? "";
+  const intro = rawExcerpt ? getIntro(stripHtml(rawExcerpt), 80) : "";
   return {
     id: String(m.mail_id),
     from: m.mail_from ?? "",
@@ -71,7 +75,7 @@ export function normaliseGuerrilla(m: RawGuerrillaMessage) {
     date: m.mail_date ?? "",
     body: m.mail_body ?? "",
     bodyContentType: "html" as const,
-    intro: m.mail_excerpt ?? "",
+    intro,
   };
 }
 
