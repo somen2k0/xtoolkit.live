@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { StoredState, HistoryEntry, GUERRILLA_DOMAINS, ALL_TEMPMAIL_DOMAINS, TempmailDomain } from "../../types";
 import { useTempMailInbox, fetchFullMessage } from "../../hooks/useInbox";
-import { EmailHeader } from "../EmailHeader";
+import { EmailHeader, FillEmail } from "../EmailHeader";
 import { InboxList } from "../InboxList";
 import { OTPCard } from "../OTPCard";
 import { MessageView } from "../MessageView";
@@ -23,6 +23,8 @@ interface Props {
   patch: <K extends keyof StoredState>(key: K, val: StoredState[K]) => void;
   ready: boolean;
   onSwitchToGmail?: () => void;
+  fillEmails?: FillEmail[];
+  onFillPage?: (address: string) => Promise<void>;
 }
 
 function getActiveEmail(state: StoredState): string {
@@ -263,7 +265,7 @@ function DomainSelector({ currentDomain, switching, onSwitch, domainStatus }: Do
   );
 }
 
-export function TempMailTab({ state, setState, patch: _patch, ready, onSwitchToGmail }: Props) {
+export function TempMailTab({ state, setState, patch: _patch, ready, onSwitchToGmail, fillEmails, onFillPage }: Props) {
   const [creating, setCreating] = useState(false);
   const [switching, setSwitching] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
@@ -328,6 +330,8 @@ export function TempMailTab({ state, setState, patch: _patch, ready, onSwitchToG
         onNew={handleNew}
         onRefresh={refresh}
         badge={email ? messages.length : 0}
+        fillEmails={fillEmails}
+        onFillPage={onFillPage}
       />
 
       <DomainSelector

@@ -1,4 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
+
+export interface FillEmail {
+  label: string;
+  address: string;
+}
 
 interface EmailHeaderProps {
   email: string;
@@ -7,6 +12,8 @@ interface EmailHeaderProps {
   onNew: () => void;
   onRefresh: () => void;
   badge?: number;
+  fillEmails?: FillEmail[];
+  onFillPage?: (address: string) => Promise<void>;
 }
 
 function CopyIcon() {
@@ -49,8 +56,31 @@ function PlusIcon() {
   );
 }
 
-export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badge = 0 }: EmailHeaderProps) {
+function FillIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 20h9" />
+      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+    </svg>
+  );
+}
+
+export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badge = 0, fillEmails = [], onFillPage }: EmailHeaderProps) {
   const [copied, setCopied] = useState(false);
+  const [fillState, setFillState] = useState<"idle" | "filled" | "none">("idle");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [dropdownOpen]);
 
   const copyEmail = useCallback(async () => {
     if (!email) return;
@@ -69,6 +99,25 @@ export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badg
       setTimeout(() => setCopied(false), 1800);
     }
   }, [email]);
+
+  const handleFill = useCallback(async (address: string) => {
+    setDropdownOpen(false);
+    if (!onFillPage) return;
+    await onFillPage(address);
+    setFillState("filled");
+    setTimeout(() => setFillState("idle"), 2000);
+  }, [onFillPage]);
+
+  const handleFillClick = useCallback(() => {
+    if (!onFillPage || fillEmails.length === 0) return;
+    if (fillEmails.length === 1) {
+      void handleFill(fillEmails[0]!.address);
+    } else {
+      setDropdownOpen((v) => !v);
+    }
+  }, [onFillPage, fillEmails, handleFill]);
+
+  const hasFill = onFillPage && fillEmails.length > 0;
 
   const [local, domain] = email.split("@");
 
@@ -127,6 +176,68 @@ export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badg
         >
           {copied ? <CheckIcon /> : <CopyIcon />}
         </button>
+
+        {/* Auto-fill */}
+        {hasFill && (
+          <div ref={dropdownRef} style={{ position: "relative", flexShrink: 0 }}>
+            <button
+              onClick={handleFillClick}
+              disabled={loading}
+              title="Auto-fill email on this page"
+              style={{
+                width: 32, height: 32,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                background: fillState === "filled" ? "#0a2a1a" : "#0f1623",
+                border: `1px solid ${fillState === "filled" ? "#00ba7c" : "#1e2a3a"}`,
+                borderRadius: 8, cursor: "pointer",
+                color: fillState === "filled" ? "#00ba7c" : "#71767b",
+                flexShrink: 0,
+                transition: "all 0.15s",
+              }}
+            >
+              {fillState === "filled" ? <CheckIcon /> : <FillIcon />}
+            </button>
+
+            {dropdownOpen && (
+              <div style={{
+                position: "absolute",
+                top: "calc(100% + 6px)",
+                right: 0,
+                background: "#0f1623",
+                border: "1px solid #1e2a3a",
+                borderRadius: 8,
+                overflow: "hidden",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.5)",
+                zIndex: 200,
+                minWidth: 200,
+              }}>
+                <div style={{ padding: "5px 10px 4px", fontSize: 9, color: "#3d4753", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid #1e2a3a" }}>
+                  Fill which email?
+                </div>
+                {fillEmails.map(({ label, address }) => (
+                  <button
+                    key={address}
+                    onClick={() => void handleFill(address)}
+                    style={{
+                      width: "100%",
+                      display: "flex", flexDirection: "column", alignItems: "flex-start",
+                      padding: "8px 12px",
+                      background: "none", border: "none",
+                      cursor: "pointer",
+                      borderBottom: "1px solid #0f1e2e",
+                      textAlign: "left",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "#141e2e"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "none"; }}
+                  >
+                    <span style={{ fontSize: 10, color: "#71767b", marginBottom: 2 }}>{label}</span>
+                    <span style={{ fontSize: 12, fontFamily: "monospace", color: "#e7e9ea", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 200 }}>{address}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Refresh */}
         <button

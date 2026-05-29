@@ -177,10 +177,20 @@ function detectOTP(text: string): string | null {
   return null;
 }
 
+function stripOrphanedCss(text: string): string {
+  return text
+    .replace(/\*\s*\{[^{}]*\}/g, "")
+    .replace(/(?:^|\n)[^<{\n]*\{[^{}<>]*\}[ \t]*/gm, "\n")
+    .replace(/^\s*[\w-]+\s*:\s*[^;{}<>\n]+;\s*/gm, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function sanitizeEmailHtml(html: string, otpCode: string | null): string {
   let out = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<!--[\s\S]*?-->/g, "")
     .replace(/\sstyle=["'][^"']*["']/gi, "")
     .replace(/\scolor=["'][^"']*["']/gi, "")
     .replace(/\sbgcolor=["'][^"']*["']/gi, "")
@@ -208,7 +218,7 @@ function EmailMessageBody({ body, isHtml }: { body: string; isHtml: boolean }) {
   const [bodyCopied, setBodyCopied] = useState(false);
   const plainText = isHtml ? htmlToPlainText(body) : body;
   const otp = detectOTP(plainText);
-  const sanitizedHtml = isHtml ? sanitizeEmailHtml(body, otp) : null;
+  const sanitizedHtml = isHtml ? sanitizeEmailHtml(stripOrphanedCss(body), otp) : null;
 
   const copyOtp = () => {
     if (!otp) return;
