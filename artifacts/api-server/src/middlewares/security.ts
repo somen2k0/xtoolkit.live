@@ -22,6 +22,7 @@ export const helmetMiddleware = helmet({
         "'self'",
         "data:",
         "blob:",
+        "https:",
         "https://pbs.twimg.com",
         "https://abs.twimg.com",
         "https://www.google-analytics.com",
