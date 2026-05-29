@@ -17,7 +17,20 @@ export function stripHtml(html: string): string {
 export function extractOTP(text: string): string | null {
   if (!text) return null;
 
-  // Priority 1: keyword-adjacent patterns (most reliable signal)
+  // Priority 1: keyword-adjacent alphanumeric codes (e.g. "RI2-DDX" in subject)
+  const alphaNumPatterns: RegExp[] = [
+    // "code: RI2-DDX" or "code is RI2-DDX" — alphanum with dash separator
+    /(?:code|otp|token|verification|confirm(?:ation)?)[\s:]+([A-Z0-9]{2,6}[-–—][A-Z0-9]{2,6})/i,
+    // standalone dash-separated alphanum code adjacent to keyword anywhere in sentence
+    /\b([A-Z]{1,4}[0-9]{1,4}[-–—][A-Z]{1,4}[0-9]{0,4})\b/,
+    /\b([A-Z0-9]{2,4}[-–—][A-Z0-9]{2,4}[-–—][A-Z0-9]{2,4})\b/,
+  ];
+  for (const pattern of alphaNumPatterns) {
+    const match = text.match(pattern);
+    if (match?.[1]) return match[1].toUpperCase();
+  }
+
+  // Priority 2: keyword-adjacent numeric patterns (most reliable signal)
   const keywordPatterns: RegExp[] = [
     /(?:code|otp|pin|password|token|verification)[:\s]+(\d{4,8})/i,
     /(\d{4,8})(?:\s+is\s+your)/i,
@@ -29,11 +42,11 @@ export function extractOTP(text: string): string | null {
     if (match?.[1]) return match[1];
   }
 
-  // Priority 2: 6-digit number (most common OTP length)
+  // Priority 3: 6-digit number (most common OTP length)
   const sixDigit = text.match(/\b(\d{6})\b/);
   if (sixDigit?.[1]) return sixDigit[1];
 
-  // Priority 3: other lengths in order of commonality
+  // Priority 4: other digit lengths in order of commonality
   for (const len of [4, 5, 7, 8]) {
     const m = text.match(new RegExp(`\\b(\\d{${len}})\\b`));
     if (m?.[1]) return m[1];

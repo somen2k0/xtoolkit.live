@@ -39,6 +39,7 @@ function sanitizeAndTheme(html: string, otp: string | null): string {
   let clean = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<button[^>]*>[\s\S]*?<\/button>/gi, "")
     .replace(/(?:\*|@?[a-z][a-z0-9-,\s.]*)(?:[^<>{}]*)\{[^<>{}]*\}/gi, "")
     // Preserve width/height from img inline styles before stripping all styles
     .replace(/<img([^>]*?)style="([^"]*)"([^>]*?)>/gi, (_m, before, styleVal, after) => {
