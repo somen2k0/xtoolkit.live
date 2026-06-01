@@ -216,7 +216,11 @@ export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisp
       <MessageView
         message={selectedMsg}
         onBack={() => setSelectedId(null)}
-        fetchBody={() => fetchFullGmailMessage(email, selectedMsg.id)}
+        fetchBody={
+          selectedMsg.body
+            ? undefined
+            : () => fetchFullGmailMessage(email, selectedMsg.id)
+        }
       />
     );
   }

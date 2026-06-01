@@ -74,19 +74,8 @@ router.get('/message/:id', async (req, res) => {
       `${BASE}?f=fetch_email&email_id=${req.params.id}&sid_token=${sid_token ?? ''}`,
       { headers: HEADERS, signal: AbortSignal.timeout(10000) },
     );
-    const data = await r.json() as {
-      mail_body?: string;
-      mail_body_html?: string;
-      mail_from?: string;
-      mail_subject?: string;
-      mail_date?: string;
-    };
-    res.json({
-      body: data.mail_body_html || data.mail_body || "",
-      from: data.mail_from ?? "",
-      subject: data.mail_subject ?? "",
-      date: data.mail_date ?? "",
-    });
+    const data = await r.json();
+    res.json(data);
   } catch (e: any) {
     res.status(500).json({ error: e.message });
   }
