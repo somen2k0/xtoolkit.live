@@ -80,8 +80,25 @@ router.get('/message/:id', async (req, res) => {
       headers: { ...HEADERS, Authorization: `Bearer ${token ?? ''}` },
       signal: AbortSignal.timeout(8000),
     });
-    const data = await r.json();
-    res.json(data);
+    const data = await r.json() as {
+      id?: string;
+      from?: unknown;
+      subject?: string;
+      createdAt?: string;
+      html?: string[];
+      text?: string;
+    };
+    const htmlBody = data.html?.[0] ?? "";
+    const body = htmlBody || data.text || "";
+    const isHtml = !!htmlBody;
+    res.json({
+      id: data.id,
+      from: data.from,
+      subject: data.subject,
+      date: data.createdAt,
+      body,
+      isHtml,
+    });
   } catch (e: any) {
     res.status(500).json({ error: e.message });
   }

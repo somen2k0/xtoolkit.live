@@ -65,7 +65,7 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
   const [textCopied, setTextCopied] = useState(false);
 
   useEffect(() => {
-    if (!message.body && fetchBody) {
+    if (fetchBody) {
       setLoading(true);
       fetchBody()
         .then((res) => { setBody(res.body); setBodyType(res.bodyContentType); })

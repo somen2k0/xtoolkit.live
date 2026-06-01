@@ -310,11 +310,7 @@ export function TempMailTab({ state, setState, patch: _patch, ready, onSwitchToG
       <MessageView
         message={selectedMsg}
         onBack={() => setSelectedId(null)}
-        fetchBody={
-          selectedMsg.body
-            ? undefined
-            : () => fetchFullMessage(selectedMsg.id, state)
-        }
+        fetchBody={() => fetchFullMessage(selectedMsg.id, state)}
       />
     );
   }
