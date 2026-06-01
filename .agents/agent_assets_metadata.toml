@@ -210,3 +210,9 @@ id = "ApxwDRz-iNgEA_cDfQPB7"
 uri = "file://artifacts/x-toolkit-extension-v1.1.1.zip"
 type = "unspecified"
 title = "X Toolkit Extension v1.1.1"
+
+[[outputs]]
+id = "mdYIRkDUwwLbURAMLbXJP"
+uri = "file://x-toolkit-extension-v1.1.1.zip"
+type = "unspecified"
+title = "X Toolkit Extension v1.1.1 — Chrome Web Store Ready"
