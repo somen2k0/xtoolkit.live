@@ -946,14 +946,25 @@ function generatePageHtml(template, { path, title, description, ogTitle, ogDescr
 
   // Inject static content into <div id="root"> so Google indexes unique
   // content on every page without needing to execute JavaScript.
+  // Uses indexOf+slice instead of .replace() to avoid two failure modes:
+  //   1. Whitespace mismatch — Vite may reformat/minify the built HTML so a
+  //      hardcoded multiline string never matches, silently skipping injection.
+  //   2. $ substitution corruption — .replace(str, replacementStr) treats $',
+  //      $&, $1, etc. as special patterns; any $ in descriptions or FAQs would
+  //      corrupt or truncate the output.
   const rootContent = buildRootContent({ path, title, description, isHomepage, category }, tool);
-  const rootLoaderHtml = `<div id="root">
-      <div id="app-loader">
-        <div id="app-loader-logo">X</div>
-        <div id="app-loader-spinner"></div>
-      </div>
-    </div>`;
-  html = html.replace(rootLoaderHtml, `<div id="root">\n      ${rootContent}\n    </div>`);
+  const rootDivIdx = html.indexOf('<div id="root">');
+  if (rootDivIdx !== -1) {
+    const scriptIdx = html.indexOf('<script', rootDivIdx);
+    if (scriptIdx !== -1) {
+      html =
+        html.slice(0, rootDivIdx) +
+        '<div id="root">\n      ' +
+        rootContent +
+        '\n    </div>\n    ' +
+        html.slice(scriptIdx);
+    }
+  }
 
   // Category pages get ItemList + BreadcrumbList.
   // Tool pages get SoftwareApplication + BreadcrumbList.
@@ -976,8 +987,13 @@ function generatePageHtml(template, { path, title, description, ogTitle, ogDescr
   const customSchema = CUSTOM_PAGE_SCHEMAS[path] ? jsonLdTag(CUSTOM_PAGE_SCHEMAS[path]) : "";
 
   const parts = [schemaBlock, customSchema, faqSchema].filter(Boolean);
-  const injection = parts.join("\n");
-  html = html.replace("</head>", `${injection}\n  </head>`);
+  if (parts.length > 0) {
+    const injection = parts.join("\n");
+    // Use a replacer function — never a replacement string — so that any $
+    // characters inside JSON-LD schemas are treated as literals, not as JS
+    // .replace() special patterns ($&, $', $1, etc.).
+    html = html.replace("</head>", () => `${injection}\n  </head>`);
+  }
 
   return html;
 }
