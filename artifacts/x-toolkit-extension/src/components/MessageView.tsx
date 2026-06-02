@@ -35,6 +35,28 @@ function extractImgSize(styleVal: string): string {
   return attrs;
 }
 
+function upgradeImgTag(imgHtml: string): string {
+  // 1. If there's a data-src but no usable src, promote data-src → src
+  const dataSrcMatch = /\sdata-src=["']([^"']+)["']/i.exec(imgHtml);
+  const srcMatch = /\ssrc=["']([^"']+)["']/i.exec(imgHtml);
+  let result = imgHtml;
+  if (dataSrcMatch && (!srcMatch || srcMatch[1].length < 10)) {
+    // replace or inject the src with the data-src value
+    if (srcMatch) {
+      result = result.replace(/(\ssrc=["'])[^"']*(['"])/i, `$1${dataSrcMatch[1]}$2`);
+    } else {
+      result = result.replace(/^<img/i, `<img src="${dataSrcMatch[1]}"`);
+    }
+  }
+  // 2. Upgrade http:// → https:// in src (mixed-content blocks http in extension popup)
+  result = result.replace(/(\ssrc=["'])http:\/\//gi, "$1https://");
+  // 3. Add referrerpolicy="no-referrer" so tracking servers don't reject the request
+  if (!/\sreferrerpolicy=/i.test(result)) {
+    result = result.replace(/^<img/i, '<img referrerpolicy="no-referrer"');
+  }
+  return result;
+}
+
 function sanitizeAndTheme(html: string, otp: string | null): string {
   let clean = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
@@ -52,7 +74,9 @@ function sanitizeAndTheme(html: string, otp: string | null): string {
     .replace(/\sstyle='[^']*'/gi, "")
     .replace(/\sbgcolor="[^"]*"/gi, "")
     .replace(/\scolor="[^"]*"/gi, "")
-    .replace(/\sface="[^"]*"/gi, "");
+    .replace(/\sface="[^"]*"/gi, "")
+    // Fix image URLs: promote data-src, upgrade http→https, add referrerpolicy
+    .replace(/<img[^>]*>/gi, (imgTag) => upgradeImgTag(imgTag));
   if (otp) clean = highlightOTP(clean, otp);
   return SAFE_EMAIL_STYLES + clean;
 }
