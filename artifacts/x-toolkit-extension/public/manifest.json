@@ -32,6 +32,9 @@
     "https://www.mail.gw/*",
     "https://maildrop.cc/*"
   ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src * data: blob:;"
+  },
   "commands": {
     "copy-active-email": {
       "suggested_key": { "default": "Alt+Shift+C" },

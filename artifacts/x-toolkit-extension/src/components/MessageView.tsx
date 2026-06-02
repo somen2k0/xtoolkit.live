@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Message } from "../types";
 import { extractOTP, formatDate, stripHtml, highlightOTP } from "../lib/otp";
 
@@ -87,6 +87,7 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
   const [loading, setLoading] = useState(false);
   const [otpCopied, setOtpCopied] = useState(false);
   const [textCopied, setTextCopied] = useState(false);
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!message.body && fetchBody) {
@@ -97,6 +98,43 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
         .finally(() => setLoading(false));
     }
   }, [message.id]);
+
+  // After HTML body renders, fix images via DOM (more reliable than regex):
+  // - Remove cid: inline attachment refs (can never load outside email client)
+  // - Promote data-src / data-original / data-lazy → src (lazy-load patterns)
+  // - Upgrade http:// → https:// (mixed-content blocked in extension popup)
+  // - Set referrerPolicy so tracking servers don't reject the load
+  // - Hide images that still fail to load (onerror via JS, not inline attr)
+  useEffect(() => {
+    const div = bodyRef.current;
+    if (!div || bodyType !== "html" || loading) return;
+    const imgs = div.querySelectorAll<HTMLImageElement>("img");
+    imgs.forEach((img) => {
+      // Strip unloadable cid: inline attachment references
+      if (img.src.startsWith("cid:") || img.getAttribute("src")?.startsWith("cid:")) {
+        img.style.display = "none";
+        return;
+      }
+      // Promote lazy-load src variants if current src is empty / tiny placeholder
+      const lazySrc =
+        img.getAttribute("data-src") ||
+        img.getAttribute("data-original") ||
+        img.getAttribute("data-lazy") ||
+        img.getAttribute("data-delayed-url");
+      const currentSrc = img.getAttribute("src") ?? "";
+      if (lazySrc && currentSrc.length < 12) {
+        img.src = lazySrc;
+      }
+      // Upgrade http → https (extension popup is a secure context; http is blocked)
+      if (img.src.startsWith("http://")) {
+        img.src = img.src.replace(/^http:\/\//, "https://");
+      }
+      // No-referrer so tracking servers don't block the request
+      img.referrerPolicy = "no-referrer";
+      // Hide gracefully if still broken
+      img.onerror = () => { img.style.display = "none"; };
+    });
+  }, [body, bodyType, loading]);
 
   const plainText = bodyType === "html" ? stripHtml(body) : body;
   const otp = extractOTP(plainText) ?? extractOTP(message.subject);
@@ -204,6 +242,7 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
           </div>
         ) : bodyType === "html" ? (
           <div
+            ref={bodyRef}
             style={{
               background: "#0f0f1a",
               color: "#e2e8f0",
