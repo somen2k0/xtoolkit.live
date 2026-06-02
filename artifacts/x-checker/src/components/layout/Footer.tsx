@@ -196,6 +196,7 @@ export function Footer() {
           <div className="mt-10 pt-6 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground/60">
             <span>© {new Date().getFullYear()} X Toolkit. All rights reserved.</span>
             <div className="flex items-center gap-4">
+              <a href="/about" rel="external" className="hover:text-foreground transition-colors">About</a>
               <a href="/privacy" rel="external" className="hover:text-foreground transition-colors">Privacy</a>
               <a href="/terms" rel="external" className="hover:text-foreground transition-colors">Terms</a>
               <Link href="/contact"><button className="hover:text-foreground transition-colors">Contact</button></Link>
