@@ -901,17 +901,12 @@ function buildRootContent(pageData, tool) {
         ).join("")
       : "";
 
-    return `<div>` +
+    return `<div style="font-family:sans-serif;max-width:900px;margin:2rem auto;padding:1rem">` +
       `<h1>${escapeHtml(tool.seoTitle || tool.label)}</h1>` +
       `<p>${escapeHtml(tool.seoDescription || tool.description)}</p>` +
-      `<main class="mb-12 p-6 border rounded-xl bg-card">` +
-      `<noscript><p>Please enable JavaScript to use this interactive tool.</p></noscript>` +
-      `</main>` +
-      `<article class="prose dark:prose-invert max-w-none border-t pt-8 mt-8">` +
       faqHtml +
       (related ? `<h2>Related Tools</h2><ul>${related}</ul>` : ``) +
       `<p><a href="${SITE_URL}/tools">Browse all ${LIVE_TOOLS.length} free tools</a></p>` +
-      `</article>` +
       `</div>`;
   }
 
@@ -952,7 +947,13 @@ function generatePageHtml(template, { path, title, description, ogTitle, ogDescr
   // Inject static content into <div id="root"> so Google indexes unique
   // content on every page without needing to execute JavaScript.
   const rootContent = buildRootContent({ path, title, description, isHomepage, category }, tool);
-  html = html.replace('<div id="root"></div>', `<div id="root">${rootContent}</div>`);
+  const rootLoaderHtml = `<div id="root">
+      <div id="app-loader">
+        <div id="app-loader-logo">X</div>
+        <div id="app-loader-spinner"></div>
+      </div>
+    </div>`;
+  html = html.replace(rootLoaderHtml, `<div id="root">\n      ${rootContent}\n    </div>`);
 
   // Category pages get ItemList + BreadcrumbList.
   // Tool pages get SoftwareApplication + BreadcrumbList.
@@ -974,8 +975,7 @@ function generatePageHtml(template, { path, title, description, ogTitle, ogDescr
   // Custom per-page schema (e.g. WebApplication for tempgmail)
   const customSchema = CUSTOM_PAGE_SCHEMAS[path] ? jsonLdTag(CUSTOM_PAGE_SCHEMAS[path]) : "";
 
-  const noscriptBlock = buildNoscript({ path, title, description, isHomepage }, tool);
-  const parts = [schemaBlock, customSchema, faqSchema, noscriptBlock].filter(Boolean);
+  const parts = [schemaBlock, customSchema, faqSchema].filter(Boolean);
   const injection = parts.join("\n");
   html = html.replace("</head>", `${injection}\n  </head>`);
 
