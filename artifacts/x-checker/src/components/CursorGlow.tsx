@@ -26,7 +26,7 @@ export function CursorGlow() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<Particle[]>([]);
   const mouse = useRef({ x: -999, y: -999, px: -999, py: -999 });
-  const raf = useRef<number>();
+  const raf = useRef<number | undefined>(undefined);
   const active = useRef(false);
 
   // Skip entirely on mobile — avoids being picked as LCP candidate

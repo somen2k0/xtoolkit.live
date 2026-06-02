@@ -865,11 +865,13 @@ ${toolLinks}
 
 /**
  * Builds static HTML content for <div id="root"> so Google can index each
- * page's unique content without executing JavaScript. React's createRoot()
- * replaces this at runtime — no hydration mismatch risk.
+ * page's unique content without executing JavaScript. React's hydrateRoot()
+ * preserves this markup at runtime and reconciles it with the React tree.
+ * Tool pages use semantic <main> (interactive zone) and <article> (FAQ/prose)
+ * blocks that mirror the matching layout in MiniToolLayout.tsx.
  */
 function buildRootContent(pageData, tool) {
-  const { title, description, isHomepage } = pageData;
+  const { path, title, description, isHomepage } = pageData;
 
   if (isHomepage) {
     const toolLinks = LIVE_TOOLS.map(
@@ -885,16 +887,31 @@ function buildRootContent(pageData, tool) {
   }
 
   if (tool) {
+    const toolFaqs = PAGE_FAQS[tool.href] ?? PAGE_FAQS[path] ?? [];
     const related = LIVE_TOOLS
       .filter((t) => t.category === tool.category && t.id !== tool.id)
       .slice(0, 6)
       .map((t) => `<li><a href="${SITE_URL}${t.href}">${escapeHtml(t.label)}</a></li>`)
       .join("");
-    return `<div style="font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:24px 20px">` +
+
+    const faqHtml = toolFaqs.length > 0
+      ? `<h2>Frequently Asked Questions</h2>` +
+        toolFaqs.map(({ q, a }) =>
+          `<div><h3>${escapeHtml(q)}</h3><p>${escapeHtml(a)}</p></div>`,
+        ).join("")
+      : "";
+
+    return `<div>` +
       `<h1>${escapeHtml(tool.seoTitle || tool.label)}</h1>` +
       `<p>${escapeHtml(tool.seoDescription || tool.description)}</p>` +
-      (related ? `<h2>Related Tools</h2><ul>${related}</ul>` : "") +
+      `<main class="mb-12 p-6 border rounded-xl bg-card">` +
+      `<noscript><p>Please enable JavaScript to use this interactive tool.</p></noscript>` +
+      `</main>` +
+      `<article class="prose dark:prose-invert max-w-none border-t pt-8 mt-8">` +
+      faqHtml +
+      (related ? `<h2>Related Tools</h2><ul>${related}</ul>` : ``) +
       `<p><a href="${SITE_URL}/tools">Browse all ${LIVE_TOOLS.length} free tools</a></p>` +
+      `</article>` +
       `</div>`;
   }
 

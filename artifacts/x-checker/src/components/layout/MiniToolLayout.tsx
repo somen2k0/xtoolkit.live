@@ -136,7 +136,9 @@ export function MiniToolLayout({
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-5 md:py-7 space-y-10">
 
         {/* Tool content */}
-        <div>{children}</div>
+        <main className="mb-12 p-6 border rounded-xl bg-card">
+          {children}
+        </main>
 
         {/* Email capture — pro waitlist */}
         <EmailCapture
@@ -147,25 +149,27 @@ export function MiniToolLayout({
         />
 
         {/* FAQ */}
-        <section>
-          <h2 className="text-xl font-semibold mb-5">Frequently Asked Questions</h2>
-          <Accordion type="single" collapsible className="space-y-2">
-            {faqs.map(({ q, a }, i) => (
-              <AccordionItem
-                key={i}
-                value={`faq-${i}`}
-                className="rounded-xl border border-border/60 bg-card/40 px-5 data-[state=open]:bg-card/70 transition-colors"
-              >
-                <AccordionTrigger className="text-sm font-medium text-left hover:no-underline py-4">
-                  {q}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
-                  {a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
+        <article className="prose dark:prose-invert max-w-none border-t pt-8 mt-8">
+          <h2 className="not-prose text-xl font-semibold mb-5">Frequently Asked Questions</h2>
+          <div className="not-prose">
+            <Accordion type="single" collapsible className="space-y-2">
+              {faqs.map(({ q, a }, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`faq-${i}`}
+                  className="rounded-xl border border-border/60 bg-card/40 px-5 data-[state=open]:bg-card/70 transition-colors"
+                >
+                  <AccordionTrigger className="text-sm font-medium text-left hover:no-underline py-4">
+                    {q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
+                    {a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </article>
 
         {/* Affiliate section */}
         <AffiliateSection category={affiliateCategory} limit={4} />

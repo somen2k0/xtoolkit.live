@@ -134,28 +134,30 @@ export function Footer() {
             <div className="col-span-2 md:col-span-1 space-y-3">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/60">Company</h3>
               <ul className="space-y-2">
-                {[
-                  { label: "About", href: "/about" },
-                  { label: "Blog", href: "/blog" },
-                  { label: "Pricing", href: "/pricing" },
-                  { label: "Contact", href: "/contact" },
-                  { label: "Privacy Policy", href: "/privacy" },
-                  { label: "Terms of Service", href: "/terms" },
-                ].map(({ label, href, action }: { label: string; href?: string; action?: () => void }) => (
-                  <li key={label}>
-                    {action ? (
-                      <button onClick={action} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                        {label}
-                      </button>
-                    ) : (
-                      <Link href={href!}>
-                        <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                          {label}
-                        </button>
-                      </Link>
-                    )}
-                  </li>
-                ))}
+                <li>
+                  <a href="/about" rel="external" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
+                </li>
+                <li>
+                  <Link href="/blog">
+                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</button>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pricing">
+                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">Pricing</button>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact">
+                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</button>
+                  </Link>
+                </li>
+                <li>
+                  <a href="/privacy" rel="external" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a>
+                </li>
+                <li>
+                  <a href="/terms" rel="external" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a>
+                </li>
               </ul>
             </div>
 
@@ -194,8 +196,8 @@ export function Footer() {
           <div className="mt-10 pt-6 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground/60">
             <span>© {new Date().getFullYear()} X Toolkit. All rights reserved.</span>
             <div className="flex items-center gap-4">
-              <Link href="/privacy"><button className="hover:text-foreground transition-colors">Privacy</button></Link>
-              <Link href="/terms"><button className="hover:text-foreground transition-colors">Terms</button></Link>
+              <a href="/privacy" rel="external" className="hover:text-foreground transition-colors">Privacy</a>
+              <a href="/terms" rel="external" className="hover:text-foreground transition-colors">Terms</a>
               <Link href="/contact"><button className="hover:text-foreground transition-colors">Contact</button></Link>
             </div>
           </div>
