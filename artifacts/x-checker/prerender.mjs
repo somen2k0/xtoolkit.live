@@ -953,17 +953,19 @@ function generatePageHtml(template, { path, title, description, ogTitle, ogDescr
   //      $&, $1, etc. as special patterns; any $ in descriptions or FAQs would
   //      corrupt or truncate the output.
   const rootContent = buildRootContent({ path, title, description, isHomepage, category }, tool);
-  const rootDivIdx = html.indexOf('<div id="root">');
+  // Insert rootContent immediately after the <div id="root"> opening tag,
+  // preserving ALL existing children (app-loader spinner, etc.) and every
+  // node that follows (script tags, </body>, </html>).
+  // Slicing on the open-tag boundary — not on scriptIdx — means nothing after
+  // the insertion point is ever discarded.
+  const rootOpenTag = '<div id="root">';
+  const rootDivIdx = html.indexOf(rootOpenTag);
   if (rootDivIdx !== -1) {
-    const scriptIdx = html.indexOf('<script', rootDivIdx);
-    if (scriptIdx !== -1) {
-      html =
-        html.slice(0, rootDivIdx) +
-        '<div id="root">\n      ' +
-        rootContent +
-        '\n    </div>\n    ' +
-        html.slice(scriptIdx);
-    }
+    const insertionPoint = rootDivIdx + rootOpenTag.length;
+    html =
+      html.slice(0, insertionPoint) +
+      '\n      ' + rootContent +
+      html.slice(insertionPoint);
   }
 
   // Category pages get ItemList + BreadcrumbList.
