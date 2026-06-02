@@ -53,7 +53,12 @@ export async function guerrillaInbox(sid_token: string) {
 }
 
 export async function guerrillaMessage(id: string, sid_token: string) {
-  return apiFetch<{ body: string; from: string; subject: string }>(`/api/guerrilla/message/${id}?sid_token=${encodeURIComponent(sid_token)}`);
+  const raw = await apiFetch<RawGuerrillaMessage>(`/api/guerrilla/message/${id}?sid_token=${encodeURIComponent(sid_token)}`);
+  return {
+    body: raw.mail_body ?? "",
+    from: raw.mail_from ?? "",
+    subject: raw.mail_subject ?? "",
+  };
 }
 
 interface RawGuerrillaMessage {
