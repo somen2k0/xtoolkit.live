@@ -74,8 +74,11 @@ export default function RegexTester() {
 
   return (
     <MiniToolLayout
-      seoTitle="Regex Tester Online Free — Regular Expression Tester"
-      seoDescription="Test and debug regular expressions online for free. Real-time match highlighting, named groups, and common regex presets. 100% client-side."
+      seoTitle="Regex Tester Online — Test & Debug Regular Expressions Instantly | X Toolkit"
+      seoDescription="Free online regex tester and debugger. Test regular expressions against any string in real time. Supports JavaScript, Python, and PCRE syntax. No signup required."
+      seoKeywords="regex tester, online regex tester, regular expression tester, regex debugger, regex101, test regex online, javascript regex tester, regex matcher online, regex validator, pcre tester, regex pattern tester, regex checker"
+      seoOgTitle="Regex Tester Online — Test Regular Expressions Free"
+      seoOgDescription="Test and debug regular expressions instantly. Real-time matching, error highlighting, and match details. Free, no signup."
       icon={Regex}
       badge="Developer Tool"
       title="Regex Tester"

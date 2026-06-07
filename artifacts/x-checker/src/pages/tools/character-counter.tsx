@@ -60,8 +60,11 @@ export default function CharacterCounter() {
 
   return (
     <MiniToolLayout
-      seoTitle="Twitter Character Counter — Live Count for Tweets & Bios"
-      seoDescription="Count characters, words, and lines in real time. See how close you are to Twitter's 280-character tweet limit and 160-character bio limit."
+      seoTitle="Character Counter — Free Online Character & Word Count Tool | X Toolkit"
+      seoDescription="Count characters, words, sentences and paragraphs in real time. Shows Twitter/X, LinkedIn, Instagram and email limits. Free character counter, no signup."
+      seoKeywords="character counter, character count online, word counter, letter counter, character counter online, twitter character counter, instagram character counter, text character counter, character limit checker, online character count, free character counter"
+      seoOgTitle="Character Counter — Free Online Character Count"
+      seoOgDescription="Count characters and words in real time. Shows platform limits for Twitter, LinkedIn, Instagram and email. Free, no signup."
       icon={Hash}
       badge="Free Tool"
       title="Twitter Character Counter"

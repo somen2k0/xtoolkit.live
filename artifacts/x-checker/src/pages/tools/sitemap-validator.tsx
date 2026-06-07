@@ -156,8 +156,11 @@ export default function SitemapValidator() {
 
   return (
     <MiniToolLayout
-      seoTitle="XML Sitemap Validator — Check & Debug Your Sitemap File"
-      seoDescription="Paste your XML sitemap and instantly validate structure, required tags, URL formats, date formats, and count. Free, browser-based, no signup."
+      seoTitle="XML Sitemap Validator — Free Online Sitemap Checker & Debugger | X Toolkit"
+      seoDescription="Validate and check your XML sitemap instantly. Find errors, missing URLs, and formatting issues. Free sitemap validator for SEO. No signup required."
+      seoKeywords="sitemap validator, xml sitemap validator, sitemap checker, xml sitemap checker, sitemap validator online, sitemap error checker, google sitemap validator, sitemap xml checker, free sitemap validator, sitemap tester, sitemap debugger"
+      seoOgTitle="XML Sitemap Validator — Free Sitemap Checker"
+      seoOgDescription="Validate your XML sitemap instantly. Find errors and missing URLs. Free sitemap checker for SEO."
       icon={Globe}
       badge="SEO Tool"
       title="Sitemap Validator"

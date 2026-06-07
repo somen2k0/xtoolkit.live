@@ -26,6 +26,8 @@ interface Faq {
 interface MiniToolLayoutProps {
   seoTitle: string;
   seoDescription: string;
+  seoOgTitle?: string;
+  seoOgDescription?: string;
   seoKeywords?: string;
   seoExtraSchemas?: object[];
   icon: LucideIcon;
@@ -43,6 +45,8 @@ const SITE_URL = "https://xtoolkit.live";
 export function MiniToolLayout({
   seoTitle,
   seoDescription,
+  seoOgTitle,
+  seoOgDescription,
   seoKeywords,
   seoExtraSchemas,
   icon: Icon,
@@ -93,6 +97,8 @@ export function MiniToolLayout({
       <SeoHead
         title={seoTitle}
         description={seoDescription}
+        ogTitle={seoOgTitle}
+        ogDescription={seoOgDescription}
         keywords={resolvedKeywords}
         path={path}
         extraSchemas={allExtraSchemas}

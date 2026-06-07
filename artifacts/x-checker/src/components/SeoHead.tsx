@@ -5,12 +5,14 @@ const SITE_URL = "https://xtoolkit.live";
 interface SeoHeadProps {
   title: string;
   description: string;
+  ogTitle?: string;
+  ogDescription?: string;
   path?: string;
   keywords?: string;
   extraSchemas?: object[];
 }
 
-export function SeoHead({ title, description, path, keywords, extraSchemas }: SeoHeadProps) {
+export function SeoHead({ title, description, ogTitle, ogDescription, path, keywords, extraSchemas }: SeoHeadProps) {
   useEffect(() => {
     const canonicalUrl = path ? `${SITE_URL}${path}` : SITE_URL;
 
@@ -29,11 +31,11 @@ export function SeoHead({ title, description, path, keywords, extraSchemas }: Se
 
     const metaOgTitle = document.querySelector('meta[property="og:title"]');
     const prevOgTitle = metaOgTitle?.getAttribute("content") ?? "";
-    metaOgTitle?.setAttribute("content", title);
+    metaOgTitle?.setAttribute("content", ogTitle || title);
 
     const metaOgDesc = document.querySelector('meta[property="og:description"]');
     const prevOgDesc = metaOgDesc?.getAttribute("content") ?? "";
-    metaOgDesc?.setAttribute("content", description);
+    metaOgDesc?.setAttribute("content", ogDescription || description);
 
     const metaOgUrl = document.querySelector('meta[property="og:url"]');
     const prevOgUrl = metaOgUrl?.getAttribute("content") ?? "";
@@ -41,11 +43,11 @@ export function SeoHead({ title, description, path, keywords, extraSchemas }: Se
 
     const metaTwitterTitle = document.querySelector('meta[name="twitter:title"]');
     const prevTwitterTitle = metaTwitterTitle?.getAttribute("content") ?? "";
-    metaTwitterTitle?.setAttribute("content", title);
+    metaTwitterTitle?.setAttribute("content", ogTitle || title);
 
     const metaTwitterDesc = document.querySelector('meta[name="twitter:description"]');
     const prevTwitterDesc = metaTwitterDesc?.getAttribute("content") ?? "";
-    metaTwitterDesc?.setAttribute("content", description);
+    metaTwitterDesc?.setAttribute("content", ogDescription || description);
 
     let canonicalEl = document.querySelector('link[rel="canonical"]');
     const prevCanonical = canonicalEl?.getAttribute("href") ?? "";
@@ -81,7 +83,7 @@ export function SeoHead({ title, description, path, keywords, extraSchemas }: Se
       canonicalEl?.setAttribute("href", prevCanonical);
       injectedScripts.forEach((el) => el.remove());
     };
-  }, [title, description, path, keywords, extraSchemas]);
+  }, [title, description, ogTitle, ogDescription, path, keywords, extraSchemas]);
 
   return null;
 }

@@ -1,0 +1,97 @@
+3 pages need urgent SEO optimization based on
+real Search Console data. High impressions but
+zero clicks means titles/descriptions need work.
+
+===================================================
+PAGE 1 — /tools/regex-tester
+282 impressions, position 83, 0 clicks
+===================================================
+
+Update title:
+"Regex Tester Online — Test & Debug Regular
+Expressions Instantly | X Toolkit"
+
+Update meta description:
+"Free online regex tester and debugger. Test
+regular expressions against any string in real
+time. Supports JavaScript, Python, and PCRE
+syntax. No signup required."
+
+Update meta keywords:
+"regex tester, online regex tester, regular
+expression tester, regex debugger, regex101,
+test regex online, javascript regex tester,
+regex matcher online, regex validator, pcre
+tester, regex pattern tester, regex checker"
+
+Update og:title:
+"Regex Tester Online — Test Regular Expressions
+Free"
+
+Update og:description:
+"Test and debug regular expressions instantly.
+Real-time matching, error highlighting, and
+match details. Free, no signup."
+
+===================================================
+PAGE 2 — /tools/sitemap-validator
+212 impressions, position 73, 0 clicks
+===================================================
+
+Update title:
+"XML Sitemap Validator — Free Online Sitemap
+Checker & Debugger | X Toolkit"
+
+Update meta description:
+"Validate and check your XML sitemap instantly.
+Find errors, missing URLs, and formatting issues.
+Free sitemap validator for SEO. No signup required."
+
+Update meta keywords:
+"sitemap validator, xml sitemap validator, sitemap
+checker, xml sitemap checker, sitemap validator
+online, sitemap error checker, google sitemap
+validator, sitemap xml checker, free sitemap
+validator, sitemap tester, sitemap debugger"
+
+Update og:title:
+"XML Sitemap Validator — Free Sitemap Checker"
+
+Update og:description:
+"Validate your XML sitemap instantly. Find errors
+and missing URLs. Free sitemap checker for SEO."
+
+===================================================
+PAGE 3 — /tools/character-counter
+181 impressions, position 59, 0 clicks
+===================================================
+
+Update title:
+"Character Counter — Free Online Character &
+Word Count Tool | X Toolkit"
+
+Update meta description:
+"Count characters, words, sentences and paragraphs
+in real time. Shows Twitter/X, LinkedIn, Instagram
+and email limits. Free character counter, no signup."
+
+Update meta keywords:
+"character counter, character count online, word
+counter, letter counter, character counter online,
+twitter character counter, instagram character
+counter, text character counter, character limit
+checker, online character count, free character
+counter"
+
+Update og:title:
+"Character Counter — Free Online Character Count"
+
+Update og:description:
+"Count characters and words in real time. Shows
+platform limits for Twitter, LinkedIn, Instagram
+and email. Free, no signup."
+
+===================================================
+Build, commit, push.
+Show all files changed.
+===================================================
