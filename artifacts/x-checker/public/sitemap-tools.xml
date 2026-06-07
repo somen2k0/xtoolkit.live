@@ -293,24 +293,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
-  <url>
-    <loc>https://xtoolkit.live/tools/bio-ideas</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://xtoolkit.live/tools/aesthetic-bios</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://xtoolkit.live/tools/professional-bios</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
+
   <url>
     <loc>https://xtoolkit.live/tools/name-ideas</loc>
     <lastmod>2026-05-26</lastmod>
