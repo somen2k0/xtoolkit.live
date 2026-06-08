@@ -27,7 +27,7 @@ const relatedTools = [
   { title: "Tweet Thread Formatter", href: "/tools/tweet-formatter", description: "Split long text into a numbered tweet thread." },
   { title: "Hashtag Formatter", href: "/tools/hashtag-formatter", description: "Convert words into properly formatted hashtags." },
   { title: "Twitter Font Preview", href: "/tools/font-preview", description: "Preview your text in Unicode font styles." },
-  { title: "Bio Generator", href: "/tools/bio-ideas", description: "Generate Twitter bio ideas for any niche." },
+  { title: "Bio Generator", href: "/tools/bio-generator", description: "Generate Twitter bio ideas for any niche." },
 ];
 
 let counterDebounce: ReturnType<typeof setTimeout> | null = null;

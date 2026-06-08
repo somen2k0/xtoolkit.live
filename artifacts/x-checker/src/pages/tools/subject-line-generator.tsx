@@ -89,10 +89,9 @@ const faqs = [
 ];
 
 const relatedTools = [
-  { title: "Email Character Counter", href: "/tools/email-character-counter", description: "Count subject line and body characters by platform." },
+  { title: "Character Counter", href: "/tools/character-counter", description: "Count subject line and body characters by platform." },
   { title: "Email Signature Generator", href: "/tools/email-signature-generator", description: "Build a professional email signature in seconds." },
-  { title: "Plain Text Email Formatter", href: "/tools/plain-text-formatter", description: "Convert HTML emails to clean plain text." },
-  { title: "Character Counter", href: "/tools/character-counter", description: "Count characters for any text." },
+  { title: "Email Validator", href: "/tools/email-validator", description: "Validate email address syntax before sending." },
 ];
 
 export default function SubjectLineGenerator() {

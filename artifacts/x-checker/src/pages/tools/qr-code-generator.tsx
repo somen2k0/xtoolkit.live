@@ -227,6 +227,62 @@ export default function QrCodeGenerator() {
         </div>
       </div>
 
+      {/* Extended content */}
+      <div className="mt-8 space-y-6">
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">What is a QR Code?</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">A QR code (Quick Response code) is a two-dimensional barcode that can store various types of data including URLs, text, contact information, WiFi credentials, and more. Unlike traditional barcodes that only store data horizontally, QR codes store data both horizontally and vertically — allowing them to hold significantly more information in a compact square format.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">QR codes were invented in 1994 by Denso Wave, a Japanese automotive company, originally for tracking vehicle parts during manufacturing. Today they are one of the most widely used tools for bridging the physical and digital worlds — appearing on product packaging, restaurant menus, business cards, event tickets, and advertising materials worldwide.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">How QR Codes Work</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">A QR code consists of black squares arranged on a white grid background. The pattern encodes data using a combination of position detection patterns (the three square corners), alignment patterns, timing patterns, and data modules. When a smartphone camera scans the code, it reads the pattern and decodes the stored information instantly.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">QR codes include built-in error correction that allows them to remain readable even when partially damaged or obscured — up to 30% of a QR code can be damaged and it will still scan correctly. This is why you sometimes see QR codes with logos or artwork overlaid in the center.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">QR Code Types and Use Cases</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Our QR code generator supports multiple data types for different use cases:</p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">URL QR Codes:</strong> The most common type. Encode any website URL so users can visit a page by scanning instead of typing. Perfect for business cards, flyers, posters, and product packaging.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">WiFi QR Codes:</strong> Encode your WiFi network name (SSID), password, and security type. Guests can connect to your network by scanning without manually entering credentials — ideal for offices, cafes, hotels, and homes.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Text QR Codes:</strong> Encode any plain text message. Useful for short instructions, notes, or any information you want to share without a URL.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Email QR Codes:</strong> Encode an email address with optional pre-filled subject and body. Scanning opens the user's email client ready to send.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Phone QR Codes:</strong> Encode a phone number. Scanning immediately prompts the user to call or save the contact.</span></li>
+          </ul>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">QR Code Best Practices</h2>
+          <ul className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Size matters:</strong> QR codes should be at least 2cm x 2cm (0.8 x 0.8 inches) for reliable scanning. Smaller codes may not scan reliably, especially on printed materials viewed from a distance.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Contrast is critical:</strong> Always use high contrast between the QR code and its background. Black on white is most reliable. Avoid placing QR codes on busy backgrounds or using colors with low contrast.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Test before printing:</strong> Always scan your QR code with multiple devices before printing or publishing. What works on one device may not work on another.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Include a call to action:</strong> Tell users what will happen when they scan. "Scan to visit our website" or "Scan to connect to WiFi" increases scan rates.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Error correction level:</strong> Higher error correction (level H) allows more of the QR code to be damaged while remaining readable, but creates a more complex code. Use level M for most applications and level H when adding a logo or decoration.</span></li>
+          </ul>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {[
+              { q: "Are QR codes free to use?", a: "Yes. QR codes are an open standard and completely free to generate and use. Our generator creates QR codes at no cost with no usage limits or expiration dates." },
+              { q: "Do QR codes expire?", a: "Static QR codes (like those generated here) never expire. The data is encoded directly in the pattern and will work as long as the destination URL or content remains valid." },
+              { q: "Can I customize the colors of a QR code?", a: "Yes. Our generator allows you to change the foreground and background colors. Always ensure sufficient contrast between foreground and background for reliable scanning." },
+              { q: "What is the maximum amount of data a QR code can store?", a: "A QR code can store up to 4,296 alphanumeric characters, 7,089 numeric characters, or 2,953 bytes of binary data. For URLs, this is more than enough for any standard web address." },
+              { q: "Can QR codes be scanned from a screen?", a: "Yes. QR codes work equally well when displayed on screens or printed on paper. Most modern smartphones can scan QR codes directly from other screens without any special app." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );

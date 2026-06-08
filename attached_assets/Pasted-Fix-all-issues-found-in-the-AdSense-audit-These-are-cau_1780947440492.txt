@@ -1,0 +1,679 @@
+Fix all issues found in the AdSense audit.
+These are causing repeated AdSense rejections.
+
+===================================================
+FIX 1 — QR Code Generator (180 words → 800+)
+===================================================
+
+In /tools/qr-code-generator add this content
+BELOW the existing tool UI and about section:
+
+Heading: "What is a QR Code?"
+Content:
+"A QR code (Quick Response code) is a two-dimensional
+barcode that can store various types of data including
+URLs, text, contact information, WiFi credentials,
+and more. Unlike traditional barcodes that only store
+data horizontally, QR codes store data both horizontally
+and vertically — allowing them to hold significantly
+more information in a compact square format.
+
+QR codes were invented in 1994 by Denso Wave, a
+Japanese automotive company, originally for tracking
+vehicle parts during manufacturing. Today they are
+one of the most widely used tools for bridging the
+physical and digital worlds — appearing on product
+packaging, restaurant menus, business cards, event
+tickets, and advertising materials worldwide."
+
+Heading: "How QR Codes Work"
+Content:
+"A QR code consists of black squares arranged on
+a white grid background. The pattern encodes data
+using a combination of position detection patterns
+(the three square corners), alignment patterns,
+timing patterns, and data modules. When a smartphone
+camera scans the code, it reads the pattern and
+decodes the stored information instantly.
+
+QR codes include built-in error correction that
+allows them to remain readable even when partially
+damaged or obscured — up to 30% of a QR code can
+be damaged and it will still scan correctly. This
+is why you sometimes see QR codes with logos or
+artwork overlaid in the center."
+
+Heading: "QR Code Types and Use Cases"
+Content:
+"Our QR code generator supports multiple data types
+for different use cases:
+
+URL QR Codes: The most common type. Encode any
+website URL so users can visit a page by scanning
+instead of typing. Perfect for business cards,
+flyers, posters, and product packaging.
+
+WiFi QR Codes: Encode your WiFi network name
+(SSID), password, and security type. Guests can
+connect to your network by scanning without
+manually entering credentials — ideal for offices,
+cafes, hotels, and homes.
+
+Text QR Codes: Encode any plain text message.
+Useful for short instructions, notes, or any
+information you want to share without a URL.
+
+Email QR Codes: Encode an email address with
+optional pre-filled subject and body. Scanning
+opens the user's email client ready to send.
+
+Phone QR Codes: Encode a phone number. Scanning
+immediately prompts the user to call or save
+the contact."
+
+Heading: "QR Code Best Practices"
+Bullet points as paragraphs:
+"Size matters: QR codes should be at least 2cm x 2cm
+(0.8 x 0.8 inches) for reliable scanning. Smaller
+codes may not scan reliably, especially on printed
+materials viewed from a distance.
+
+Contrast is critical: Always use high contrast
+between the QR code and its background. Black on
+white is most reliable. Avoid placing QR codes on
+busy backgrounds or using colors with low contrast.
+
+Test before printing: Always scan your QR code
+with multiple devices before printing or publishing.
+What works on one device may not work on another.
+
+Include a call to action: Tell users what will
+happen when they scan. 'Scan to visit our website'
+or 'Scan to connect to WiFi' increases scan rates.
+
+Error correction level: Higher error correction
+(level H) allows more of the QR code to be damaged
+while remaining readable, but creates a more complex
+code. Use level M for most applications and level H
+when adding a logo or decoration."
+
+Heading: "Frequently Asked Questions"
+
+Q: Are QR codes free to use?
+A: Yes. QR codes are an open standard and completely
+   free to generate and use. Our generator creates
+   QR codes at no cost with no usage limits or
+   expiration dates.
+
+Q: Do QR codes expire?
+A: Static QR codes (like those generated here)
+   never expire. The data is encoded directly in
+   the pattern and will work as long as the
+   destination URL or content remains valid.
+
+Q: Can I customize the colors of a QR code?
+A: Yes. Our generator allows you to change the
+   foreground and background colors. Always ensure
+   sufficient contrast between foreground and
+   background for reliable scanning.
+
+Q: What is the maximum amount of data a QR code
+   can store?
+A: A QR code can store up to 4,296 alphanumeric
+   characters, 7,089 numeric characters, or 2,953
+   bytes of binary data. For URLs, this is more
+   than enough for any standard web address.
+
+Q: Can QR codes be scanned from a screen?
+A: Yes. QR codes work equally well when displayed
+   on screens or printed on paper. Most modern
+   smartphones can scan QR codes directly from
+   other screens without any special app.
+
+===================================================
+FIX 2 — Password Generator (250 words → 800+)
+===================================================
+
+In /tools/password-generator add this content
+BELOW existing tool UI:
+
+Heading: "Why Strong Passwords Matter"
+Content:
+"Weak passwords are one of the leading causes of
+account compromise and data breaches. A simple
+8-character password using only lowercase letters
+can be cracked in seconds using modern hardware.
+By contrast, a 16-character password combining
+uppercase letters, lowercase letters, numbers,
+and symbols would take thousands of years to crack
+using the same technology.
+
+In 2024 alone, billions of credentials were exposed
+in data breaches. The majority of compromised
+accounts used passwords that were too short, too
+simple, or reused across multiple services. Using
+a unique, randomly generated strong password for
+every account is the single most effective security
+measure available to regular users."
+
+Heading: "Understanding Password Strength"
+Content:
+"Password strength is determined by entropy —
+a measure of unpredictability. Entropy is calculated
+based on the size of the character set used and
+the length of the password. The formula is:
+Entropy = Length × log2(Character Set Size)
+
+A password using only lowercase letters (26 characters)
+has much lower entropy than one using all character
+types (uppercase + lowercase + numbers + symbols = 95
+possible characters). This is why our generator
+defaults to using all character types.
+
+Common password length recommendations:
+- 8 characters: Minimum acceptable (not recommended
+  for important accounts)
+- 12 characters: Good for most accounts
+- 16 characters: Strong, recommended for important
+  accounts like email and banking
+- 20+ characters: Very strong, recommended for
+  master passwords and high-value accounts"
+
+Heading: "Password Security Best Practices"
+Content:
+"Use a unique password for every account: If one
+site is breached and you use the same password
+elsewhere, attackers can access all your accounts.
+This attack is called credential stuffing and is
+extremely common.
+
+Use a password manager: Strong unique passwords
+for every account are impossible to remember.
+Password managers like Bitwarden (free), 1Password,
+or LastPass store your passwords securely so you
+only need to remember one master password.
+
+Enable two-factor authentication: Even the strongest
+password can be compromised through phishing or
+data breaches. Two-factor authentication adds a
+second layer of security so attackers cannot access
+your account with your password alone.
+
+Never share passwords: Never send a password in
+an email, text message, or chat. These communications
+are often not encrypted and can be intercepted.
+
+Change passwords after breaches: If a service you
+use reports a data breach, change your password
+immediately. Use our tool to generate a new strong
+password instantly."
+
+Heading: "Common Password Mistakes to Avoid"
+Content:
+"Using personal information: Passwords based on
+your name, birthday, pet's name, or other personal
+information are easy to guess for anyone who knows
+you — and this information is often publicly available
+on social media.
+
+Simple substitutions: Replacing letters with numbers
+(p4ssw0rd) or adding numbers at the end (password123)
+provides almost no additional security. Automated
+cracking tools are specifically designed to try
+these common patterns.
+
+Short passwords: Every character you add to a
+password exponentially increases the number of
+possible combinations. A 12-character password
+is not just 50% harder to crack than an 8-character
+password — it is millions of times harder.
+
+Reusing passwords: Using the same password across
+multiple sites means a single breach exposes all
+your accounts. Always use unique passwords."
+
+Heading: "Frequently Asked Questions"
+
+Q: How random are the generated passwords?
+A: Our generator uses the Web Crypto API
+   (window.crypto.getRandomValues) which is a
+   cryptographically secure random number generator.
+   This is the same technology used by security
+   professionals and is significantly more random
+   than Math.random().
+
+Q: Is it safe to generate passwords online?
+A: Yes. Our password generator runs entirely in
+   your browser — no passwords are sent to any
+   server or stored anywhere. You can verify this
+   by turning off your internet connection and
+   the generator will still work.
+
+Q: How long should my password be?
+A: For most accounts, 16 characters is a good
+   balance of security and usability. For master
+   passwords and high-value accounts, use 20+
+   characters.
+
+Q: Should I include symbols in my password?
+A: Yes when possible. Symbols expand the character
+   set from 62 (letters + numbers) to 95 characters,
+   significantly increasing password strength.
+   Some sites don't support all symbols — our
+   generator only uses widely accepted symbols.
+
+Q: What does "exclude ambiguous characters" mean?
+A: Characters like 0 (zero) and O (letter O),
+   1 (one) and l (letter L) look similar and
+   can cause confusion when reading a password
+   aloud or typing it manually. Excluding them
+   makes passwords easier to use without reducing
+   security significantly.
+
+===================================================
+FIX 3 — Color Picker (230 words → 800+)
+===================================================
+
+In /tools/color-picker add this content
+BELOW existing tool UI:
+
+Heading: "Understanding Color Formats"
+Content:
+"Colors on the web can be expressed in several
+different formats, each with their own use cases
+and advantages. Understanding the differences
+helps you choose the right format for your project.
+
+HEX (Hexadecimal): The most common color format
+in web development. A HEX color code like #6366f1
+represents the red, green, and blue components of
+a color as pairs of hexadecimal digits (00-FF).
+The first two digits represent red, the next two
+green, and the last two blue. HEX is compact and
+widely supported in CSS, HTML, and design tools.
+
+RGB (Red, Green, Blue): Expresses color as three
+values from 0-255 for red, green, and blue channels.
+rgb(99, 102, 241) is easier to understand intuitively
+than its HEX equivalent. RGB is useful when you
+need to manipulate individual color channels
+programmatically or calculate color relationships.
+
+HSL (Hue, Saturation, Lightness): The most intuitive
+format for humans. Hue is the color angle on a
+color wheel (0-360°), saturation is the intensity
+(0-100%), and lightness is the brightness (0-100%).
+HSL makes it easy to create color variations —
+increasing or decreasing lightness creates tints
+and shades of the same color, while adjusting
+saturation controls vibrancy.
+
+RGBA and HSLA: Extended versions of RGB and HSL
+that include an alpha channel for transparency,
+where 0 is fully transparent and 1 is fully opaque."
+
+Heading: "Web Accessibility and Color Contrast"
+Content:
+"Color contrast is one of the most important
+accessibility considerations in web design. The
+Web Content Accessibility Guidelines (WCAG) define
+minimum contrast ratios that ensure text is readable
+for users with visual impairments including color
+blindness and low vision.
+
+WCAG 2.1 defines two levels of contrast compliance:
+
+AA Level (minimum): Requires a contrast ratio of
+at least 4.5:1 for normal text and 3:1 for large
+text (18pt or 14pt bold). This is the standard
+legal requirement in many countries.
+
+AAA Level (enhanced): Requires a contrast ratio
+of 7:1 for normal text and 4.5:1 for large text.
+This provides the highest level of accessibility.
+
+Our color picker includes a contrast checker that
+calculates the contrast ratio between two colors
+and shows whether they meet WCAG AA and AAA
+requirements. Always check contrast when choosing
+text and background color combinations."
+
+Heading: "Color Theory Basics for Web Design"
+Content:
+"Understanding basic color theory helps you create
+more visually appealing and effective designs:
+
+Complementary colors sit opposite each other on
+the color wheel and create high contrast combinations.
+They are attention-grabbing and work well for
+calls-to-action.
+
+Analogous colors sit adjacent on the color wheel
+and create harmonious, comfortable combinations.
+They are often used for backgrounds and neutral
+design elements.
+
+Triadic colors are evenly spaced around the color
+wheel (120° apart) and create vibrant, balanced
+color schemes. They work well when one color
+dominates and the others are used as accents.
+
+The 60-30-10 rule is a practical guideline: use
+your primary color for 60% of the design, a
+secondary color for 30%, and an accent color for
+10%. This creates visual hierarchy without
+overwhelming the viewer."
+
+Heading: "Frequently Asked Questions"
+
+Q: What is the difference between HEX and RGB?
+A: Both represent the same colors. HEX uses
+   base-16 notation (#FF0000) while RGB uses
+   decimal values (255, 0, 0). HEX is more
+   compact for writing in code while RGB is
+   easier to read and manipulate mathematically.
+
+Q: What does the alpha channel in RGBA mean?
+A: Alpha controls transparency. A value of 1
+   is fully opaque (solid color) and 0 is fully
+   transparent (invisible). Values between 0
+   and 1 create semi-transparent colors.
+
+Q: How do I check if my colors meet accessibility
+   requirements?
+A: Use our built-in contrast checker. Enter your
+   text color and background color and it shows
+   the contrast ratio with WCAG AA and AAA
+   pass/fail status.
+
+Q: What is HSL and why is it useful?
+A: HSL (Hue, Saturation, Lightness) is the most
+   intuitive color format. It lets you easily
+   create color variations — adjust lightness
+   to make tints and shades, adjust saturation
+   to make colors more or less vibrant.
+
+Q: Can I use HEX colors in all browsers?
+A: Yes. HEX color codes are supported in all
+   modern browsers and have been since the
+   earliest days of the web. They are the
+   most universally compatible color format.
+
+===================================================
+FIX 4 — Image Compressor (220 words → 800+)
+===================================================
+
+In /tools/image-compressor add this content
+BELOW existing tool UI:
+
+Heading: "Why Image Compression Matters"
+Content:
+"Images are typically the largest files on any
+webpage, often accounting for 50-80% of total
+page weight. Unoptimized images significantly
+slow down page load times — and page speed
+directly affects both user experience and search
+engine rankings.
+
+Google's Core Web Vitals include Largest Contentful
+Paint (LCP), which measures how long it takes for
+the main content of a page to become visible. Large
+uncompressed images are the most common cause of
+poor LCP scores. Compressing images before
+uploading them to your website is one of the most
+impactful optimizations available.
+
+Research consistently shows that users abandon
+websites that take more than 3 seconds to load.
+On mobile connections, this is even more critical.
+A single uncompressed photograph can be 5-10MB —
+compressing it to 300-500KB with negligible visual
+quality loss can reduce load time by several seconds."
+
+Heading: "Lossy vs Lossless Compression"
+Content:
+"There are two fundamentally different approaches
+to image compression:
+
+Lossless compression reduces file size without
+discarding any image data. The original image can
+be perfectly reconstructed from the compressed
+file. PNG uses lossless compression, making it
+ideal for images that require perfect accuracy
+like logos, icons, screenshots, and text-heavy
+images where compression artifacts would be
+visible and unacceptable.
+
+Lossy compression achieves much greater file size
+reductions by permanently discarding some image
+data — specifically data that is less perceptible
+to the human eye. JPEG uses lossy compression,
+making it ideal for photographs and complex images
+where minor quality loss at high compression ratios
+is acceptable and often imperceptible.
+
+Our compressor uses the browser's Canvas API to
+apply lossy compression to JPEG, PNG, and WebP
+files. PNG files are converted to JPEG format for
+compression since PNG's lossless format doesn't
+support quality settings. If you need to maintain
+transparency, keep PNG files at a lower compression
+ratio."
+
+Heading: "Image Format Guide"
+Content:
+"Choosing the right image format is as important
+as compression:
+
+JPEG: Best for photographs and complex images with
+gradients and many colors. Supports lossy compression
+with excellent results at 70-85% quality. Does not
+support transparency.
+
+PNG: Best for images requiring transparency, logos,
+icons, screenshots, and images with text. Uses
+lossless compression. File sizes are larger than
+JPEG for photographs but better for graphics.
+
+WebP: Google's modern format that supports both
+lossy and lossless compression with better results
+than JPEG and PNG. WebP files are typically 25-35%
+smaller than equivalent JPEG files. Supported by
+all modern browsers.
+
+SVG: Best for logos, icons, and illustrations that
+need to scale to any size without quality loss.
+Not a raster format — uses mathematical paths
+instead of pixels. Excellent for simple graphics
+but not suitable for photographs."
+
+Heading: "Image Optimization Best Practices"
+Content:
+"Resize before compressing: Compression works
+on the actual pixel dimensions of the image.
+If you're displaying an image at 800px width but
+the file is 4000px wide, resize it to 800px first
+— this alone reduces file size by 96% before any
+compression.
+
+Use appropriate quality settings: For photographs
+on the web, 70-85% quality produces excellent
+results with significant file size reduction. Going
+below 60% starts to produce visible artifacts.
+For images with text or logos, use higher quality
+(85-95%) to maintain sharpness.
+
+Consider lazy loading: Images below the fold don't
+need to load immediately. Use the HTML loading='lazy'
+attribute to defer loading of off-screen images.
+
+Use responsive images: Serve appropriately sized
+images for different screen sizes using the srcset
+attribute. Mobile users don't need 2000px wide images."
+
+Heading: "Frequently Asked Questions"
+
+Q: Is my image data sent to any server?
+A: No. Our image compressor runs entirely in your
+   browser using the Canvas API. Your images are
+   never uploaded to or processed by any server.
+   Complete privacy guaranteed.
+
+Q: What is the maximum file size I can compress?
+A: Our compressor handles files up to several
+   hundred MB in theory, but browser memory limits
+   practical use to files under 50MB. Most web
+   images are well within this range.
+
+Q: Will compression make my images blurry?
+A: At quality settings of 70% and above, compression
+   artifacts are generally imperceptible for
+   photographs. The preview comparison lets you
+   see the quality before downloading.
+
+Q: Can I compress PNG files?
+A: Yes. PNG files are compressed by converting
+   them to JPEG format. If your PNG has a
+   transparent background, the transparency
+   will be filled with white. Use a quality
+   of 85%+ for best results.
+
+Q: How much can images be compressed?
+A: Typical JPEG photographs compress 60-80% with
+   minimal quality loss. Screenshots and graphics
+   compress 40-60%. The actual ratio depends on
+   image content and complexity.
+
+===================================================
+FIX 5 — About Page (Add Author/Team Name)
+===================================================
+
+In /about page component, find the section
+that describes who built the site and add:
+
+Find where it currently says something like
+"Built by the X Toolkit team" or similar and
+update to include a real identifier:
+
+Add this paragraph to the about page:
+
+"X Toolkit is an independent project built and
+maintained by a solo developer passionate about
+creating genuinely useful free tools for the web.
+The project started in May 2026 with a simple
+goal: build the tools I wished existed, make them
+completely free, and keep them that way.
+
+Have feedback, found a bug, or want to suggest
+a new tool? Reach out at support@xtoolkit.live
+— all messages are read and responded to within
+1-2 business days."
+
+Also add this to the page meta description
+for /about to improve E-A-T signals:
+"Learn about X Toolkit — a free collection of
+44+ tools for developers, SEO professionals
+and social media managers. Built and maintained
+by an independent developer since May 2026."
+
+===================================================
+FIX 6 — Fix ALL 13 Broken Internal Links
+===================================================
+
+Fix every broken related tool link found in audit:
+
+In character-counter.tsx line 30:
+Change /tools/bio-ideas → /tools/bio-generator
+
+In funny-bios.tsx lines 100-102:
+Change /tools/bio-ideas → /tools/bio-generator
+Change /tools/professional-bios → /tools/username-generator
+Change /tools/aesthetic-bios → /tools/bio-generator
+
+In font-preview.tsx lines 19-20:
+Change /tools/bio-ideas → /tools/bio-generator
+Change /tools/aesthetic-bios → /tools/tweet-formatter
+
+In bio-generator.tsx lines 70-73:
+Change /tools/bio-ideas → /tools/funny-bios
+Change /tools/professional-bios → /tools/username-generator
+Change /tools/aesthetic-bios → /tools/username-generator
+
+In username-generator.tsx line 57:
+Change /tools/name-ideas → /tools/bio-generator
+
+In page-speed-checker.tsx line 20:
+Change /tools/backlink-analyzer → /tools/keyword-density
+
+In email-validator.tsx lines 61-62:
+Change /tools/email-username-generator → /tools/masked-email-generator
+Change /tools/email-character-counter → /tools/character-counter
+
+In subject-line-generator.tsx lines 92-94:
+Change /tools/email-character-counter → /tools/character-counter
+Change /tools/plain-text-formatter → /tools/email-signature-generator
+
+In tweet-scheduler.tsx line 21:
+Change /tools/follower-analyzer → /tools/x-account-checker
+
+In blog files referencing /tools/disposable-email-guide:
+what-is-disposable-email.tsx line 22:
+Change /tools/disposable-email-guide → /tools/temp-mail
+best-temp-mail-services.tsx line 22:
+Change /tools/disposable-email-guide → /tools/temp-mail
+
+In files referencing /tools/email-privacy-checker:
+alias-email-explainer.tsx line 95:
+Change /tools/email-privacy-checker → /tools/masked-email-generator
+is-temp-mail-safe.tsx line 22:
+Change /tools/email-privacy-checker → /tools/masked-email-generator
+disposable-email-guide.tsx line 55:
+Change /tools/email-privacy-checker → /tools/masked-email-generator
+
+===================================================
+FIX 7 — Fix Pricing Page "Coming Soon" Text
+===================================================
+
+In pricing.tsx lines 129 and 143:
+Remove or replace "coming soon" text.
+
+Either:
+Option A: Replace with "In development — join
+our waitlist to be notified" with email input
+
+Option B: Remove the unbuilt Pro features
+entirely and only show what currently exists
+
+Option C: Change "coming soon" to "planned"
+and add estimated timeline
+
+Use Option A — add a simple email input.
+
+===================================================
+FIX 8 — Add Affiliate Disclosure
+===================================================
+
+In AffiliateSection.tsx find where the external
+tool recommendations are shown (Buffer, Canva,
+Taplio, Beehiiv, Gumroad, Hypefury etc.)
+
+Add a visible disclaimer above the section:
+"Recommended tools — we have no affiliate
+relationship with these products and receive
+no compensation for recommendations."
+
+Also add rel="nofollow noopener noreferrer"
+to all external links in AffiliateSection.tsx
+
+===================================================
+AFTER ALL FIXES:
+pnpm build — confirm zero errors, 74+ pages
+git add -A
+git commit -m "AdSense fix: expand 4 thin pages,
+fix about page E-A-T, fix 13 broken links,
+pricing page, affiliate disclosure"
+git push origin main
+
+Show ALL files changed and word counts for
+the 4 expanded tool pages.
+===================================================

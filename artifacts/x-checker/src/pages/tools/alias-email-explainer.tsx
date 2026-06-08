@@ -92,7 +92,6 @@ const faqs = [
 
 const relatedTools = [
   { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate random alias patterns instantly." },
-  { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your current email's privacy level." },
   { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Fully anonymous throwaway inbox — no signup needed." },
   { title: "Disposable Email Guide", href: "/tools/disposable-email-guide", description: "Guide to disposable vs permanent alias emails." },
 ];

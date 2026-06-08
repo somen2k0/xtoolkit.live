@@ -18,7 +18,7 @@ const faqs = [
 const relatedTools = [
   { title: "Tweet Formatter", href: "/tools/tweet-formatter", description: "Split long content into tweet threads." },
   { title: "Character Counter", href: "/tools/character-counter", description: "Count characters to stay within 280 limit." },
-  { title: "Follower Analyzer", href: "/tools/follower-analyzer", description: "Analyze your follower ratio and engagement." },
+  { title: "X Account Checker", href: "/tools/x-account-checker", description: "Check X account status and follower data." },
 ];
 
 interface ScheduledTweet {

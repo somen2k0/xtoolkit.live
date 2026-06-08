@@ -52,7 +52,6 @@ const relatedTools = [
   { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a disposable inbox instantly — no signup, 9 domains." },
   { title: "Alias Email Explainer", href: "/tools/alias-email-explainer", description: "When to use permanent aliases instead of disposable email." },
   { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous email aliases." },
-  { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your real email's privacy characteristics." },
 ];
 
 export default function DisposableEmailGuide() {

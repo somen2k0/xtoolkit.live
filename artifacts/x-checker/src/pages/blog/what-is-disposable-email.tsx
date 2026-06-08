@@ -19,7 +19,7 @@ export default function WhatIsDisposableEmail() {
       ]}
       relatedTools={[
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a throwaway inbox instantly.", icon: Mail },
-        { title: "Disposable Email Guide", href: "/tools/disposable-email-guide", description: "When to use disposable vs alias email.", icon: BookOpen },
+        { title: "Temp Mail", href: "/tools/temp-mail", description: "Get a disposable inbox instantly — no signup.", icon: BookOpen },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous aliases.", icon: EyeOff },
         { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your email's privacy level.", icon: Shield },
       ]}

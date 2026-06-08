@@ -67,10 +67,10 @@ export default function BioGenerator() {
       faqs={FAQS}
       affiliateCategory="growth"
       relatedTools={[
-        { title: "Bio Ideas", href: "/tools/bio-ideas", description: "100+ ready-made X bio templates by niche and style." },
         { title: "Funny Bios", href: "/tools/funny-bios", description: "Witty, humorous bio ideas that stand out." },
-        { title: "Professional Bios", href: "/tools/professional-bios", description: "Clean, credible bios for business professionals." },
-        { title: "Aesthetic Bios", href: "/tools/aesthetic-bios", description: "Minimal and stylish bios for a curated profile." },
+        { title: "Funny Bios Template Library", href: "/tools/funny-bios", description: "100+ ready-made X bio templates by niche and style." },
+        { title: "Username Generator", href: "/tools/username-generator", description: "Generate unique username ideas for X." },
+        { title: "Character Counter", href: "/tools/character-counter", description: "Check your bio fits within X's 160-char limit." },
       ]}
     >
       <div className="space-y-5">

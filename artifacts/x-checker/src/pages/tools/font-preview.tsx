@@ -16,8 +16,8 @@ const faqs = [
 ];
 
 const relatedTools = [
-  { title: "Twitter Bio Ideas", href: "/tools/bio-ideas", description: "Generate bio ideas for any niche in seconds." },
-  { title: "Aesthetic Bio Ideas", href: "/tools/aesthetic-bios", description: "Aesthetic Twitter bios with symbols and style." },
+  { title: "Twitter Bio Ideas", href: "/tools/bio-generator", description: "Generate bio ideas for any niche in seconds." },
+  { title: "Tweet Formatter", href: "/tools/tweet-formatter", description: "Split long text into a numbered tweet thread." },
   { title: "Character Counter", href: "/tools/character-counter", description: "Count characters against Twitter's 160-char bio limit." },
   { title: "Tweet Formatter", href: "/tools/tweet-formatter", description: "Split long text into a numbered thread." },
 ];

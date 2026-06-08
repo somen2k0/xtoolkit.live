@@ -274,6 +274,59 @@ export default function ColorPicker() {
         </div>
       </div>
 
+      {/* Extended content */}
+      <div className="mt-2 space-y-6">
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">Understanding Color Formats</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Colors on the web can be expressed in several different formats, each with their own use cases and advantages. Understanding the differences helps you choose the right format for your project.</p>
+          <ul className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">HEX (Hexadecimal):</strong> The most common color format in web development. A HEX color code like #6366f1 represents the red, green, and blue components of a color as pairs of hexadecimal digits (00-FF). HEX is compact and widely supported in CSS, HTML, and design tools.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">RGB (Red, Green, Blue):</strong> Expresses color as three values from 0-255 for red, green, and blue channels. RGB is useful when you need to manipulate individual color channels programmatically or calculate color relationships.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">HSL (Hue, Saturation, Lightness):</strong> The most intuitive format for humans. Hue is the color angle on a color wheel (0-360°), saturation is the intensity (0-100%), and lightness is the brightness (0-100%). HSL makes it easy to create color variations — increasing or decreasing lightness creates tints and shades of the same color.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">RGBA and HSLA:</strong> Extended versions of RGB and HSL that include an alpha channel for transparency, where 0 is fully transparent and 1 is fully opaque.</span></li>
+          </ul>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">Web Accessibility and Color Contrast</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Color contrast is one of the most important accessibility considerations in web design. The Web Content Accessibility Guidelines (WCAG) define minimum contrast ratios that ensure text is readable for users with visual impairments including color blindness and low vision.</p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">AA Level (minimum):</strong> Requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18pt or 14pt bold). This is the standard legal requirement in many countries.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">AAA Level (enhanced):</strong> Requires a contrast ratio of 7:1 for normal text and 4.5:1 for large text. This provides the highest level of accessibility.</span></li>
+          </ul>
+          <p className="text-sm text-muted-foreground leading-relaxed">Our color picker includes a contrast checker that calculates the contrast ratio between two colors and shows whether they meet WCAG AA and AAA requirements. Always check contrast when choosing text and background color combinations.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">Color Theory Basics for Web Design</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Understanding basic color theory helps you create more visually appealing and effective designs:</p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Complementary colors</strong> sit opposite each other on the color wheel and create high contrast combinations. They are attention-grabbing and work well for calls-to-action.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Analogous colors</strong> sit adjacent on the color wheel and create harmonious, comfortable combinations. They are often used for backgrounds and neutral design elements.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Triadic colors</strong> are evenly spaced around the color wheel (120° apart) and create vibrant, balanced color schemes. They work well when one color dominates and the others are used as accents.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">The 60-30-10 rule:</strong> Use your primary color for 60% of the design, a secondary color for 30%, and an accent color for 10%. This creates visual hierarchy without overwhelming the viewer.</span></li>
+          </ul>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {[
+              { q: "What is the difference between HEX and RGB?", a: "Both represent the same colors. HEX uses base-16 notation (#FF0000) while RGB uses decimal values (255, 0, 0). HEX is more compact for writing in code while RGB is easier to read and manipulate mathematically." },
+              { q: "What does the alpha channel in RGBA mean?", a: "Alpha controls transparency. A value of 1 is fully opaque (solid color) and 0 is fully transparent (invisible). Values between 0 and 1 create semi-transparent colors." },
+              { q: "How do I check if my colors meet accessibility requirements?", a: "Use our built-in contrast checker. Enter your text color and background color and it shows the contrast ratio with WCAG AA and AAA pass/fail status." },
+              { q: "What is HSL and why is it useful?", a: "HSL (Hue, Saturation, Lightness) is the most intuitive color format. It lets you easily create color variations — adjust lightness to make tints and shades, adjust saturation to make colors more or less vibrant." },
+              { q: "Can I use HEX colors in all browsers?", a: "Yes. HEX color codes are supported in all modern browsers and have been since the earliest days of the web. They are the most universally compatible color format." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );

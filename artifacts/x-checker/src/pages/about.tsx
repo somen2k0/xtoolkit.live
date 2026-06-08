@@ -64,7 +64,7 @@ export default function About() {
     <Layout>
       <SeoHead
         title="About X Toolkit — Free Tools for X, Developers & SEO"
-        description="X Toolkit offers 44+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work."
+        description="Learn about X Toolkit — a free collection of 44+ tools for developers, SEO professionals and social media managers. Built and maintained by an independent developer since May 2026."
         path="/about"
         keywords="x toolkit, free online tools, twitter tools, seo tools, developer tools, email tools, no signup tools"
       />
@@ -180,6 +180,19 @@ export default function About() {
               </span>
             ))}
           </div>
+        </section>
+
+        {/* About the developer */}
+        <section className="mb-12 rounded-2xl border border-border/60 bg-card/50 p-6 md:p-8">
+          <h2 className="text-xl font-semibold mb-3">About the Developer</h2>
+          <p className="text-muted-foreground leading-relaxed mb-3">
+            X Toolkit is an independent project built and maintained by a solo developer passionate about creating genuinely useful free tools for the web. The project started in May 2026 with a simple goal: build the tools I wished existed, make them completely free, and keep them that way.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Have feedback, found a bug, or want to suggest a new tool? Reach out at{" "}
+            <a href="mailto:support@xtoolkit.live" className="text-primary hover:underline font-medium">support@xtoolkit.live</a>
+            {" "}— all messages are read and responded to within 1-2 business days.
+          </p>
         </section>
 
         {/* CTA */}

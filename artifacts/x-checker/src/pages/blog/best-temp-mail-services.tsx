@@ -19,7 +19,7 @@ export default function BestTempMailServices() {
       ]}
       relatedTools={[
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a throwaway inbox right now — free.", icon: Mail },
-        { title: "Disposable Email Guide", href: "/tools/disposable-email-guide", description: "When to use disposable vs permanent alias.", icon: Shield },
+        { title: "Temp Mail", href: "/tools/temp-mail", description: "Get a throwaway inbox right now — free.", icon: Shield },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate anonymous permanent aliases.", icon: EyeOff },
       ]}
     >

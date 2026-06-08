@@ -277,6 +277,64 @@ export default function ImageCompressor() {
         </div>
       </div>
 
+      {/* Extended content */}
+      <div className="space-y-6">
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">Why Image Compression Matters</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Images are typically the largest files on any webpage, often accounting for 50-80% of total page weight. Unoptimized images significantly slow down page load times — and page speed directly affects both user experience and search engine rankings.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">Google's Core Web Vitals include Largest Contentful Paint (LCP), which measures how long it takes for the main content of a page to become visible. Large uncompressed images are the most common cause of poor LCP scores. Compressing images before uploading them to your website is one of the most impactful optimizations available.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">Research consistently shows that users abandon websites that take more than 3 seconds to load. On mobile connections, this is even more critical. A single uncompressed photograph can be 5-10MB — compressing it to 300-500KB with negligible visual quality loss can reduce load time by several seconds.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">Lossy vs Lossless Compression</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">There are two fundamentally different approaches to image compression:</p>
+          <ul className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Lossless compression</strong> reduces file size without discarding any image data. The original image can be perfectly reconstructed from the compressed file. PNG uses lossless compression, making it ideal for images that require perfect accuracy like logos, icons, screenshots, and text-heavy images.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Lossy compression</strong> achieves much greater file size reductions by permanently discarding some image data — specifically data that is less perceptible to the human eye. JPEG uses lossy compression, making it ideal for photographs and complex images where minor quality loss at high compression ratios is acceptable and often imperceptible.</span></li>
+          </ul>
+          <p className="text-sm text-muted-foreground leading-relaxed">Our compressor uses the browser's Canvas API to apply lossy compression to JPEG, PNG, and WebP files. PNG files are converted to JPEG format for compression since PNG's lossless format doesn't support quality settings. If you need to maintain transparency, keep PNG files at a lower compression ratio.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">Image Format Guide</h2>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">JPEG:</strong> Best for photographs and complex images with gradients and many colors. Supports lossy compression with excellent results at 70-85% quality. Does not support transparency.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">PNG:</strong> Best for images requiring transparency, logos, icons, screenshots, and images with text. Uses lossless compression. File sizes are larger than JPEG for photographs but better for graphics.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">WebP:</strong> Google's modern format that supports both lossy and lossless compression with better results than JPEG and PNG. WebP files are typically 25-35% smaller than equivalent JPEG files. Supported by all modern browsers.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">SVG:</strong> Best for logos, icons, and illustrations that need to scale to any size without quality loss. Not a raster format — uses mathematical paths instead of pixels. Excellent for simple graphics but not suitable for photographs.</span></li>
+          </ul>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+          <h2 className="text-lg font-semibold">Image Optimization Best Practices</h2>
+          <ul className="space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Resize before compressing:</strong> Compression works on the actual pixel dimensions of the image. If you're displaying an image at 800px width but the file is 4000px wide, resize it to 800px first — this alone reduces file size by 96% before any compression.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Use appropriate quality settings:</strong> For photographs on the web, 70-85% quality produces excellent results with significant file size reduction. Going below 60% starts to produce visible artifacts. For images with text or logos, use higher quality (85-95%) to maintain sharpness.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Consider lazy loading:</strong> Images below the fold don't need to load immediately. Use the HTML loading='lazy' attribute to defer loading of off-screen images.</span></li>
+            <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span><span><strong className="text-foreground/80">Use responsive images:</strong> Serve appropriately sized images for different screen sizes using the srcset attribute. Mobile users don't need 2000px wide images.</span></li>
+          </ul>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {[
+              { q: "Is my image data sent to any server?", a: "No. Our image compressor runs entirely in your browser using the Canvas API. Your images are never uploaded to or processed by any server. Complete privacy guaranteed." },
+              { q: "What is the maximum file size I can compress?", a: "Our compressor handles files up to several hundred MB in theory, but browser memory limits practical use to files under 50MB. Most web images are well within this range." },
+              { q: "Will compression make my images blurry?", a: "At quality settings of 70% and above, compression artifacts are generally imperceptible for photographs. The preview comparison lets you see the quality before downloading." },
+              { q: "Can I compress PNG files?", a: "Yes. PNG files are compressed by converting them to JPEG format. If your PNG has a transparent background, the transparency will be filled with white. Use a quality of 85%+ for best results." },
+              { q: "How much can images be compressed?", a: "Typical JPEG photographs compress 60-80% with minimal quality loss. Screenshots and graphics compress 40-60%. The actual ratio depends on image content and complexity." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );

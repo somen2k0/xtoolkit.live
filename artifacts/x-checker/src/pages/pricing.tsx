@@ -104,7 +104,7 @@ function PlanCard({
       >
         {comingSoon ? (
           <>
-            <Sparkles className="h-3.5 w-3.5 mr-1.5" /> Coming Soon
+            <Sparkles className="h-3.5 w-3.5 mr-1.5" /> In development — join waitlist below
           </>
         ) : cta}
       </Button>

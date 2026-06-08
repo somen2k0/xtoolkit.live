@@ -54,7 +54,7 @@ const faqs = [
 ];
 
 const relatedTools = [
-  { title: "Twitter Name Ideas", href: "/tools/name-ideas", description: "Curated display name ideas by niche." },
+  { title: "Bio Generator", href: "/tools/bio-generator", description: "Generate X bio ideas for any niche." },
   { title: "Account Checker", href: "/tools/x-account-checker", description: "Check if specific X usernames are active on X." },
   { title: "@ Formatter", href: "/tools/at-formatter", description: "Bulk add or remove @ from username lists." },
   { title: "Profile Link Generator", href: "/tools/profile-link-generator", description: "Turn usernames into direct X profile links." },

@@ -97,9 +97,9 @@ const faqs = [
 
 const relatedTools = [
   { title: "AI Bio Generator", href: "/tools/bio-generator", description: "Generate 3 personalized bios using AI." },
-  { title: "Bio Ideas Generator", href: "/tools/bio-ideas", description: "Bio templates for developers, marketers, creators and more." },
-  { title: "Professional Bios", href: "/tools/professional-bios", description: "Polished, industry-specific bio templates." },
-  { title: "Aesthetic Bio Ideas", href: "/tools/aesthetic-bios", description: "Aesthetic bios with Unicode symbols and emojis." },
+  { title: "Bio Ideas Generator", href: "/tools/bio-generator", description: "Bio templates for developers, marketers, creators and more." },
+  { title: "Username Generator", href: "/tools/username-generator", description: "Generate unique username ideas for any niche." },
+  { title: "Aesthetic Bio Ideas", href: "/tools/bio-generator", description: "Aesthetic bios with Unicode symbols and emojis." },
 ];
 
 export default function FunnyBios() {

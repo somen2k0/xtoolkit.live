@@ -81,22 +81,22 @@ export function AffiliateSection({ category = "all", limit = 4 }: AffiliateSecti
 
   if (!tools.length) return null;
 
-  const handleClick = (name: string, url: string) => {
-    trackEvent("affiliate_click", { label: name });
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <section className="space-y-4">
       <div className="flex items-center gap-2">
         <h2 className="text-sm font-semibold text-foreground/70">Recommended Creator Tools</h2>
-        <span className="text-[10px] text-muted-foreground/40 border border-border/40 rounded px-1.5 py-0.5">Sponsored</span>
       </div>
+      <p className="text-xs text-muted-foreground/60 -mt-2">
+        Recommended tools — we have no affiliate relationship with these products and receive no compensation for recommendations.
+      </p>
       <div className="grid sm:grid-cols-2 gap-3">
         {tools.map(({ name, description, url, badge }) => (
-          <button
+          <a
             key={name}
-            onClick={() => handleClick(name, url)}
+            href={url}
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            onClick={() => trackEvent("affiliate_click", { label: name })}
             className="group flex items-start gap-3 rounded-xl border border-border/50 bg-card/30 p-3.5 hover:border-border hover:bg-card/60 transition-all text-left"
           >
             <div className="h-8 w-8 rounded-lg bg-muted/60 border border-border/40 flex items-center justify-center shrink-0 text-xs font-bold text-foreground/60">
@@ -112,7 +112,7 @@ export function AffiliateSection({ category = "all", limit = 4 }: AffiliateSecti
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{description}</p>
             </div>
-          </button>
+          </a>
         ))}
       </div>
     </section>

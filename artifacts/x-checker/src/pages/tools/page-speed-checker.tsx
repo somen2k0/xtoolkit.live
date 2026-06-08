@@ -17,7 +17,7 @@ const faqs = [
 const relatedTools = [
   { title: "Meta Tag Generator", href: "/tools/meta-tag-generator", description: "Generate optimized title, description, and OG tags." },
   { title: "Robots.txt Generator", href: "/tools/robots-txt-generator", description: "Create a robots.txt file for your site." },
-  { title: "Backlink Analyzer", href: "/tools/backlink-analyzer", description: "Analyze your backlink profile for SEO quality." },
+  { title: "Keyword Density Checker", href: "/tools/keyword-density", description: "Analyze keyword frequency in your content." },
 ];
 
 interface CheckItem {
