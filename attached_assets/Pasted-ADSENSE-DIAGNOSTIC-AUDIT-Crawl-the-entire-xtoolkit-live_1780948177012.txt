@@ -1,0 +1,324 @@
+ADSENSE DIAGNOSTIC AUDIT
+Crawl the entire xtoolkit.live codebase and answer
+every question below with specific evidence.
+Do not give vague answers — show file names,
+line numbers, and actual content where relevant.
+
+===================================================
+SECTION 1 — INSUFFICIENT CONTENT CHECK
+===================================================
+
+Q1. Count the total words on each of these pages
+(rendered text only, not code):
+- Homepage (/)
+- /tools/json-formatter
+- /tools/regex-tester
+- /tools/base64
+- /tools/uuid-generator
+- /tools/css-minifier
+- /tools/character-counter
+- /tools/word-counter
+- /tools/qr-code-generator
+- /tools/password-generator
+- /tools/color-picker
+- /tools/image-compressor
+
+Show: filename, word count, pass/fail (pass = 300+)
+
+Q2. Do ALL pages have complete sentences and
+paragraphs — not just headlines and bullet points?
+Check these specifically:
+- /tools/qr-code-generator
+- /tools/password-generator
+- /tools/color-picker
+- /tools/image-compressor
+Show the actual text content of each.
+
+Q3. Are any pages still "under construction" or
+showing placeholder content?
+Search for these strings in all tsx files:
+"coming soon", "under construction", "placeholder",
+"TODO", "lorem ipsum", "example content"
+Show all matches.
+
+Q4. Count words in every blog post:
+- /blog/best-temp-mail-services
+- /blog/what-is-disposable-email
+- /blog/temp-mail-vs-gmail
+- /blog/is-temp-mail-safe
+- /blog/why-websites-ask-email-verification
+- /blog/temp-gmail-explained
+- /blog/how-to-use-temp-email-extension
+- /blog/what-is-json-ld
+- /blog/what-is-base64
+- /blog/twitter-bio-tips
+- /blog/what-is-uuid
+- /blog/url-encoding-guide
+
+Show word count for each. Pass = 800+ words.
+
+Q5. Does the site have a visible blog/articles
+section that Google's reviewer can easily find?
+Is there a link to /blog in the main navigation?
+Show where /blog is linked from.
+
+===================================================
+SECTION 2 — CONTENT QUALITY CHECK
+===================================================
+
+Q6. Is any content AI-generated without human
+editing or added value?
+Check blog posts — do they read as genuinely
+helpful original content or templated AI output?
+List any posts that seem thin or repetitive.
+
+Q7. Are there any pages with duplicate content
+— same text appearing on multiple pages?
+Run: grep -r "About this tool" src/pages/tools/ --include="*.tsx" | head -20
+Are the "About this tool" sections unique per
+page or copy-pasted template text?
+
+Q8. Do tool pages contain only the tool UI
+with no supporting text content?
+List any tool pages that have ZERO text content
+below the tool interface.
+
+Q9. Does the site have original content that
+provides value beyond just the tool itself?
+Count total blog posts and total words across
+all blog posts combined.
+
+Q10. Are there any pages that are auto-generated
+with little to no original content?
+Check if any pages use the same template text
+repeated across multiple pages without variation.
+
+===================================================
+SECTION 3 — CONTENT POLICY VIOLATIONS CHECK
+===================================================
+
+Q11. Does the site contain any of these
+prohibited content types?
+Search codebase for:
+- Adult/explicit content keywords
+- Violence-related content
+- Gambling-related content
+- Weapons-related content
+- Drug-related content
+Show: "none found" or list any matches.
+
+Q12. Check the /privacy page — does it contain:
+- Cookie policy section? (yes/no)
+- Data retention policy? (yes/no)
+- User rights section? (yes/no)
+- Contact information for privacy? (yes/no)
+- Google AdSense/advertising disclosure? (yes/no)
+- Last updated date? (yes/no)
+Show the actual content of each section.
+
+Q13. Check the /about page — does it contain:
+- Clear description of what the site does? (yes/no)
+- Information about who runs the site? (yes/no)
+- Contact information? (yes/no)
+Show the actual content.
+
+Q14. Check the /contact page — does it contain:
+- Working contact form? (yes/no)
+- Email address or alternative contact? (yes/no)
+- Response time expectation? (yes/no)
+Show the actual content.
+
+Q15. Are there any pages that violate Google's
+Better Ads Standards?
+Check for:
+- Pop-ups that appear immediately on page load
+- Full-page interstitials
+- Auto-playing videos with sound
+- Sticky ads that cover content
+Show any such elements found in the codebase.
+
+===================================================
+SECTION 4 — SITE NAVIGATION CHECK
+===================================================
+
+Q16. List ALL navigation links in the main
+navbar and footer. Do all links point to
+existing, working pages?
+
+Run: grep -r "to=\"/" src/components/layout/ --include="*.tsx"
+Show complete list and verify each destination exists.
+
+Q17. Are there any broken internal links?
+Search for href or to attributes pointing to
+removed tool pages:
+grep -r "follower-analyzer\|profile-audit\|bio-ideas\|aesthetic-bios\|professional-bios\|funny-bios\|name-ideas\|backlink-analyzer\|email-username-generator\|email-privacy-checker\|spam-risk-checker\|email-leak-checker\|alias-email-explainer\|disposable-email-guide\|email-ab-tester\|email-character-counter\|plain-text-formatter" src/ --include="*.tsx"
+Show all matches.
+
+Q18. Are there any redirect chains?
+Show complete vercel.json redirects array.
+Check if any redirect destination is itself
+a redirect source.
+
+Q19. Does the site have clear breadcrumb
+navigation on tool pages?
+Check MiniToolLayout.tsx — is there a breadcrumb
+showing Home > Tools > Tool Name?
+Show the breadcrumb component code.
+
+Q20. Is the site easy to navigate on mobile?
+Check if the mobile menu works:
+- Is there a hamburger menu for mobile?
+- Does clicking nav items work on mobile?
+- Are there any elements that overlap or
+  block navigation on mobile?
+Show mobile nav implementation.
+
+Q21. Are there any pages that require login
+or restricted access that Google's reviewer
+might encounter?
+Check if /admin is accessible without password.
+Check if any other pages check authentication.
+
+Q22. Are there excessive pop-ups or dialogs?
+Search for modal/dialog components that appear
+on page load:
+grep -r "useEffect\|onMount" src/ --include="*.tsx" | grep -i "modal\|dialog\|popup\|banner\|toast"
+Show any that fire immediately on page load.
+
+===================================================
+SECTION 5 — TRAFFIC SOURCES CHECK
+===================================================
+
+Q23. Is the AdSense verification code correctly
+placed in index.html?
+Show the exact AdSense script tag in index.html.
+Is it in the <head> section?
+
+Q24. Is ads.txt correctly configured?
+Show contents of public/ads.txt
+
+Q25. Are there any third-party scripts that
+could be considered ad fraud or click inflation?
+List ALL third-party scripts loaded in index.html:
+Show src attributes of all <script> tags.
+
+Q26. Does the site have any affiliate links?
+Search for common affiliate link patterns:
+grep -r "amzn\|affiliate\|ref=\|aff_id" src/ --include="*.tsx"
+Show all matches.
+
+===================================================
+SECTION 6 — GOOGLE SPAM POLICIES CHECK
+===================================================
+
+Q27. Scaled content abuse check:
+Are blog posts genuinely helpful original content
+or do they appear to be mass-generated?
+Show the introduction paragraph of each blog post.
+
+Q28. Keyword stuffing check:
+Are keywords used naturally in content or
+stuffed unnaturally?
+Check the meta keywords tags — are they
+excessively long keyword lists?
+Show meta keywords for 5 tool pages.
+
+Q29. Cloaking check:
+Is the same content served to all visitors?
+Is there any user-agent detection that shows
+different content to Googlebot?
+Search: grep -r "googlebot\|user-agent\|bot" src/ --include="*.tsx" --include="*.ts"
+Show all matches.
+
+Q30. Hidden text check:
+Is there any text hidden with CSS that is
+not visible to users but visible to crawlers?
+Search for: display:none, visibility:hidden,
+opacity:0, font-size:0 in content areas.
+Show any suspicious hidden text.
+
+Q31. Thin affiliation check:
+Does the site have any affiliate program links?
+Does the site have any product recommendation
+pages that are primarily affiliate content?
+Search: grep -r "affiliate\|commission\|partner" src/ --include="*.tsx"
+
+Q32. Misleading functionality check:
+Do all tools actually work as described?
+Are there any tools that claim functionality
+they don't actually provide?
+List any tools that show errors or don't function.
+
+===================================================
+SECTION 7 — TECHNICAL REQUIREMENTS
+===================================================
+
+Q33. Is the AdSense code on a LIVE page
+(not a test page or empty page)?
+Show which pages have the AdSense script tag.
+
+Q34. What is the robots.txt content?
+Show complete contents of public/robots.txt
+Is Googlebot blocked from any important pages?
+
+Q35. Are there any noindex tags on important pages?
+grep -r "noindex" src/ --include="*.tsx" --include="*.ts" prerender.mjs
+Show all matches.
+
+Q36. Does the site have a valid SSL certificate?
+Is the site fully accessible via HTTPS?
+Check vercel.json for HTTPS redirect configuration.
+
+Q37. What is the page count?
+How many unique pages does the site have?
+Show total from prerender.mjs page list.
+
+Q38. Are all 44 tools functional?
+List any tools that return errors or don't work:
+- Tools requiring GROQ_API_KEY
+- Tools requiring external APIs
+- Tools that have known issues
+Show status of each.
+
+===================================================
+SECTION 8 — OVERALL SITE QUALITY ASSESSMENT
+===================================================
+
+Q39. What is the ratio of content pages to
+tool pages?
+Count: blog posts + static pages vs tool pages
+Show the ratio.
+
+Q40. Does the site have an identifiable purpose
+that is clear to a first-time visitor?
+Show the homepage H1 and first paragraph of text.
+
+Q41. Is there any indication of who owns/runs
+the site? (E-A-T signals)
+Check /about page for:
+- Author information
+- Company/person name
+- Credentials or expertise claims
+Show actual content.
+
+Q42. Are there any external links on the site?
+Do they use rel="nofollow" where appropriate?
+grep -r "target=\"_blank\"" src/ --include="*.tsx" | head -20
+Do they also have rel="nofollow noopener"?
+
+Q43. What languages is the site available in?
+Is all content in English?
+grep -r "lang=" src/ --include="*.tsx" --include="*.html"
+Show language declarations.
+
+Q44. Final assessment — list the top 5 most
+likely reasons AdSense would reject this site
+based on all findings above, in order of
+likelihood.
+
+===================================================
+Show ALL answers with evidence.
+Do not skip any question.
+Do not summarize — show actual content and
+file references for every answer.
+===================================================
