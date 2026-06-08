@@ -204,3 +204,9 @@ id = "1ajJNPEU--RAKAtUl09VE"
 uri = "file://artifacts/x-toolkit-extension/x-toolkit-extension-v1.1.1.zip"
 type = "unspecified"
 title = "X Toolkit Extension v1.1.1 — OTP + Button-strip fixes"
+
+[[outputs]]
+id = "QWqF8Pv18qSvx8Jg9nnc9"
+uri = "file://adsense-audit.csv"
+type = "table"
+title = "AdSense Audit — Full 44-Question Results"
