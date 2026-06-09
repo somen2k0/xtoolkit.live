@@ -182,6 +182,67 @@ export default function PageSpeedChecker() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Identifying slow-loading pages during an SEO audit</li>
           </ul>
         </div>
+
+        {/* SEO Content */}
+        <div className="space-y-8 pt-2 border-t border-border/40">
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">What is Page Speed and Why Does It Matter?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Page speed refers to how fast the content on your webpage loads and becomes interactive for visitors. It is one of Google's confirmed ranking factors — slow pages rank lower in search results and provide worse user experiences. Google's research shows that 53% of mobile users abandon pages that take longer than 3 seconds to load.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Page speed affects every aspect of your website's performance: search engine rankings, user engagement, conversion rates, and advertising revenue. A one-second delay in page load time can reduce conversions by 7% and page views by 11%.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">Core Web Vitals Explained</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Google uses Core Web Vitals as the primary page experience signals for ranking. There are three main metrics:
+            </p>
+            <div className="space-y-3">
+              {[
+                { metric: "Largest Contentful Paint (LCP)", desc: "Measures loading performance — specifically how long it takes for the largest content element (usually an image or heading) to become visible. Google recommends LCP under 2.5 seconds for a good score." },
+                { metric: "First Input Delay (FID) / Interaction to Next Paint (INP)", desc: "Measures interactivity — how long it takes for the page to respond to a user's first interaction like clicking a button or link. Target: under 200ms for FID, under 200ms for INP." },
+                { metric: "Cumulative Layout Shift (CLS)", desc: "Measures visual stability — how much the page layout shifts unexpectedly as it loads. Unexpected shifts are frustrating and can cause accidental clicks. Target: CLS under 0.1." },
+              ].map(({ metric, desc }) => (
+                <div key={metric} className="rounded-xl border border-border/60 bg-card/40 p-4 space-y-1.5">
+                  <p className="text-sm font-semibold">{metric}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">How to Improve Page Speed</h2>
+            <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+              <p><strong className="text-foreground">Optimize images:</strong> Images are typically the largest files on any webpage. Compress images before uploading, use modern formats like WebP, and implement lazy loading for images below the fold.</p>
+              <p><strong className="text-foreground">Minimize JavaScript:</strong> Large JavaScript bundles delay page interactivity. Use code splitting to load only the JavaScript needed for the current page. Defer non-critical scripts.</p>
+              <p><strong className="text-foreground">Use a CDN:</strong> Content Delivery Networks serve your files from servers close to your visitors, reducing latency. Most hosting platforms like Vercel and Netlify include CDN automatically.</p>
+              <p><strong className="text-foreground">Enable caching:</strong> Set appropriate cache headers so returning visitors load your site from their local cache instead of downloading files again.</p>
+              <p><strong className="text-foreground">Reduce server response time:</strong> Your server should respond within 200ms. Use serverless functions or fast hosting platforms to minimize time to first byte.</p>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {[
+                { q: "What is a good page speed score?", a: "Google PageSpeed Insights scores pages 0–100. 90–100 is considered Good, 50–89 Needs Improvement, and 0–49 is Poor. Aim for 90+ on desktop and 70+ on mobile." },
+                { q: "Does page speed affect SEO rankings?", a: "Yes. Google uses Core Web Vitals as a ranking factor. Pages with good Core Web Vitals scores may rank higher than slower competitors with similar content quality." },
+                { q: "What is the difference between page speed and page load time?", a: "Page load time is the total time for all page resources to download. Page speed encompasses multiple user experience metrics including when content first appears (FCP), when the main content loads (LCP), and when the page becomes interactive (TTI)." },
+                { q: "How do I check my Core Web Vitals?", a: "Use Google PageSpeed Insights (free), Google Search Console's Core Web Vitals report, or Chrome DevTools Lighthouse audit. All three measure real user experience data." },
+                { q: "What causes poor LCP scores?", a: "The most common causes are large unoptimized images, render-blocking JavaScript or CSS, slow server response times, and client-side rendering that delays content appearance." },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl border border-border/60 bg-card/40 p-4 space-y-1.5">
+                  <p className="text-sm font-semibold">{q}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{a}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
     </MiniToolLayout>
   );

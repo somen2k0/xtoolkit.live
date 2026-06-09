@@ -243,6 +243,27 @@ const STATIC_PAGES = [
       "URL encoding (percent encoding) converts unsafe characters for safe use in URLs. Complete guide covering how it works, reserved characters, and common developer mistakes.",
   },
   {
+    path: "/blog/what-is-regex",
+    label: "What Is Regex?",
+    title: "Regular Expressions (Regex) — A Complete Beginner's Guide with Examples | X Toolkit Blog",
+    description:
+      "What is regex? A complete beginner's guide to regular expressions with 10 practical examples. Learn syntax, character classes, quantifiers, and how to use regex in JavaScript and Python.",
+  },
+  {
+    path: "/blog/seo-meta-tags-guide",
+    label: "SEO Meta Tags Guide",
+    title: "Complete Guide to SEO Meta Tags in 2026 — Title, Description, OG Tags | X Toolkit Blog",
+    description:
+      "Everything you need to know about SEO meta tags in 2026: title tags, meta descriptions, Open Graph, Twitter Cards, canonical tags, and structured data. With best practices and examples.",
+  },
+  {
+    path: "/blog/what-is-jwt",
+    label: "What Is a JWT Token?",
+    title: "What is a JWT Token? JSON Web Tokens Explained for Developers | X Toolkit Blog",
+    description:
+      "What is a JWT? Learn how JSON Web Tokens work, their header-payload-signature structure, when to use JWT vs sessions, security best practices, and how to decode JWTs.",
+  },
+  {
     path: "/chrome-extension",
     label: "Chrome Extension",
     title: "Free Temp Email Chrome Extension — Disposable Inbox & OTP Detector | X Toolkit",

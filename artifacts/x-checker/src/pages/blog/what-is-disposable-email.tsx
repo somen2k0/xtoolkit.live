@@ -21,7 +21,7 @@ export default function WhatIsDisposableEmail() {
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a throwaway inbox instantly.", icon: Mail },
         { title: "Temp Mail", href: "/tools/temp-mail", description: "Get a disposable inbox instantly — no signup.", icon: BookOpen },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous aliases.", icon: EyeOff },
-        { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your email's privacy level.", icon: Shield },
+        { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Score your email's privacy level.", icon: Shield },
       ]}
     >
       <h2>What Is a Disposable Email Address?</h2>

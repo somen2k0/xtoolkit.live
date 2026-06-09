@@ -118,4 +118,28 @@
     <priority>0.78</priority>
   </url>
 
+  <!-- Regex: high-volume developer evergreen query -->
+  <url>
+    <loc>https://xtoolkit.live/blog/what-is-regex</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- SEO meta tags: high-intent developer/marketer query -->
+  <url>
+    <loc>https://xtoolkit.live/blog/seo-meta-tags-guide</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- JWT: developer authentication evergreen content -->
+  <url>
+    <loc>https://xtoolkit.live/blog/what-is-jwt</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
 </urlset>

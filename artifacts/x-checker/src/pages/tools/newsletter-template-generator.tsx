@@ -17,7 +17,7 @@ const faqs = [
 
 const relatedTools = [
   { title: "Subject Line Generator", href: "/tools/subject-line-generator", description: "Generate high-converting email subject lines." },
-  { title: "Email A/B Tester", href: "/tools/email-ab-tester", description: "Compare two subject lines and predict the winner." },
+  { title: "Subject Line Generator", href: "/tools/subject-line-generator", description: "Compare two subject lines and predict the winner." },
   { title: "Email Signature Generator", href: "/tools/email-signature-generator", description: "Create a professional email signature." },
 ];
 

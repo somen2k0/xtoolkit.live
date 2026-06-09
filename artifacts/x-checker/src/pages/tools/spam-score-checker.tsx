@@ -15,9 +15,9 @@ const faqs = [
 ];
 
 const relatedTools = [
-  { title: "Email A/B Tester", href: "/tools/email-ab-tester", description: "Compare two subject lines and predict the winner." },
+  { title: "Subject Line Generator", href: "/tools/subject-line-generator", description: "Compare two subject lines and predict the winner." },
   { title: "Subject Line Generator", href: "/tools/subject-line-generator", description: "Generate high-converting email subject lines." },
-  { title: "Email Character Counter", href: "/tools/email-character-counter", description: "Count characters for subject lines and body text." },
+  { title: "Character Counter", href: "/tools/character-counter", description: "Count characters for subject lines and body text." },
 ];
 
 interface SpamRule {

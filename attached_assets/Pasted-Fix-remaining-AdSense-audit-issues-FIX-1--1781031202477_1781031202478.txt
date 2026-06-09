@@ -1,0 +1,304 @@
+Fix remaining AdSense audit issues.
+
+===================================================
+FIX 1 — Fix 7 broken internal links in LIVE pages
+===================================================
+
+File: src/pages/blog/what-is-disposable-email.tsx
+Line 24: Change /tools/email-privacy-checker
+To: /tools/masked-email-generator
+
+File: src/pages/tools/masked-email-generator.tsx
+Line 43: Change /tools/email-privacy-checker
+To: /tools/masked-email-generator
+Line 45: Change /tools/alias-email-explainer
+To: /tools/masked-email-generator
+
+File: src/pages/tools/spam-score-checker.tsx
+Line 18: Change /tools/email-ab-tester
+To: /tools/subject-line-generator
+Line 20: Change /tools/email-character-counter
+To: /tools/character-counter
+
+File: src/pages/tools/tweet-formatter.tsx
+Line 45: Change /tools/bio-ideas
+To: /tools/bio-generator
+
+File: src/pages/tools/newsletter-template-generator.tsx
+Line 20: Change /tools/email-ab-tester
+To: /tools/subject-line-generator
+
+===================================================
+FIX 2 — Add content to case-converter (39 words)
+===================================================
+
+In src/pages/tools/case-converter.tsx add below
+the tool UI:
+
+Heading: "What is Case Conversion?"
+Content:
+"Case conversion transforms text between different
+naming conventions used in programming, writing,
+and data formatting. Different programming languages
+and style guides have different conventions for
+naming variables, functions, files, and classes.
+Our case converter handles all major formats
+instantly — paste any text and convert to your
+preferred case with one click.
+
+Understanding naming conventions is essential for
+writing clean, consistent code. Using the wrong
+case format can cause runtime errors in case-sensitive
+languages, make code harder to read, and break
+APIs that expect specific formatting."
+
+Heading: "Supported Case Formats"
+Content:
+"camelCase: Words joined without spaces, first word
+lowercase, subsequent words capitalized. Used for
+variables and functions in JavaScript, Java, and
+most modern languages. Example: myVariableName
+
+PascalCase (UpperCamelCase): Same as camelCase but
+first word also capitalized. Standard for class names
+and components in most languages. Example: MyClassName
+
+snake_case: Words separated by underscores, all
+lowercase. Standard in Python, Ruby, and database
+column names. Example: my_variable_name
+
+SCREAMING_SNAKE_CASE: All uppercase with underscores.
+Used for constants and environment variables across
+most languages. Example: MAX_RETRY_COUNT
+
+kebab-case: Words separated by hyphens, all lowercase.
+Standard for CSS class names, HTML attributes, and
+URL slugs. Example: my-css-class
+
+dot.case: Words separated by dots. Used in
+configuration files, package names, and some
+programming contexts. Example: my.config.value
+
+Title Case: Each word capitalized. Used for headings,
+titles, and proper nouns in written content.
+Example: My Article Title"
+
+Heading: "When to Use Each Case"
+Content:
+"The right case format depends entirely on context.
+JavaScript developers use camelCase for variables
+and PascalCase for classes. Python developers use
+snake_case for variables and SCREAMING_SNAKE_CASE
+for constants. CSS developers use kebab-case for
+class names. Database administrators use snake_case
+for column and table names. URL designers use
+kebab-case for SEO-friendly slugs.
+
+Our converter is especially useful when migrating
+data between systems, reformatting API responses,
+or standardizing variable names across a codebase."
+
+Heading: "Frequently Asked Questions"
+
+Q: What is the difference between camelCase
+   and PascalCase?
+A: Both join words without spaces. camelCase starts
+   with a lowercase letter (myVariable) while
+   PascalCase starts with uppercase (MyVariable).
+   PascalCase is also called UpperCamelCase.
+
+Q: Which case should I use for JavaScript variables?
+A: JavaScript convention uses camelCase for variables
+   and functions, PascalCase for classes and
+   constructors, and SCREAMING_SNAKE_CASE for
+   constants. Following these conventions makes
+   your code more readable and idiomatic.
+
+Q: What is kebab-case used for?
+A: Kebab-case is standard for CSS class names,
+   HTML data attributes, URL slugs, and file names
+   in many frontend projects. It is never used for
+   JavaScript variables because the hyphen is a
+   subtraction operator in JS.
+
+Q: Can I convert multiple words at once?
+A: Yes. Paste any amount of text and the converter
+   processes all words simultaneously. It correctly
+   handles spaces, existing camelCase, and mixed
+   formatting.
+
+Q: What is snake_case used for?
+A: snake_case is the standard naming convention in
+   Python for variables, functions, and module names.
+   It is also widely used for database column names,
+   configuration keys, and JSON property names in
+   many APIs.
+
+===================================================
+FIX 3 — Add content to page-speed-checker (43 words)
+===================================================
+
+In src/pages/tools/page-speed-checker.tsx add:
+
+Heading: "What is Page Speed and Why Does It Matter?"
+Content:
+"Page speed refers to how fast the content on your
+webpage loads and becomes interactive for visitors.
+It is one of Google's confirmed ranking factors —
+slow pages rank lower in search results and provide
+worse user experiences. Google's research shows that
+53% of mobile users abandon pages that take longer
+than 3 seconds to load.
+
+Page speed affects every aspect of your website's
+performance: search engine rankings, user engagement,
+conversion rates, and advertising revenue. A one-second
+delay in page load time can reduce conversions by 7%
+and page views by 11%."
+
+Heading: "Core Web Vitals Explained"
+Content:
+"Google uses Core Web Vitals as the primary page
+experience signals for ranking. There are three
+main metrics:
+
+Largest Contentful Paint (LCP): Measures loading
+performance — specifically how long it takes for
+the largest content element (usually an image or
+heading) to become visible. Google recommends LCP
+under 2.5 seconds for a good score.
+
+First Input Delay (FID) / Interaction to Next Paint
+(INP): Measures interactivity — how long it takes
+for the page to respond to a user's first interaction
+like clicking a button or link. Target: under 200ms
+for FID, under 200ms for INP.
+
+Cumulative Layout Shift (CLS): Measures visual
+stability — how much the page layout shifts
+unexpectedly as it loads. Unexpected shifts are
+frustrating and can cause accidental clicks. Target:
+CLS under 0.1."
+
+Heading: "How to Improve Page Speed"
+Content:
+"Optimize images: Images are typically the largest
+files on any webpage. Compress images before
+uploading, use modern formats like WebP, and
+implement lazy loading for images below the fold.
+
+Minimize JavaScript: Large JavaScript bundles
+delay page interactivity. Use code splitting to
+load only the JavaScript needed for the current
+page. Defer non-critical scripts.
+
+Use a CDN: Content Delivery Networks serve your
+files from servers close to your visitors,
+reducing latency. Most hosting platforms like
+Vercel and Netlify include CDN automatically.
+
+Enable caching: Set appropriate cache headers so
+returning visitors load your site from their local
+cache instead of downloading files again.
+
+Reduce server response time: Your server should
+respond within 200ms. Use serverless functions or
+fast hosting platforms to minimize time to first byte."
+
+Heading: "Frequently Asked Questions"
+
+Q: What is a good page speed score?
+A: Google PageSpeed Insights scores pages 0-100.
+   90-100 is considered Good, 50-89 Needs
+   Improvement, and 0-49 is Poor. Aim for 90+
+   on desktop and 70+ on mobile.
+
+Q: Does page speed affect SEO rankings?
+A: Yes. Google uses Core Web Vitals as a ranking
+   factor. Pages with good Core Web Vitals scores
+   may rank higher than slower competitors with
+   similar content quality.
+
+Q: What is the difference between page speed
+   and page load time?
+A: Page load time is the total time for all page
+   resources to download. Page speed encompasses
+   multiple user experience metrics including
+   when content first appears (FCP), when the
+   main content loads (LCP), and when the page
+   becomes interactive (TTI).
+
+Q: How do I check my Core Web Vitals?
+A: Use Google PageSpeed Insights (free), Google
+   Search Console's Core Web Vitals report, or
+   Chrome DevTools Lighthouse audit. All three
+   measure real user experience data.
+
+Q: What causes poor LCP scores?
+A: The most common causes are large unoptimized
+   images, render-blocking JavaScript or CSS,
+   slow server response times, and client-side
+   rendering that delays content appearance.
+
+===================================================
+FIX 4 — Add 3 more blog posts for better ratio
+===================================================
+
+Create these 3 new blog posts to improve the
+content-to-tool ratio from 0.59 to 0.66:
+
+1. src/pages/blog/what-is-regex.tsx
+Title: "Regular Expressions (Regex) — A Complete
+Beginner's Guide with Examples"
+900+ words covering:
+- What regex is and why developers use it
+- Basic syntax: character classes, quantifiers,
+  anchors, groups
+- 10 practical regex examples with explanations
+- Common regex use cases: email validation,
+  phone numbers, URLs, passwords
+- Regex in JavaScript, Python, and other languages
+- Link to /tools/regex-tester
+
+2. src/pages/blog/seo-meta-tags-guide.tsx
+Title: "Complete Guide to SEO Meta Tags in 2026 —
+Title, Description, OG Tags Explained"
+900+ words covering:
+- What meta tags are and why they matter
+- Title tag best practices and character limits
+- Meta description optimization
+- Open Graph tags for social sharing
+- Twitter Card meta tags
+- Structured data and JSON-LD
+- Link to /tools/meta-tag-generator
+
+3. src/pages/blog/what-is-jwt.tsx
+Title: "What is a JWT Token? JSON Web Tokens
+Explained for Developers"
+900+ words covering:
+- What JWT is and how it works
+- JWT structure: header, payload, signature
+- JWT vs session tokens
+- When to use JWT
+- JWT security best practices
+- How to decode and inspect JWTs
+- Link to /tools/jwt-decoder
+
+For each new blog post:
+- Add route to App.tsx
+- Add entry to prerender.mjs
+- Add to sitemap-blog.xml
+- Add to blog index page (src/pages/blog/index.tsx)
+- Add appropriate meta title and description
+- 900+ words each
+
+===================================================
+BUILD AND VERIFY:
+pnpm build — confirm zero errors
+Confirm page count increases to 83+
+git add -A
+git commit -m "AdSense fix: broken links, thin pages,
+3 new blog posts, content ratio improvement"
+git push origin main
+Show ALL files changed and word counts.
+===================================================

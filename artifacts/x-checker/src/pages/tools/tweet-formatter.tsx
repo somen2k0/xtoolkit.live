@@ -42,7 +42,7 @@ const relatedTools = [
   { title: "Character Counter", href: "/tools/character-counter", description: "Count characters in real time against Twitter's limits." },
   { title: "Hashtag Formatter", href: "/tools/hashtag-formatter", description: "Convert words to properly formatted #hashtags." },
   { title: "Twitter Font Preview", href: "/tools/font-preview", description: "Preview text in Unicode font styles." },
-  { title: "Bio Generator", href: "/tools/bio-ideas", description: "Generate Twitter bio ideas for any niche." },
+  { title: "Bio Generator", href: "/tools/bio-generator", description: "Generate Twitter bio ideas for any niche." },
 ];
 
 const EXAMPLE = `Twitter threads are one of the best ways to share long-form content on X. Instead of writing a blog post that nobody reads, you can break your ideas into connected tweets that people will actually engage with.

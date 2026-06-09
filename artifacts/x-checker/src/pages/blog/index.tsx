@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon } from "lucide-react";
+import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key } from "lucide-react";
 
 const ARTICLES = [
   {
@@ -134,6 +134,39 @@ const ARTICLES = [
     readTime: "5 min",
     category: "Developer",
     icon: LinkIcon,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10 border-sky-400/20",
+  },
+  {
+    slug: "what-is-regex",
+    href: "/blog/what-is-regex",
+    title: "Regular Expressions (Regex) — A Complete Beginner's Guide with Examples",
+    description: "What is regex? Learn basic syntax, character classes, quantifiers, and anchors — with 10 practical examples for email, URLs, passwords, and more.",
+    readTime: "9 min",
+    category: "Developer",
+    icon: Code,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10 border-sky-400/20",
+  },
+  {
+    slug: "seo-meta-tags-guide",
+    href: "/blog/seo-meta-tags-guide",
+    title: "Complete Guide to SEO Meta Tags in 2026 — Title, Description, OG Tags Explained",
+    description: "Title tags, meta descriptions, Open Graph, Twitter Cards, canonical tags, and structured data — everything you need to know about SEO meta tags.",
+    readTime: "9 min",
+    category: "SEO",
+    icon: Search,
+    color: "text-orange-400",
+    bg: "bg-orange-400/10 border-orange-400/20",
+  },
+  {
+    slug: "what-is-jwt",
+    href: "/blog/what-is-jwt",
+    title: "What is a JWT Token? JSON Web Tokens Explained for Developers",
+    description: "How JWTs work, their header-payload-signature structure, JWT vs session tokens, security best practices, and how to decode and inspect JWTs.",
+    readTime: "8 min",
+    category: "Developer",
+    icon: Key,
     color: "text-sky-400",
     bg: "bg-sky-400/10 border-sky-400/20",
   },

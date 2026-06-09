@@ -290,6 +290,57 @@ export default function CaseConverter() {
               ))}
             </div>
           </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">What is Case Conversion?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Case conversion transforms text between different naming conventions used in programming, writing, and data formatting. Different programming languages and style guides have different conventions for naming variables, functions, files, and classes. Our case converter handles all major formats instantly — paste any text and convert to your preferred case with one click.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Understanding naming conventions is essential for writing clean, consistent code. Using the wrong case format can cause runtime errors in case-sensitive languages, make code harder to read, and break APIs that expect specific formatting.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">Supported Case Formats</h2>
+            <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+              <p><strong className="text-foreground">camelCase:</strong> Words joined without spaces, first word lowercase, subsequent words capitalized. Used for variables and functions in JavaScript, Java, and most modern languages. Example: <code className="font-mono text-primary/80 bg-muted/60 px-1 rounded">myVariableName</code></p>
+              <p><strong className="text-foreground">PascalCase (UpperCamelCase):</strong> Same as camelCase but first word also capitalized. Standard for class names and components in most languages. Example: <code className="font-mono text-primary/80 bg-muted/60 px-1 rounded">MyClassName</code></p>
+              <p><strong className="text-foreground">snake_case:</strong> Words separated by underscores, all lowercase. Standard in Python, Ruby, and database column names. Example: <code className="font-mono text-primary/80 bg-muted/60 px-1 rounded">my_variable_name</code></p>
+              <p><strong className="text-foreground">SCREAMING_SNAKE_CASE:</strong> All uppercase with underscores. Used for constants and environment variables across most languages. Example: <code className="font-mono text-primary/80 bg-muted/60 px-1 rounded">MAX_RETRY_COUNT</code></p>
+              <p><strong className="text-foreground">kebab-case:</strong> Words separated by hyphens, all lowercase. Standard for CSS class names, HTML attributes, and URL slugs. Example: <code className="font-mono text-primary/80 bg-muted/60 px-1 rounded">my-css-class</code></p>
+              <p><strong className="text-foreground">dot.case:</strong> Words separated by dots. Used in configuration files, package names, and some programming contexts. Example: <code className="font-mono text-primary/80 bg-muted/60 px-1 rounded">my.config.value</code></p>
+              <p><strong className="text-foreground">Title Case:</strong> Each word capitalized. Used for headings, titles, and proper nouns in written content. Example: <code className="font-mono text-primary/80 bg-muted/60 px-1 rounded">My Article Title</code></p>
+            </div>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">When to Use Each Case</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              The right case format depends entirely on context. JavaScript developers use camelCase for variables and PascalCase for classes. Python developers use snake_case for variables and SCREAMING_SNAKE_CASE for constants. CSS developers use kebab-case for class names. Database administrators use snake_case for column and table names. URL designers use kebab-case for SEO-friendly slugs.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Our converter is especially useful when migrating data between systems, reformatting API responses, or standardizing variable names across a codebase.
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {[
+                { q: "What is the difference between camelCase and PascalCase?", a: "Both join words without spaces. camelCase starts with a lowercase letter (myVariable) while PascalCase starts with uppercase (MyVariable). PascalCase is also called UpperCamelCase." },
+                { q: "Which case should I use for JavaScript variables?", a: "JavaScript convention uses camelCase for variables and functions, PascalCase for classes and constructors, and SCREAMING_SNAKE_CASE for constants. Following these conventions makes your code more readable and idiomatic." },
+                { q: "What is kebab-case used for?", a: "Kebab-case is standard for CSS class names, HTML data attributes, URL slugs, and file names in many frontend projects. It is never used for JavaScript variables because the hyphen is a subtraction operator in JS." },
+                { q: "Can I convert multiple words at once?", a: "Yes. Paste any amount of text and the converter processes all words simultaneously. It correctly handles spaces, existing camelCase, and mixed formatting." },
+                { q: "What is snake_case used for?", a: "snake_case is the standard naming convention in Python for variables, functions, and module names. It is also widely used for database column names, configuration keys, and JSON property names in many APIs." },
+              ].map(({ q, a }) => (
+                <div key={q} className="rounded-xl border border-border/60 bg-card/40 p-4 space-y-1.5">
+                  <p className="text-sm font-semibold">{q}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{a}</p>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </MiniToolLayout>

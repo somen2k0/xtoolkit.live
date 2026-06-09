@@ -89,6 +89,9 @@ const WhatIsBase64 = lazy(() => import("@/pages/blog/what-is-base64"));
 const TwitterBioTips = lazy(() => import("@/pages/blog/twitter-bio-tips"));
 const WhatIsUuid = lazy(() => import("@/pages/blog/what-is-uuid"));
 const UrlEncodingGuide = lazy(() => import("@/pages/blog/url-encoding-guide"));
+const WhatIsRegex = lazy(() => import("@/pages/blog/what-is-regex"));
+const SeoMetaTagsGuide = lazy(() => import("@/pages/blog/seo-meta-tags-guide"));
+const WhatIsJwt = lazy(() => import("@/pages/blog/what-is-jwt"));
 // Category pages (lazy)
 const AiWritingTools = lazy(() => import("@/pages/categories/ai-writing-tools"));
 const SocialMediaTools = lazy(() => import("@/pages/categories/social-media-tools"));
@@ -222,6 +225,9 @@ function TrackedRouter() {
           <Route path="/blog/twitter-bio-tips" component={TwitterBioTips} />
           <Route path="/blog/what-is-uuid" component={WhatIsUuid} />
           <Route path="/blog/url-encoding-guide" component={UrlEncodingGuide} />
+          <Route path="/blog/what-is-regex" component={WhatIsRegex} />
+          <Route path="/blog/seo-meta-tags-guide" component={SeoMetaTagsGuide} />
+          <Route path="/blog/what-is-jwt" component={WhatIsJwt} />
 
           {/* Category landing pages */}
           <Route path="/ai-writing-tools" component={AiWritingTools} />

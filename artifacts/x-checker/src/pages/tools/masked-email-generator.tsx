@@ -40,9 +40,9 @@ const faqs = [
 const relatedTools = [
   { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Fully anonymous throwaway inbox — no account needed." },
   { title: "Temp Gmail Generator", href: "/tools/temp-mail/tempgmail", description: "Need a @gmail.com address? Generate a real temporary Gmail instantly." },
-  { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your email address for privacy risks." },
+  { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Score your email address for privacy risks." },
   { title: "Email Validator", href: "/tools/email-validator", description: "Validate email address syntax and format." },
-  { title: "Alias Email Explainer", href: "/tools/alias-email-explainer", description: "Complete guide to email aliasing services." },
+  { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Complete guide to email aliasing services." },
 ];
 
 export default function MaskedEmailGenerator() {
