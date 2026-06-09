@@ -63,7 +63,7 @@ const faqs = [
 const relatedTools = [
   { title: "Twitter Font Preview", href: "/tools/font-preview", description: "Preview text in Unicode fonts for your bio." },
   { title: "Funny Twitter Bios", href: "/tools/funny-bios", description: "40+ funny bio templates to copy." },
-  { title: "Bio Ideas Generator", href: "/tools/bio-ideas", description: "Bio templates for every niche." },
+  { title: "Bio Ideas Generator", href: "/tools/bio-generator", description: "Bio templates for every niche." },
   { title: "Character Counter", href: "/tools/character-counter", description: "Count characters for the 160-char bio limit." },
 ];
 

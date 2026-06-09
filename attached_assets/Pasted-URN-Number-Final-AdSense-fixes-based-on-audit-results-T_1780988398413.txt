@@ -1,0 +1,198 @@
+URN Number *
+
+Final AdSense fixes based on audit results.
+These are the remaining issues causing rejection.
+
+===================================================
+FIX 1 — Add /blog to main navbar (HIGH PRIORITY)
+===================================================
+
+Blog is currently only in footer. AdSense reviewer
+cannot easily find blog content. Add to navbar.
+
+In src/components/layout/Navbar.tsx:
+Add "Blog" as a top-level nav item linking to /blog
+
+Place it between "About" and the Extension button:
+Home | X Tools | Dev Tools | SEO Tools | 
+Email Tools | Temp Mail | Blog | About
+
+Style it the same as other nav items.
+
+Also add Blog to mobile navigation menu.
+
+===================================================
+FIX 2 — Add author name to About page (HIGH PRIORITY)
+===================================================
+
+E-A-T (Expertise, Authoritativeness, Trustworthiness)
+requires identifying who runs the site.
+
+In src/pages/about.tsx find the "About the
+Developer" section and replace the anonymous
+text with:
+
+"X Toolkit is built and maintained by Somen,
+an independent developer focused on building
+genuinely useful free tools for the web.
+
+Connect:
+- X/Twitter: @somen_2k → https://x.com/somen_2k
+- Email: somen.office@gmail.com
+- Telegram: @so_m_en → https://t.me/so_m_en
+- GitHub: github.com/somen2k0 → https://github.com/somen2k0"
+
+All links should use:
+target="_blank" rel="noopener noreferrer"
+
+Update meta description for /about page:
+"X Toolkit is built by Somen — a free collection
+of 44+ tools for developers, SEO professionals
+and social media managers. Learn more about the
+project and its creator."
+
+Update og:description for /about page to match.
+===================================================
+FIX 3 — Fix 11 broken internal links (HIGH PRIORITY)
+===================================================
+
+These pages still reference removed tools in their
+source code. Even though redirects exist, Google
+sees them as broken navigation.
+
+File: src/pages/blog/how-to-use-temp-email-extension.tsx line 24
+Change: /tools/email-privacy-checker
+To: /tools/masked-email-generator
+
+File: src/pages/blog/temp-gmail-explained.tsx line 24
+Change: /tools/email-privacy-checker
+To: /tools/masked-email-generator
+
+File: src/pages/blog/temp-mail-vs-gmail.tsx line 23
+Change: /tools/email-privacy-checker
+To: /tools/masked-email-generator
+
+File: src/pages/blog/why-websites-ask-email-verification.tsx line 22
+Change: /tools/email-privacy-checker
+To: /tools/masked-email-generator
+
+File: src/pages/blog/is-temp-mail-safe.tsx line 23
+Change: /tools/email-leak-checker
+To: /tools/temp-mail
+
+File: src/pages/tools/email-leak-checker.tsx lines 43-44
+Change: /tools/email-privacy-checker → /tools/masked-email-generator
+Change: /tools/spam-risk-checker → /tools/spam-score-checker
+
+File: src/pages/tools/follower-analyzer.tsx line 17
+Change: /tools/profile-audit → /tools/x-account-checker
+
+File: src/pages/tools/aesthetic-bios.tsx line 66
+Change: /tools/bio-ideas → /tools/bio-generator
+
+File: src/pages/tools/bio-ideas.tsx lines 109-110
+Change: /tools/professional-bios → /tools/bio-generator
+Change: /tools/aesthetic-bios → /tools/bio-generator
+
+File: src/pages/tools/email-username-generator.tsx line 62
+Change: /tools/email-character-counter → /tools/character-counter
+
+File: src/pages/tools/email-privacy-checker.tsx line 76
+Change: /tools/spam-risk-checker → /tools/spam-score-checker
+
+===================================================
+FIX 4 — Remove Coming Soon cards from category pages
+===================================================
+
+In src/pages/categories/CategoryLandingPage.tsx
+lines 138 and 207:
+
+Find all tool cards that show "Coming Soon" badge
+and remove them completely from the rendered output.
+
+Coming Soon tools should not be visible to visitors
+or Google's reviewer — they signal incomplete content.
+
+Search for "coming-soon" or "Coming Soon" in
+CategoryLandingPage.tsx and remove those cards.
+
+===================================================
+FIX 5 — Remove redirect stub pages from App.tsx
+===================================================
+
+In src/App.tsx lines 204-219 there are routes
+for removed pages like follower-analyzer,
+aesthetic-bios, profile-audit etc.
+
+These pages render minimal stub content before
+redirecting. Google may visit them and see thin
+content.
+
+Remove these route entries from App.tsx completely:
+- /tools/follower-analyzer
+- /tools/profile-audit
+- /tools/aesthetic-bios
+- /tools/bio-ideas
+- /tools/professional-bios
+- /tools/funny-bios (if it's a redirect stub)
+- /tools/name-ideas
+- Any other removed tool stub routes
+
+The vercel.json 301 redirects will handle these
+URLs automatically without needing React routes.
+
+Show which routes you remove and confirm
+vercel.json has matching 301 redirects for each.
+
+===================================================
+FIX 6 — Add content-to-tool ratio improvement
+===================================================
+
+Current ratio: 28 content pages : 44 tool pages
+= 0.64:1 (Google wants closer to 1:1 or better)
+
+Add a /guides page that lists all blog posts
+organized by topic. This adds one more content
+page and makes content more discoverable:
+
+Create src/pages/guides.tsx:
+- Title: "Free Guides & Tutorials | X Toolkit"
+- Description: "In-depth guides on email privacy,
+  developer tools, SEO, and social media"
+- List all 12 blog posts grouped by category:
+
+  Email & Privacy:
+  - What is Disposable Email?
+  - Is Temp Mail Safe?
+  - Temp Mail vs Gmail
+  - Best Temp Mail Services
+  - Why Websites Ask for Email Verification
+  - Temp Gmail Explained
+  - How to Use Temp Email Extension
+
+  Developer Guides:
+  - What is JSON-LD?
+  - What is Base64 Encoding?
+  - What is a UUID?
+  - URL Encoding Guide
+
+  Social Media:
+  - How to Write the Perfect Twitter Bio
+
+Add /guides route to App.tsx
+Add /guides to navbar alongside /blog
+Add /guides to footer
+Add /guides to prerender.mjs
+Add /guides to sitemap
+
+===================================================
+BUILD AND DEPLOY:
+pnpm build — confirm zero errors, 75+ pages
+git add -A
+git commit -m "AdSense final fixes: navbar blog link,
+author name, fix 11 broken links, remove stubs,
+add guides page"
+git push origin main
+
+Show ALL files changed.
+===================================================

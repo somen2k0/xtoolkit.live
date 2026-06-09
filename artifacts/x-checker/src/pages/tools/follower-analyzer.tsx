@@ -14,7 +14,7 @@ const faqs = [
 ];
 
 const relatedTools = [
-  { title: "Profile Audit", href: "/tools/profile-audit", description: "Get a full audit score for your X profile." },
+  { title: "Profile Audit", href: "/tools/x-account-checker", description: "Get a full audit score for your X profile." },
   { title: "Tweet Scheduler", href: "/tools/tweet-scheduler", description: "Plan and schedule your tweet content calendar." },
   { title: "Account Checker", href: "/tools/x-account-checker", description: "Bulk-check X account statuses in seconds." },
 ];

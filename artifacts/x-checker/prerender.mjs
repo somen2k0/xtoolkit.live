@@ -100,6 +100,14 @@ const STATIC_PAGES = [
     description:
       "Articles on temp mail, email privacy, disposable email services, and developer tools. Tips and guides from X Toolkit.",
   },
+  {
+    path: "/guides",
+    label: "Guides",
+    title: "Free Guides & Tutorials | X Toolkit",
+    description:
+      "In-depth guides on email privacy, temp mail, developer tools, URL encoding, JSON-LD, Base64, UUIDs, and social media. 12 free tutorials from X Toolkit.",
+    seoKeywords: "email privacy guide, temp mail tutorial, developer guides, url encoding, base64 explained, uuid guide, twitter bio tips, json-ld structured data",
+  },
   // Category landing pages
   {
     path: "/social-media-tools",

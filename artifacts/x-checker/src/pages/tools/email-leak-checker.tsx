@@ -40,8 +40,8 @@ const faqs = [
 
 const relatedTools = [
   { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Create anonymous aliases so future leaks are traceable." },
-  { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your email's privacy characteristics." },
-  { title: "Spam Risk Checker", href: "/tools/spam-risk-checker", description: "Check if your email pattern attracts spam bots." },
+  { title: "Email Privacy Checker", href: "/tools/masked-email-generator", description: "Score your email's privacy characteristics." },
+  { title: "Spam Risk Checker", href: "/tools/spam-score-checker", description: "Check if your email pattern attracts spam bots." },
   { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Use a throwaway address instead of your real one." },
 ];
 

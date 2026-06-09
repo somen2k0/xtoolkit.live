@@ -73,6 +73,8 @@ const PageSpeedChecker = lazy(() => import("@/pages/tools/page-speed-checker"));
 const SchemaGenerator = lazy(() => import("@/pages/tools/schema-generator"));
 const SpamScoreChecker = lazy(() => import("@/pages/tools/spam-score-checker"));
 const NewsletterTemplateGenerator = lazy(() => import("@/pages/tools/newsletter-template-generator"));
+// Guides (lazy)
+const Guides = lazy(() => import("@/pages/guides"));
 // Blog (lazy)
 const BlogIndex = lazy(() => import("@/pages/blog/index"));
 const WhatIsDisposableEmail = lazy(() => import("@/pages/blog/what-is-disposable-email"));
@@ -200,23 +202,11 @@ function TrackedRouter() {
           <Route path="/tools/bio-generator" component={BioGenerator} />
           <Route path="/tools/tweet-scheduler" component={TweetScheduler} />
 
-          {/* Redirects for removed/renamed tools */}
-          <Route path="/tools/bio-ideas">{() => <Redirect to="/tools/bio-generator" />}</Route>
-          <Route path="/tools/aesthetic-bios">{() => <Redirect to="/tools/bio-generator" />}</Route>
+          {/* Real tool — not a redirect stub */}
           <Route path="/tools/funny-bios" component={FunnyBios} />
-          <Route path="/tools/professional-bios">{() => <Redirect to="/tools/bio-generator" />}</Route>
-          <Route path="/tools/name-ideas">{() => <Redirect to="/tools/username-generator" />}</Route>
-          <Route path="/tools/backlink-analyzer">{() => <Redirect to="/tools/keyword-density" />}</Route>
-          <Route path="/tools/plain-text-formatter">{() => <Redirect to="/tools/email-tools" />}</Route>
-          <Route path="/tools/email-character-counter">{() => <Redirect to="/tools/character-counter" />}</Route>
-          <Route path="/tools/email-username-generator">{() => <Redirect to="/tools/email-tools" />}</Route>
-          <Route path="/tools/follower-analyzer">{() => <Redirect to="/tools/x-account-checker" />}</Route>
-          <Route path="/tools/profile-audit">{() => <Redirect to="/tools/x-account-checker" />}</Route>
-          <Route path="/tools/spam-risk-checker">{() => <Redirect to="/tools/spam-score-checker" />}</Route>
-          <Route path="/tools/email-privacy-checker">{() => <Redirect to="/tools/masked-email-generator" />}</Route>
-          <Route path="/tools/email-leak-checker">{() => <Redirect to="/tools/temp-mail" />}</Route>
-          <Route path="/tools/alias-email-explainer">{() => <Redirect to="/tools/masked-email-generator" />}</Route>
-          <Route path="/tools/disposable-email-guide">{() => <Redirect to="/tools/temp-mail" />}</Route>
+
+          {/* Guides */}
+          <Route path="/guides" component={Guides} />
 
           {/* Blog */}
           <Route path="/blog" component={BlogIndex} />

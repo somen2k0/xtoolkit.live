@@ -59,7 +59,7 @@ const faqs = [
 const relatedTools = [
   { title: "Subject Line Generator", href: "/tools/subject-line-generator", description: "Generate high-converting email subject lines." },
   { title: "Email Signature Generator", href: "/tools/email-signature-generator", description: "Build a professional email signature in seconds." },
-  { title: "Email Character Counter", href: "/tools/email-character-counter", description: "Count subject line and preview text characters." },
+  { title: "Email Character Counter", href: "/tools/character-counter", description: "Count subject line and preview text characters." },
 ];
 
 export default function EmailUsernameGenerator() {

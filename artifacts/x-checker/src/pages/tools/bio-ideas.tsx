@@ -106,8 +106,8 @@ const faqs = [
 
 const relatedTools = [
   { title: "Funny Twitter Bios", href: "/tools/funny-bios", description: "30+ funny bio templates to stand out with humor." },
-  { title: "Professional Twitter Bios", href: "/tools/professional-bios", description: "Polished bio templates for every industry." },
-  { title: "Aesthetic Bio Ideas", href: "/tools/aesthetic-bios", description: "Aesthetic bios with Unicode symbols and vibes." },
+  { title: "Professional Twitter Bios", href: "/tools/bio-generator", description: "Polished bio templates for every industry." },
+  { title: "Aesthetic Bio Ideas", href: "/tools/bio-generator", description: "Aesthetic bios with Unicode symbols and vibes." },
   { title: "AI Bio Generator", href: "/tools/bio-generator", description: "Generate 3 personalized bios using AI." },
 ];
 

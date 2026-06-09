@@ -10,7 +10,7 @@ import {
   Mail, ShieldCheck, Pencil, Shield, Tag, Clock,
   Minimize2, Code2, KeyRound, Regex, Database, Shuffle, ArrowLeftRight,
   ScanSearch, EyeOff, Newspaper, Calendar, Gauge, ShieldAlert, Inbox,
-  AlignLeft, QrCode, ImageIcon, Palette, Laugh,
+  AlignLeft, QrCode, ImageIcon, Palette, Laugh, BookOpen, BookMarked,
 } from "lucide-react";
 import { TOTAL_LIVE } from "@/lib/tools-registry";
 import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
@@ -404,6 +404,28 @@ export function Navbar() {
 
               <TempMailNavItem currentPath={location} />
 
+              <Link href="/blog">
+                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
+                  location.startsWith("/blog")
+                    ? "bg-background shadow-sm text-foreground"
+                    : "text-foreground hover:bg-background/60"
+                }`}>
+                  <BookOpen className="h-3.5 w-3.5 shrink-0" />
+                  Blog
+                </button>
+              </Link>
+
+              <Link href="/guides">
+                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
+                  location === "/guides"
+                    ? "bg-background shadow-sm text-foreground"
+                    : "text-foreground hover:bg-background/60"
+                }`}>
+                  <BookMarked className="h-3.5 w-3.5 shrink-0" />
+                  Guides
+                </button>
+              </Link>
+
               <Link href="/about">
                 <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
                   location === "/about"
@@ -534,6 +556,24 @@ export function Navbar() {
                   </div>
                 )}
               </div>
+
+              <Link href="/blog" onClick={closeMenu}>
+                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left nav-glow-white ${
+                  location.startsWith("/blog") ? "bg-muted/60 text-foreground" : "text-foreground hover:bg-muted/50"
+                }`}>
+                  <BookOpen className="h-4 w-4 shrink-0" />
+                  Blog
+                </button>
+              </Link>
+
+              <Link href="/guides" onClick={closeMenu}>
+                <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left nav-glow-white ${
+                  location === "/guides" ? "bg-muted/60 text-foreground" : "text-foreground hover:bg-muted/50"
+                }`}>
+                  <BookMarked className="h-4 w-4 shrink-0" />
+                  Guides
+                </button>
+              </Link>
 
               <Link href="/about" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left nav-glow-white ${

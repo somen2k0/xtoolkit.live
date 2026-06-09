@@ -21,7 +21,7 @@ export default function TempGmailExplained() {
         { title: "Temp Gmail", href: "/tools/temp-mail/tempgmail", description: "Generate a real temporary Gmail address.", icon: Mail },
         { title: "Gmail Tricks", href: "/tools/temp-mail/gmail-tricks", description: "Generate dot & plus-tag Gmail variants.", icon: Hash },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Create anonymous Gmail-compatible aliases.", icon: EyeOff },
-        { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your Gmail address for privacy.", icon: Shield },
+        { title: "Email Privacy Checker", href: "/tools/masked-email-generator", description: "Score your Gmail address for privacy.", icon: Shield },
       ]}
     >
       <h2>What Is "Temp Gmail"?</h2>

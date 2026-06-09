@@ -19,7 +19,7 @@ export default function WhyWebsitesAskEmailVerification() {
       ]}
       relatedTools={[
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Receive verification emails without your real address.", icon: Mail },
-        { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Understand your email's privacy exposure.", icon: Shield },
+        { title: "Email Privacy Checker", href: "/tools/masked-email-generator", description: "Understand your email's privacy exposure.", icon: Shield },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Create permanent anonymous forwarding aliases.", icon: EyeOff },
       ]}
     >

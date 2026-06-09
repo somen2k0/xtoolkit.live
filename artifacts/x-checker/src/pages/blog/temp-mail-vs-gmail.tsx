@@ -20,7 +20,7 @@ export default function TempMailVsGmail() {
       relatedTools={[
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a disposable inbox instantly — no signup.", icon: Mail },
         { title: "Temp Gmail", href: "/tools/temp-mail/tempgmail", description: "Get a real temporary Gmail address.", icon: Mail },
-        { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score Gmail vs other providers.", icon: Shield },
+        { title: "Email Privacy Checker", href: "/tools/masked-email-generator", description: "Score Gmail vs other providers.", icon: Shield },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Create anonymous Gmail-compatible aliases.", icon: EyeOff },
       ]}
     >

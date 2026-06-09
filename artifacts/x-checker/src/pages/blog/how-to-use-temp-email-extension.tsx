@@ -21,7 +21,7 @@ export default function HowToUseTempEmailExtension() {
         { title: "Chrome Extension", href: "/chrome-extension", description: "Free temp email extension — install in 60 seconds.", icon: Download },
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Web-based disposable inbox, no install needed.", icon: Mail },
         { title: "Temp Gmail", href: "/tools/temp-mail/tempgmail", description: "Generate a real @gmail.com temp address.", icon: Mail },
-        { title: "Email Privacy Checker", href: "/tools/email-privacy-checker", description: "Score your email across 7 privacy factors.", icon: Shield },
+        { title: "Email Privacy Checker", href: "/tools/masked-email-generator", description: "Score your email across 7 privacy factors.", icon: Shield },
       ]}
     >
       <h2>What Is a Temp Email Chrome Extension?</h2>

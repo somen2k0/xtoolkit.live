@@ -73,7 +73,7 @@ const faqs = [
 
 const relatedTools = [
   { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate anonymous email aliases." },
-  { title: "Spam Risk Checker", href: "/tools/spam-risk-checker", description: "Check if your email pattern attracts spam." },
+  { title: "Spam Risk Checker", href: "/tools/spam-score-checker", description: "Check if your email pattern attracts spam." },
   { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Anonymous throwaway inbox — no signup." },
   { title: "Email Validator", href: "/tools/email-validator", description: "Validate email address syntax instantly." },
 ];

@@ -133,15 +133,9 @@ export function CategoryLandingPage({ config }: { config: CategoryPageConfig }) 
                 <div className={`h-12 w-12 rounded-xl border flex items-center justify-center shadow-sm ${bg}`}>
                   <Icon className={`h-6 w-6 ${color}`} />
                 </div>
-                {comingSoon ? (
-                  <Badge variant="outline" className="border-muted-foreground/30 text-muted-foreground text-xs">
-                    Coming Soon
-                  </Badge>
-                ) : (
-                  <Badge variant="outline" className={`border-current/30 bg-current/5 text-xs font-medium ${color}`}>
-                    {liveTools.length} Free {liveTools.length === 1 ? "Tool" : "Tools"}
-                  </Badge>
-                )}
+                <Badge variant="outline" className={`border-current/30 bg-current/5 text-xs font-medium ${color}`}>
+                  {liveTools.length} Free {liveTools.length === 1 ? "Tool" : "Tools"}
+                </Badge>
               </div>
 
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">{title}</h1>
@@ -204,23 +198,6 @@ export function CategoryLandingPage({ config }: { config: CategoryPageConfig }) 
           </section>
         )}
 
-        {/* Coming Soon placeholder */}
-        {comingSoon && (
-          <section className="py-12 md:py-16 text-center">
-            <div className="rounded-2xl border border-border/60 bg-card/40 p-10 md:p-14">
-              <div className={`h-14 w-14 rounded-xl border mx-auto mb-4 flex items-center justify-center ${bg}`}>
-                <Icon className={`h-7 w-7 ${color}`} />
-              </div>
-              <h2 className="text-xl font-bold mb-2">These tools are on their way</h2>
-              <p className="text-muted-foreground text-sm max-w-md mx-auto mb-6">
-                We're actively building this category. Subscribe below to get notified the moment they go live.
-              </p>
-              <Link href="/tools">
-                <Button variant="outline" className="border-border/60">Browse available tools →</Button>
-              </Link>
-            </div>
-          </section>
-        )}
 
         {/* ── What Are These Tools ── */}
         <section className="py-12 border-t border-border/50">

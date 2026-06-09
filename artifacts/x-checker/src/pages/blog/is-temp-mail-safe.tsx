@@ -20,7 +20,7 @@ export default function IsTempMailSafe() {
       relatedTools={[
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Anonymous throwaway inbox — free, no signup.", icon: Mail },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous email aliases.", icon: Shield },
-        { title: "Email Leak Checker", href: "/tools/email-leak-checker", description: "Understand how email leaks happen.", icon: AlertTriangle },
+        { title: "Email Leak Checker", href: "/tools/temp-mail/tempemail", description: "Understand how email leaks happen.", icon: AlertTriangle },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Create permanent anonymous aliases.", icon: EyeOff },
       ]}
     >
