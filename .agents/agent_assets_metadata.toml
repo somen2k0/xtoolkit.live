@@ -210,3 +210,9 @@ id = "QWqF8Pv18qSvx8Jg9nnc9"
 uri = "file://adsense-audit.csv"
 type = "table"
 title = "AdSense Audit — Full 44-Question Results"
+
+[[outputs]]
+id = "nZgVcUUvpy6zU-Juz-uOx"
+uri = "file://adsense-audit-results.csv"
+type = "table"
+title = "AdSense Diagnostic Audit Results — xtoolkit.live"
