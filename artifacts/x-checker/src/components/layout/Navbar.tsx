@@ -207,7 +207,7 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap ${category.glowClass} ${
+        className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap ${category.glowClass} ${
           isActive
             ? `${category.activeBg} ${category.color} nav-active-pulse`
             : `${category.color} hover:${category.bg}`
@@ -252,7 +252,7 @@ function TempMailNavItem({ currentPath }: { currentPath: string }) {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-teal ${
+        className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-teal ${
           isActive
             ? "bg-teal-500/10 text-teal-400 nav-active-pulse"
             : "text-teal-400 hover:bg-teal-500/10"
@@ -388,7 +388,7 @@ export function Navbar() {
           <div className="hidden md:flex flex-1 items-center justify-center">
             <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-muted/50 border border-violet-500/15 shadow-inner shadow-black/[0.08] dark:shadow-black/30">
               <Link href="/">
-                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
+                <button className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
                   location === "/"
                     ? "bg-background shadow-sm text-foreground"
                     : "text-foreground hover:bg-background/60"
@@ -405,7 +405,7 @@ export function Navbar() {
               <TempMailNavItem currentPath={location} />
 
               <Link href="/blog">
-                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
+                <button className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
                   location.startsWith("/blog")
                     ? "bg-background shadow-sm text-foreground"
                     : "text-foreground hover:bg-background/60"
@@ -416,7 +416,7 @@ export function Navbar() {
               </Link>
 
               <Link href="/guides">
-                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
+                <button className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
                   location === "/guides"
                     ? "bg-background shadow-sm text-foreground"
                     : "text-foreground hover:bg-background/60"
@@ -427,7 +427,7 @@ export function Navbar() {
               </Link>
 
               <Link href="/about">
-                <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[13px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
+                <button className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
                   location === "/about"
                     ? "bg-background shadow-sm text-foreground"
                     : "text-foreground hover:bg-background/60"
