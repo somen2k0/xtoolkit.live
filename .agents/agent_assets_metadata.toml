@@ -222,3 +222,9 @@ id = "m1g6YIQrvOhz9LZyojl0Y"
 uri = "file://adsense-fixes-audit.csv"
 type = "table"
 title = "AdSense Fixes Audit Report"
+
+[[outputs]]
+id = "0yA0K2vttj3nSWFOo4Fc9"
+uri = "file://xtoolkit-full-site-audit.csv"
+type = "table"
+title = "XToolkit — Full Site Audit (65 issues)"
