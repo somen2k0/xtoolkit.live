@@ -279,6 +279,11 @@ export default function CssMinifier() {
         </div>
 
         <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">CSS Minification vs CSS Compression — Key Difference</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">CSS minification and CSS compression are two distinct optimizations that work at different levels. Minification removes unnecessary characters from the source code itself — spaces, line breaks, comments, and redundant semicolons — reducing the file before it leaves your server. Compression (gzip or Brotli) is applied at the HTTP transport layer: the web server compresses the file on the fly before sending it to the browser, which decompresses it upon receipt. Both reduce the bytes transferred over the network, but they are complementary rather than redundant. A minified CSS file compresses more efficiently than an unminified one because its reduced character variety and shorter structure respond better to the patterns that compression algorithms exploit. For maximum performance, use both: minify your CSS during the build process, then serve it with gzip or Brotli enabled on your web server or CDN.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
           <h2 className="text-lg font-semibold">CSS Minification in Build Pipelines</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">In modern frontend development, CSS minification is typically automated as part of a build pipeline rather than done manually. Build tools like Vite, Webpack, Parcel, and Rollup integrate CSS minifiers — usually esbuild, cssnano, or Lightning CSS — that automatically minify all stylesheets when you run a production build. Developers write clean, readable CSS with comments and whitespace during development, and the build tool handles optimization before deployment. For teams, this ensures consistency across every release and removes the need to remember a manual step.</p>
         </div>

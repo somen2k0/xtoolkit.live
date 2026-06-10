@@ -216,3 +216,9 @@ id = "nZgVcUUvpy6zU-Juz-uOx"
 uri = "file://adsense-audit-results.csv"
 type = "table"
 title = "AdSense Diagnostic Audit Results — xtoolkit.live"
+
+[[outputs]]
+id = "m1g6YIQrvOhz9LZyojl0Y"
+uri = "file://adsense-fixes-audit.csv"
+type = "table"
+title = "AdSense Fixes Audit Report"

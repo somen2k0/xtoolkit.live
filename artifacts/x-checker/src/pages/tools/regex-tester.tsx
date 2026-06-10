@@ -316,6 +316,41 @@ export default function RegexTester() {
         </div>
 
         <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Regex Metacharacters Explained</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Regex patterns are built from a combination of literal characters and metacharacters — special symbols that carry meaning beyond their literal value. Understanding the core metacharacters is the key to reading and writing regular expressions confidently.</p>
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p><strong className="text-foreground/80">Quantifiers</strong> control how many times the preceding element can match. The asterisk (*) means zero or more, the plus (+) means one or more, and the question mark (?) means zero or one (making the element optional). Adding a curly-brace range like {"{2,5}"} matches a specific count range — "between 2 and 5 times." Appending ? to any quantifier makes it lazy (matches as few characters as possible) rather than greedy (the default, which matches as many as possible).</p>
+            <p><strong className="text-foreground/80">Character classes</strong> match any single character from a defined set. Square brackets define a class: [aeiou] matches any vowel. A caret inside the brackets negates it: [^aeiou] matches any character that is not a vowel. Ranges like [a-z] and [0-9] are shorthand for all lowercase letters and all digits respectively. Common shorthand classes include \d (any digit), \w (any word character — letters, digits, underscore), and \s (any whitespace character).</p>
+            <p><strong className="text-foreground/80">Anchors and boundaries</strong> match positions rather than characters. The caret (^) anchors the match to the start of the string (or start of each line in multiline mode). The dollar sign ($) anchors to the end. The word boundary \b matches the position between a word character and a non-word character — making it possible to match whole words without matching substrings inside longer words.</p>
+            <p><strong className="text-foreground/80">Groups and alternation</strong> are formed with parentheses. A capturing group (pattern) extracts the matched text for use in replacements or programmatic access. A non-capturing group (?:pattern) groups without capturing, useful for applying quantifiers to multiple tokens. The pipe character (|) represents alternation — either the left or right side must match, like (cat|dog) which matches either "cat" or "dog".</p>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">When to Use Regex vs String Methods</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Regex is a powerful tool but not always the right one. For simple, fixed-string operations — checking if a string starts with a prefix, splitting on a known delimiter, or checking exact equality — plain string methods like includes(), startsWith(), split(), and indexOf() are clearer, faster, and easier to maintain. Regex becomes the right choice when the pattern is variable, when you need to match across multiple formats simultaneously (e.g., phone numbers in 10 different formats), when you need to extract capture groups, or when you're processing large volumes of text and need the expressiveness of pattern matching. Over-using regex for simple string operations is a common source of bugs and maintainability problems — if a string method can solve the problem clearly, prefer it over a complex regular expression.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {[
+              { q: "Why is my regex matching too much?", a: "This is usually caused by greedy quantifiers. By default, * and + match as many characters as possible. For example, the pattern <.+> applied to <b>hello</b> matches the entire string rather than just <b>. Adding ? after the quantifier (<.+?>) makes it lazy, matching as little as possible. You can also be more explicit about what the quantifier should match: <[^>]+> matches one or more characters that are not >, which is safer for HTML-like patterns." },
+              { q: "What is the difference between test() and match() in JavaScript?", a: "test() returns a boolean — true if the pattern matches, false if not. It is the fastest option when you only need to know whether a match exists. match() returns an array of matches (or null if no match), including any captured groups. Use test() for validation and match() when you need to extract the matched text or capture groups." },
+              { q: "How do I match a literal dot, asterisk, or other special character?", a: "Escape the special character with a backslash. In a regex, a dot (.) matches any character, but \\. matches only a literal period. Similarly, \\* matches a literal asterisk, \\+ matches a literal plus, and so on. Any of the following characters need escaping when used literally: . * + ? ^ $ { } [ ] | ( ) \\." },
+              { q: "What is a lookahead and how do I use it?", a: "A lookahead is a zero-width assertion — it checks what follows the current position without consuming characters. A positive lookahead (?=pattern) asserts that the pattern must follow. A negative lookahead (?!pattern) asserts it must not follow. For example, \\w+(?=\\s) matches a word only when followed by whitespace, without including the whitespace in the match. Lookaheads are commonly used in password validation patterns." },
+              { q: "Can I use regex across multiple lines?", a: "By default, the dot (.) does not match newline characters, and ^ and $ match only the start and end of the entire string. Enabling the multiline flag (m) makes ^ and $ match the start and end of each line. Enabling the dotAll flag (s) makes the dot match newline characters too. The tester above supports both flags — enable them in the flags section to test multiline patterns." },
+              { q: "How do I make my regex case-insensitive?", a: "Add the case-insensitive flag (i) to your regex. With the i flag, the pattern [a-z] also matches uppercase letters, and specific letters like 'cat' match 'CAT', 'Cat', 'cAt', and all other case combinations. In JavaScript: /pattern/i or new RegExp('pattern', 'i'). The tester above lets you toggle the i flag with a single click." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
           <h2 className="text-lg font-semibold">Common Regex Patterns Reference</h2>
           <div className="space-y-4">
             {[

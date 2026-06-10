@@ -1,0 +1,68 @@
+Fix #,Category,Check Item,Status,Detail,File / Location
+FIX 1,Thin Content,qr-code-generator word count (target 800+),PASS,1307 words,artifacts/x-checker/src/pages/tools/qr-code-generator.tsx
+FIX 1,Thin Content,color-picker word count (target 800+),PASS,1157 words,artifacts/x-checker/src/pages/tools/color-picker.tsx
+FIX 1,Thin Content,password-generator word count (target 800+),PASS,1099 words,artifacts/x-checker/src/pages/tools/password-generator.tsx
+FIX 1,Thin Content,css-minifier word count (target 800+),PASS,916 words,artifacts/x-checker/src/pages/tools/css-minifier.tsx
+FIX 1,Thin Content,image-compressor word count (target 800+),PASS,1172 words,artifacts/x-checker/src/pages/tools/image-compressor.tsx
+FIX 1,Thin Content,uuid-generator word count (target 800+),PASS,924 words,artifacts/x-checker/src/pages/tools/uuid-generator.tsx
+FIX 1,Thin Content,regex-tester word count (target 800+),PASS,1061 words,artifacts/x-checker/src/pages/tools/regex-tester.tsx
+FIX 1,Thin Content,qr-code-generator — QR Code vs Barcode section added,PASS,2 paragraphs added,artifacts/x-checker/src/pages/tools/qr-code-generator.tsx
+FIX 1,Thin Content,qr-code-generator — Industries Using QR Codes section added,PASS,5 industry paragraphs (restaurant / retail / healthcare / ticketing / real estate),artifacts/x-checker/src/pages/tools/qr-code-generator.tsx
+FIX 1,Thin Content,qr-code-generator — 2 new FAQ items added,PASS,"offline scanning Q&A + static vs dynamic Q&A",artifacts/x-checker/src/pages/tools/qr-code-generator.tsx
+FIX 1,Thin Content,color-picker — Color Psychology section added,PASS,2 paragraphs (blue/red/green/yellow + cultural variation),artifacts/x-checker/src/pages/tools/color-picker.tsx
+FIX 1,Thin Content,color-picker — Popular Color Palettes section added,PASS,1 paragraph (monochromatic / neutral+accent / earth tones / dark mode),artifacts/x-checker/src/pages/tools/color-picker.tsx
+FIX 1,Thin Content,color-picker — 2 new FAQ items added,PASS,"RGB vs CMYK + how to choose colors Q&As",artifacts/x-checker/src/pages/tools/color-picker.tsx
+FIX 1,Thin Content,password-generator — How Password Crackers Work section added,PASS,"3 paragraphs: brute force / dictionary attacks / rainbow tables",artifacts/x-checker/src/pages/tools/password-generator.tsx
+FIX 1,Thin Content,password-generator — 1 new FAQ item added,PASS,Password entropy explanation,artifacts/x-checker/src/pages/tools/password-generator.tsx
+FIX 1,Thin Content,css-minifier — CSS Minification in Build Pipelines section added,PASS,1 paragraph (Vite / Webpack / Parcel / esbuild / cssnano),artifacts/x-checker/src/pages/tools/css-minifier.tsx
+FIX 1,Thin Content,css-minifier — CSS vs JS vs HTML Minification section added,PASS,1 paragraph (comparison of all three types),artifacts/x-checker/src/pages/tools/css-minifier.tsx
+FIX 1,Thin Content,css-minifier — CSS Minification vs CSS Compression section added,PASS,1 paragraph (minification vs gzip/Brotli distinction — direct answer to spec FAQ),artifacts/x-checker/src/pages/tools/css-minifier.tsx
+FIX 1,Thin Content,css-minifier — 2 new FAQ items added,PASS,"Sass/Less workflow Q&A + compression vs minification Q&A",artifacts/x-checker/src/pages/tools/css-minifier.tsx
+FIX 1,Thin Content,image-compressor — Image Compression for Core Web Vitals section added,PASS,1 paragraph (LCP impact),artifacts/x-checker/src/pages/tools/image-compressor.tsx
+FIX 1,Thin Content,image-compressor — WebP vs JPEG vs PNG section added,PASS,1 paragraph (format comparison),artifacts/x-checker/src/pages/tools/image-compressor.tsx
+FIX 1,Thin Content,image-compressor — 2 new FAQ items added,PASS,"compression ratio target Q&A + WebP conversion Q&A",artifacts/x-checker/src/pages/tools/image-compressor.tsx
+FIX 1,Thin Content,uuid-generator — UUID in Different Programming Languages section added,PASS,"3 paragraphs: JavaScript / Python / Go",artifacts/x-checker/src/pages/tools/uuid-generator.tsx
+FIX 1,Thin Content,uuid-generator — UUID Storage in Databases section added,PASS,2 paragraphs (VARCHAR vs BINARY + index fragmentation / UUID v7),artifacts/x-checker/src/pages/tools/uuid-generator.tsx
+FIX 1,Thin Content,uuid-generator — 4 new FAQ items added,PASS,"UUID as URL slug / case sensitivity / public URL safety / NIL UUID",artifacts/x-checker/src/pages/tools/uuid-generator.tsx
+FIX 1,Thin Content,regex-tester — Common Regex Patterns Reference section added,PASS,"5 patterns: email / URL / US phone / YYYY-MM-DD date / strong password",artifacts/x-checker/src/pages/tools/regex-tester.tsx
+FIX 1,Thin Content,regex-tester — Regex Metacharacters Explained section added,PASS,"4 paragraphs: quantifiers / character classes / anchors / groups & alternation",artifacts/x-checker/src/pages/tools/regex-tester.tsx
+FIX 1,Thin Content,regex-tester — When to Use Regex vs String Methods section added,PASS,1 paragraph (practical guidance),artifacts/x-checker/src/pages/tools/regex-tester.tsx
+FIX 1,Thin Content,regex-tester — Full FAQ section added,PASS,"6 Q&As: greedy matching / test() vs match() / escaping / lookaheads / multiline / case-insensitive",artifacts/x-checker/src/pages/tools/regex-tester.tsx
+FIX 2,Zombie Routes,/tools/alias-email-explainer absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/disposable-email-guide absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/bio-ideas absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/aesthetic-bios absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/professional-bios absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/name-ideas absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/plain-text-formatter absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/email-character-counter absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/email-username-generator absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/email-ab-tester absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/follower-analyzer absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/email-privacy-checker absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/spam-risk-checker absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,/tools/email-leak-checker absent from App.tsx SPA routes,PASS,Route never existed in App.tsx — confirmed via grep (0 matches),artifacts/x-checker/src/App.tsx
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/alias-email-explainer,PASS,→ /tools/masked-email-generator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/disposable-email-guide,PASS,→ /tools/temp-mail (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/bio-ideas,PASS,→ /tools/bio-generator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/aesthetic-bios,PASS,→ /tools/bio-generator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/professional-bios,PASS,→ /tools/bio-generator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/name-ideas,PASS,→ /tools/username-generator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/plain-text-formatter,PASS,→ /tools/email-signature-generator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/email-character-counter,PASS,→ /tools/character-counter (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/email-username-generator,PASS,→ /tools/email-validator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/email-ab-tester,PASS,→ /tools/subject-line-generator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/follower-analyzer,PASS,→ /tools/x-account-checker (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/email-privacy-checker,PASS,→ /tools/masked-email-generator (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/spam-risk-checker,PASS,→ /tools/spam-score-checker (permanent),vercel.json
+FIX 2,Zombie Routes,vercel.json 301 redirect — /tools/email-leak-checker,PASS,→ /tools/temp-mail (permanent),vercel.json
+FIX 3,Noindex,noindex prop added to SeoHead call in pricing.tsx,PASS,Line 134: noindex attribute present,artifacts/x-checker/src/pages/pricing.tsx
+FIX 3,Noindex,SeoHead.tsx updated to support noindex prop,PASS,"Injects <meta name=""robots"" content=""noindex, nofollow""> on mount; removes on unmount",artifacts/x-checker/src/components/SeoHead.tsx
+FIX 3,Noindex,noindex added to SeoHead interface (TypeScript type-safe),PASS,noindex?: boolean in SeoHeadProps interface — 0 TS errors,artifacts/x-checker/src/components/SeoHead.tsx
+FIX 4,Spam Patterns,src/lib/spam-patterns.ts created,PASS,"Exports SPAMMY_PATTERNS as const array (11 terms)",artifacts/x-checker/src/lib/spam-patterns.ts
+FIX 4,Spam Patterns,backlink-analyzer.tsx imports from @/lib/spam-patterns,PASS,Line 8: import { SPAMMY_PATTERNS } from '@/lib/spam-patterns',artifacts/x-checker/src/pages/tools/backlink-analyzer.tsx
+FIX 4,Spam Patterns,Inline SPAMMY_PATTERNS array removed from backlink-analyzer.tsx,PASS,No inline array present — confirmed via grep,artifacts/x-checker/src/pages/tools/backlink-analyzer.tsx
+FIX 5,Affiliate Disclosure,Affiliate disclosure text present above tool cards in AffiliateSection.tsx,PASS,"Line 90: ""Recommended tools — we have no affiliate relationship with these products and receive no compensation for recommendations.""",artifacts/x-checker/src/components/monetization/AffiliateSection.tsx
+FIX 5,Affiliate Disclosure,Disclosure rendered above card grid (visible to users and Google reviewer),PASS,Disclosure <p> element is placed before <div className=""grid ..."">,artifacts/x-checker/src/components/monetization/AffiliateSection.tsx
+BUILD,Verification,TypeScript typecheck — @workspace/x-checker,PASS,0 errors (pnpm --filter @workspace/x-checker run typecheck),artifacts/x-checker/
+BUILD,Verification,Pre-existing extension TS errors (unrelated to AdSense fixes),NOTE,"3 errors in artifacts/x-toolkit-extension — unrelated to these fixes (service-worker.ts + 2 unused imports); pre-existed before this session",artifacts/x-toolkit-extension/

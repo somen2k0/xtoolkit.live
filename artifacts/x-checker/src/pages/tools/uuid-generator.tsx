@@ -227,6 +227,28 @@ export default function UuidGenerator() {
         </div>
 
         <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">UUID Storage in Databases</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">How you store UUIDs in a database affects both storage size and query performance. There are two common approaches: storing as a string (VARCHAR 36) or storing as a binary value (BINARY 16). The string form (e.g., "550e8400-e29b-41d4-a716-446655440000") is human-readable and easy to debug but uses 36 bytes versus just 16 bytes for the binary representation — a 55% space saving that matters at scale. PostgreSQL has a dedicated UUID type that stores the value efficiently in 16 bytes while presenting it in the familiar hyphenated string format. MySQL lacks a native UUID type but supports BINARY(16) with UUIDs stored using UNHEX(REPLACE(uuid,'-','')).</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">The bigger performance concern with UUID v4 is index fragmentation. Because v4 UUIDs are randomly distributed, each insert lands at a random position in the B-tree index rather than at the end. This causes frequent page splits and index fragmentation over millions of rows, degrading INSERT performance. UUID v7 (a newer standard) addresses this by prefixing the UUID with a millisecond timestamp, making them time-ordered and dramatically reducing fragmentation while retaining uniqueness guarantees. If you are building a new high-volume system, consider UUID v7 over v4 for primary keys.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {[
+              { q: "Are UUIDs case sensitive?", a: "No. UUID values are case-insensitive — the lowercase form (550e8400-e29b-41d4-a716-446655440000) and the uppercase form refer to the same identifier. Most systems and style guides standardize on lowercase for consistency. Our generator outputs lowercase UUIDs following the most widely accepted convention." },
+              { q: "Is it safe to expose UUIDs in public URLs?", a: "Yes. UUID v4 values reveal nothing about your system — they contain no timestamp, no server information, and no sequential pattern. They are safe to use in public URLs, API endpoints, and client-facing identifiers. Unlike sequential integer IDs, UUIDs cannot be guessed or enumerated, which provides an additional layer of security for resource access." },
+              { q: "What is the NIL UUID?", a: "The NIL UUID is a special UUID where all 128 bits are set to zero: 00000000-0000-0000-0000-000000000000. It is used as a sentinel or null value in contexts where a UUID is required but no meaningful value exists — similar to null in other contexts. It should never be used as a real identifier since it is not unique." },
+            ].map(({ q, a }) => (
+              <div key={q} className="space-y-1.5">
+                <p className="text-sm font-semibold text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
           <h2 className="text-lg font-semibold">UUID in Different Programming Languages</h2>
           <div className="space-y-3 text-sm text-muted-foreground">
             <p><strong className="text-foreground/80">JavaScript / Node.js:</strong> The built-in <code className="text-xs font-mono bg-muted/60 rounded px-1">crypto.randomUUID()</code> method generates UUID v4 natively in all modern browsers and Node.js 14.17+, with no packages required. For older environments or additional UUID versions, the <code className="text-xs font-mono bg-muted/60 rounded px-1">uuid</code> npm package provides a full-featured alternative.</p>
