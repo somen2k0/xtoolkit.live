@@ -216,12 +216,22 @@ export default function UuidGenerator() {
               { q: "Can two UUIDs ever be the same?", a: "Theoretically yes, but practically impossible. The probability of generating a duplicate UUID v4 is approximately 1 in 5.3 undecillion (5.3 × 10³⁶). You'd need to generate about 1 billion UUIDs per second for 85 years to have a 50% chance of a single collision." },
               { q: "Should I use UUID or auto-increment for database IDs?", a: "UUIDs are better for distributed systems, microservices, and APIs where you need to generate IDs before inserting to a database. They also prevent enumeration attacks. Auto-increment integers are simpler and more performant for small-to-medium single-database applications where these concerns don't apply." },
               { q: "What is a GUID? Is it the same as UUID?", a: "GUID (Globally Unique Identifier) is Microsoft's term for UUID. They are the same specification with different names — GUIDs use the same 128-bit format and generation algorithm as UUIDs. You'll see GUID used in Microsoft documentation (.NET, SQL Server, Azure) and UUID everywhere else." },
+              { q: "Can I use UUID as a URL slug?", a: "Technically yes, but it's not recommended for public-facing URLs. UUIDs are 36 characters and not human-readable — they make poor URLs from both a usability and SEO perspective. For database primary keys and internal identifiers, UUIDs are excellent. For public URLs, consider a descriptive slug combined with a short random suffix (e.g., my-article-title-a3f9b2) for uniqueness without sacrificing readability." },
             ].map(({ q, a }) => (
               <div key={q} className="space-y-1.5">
                 <p className="text-sm font-semibold text-foreground/80">{q}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">UUID in Different Programming Languages</h2>
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p><strong className="text-foreground/80">JavaScript / Node.js:</strong> The built-in <code className="text-xs font-mono bg-muted/60 rounded px-1">crypto.randomUUID()</code> method generates UUID v4 natively in all modern browsers and Node.js 14.17+, with no packages required. For older environments or additional UUID versions, the <code className="text-xs font-mono bg-muted/60 rounded px-1">uuid</code> npm package provides a full-featured alternative.</p>
+            <p><strong className="text-foreground/80">Python:</strong> The standard library includes a <code className="text-xs font-mono bg-muted/60 rounded px-1">uuid</code> module with no installation required. <code className="text-xs font-mono bg-muted/60 rounded px-1">import uuid; str(uuid.uuid4())</code> generates a UUID v4 string. The module also supports v1, v3, and v5. Django's <code className="text-xs font-mono bg-muted/60 rounded px-1">UUIDField</code> uses this module internally for UUID primary keys.</p>
+            <p><strong className="text-foreground/80">Go:</strong> The <code className="text-xs font-mono bg-muted/60 rounded px-1">github.com/google/uuid</code> package is the community standard. After installing with <code className="text-xs font-mono bg-muted/60 rounded px-1">go get github.com/google/uuid</code>, generate a v4 UUID with <code className="text-xs font-mono bg-muted/60 rounded px-1">uuid.New().String()</code>. Go's standard library does not include a UUID generator, so the Google package is the default choice for most Go projects.</p>
           </div>
         </div>
       </div>

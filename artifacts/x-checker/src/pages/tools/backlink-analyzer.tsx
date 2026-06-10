@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link2, Copy, AlertCircle, CheckCircle2, XCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useToolView } from "@/hooks/use-track";
+import { SPAMMY_PATTERNS } from "@/lib/spam-patterns";
 
 const faqs = [
   { q: "What is a backlink?", a: "A backlink is a hyperlink from one website pointing to another. Backlinks are one of Google's most important ranking factors. A link from a high-authority domain like a major news site is worth far more than hundreds of links from low-quality sites." },
@@ -45,7 +46,6 @@ function getTld(domain: string): string {
 }
 
 const QUALITY_TLDS = new Set(["com", "org", "net", "edu", "gov", "io", "co", "uk", "de", "fr", "ca", "au"]);
-const SPAMMY_PATTERNS = ["casino", "poker", "bet", "loan", "pills", "pharma", "viagra", "xxx", "porn", "adult", "gambling"];
 
 function analyzeBacklink(raw: string): BacklinkResult {
   const parts = raw.split(/\s+/);

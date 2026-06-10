@@ -273,12 +273,31 @@ export default function QrCodeGenerator() {
               { q: "Can I customize the colors of a QR code?", a: "Yes. Our generator allows you to change the foreground and background colors. Always ensure sufficient contrast between foreground and background for reliable scanning." },
               { q: "What is the maximum amount of data a QR code can store?", a: "A QR code can store up to 4,296 alphanumeric characters, 7,089 numeric characters, or 2,953 bytes of binary data. For URLs, this is more than enough for any standard web address." },
               { q: "Can QR codes be scanned from a screen?", a: "Yes. QR codes work equally well when displayed on screens or printed on paper. Most modern smartphones can scan QR codes directly from other screens without any special app." },
+              { q: "Can I use a QR code without internet access?", a: "Yes. Static QR codes encode data directly into the pattern itself — decoding happens entirely on-device. However, if the encoded content is a URL pointing to an online resource, an internet connection is needed to open that destination after scanning." },
+              { q: "What is the difference between static and dynamic QR codes?", a: "Static QR codes encode data permanently — once generated, the destination cannot be changed without reprinting. Dynamic QR codes use a short redirect URL that can be updated to point to a different destination later, letting you change what a printed code does without reprinting. Dynamic codes require a paid third-party service." },
             ].map(({ q, a }) => (
               <div key={q} className="space-y-1.5">
                 <p className="text-sm font-semibold text-foreground/80">{q}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">QR Code vs Barcode — Key Differences</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">QR codes and traditional barcodes both encode machine-readable information, but they work very differently. Traditional 1D barcodes encode data only horizontally — in lines of varying width — limiting capacity to around 20–30 characters, typically just a product ID or SKU. QR codes are two-dimensional, encoding data both horizontally and vertically, allowing them to store up to 4,296 alphanumeric characters including full URLs, contact cards, and free-form text.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">QR codes also include built-in error correction that barcodes lack — up to 30% of a QR code can be damaged or obscured and it will still scan correctly, which is why logos can be placed in the center without breaking functionality. Barcodes require a clean, undamaged scan line. For consumer-facing applications, QR codes are almost always preferable since any modern smartphone camera can scan them without a dedicated scanner device.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Industries Using QR Codes</h2>
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p><strong className="text-foreground/80">Restaurants and food service:</strong> QR code menus became widespread during the pandemic and remain popular because they eliminate reprinting costs, allow real-time menu updates, and link customers to allergen information, nutritional data, and online ordering — all from a single code on each table.</p>
+            <p><strong className="text-foreground/80">Retail and e-commerce:</strong> Retailers use QR codes on shelf labels to direct customers to product reviews, comparison pages, and alternative options. In packaging, QR codes link to warranty registration, tutorial videos, and reorder pages — turning a one-time sale into a lasting customer relationship.</p>
+            <p><strong className="text-foreground/80">Healthcare:</strong> Hospitals and pharmacies use QR codes on patient wristbands, prescription bottles, and medical equipment for instant access to patient records, dosage instructions, and drug interaction data — reducing errors and speeding clinical workflows.</p>
+            <p><strong className="text-foreground/80">Event ticketing:</strong> QR codes have replaced physical tickets at concerts, conferences, and sporting events. Each code is unique to the ticket holder, scans in under a second at the gate, and can be invalidated instantly if reported lost or used fraudulently.</p>
+            <p><strong className="text-foreground/80">Real estate:</strong> Property listings use QR codes on yard signs and print ads to link potential buyers to virtual tours, floor plans, and full listing details — giving buyers immediate access to information without requiring an agent present.</p>
           </div>
         </div>
       </div>

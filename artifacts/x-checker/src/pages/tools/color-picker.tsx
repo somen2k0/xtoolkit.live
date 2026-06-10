@@ -317,6 +317,8 @@ export default function ColorPicker() {
               { q: "How do I check if my colors meet accessibility requirements?", a: "Use our built-in contrast checker. Enter your text color and background color and it shows the contrast ratio with WCAG AA and AAA pass/fail status." },
               { q: "What is HSL and why is it useful?", a: "HSL (Hue, Saturation, Lightness) is the most intuitive color format. It lets you easily create color variations — adjust lightness to make tints and shades, adjust saturation to make colors more or less vibrant." },
               { q: "Can I use HEX colors in all browsers?", a: "Yes. HEX color codes are supported in all modern browsers and have been since the earliest days of the web. They are the most universally compatible color format." },
+              { q: "What is the difference between RGB and CMYK?", a: "RGB (Red, Green, Blue) is an additive color model used for screens — colors are produced by combining light. CMYK (Cyan, Magenta, Yellow, Key/Black) is a subtractive model used in printing — colors are produced by absorbing light with ink. A color that looks vivid on screen may appear duller when printed because CMYK has a smaller gamut than RGB displays." },
+              { q: "How do I choose colors that look good together?", a: "Start with a primary brand color, then apply color theory relationships: a complementary color (opposite on the color wheel) for high-contrast elements like calls-to-action, analogous colors (adjacent on the wheel) for supporting elements, and neutrals for backgrounds and body text. The 60-30-10 rule — 60% dominant, 30% secondary, 10% accent — produces balanced compositions." },
             ].map(({ q, a }) => (
               <div key={q} className="space-y-1.5">
                 <p className="text-sm font-semibold text-foreground/80">{q}</p>
@@ -324,6 +326,17 @@ export default function ColorPicker() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Color Psychology in Web Design</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Colors carry powerful psychological associations that shape how visitors perceive a brand before they read a single word. Blue conveys trust, reliability, and professionalism — it dominates banking, healthcare, and technology brands for this reason. Red creates urgency, energy, and passion, making it effective for sale banners, error states, and high-priority calls-to-action. Green is associated with nature, growth, and safety — used widely in sustainability brands, financial apps (to signal positive returns), and healthcare. Yellow suggests optimism and creativity but is hard to read at small sizes on white backgrounds.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">These associations vary by culture and should not be applied universally. White represents purity and minimalism in Western design but is associated with mourning in some Asian cultures. Red symbolizes luck and celebration in Chinese culture but signals danger in Western contexts. For global products, testing color choices with target demographics matters significantly. Within a cultural context, color psychology is a powerful, wordless communication tool for guiding attention and establishing brand character.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Popular Color Palettes for Web Design</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Proven palettes that designers return to again and again include: monochromatic schemes (variations of a single hue with different lightness and saturation) for a clean, cohesive look common in premium and luxury brands; neutral-plus-accent (black, white, and grey with one vibrant color) for maximum readability with visual interest — standard in SaaS and productivity apps; earth tones (warm browns, terracottas, sage greens, and cream) for brands conveying authenticity, sustainability, or craft; and high-contrast dark mode palettes (near-black backgrounds with off-white text and electric accent colors) that have become standard in developer tools, media players, and productivity software.</p>
         </div>
       </div>
 

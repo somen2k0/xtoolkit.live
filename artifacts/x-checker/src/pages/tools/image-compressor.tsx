@@ -325,6 +325,7 @@ export default function ImageCompressor() {
               { q: "Will compression make my images blurry?", a: "At quality settings of 70% and above, compression artifacts are generally imperceptible for photographs. The preview comparison lets you see the quality before downloading." },
               { q: "Can I compress PNG files?", a: "Yes. PNG files are compressed by converting them to JPEG format. If your PNG has a transparent background, the transparency will be filled with white. Use a quality of 85%+ for best results." },
               { q: "How much can images be compressed?", a: "Typical JPEG photographs compress 60-80% with minimal quality loss. Screenshots and graphics compress 40-60%. The actual ratio depends on image content and complexity." },
+              { q: "Should I convert my images to WebP?", a: "Yes, for most web use cases. WebP provides significantly smaller file sizes than JPEG or PNG at comparable visual quality. All modern browsers fully support WebP. If you need to support very old browsers (IE11 or earlier), serve JPEG or PNG as a fallback using the HTML picture element with multiple source entries." },
             ].map(({ q, a }) => (
               <div key={q} className="space-y-1.5">
                 <p className="text-sm font-semibold text-foreground/80">{q}</p>
@@ -332,6 +333,16 @@ export default function ImageCompressor() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Image Compression for Core Web Vitals</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">Google's Core Web Vitals measure real-world page performance and directly influence search rankings. Images are the primary cause of poor scores — specifically Largest Contentful Paint (LCP), which measures how quickly the main visible content loads. Unoptimized hero images routinely cause LCP scores above 4 seconds, which Google classifies as "poor." Compressing your hero image to under 100KB and switching to WebP format can often bring LCP below 2.5 seconds — the "good" threshold — without any other changes to your site code.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">WebP vs JPEG vs PNG — Which to Choose</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">For most web images, WebP is now the best choice — it provides 25–35% smaller file sizes than equivalent JPEG images and supports transparency (unlike JPEG), making it suitable for both photographs and UI graphics. All modern browsers support WebP. Use JPEG when you need maximum compatibility with older tools or workflows that don't support WebP, or for professional photography where wide software support matters. Use PNG only when you need both lossless quality and transparency together — such as logos, icons, and UI elements where pixel-perfect accuracy is required. For everything else, compress to WebP for the best balance of quality and file size.</p>
         </div>
       </div>
 

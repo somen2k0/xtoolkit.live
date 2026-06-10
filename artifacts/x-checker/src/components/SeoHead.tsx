@@ -10,9 +10,10 @@ interface SeoHeadProps {
   path?: string;
   keywords?: string;
   extraSchemas?: object[];
+  noindex?: boolean;
 }
 
-export function SeoHead({ title, description, ogTitle, ogDescription, path, keywords, extraSchemas }: SeoHeadProps) {
+export function SeoHead({ title, description, ogTitle, ogDescription, path, keywords, extraSchemas, noindex }: SeoHeadProps) {
   useEffect(() => {
     const canonicalUrl = path ? `${SITE_URL}${path}` : SITE_URL;
 
@@ -71,6 +72,14 @@ export function SeoHead({ title, description, ogTitle, ogDescription, path, keyw
       });
     }
 
+    let noindexMeta: HTMLMetaElement | null = null;
+    if (noindex) {
+      noindexMeta = document.createElement("meta");
+      noindexMeta.name = "robots";
+      noindexMeta.content = "noindex, nofollow";
+      document.head.appendChild(noindexMeta);
+    }
+
     return () => {
       document.title = prev;
       metaDesc?.setAttribute("content", prevDesc);
@@ -82,8 +91,9 @@ export function SeoHead({ title, description, ogTitle, ogDescription, path, keyw
       metaTwitterDesc?.setAttribute("content", prevTwitterDesc);
       canonicalEl?.setAttribute("href", prevCanonical);
       injectedScripts.forEach((el) => el.remove());
+      noindexMeta?.remove();
     };
-  }, [title, description, ogTitle, ogDescription, path, keywords, extraSchemas]);
+  }, [title, description, ogTitle, ogDescription, path, keywords, extraSchemas, noindex]);
 
   return null;
 }

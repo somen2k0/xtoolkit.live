@@ -299,6 +299,7 @@ export default function PasswordGenerator() {
               { q: "How long should my password be?", a: "For most accounts, 16 characters is a good balance of security and usability. For master passwords and high-value accounts, use 20+ characters." },
               { q: "Should I include symbols in my password?", a: "Yes when possible. Symbols expand the character set from 62 (letters + numbers) to 95 characters, significantly increasing password strength. Some sites don't support all symbols — our generator only uses widely accepted symbols." },
               { q: "What does \"exclude ambiguous characters\" mean?", a: "Characters like 0 (zero) and O (letter O), 1 (one) and l (letter L) look similar and can cause confusion when reading a password aloud or typing it manually. Excluding them makes passwords easier to use without reducing security significantly." },
+              { q: "What is entropy and why does it matter for passwords?", a: "Password entropy measures unpredictability in bits — each additional bit doubles the number of guesses required to crack it. A truly random 16-character password using all character types has roughly 105 bits of entropy, making brute-force attacks computationally infeasible. Predictable patterns (dictionary words, names, dates) dramatically reduce effective entropy even in long passwords." },
             ].map(({ q, a }) => (
               <div key={q} className="space-y-1.5">
                 <p className="text-sm font-semibold text-foreground/80">{q}</p>
@@ -306,6 +307,13 @@ export default function PasswordGenerator() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">How Password Crackers Work</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed"><strong className="text-foreground/80">Brute force attacks</strong> try every possible combination of characters. Against a truly random 8-character password using upper and lowercase letters, numbers, and symbols (95 possible characters per position), there are 95⁸ ≈ 6.6 quadrillion combinations. A modern GPU cluster can try billions of combinations per second — meaning an 8-character password can fall in hours. A 16-character password from the same set has 95¹⁶ ≈ 4.4 × 10³¹ combinations — beyond any feasible attack at current speeds.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed"><strong className="text-foreground/80">Dictionary attacks</strong> are far more efficient than pure brute force. Instead of random combinations, they try real words, common passwords, known leaked passwords, and systematic substitutions (@ for a, 3 for e, ! at the end). If your password is based on any real word or common phrase — even with character substitutions — a dictionary attack cracks it in seconds. Passwords like "P@ssw0rd" or "S3cur!ty1" offer almost no protection against modern crackers.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed"><strong className="text-foreground/80">Rainbow table attacks</strong> use precomputed tables mapping passwords to their cryptographic hashes. When a site stores passwords, it should store a hashed fingerprint rather than the password itself. Rainbow tables let attackers instantly look up which password produced a given hash. Modern systems counter this with "salting" — adding unique random data before hashing — which defeats rainbow tables entirely. However, sites still using weak hashing algorithms like MD5 or unsalted SHA1 are vulnerable to rainbow table attacks that can crack millions of passwords in minutes after a breach.</p>
         </div>
       </div>
 

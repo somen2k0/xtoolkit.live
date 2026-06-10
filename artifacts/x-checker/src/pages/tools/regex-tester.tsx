@@ -314,6 +314,47 @@ export default function RegexTester() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Extracting capture groups from log files or structured text</li>
           </ul>
         </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">Common Regex Patterns Reference</h2>
+          <div className="space-y-4">
+            {[
+              {
+                name: "Email address",
+                pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
+                desc: "Matches standard email addresses. Validates the local part (letters, numbers, dots, plus, hyphens, underscores), an @ symbol, a domain name, and a top-level domain of at least two characters.",
+              },
+              {
+                name: "URL (http / https)",
+                pattern: "https?:\\/\\/[^\\s/$.?#].[^\\s]*",
+                desc: "Matches http and https URLs. The ? after 's' makes it optional so both protocols match. Stops at whitespace, making it reliable for extracting URLs from plain text or logs.",
+              },
+              {
+                name: "US phone number",
+                pattern: "(\\+1[-.\\s]?)?\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}",
+                desc: "Matches common US formats including (555) 555-5555, 555-555-5555, and +1 555.555.5555. The optional +1 country code prefix uses a non-capturing group.",
+              },
+              {
+                name: "Date (YYYY-MM-DD)",
+                pattern: "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])",
+                desc: "Matches ISO 8601 dates with basic range validation — months 01–12 and days 01–31. Does not validate month-specific day counts (e.g., Feb 30 would still match).",
+              },
+              {
+                name: "Strong password",
+                pattern: "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}",
+                desc: "Uses lookaheads to require at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&). Enforces a minimum length of 8 characters.",
+              },
+            ].map(({ name, pattern, desc }) => (
+              <div key={name} className="space-y-1.5">
+                <div className="flex items-start gap-2 flex-wrap">
+                  <p className="text-sm font-semibold text-foreground/80 shrink-0">{name}:</p>
+                  <code className="text-xs font-mono bg-muted/60 rounded px-1.5 py-0.5 text-purple-400 break-all">{pattern}</code>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

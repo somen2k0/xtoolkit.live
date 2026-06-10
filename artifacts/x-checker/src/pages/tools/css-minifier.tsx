@@ -268,6 +268,7 @@ export default function CssMinifier() {
               { q: "How much does CSS minification reduce file size?", a: "Typically 20–50% for hand-written CSS and 10–30% for already-optimized or pre-processed CSS. The more comments and whitespace in your original CSS, the bigger the reduction. Bootstrap's CSS, for example, compresses from ~200KB to ~160KB." },
               { q: "Should I minify CSS manually or use a build tool?", a: "For small projects or one-off optimizations, manual minification using our tool works perfectly. For larger projects with automated deployments, build tools like Webpack, Vite, or Parcel can automate CSS minification as part of your build process so you never have to think about it." },
               { q: "Can I beautify minified CSS to make it readable again?", a: "Yes — our CSS minifier also works as a CSS beautifier/formatter. Paste any minified CSS and click Format to get properly indented, readable CSS back. This is useful when you receive minified stylesheets and need to understand or debug them." },
+              { q: "Does CSS minification work with CSS preprocessors like Sass or Less?", a: "Yes, but the workflow is slightly different. You first compile your Sass or Less to standard CSS, then minify the resulting output. Most build tools (Vite, Webpack) handle both steps automatically in sequence. You can also minify pre-compiled CSS using our tool — paste the compiled CSS and click Minify." },
             ].map(({ q, a }) => (
               <div key={q} className="space-y-1.5">
                 <p className="text-sm font-semibold text-foreground/80">{q}</p>
@@ -275,6 +276,16 @@ export default function CssMinifier() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">CSS Minification in Build Pipelines</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">In modern frontend development, CSS minification is typically automated as part of a build pipeline rather than done manually. Build tools like Vite, Webpack, Parcel, and Rollup integrate CSS minifiers — usually esbuild, cssnano, or Lightning CSS — that automatically minify all stylesheets when you run a production build. Developers write clean, readable CSS with comments and whitespace during development, and the build tool handles optimization before deployment. For teams, this ensures consistency across every release and removes the need to remember a manual step.</p>
+        </div>
+
+        <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-4">
+          <h2 className="text-lg font-semibold">CSS vs JavaScript vs HTML Minification</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">All three types of minification reduce file sizes by removing unnecessary characters, but they operate at different layers with different performance impact. JavaScript minification typically delivers the largest gains — 50–80% file size reduction — because JS files tend to be large, contain verbose variable names that can be shortened, and are often render-blocking resources. CSS minification typically delivers 20–50% reduction. HTML minification generally yields the smallest gains (5–20%) since HTML files are smaller and modern servers already compress HTML with gzip or Brotli in transit. For maximum performance, all three should be minified in production.</p>
         </div>
       </div>
     </MiniToolLayout>
