@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -136,6 +137,7 @@ export default function CaseConverter() {
       relatedTools={relatedTools}
       affiliateCategory="all"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-4">
         {/* Case selector */}
         <div className="flex flex-wrap gap-2">
@@ -343,6 +345,7 @@ export default function CaseConverter() {
           </section>
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

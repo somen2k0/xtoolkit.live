@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { useToolView } from "@/hooks/use-track";
 import { Regex, ShieldCheck, CheckCircle2, XCircle } from "lucide-react";
@@ -87,6 +88,7 @@ export default function RegexTester() {
       relatedTools={relatedTools}
       affiliateCategory="all"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-4">
         <div className="space-y-2">
           <span className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Presets</span>
@@ -391,6 +393,7 @@ export default function RegexTester() {
           </div>
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

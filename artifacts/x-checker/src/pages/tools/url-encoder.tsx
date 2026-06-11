@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -87,6 +88,7 @@ export default function UrlEncoder() {
       relatedTools={relatedTools}
       affiliateCategory="all"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-4">
         <div className="flex items-center gap-2 p-1 bg-muted/40 border border-border/60 rounded-xl w-fit">
           {(["encode", "decode"] as Mode[]).map((m) => (
@@ -253,6 +255,7 @@ export default function UrlEncoder() {
           </div>
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

@@ -1,4 +1,5 @@
 import { useSearch } from "wouter";
+import { SeoHead } from "@/components/SeoHead";
 import { Copy, RefreshCw, Mail, History, ExternalLink, Bell, Shield, Zap, Key } from "lucide-react";
 
 function BrowserFrame({ children, url = "https://xtoolkit.live" }: { children: React.ReactNode; url?: string }) {
@@ -350,8 +351,11 @@ export default function CwsScreenshots() {
   };
 
   return (
-    <div style={{ width: 1280, height: 800, overflow: "hidden", background: "#000" }}>
-      {screens[n] ?? <Screenshot1 />}
-    </div>
+    <>
+      <SeoHead title="CWS Screenshots" description="Internal Chrome Web Store screenshot utility." path="/cws-screenshots" noindex />
+      <div style={{ width: 1280, height: 800, overflow: "hidden", background: "#000" }}>
+        {screens[n] ?? <Screenshot1 />}
+      </div>
+    </>
   );
 }

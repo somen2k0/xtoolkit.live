@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -100,6 +101,7 @@ export default function JwtDecoder() {
       relatedTools={relatedTools}
       affiliateCategory="all"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
@@ -289,6 +291,7 @@ export default function JwtDecoder() {
           </div>
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

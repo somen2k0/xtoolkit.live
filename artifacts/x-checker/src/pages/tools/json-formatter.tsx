@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -249,6 +250,7 @@ export default function JsonFormatter() {
       relatedTools={relatedTools}
       affiliateCategory="all"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-4">
 
         {/* Validation status bar */}
@@ -650,6 +652,7 @@ export default function JsonFormatter() {
 
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

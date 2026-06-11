@@ -69,6 +69,7 @@ export default function WordCounter() {
       faqs={faqs}
       relatedTools={relatedTools}
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-6">
         {/* Textarea */}
         <div className="space-y-3">
@@ -232,6 +233,7 @@ export default function WordCounter() {
           </div>
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

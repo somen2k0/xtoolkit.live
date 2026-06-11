@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -72,6 +73,7 @@ export default function UuidGenerator() {
       relatedTools={relatedTools}
       affiliateCategory="all"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-4 p-4 rounded-xl border border-border/60 bg-muted/20">
           <div className="flex items-center gap-2">
@@ -257,6 +259,7 @@ export default function UuidGenerator() {
           </div>
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

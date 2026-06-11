@@ -77,38 +77,36 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- Blog index -->
-  <url>
-    <loc>https://xtoolkit.live/blog</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
   <!-- ── Tier 4: Supporting static pages ──────────────────────────── -->
   <url>
     <loc>https://xtoolkit.live/about</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/pricing</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://xtoolkit.live/guides</loc>
+    <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.55</priority>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/contact</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
   </url>
 
   <!-- ── Tier 5: Legal ─────────────────────────────────────────────── -->
   <url>
     <loc>https://xtoolkit.live/privacy</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>
   <url>
     <loc>https://xtoolkit.live/terms</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>

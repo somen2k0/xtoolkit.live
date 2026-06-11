@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -231,6 +232,7 @@ export default function Base64Tool() {
       relatedTools={relatedTools}
       affiliateCategory="all"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-4">
 
         {/* Mode tabs */}
@@ -630,6 +632,7 @@ export default function Base64Tool() {
 
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

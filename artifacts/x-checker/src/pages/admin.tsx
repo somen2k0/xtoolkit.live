@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { SeoHead } from "@/components/SeoHead";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -1294,6 +1295,7 @@ export default function AdminPage() {
 
   return (
     <Layout>
+      <SeoHead title="Admin" description="Admin dashboard." path="/admin" noindex />
       {password ? (
         <AdminDashboard password={password} />
       ) : (

@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -73,6 +74,7 @@ export default function CharacterCounter() {
       relatedTools={relatedTools}
       affiliateCategory="scheduling"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-5">
         <div className="relative">
           <Textarea
@@ -225,6 +227,7 @@ export default function CharacterCounter() {
           </div>
         </div>
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

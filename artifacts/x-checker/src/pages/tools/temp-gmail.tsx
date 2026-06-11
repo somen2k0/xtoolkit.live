@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect, memo } from "react";
+import { AdSlot } from "@/components/AdSlot";
 import { MiniToolLayout } from "@/components/layout/MiniToolLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -1649,6 +1650,7 @@ export default function TempMail({ defaultTab = "disposable" }: { defaultTab?: T
       relatedTools={relatedTools}
       affiliateCategory="growth"
     >
+      <AdSlot slot="top" className="mb-6" />
       <div className="space-y-6">
         {defaultTab === "disposable" && (
           <>
@@ -1764,6 +1766,7 @@ export default function TempMail({ defaultTab = "disposable" }: { defaultTab?: T
         )}
         <ExtensionBanner />
       </div>
+      <AdSlot slot="bottom" className="mt-6" />
     </MiniToolLayout>
   );
 }

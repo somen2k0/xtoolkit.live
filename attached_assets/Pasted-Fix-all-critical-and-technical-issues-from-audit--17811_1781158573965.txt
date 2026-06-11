@@ -1,0 +1,95 @@
+Fix all critical and technical issues from audit.
+
+===================================================
+FIX 1 — Sitemap fixes
+===================================================
+
+In sitemap-tools.xml:
+1. REMOVE /tools/name-ideas entry
+2. ADD these missing active pages:
+   /tools/color-picker (priority 0.75)
+   /tools/image-compressor (priority 0.75)
+   /tools/password-generator (priority 0.75)
+   /tools/qr-code-generator (priority 0.75)
+   /tools/word-counter (priority 0.70)
+
+In sitemap-pages.xml:
+1. REMOVE /blog entry (keep in sitemap-blog.xml only)
+2. REMOVE /pricing entry (has noindex tag)
+3. ADD /guides (priority 0.60)
+4. ADD /contact (priority 0.50)
+
+Update lastmod to today (2026-06-11) for all
+pages that have been updated recently.
+
+===================================================
+FIX 2 — Add noindex to utility pages
+===================================================
+
+In src/pages/cws-screenshots.tsx:
+Add to SeoHead: noIndex={true} noFollow={true}
+
+In src/pages/admin.tsx:
+Add to SeoHead: noIndex={true} noFollow={true}
+
+In src/pages/pricing.tsx:
+Confirm noIndex={true} is already set.
+
+===================================================
+FIX 3 — Delete 16 dead orphaned files
+===================================================
+
+Delete these files completely from the codebase:
+src/pages/tools/aesthetic-bios.tsx
+src/pages/tools/alias-email-explainer.tsx
+src/pages/tools/bio-ideas.tsx
+src/pages/tools/disposable-email-guide.tsx
+src/pages/tools/email-ab-tester.tsx
+src/pages/tools/email-character-counter.tsx
+src/pages/tools/email-leak-checker.tsx
+src/pages/tools/email-privacy-checker.tsx
+src/pages/tools/email-username-generator.tsx
+src/pages/tools/follower-analyzer.tsx
+src/pages/tools/name-ideas.tsx
+src/pages/tools/plain-text-formatter.tsx
+src/pages/tools/professional-bios.tsx
+src/pages/tools/profile-audit.tsx
+src/pages/tools/spam-risk-checker.tsx
+src/pages/tools/backlink-analyzer.tsx
+
+These are dead code — vercel.json handles 301
+redirects. No routes reference them anymore.
+
+===================================================
+FIX 4 — Allow AI bots in robots.txt
+===================================================
+
+In public/robots.txt find and REMOVE these
+Disallow rules:
+Disallow: / for PerplexityBot
+Disallow: / for YouBot
+
+These AI search engines drive referral traffic
+and should be allowed to crawl your site.
+
+===================================================
+FIX 5 — Add AdSlot to high traffic pages
+===================================================
+
+Add <AdSlot slot="top" /> and
+<AdSlot slot="bottom" /> to these pages:
+- /tools/json-formatter
+- /tools/base64
+- /tools/jwt-decoder
+- /tools/url-encoder
+- /tools/case-converter
+- /tools/character-counter
+- /tools/word-counter
+- /tools/regex-tester
+- /tools/uuid-generator
+- /tools/temp-mail
+
+===================================================
+Build, commit, push.
+Show all files changed.
+===================================================

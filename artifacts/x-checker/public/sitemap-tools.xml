@@ -294,16 +294,41 @@
     <priority>0.75</priority>
   </url>
 
-  <url>
-    <loc>https://xtoolkit.live/tools/name-ideas</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <!-- TIER 5 — Lower-traffic / niche tools (0.70)                    -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- New utility tools (high-quality content, previously missing) -->
+  <url>
+    <loc>https://xtoolkit.live/tools/color-picker</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/tools/image-compressor</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/tools/password-generator</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/tools/qr-code-generator</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/tools/word-counter</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
 
   <url>
     <loc>https://xtoolkit.live/tools/hashtag-formatter</loc>
