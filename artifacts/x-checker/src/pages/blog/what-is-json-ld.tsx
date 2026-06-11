@@ -5,7 +5,7 @@ export default function WhatIsJsonLd() {
   return (
     <BlogLayout
       seoTitle="What Is JSON-LD? Structured Data for SEO Explained (2026)"
-      seoDescription="What is JSON-LD and why does it matter for SEO? A complete guide to structured data markup, Schema.org types, and how JSON-LD helps search engines understand your content."
+      seoDescription="What is JSON-LD and why does it matter for SEO? A complete guide to structured data markup, Schema.org types and how JSON-LD helps search engines."
       title="What Is JSON-LD? Structured Data for SEO Explained"
       description="JSON-LD is the modern way to add structured data to web pages. Here's what it is, why it matters for search rankings, and how to implement it correctly."
       icon={Code}

@@ -5,7 +5,7 @@ export default function WhatIsJwt() {
   return (
     <BlogLayout
       seoTitle="What is a JWT Token? JSON Web Tokens Explained for Developers (2026)"
-      seoDescription="What is a JWT? Learn how JSON Web Tokens work, their header-payload-signature structure, when to use JWT vs sessions, security best practices, and how to decode JWTs."
+      seoDescription="What is a JWT? Learn how JSON Web Tokens work, their header-payload-signature structure, when to use JWT vs sessions and JWT security best practices."
       title="What is a JWT Token? JSON Web Tokens Explained for Developers"
       description="JWTs are the standard for stateless authentication in modern web apps and APIs. Here's how they work, when to use them, and how to avoid the common security pitfalls."
       icon={Key}

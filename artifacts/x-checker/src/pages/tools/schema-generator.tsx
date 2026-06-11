@@ -166,7 +166,7 @@ export default function SchemaGenerator() {
 
   return (
     <MiniToolLayout
-      seoTitle="JSON-LD Schema Generator — Free JSON LD Builder & Structured Data Generator | X Toolkit"
+      seoTitle="JSON-LD Schema Generator — Free Structured Data Builder | X Toolkit"
       seoDescription="Free JSON-LD schema generator and builder. Create structured data markup for Article, FAQ, Product, BreadcrumbList & more. No signup. Instant results."
       icon={Code2}
       badge="SEO Tool"

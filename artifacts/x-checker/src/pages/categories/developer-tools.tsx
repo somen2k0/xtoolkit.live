@@ -9,7 +9,7 @@ const tools = ALL_TOOLS.filter((t) => t.category === "developer");
 
 const config: CategoryPageConfig = {
   path: "/developer-tools",
-  seoTitle: "Free Online Developer Tools — JSON Formatter, Base64 Encoder | X Toolkit",
+  seoTitle: "Free Developer Tools — JSON Formatter & Base64 Encoder | X Toolkit",
   seoDescription:
     "Free browser-based developer utilities: JSON formatter with validation, Base64 encoder/decoder with Unicode support. No install, no signup, no data sent to servers.",
   title: "Developer Tools",

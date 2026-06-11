@@ -114,7 +114,7 @@ export default function HtmlFormatter() {
   return (
     <MiniToolLayout
       seoTitle="HTML Formatter & Minifier Online Free"
-      seoDescription="Format and beautify HTML or minify it for production. Instant, 100% client-side — your code never leaves your browser."
+      seoDescription="Beautify and format HTML code with proper indentation instantly. Also minifies HTML for production. 100% browser-based — your code never leaves your device. Free."
       icon={Code2}
       badge="Developer Tool"
       title="HTML Formatter & Minifier"

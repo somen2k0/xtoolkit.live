@@ -109,8 +109,8 @@ export default function XAccountChecker() {
 
   return (
     <MiniToolLayout
-      seoTitle="X Account Checker — Bulk Twitter Account Status, Followers & Profile Data | X Toolkit"
-      seoDescription="Bulk check Twitter/X account status with full profile data — followers, following, join date, verified badge. Check up to 100 accounts free. No signup. Instant results."
+      seoTitle="X Account Checker — Bulk Twitter Status & Profile Data | X Toolkit"
+      seoDescription="Bulk check Twitter/X account status — followers, join date, verified badge. Up to 100 accounts free. No signup."
       seoKeywords="twitter account checker, x account checker, bulk twitter checker, suspended account checker, twitter username checker, check twitter account status, bulk x account check, twitter follower checker, twitter verified checker, check twitter followers, suspended twitter account, deleted twitter account checker, free twitter checker, twitter profile checker"
       icon={Search}
       badge="Most Popular"

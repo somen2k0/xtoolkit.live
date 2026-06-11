@@ -78,6 +78,7 @@ export function BlogLayout({
       <SeoHead
         title={seoTitle}
         description={seoDescription}
+        ogType="article"
         path={path}
         extraSchemas={[breadcrumbSchema, articleSchema]}
       />

@@ -96,26 +96,26 @@
   <!-- Developer tools (high-engagement category) -->
   <url>
     <loc>https://xtoolkit.live/tools/json-formatter</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://xtoolkit.live/tools/base64</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
     <loc>https://xtoolkit.live/tools/jwt-decoder</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
     <loc>https://xtoolkit.live/tools/regex-tester</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
@@ -132,8 +132,8 @@
   </url>
   <url>
     <loc>https://xtoolkit.live/tools/timezone-converter</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
@@ -269,9 +269,9 @@
   </url>
   <url>
     <loc>https://xtoolkit.live/tools/schema-generator</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://xtoolkit.live/tools/spam-score-checker</loc>

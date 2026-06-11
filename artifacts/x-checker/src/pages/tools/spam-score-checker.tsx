@@ -67,8 +67,8 @@ export default function SpamScoreChecker() {
 
   return (
     <MiniToolLayout
-      seoTitle="Email Spam Score Checker — Check Subject Line & Content for Spam Triggers"
-      seoDescription="Check your email subject line and body for spam trigger words, excessive caps, urgency overload, and 10 other spam signals. Get an instant spam score and fix recommendations."
+      seoTitle="Email Spam Score Checker — Check for Spam Triggers | X Toolkit"
+      seoDescription="Check your email subject line and body for spam trigger words, excessive caps, urgency overload and 10 other spam signals. Get an instant spam score."
       icon={ShieldAlert}
       badge="Email Tool"
       title="Spam Score Checker"
@@ -164,6 +164,51 @@ export default function SpamScoreChecker() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Diagnosing why a previous campaign had low open rates</li>
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Checking cold outreach emails for spam trigger words</li>
           </ul>
+        </div>
+
+        <div className="space-y-6 pt-2">
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">How Email Spam Scoring Works</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Email spam scoring analyzes your content against hundreds of rules used by popular spam filters including SpamAssassin, Gmail's filters, Outlook's SmartScreen, and others. Each rule that your email triggers adds points to your spam score — higher scores mean a higher likelihood of landing in spam folders.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Modern spam filters combine content analysis (checking for spam trigger words and phrases), sender reputation (your IP and domain history), authentication checks (SPF, DKIM, DMARC records), and engagement metrics (whether recipients open and click or mark as spam). Our checker focuses on the content factors you can control directly before sending.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Common Email Spam Triggers</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Subject line triggers:</strong> Excessive capitalization, multiple exclamation points, money-related terms (free, earn, cash, prize), urgency language (act now, limited time, expires today), and misleading subjects all raise spam scores significantly. Question-based subjects tend to score lower than statement-based ones.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Body content triggers:</strong> Spam filters flag emails with high image-to-text ratios, spam trigger words in body copy, excessive links, HTML-to-text ratio imbalances, and certain font sizes or colors. Using web-safe fonts, balanced image and text ratios, and clean HTML structure reduces spam scores.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Technical triggers:</strong> Broken HTML, a missing plain-text alternative, no unsubscribe link in marketing emails, and mismatched sender information also contribute to higher spam scores.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Spam Score Thresholds Explained</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              SpamAssassin — the most widely deployed open-source spam filter — uses a scoring system where each triggered rule adds points. The default spam threshold is 5.0. Emails scoring above this are likely to be marked as spam. Scores between 3.0–5.0 are borderline. Scores under 3.0 are generally safe for most inbox providers.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Gmail, Outlook, and other providers use proprietary scoring systems that are not publicly disclosed, but they follow similar principles. The safest strategy is to minimize obvious spam triggers regardless of which specific filter your recipients use.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Improving Email Deliverability Beyond Spam Score</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Deliverability goes beyond content scores. To maximize inbox placement: authenticate your domain with SPF, DKIM, and DMARC records; maintain a clean list by removing bounces and unsubscribers promptly; send consistently rather than in large sporadic batches; warm up new sending IPs gradually; and monitor your sender reputation using tools like Google Postmaster Tools.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Content quality matters too. Emails that recipients consistently open and engage with train inbox filters to trust your sender reputation. Conversely, emails frequently marked as spam permanently damage your deliverability — even if future emails are perfectly clean.
+            </p>
+          </div>
         </div>
       </div>
     </MiniToolLayout>

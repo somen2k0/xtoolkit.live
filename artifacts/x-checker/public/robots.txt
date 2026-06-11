@@ -1,5 +1,5 @@
 # robots.txt — xtoolkit.live
-# Last updated: 2026-05-16
+# Last updated: 2026-06-11
 
 # ── General crawlers ──────────────────────────────────────────────────
 User-agent: *
@@ -78,4 +78,3 @@ Disallow: /
 #   sitemap-images.xml — image sitemap for OG/preview images
 
 Sitemap: https://xtoolkit.live/sitemap.xml
-Sitemap: https://xtoolkit.live/sitemap-images.xml

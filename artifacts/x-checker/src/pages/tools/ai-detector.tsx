@@ -136,7 +136,7 @@ export default function AiDetector() {
   return (
     <MiniToolLayout
       seoTitle="AI Text Detector & Humanizer — Free, No Signup"
-      seoDescription="Detect if text is AI-generated and rewrite it to sound human. Powered by Llama 3.3 70B. Free Groq API key required."
+      seoDescription="Detect AI-generated content and humanize it to sound natural. Supports text from ChatGPT, Claude and Gemini. Powered by Llama 3.3 70B. Free, no signup required."
       icon={Sparkles}
       badge="AI"
       title="AI Text Detector & Humanizer"

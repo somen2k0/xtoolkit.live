@@ -4,8 +4,8 @@ import { Search, Tag, Share2, Code } from "lucide-react";
 export default function SeoMetaTagsGuide() {
   return (
     <BlogLayout
-      seoTitle="Complete Guide to SEO Meta Tags in 2026 — Title, Description, OG Tags Explained"
-      seoDescription="Everything you need to know about SEO meta tags in 2026: title tags, meta descriptions, Open Graph, Twitter Cards, canonical tags, and structured data. With best practices and examples."
+      seoTitle="SEO Meta Tags Guide 2026 — Title, Description & OG Tags"
+      seoDescription="Everything you need to know about SEO meta tags in 2026: title tags, meta descriptions, Open Graph, Twitter Cards, canonical tags and structured data. With examples."
       title="Complete Guide to SEO Meta Tags in 2026 — Title, Description, OG Tags Explained"
       description="Meta tags control how your pages appear in search results and on social media. Here's what each tag does, how to write them, and how to avoid the most common mistakes."
       icon={Search}

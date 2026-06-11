@@ -4,8 +4,8 @@ import { Code, Search, FileText, Braces } from "lucide-react";
 export default function WhatIsRegex() {
   return (
     <BlogLayout
-      seoTitle="Regular Expressions (Regex) — A Complete Beginner's Guide with Examples (2026)"
-      seoDescription="What is regex? A complete beginner's guide to regular expressions with 10 practical examples. Learn syntax, character classes, quantifiers, and how to use regex in JavaScript and Python."
+      seoTitle="What Is Regex? Complete Beginner's Guide with Examples"
+      seoDescription="What is regex? A complete beginner's guide to regular expressions with practical examples. Learn syntax, character classes, quantifiers and how to use regex in JavaScript."
       title="Regular Expressions (Regex) — A Complete Beginner's Guide with Examples"
       description="Regex lets you search, match, and manipulate text using patterns. Here's everything you need to know — from basic syntax to 10 practical real-world examples."
       icon={Code}

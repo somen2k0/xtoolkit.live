@@ -61,7 +61,7 @@ export default function CharacterCounter() {
 
   return (
     <MiniToolLayout
-      seoTitle="Character Counter — Free Online Character & Word Count Tool | X Toolkit"
+      seoTitle="Character Counter — Free Online Character & Word Count | X Toolkit"
       seoDescription="Count characters, words, sentences and paragraphs in real time. Shows Twitter/X, LinkedIn, Instagram and email limits. Free character counter, no signup."
       seoKeywords="character counter, character count online, word counter, letter counter, character counter online, twitter character counter, instagram character counter, text character counter, character limit checker, online character count, free character counter"
       seoOgTitle="Character Counter — Free Online Character Count"

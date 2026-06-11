@@ -272,6 +272,42 @@ export default function RobotsTxtGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding a sitemap URL to help Googlebot discover all your pages</li>
           </ul>
         </div>
+
+        <div className="space-y-6 pt-2">
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Robots.txt Syntax Reference</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              The robots.txt file is a plain text file placed at the root of your website that gives instructions to web crawlers about which pages they should or should not visit. It is part of the Robots Exclusion Protocol — an informal standard that most legitimate crawlers respect voluntarily.
+            </p>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">User-agent:</strong> Specifies which crawler the rules apply to. Use <code className="text-xs bg-muted px-1 rounded">*</code> for all crawlers, or specific names like Googlebot</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Disallow:</strong> Paths the crawler should not visit. <code className="text-xs bg-muted px-1 rounded">Disallow: /admin/</code> blocks all pages under /admin/</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Allow:</strong> Overrides a Disallow rule for specific paths. Allow rules take precedence over Disallow when both match</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Sitemap:</strong> Points crawlers to your XML sitemap. You can include multiple Sitemap: lines</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Crawl-delay:</strong> Note — Google ignores crawl-delay. Use Search Console crawl rate settings instead</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Blocking AI Scrapers and Data Harvesters</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              AI training data scrapers have become a significant concern for content creators. Many AI companies respect robots.txt while others do not. Common AI crawler User-agent values you can disallow include: GPTBot (OpenAI), Google-Extended (Google AI training), CCBot (Common Crawl), anthropic-ai and Claude-Web (Anthropic), and Bytespider (ByteDance).
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Add <code className="text-xs bg-muted px-1 rounded">Disallow: /</code> under each User-agent block to request they do not crawl your content. Note that blocking these crawlers has no effect on your Google Search rankings — Googlebot and Google-Extended are completely separate bots. Our generator includes an AI-blocker option that adds all major AI crawlers automatically.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Crawling vs Indexing — An Important Distinction</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Robots.txt controls <strong className="text-foreground">crawling</strong> (whether bots visit your pages) but does not control <strong className="text-foreground">indexing</strong> (whether pages appear in search results). A page can be indexed without being crawled if external sites link to it.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              To prevent indexing, use the <code className="text-xs bg-muted px-1 rounded">noindex</code> meta tag in addition to or instead of robots.txt rules. This is a common source of SEO mistakes — webmasters assume robots.txt blocks keep pages out of search results, when in fact only the noindex meta tag or X-Robots-Tag HTTP header guarantees non-indexing.
+            </p>
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -156,7 +156,7 @@ export default function SitemapValidator() {
 
   return (
     <MiniToolLayout
-      seoTitle="XML Sitemap Validator — Free Online Sitemap Checker & Debugger | X Toolkit"
+      seoTitle="XML Sitemap Validator — Free Sitemap Checker & Debugger | X Toolkit"
       seoDescription="Validate and check your XML sitemap instantly. Find errors, missing URLs, and formatting issues. Free sitemap validator for SEO. No signup required."
       seoKeywords="sitemap validator, xml sitemap validator, sitemap checker, xml sitemap checker, sitemap validator online, sitemap error checker, google sitemap validator, sitemap xml checker, free sitemap validator, sitemap tester, sitemap debugger"
       seoOgTitle="XML Sitemap Validator — Free Sitemap Checker"
@@ -298,6 +298,42 @@ export default function SitemapValidator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Debugging sitemap errors reported in Google Search Console</li>
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Verifying the output of a sitemap generator plugin or CMS</li>
           </ul>
+        </div>
+
+        <div className="space-y-6 pt-2">
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">XML Sitemap Format and Requirements</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              A valid XML sitemap must follow specific format requirements. The file must begin with the XML declaration and use the correct sitemap namespace. Each URL entry uses a <code className="text-xs bg-muted px-1 rounded">&lt;url&gt;</code> tag containing at minimum a <code className="text-xs bg-muted px-1 rounded">&lt;loc&gt;</code> tag with the full absolute URL.
+            </p>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">&lt;lastmod&gt;</strong> — Date of last modification in YYYY-MM-DD format (W3C Datetime)</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">&lt;changefreq&gt;</strong> — How often the page changes: always, hourly, daily, weekly, monthly, yearly, never</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">&lt;priority&gt;</strong> — Relative importance 0.0–1.0 (default 0.5). Only affects crawl priority within your own site</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Size limits:</strong> Each sitemap can contain up to 50,000 URLs and must not exceed 50MB uncompressed</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Common Sitemap Validation Errors</h2>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Invalid URL format</strong> — All URLs must be absolute (https://example.com/page, not /page). Relative URLs cause validation failures</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Missing namespace</strong> — The urlset opening tag must include <code className="text-xs bg-muted px-1 rounded">xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"</code></li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Invalid date format</strong> — lastmod dates must be in W3C Datetime format (YYYY-MM-DD). Common errors: MM/DD/YYYY or DD-MM-YYYY</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Blocked URLs in sitemap</strong> — Including URLs blocked by robots.txt confuses crawlers and wastes crawl budget</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Redirected URLs</strong> — Sitemaps should list canonical final-destination URLs, not URLs that redirect elsewhere</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Sitemap Best Practices</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Only include indexable pages — exclude pages with noindex tags, 301 redirects, or pages blocked by robots.txt. Including these wastes crawl budget and confuses search engines.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Keep lastmod dates accurate. Only update lastmod when content genuinely changes. Inflating lastmod dates to appear fresh is a spam signal Google actively detects. For large sites with over 50,000 URLs, create a sitemap index file that references multiple topic-specific sitemap files (blog, tools, static pages). After creating or updating your sitemap, submit it in Google Search Console under Indexing → Sitemaps to trigger recrawling.
+            </p>
+          </div>
         </div>
       </div>
     </MiniToolLayout>

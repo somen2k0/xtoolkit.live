@@ -89,7 +89,7 @@ export default function EmailValidator() {
   return (
     <MiniToolLayout
       seoTitle="Email Address Validator — Syntax Checker for Email Lists"
-      seoDescription="Validate email address syntax instantly. Paste one or many addresses and get instant pass/fail results with specific error messages. Free, browser-based, no signup."
+      seoDescription="Validate email address syntax instantly. Paste one or many addresses and get instant pass/fail results with specific error messages. Free, no signup."
       icon={ShieldCheck}
       badge="Email Tool"
       title="Email Address Validator"

@@ -73,7 +73,7 @@ export default function MaskedEmailGenerator() {
   return (
     <MiniToolLayout
       seoTitle="Masked Email Generator — Create Anonymous Email Aliases"
-      seoDescription="Generate masked email aliases instantly. Protect your real inbox from spam, trackers, and data brokers. Free, no signup."
+      seoDescription="Create privacy-preserving email aliases that forward to your real address. Protect your inbox from spam and data brokers. Free masked email generator, no signup required."
       icon={EyeOff}
       badge="Privacy Tool"
       title="Masked Email Generator"
@@ -200,6 +200,41 @@ export default function MaskedEmailGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Creating per-service aliases to track where spam originated</li>
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Keeping your personal inbox clean while still receiving forwards</li>
           </ul>
+        </div>
+
+        <div className="space-y-6 pt-2">
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">What is Email Masking?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Email masking creates a unique alias address that forwards messages to your real inbox without revealing your actual email. When you provide a masked address to a website, service, or contact, they interact with the alias — not your real email. If the alias starts receiving spam, you simply disable or delete it, leaving your real inbox untouched.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Email masking differs from disposable email in one important way: disposable addresses are temporary and expire, while masked email aliases are permanent and can be toggled on or off at will. Services like Apple's Hide My Email, SimpleLogin, and Addy.io provide this functionality as a managed service.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">How Email Forwarding Aliases Work</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              When someone sends an email to your masked address (alias@privacy-service.com), the masking service's servers receive it, then forward it to your real inbox. From your perspective, the email arrives just like any other message. When you reply, your reply is routed through the masking service so the recipient sees only your alias — never your real email.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Most email masking services also allow you to send emails from your aliases, maintaining complete anonymity throughout the conversation. Premium services support custom domains, unlimited aliases, and detailed analytics showing which aliases receive the most email.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Masked Email vs Disposable Email</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Disposable email</strong> creates a temporary inbox that expires after a set time — ideal for one-time registrations where you never need to access the service again. The inbox is public and accessible to anyone who knows the address.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Masked email</strong> creates a permanent alias that forwards to your private inbox — ideal for services you genuinely want to use long-term but want to protect your real address from. The alias is private; only your masking service knows where it forwards.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Use disposable email for: one-time signups, free trial activations, software downloads requiring registration, and any service you don't plan to return to. Use masked email for: newsletters you want to read, e-commerce accounts, subscription services, and any long-term service where you want ongoing access but email privacy.
+            </p>
+          </div>
         </div>
       </div>
     </MiniToolLayout>

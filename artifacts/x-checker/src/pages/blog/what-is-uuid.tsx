@@ -5,7 +5,7 @@ export default function WhatIsUuid() {
   return (
     <BlogLayout
       seoTitle="What Is a UUID? Format, Versions, and Use Cases Explained (2026)"
-      seoDescription="What is a UUID? A complete guide to Universally Unique Identifiers: the format, versions (v1, v4, v7), when to use UUIDs vs auto-increment, and how to generate them."
+      seoDescription="What is a UUID? A complete guide to Universally Unique Identifiers: the format, versions (v1, v4, v7) and when to use UUIDs vs auto-increment IDs."
       title="What Is a UUID? Format, Versions & Use Cases Explained"
       description="UUIDs are 128-bit identifiers used in distributed systems, databases, and APIs. Here's what they are, how the format works, and when to use each version."
       icon={Hash}

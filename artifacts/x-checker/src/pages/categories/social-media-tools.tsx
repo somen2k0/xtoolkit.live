@@ -9,7 +9,7 @@ const tools = ALL_TOOLS.filter((t) => t.category === "social-media");
 
 const config: CategoryPageConfig = {
   path: "/social-media-tools",
-  seoTitle: "Free Social Media Tools for X (Twitter) — Account Checker & More | X Toolkit",
+  seoTitle: "Free Social Media Tools for X (Twitter) — Account Checker | X Toolkit",
   seoDescription:
     "Free tools for X (Twitter): bulk account status checker, profile link generator, and @ formatter. Check hundreds of accounts in seconds. No login required.",
   title: "Social Media Tools",

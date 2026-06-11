@@ -5,7 +5,7 @@ export default function HowToUseTempEmailExtension() {
   return (
     <BlogLayout
       seoTitle="How to Use a Temp Email Chrome Extension — Step-by-Step Guide (2026)"
-      seoDescription="Learn how to install and use a free temp email Chrome extension to get instant disposable inboxes, auto-detect OTP codes, and block spam — without ever leaving your tab."
+      seoDescription="Learn how to install and use a free temp email Chrome extension to get instant disposable inboxes, auto-detect OTP codes and block spam. No extra tab needed."
       title="How to Use a Temp Email Chrome Extension"
       description="A complete step-by-step guide to installing a disposable email extension, generating throwaway inboxes, auto-copying OTP codes, and never switching tabs for a verification email again."
       icon={Chrome}

@@ -77,7 +77,7 @@ export default function PageSpeedChecker() {
   return (
     <MiniToolLayout
       seoTitle="Page Speed Checker — Audit Your Website Speed & Core Web Vitals"
-      seoDescription="Check your website's page speed with a free SEO audit checklist. Audit images, caching, compression, fonts, and Core Web Vitals. Get a speed score and actionable fixes."
+      seoDescription="Check your website's page speed with a free SEO audit checklist. Audit images, caching, compression, fonts and Core Web Vitals. Get a speed score instantly."
       icon={Gauge}
       badge="SEO Tool"
       title="Page Speed Checker"

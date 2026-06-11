@@ -10,7 +10,7 @@ const tools = ALL_TOOLS.filter((t) => t.category === "email" && !t.isComingSoon)
 
 const config: CategoryPageConfig = {
   path: "/email-tools",
-  seoTitle: "Free Email Tools — Subject Line Generator, Signature Builder, Validator | X Toolkit",
+  seoTitle: "Free Email Tools — Temp Mail, Validator & Signature Generator | X Toolkit",
   seoDescription:
     "Free browser-based email utilities: subject line generator, email signature builder, plain text formatter, character counter, username generator, and address validator. No signup.",
   title: "Email Tools",

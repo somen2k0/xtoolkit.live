@@ -1,0 +1,1 @@
+- [SEO audit patterns](seo-audit-patterns.md) — xtoolkit.live SEO audit completed; patterns for tool page content expansion and schema setup documented.

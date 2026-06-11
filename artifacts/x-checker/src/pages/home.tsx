@@ -122,6 +122,41 @@ export default function Home() {
         title={`X Toolkit — ${TOTAL_LIVE}+ Free Tools for X, SEO, Developers & Creators`}
         description="44+ free online tools for X (Twitter), SEO, developers & creators: X account checker, AI bio generator, JSON formatter, Base64, JWT decoder, temp mail, QR code generator, password generator & more. No signup, instant results."
         path="/"
+        extraSchemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://xtoolkit.live",
+            "name": "X Toolkit",
+            "description": "Free online tools for X (Twitter), SEO, developers and creators.",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://xtoolkit.live/tools?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "X Toolkit",
+            "url": "https://xtoolkit.live",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://xtoolkit.live/favicon-512.png"
+            },
+            "founder": {
+              "@type": "Person",
+              "name": "Somen Biswas"
+            },
+            "sameAs": [
+              "https://twitter.com/somen_2k",
+              "https://github.com/somen2k0"
+            ]
+          }
+        ]}
       />
 
       {/* ── Hero ── */}

@@ -223,7 +223,7 @@ export default function Base64Tool() {
   return (
     <MiniToolLayout
       seoTitle="Base64 Encoder & Decoder Online Free"
-      seoDescription="Encode and decode Base64 online for free. Real-time conversion with full Unicode support. Paste text or Base64 and get instant results — 100% client-side, nothing sent to a server."
+      seoDescription="Encode and decode Base64 online for free. Supports full Unicode. 100% client-side — your data never leaves your browser."
       icon={Lock}
       badge="Developer Tool"
       title="Base64 Encoder & Decoder"

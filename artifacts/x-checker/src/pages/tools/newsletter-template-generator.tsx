@@ -190,7 +190,7 @@ export default function NewsletterTemplateGenerator() {
   return (
     <MiniToolLayout
       seoTitle="Newsletter Template Generator — Free HTML Email Templates"
-      seoDescription="Generate clean, responsive HTML email newsletter templates for free. Choose from Minimal, Editorial, and Digest styles. Customize your brand colors and download instantly."
+      seoDescription="Generate clean, responsive HTML email newsletter templates for free. Choose from Minimal, Editorial and Digest styles. Customize your brand colors and download."
       icon={Newspaper}
       badge="Email Tool"
       title="Newsletter Template Generator"
@@ -300,6 +300,41 @@ export default function NewsletterTemplateGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Building a quick one-off announcement email outside your usual ESP</li>
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Generating a base HTML template to import into Mailchimp, Klaviyo, or similar</li>
           </ul>
+        </div>
+
+        <div className="space-y-6 pt-2">
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Email Newsletter Best Practices in 2026</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Effective email newsletters balance content value with design appeal. The most successful newsletters share three characteristics: they arrive on a predictable schedule, they provide genuine value subscribers cannot get elsewhere, and they respect the recipient's time with focused, scannable content.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Newsletter open rates have held steady around 20–25% across industries despite the rise of social media. Email remains the most direct channel for reaching an audience you own — unlike social media followers who can be lost to algorithm changes or platform policy shifts overnight.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">HTML Email Design Fundamentals</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Email clients are notoriously inconsistent in their HTML and CSS support. Gmail strips most CSS from the head section. Outlook uses Word's rendering engine for HTML. This inconsistency requires email-specific design approaches that differ significantly from web design.
+            </p>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Use table-based layouts</strong> — table layouts are universally supported; CSS flexbox and grid are not reliable in email clients</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Inline all CSS</strong> — Gmail strips head CSS; move all styles to inline style attributes (our generator handles this automatically)</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Keep width under 600px</strong> — wider designs require horizontal scrolling on mobile and webmail</li>
+              <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> <strong className="text-foreground">Use web-safe fonts</strong> — Arial, Helvetica, Georgia, and Times New Roman display consistently across all clients</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">CAN-SPAM and GDPR Compliance</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Marketing emails must comply with anti-spam laws. In the US, CAN-SPAM requires: clear identification that the message is an advertisement, a valid physical postal address, a clear explanation of how to opt out, and honoring opt-out requests within 10 business days.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              In the EU, GDPR requires explicit consent before sending marketing emails — pre-checked opt-in boxes do not count. Canada's CASL has similar requirements. Our templates include all required compliance elements by default. Always review your specific legal requirements for high-volume commercial email programs.
+            </p>
+          </div>
         </div>
       </div>
     </MiniToolLayout>

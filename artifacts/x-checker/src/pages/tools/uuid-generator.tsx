@@ -64,7 +64,7 @@ export default function UuidGenerator() {
   return (
     <MiniToolLayout
       seoTitle="UUID Generator Online Free — v4 UUID"
-      seoDescription="Generate random UUID v4 identifiers online for free. Instant generation, no signup, 100% client-side."
+      seoDescription="Generate cryptographically random UUID v4 identifiers for databases, APIs, session tokens and distributed systems. Free, no signup, bulk generation supported."
       icon={Shuffle}
       badge="Developer Tool"
       title="UUID Generator"

@@ -9,7 +9,7 @@ const tools = ALL_TOOLS.filter((t) => t.category === "text-formatting");
 
 const config: CategoryPageConfig = {
   path: "/text-format-tools",
-  seoTitle: "Free Text & Formatting Tools for X (Twitter) — Thread Formatter, Font Preview | X Toolkit",
+  seoTitle: "Free Text Formatting Tools — Thread Splitter & Case Converter | X Toolkit",
   seoDescription:
     "Free text and formatting tools for X (Twitter): format tweet threads, preview Unicode fonts, count characters, format hashtags, and generate usernames. No signup required.",
   title: "Text & Formatting Tools",

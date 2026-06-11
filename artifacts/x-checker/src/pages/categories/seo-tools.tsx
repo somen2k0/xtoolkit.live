@@ -9,7 +9,7 @@ const tools = ALL_TOOLS.filter((t) => t.category === "seo" && !t.isComingSoon);
 
 const config: CategoryPageConfig = {
   path: "/seo-tools",
-  seoTitle: "Free SEO Tools — Meta Tag Generator, Keyword Density, URL Slug, Robots.txt | X Toolkit",
+  seoTitle: "Free SEO Tools — Meta Tags, Schema & Sitemap Validator | X Toolkit",
   seoDescription:
     "Free browser-based SEO tools: meta tag generator with SERP preview, keyword density checker, URL slug generator, robots.txt builder, and sitemap validator. No signup required.",
   title: "SEO Tools",

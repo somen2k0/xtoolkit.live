@@ -252,6 +252,48 @@ export default function KeywordDensity() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Comparing keyword density across competitor pages and your own</li>
           </ul>
         </div>
+
+        <div className="space-y-6 pt-2">
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">What is Keyword Density?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Keyword density measures how often a specific keyword or phrase appears in a piece of content relative to the total word count. Expressed as a percentage, it is calculated by dividing the number of keyword occurrences by the total word count and multiplying by 100.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              For example: if "email marketing" appears 10 times in a 1,000-word article, its keyword density is 1%. Historically, SEO practitioners believed maintaining specific density targets was critical. Modern SEO has largely moved away from density targets toward natural language and topical relevance — but density still provides a useful sanity check for under- or over-optimized content.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Ideal Keyword Density in 2026</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Google's algorithms now use semantic analysis, entity recognition, and natural language understanding to evaluate content relevance — far beyond simple keyword counting. Stuffing keywords to hit a specific density percentage is not only ineffective but actively harmful.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              A useful general guideline for primary keywords is <strong className="text-foreground">1–2% density</strong>. This is enough to clearly establish topical relevance without appearing manipulative to algorithms or awkward to human readers. Secondary keywords and related terms should appear naturally throughout without targeting specific percentages.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">Keyword Stuffing — What to Avoid</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Keyword stuffing is the practice of excessively repeating keywords in an attempt to manipulate search rankings. Google's Panda algorithm update specifically targets keyword-stuffed content and penalizes it with ranking demotions or manual actions.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Signs of keyword stuffing include: the same phrase repeated in nearly every sentence, awkward or unnatural phrasing to force a keyword, keyword-stuffed title tags and meta descriptions, and long lists of keywords with no context. Use this tool to identify over-optimized content before publishing. If a keyword appears more than 20–25 times in a 1,000-word article, consider rewriting those sections with synonyms and natural variations.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-6 space-y-3">
+            <h2 className="text-lg font-semibold">TF-IDF — Beyond Simple Keyword Density</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              TF-IDF (Term Frequency–Inverse Document Frequency) is a more sophisticated measure of keyword importance than simple density. It considers not just how often a term appears in your document (TF) but also how common that term is across all documents (IDF). Terms that appear frequently in your content but rarely across the web are considered more significant.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              SEO tools that analyze TF-IDF compare your content against top-ranking pages to identify terms that top performers include that your content lacks. This is more actionable than targeting specific density percentages because it identifies genuine content gaps rather than just measuring repetition.
+            </p>
+          </div>
+        </div>
       </div>
     </MiniToolLayout>
   );

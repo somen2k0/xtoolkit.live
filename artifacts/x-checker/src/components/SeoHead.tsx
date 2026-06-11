@@ -7,13 +7,14 @@ interface SeoHeadProps {
   description: string;
   ogTitle?: string;
   ogDescription?: string;
+  ogType?: string;
   path?: string;
   keywords?: string;
   extraSchemas?: object[];
   noindex?: boolean;
 }
 
-export function SeoHead({ title, description, ogTitle, ogDescription, path, keywords, extraSchemas, noindex }: SeoHeadProps) {
+export function SeoHead({ title, description, ogTitle, ogDescription, ogType, path, keywords, extraSchemas, noindex }: SeoHeadProps) {
   useEffect(() => {
     const canonicalUrl = path ? `${SITE_URL}${path}` : SITE_URL;
 
@@ -23,6 +24,10 @@ export function SeoHead({ title, description, ogTitle, ogDescription, path, keyw
     const metaDesc = document.querySelector('meta[name="description"]');
     const prevDesc = metaDesc?.getAttribute("content") ?? "";
     metaDesc?.setAttribute("content", description);
+
+    const metaOgType = document.querySelector('meta[property="og:type"]');
+    const prevOgType = metaOgType?.getAttribute("content") ?? "";
+    if (ogType && metaOgType) metaOgType.setAttribute("content", ogType);
 
     const metaKeywords = document.querySelector('meta[name="keywords"]');
     const prevKeywords = metaKeywords?.getAttribute("content") ?? "";
@@ -83,6 +88,7 @@ export function SeoHead({ title, description, ogTitle, ogDescription, path, keyw
     return () => {
       document.title = prev;
       metaDesc?.setAttribute("content", prevDesc);
+      if (ogType && metaOgType) metaOgType.setAttribute("content", prevOgType);
       if (keywords && metaKeywords) metaKeywords.setAttribute("content", prevKeywords);
       metaOgTitle?.setAttribute("content", prevOgTitle);
       metaOgDesc?.setAttribute("content", prevOgDesc);
@@ -93,7 +99,7 @@ export function SeoHead({ title, description, ogTitle, ogDescription, path, keyw
       injectedScripts.forEach((el) => el.remove());
       noindexMeta?.remove();
     };
-  }, [title, description, ogTitle, ogDescription, path, keywords, extraSchemas, noindex]);
+  }, [title, description, ogTitle, ogDescription, ogType, path, keywords, extraSchemas, noindex]);
 
   return null;
 }

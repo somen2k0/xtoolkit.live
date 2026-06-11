@@ -5,7 +5,7 @@ export default function UrlEncodingGuide() {
   return (
     <BlogLayout
       seoTitle="URL Encoding Guide — What Is Percent Encoding and How It Works (2026)"
-      seoDescription="What is URL encoding (percent encoding)? How it works, which characters must be encoded, common examples, and how to encode and decode URLs online. Complete 2026 guide."
+      seoDescription="What is URL encoding (percent encoding)? How it works, which characters must be encoded, common examples and how to encode and decode URLs online. 2026 guide."
       title="URL Encoding Guide — What Is Percent Encoding and How It Works"
       description="URL encoding converts unsafe characters into percent-escaped sequences for safe use in URLs. Here's how it works, which characters need encoding, and when to use it."
       icon={Link}
