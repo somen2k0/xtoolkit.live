@@ -228,3 +228,9 @@ id = "0yA0K2vttj3nSWFOo4Fc9"
 uri = "file://xtoolkit-full-site-audit.csv"
 type = "table"
 title = "XToolkit — Full Site Audit (65 issues)"
+
+[[outputs]]
+id = "XJohJxfrQ2h8YlP7fxwhR"
+uri = "file://audit-results.csv"
+type = "table"
+title = "Full Site Audit Results"

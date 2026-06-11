@@ -1,0 +1,50 @@
+Phase,ID,Severity,Status,File,Issue,Required Fix
+1,P1-01,Low,FAIL,artifacts/x-checker/public/sitemap-tools.xml,color-picker changefreq=monthly (should be weekly),Change changefreq to weekly
+1,P1-02,Low,FAIL,artifacts/x-checker/public/sitemap-tools.xml,image-compressor changefreq=monthly (should be weekly),Change changefreq to weekly
+1,P1-03,Low,FAIL,artifacts/x-checker/public/sitemap-tools.xml,password-generator changefreq=monthly (should be weekly),Change changefreq to weekly
+1,P1-04,Low,FAIL,artifacts/x-checker/public/sitemap-tools.xml,qr-code-generator changefreq=monthly (should be weekly),Change changefreq to weekly
+1,P1-05,Low,FAIL,artifacts/x-checker/public/sitemap-pages.xml,/contact changefreq=yearly (should be monthly),Change changefreq to monthly
+1,P1-06,Low,FAIL,artifacts/x-checker/public/sitemap-pages.xml,/ lastmod=2026-05-14 (should be 2026-06-11),Update lastmod to 2026-06-11
+1,P1-07,Low,FAIL,artifacts/x-checker/public/sitemap-pages.xml,/chrome-extension lastmod=2026-05-16 (should be 2026-06-11),Update lastmod to 2026-06-11
+1,P1-08,Pass,DONE,artifacts/x-checker/public/sitemap-tools.xml,/tools/name-ideas entry removed,Already removed
+1,P1-09,Pass,DONE,artifacts/x-checker/public/sitemap-tools.xml,5 new tool entries added (color-picker/image-compressor/password-generator/qr-code-generator/word-counter),Already present
+1,P1-10,Pass,DONE,artifacts/x-checker/public/sitemap-pages.xml,/blog entry removed,Already removed
+1,P1-11,Pass,DONE,artifacts/x-checker/public/sitemap-pages.xml,/pricing entry removed,Already removed
+1,P1-12,Pass,DONE,artifacts/x-checker/public/sitemap-pages.xml,/guides entry added with correct lastmod+priority,Already present
+1,P1-13,Pass,DONE,artifacts/x-checker/public/sitemap-pages.xml,/contact entry added,Already present (changefreq wrong — see P1-05)
+1,P1-14,Pass,DONE,artifacts/x-checker/public/sitemap-pages.xml,/about lastmod updated to 2026-06-11,Already correct
+1,P1-15,Pass,DONE,artifacts/x-checker/public/sitemap-pages.xml,/privacy lastmod updated to 2026-06-11,Already correct
+1,P1-16,Pass,DONE,artifacts/x-checker/public/sitemap-pages.xml,/terms lastmod updated to 2026-06-11,Already correct
+2,P2-01,Medium,FAIL,artifacts/x-checker/src/pages/cws-screenshots.tsx,SeoHead has noindex but missing noFollow prop,Add noFollow prop to SeoHead call
+2,P2-02,Medium,FAIL,artifacts/x-checker/src/pages/admin.tsx,SeoHead has noindex but missing noFollow prop,Add noFollow prop to SeoHead call
+2,P2-03,Pass,DONE,artifacts/x-checker/src/pages/pricing.tsx,noindex confirmed present on SeoHead,No action needed
+3,P3-01,Pass,DONE,artifacts/x-checker/src/pages/tools/,All 16 dead orphaned files deleted,Already deleted
+4,P4-01,Pass,DONE,artifacts/x-checker/public/robots.txt,PerplexityBot Disallow rule — not present (already clean),No action needed
+4,P4-02,Pass,DONE,artifacts/x-checker/public/robots.txt,YouBot Disallow rule — not present (already clean),No action needed
+5,P5-01,Pass,DONE,artifacts/x-checker/src/pages/tools/json-formatter.tsx,AdSlot top+bottom present,Already done
+5,P5-02,Pass,DONE,artifacts/x-checker/src/pages/tools/base64.tsx,AdSlot top+bottom present,Already done
+5,P5-03,Pass,DONE,artifacts/x-checker/src/pages/tools/jwt-decoder.tsx,AdSlot top+bottom present,Already done
+5,P5-04,Pass,DONE,artifacts/x-checker/src/pages/tools/url-encoder.tsx,AdSlot top+bottom present,Already done
+5,P5-05,Pass,DONE,artifacts/x-checker/src/pages/tools/case-converter.tsx,AdSlot top+bottom present,Already done
+5,P5-06,Pass,DONE,artifacts/x-checker/src/pages/tools/character-counter.tsx,AdSlot top+bottom present,Already done
+5,P5-07,Pass,DONE,artifacts/x-checker/src/pages/tools/word-counter.tsx,AdSlot top+bottom present,Already done
+5,P5-08,Pass,DONE,artifacts/x-checker/src/pages/tools/regex-tester.tsx,AdSlot top+bottom present,Already done
+5,P5-09,Pass,DONE,artifacts/x-checker/src/pages/tools/uuid-generator.tsx,AdSlot top+bottom present,Already done
+6,P6-01,High,FAIL,artifacts/x-checker/src/pages/tools/ai-detector.tsx,"Thin content — Phase 6 sections not added (How AI Text Detection Works / What Triggers AI Detection Flags / The Humanizer Feature / Limitations / Use Cases / FAQ)","Add all 5 headings + FAQ below tool UI (target 800+ words)"
+6,P6-02,High,FAIL,artifacts/x-checker/src/pages/tools/html-formatter.tsx,"Thin content — Phase 6 sections not added (What is HTML Formatting / Why it Matters / Standards / vs Minifier / Common Errors / FAQ)","Add all 5 headings + FAQ below tool UI (target 800+ words)"
+7,P7-01,High,FAIL,artifacts/x-checker/src/pages/tools/yaml-json.tsx,"Thin content — Phase 7 sections not added (What is YAML / YAML vs JSON / When to Use / FAQ)","Add all 3 headings + FAQ below tool UI (target 800+ words)"
+7,P7-02,High,FAIL,artifacts/x-checker/src/pages/tools/email-validator.tsx,"Thin content — Phase 7 sections not added (How Email Validation Works / Understanding Email Formats / Common Invalid Patterns / FAQ)","Add all 3 headings + FAQ below tool UI (target 800+ words)"
+7,P7-03,High,FAIL,artifacts/x-checker/src/pages/tools/email-signature-generator.tsx,"Thin content — Phase 7 sections not added (Why Signatures Matter / Key Elements / HTML vs Plain Text / FAQ)","Add all 3 headings + FAQ below tool UI (target 800+ words)"
+7,P7-04,High,FAIL,artifacts/x-checker/src/pages/tools/url-slug-generator.tsx,"Thin content — Phase 7 sections not added (What is a URL Slug / SEO Best Practices / Special Characters / FAQ)","Add all 3 headings + FAQ below tool UI (target 800+ words)"
+7,P7-05,High,FAIL,artifacts/x-checker/src/pages/tools/tweet-scheduler.tsx,"Thin content — Phase 7 sections not added (Why Schedule Tweets / Best Times / Content Calendar Strategy / FAQ)","Add all 3 headings + FAQ below tool UI (target 800+ words)"
+7,P7-06,High,FAIL,artifacts/x-checker/src/pages/tools/subject-line-generator.tsx,"Thin content — Phase 7 sections not added (What Makes a Great Subject Line / Open Rate Stats / Spam Trigger Words / FAQ)","Add all 3 headings + FAQ below tool UI (target 800+ words)"
+8,P8-01,High,FAIL,artifacts/x-checker/src/pages/email-tools.tsx,"Category page thin — Phase 8 content not added (Email Privacy section / Complete Toolkit Explained / FAQ)","Add headings + FAQ after tool listing (target 800+ words)"
+8,P8-02,High,FAIL,artifacts/x-checker/src/pages/ai-writing-tools.tsx,"Category page thin — Phase 8 content not added (AI Writing for Creators / Tools Explained / Responsible AI / FAQ)","Add headings + FAQ after tool listing (target 800+ words)"
+8,P8-03,High,FAIL,artifacts/x-checker/src/pages/social-media-tools.tsx,"Category page thin — Phase 8 content not added (X Tools for Creators / All Tools Explained / FAQ)","Add headings + FAQ after tool listing (target 800+ words)"
+8,P8-04,High,FAIL,artifacts/x-checker/src/pages/seo-tools.tsx,"Category page thin — Phase 8 content not added (SEO Tools for Every Owner / All Tools Explained / FAQ)","Add headings + FAQ after tool listing (target 800+ words)"
+8,P8-05,High,FAIL,artifacts/x-checker/src/pages/developer-tools.tsx,"Category page thin — Phase 8 content not added (Developer Tools for Every Workflow / All Tools Explained / FAQ)","Add headings + FAQ after tool listing (target 800+ words)"
+9,P9-01,Medium,FAIL,artifacts/x-checker/src/pages/blog/index.tsx,Phase 9 expanded intro content not added (category sections + article listing),Add headings and category sections per spec
+9,P9-02,Medium,FAIL,artifacts/x-checker/src/pages/blog/seo-meta-tags-guide.tsx,"Phase 9 expansion not added — 154 lines (needs 900+ words). Missing: Open Graph Tag Examples / Canonical Tags / Meta Robots Tag","Add 3 new sections per spec"
+9,P9-03,Medium,FAIL,artifacts/x-checker/src/pages/blog/what-is-regex.tsx,"Phase 9 expansion not added — 180 lines (needs 900+ words). Missing: Regex Syntax Reference / 5 Common Patterns","Add 2 new sections per spec"
+9,P9-04,Medium,PARTIAL,artifacts/x-checker/src/pages/blog/what-is-jwt.tsx,"JWT Security Best Practices section present but JWT vs Session Tokens comparison section missing","Add JWT vs Session Tokens comparison section"
+10,P10-01,High,FAIL,artifacts/x-checker/src/components/layout/MiniToolLayout.tsx,WebApplication schema not auto-generated for tool pages,"Add webAppSchema object and pass to SeoHead extraSchemas on every tool page"

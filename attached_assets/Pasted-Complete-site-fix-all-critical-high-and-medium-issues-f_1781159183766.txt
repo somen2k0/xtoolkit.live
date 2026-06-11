@@ -1,0 +1,1636 @@
+Complete site fix — all critical, high and medium
+issues from the full audit. Do everything in one go.
+
+===================================================
+PHASE 1 — SITEMAP FIXES
+===================================================
+
+In artifacts/x-checker/public/sitemap-tools.xml:
+1. REMOVE /tools/name-ideas entry
+2. ADD these missing active pages with today's date
+   (2026-06-11):
+   <url>
+     <loc>https://xtoolkit.live/tools/color-picker</loc>
+     <lastmod>2026-06-11</lastmod>
+     <changefreq>weekly</changefreq>
+     <priority>0.75</priority>
+   </url>
+   <url>
+     <loc>https://xtoolkit.live/tools/image-compressor</loc>
+     <lastmod>2026-06-11</lastmod>
+     <changefreq>weekly</changefreq>
+     <priority>0.75</priority>
+   </url>
+   <url>
+     <loc>https://xtoolkit.live/tools/password-generator</loc>
+     <lastmod>2026-06-11</lastmod>
+     <changefreq>weekly</changefreq>
+     <priority>0.75</priority>
+   </url>
+   <url>
+     <loc>https://xtoolkit.live/tools/qr-code-generator</loc>
+     <lastmod>2026-06-11</lastmod>
+     <changefreq>weekly</changefreq>
+     <priority>0.75</priority>
+   </url>
+   <url>
+     <loc>https://xtoolkit.live/tools/word-counter</loc>
+     <lastmod>2026-06-11</lastmod>
+     <changefreq>weekly</changefreq>
+     <priority>0.70</priority>
+   </url>
+
+In artifacts/x-checker/public/sitemap-pages.xml:
+1. REMOVE /blog entry completely
+2. REMOVE /pricing entry completely
+3. ADD /guides entry:
+   <url>
+     <loc>https://xtoolkit.live/guides</loc>
+     <lastmod>2026-06-11</lastmod>
+     <changefreq>weekly</changefreq>
+     <priority>0.60</priority>
+   </url>
+4. ADD /contact entry:
+   <url>
+     <loc>https://xtoolkit.live/contact</loc>
+     <lastmod>2026-06-11</lastmod>
+     <changefreq>monthly</changefreq>
+     <priority>0.50</priority>
+   </url>
+5. Update lastmod to 2026-06-11 for these pages
+   that have been updated recently:
+   /, /about, /privacy, /terms, /chrome-extension
+
+===================================================
+PHASE 2 — NOINDEX UTILITY PAGES
+===================================================
+
+In src/pages/cws-screenshots.tsx:
+Add noIndex and noFollow to SeoHead component call.
+
+In src/pages/admin.tsx:
+Add noIndex and noFollow to SeoHead component call.
+
+Verify src/pages/pricing.tsx already has noIndex.
+If not, add it.
+
+===================================================
+PHASE 3 — DELETE 16 DEAD ORPHANED FILES
+===================================================
+
+Delete these files permanently:
+src/pages/tools/aesthetic-bios.tsx
+src/pages/tools/alias-email-explainer.tsx
+src/pages/tools/bio-ideas.tsx
+src/pages/tools/disposable-email-guide.tsx
+src/pages/tools/email-ab-tester.tsx
+src/pages/tools/email-character-counter.tsx
+src/pages/tools/email-leak-checker.tsx
+src/pages/tools/email-privacy-checker.tsx
+src/pages/tools/email-username-generator.tsx
+src/pages/tools/follower-analyzer.tsx
+src/pages/tools/name-ideas.tsx
+src/pages/tools/plain-text-formatter.tsx
+src/pages/tools/professional-bios.tsx
+src/pages/tools/profile-audit.tsx
+src/pages/tools/spam-risk-checker.tsx
+src/pages/tools/backlink-analyzer.tsx
+
+After deleting confirm no imports reference them
+in App.tsx or any other file.
+
+===================================================
+PHASE 4 — FIX ROBOTS.TXT
+===================================================
+
+In public/robots.txt remove Disallow rules for:
+PerplexityBot and YouBot
+
+Keep all other rules unchanged.
+
+===================================================
+PHASE 5 — ADD ADSLOT TO HIGH TRAFFIC PAGES
+===================================================
+
+Add <AdSlot slot="top" /> between page title
+and tool UI, and <AdSlot slot="bottom" /> after
+tool UI on these pages:
+src/pages/tools/json-formatter.tsx
+src/pages/tools/base64.tsx
+src/pages/tools/jwt-decoder.tsx
+src/pages/tools/url-encoder.tsx
+src/pages/tools/case-converter.tsx
+src/pages/tools/character-counter.tsx
+src/pages/tools/word-counter.tsx
+src/pages/tools/regex-tester.tsx
+src/pages/tools/uuid-generator.tsx
+
+Import AdSlot from components if not already imported.
+
+===================================================
+PHASE 6 — EXPAND CRITICAL THIN PAGES (165-300 words)
+===================================================
+
+These are the most urgently thin pages.
+Add 800+ words total to each.
+Add content BELOW existing tool UI only.
+Do NOT change tool functionality.
+
+--- /tools/ai-detector (165 words → 800+) ---
+
+Add these sections:
+
+Heading: "How AI Text Detection Works"
+Content:
+"AI text detectors analyze writing patterns,
+statistical properties, and stylistic features
+that differentiate human writing from AI-generated
+content. Modern language models like GPT-4 and
+Claude tend to produce text with certain consistent
+patterns — predictable word choices, uniform sentence
+length variation, specific punctuation habits, and
+characteristic phrase structures that differ from
+how humans naturally write.
+
+Detection algorithms measure several signals
+simultaneously: perplexity (how surprising each
+word choice is), burstiness (variation in sentence
+complexity), semantic coherence patterns, and
+vocabulary distribution. Human writing tends to
+have higher burstiness — mixing short punchy
+sentences with longer complex ones — while AI
+writing often maintains more consistent rhythm
+and complexity throughout."
+
+Heading: "What Triggers AI Detection Flags"
+Content:
+"Certain writing patterns consistently score high
+on AI detection regardless of whether they were
+actually written by AI. These include overly formal
+academic language, perfectly balanced paragraph
+lengths, excessive use of transitional phrases like
+'furthermore' and 'moreover', unnaturally consistent
+sentence structure, absence of personal anecdotes
+or opinions, and generic examples that lack specific
+details.
+
+Ironically, some highly educated human writers
+whose style resembles formal academic writing
+sometimes trigger false positives. Conversely,
+well-crafted AI writing that includes intentional
+imperfections, personal voice, and varied structure
+can evade detection. This is why no AI detector
+has 100% accuracy — they are probabilistic tools
+that estimate likelihood, not definitive proof."
+
+Heading: "The Humanizer Feature — How It Works"
+Content:
+"Our AI humanizer rewrites AI-generated text to
+reduce detection signals while preserving the
+original meaning. It applies several techniques:
+varying sentence length and structure, replacing
+formal phrases with more natural alternatives,
+adding appropriate hedging language, introducing
+subtle imperfections that characterize human
+writing, and restructuring predictable paragraph
+patterns.
+
+The humanizer is most effective when used
+iteratively — run it once, check the detection
+score, then run it again if needed. Keep in mind
+that heavily humanized text should always be
+reviewed for accuracy since rewriting can
+occasionally change the meaning of specific
+statements."
+
+Heading: "Limitations of AI Detection"
+Content:
+"No AI detector is perfect. Current technology
+achieves roughly 70-85% accuracy under ideal
+conditions and significantly lower accuracy with
+edge cases. False positive rates (flagging human
+writing as AI) range from 5-30% depending on
+writing style and topic. False negative rates
+(missing AI writing) are also significant,
+especially for sophisticated AI outputs that
+have been lightly edited.
+
+Detectors work best on longer texts — short
+paragraphs of under 100 words produce unreliable
+results. They are calibrated for English and
+perform less reliably on other languages. They
+also struggle with highly technical content
+where specialized terminology forces predictable
+word choices regardless of who wrote the text."
+
+Heading: "Use Cases for AI Detection"
+Content:
+"Academic integrity: Universities and schools use
+AI detection to identify submitted work that may
+have been generated by AI tools rather than written
+by students. Many institutions have specific policies
+about AI use in academic work.
+
+Content marketing: Publishers and content managers
+use detection to verify that freelance writers are
+delivering original human-written content rather
+than AI-generated text passed off as original work.
+
+SEO and web content: Search engines increasingly
+favor original human-written content. Some website
+owners use detection to screen content before
+publishing to ensure it will be treated as
+original by search algorithms.
+
+Journalism and media: News organizations verify
+that contributed articles and opinion pieces are
+genuinely written by the attributed authors."
+
+FAQ:
+Q: How accurate is AI text detection?
+A: Current AI detectors achieve 70-85% accuracy
+   under ideal conditions. No detector is 100%
+   accurate — they provide probability estimates,
+   not definitive proof.
+
+Q: Can AI-generated text be edited to pass detection?
+A: Yes. Significant human editing that changes
+   structure, adds personal voice, and varies
+   sentence patterns can reduce AI detection scores
+   substantially. Our humanizer automates this process.
+
+Q: Does the detector work for ChatGPT, Claude,
+   and other AI tools?
+A: Yes. The detector analyzes writing patterns
+   rather than identifying specific AI tools.
+   It works on text from any AI writing system
+   including GPT-4, Claude, Gemini, and others.
+
+Q: Why does my human-written text show as AI?
+A: Formal, academic, or highly structured writing
+   styles can trigger false positives. If you write
+   consistently formal English, you may see higher
+   AI probability scores even for original work.
+
+Q: What is the minimum text length for reliable results?
+A: For reliable results use at least 200 words.
+   Very short texts (under 100 words) produce
+   unreliable results because there is insufficient
+   data to identify patterns accurately.
+
+--- /tools/html-formatter (186 words → 800+) ---
+
+Add these sections:
+
+Heading: "What is HTML Formatting?"
+Content:
+"HTML formatting (also called HTML beautification)
+transforms compressed, minified, or inconsistently
+indented HTML into clean, properly structured code
+with consistent indentation and line breaks. When
+working with HTML from various sources — CMS outputs,
+email templates, third-party widgets, legacy code,
+or auto-generated markup — the raw HTML is often
+difficult to read and maintain.
+
+Our HTML formatter applies standard indentation
+rules, properly nests elements, formats attributes
+consistently, and makes the overall structure
+immediately clear. The result is HTML that is
+significantly easier to read, debug, and modify."
+
+Heading: "Why Properly Formatted HTML Matters"
+Content:
+"Readable code is maintainable code. When HTML is
+properly indented and formatted, the structure of
+the document becomes immediately visible — you can
+see parent-child relationships between elements,
+identify mismatched tags, and understand the layout
+hierarchy at a glance. This is especially important
+when working with complex nested structures like
+tables, forms, or multi-level navigation menus.
+
+Formatting also helps with debugging. Browser
+developer tools display HTML in formatted view,
+but working with source code directly requires
+proper formatting to quickly identify issues.
+Mismatched tags, unclosed elements, and incorrect
+nesting are much easier to spot in formatted code."
+
+Heading: "HTML Formatting Standards and Conventions"
+Content:
+"Most style guides recommend 2 or 4 spaces for
+HTML indentation (tabs are also acceptable if
+used consistently). Block-level elements like
+div, section, article, header, footer, nav,
+and main should each start on a new line with
+their content indented. Inline elements like
+span, a, strong, em, and code can remain on
+the same line as surrounding content.
+
+Attributes should follow a consistent order —
+typically: id, class, name, type, href/src,
+then other attributes. Boolean attributes (like
+disabled, checked, required) need no value in
+HTML5. Self-closing tags like img, br, input,
+and meta do not need a closing slash in HTML5,
+though they are accepted."
+
+Heading: "HTML Formatter vs HTML Minifier"
+Content:
+"HTML formatting and HTML minification are opposite
+operations serving different purposes. Formatting
+adds whitespace, indentation, and line breaks to
+make code human-readable — used during development,
+debugging, and code review. Minification removes
+all unnecessary whitespace to reduce file size —
+used in production to improve page load performance.
+
+A typical workflow: develop with formatted HTML
+for readability, then minify before deployment for
+performance. Always keep your formatted source files
+— never work directly with minified HTML as your
+primary source code."
+
+Heading: "Common HTML Formatting Errors to Avoid"
+Content:
+"Inconsistent indentation: Mixing spaces and tabs
+or using different indent sizes throughout a file
+makes code harder to read and can cause issues
+with some tools and editors.
+
+Improper nesting: Elements must be closed in the
+reverse order they were opened. div > p > span
+must close as /span > /p > /div. Improper nesting
+causes rendering inconsistencies across browsers.
+
+Missing doctype: Always include DOCTYPE html as
+the first line of HTML documents. Without it,
+browsers enter quirks mode with unpredictable
+rendering behavior.
+
+Unclosed tags: While browsers are forgiving about
+some unclosed tags, relying on browser error
+correction leads to unpredictable behavior and
+makes code harder to maintain."
+
+FAQ:
+Q: Does HTML formatting affect how the page looks?
+A: No. Browsers ignore extra whitespace between
+   HTML elements. Formatting only affects the
+   source code readability, not the visual output.
+
+Q: What is the difference between HTML formatting
+   and HTML validation?
+A: Formatting fixes indentation and structure.
+   Validation checks that your HTML follows the
+   W3C specification — no invalid attributes,
+   proper element usage, correct DOCTYPE. Our
+   formatter improves readability; use the W3C
+   Validator for specification compliance.
+
+Q: Should I format HTML before or after minifying?
+A: Always work with formatted HTML as your source.
+   Minify only for production deployment. Never
+   use minified HTML as your working source code.
+
+Q: Can I format HTML email templates?
+A: Yes. HTML email templates are often complex
+   table-based layouts that benefit greatly from
+   formatting. Note that email HTML has different
+   rules than web HTML — many modern CSS properties
+   are not supported in email clients.
+
+Q: Does the formatter handle inline CSS and JavaScript?
+A: Our formatter focuses on HTML structure and
+   indentation. Inline CSS and JavaScript within
+   HTML are preserved as-is. Use our CSS Minifier
+   for CSS-specific formatting.
+
+===================================================
+PHASE 7 — EXPAND HIGH PRIORITY THIN PAGES
+(241-370 words → 800+)
+===================================================
+
+--- /tools/yaml-json (241 words → 800+) ---
+
+Add:
+Heading: "What is YAML?"
+Content:
+"YAML (YAML Ain't Markup Language) is a
+human-readable data serialization format designed
+to be easy for humans to read and write. Unlike
+JSON which uses curly braces and square brackets,
+YAML uses indentation and newlines to represent
+data structure — making it significantly more
+readable for complex configurations.
+
+YAML is the standard format for configuration
+files in many modern tools and frameworks.
+Docker Compose files, Kubernetes manifests,
+GitHub Actions workflows, Ansible playbooks,
+and many CI/CD pipeline configurations are
+all written in YAML. Its readability makes
+it ideal for configuration that developers
+need to read and edit regularly."
+
+Heading: "YAML vs JSON — Key Differences"
+Content:
+"Syntax: YAML uses indentation and colons while
+JSON uses braces, brackets, and quotes. YAML
+is more concise for complex nested structures
+but indentation-sensitive — a single wrong space
+can break the entire file.
+
+Comments: YAML supports comments (lines starting
+with #). JSON does not support comments at all.
+This makes YAML significantly better for
+configuration files where explaining settings
+is important.
+
+Data types: Both support strings, numbers,
+booleans, arrays, and objects. YAML also has
+native support for dates, nulls, and multi-line
+strings. JSON requires all strings to be quoted;
+YAML can infer types automatically.
+
+Verbosity: JSON requires quotes around all
+string keys and values. YAML infers types and
+only requires quotes when values contain special
+characters. This makes YAML roughly 30-40%
+less verbose for equivalent data structures.
+
+Use cases: JSON is the standard for APIs, web
+services, and data exchange between systems.
+YAML is preferred for configuration files,
+CI/CD pipelines, and infrastructure-as-code
+where human readability matters more than
+machine parsing efficiency."
+
+Heading: "When to Use YAML vs JSON"
+Content:
+"Use JSON when: building REST APIs, exchanging
+data between services, working with JavaScript
+applications (JSON parses natively), or when
+the data will primarily be read by machines.
+
+Use YAML when: writing configuration files,
+defining CI/CD pipelines, creating Docker or
+Kubernetes configs, writing Ansible playbooks,
+or any situation where developers will regularly
+read and edit the file manually.
+
+The conversion between YAML and JSON is lossless
+for most data structures — our converter handles
+both directions accurately, preserving all data
+types and nested structures."
+
+FAQ:
+Q: Is YAML a superset of JSON?
+A: Yes. Valid JSON is also valid YAML. Any JSON
+   document can be parsed by a YAML parser,
+   though the reverse is not true since YAML
+   has features JSON doesn't support.
+
+Q: Why does YAML use indentation instead of braces?
+A: YAML was designed for human readability.
+   Indentation-based structure eliminates the
+   visual noise of braces and brackets, making
+   complex nested data easier to read at a glance.
+
+Q: What are common YAML errors?
+A: The most common YAML errors are inconsistent
+   indentation (mixing tabs and spaces), special
+   characters in unquoted strings, and incorrect
+   handling of colons in values. Always use
+   spaces (not tabs) for YAML indentation.
+
+Q: Can YAML handle binary data?
+A: Yes. YAML supports binary data using Base64
+   encoding with the !!binary tag. However JSON
+   is typically preferred for binary data exchange.
+
+Q: What tools validate YAML files?
+A: Online YAML validators, IDE extensions, and
+   command-line tools like yamllint validate YAML
+   syntax. Our converter validates YAML as part
+   of the conversion process.
+
+--- /tools/email-validator (256 words → 800+) ---
+
+Add:
+Heading: "How Email Validation Works"
+Content:
+"Email validation checks whether an email address
+is correctly formatted and potentially deliverable.
+There are three levels of validation:
+
+Syntax validation checks that the email address
+follows the correct format: local-part@domain.
+The local part can contain letters, numbers, and
+certain special characters. The domain must have
+at least one dot and a valid TLD. Our validator
+performs comprehensive syntax checking following
+RFC 5322 standards.
+
+Domain validation checks that the domain in the
+email address actually exists and has DNS records.
+An email address like user@thisdoesnotexist.com
+passes syntax validation but fails domain validation
+because the domain has no DNS records.
+
+MX record validation checks that the domain has
+Mail Exchange (MX) records — meaning it is actually
+configured to receive email. A domain can exist
+without being set up for email. MX record checking
+is the most reliable validation short of actually
+sending an email."
+
+Heading: "Understanding Email Address Formats"
+Content:
+"The RFC 5322 standard defines what constitutes
+a valid email address. The format is local@domain
+where the local part can be up to 64 characters
+and the domain up to 255 characters.
+
+Valid local part characters include letters (a-z,
+A-Z), digits (0-9), and these special characters:
+! # $ % & ' * + - / = ? ^ _ ` { | } ~
+and periods (.) as long as they are not the first
+or last character and don't appear consecutively.
+
+Common email formats that our validator correctly
+handles: simple (user@example.com), with periods
+(first.last@example.com), with plus addressing
+(user+tag@example.com), with hyphens in domain
+(user@my-company.com), and subdomains
+(user@mail.example.com)."
+
+Heading: "Common Invalid Email Patterns"
+Content:
+"Missing @ symbol: The @ symbol is required and
+must appear exactly once in a valid email address.
+
+Multiple @ symbols: user@@example.com and
+user@example@com are both invalid.
+
+Missing domain: user@ with no domain is invalid.
+The domain must include at least one dot.
+
+Invalid characters: Spaces and most special
+characters are not allowed without quoting.
+Commas, parentheses, and angle brackets are
+invalid in standard email addresses.
+
+Consecutive dots: user..name@example.com is
+invalid — consecutive dots are not permitted in
+the local part. Dots at the start or end are
+also invalid.
+
+Invalid TLD: While our validator accepts any TLD
+format, extremely unusual TLDs may indicate
+invalid addresses."
+
+FAQ:
+Q: What is MX record validation?
+A: MX (Mail Exchange) records are DNS entries
+   that specify which servers receive email for
+   a domain. Checking MX records confirms the
+   domain is actually configured to receive email.
+
+Q: Can email validation guarantee deliverability?
+A: No. Validation confirms format and domain
+   configuration but cannot confirm the specific
+   mailbox exists without sending an email. Some
+   mail servers reject unknown addresses; others
+   silently discard them.
+
+Q: What is the difference between email validation
+   and email verification?
+A: Validation checks format and domain records.
+   Verification confirms a specific mailbox exists
+   by sending a test message or using SMTP probing.
+   Our tool performs validation not verification.
+
+Q: Why do some valid emails fail validation?
+A: Some uncommon but technically valid email
+   formats (like quoted strings or IP address
+   domains) may fail basic validators. Our
+   validator follows RFC 5322 standards and
+   handles all common valid formats correctly.
+
+Q: Should I validate emails on the frontend
+   or backend?
+A: Both. Frontend validation provides instant
+   feedback to users. Backend validation is
+   essential for security — never trust frontend
+   validation alone as it can be bypassed.
+
+--- /tools/email-signature-generator (269 words → 800+) ---
+
+Add:
+Heading: "Why Email Signatures Matter"
+Content:
+"A professional email signature serves multiple
+important functions beyond simply identifying who
+sent the email. It provides recipients with
+immediate access to your contact information,
+establishes your professional credibility, reinforces
+your personal or company brand, and can include
+calls-to-action that drive business outcomes.
+
+Research shows that emails with professional
+signatures receive higher response rates than
+those without. A well-designed signature signals
+that you take communication seriously and provides
+everything the recipient needs to follow up —
+phone number, title, company, website, and social
+profiles — without requiring them to search
+for your information."
+
+Heading: "Key Elements of an Effective Email Signature"
+Content:
+"Name and title: Your full name and professional
+title should be the most prominent elements.
+Use your preferred professional name consistently
+across all communications.
+
+Company and contact information: Include your
+company name, direct phone number, and company
+website. Only include your physical address if
+it is relevant to your role and appropriate
+to share.
+
+Social media links: Include relevant professional
+social profiles. LinkedIn is appropriate for most
+professional contexts. Twitter/X and GitHub are
+valuable for technical professionals. Avoid
+including purely personal social profiles.
+
+Headshot or logo: A small professional photo
+(48-64px) or company logo adds visual identity
+and makes your signature more memorable.
+Photos should be professional quality with a
+clean background.
+
+Legal disclaimers: Some industries and companies
+require confidentiality notices or legal disclaimers
+in email signatures. Check your company policy
+before omitting these."
+
+Heading: "HTML vs Plain Text Email Signatures"
+Content:
+"HTML signatures allow rich formatting — fonts,
+colors, images, logos, and clickable links. They
+display correctly in most modern email clients
+including Gmail, Outlook, and Apple Mail.
+
+Plain text signatures work in every email client
+without exception but cannot include formatting,
+images, or styled links. They are appropriate
+for technical contexts where plain text email
+is preferred.
+
+Our generator creates HTML signatures that
+are compatible with major email clients. When
+copying to Gmail, Outlook, or other clients,
+use the copy button to get properly formatted
+HTML that preserves all styling."
+
+FAQ:
+Q: How do I add an HTML signature to Gmail?
+A: In Gmail go to Settings → See all settings →
+   General → Signature → Create new. Paste the
+   HTML directly into the signature editor.
+   Gmail supports basic HTML formatting in
+   signatures.
+
+Q: What size should my signature image be?
+A: Keep signature images small — 48-64px for
+   headshots and 100-200px wide for logos.
+   Large images slow email loading and may
+   be blocked by corporate email filters.
+
+Q: Should I include my email address in my signature?
+A: Generally no — recipients already know your
+   email address since they received your message.
+   Including it adds clutter without value.
+   Focus on alternative contact methods like
+   phone or social profiles.
+
+Q: How long should an email signature be?
+A: Keep signatures concise — 4-6 lines of
+   information is ideal. Overly long signatures
+   with extensive legal disclaimers, quotes,
+   and multiple images can appear unprofessional
+   and slow email loading.
+
+Q: Can I use custom fonts in email signatures?
+A: Custom web fonts are not reliably supported
+   in email clients. Stick to web-safe fonts
+   like Arial, Helvetica, Georgia, or Times New
+   Roman for consistent display across all
+   email clients.
+
+--- /tools/url-slug-generator (278 words → 800+) ---
+
+Add:
+Heading: "What is a URL Slug?"
+Content:
+"A URL slug is the human-readable part of a URL
+that identifies a specific page. In the URL
+https://example.com/blog/how-to-write-seo-titles,
+the slug is how-to-write-seo-titles. Slugs replace
+spaces with hyphens, remove special characters,
+and use lowercase letters to create clean, readable,
+and SEO-friendly web addresses.
+
+URL slugs matter for both usability and SEO.
+A descriptive slug tells both users and search
+engines what a page is about before they visit it.
+Descriptive slugs in search results have higher
+click-through rates because users can immediately
+understand what they will find on the page."
+
+Heading: "SEO Best Practices for URL Slugs"
+Content:
+"Keep slugs short and descriptive: Shorter URLs
+are easier to share, remember, and display in
+search results without truncation. Include only
+the most important keywords — remove stop words
+like 'a', 'the', 'and', 'of' that add length
+without SEO value.
+
+Use hyphens not underscores: Google treats hyphens
+as word separators but underscores as word joiners.
+how-to-write (three words) vs how_to_write (one
+word from Google's perspective). Always use
+hyphens in URL slugs.
+
+Use lowercase only: URLs are case-sensitive on
+most servers. Uppercase in URLs can cause duplicate
+content issues if both versions are accessible.
+Always use lowercase for all URL slugs.
+
+Include target keywords: The slug should contain
+your primary keyword for the page. A blog post
+about email marketing tips should have a slug
+like email-marketing-tips not page-123 or
+article-about-marketing."
+
+Heading: "Special Characters in URLs"
+Content:
+"Most special characters must be encoded or removed
+from URL slugs. Characters like spaces ( ),
+ampersands (&), question marks (?), hash symbols
+(#), and percent signs (%) have special meaning
+in URLs and must be either encoded or removed.
+
+Our slug generator automatically handles all
+special characters — removing punctuation,
+encoding necessary characters, replacing spaces
+with hyphens, and converting to lowercase —
+producing clean, valid slugs ready to use
+in any CMS or web application."
+
+FAQ:
+Q: What characters are allowed in a URL slug?
+A: Letters (a-z), numbers (0-9), and hyphens (-).
+   Underscores are technically allowed but
+   hyphens are strongly preferred for SEO.
+   All other characters should be removed or
+   encoded.
+
+Q: Should URL slugs include dates?
+A: For evergreen content, avoid dates in slugs —
+   they make content appear outdated even when
+   updated. For news and time-sensitive content,
+   dates can be appropriate for context.
+
+Q: How long should a URL slug be?
+A: Under 60 characters ideally. Google truncates
+   URLs in search results, and shorter URLs are
+   easier to share. Include your primary keyword
+   and remove unnecessary words.
+
+Q: Should I change existing URL slugs for SEO?
+A: Avoid changing established URLs — they have
+   existing backlinks and search equity. If you
+   must change a URL, always set up a 301 redirect
+   from the old URL to the new one.
+
+Q: What is the difference between a URL slug
+   and a URL path?
+A: A URL path is the complete directory structure
+   (/blog/2026/how-to-write-seo-titles). A slug
+   is just the final segment of the path
+   (how-to-write-seo-titles).
+
+--- /tools/tweet-scheduler (297 words → 800+) ---
+
+Add:
+Heading: "Why Schedule Tweets?"
+Content:
+"Tweet scheduling allows you to plan and organize
+your Twitter/X content in advance, ensuring
+consistent posting even when you are unavailable.
+Consistency is one of the most important factors
+in growing a Twitter/X audience — accounts that
+post regularly and predictably grow faster than
+those that post sporadically.
+
+Scheduling also allows you to post at optimal
+times for your audience's timezone and activity
+patterns, even if those times are inconvenient
+for you personally. If your audience is primarily
+in the US but you are in Asia, scheduling lets
+you post during peak US hours while you sleep."
+
+Heading: "Best Times to Post on Twitter/X"
+Content:
+"Research consistently identifies certain time
+windows as having higher engagement rates on
+Twitter/X. For a US-centric audience the most
+effective times are generally Tuesday through
+Thursday between 9am-3pm Eastern Time.
+
+However the best times for your specific account
+depend entirely on when your followers are active.
+Twitter/X Analytics (available to all accounts)
+shows when your followers are most active —
+use this data to time your posts rather than
+relying on generic recommendations.
+
+For a global audience, consider posting multiple
+times per day across different time zones, or
+focus on the single largest timezone segment
+of your audience."
+
+Heading: "Content Calendar Strategy"
+Content:
+"A content calendar maps out your posting schedule
+in advance — what to post, when to post it, and
+for what purpose. Effective Twitter/X content
+calendars typically include a mix of: original
+thoughts and opinions (40%), curated content
+from others with commentary (30%), promotional
+content about your work or products (20%),
+and engagement content like questions and polls (10%).
+
+Batch creating content — writing a week's worth
+of tweets in one session — is more efficient than
+trying to come up with something to post each day.
+Use our scheduler to plan content in advance and
+maintain a consistent presence without daily effort."
+
+FAQ:
+Q: What is the best tweet posting frequency?
+A: For most accounts 1-3 tweets per day is
+   optimal. Posting more can work for news
+   accounts but risks overwhelming followers
+   for personal and brand accounts. Consistency
+   matters more than volume.
+
+Q: Can I edit a scheduled tweet?
+A: Our scheduler helps you plan content but
+   the actual scheduling requires a third-party
+   tool like Buffer or Hootsuite that integrates
+   with Twitter/X's API. Edit scheduled tweets
+   within those tools before they publish.
+
+Q: What is the character limit for tweets?
+A: Standard Twitter/X accounts can post 280
+   characters per tweet. X Premium subscribers
+   can post up to 25,000 characters. Our
+   character counter shows your count in real time.
+
+Q: Should I delete and repost underperforming tweets?
+A: Generally no. Deleting tweets removes them
+   from conversations and can break thread
+   continuity. Instead analyze why a tweet
+   underperformed and apply those learnings
+   to future content.
+
+Q: How do I find my best posting times?
+A: Check Twitter/X Analytics (analytics.twitter.com)
+   to see when your followers are most active.
+   This data is specific to your account and
+   far more reliable than generic recommendations.
+
+--- /tools/subject-line-generator (299 words → 800+) ---
+
+Add:
+Heading: "What Makes a Great Email Subject Line?"
+Content:
+"The email subject line is the single most important
+factor determining whether your email gets opened
+or ignored. With the average professional receiving
+120+ emails per day, your subject line has less
+than 3 seconds to capture attention and compel
+a click.
+
+Effective subject lines are specific (tell the
+reader exactly what's inside), create curiosity
+or urgency without being misleading, are concise
+(under 50 characters to display fully on mobile),
+and are relevant to the recipient's interests
+or needs. Generic subject lines like 'Newsletter
+March 2026' or 'Update from [Company]' consistently
+underperform against specific, value-driven alternatives."
+
+Heading: "Email Open Rate Statistics"
+Content:
+"The average email open rate varies significantly
+by industry. Marketing emails average 20-25%
+open rates. Transactional emails (receipts,
+password resets) average 45-65%. Internal
+company emails average 80%+. B2B emails average
+15-25%. Non-profit emails average 25-30%.
+
+Subject line personalization (including the
+recipient's name or company) increases open
+rates by an average of 26% according to Campaign
+Monitor research. Question-based subject lines
+average 10% higher open rates than statement-based
+ones. Numbers in subject lines ('5 ways to...')
+increase open rates by 15-20% compared to equivalent
+lines without numbers."
+
+Heading: "Subject Line Spam Trigger Words"
+Content:
+"Certain words and phrases trigger spam filters
+and should be avoided in subject lines. The most
+common spam triggers include: FREE (in caps),
+guaranteed, winner, cash, prize, act now, limited
+time, click here, buy now, earn money, make money,
+no cost, risk-free, and excessive punctuation
+like multiple exclamation points.
+
+Using these phrases does not guarantee your email
+will be marked as spam — modern filters use
+sophisticated algorithms that consider many factors.
+However avoiding obvious spam language reduces
+your risk and improves deliverability."
+
+FAQ:
+Q: How long should an email subject line be?
+A: Under 50 characters for full display on
+   most mobile devices. Gmail shows approximately
+   60 characters on desktop and 30-40 on mobile.
+   Aim for 30-50 characters for maximum compatibility.
+
+Q: Do emojis in subject lines increase open rates?
+A: Used sparingly and appropriately, emojis can
+   increase open rates by 5-10% by making emails
+   visually distinctive in crowded inboxes.
+   Overuse or inappropriate emojis can reduce
+   credibility and open rates.
+
+Q: What is A/B testing for subject lines?
+A: A/B testing sends two versions of an email
+   with different subject lines to small segments
+   of your list, measures which performs better,
+   then sends the winning version to the remainder.
+   Most email marketing platforms support A/B
+   testing built-in.
+
+Q: Does subject line capitalization affect open rates?
+A: Sentence case (only first word capitalized)
+   tends to feel more personal and conversational.
+   Title Case Can Feel More Formal. ALL CAPS
+   typically reduces open rates and triggers
+   spam filters.
+
+Q: How do I test if my subject line will be
+   flagged as spam?
+A: Use our spam score checker to analyze your
+   subject line and email content for common
+   spam triggers before sending.
+
+===================================================
+PHASE 8 — EXPAND 5 CATEGORY LANDING PAGES
+(234-294 words → 800+)
+===================================================
+
+--- /email-tools (234 words → 800+) ---
+
+In src/pages/categories/email-tools.tsx or
+equivalent category page file, add after the
+tool listing:
+
+Heading: "Email Privacy and Security in 2026"
+Content:
+"Email remains one of the most common vectors
+for spam, phishing, and data breaches. Every time
+you provide your real email address to a new
+service, you risk that address being sold to
+advertisers, exposed in a data breach, or added
+to spam lists. Our email tools help you protect
+your privacy while maintaining full email
+functionality.
+
+Disposable email addresses let you sign up for
+services, receive verification codes, and complete
+registrations without ever exposing your real
+inbox. Masked email generators create permanent
+aliases that forward to your real email — giving
+you the ability to disable forwarding if an
+alias starts receiving spam."
+
+Heading: "Complete Email Toolkit — All Tools Explained"
+Content:
+"Temp Email: Get an instant throwaway inbox
+across 9 domains. Perfect for one-time signups,
+free trials, and any registration where you
+prefer not to use your real email address.
+No account required, auto-refreshes every 15 seconds.
+
+Temp Gmail: Generate real @gmail.com addresses
+using Gmail's dot trick feature. These addresses
+work on sites that specifically block disposable
+email domains — because they ARE real Gmail
+addresses that forward to a real inbox.
+
+Gmail Tricks: Create unlimited Gmail aliases
+using dot and plus addressing. Unlike temp email,
+these aliases are permanent and all mail is
+delivered to your real Gmail inbox — useful for
+tracking which services share your data.
+
+Email Validator: Check email addresses for correct
+syntax and valid MX records. Essential for
+cleaning email lists, validating form input,
+and verifying contact information before outreach.
+
+Masked Email Generator: Create privacy-preserving
+email aliases that forward to your real address.
+Unlike disposable addresses, masked emails can
+be permanent — useful for long-term signups
+where you want to protect your real address.
+
+Email Signature Generator: Create professional
+HTML email signatures with your name, title,
+company, contact information, and social links.
+
+Spam Score Checker: Analyze your email content
+and subject lines for spam triggers before sending
+to improve inbox placement rates.
+
+Newsletter Template Generator: Create professional
+HTML email newsletter templates without coding.
+
+Subject Line Generator: Generate compelling email
+subject lines optimized for high open rates using
+AI."
+
+FAQ:
+Q: What is the safest way to sign up for new services?
+A: Use a disposable email for services you are
+   unsure about. Use masked email for services
+   you trust but want privacy from. Use your real
+   email only for services you actively want to
+   receive communication from long-term.
+
+Q: What is the difference between temp email
+   and masked email?
+A: Temp email creates a completely throwaway
+   address that expires. Masked email creates
+   a permanent alias that forwards to your real
+   address — you can disable the forwarding if
+   the alias starts receiving spam.
+
+Q: Can websites detect if I am using a disposable
+   email address?
+A: Some websites maintain blocklists of known
+   disposable email domains. Our Temp Gmail tool
+   generates real @gmail.com addresses that bypass
+   these blocklists entirely.
+
+Q: Is it legal to use a disposable email address?
+A: Yes. Using disposable email addresses is
+   completely legal in all jurisdictions. They
+   are simply email addresses that expire —
+   there is no law requiring you to use your
+   real email address for online registrations.
+
+Q: How do I know if my email address has been
+   leaked in a data breach?
+A: Use a service like Have I Been Pwned
+   (haveibeenpwned.com) to check if your email
+   has appeared in known data breaches.
+
+--- /ai-writing-tools (263 words → 800+) ---
+
+Add:
+Heading: "AI Writing Tools for Creators and Professionals"
+Content:
+"Artificial intelligence has transformed how
+professionals approach writing tasks. From generating
+first drafts to detecting AI content in submissions,
+AI writing tools handle the time-consuming aspects
+of content creation while leaving creative judgment
+to humans.
+
+Our AI writing tools are powered by Groq's
+ultra-fast inference engine running Llama 3.3 70B —
+one of the most capable open-source language models
+available. This gives you access to professional-grade
+AI writing assistance completely free, with no
+usage limits or subscription required."
+
+Heading: "AI Writing Tools Explained"
+Content:
+"AI Bio Generator: Creates professional Twitter/X
+bios tailored to your niche, profession, and tone
+preference. Generate 3 options instantly and choose
+the best fit. Powered by Llama 3.3 70B.
+
+AI Text Detector and Humanizer: Analyzes text to
+estimate the probability it was AI-generated.
+The humanizer feature rewrites AI text to sound
+more natural and human while preserving meaning.
+Useful for content creators, educators, and anyone
+working with AI-generated content.
+
+Email Subject Line Generator: Creates compelling
+email subject lines optimized for high open rates.
+Supports multiple tones and use cases from
+marketing emails to transactional messages."
+
+Heading: "Responsible AI Writing"
+Content:
+"AI writing tools are most effective when used
+as assistants rather than replacements for human
+creativity and judgment. Use AI to generate first
+drafts, overcome writer's block, explore different
+tones and approaches, and handle repetitive writing
+tasks — then apply human editing to add personal
+voice, verify accuracy, and ensure the content
+genuinely reflects your perspective.
+
+Always review AI-generated content before publishing.
+AI models can produce plausible-sounding but
+incorrect information, especially for specific
+facts, recent events, and specialized domains."
+
+FAQ:
+Q: Are AI writing tools free to use?
+A: Yes. All AI writing tools on X Toolkit are
+   completely free with no signup required.
+
+Q: What AI model powers these tools?
+A: Our AI tools use Groq's inference engine
+   running Llama 3.3 70B — one of the most
+   capable open-source language models.
+
+Q: How accurate is the AI detector?
+A: Current accuracy is approximately 70-85%.
+   No detector is 100% accurate — results are
+   probability estimates, not definitive proof.
+
+Q: Can I use AI-generated bios commercially?
+A: Yes. Content generated by our tools is yours
+   to use for any purpose. We claim no rights
+   over generated content.
+
+Q: Will more AI tools be added?
+A: Yes. We plan to add Text-to-Speech, AI Tweet
+   Generator, AI Caption Generator, and more.
+   Follow our updates for new tool announcements.
+
+--- /social-media-tools (280 words → 800+) ---
+
+Add:
+Heading: "X/Twitter Tools for Creators and Managers"
+Content:
+"X (formerly Twitter) remains one of the most
+important platforms for building a public presence,
+sharing expertise, and connecting with communities.
+Our X/Twitter tools handle the technical and
+repetitive tasks so you can focus on creating
+content and building relationships.
+
+Whether you manage a single personal account or
+dozens of brand accounts, our tools automate
+time-consuming tasks like bulk account checking,
+username generation, bio writing, hashtag formatting,
+and thread splitting."
+
+Heading: "All Social Media Tools Explained"
+Content:
+"X Account Checker: The most powerful free bulk
+Twitter/X account checker available. Check up to
+100 usernames simultaneously and see their status
+(Active/Suspended/Deleted), follower count,
+following count, join date, and verified badge.
+No login or API key required.
+
+AI Bio Generator: Generate professional Twitter/X
+bios in seconds using AI. Enter your niche and
+preferred tone to get 3 unique bio options.
+
+Username Generator: Create unique username ideas
+based on your name, niche, or keywords. Check
+availability and find handles that match your
+personal or brand identity.
+
+Hashtag Formatter: Process lists of hashtags —
+add or remove # symbols, deduplicate, sort, and
+format for different platforms.
+
+Tweet Formatter: Split long-form content into
+properly sized tweet threads automatically.
+
+Tweet Scheduler: Plan and organize your posting
+schedule with a content calendar tool.
+
+Font Preview: Preview Unicode text styles for
+Twitter/X bios and posts — bold, italic, script,
+monospace and more."
+
+FAQ:
+Q: Do these tools require a Twitter/X account?
+A: No. All tools work without any Twitter/X
+   login or API credentials.
+
+Q: Is the X Account Checker free?
+A: Yes, completely free. Check up to 100 accounts
+   per batch with no limits.
+
+Q: Will Instagram and LinkedIn tools be added?
+A: Yes. We plan to add tools for Instagram,
+   LinkedIn, Facebook, and YouTube. Follow our
+   updates for announcements.
+
+Q: Can I use these tools for competitor research?
+A: Yes. All tools work with any public Twitter/X
+   account. They are commonly used for competitor
+   analysis, influencer research, and account auditing.
+
+--- /seo-tools (284 words → 800+) ---
+
+Add:
+Heading: "SEO Tools for Every Website Owner"
+Content:
+"Search engine optimization (SEO) determines
+how your website ranks in Google, Bing, and
+other search engines. Effective SEO requires
+both technical implementation (correct meta tags,
+structured data, sitemaps) and content strategy
+(keyword research, content quality, link building).
+
+Our SEO tools handle the technical implementation
+side — generating correct markup, validating
+your configuration, and helping you understand
+what search engines see when they crawl your pages."
+
+Heading: "All SEO Tools Explained"
+Content:
+"Meta Tag Generator: Create complete SEO meta
+tags including title, description, Open Graph,
+and Twitter Card tags with a live SERP preview
+showing exactly how your page will appear in
+Google search results.
+
+JSON-LD Schema Generator: Generate structured
+data markup in JSON-LD format. Supports Article,
+FAQ, Product, BreadcrumbList, Organization, Local
+Business, and more. Structured data enables rich
+results in Google Search.
+
+Robots.txt Generator: Create and configure your
+robots.txt file to control which pages search
+engines crawl and which they ignore.
+
+XML Sitemap Validator: Validate your sitemap for
+errors, invalid URLs, and formatting issues that
+could prevent Google from properly indexing your
+pages.
+
+Keyword Density Checker: Analyze your content for
+keyword frequency to ensure natural keyword usage
+without over-optimization.
+
+Page Speed Checker: Evaluate your page against
+Core Web Vitals criteria with actionable improvement
+recommendations.
+
+OG Image Preview: See exactly how your pages
+appear when shared on Twitter/X, Facebook,
+LinkedIn, and other social platforms."
+
+FAQ:
+Q: Do I need all these tools for basic SEO?
+A: Start with Meta Tag Generator and Schema
+   Generator — these have the highest impact.
+   Add Robots.txt and Sitemap Validator for
+   technical SEO compliance.
+
+Q: How often should I check my sitemap?
+A: After any major site changes — adding pages,
+   removing pages, or restructuring URLs. Also
+   check if Google Search Console reports sitemap
+   errors.
+
+Q: What is the most important meta tag for SEO?
+A: The title tag has the highest direct impact
+   on rankings. Meta description does not directly
+   affect rankings but affects click-through rate
+   from search results.
+
+Q: Does structured data directly improve rankings?
+A: Not directly. Schema markup enables rich results
+   (FAQ dropdowns, star ratings, breadcrumbs) in
+   search results, which improves click-through
+   rates — indirectly improving rankings over time.
+
+--- /developer-tools (294 words → 800+) ---
+
+Add:
+Heading: "Developer Tools for Every Workflow"
+Content:
+"Modern web development involves constant data
+transformation, encoding, formatting, and debugging.
+Our developer tools handle the repetitive technical
+tasks so you can focus on building rather than
+manually processing data.
+
+Every tool runs entirely in your browser — no
+data is sent to any server. This means sensitive
+data like JWT tokens, API keys in JSON, and
+proprietary code can be safely processed without
+privacy concerns."
+
+Heading: "All Developer Tools Explained"
+Content:
+"JSON Formatter and Validator: Format messy JSON
+into readable, properly indented code. Validates
+syntax and highlights errors with specific line
+numbers. Supports both formatting (beautify) and
+minification.
+
+JWT Decoder: Decode JSON Web Tokens to inspect
+header, payload, and claims. Runs 100% client-side —
+your tokens are never transmitted anywhere.
+
+Base64 Encoder/Decoder: Convert text and binary
+data to and from Base64 encoding. Essential for
+working with APIs, email attachments, and
+data URIs.
+
+Regex Tester: Test regular expressions against
+sample input with real-time match highlighting.
+Supports JavaScript regex syntax.
+
+UUID Generator: Generate cryptographically random
+UUID v4 identifiers for databases, APIs, and
+applications. Single and bulk generation.
+
+URL Encoder/Decoder: Convert special characters
+in URLs to percent-encoded format and back.
+Essential for API development and URL debugging.
+
+YAML to JSON Converter: Convert between YAML and
+JSON formats bidirectionally. Handles nested
+structures and all standard data types.
+
+CSS Minifier: Remove whitespace and comments from
+CSS to reduce file size for production deployment.
+
+HTML Formatter: Beautify messy HTML with proper
+indentation and structure for readability.
+
+SQL Formatter: Format SQL queries with proper
+indentation and capitalization for readability."
+
+FAQ:
+Q: Are developer tools safe for sensitive data?
+A: Yes. All tools run entirely in your browser.
+   No data is transmitted to any server. JWT tokens,
+   API keys, and proprietary code are never shared.
+
+Q: Which tools work offline?
+A: All developer tools work offline since they
+   run client-side. Only AI tools and tools
+   requiring external data (account checker,
+   temp mail) need an internet connection.
+
+Q: Can I use these tools in my development workflow?
+A: Yes. All tools are designed for professional
+   development use. They handle real-world data
+   formats and edge cases developers encounter daily.
+
+Q: Will more developer tools be added?
+A: Yes. Planned additions include Diff Checker,
+   Hash Generator, Cron Expression Generator,
+   and more based on community requests.
+
+===================================================
+PHASE 9 — EXPAND BLOG INDEX AND SHORT BLOG POSTS
+===================================================
+
+--- /blog (190 words → 800+) ---
+
+In src/pages/blog/index.tsx replace the current
+minimal intro with comprehensive content:
+
+Heading: "X Toolkit Blog — Guides, Tutorials
+and Resources"
+
+Intro paragraph:
+"Welcome to the X Toolkit blog — your resource for
+practical guides on email privacy, developer tools,
+SEO, and social media. Each article is written to
+be genuinely useful with real examples, actionable
+advice, and links to free tools that let you apply
+what you learn immediately."
+
+Add category sections with descriptions:
+
+Email and Privacy section:
+"Email privacy is more important than ever.
+Our guides cover everything from understanding
+disposable email to protecting yourself from
+data breaches and spam. Learn how to use
+temporary email addresses, Gmail tricks, and
+masked email to protect your inbox."
+
+Developer Guides section:
+"Technical guides for web developers covering
+common encoding formats, data structures, and
+development tools. Written for developers at
+all levels with practical examples."
+
+Social Media section:
+"Practical guides for building your presence
+on Twitter/X and other social platforms.
+Bio writing, content strategy, and tool guides."
+
+Then list all 15 articles with title, excerpt,
+read time, and category badge.
+
+--- /blog/seo-meta-tags-guide (490 words → 900+) ---
+
+Expand with these additional sections:
+
+Add after existing content:
+
+Heading: "Open Graph Tag Examples"
+Content:
+"Here is a complete example of all recommended
+meta tags for a blog post page:
+
+The title tag should contain your primary keyword
+and be under 60 characters. The meta description
+should be 150-160 characters and include a call
+to action. The og:title can be slightly longer
+than the title tag since it does not have Google's
+character limit. The og:image should be 1200x630
+pixels for optimal display on all social platforms.
+The og:type should be article for blog posts and
+website for the homepage.
+
+For Twitter/X specifically, use twitter:card set
+to summary_large_image to get the large image
+preview format. Set twitter:site to your Twitter/X
+handle and twitter:creator to the author's handle
+for attribution."
+
+Add Heading: "Canonical Tags"
+Content:
+"The canonical tag tells search engines which
+version of a page is the authoritative original
+when multiple URLs show the same or similar content.
+Common situations requiring canonical tags include
+HTTP vs HTTPS versions, www vs non-www versions,
+URL parameters like ?sort=price or ?ref=newsletter,
+and syndicated content published on multiple sites.
+
+Set the canonical tag to the preferred URL for
+every page, even pages without duplicates — this
+is defensive SEO that prevents accidental duplicate
+content issues."
+
+Add Heading: "Meta Robots Tag"
+Content:
+"The meta robots tag controls how search engines
+index and follow links on your page. The most
+important values are: index/noindex (whether to
+include in search results), follow/nofollow
+(whether to follow links on the page).
+
+Use noindex for: thank you pages, search results
+pages, user profile pages, admin pages, and any
+pages you do not want appearing in search results.
+Never noindex your important content pages."
+
+--- /blog/what-is-regex (549 words → 900+) ---
+
+Expand with:
+
+Heading: "Regex Syntax Reference"
+Content:
+"Character classes: [abc] matches a, b, or c.
+[a-z] matches any lowercase letter. [0-9] matches
+any digit. [^abc] matches anything except a, b, or c.
+. (dot) matches any character except newline.
+
+Quantifiers: * matches 0 or more. + matches 1 or more.
+? matches 0 or 1 (optional). {n} matches exactly n times.
+{n,} matches n or more times. {n,m} matches between
+n and m times.
+
+Anchors: ^ matches start of string. $ matches end of
+string. \b matches word boundary. \B matches non-word
+boundary.
+
+Groups and alternation: (abc) captures group.
+(?:abc) non-capturing group. a|b matches a or b.
+\1 backreference to first captured group."
+
+Add: "5 Common Regex Patterns Every Developer Needs"
+With examples for: email validation, URL matching,
+phone numbers, date format validation, password
+strength checking — explain each in plain English.
+
+--- /blog/what-is-jwt (561 words → 900+) ---
+
+Expand with:
+
+Heading: "JWT Security Best Practices"
+Content:
+"Never store JWTs in localStorage: localStorage
+is accessible by any JavaScript on the page and
+is vulnerable to XSS attacks. Store JWTs in
+httpOnly cookies which are inaccessible to JavaScript.
+
+Validate the signature: Always verify the JWT
+signature on the server. Never trust client-supplied
+data without verification.
+
+Check expiration: Always verify the exp claim.
+Expired tokens should be rejected even if the
+signature is valid.
+
+Use appropriate algorithms: Prefer RS256 (asymmetric)
+over HS256 (symmetric) for multi-service architectures.
+Never use the none algorithm in production — it
+disables signature verification entirely."
+
+Add heading: "JWT vs Session Tokens"
+Content comparing both approaches for authentication.
+
+===================================================
+PHASE 10 — ADD SCHEMA MARKUP TO ALL TOOL PAGES
+===================================================
+
+In src/components/layout/MiniToolLayout.tsx
+find where extraSchemas is passed to SeoHead.
+
+Update the MiniToolLayout to automatically
+generate and pass a WebApplication schema for
+every tool page using the tool's metadata:
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": toolTitle,
+  "url": `https://xtoolkit.live${currentPath}`,
+  "description": toolDescription,
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+};
+
+This adds WebApplication schema to ALL tool pages
+automatically without touching each file individually.
+
+===================================================
+FINAL BUILD AND AUDIT:
+===================================================
+
+After ALL phases complete:
+
+1. pnpm build
+   Confirm zero errors
+   Confirm 83+ pages prerendered
+
+2. Run the full audit script to verify:
+   - Zero Critical issues
+   - Zero High issues for thin content
+   - All sitemaps correct
+   - All pages 800+ words
+
+3. git add -A
+   git commit -m "AdSense comprehensive fix: expand
+   30+ thin pages, fix sitemaps, add schema markup,
+   noindex utility pages, delete dead files"
+   git push origin main
+
+4. Show ALL files changed and word counts for
+   every expanded page.
+===================================================
