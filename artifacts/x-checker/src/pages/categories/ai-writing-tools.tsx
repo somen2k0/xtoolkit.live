@@ -154,6 +154,26 @@ const config: CategoryPageConfig = {
       bg: "bg-pink-400/10 border-pink-400/20",
     },
   ],
+
+  extendedContent: (
+    <>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Writing a Great X (Twitter) Bio</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Your X bio is one of the most important pieces of copy you will write — it has a strict 160-character limit, appears in search results, and is the first thing potential followers read when deciding whether to follow you. A strong bio communicates who you are, what you create or do, and why someone should follow you — all in under 160 characters.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">The most effective X bios share several characteristics: they lead with a specific identity or role rather than a generic one (not "entrepreneur" but "building developer tools"), they include a clear value proposition for followers, they avoid generic buzzwords like "passionate" and "guru", and they end with a specific call-to-action — a website link, a product, or a key project. Our AI Bio Generator produces multiple variants following these proven patterns across different tones and styles.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">The 160-Character Challenge</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">160 characters is remarkably short — about 2–3 sentences at most. Every word must earn its place. Common mistakes include wasting characters on your name (already displayed above the bio), your location (use the dedicated location field), or your website URL (use the dedicated website field). Focus the bio itself on your identity, value proposition, and personality.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">Emojis can work well in X bios — they add visual interest and save characters compared to words (😂 is 2 chars, "lol" is 3). However overusing emojis signals inauthenticity. One or two relevant emojis at most; professional contexts should use none or one. Our generator creates emoji-free and emoji-optional variants so you can choose the style that fits your audience.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">AI Writing Tools for Content Creation</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Beyond bio generation, AI writing tools are increasingly being used for drafting tweets, creating thread outlines, generating content ideas from keywords, and rewriting existing content in different tones. These use cases are growing as AI language models become more capable and accessible.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">The most effective use of AI writing tools is as a starting point, not a final product. Use generated content as a first draft or inspiration, then edit it to add your voice, specific details, and personal perspective. AI-generated content that is published verbatim is often detectable and lacks the specific authentic details that make content genuinely useful and shareable. Our tools are designed to give you a strong starting point that you refine — not replace your voice entirely.</p>
+      </div>
+    </>
+  ),
 };
 
 export default function AiWritingToolsPage() {

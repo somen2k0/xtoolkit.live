@@ -303,6 +303,24 @@ export default function YamlJsonConverter() {
               ))}
             </div>
           </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">When to Use YAML vs JSON</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Use JSON when building REST APIs, exchanging data between services, working with JavaScript applications (JSON parses natively), or when the data will primarily be read by machines. JSON is the universal standard for web APIs and data interchange.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Use YAML when writing configuration files, defining CI/CD pipelines, creating Docker or Kubernetes configs, writing Ansible playbooks, or any situation where developers will regularly read and edit the file manually. The conversion between YAML and JSON is lossless for most data structures — our converter handles both directions accurately, preserving all data types and nested structures.</p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">Common YAML Pitfalls</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">The most common YAML errors are inconsistent indentation (mixing tabs and spaces), special characters in unquoted strings, and incorrect handling of colons in values. Always use spaces — not tabs — for YAML indentation. A single misplaced space can break an entire YAML file silently or cause unexpected type coercion.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">YAML also has surprising type inference: values like <code className="text-xs bg-muted px-1 py-0.5 rounded">yes</code>, <code className="text-xs bg-muted px-1 py-0.5 rounded">no</code>, <code className="text-xs bg-muted px-1 py-0.5 rounded">on</code>, and <code className="text-xs bg-muted px-1 py-0.5 rounded">off</code> are parsed as booleans in YAML 1.1 (used by many tools). Wrap them in quotes if you need string values. Our converter shows you exactly how your YAML will be interpreted when converted to JSON.</p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">YAML in Modern DevOps Workflows</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">YAML has become the dominant configuration format in modern DevOps. GitHub Actions workflows, GitLab CI/CD pipelines, Kubernetes manifests, Docker Compose files, Helm charts, and Ansible playbooks are all written in YAML. Understanding YAML syntax and being able to convert between YAML and JSON is an essential skill for any developer working with cloud infrastructure or CI/CD systems.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">When debugging complex YAML configurations, converting to JSON can be helpful — JSON's strict syntax makes structural errors more obvious, and many JSON validators provide clearer error messages than YAML parsers.</p>
+          </section>
         </div>
       </div>
     </MiniToolLayout>

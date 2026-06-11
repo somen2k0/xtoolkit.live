@@ -208,6 +208,31 @@ export default function UrlSlugGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Standardizing URL formats across a website or API</li>
           </ul>
         </div>
+
+        {/* Extended content */}
+        <div className="space-y-6 pt-2">
+          <section>
+            <h2 className="text-lg font-semibold mb-2">What is a URL Slug?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">A URL slug is the human-readable part of a URL that identifies a specific page. In the URL <code className="text-xs bg-muted px-1 py-0.5 rounded">https://example.com/blog/how-to-write-seo-titles</code>, the slug is <code className="text-xs bg-muted px-1 py-0.5 rounded">how-to-write-seo-titles</code>. Slugs replace spaces with hyphens, remove special characters, and use lowercase letters to create clean, readable, and SEO-friendly web addresses.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">URL slugs matter for both usability and SEO. A descriptive slug tells both users and search engines what a page is about before they visit it. Descriptive slugs in search results have higher click-through rates because users can immediately understand what they will find on the page.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">SEO Best Practices for URL Slugs</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed"><strong>Keep slugs short and descriptive:</strong> Shorter URLs are easier to share, remember, and display in search results without truncation. Include only the most important keywords — remove stop words like "a", "the", "and", "of" that add length without SEO value.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Use hyphens not underscores:</strong> Google treats hyphens as word separators but underscores as word joiners. <code className="text-xs bg-muted px-1 py-0.5 rounded">how-to-write</code> (three words) vs <code className="text-xs bg-muted px-1 py-0.5 rounded">how_to_write</code> (one word from Google's perspective). Always use hyphens in URL slugs.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Use lowercase only:</strong> URLs are case-sensitive on most servers. Uppercase in URLs can cause duplicate content issues if both versions are accessible. Always use lowercase for all URL slugs.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Include target keywords:</strong> The slug should contain your primary keyword for the page. A blog post about email marketing tips should have a slug like <code className="text-xs bg-muted px-1 py-0.5 rounded">email-marketing-tips</code> not <code className="text-xs bg-muted px-1 py-0.5 rounded">page-123</code>.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Special Characters in URLs</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Most special characters must be encoded or removed from URL slugs. Characters like spaces, ampersands (&), question marks (?), hash symbols (#), and percent signs (%) have special meaning in URLs and must be either encoded or removed. Our slug generator automatically handles all special characters — removing punctuation, encoding necessary characters, replacing spaces with hyphens, and converting to lowercase — producing clean, valid slugs ready to use in any CMS or web application.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Should I Change Existing URL Slugs?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Avoid changing established URLs — they have existing backlinks and search equity. If you must change a URL, always set up a 301 redirect from the old URL to the new one. Without a redirect, you lose all the link equity accumulated by the old URL and create a poor user experience for anyone who has bookmarked or linked to the old address.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">For new content, take the time to create a clean, keyword-rich slug from the start. Aim for under 60 characters — Google truncates URLs in search results, and shorter URLs are easier to share and copy.</p>
+          </section>
+        </div>
       </div>
     </MiniToolLayout>
   );

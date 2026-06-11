@@ -305,6 +305,32 @@ export default function EmailSignatureGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Adding social links and a call-to-action to outbound emails</li>
           </ul>
         </div>
+
+        {/* Extended content */}
+        <div className="space-y-6 pt-2">
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Why Email Signatures Matter</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">A professional email signature serves multiple important functions beyond simply identifying who sent the email. It provides recipients with immediate access to your contact information, establishes your professional credibility, reinforces your personal or company brand, and can include calls-to-action that drive business outcomes.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Research shows that emails with professional signatures receive higher response rates than those without. A well-designed signature signals that you take communication seriously and provides everything the recipient needs to follow up — phone number, title, company, website, and social profiles — without requiring them to search for your information.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Key Elements of an Effective Email Signature</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed"><strong>Name and title:</strong> Your full name and professional title should be the most prominent elements. Use your preferred professional name consistently across all communications.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Company and contact information:</strong> Include your company name, direct phone number, and company website. Only include your physical address if it is relevant to your role and appropriate to share.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Social media links:</strong> Include relevant professional social profiles. LinkedIn is appropriate for most professional contexts. Twitter/X and GitHub are valuable for technical professionals. Avoid including purely personal social profiles.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Headshot or logo:</strong> A small professional photo (48–64px) or company logo adds visual identity and makes your signature more memorable. Photos should be professional quality with a clean background.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">HTML vs Plain Text Email Signatures</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">HTML signatures allow rich formatting — fonts, colors, images, logos, and clickable links. They display correctly in most modern email clients including Gmail, Outlook, and Apple Mail. Plain text signatures work in every email client without exception but cannot include formatting, images, or styled links — they are appropriate for technical contexts where plain text email is preferred.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Our generator creates HTML signatures that are compatible with major email clients. When copying to Gmail, Outlook, or other clients, use the copy button to get properly formatted HTML that preserves all styling. Keep signature images small — 48–64px for headshots and 100–200px wide for logos — to avoid slowing email loading or triggering corporate email filters.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Email Signature Best Practices</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Keep signatures concise — 4–6 lines of information is ideal. Overly long signatures with extensive legal disclaimers, quotes, and multiple images can appear unprofessional and slow email loading. Avoid including your email address in your signature — recipients already know it since they received your message. Focus on alternative contact methods like phone or social profiles.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Custom web fonts are not reliably supported in email clients. Stick to web-safe fonts like Arial, Helvetica, Georgia, or Times New Roman for consistent display across all email clients. Test your signature by sending a test email to yourself and checking how it renders in different email clients before rolling it out.</p>
+          </section>
+        </div>
       </div>
     </MiniToolLayout>
   );

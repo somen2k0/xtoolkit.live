@@ -125,6 +125,20 @@ export default function WhatIsJwt() {
         <li><strong>Don't put sensitive data in the payload.</strong> The payload is readable by anyone who has the token. Encrypt the entire JWT (using JWE) if you need to store sensitive claims.</li>
       </ul>
 
+      <h2>JWT vs Session Tokens</h2>
+      <p>
+        Traditional server-side sessions store user data in a database and give the client only a session ID cookie. On every request, the server looks up the session ID in the database to retrieve the user's state. This approach is simple and easy to invalidate (just delete the session from the database), but it requires a database lookup on every authenticated request and doesn't scale easily across multiple servers without a shared session store.
+      </p>
+      <p>
+        JWTs are stateless — the server encodes all necessary user information directly into the token. On every request, the server verifies the signature and reads the claims directly from the token without any database lookup. This makes JWTs highly scalable across distributed systems: any server that knows the secret key (or has the public key for RS256) can validate tokens independently without coordination.
+      </p>
+      <p>
+        The tradeoff is revocation: you cannot invalidate a JWT before it expires without a blocklist (which reintroduces statefulness). For most applications this is handled by using short-lived access tokens (15 minutes to 1 hour) paired with longer-lived refresh tokens stored in HttpOnly cookies. When you need to log a user out immediately — for security events like password changes — the standard approach is to rotate the refresh token secret or maintain a short-lived token blocklist.
+      </p>
+      <p>
+        <strong>When to use JWTs:</strong> microservices architectures where services need to authenticate requests independently, mobile apps where cookie management is less natural, or APIs that need to be stateless for horizontal scaling. <strong>When to prefer sessions:</strong> traditional web applications with a single server, applications requiring immediate revocation (banking, healthcare), or when simplicity is more valuable than scalability.
+      </p>
+
       <h2>Decode and Inspect JWTs</h2>
       <p>
         Use our free <a href="/tools/jwt-decoder"><strong>JWT Decoder</strong></a> to decode any JWT token and inspect its header, payload, and signature. Paste a token to see all claims including the user ID, email, role, expiration time, and any custom claims — instantly, with no server calls.

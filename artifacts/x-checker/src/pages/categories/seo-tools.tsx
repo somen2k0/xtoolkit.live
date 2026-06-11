@@ -150,6 +150,26 @@ const config: CategoryPageConfig = {
       bg: "bg-purple-400/10 border-purple-400/20",
     },
   ],
+
+  extendedContent: (
+    <>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">On-Page SEO Fundamentals</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">On-page SEO refers to all the optimizations you make directly on your web pages to improve their visibility in search engines. Unlike off-page SEO (backlinks, social signals, domain authority), on-page SEO is entirely within your control and should be your first priority before investing in link building.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">The most impactful on-page SEO elements are: the title tag (the biggest single ranking signal on the page), the meta description (affects click-through rate from search results), the URL structure (should be short and keyword-rich), heading hierarchy (H1 through H6 should follow logical structure with keywords in H1), content depth and relevance, and internal linking structure. Our SEO tools cover all of these areas, giving you practical utilities for each.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Meta Tags and SERP Appearance</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Search engine results pages (SERPs) show your title tag and meta description as your page's "advertisement" in search results. A well-written title and description can significantly increase your click-through rate even if your ranking position stays the same — getting you more traffic without improving your ranking.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">Google rewrites title tags and meta descriptions when it believes its version will perform better. To minimize rewrites: write titles that are descriptive and match the page content closely, stay under 60 characters for titles and 160 for descriptions, include your target keyword naturally (not forced), and avoid excessive capitalization, symbols, or repeated keywords. Our Meta Tag Generator shows a live SERP preview so you can optimize before publishing rather than guessing how it will look in results.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Robots.txt and Crawl Budget</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">The robots.txt file tells search engine crawlers which pages to crawl and which to skip. For most small sites it is not a critical ranking factor — crawlers will index everything accessible anyway. However for large sites (thousands of pages), e-commerce stores with faceted navigation, or sites with significant non-public areas, robots.txt helps focus crawl budget on the pages that matter most.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">Common robots.txt use cases: blocking crawlers from admin areas, staging environments, user account pages, search result pages, and print versions. Also valuable: blocking AI training scrapers using rules for GPTBot, CCBot, and other AI crawlers that have been added to well-maintained robots.txt files. Our Robots.txt Generator provides a complete interface for setting up all these rules without needing to write the syntax manually.</p>
+      </div>
+    </>
+  ),
 };
 
 export default function SeoToolsPage() {

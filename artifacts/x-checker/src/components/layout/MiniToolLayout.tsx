@@ -90,7 +90,22 @@ export function MiniToolLayout({
     ],
   };
 
-  const allExtraSchemas = [breadcrumbSchema, ...(seoExtraSchemas ?? [])];
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": title,
+    "url": `${SITE_URL}${path}`,
+    "description": seoDescription,
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+    },
+  };
+
+  const allExtraSchemas = [breadcrumbSchema, webAppSchema, ...(seoExtraSchemas ?? [])];
 
   return (
     <Layout>

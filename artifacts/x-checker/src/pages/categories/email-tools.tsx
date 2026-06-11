@@ -151,6 +151,26 @@ const config: CategoryPageConfig = {
       bg: "bg-green-400/10 border-green-400/20",
     },
   ],
+
+  extendedContent: (
+    <>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Email Deliverability: The Complete Picture</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Email deliverability is the ability of your emails to actually reach recipients' inboxes rather than being filtered into spam folders or bounced entirely. It is determined by a combination of technical factors (SPF, DKIM, DMARC records), sending reputation (your domain and IP's history), list quality (how many invalid or disengaged addresses you send to), and content quality (whether your emails look like spam).</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">The most preventable deliverability issues are list quality problems — sending to invalid email addresses, role-based accounts, and disposable domains that inflate your bounce rate and spam complaint rate. A single campaign to a dirty list can permanently damage your sender reputation with major email providers. Our Email Validator helps you catch these problems before they cause damage.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Understanding Email Character Limits</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Every email client displays subject lines and preview text differently. Gmail on desktop shows approximately 70 characters. Gmail on mobile shows 30–40 characters depending on screen size. Apple iPhone Mail shows 30–40 characters. Outlook shows 60–70 characters. Beyond these limits, your subject line is truncated with an ellipsis — cutting off your message mid-sentence.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">The most important practical rule: put the most important information in the first 30–40 characters of your subject line. Do not front-load your subject with the newsletter name, date, or company name — these take up valuable space that should be used to communicate value. Our Email Character Counter shows exactly where each major client truncates, so you can optimize for your audience's primary device.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Professional Email Signatures in 2026</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Email signatures have evolved significantly. In 2026, effective professional signatures are concise (4–6 lines maximum), mobile-friendly (designed for small screens first), and include exactly what the recipient needs to follow up — nothing more. The trend is toward simpler, cleaner signatures that load quickly and render well in all clients.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">The most important elements in priority order: your name (large and clear), your title and company, one phone number (direct line preferred), your website URL, and optionally 1–2 social profiles relevant to your professional context. Avoid: inspirational quotes, legal disclaimers in signatures (use proper legal footers instead), multiple logos, animated GIFs, and background images — all of which cause rendering issues in various clients.</p>
+      </div>
+    </>
+  ),
 };
 
 export default function EmailToolsPage() {

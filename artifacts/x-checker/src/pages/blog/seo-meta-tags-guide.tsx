@@ -149,6 +149,30 @@ export default function SeoMetaTagsGuide() {
       <p>
         Use our free <a href="/tools/meta-tag-generator"><strong>Meta Tag Generator</strong></a> to create optimized title, description, Open Graph, and Twitter Card tags for any page — with character counters and a live preview of how your page will appear in search results and social shares.
       </p>
+
+      <h2>Open Graph Tag Examples</h2>
+      <p>
+        A complete set of recommended meta tags for a blog post page should include: a title tag containing your primary keyword under 60 characters; a meta description of 150–160 characters with a call to action; an og:title (which can be slightly longer than the title tag since it has no Google character limit); an og:image of 1200×630 pixels for optimal display on all social platforms; and og:type set to <code>article</code> for blog posts or <code>website</code> for the homepage.
+      </p>
+      <p>
+        For Twitter/X specifically, use <code>twitter:card</code> set to <code>summary_large_image</code> to get the large image preview format. Set <code>twitter:site</code> to your Twitter/X handle and <code>twitter:creator</code> to the author's handle for proper attribution in tweets.
+      </p>
+
+      <h2>Canonical Tags</h2>
+      <p>
+        The canonical tag tells search engines which version of a page is the authoritative original when multiple URLs show the same or similar content. Common situations requiring canonical tags include: HTTP vs HTTPS versions, www vs non-www versions, URL parameters like <code>?sort=price</code> or <code>?ref=newsletter</code>, and syndicated content published on multiple sites.
+      </p>
+      <p>
+        Best practice is to set the canonical tag to the preferred URL for every page — even pages without duplicates. This is defensive SEO that prevents accidental duplicate content issues if your URL structure ever changes or if crawlers discover unexpected parameter variations.
+      </p>
+
+      <h2>Meta Robots Tag</h2>
+      <p>
+        The meta robots tag controls how search engines index and follow links on your page. The most important values are: <code>index</code> / <code>noindex</code> (whether to include the page in search results) and <code>follow</code> / <code>nofollow</code> (whether to follow links on the page).
+      </p>
+      <p>
+        Use <code>noindex</code> for: thank-you pages, internal search results pages, user profile pages, admin pages, pagination pages beyond the first, and any page you do not want appearing in search results. Never noindex your important content pages — this is one of the most common and damaging SEO mistakes. Always audit your meta robots tags whenever you add new page templates to your site.
+      </p>
     </BlogLayout>
   );
 }

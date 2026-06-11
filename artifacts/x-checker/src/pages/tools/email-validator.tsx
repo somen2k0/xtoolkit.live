@@ -202,6 +202,32 @@ export default function EmailValidator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Identifying role-based addresses that rarely convert</li>
           </ul>
         </div>
+
+        {/* Extended content */}
+        <div className="space-y-6 pt-2">
+          <section>
+            <h2 className="text-lg font-semibold mb-2">How Email Validation Works</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Email validation checks whether an email address is correctly formatted and potentially deliverable. There are three levels of validation: syntax validation checks that the email address follows the correct format (local-part@domain). Domain validation checks that the domain in the email address actually exists and has DNS records. MX record validation checks that the domain has Mail Exchange records — meaning it is actually configured to receive email.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Our validator performs comprehensive syntax checking following RFC 5322 standards, checks for known disposable email domains, and identifies role-based addresses (admin@, info@, support@) that typically have low engagement rates and high bounce risks.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Understanding Email Address Formats</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">The RFC 5322 standard defines what constitutes a valid email address. The format is local@domain where the local part can be up to 64 characters and the domain up to 255 characters. Valid local part characters include letters (a-z, A-Z), digits (0-9), and special characters like <code className="text-xs bg-muted px-1 py-0.5 rounded">! # $ % & ' * + - / = ? ^ _ ` {'{'} | {'}'} ~</code> and periods — as long as they are not the first or last character and don't appear consecutively.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Common valid formats include: simple (user@example.com), with periods (first.last@example.com), with plus addressing (user+tag@example.com), with hyphens in domain (user@my-company.com), and subdomains (user@mail.example.com).</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Common Invalid Email Patterns</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed"><strong>Missing @ symbol:</strong> The @ symbol is required and must appear exactly once. Multiple @ symbols are also invalid.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Missing domain:</strong> user@ with no domain is invalid. The domain must include at least one dot and a valid TLD.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Consecutive dots:</strong> user..name@example.com is invalid — consecutive dots are not permitted in the local part. Dots at the start or end are also invalid.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Invalid characters:</strong> Spaces and most special characters are not allowed without quoting. Commas, parentheses, and angle brackets are invalid in standard email addresses.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Why Bounce Rates Matter</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">High email bounce rates damage your sender reputation with email service providers like Gmail, Outlook, and Yahoo. Once your sender reputation drops, your emails are increasingly routed to spam folders — even for valid recipients who want to receive your messages. Most email marketing platforms will suspend accounts that exceed a 5% hard bounce rate.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Validating your email list before each campaign is one of the highest-impact actions you can take for deliverability. Removing invalid, disposable, and role-based addresses before sending protects your sender score and improves overall campaign performance.</p>
+          </section>
+        </div>
       </div>
     </MiniToolLayout>
   );

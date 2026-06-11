@@ -154,6 +154,26 @@ const config: CategoryPageConfig = {
       bg: "bg-orange-400/10 border-orange-400/20",
     },
   ],
+
+  extendedContent: (
+    <>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">X (Twitter) Account Management at Scale</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Managing X accounts manually — checking whether accounts are active, building lists of profile links, formatting username lists for outreach tools — is time-consuming and error-prone at scale. Social media managers, growth researchers, and agencies regularly need to audit lists of dozens or hundreds of accounts, and doing this one by one in a browser is not practical.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">Our bulk account checker solves this by letting you paste a list of usernames (or URLs) and checking all of them in a single run. Results show which accounts are active, suspended, or deleted — with export options for using the results in other workflows. The profile link generator converts raw username lists into properly formatted URLs for spreadsheets, reports, and CRM imports. The @ formatter handles the common task of adding or stripping @ prefixes when moving lists between different tools that require different formats.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Why X Account Status Changes</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">X accounts change status frequently. Accounts can be suspended for violating platform rules (spam, harassment, coordinated inauthentic behavior), deactivated voluntarily by the user, permanently removed by X for severe violations, or temporarily restricted while under review. High-profile accounts are sometimes briefly suspended due to mass false-reporting campaigns before being reinstated.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">For lists built over time — influencer databases, competitor research lists, outreach contact lists — regular auditing is important. A list built 6 months ago may have a 10–20% account status change rate depending on the industry. Our checker gives you an up-to-date status on any list without any API key or authentication required, using X's public profile pages directly.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">X Profile URL Formats Explained</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">X (Twitter) profile URLs follow a simple pattern: <code className="text-xs bg-muted px-1 py-0.5 rounded">https://x.com/username</code>. However, many older links still use the original <code className="text-xs bg-muted px-1 py-0.5 rounded">https://twitter.com/username</code> format, which still redirects correctly to the x.com equivalent. Both formats are functionally identical and reach the same profile.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">When building lists of profiles for external use — in email campaigns, press kits, spreadsheets, or CRM tools — consistency matters. Our profile link generator lets you choose which URL format to use and applies it uniformly across your entire list, eliminating the mixed formatting that happens when URLs are collected from different sources over time.</p>
+      </div>
+    </>
+  ),
 };
 
 export default function SocialMediaToolsPage() {

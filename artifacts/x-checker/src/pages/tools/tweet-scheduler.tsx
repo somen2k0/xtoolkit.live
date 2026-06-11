@@ -194,6 +194,30 @@ export default function TweetScheduler() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Optimizing post timing for cross-timezone audiences</li>
           </ul>
         </div>
+
+        {/* Extended content */}
+        <div className="space-y-6 pt-2">
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Why Schedule Tweets?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Tweet scheduling allows you to plan and organize your Twitter/X content in advance, ensuring consistent posting even when you are unavailable. Consistency is one of the most important factors in growing a Twitter/X audience — accounts that post regularly and predictably grow faster than those that post sporadically.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Scheduling also allows you to post at optimal times for your audience's timezone and activity patterns, even if those times are inconvenient for you personally. If your audience is primarily in the US but you are in Asia, scheduling lets you post during peak US hours while you sleep.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Best Times to Post on Twitter/X</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Research consistently identifies certain time windows as having higher engagement rates on Twitter/X. For a US-centric audience the most effective times are generally Tuesday through Thursday between 9am–3pm Eastern Time. However the best times for your specific account depend entirely on when your followers are active.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Twitter/X Analytics (available to all accounts at analytics.twitter.com) shows when your followers are most active — use this data to time your posts rather than relying on generic recommendations. For a global audience, consider posting multiple times per day across different time zones, or focus on the single largest timezone segment of your audience.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Content Calendar Strategy</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">A content calendar maps out your posting schedule in advance — what to post, when to post it, and for what purpose. Effective Twitter/X content calendars typically include a mix of: original thoughts and opinions (40%), curated content from others with commentary (30%), promotional content about your work or products (20%), and engagement content like questions and polls (10%).</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Batch creating content — writing a week's worth of tweets in one session — is more efficient than trying to come up with something to post each day. For most accounts 1–3 tweets per day is optimal. Posting more can work for news accounts but risks overwhelming followers for personal and brand accounts. Consistency matters more than volume.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Twitter/X Character Limits and Formats</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Standard Twitter/X accounts can post up to 280 characters per tweet. X Premium subscribers can post up to 25,000 characters. Images, videos, and links are highly recommended — tweets with images get 150% more retweets than text-only tweets, and videos get 10x more engagement than links alone.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">For thread content, use our Tweet Formatter to automatically split long-form content into properly sized thread segments, each within the character limit. Threads outperform single tweets for educational content, storytelling, and detailed commentary on complex topics.</p>
+          </section>
+        </div>
       </div>
     </MiniToolLayout>
   );

@@ -207,6 +207,37 @@ export default function HtmlFormatter() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Minifying HTML for faster page delivery</li>
           </ul>
         </div>
+
+        {/* Extended content */}
+        <div className="space-y-6 pt-2">
+          <section>
+            <h2 className="text-lg font-semibold mb-2">What is HTML Formatting?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">HTML formatting (also called HTML beautification) transforms compressed, minified, or inconsistently indented HTML into clean, properly structured code with consistent indentation and line breaks. When working with HTML from various sources — CMS outputs, email templates, third-party widgets, legacy code, or auto-generated markup — the raw HTML is often difficult to read and maintain.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Our HTML formatter applies standard indentation rules, properly nests elements, formats attributes consistently, and makes the overall structure immediately clear. The result is HTML that is significantly easier to read, debug, and modify.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Why Properly Formatted HTML Matters</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Readable code is maintainable code. When HTML is properly indented and formatted, the structure of the document becomes immediately visible — you can see parent-child relationships between elements, identify mismatched tags, and understand the layout hierarchy at a glance. This is especially important when working with complex nested structures like tables, forms, or multi-level navigation menus.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Formatting also helps with debugging. Mismatched tags, unclosed elements, and incorrect nesting are much easier to spot in formatted code. Browser developer tools display HTML in formatted view, but working with source code directly requires proper formatting to quickly identify issues.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">HTML Formatting Standards and Conventions</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Most style guides recommend 2 or 4 spaces for HTML indentation. Block-level elements like div, section, article, header, footer, nav, and main should each start on a new line with their content indented. Inline elements like span, a, strong, em, and code can remain on the same line as surrounding content.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Attributes should follow a consistent order — typically: id, class, name, type, href/src, then other attributes. Boolean attributes like disabled, checked, and required need no value in HTML5. Self-closing tags like img, br, input, and meta do not need a closing slash in HTML5.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">HTML Formatter vs HTML Minifier</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">HTML formatting and HTML minification are opposite operations serving different purposes. Formatting adds whitespace, indentation, and line breaks to make code human-readable — used during development, debugging, and code review. Minification removes all unnecessary whitespace to reduce file size — used in production to improve page load performance.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">A typical workflow: develop with formatted HTML for readability, then minify before deployment for performance. Always keep your formatted source files — never work directly with minified HTML as your primary source code.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Common HTML Formatting Errors to Avoid</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed"><strong>Inconsistent indentation:</strong> Mixing spaces and tabs or using different indent sizes throughout a file makes code harder to read and can cause issues with some tools and editors.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Improper nesting:</strong> Elements must be closed in the reverse order they were opened. Improper nesting causes rendering inconsistencies across browsers.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Missing doctype:</strong> Always include <code className="text-xs bg-muted px-1 py-0.5 rounded">{'<!DOCTYPE html>'}</code> as the first line of HTML documents. Without it, browsers enter quirks mode with unpredictable rendering behavior.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2"><strong>Unclosed tags:</strong> While browsers are forgiving about some unclosed tags, relying on browser error correction leads to unpredictable behavior and makes code harder to maintain.</p>
+          </section>
+        </div>
       </div>
     </MiniToolLayout>
   );

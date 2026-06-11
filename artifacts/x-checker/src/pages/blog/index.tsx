@@ -203,6 +203,9 @@ export default function BlogIndex() {
           <p className="text-muted-foreground max-w-xl text-sm md:text-base">
             Guides on temporary email, email privacy, and protecting your inbox from spam, trackers, and data brokers.
           </p>
+          <p className="text-muted-foreground max-w-xl text-sm mt-3">
+            We cover practical topics for developers, marketers, and everyday users: how disposable email addresses work, when to use them instead of your real inbox, the best services compared side by side, and how to protect your email address from data brokers. We also publish technical guides on web development topics like SEO meta tags, JWT authentication, regular expressions, and developer tools.
+          </p>
         </div>
       </div>
 

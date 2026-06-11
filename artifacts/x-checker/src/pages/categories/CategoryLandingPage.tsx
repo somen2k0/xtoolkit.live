@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "wouter";
 import { type LucideIcon, ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
@@ -48,13 +49,14 @@ export interface CategoryPageConfig {
   useCases: CategoryUseCase[];
   faqs: { q: string; a: string }[];
   relatedCategories: RelatedCategory[];
+  extendedContent?: React.ReactNode;
 }
 
 export function CategoryLandingPage({ config }: { config: CategoryPageConfig }) {
   const {
     path, seoTitle, seoDescription, title, tagline, description,
     icon: Icon, color, bg, heroGradient, tools, comingSoon,
-    whatIs, benefits, useCases, faqs, relatedCategories,
+    whatIs, benefits, useCases, faqs, relatedCategories, extendedContent,
   } = config;
 
   const liveTools = tools.filter((t) => !t.isComingSoon);
@@ -268,6 +270,13 @@ export function CategoryLandingPage({ config }: { config: CategoryPageConfig }) 
             ))}
           </Accordion>
         </section>
+
+        {/* ── Extended Content ── */}
+        {extendedContent && (
+          <section className="py-12 border-t border-border/50 space-y-6">
+            {extendedContent}
+          </section>
+        )}
 
         {/* ── Related Categories ── */}
         {relatedCategories.length > 0 && (

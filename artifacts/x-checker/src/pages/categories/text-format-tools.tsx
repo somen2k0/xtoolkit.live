@@ -150,6 +150,26 @@ const config: CategoryPageConfig = {
       bg: "bg-pink-400/10 border-pink-400/20",
     },
   ],
+
+  extendedContent: (
+    <>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Twitter/X Thread Formatting Guide</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Twitter/X threads are one of the highest-engagement content formats on the platform. A thread is a series of connected tweets posted together, allowing you to share longer-form content in a format that X natively promotes and recommends to users. Threads consistently outperform single tweets in reach, engagement, and follower growth.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">Effective threads follow specific structural patterns: the first tweet (the hook) must be strong enough to make someone want to read more — it should promise specific value, ask a compelling question, or make a surprising claim. Each subsequent tweet should deliver on that promise while maintaining momentum. The last tweet should include a clear call-to-action — a follow prompt, a link to something relevant, or an invitation to reply. Our Thread Formatter handles the mechanical work of splitting long content correctly, so you can focus on the writing.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Understanding X's 280-Character Limit</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">X's 280-character limit applies to standard accounts posting tweets. The count includes spaces, punctuation, and most Unicode characters. URLs are always counted as 23 characters regardless of actual length (X wraps them in t.co shortened links). Emojis typically count as 2 characters (they use Unicode code points that take 2 characters in Twitter's counting system).</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">X Premium subscribers can post up to 25,000 characters in a single post — effectively removing the character limit. However, long posts are only shown in full to Premium subscribers by default; non-subscribers see a truncated preview with a "Read more" link. For maximum reach to all users, most creators still target 280 characters or use threads. Our Character Counter gives you a real-time count with a visual indicator as you approach the limit.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Unicode Fonts and X Bio Styling</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Many X bios and tweets include text styled in bold, italic, script, or other decorative fonts — this is achieved using Unicode mathematical letters and special character blocks that render in any Unicode-compliant environment including X's interface. These characters are not actually different fonts; they are distinct Unicode characters that look like styled versions of standard letters.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">Important caveats: Unicode styled text is not searchable (Google and X's search cannot find "𝐁𝐨𝐥𝐝 𝐓𝐞𝐱𝐭" when users search for "Bold Text"). Unicode styled characters may also be inaccessible to screen readers, potentially excluding users who rely on assistive technology. Use styled text sparingly — it is most appropriate for decorative elements like bio styling rather than content you want to be discovered or shared broadly. Our Font Preview tool lets you see all available styles and choose the one that fits your brand.</p>
+      </div>
+    </>
+  ),
 };
 
 export default function TextFormatToolsPage() {

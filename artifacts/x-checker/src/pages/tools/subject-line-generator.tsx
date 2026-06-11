@@ -246,6 +246,30 @@ export default function SubjectLineGenerator() {
             <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span> Overcoming writer's block when starting an email campaign</li>
           </ul>
         </div>
+
+        {/* Extended content */}
+        <div className="space-y-6 pt-2">
+          <section>
+            <h2 className="text-lg font-semibold mb-2">What Makes a Great Email Subject Line?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">The email subject line is the single most important factor determining whether your email gets opened or ignored. With the average professional receiving 120+ emails per day, your subject line has less than 3 seconds to capture attention and compel a click.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Effective subject lines are specific (tell the reader exactly what's inside), create curiosity or urgency without being misleading, are concise (under 50 characters to display fully on mobile), and are relevant to the recipient's interests or needs. Generic subject lines like "Newsletter March 2026" or "Update from [Company]" consistently underperform against specific, value-driven alternatives.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Email Open Rate Statistics</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">The average email open rate varies significantly by industry. Marketing emails average 20–25% open rates. Transactional emails (receipts, password resets) average 45–65%. B2B emails average 15–25%. Non-profit emails average 25–30%.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Subject line personalization (including the recipient's name or company) increases open rates by an average of 26%. Question-based subject lines average 10% higher open rates than statement-based ones. Numbers in subject lines ("5 ways to...") increase open rates by 15–20% compared to equivalent lines without numbers. Aim for 30–50 characters for maximum mobile compatibility — Gmail shows approximately 30–40 characters on mobile.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">Subject Line Spam Trigger Words to Avoid</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">Certain words and phrases trigger spam filters and should be avoided in subject lines. The most common spam triggers include: FREE (in caps), guaranteed, winner, cash, prize, act now, limited time, click here, buy now, earn money, make money, no cost, risk-free, and excessive punctuation like multiple exclamation points.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Using these phrases does not guarantee your email will be marked as spam — modern filters use sophisticated algorithms that consider many factors. However avoiding obvious spam language reduces your risk and improves deliverability. Use our Spam Score Checker to analyze your email content and subject lines for common spam triggers before sending.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold mb-2">A/B Testing Your Subject Lines</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">A/B testing sends two versions of an email with different subject lines to small segments of your list, measures which performs better, then sends the winning version to the remainder. Most email marketing platforms support A/B testing built-in. Even small improvements in open rate — from 20% to 23% — have a meaningful impact on campaign performance at scale.</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">Use our generator to create multiple subject line variants quickly, then A/B test them to find what resonates with your specific audience. Track results over time to identify patterns — the best subject line style varies by audience, industry, and email type.</p>
+          </section>
+        </div>
       </div>
     </MiniToolLayout>
   );

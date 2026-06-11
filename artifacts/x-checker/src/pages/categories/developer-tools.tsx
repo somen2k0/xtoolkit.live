@@ -150,6 +150,26 @@ const config: CategoryPageConfig = {
       bg: "bg-blue-400/10 border-blue-400/20",
     },
   ],
+
+  extendedContent: (
+    <>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">JSON: The Universal Data Format</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">JSON (JavaScript Object Notation) is the most widely used data interchange format in modern software development. Virtually every REST API returns JSON. Configuration files, log formats, database query results, and WebSocket messages are all commonly JSON. Understanding how to read, validate, and format JSON is an essential skill for any developer working with modern systems.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">Common JSON issues that our formatter helps diagnose: trailing commas (valid in JavaScript but not in JSON), missing quotation marks around property keys (JavaScript allows unquoted keys, JSON does not), single quotes instead of double quotes, undefined and NaN values (not valid JSON — use null instead), and comments (JSON does not support comments, despite many JSON-based config formats adding them as an extension). Paste any JSON into our formatter to immediately see these errors with helpful messages.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Base64 Encoding Explained</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Base64 encoding converts binary data into a string of 64 ASCII characters, making it safe to transmit through systems that were designed to handle only text. The name comes from the 64-character alphabet used: A–Z, a–z, 0–9, +, and /. The encoded output is approximately 33% larger than the original data.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">Common uses: embedding images directly in HTML or CSS as data URIs (avoiding separate HTTP requests), encoding binary data in JSON (which only supports text), HTTP Basic Authentication (credentials are Base64-encoded, though not encrypted — Base64 is encoding, not encryption), and JWT tokens (the header and payload are Base64url-encoded). Base64url is a URL-safe variant that replaces + with - and / with _ to avoid conflicts with URL special characters.</p>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight mb-4">Privacy-First Development Tools</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">Developer tools that process sensitive data — API keys, JWTs, database credentials, internal configuration — should run client-side whenever possible. Sending this data to a server creates unnecessary security risk, even if the server is trusted. Browser-based tools process your data locally and never transmit it anywhere.</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3">All tools on X Toolkit run entirely in your browser. The JSON formatter, Base64 encoder/decoder, JWT decoder, regex tester, and all other developer tools process your input using JavaScript running locally on your device. No network requests are made with your data. This makes them safe to use with production credentials, private API responses, and internal configuration files that you would not want to send to an external server.</p>
+      </div>
+    </>
+  ),
 };
 
 export default function DeveloperToolsPage() {
