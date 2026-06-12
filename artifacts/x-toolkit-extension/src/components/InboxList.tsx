@@ -58,7 +58,7 @@ function VerifyBadge() {
   );
 }
 
-function Skeleton({ accentColor }: { accentColor: string }) {
+function Skeleton({ accentColor: _accentColor }: { accentColor: string }) {
   return (
     <div>
       {[1, 0.75, 0.9].map((_, i) => (

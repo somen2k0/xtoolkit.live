@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { StoredState, HistoryEntry, GUERRILLA_DOMAINS, ALL_TEMPMAIL_DOMAINS, TempmailDomain } from "../../types";
+import { StoredState, HistoryEntry, TempmailDomain } from "../../types";
 import { useTempMailInbox, fetchFullMessage } from "../../hooks/useInbox";
 import { EmailHeader } from "../EmailHeader";
 import { InboxList } from "../InboxList";

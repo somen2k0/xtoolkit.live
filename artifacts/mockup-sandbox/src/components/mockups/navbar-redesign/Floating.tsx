@@ -1,5 +1,5 @@
 import React from "react";
-import { Search, ChevronDown, Extension } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 
 export function Floating() {
   return (

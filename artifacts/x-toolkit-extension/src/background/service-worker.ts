@@ -212,6 +212,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       .catch(() => sendResponse({ email: null }));
     return true;
   }
+  return false;
 });
 
 async function generateNewDisposable(): Promise<string> {
