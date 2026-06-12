@@ -4,9 +4,9 @@ import { User, Sparkles, AtSign, Link } from "lucide-react";
 export default function TwitterBioTips() {
   return (
     <BlogLayout
-      seoTitle="Twitter/X Bio Tips — How to Write a Bio That Gets Followers (2026)"
-      seoDescription="How to write a great Twitter/X bio: proven tips for structure, keywords, tone, and calls to action. With examples and common mistakes to avoid. 2026 guide."
-      title="Twitter/X Bio Tips — How to Write a Bio That Gets Followers"
+      seoTitle="How to Write a Twitter Bio That Gets Followers (2026) — Tips & Examples"
+      seoDescription="Your Twitter bio has 160 characters to convince someone to follow you. Proven structure, power words, and 10+ real examples from top creators — plus the 5 mistakes everyone makes."
+      title="How to Write a Twitter Bio That Gets Followers — Tips & Examples"
       description="Your Twitter/X bio is 160 characters to convince someone to follow you. Here's exactly how to write one that works, with examples and the mistakes most people make."
       icon={User}
       readTime="6 min read"
