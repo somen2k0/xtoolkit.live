@@ -246,3 +246,9 @@ id = "F56JW9a09CXsRZlndx7Gp"
 uri = "file://audit-results-current.csv"
 type = "table"
 title = "SEO Audit Results — xtoolkit.live (June 2026)"
+
+[[outputs]]
+id = "V7w5-1CfIkDlhsfu93dQf"
+uri = "file://adsense-audit-june2026.csv"
+type = "table"
+title = "AdSense Audit — xtoolkit.live (June 2026)"
