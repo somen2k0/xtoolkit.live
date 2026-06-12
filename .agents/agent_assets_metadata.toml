@@ -252,3 +252,9 @@ id = "V7w5-1CfIkDlhsfu93dQf"
 uri = "file://adsense-audit-june2026.csv"
 type = "table"
 title = "AdSense Audit — xtoolkit.live (June 2026)"
+
+[[outputs]]
+id = "GE6F9qgmwcJluHrWfKKYB"
+uri = "file://full-site-audit-june2026.csv"
+type = "table"
+title = "Full Site Audit — xtoolkit.live (June 2026)"
