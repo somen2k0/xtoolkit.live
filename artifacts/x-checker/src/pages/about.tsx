@@ -66,7 +66,7 @@ export default function About() {
         title="About X Toolkit — Free Tools for X, Developers & SEO"
         description="X Toolkit is built by Somen — a free collection of 44+ tools for developers, SEO professionals and social media managers. Learn more about the project and its creator."
         path="/about"
-        keywords="x toolkit, free online tools, twitter tools, seo tools, developer tools, email tools, no signup tools"
+        keywords="x toolkit, about x toolkit, somen biswas developer, free online tools, twitter tools developer, seo tools, temp mail, independent developer tools, xtoolkit.live"
       />
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-12 md:py-16">
 

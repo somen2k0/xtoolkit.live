@@ -68,7 +68,7 @@ const STATIC_PAGES = [
     title: "About X Toolkit — Free Tools for X, SEO & Developers",
     description:
       "X Toolkit offers 44+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work.",
-    seoKeywords: "x toolkit, free online tools, twitter tools, developer tools, seo tools, temp mail, free tools no signup, online toolkit, 44 free tools",
+    seoKeywords: "x toolkit, about x toolkit, somen biswas developer, free online tools, twitter tools developer, seo tools, temp mail, independent developer tools, xtoolkit.live",
   },
   {
     path: "/pricing",
@@ -718,6 +718,62 @@ function escapeHtml(str) {
 }
 
 /**
+ * Reads a blog post TSX file and extracts the article body as HTML.
+ * Finds content between the BlogLayout closing ">" and "</BlogLayout>",
+ * then performs minimal JSX→HTML conversion so the text is indexable
+ * by crawlers without needing to execute JavaScript.
+ */
+function extractBlogHtml(slug) {
+  const srcPath = join(__dirname, `src/pages/blog/${slug}.tsx`);
+  try {
+    const tsx = readFileSync(srcPath, "utf-8");
+    // BlogLayout opening tag ends at a line that is exactly "    >"
+    // and the body closes at "    </BlogLayout>"
+    const match = tsx.match(/    >\n([\s\S]*?)\n    <\/BlogLayout>/);
+    if (!match) return null;
+    let html = match[1];
+    // Minimal JSX → HTML transforms
+    html = html
+      .replace(/\{\/\*[\s\S]*?\*\/\}/g, "")  // strip JSX block comments
+      .replace(/<hr\s*\/>/g, "<hr>")           // void elements
+      .replace(/<br\s*\/>/g, "<br>")
+      .replace(/\{[^}]*\}/g, "");             // strip remaining JSX { expr }
+    // Dedent: strip the 6-space indent that TSX formatting adds
+    html = html.replace(/^      /gm, "");
+    return html.trim();
+  } catch {
+    return null;
+  }
+}
+
+// Blog slugs that match STATIC_PAGES entries — used to pre-extract article HTML
+const BLOG_SLUGS = [
+  "what-is-disposable-email",
+  "best-temp-mail-services",
+  "temp-mail-vs-gmail",
+  "is-temp-mail-safe",
+  "why-websites-ask-email-verification",
+  "temp-gmail-explained",
+  "how-to-use-temp-email-extension",
+  "what-is-json-ld",
+  "what-is-base64",
+  "twitter-bio-tips",
+  "what-is-uuid",
+  "url-encoding-guide",
+  "what-is-regex",
+  "seo-meta-tags-guide",
+  "what-is-jwt",
+];
+
+// Pre-extract all blog article bodies at build time.
+// Keys are the URL paths (e.g. "/blog/what-is-uuid").
+const BLOG_HTML = {};
+for (const slug of BLOG_SLUGS) {
+  const html = extractBlogHtml(slug);
+  if (html) BLOG_HTML[`/blog/${slug}`] = html;
+}
+
+/**
  * Maps tool category → schema.org applicationCategory value.
  * Gives each tool the most accurate category for Google Rich Results.
  */
@@ -841,6 +897,42 @@ function buildToolSchema(tool, canonicalUrl) {
   return [jsonLdTag(softwareApp), jsonLdTag(breadcrumb)].join("\n");
 }
 
+/**
+ * Builds Article + BreadcrumbList JSON-LD schemas for blog post pages.
+ * Mirrors the schemas that BlogLayout.tsx injects client-side, so
+ * crawlers that don't execute JavaScript still see them.
+ */
+function buildBlogSchema(title, description, canonicalUrl) {
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    author: { "@type": "Organization", name: "X Toolkit", url: SITE_URL },
+    publisher: {
+      "@type": "Organization",
+      name: "X Toolkit",
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon-512.png` },
+    },
+    url: canonicalUrl,
+    datePublished: "2026",
+    image: `${SITE_URL}/opengraph.png`,
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: title, item: canonicalUrl },
+    ],
+  };
+
+  return [jsonLdTag(articleSchema), jsonLdTag(breadcrumb)].join("\n");
+}
+
 function buildNoscript(page, tool) {
   if (page.isHomepage) {
     const toolLinks = LIVE_TOOLS.map(
@@ -939,6 +1031,23 @@ function buildRootContent(pageData, tool) {
       `</div>`;
   }
 
+  // Blog posts: inject full article body so crawlers and AdSense reviewers
+  // see real content without executing JavaScript.
+  if (path.startsWith("/blog/")) {
+    const articleHtml = BLOG_HTML[path];
+    if (articleHtml) {
+      return (
+        `<div style="font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:24px 20px">` +
+        `<h1>${escapeHtml(title)}</h1>` +
+        `<p>${escapeHtml(description)}</p>` +
+        articleHtml +
+        `<p><a href="${SITE_URL}/blog">More articles</a> | ` +
+        `<a href="${SITE_URL}/tools">Browse all ${LIVE_TOOLS.length} free tools</a></p>` +
+        `</div>`
+      );
+    }
+  }
+
   return `<div style="font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:24px 20px">` +
     `<h1>${escapeHtml(title)}</h1>` +
     `<p>${escapeHtml(description)}</p>` +
@@ -965,6 +1074,11 @@ function generatePageHtml(template, { path, title, description, ogTitle, ogDescr
   html = html.replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/,  `$1${safeTitle}$2`);
   html = html.replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/,  `$1${safeDesc}$2`);
   html = html.replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/,  `$1${canonicalUrl}$2`);
+
+  // Blog posts use og:type=article instead of the template default "website"
+  if (path.startsWith("/blog/")) {
+    html = html.replace(/(<meta\s+property="og:type"\s+content=")[^"]*(")/,  `$1article$2`);
+  }
 
   // Per-page keywords: inject from tool manifest's seoKeywords field so every
   // page gets unique keywords instead of the generic site-wide fallback.
@@ -1003,6 +1117,8 @@ function generatePageHtml(template, { path, title, description, ogTitle, ogDescr
   let schemaBlock = "";
   if (categoryKey) {
     schemaBlock = buildCategoryPageSchemas(categoryKey, label, canonicalUrl);
+  } else if (path.startsWith("/blog/")) {
+    schemaBlock = buildBlogSchema(title, description, canonicalUrl);
   } else if (!isHomepage && (tool || category)) {
     schemaBlock = buildToolSchema(
       tool || { label: title, seoDescription: description, id: "", category },
