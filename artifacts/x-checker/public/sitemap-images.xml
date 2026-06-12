@@ -72,16 +72,6 @@
     </image:image>
   </url>
 
-  <!-- Email Privacy Checker -->
-  <url>
-    <loc>https://xtoolkit.live/tools/email-privacy-checker</loc>
-    <image:image>
-      <image:loc>https://xtoolkit.live/opengraph.jpg</image:loc>
-      <image:title>Email Privacy Checker — Score Your Email Address | X Toolkit</image:title>
-      <image:caption>Check your email address privacy across 7 factors. Free, runs entirely in your browser.</image:caption>
-    </image:image>
-  </url>
-
   <!-- Email Tools category -->
   <url>
     <loc>https://xtoolkit.live/email-tools</loc>

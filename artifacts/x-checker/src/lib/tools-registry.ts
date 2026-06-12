@@ -159,7 +159,6 @@ const ICON_MAP: Record<string, LucideIcon> = {
   "spam-score-checker": ShieldAlert,
   "newsletter-template-generator": Newspaper,
   "masked-email-generator": EyeOff,
-  "email-privacy-checker": ShieldCheck,
   "spam-risk-checker": MailWarning,
   "email-leak-checker": AlertOctagon,
   "alias-email-explainer": EyeOff,
