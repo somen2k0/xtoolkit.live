@@ -240,3 +240,9 @@ id = "GKiCJswPjUVibd6epyzmI"
 uri = "file://audit-results-full.csv"
 type = "table"
 title = "Full Site Audit — xtoolkit.live (85 findings)"
+
+[[outputs]]
+id = "F56JW9a09CXsRZlndx7Gp"
+uri = "file://audit-results-current.csv"
+type = "table"
+title = "SEO Audit Results — xtoolkit.live (June 2026)"
