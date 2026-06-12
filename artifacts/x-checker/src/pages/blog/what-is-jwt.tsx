@@ -91,18 +91,6 @@ export default function WhatIsJwt() {
         <li>If the token is valid, the server processes the request. If invalid or expired, it returns a 401 Unauthorized response.</li>
       </ol>
 
-      <h2>JWT vs Session Tokens</h2>
-      <p>
-        Traditional session-based authentication stores session data on the server (in memory or a database) and gives the client a session ID stored in a cookie. JWT authentication is <strong>stateless</strong> — all the information is in the token itself, and the server doesn't need to store anything.
-      </p>
-      <ul>
-        <li><strong>JWTs are better for:</strong> microservices and distributed systems (no shared session store needed), APIs consumed by mobile apps or third parties, horizontal scaling (any server can validate any token).</li>
-        <li><strong>Sessions are better for:</strong> applications that need immediate token revocation (you can delete a session from the store; you can't "un-issue" a JWT until it expires), traditional server-rendered web apps with strict security requirements.</li>
-      </ul>
-      <p>
-        The biggest operational challenge with JWTs is revocation. Because JWTs are self-contained, a server can't "invalidate" a token early without maintaining a blocklist — which partially defeats the purpose of stateless authentication. Short expiration times (15 minutes for access tokens) combined with refresh tokens is the standard mitigation.
-      </p>
-
       <h2>When to Use JWT</h2>
       <ul>
         <li><strong>API authentication:</strong> REST and GraphQL APIs where the client is a mobile app, SPA, or another service.</li>

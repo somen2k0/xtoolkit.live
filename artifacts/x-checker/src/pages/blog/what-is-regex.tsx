@@ -176,19 +176,6 @@ export default function WhatIsRegex() {
         Use our <a href="/tools/regex-tester"><strong>Regex Tester</strong></a> to write and test regular expressions in real time. Paste a pattern, enter test strings, and see matches highlighted instantly — with support for flags and capture groups.
       </p>
 
-      <h2>Regex Syntax Reference</h2>
-      <p><strong>Character classes:</strong> <code>[abc]</code> matches a, b, or c. <code>[a-z]</code> matches any lowercase letter. <code>[0-9]</code> matches any digit. <code>[^abc]</code> matches anything except a, b, or c. <code>.</code> (dot) matches any character except newline.</p>
-      <p><strong>Quantifiers:</strong> <code>*</code> matches 0 or more. <code>+</code> matches 1 or more. <code>?</code> matches 0 or 1 (optional). <code>{'{n}'}</code> matches exactly n times. <code>{'{n,}'}</code> matches n or more times. <code>{'{n,m}'}</code> matches between n and m times.</p>
-      <p><strong>Anchors:</strong> <code>^</code> matches start of string. <code>$</code> matches end of string. <code>\b</code> matches a word boundary. <code>\B</code> matches a non-word boundary.</p>
-      <p><strong>Groups and alternation:</strong> <code>(abc)</code> creates a capturing group. <code>(?:abc)</code> is a non-capturing group. <code>a|b</code> matches a or b. <code>\1</code> is a backreference to the first captured group.</p>
-      <p><strong>Shorthand classes:</strong> <code>\d</code> matches any digit (same as <code>[0-9]</code>). <code>\w</code> matches any word character (letters, digits, underscore). <code>\s</code> matches any whitespace. Uppercase versions (<code>\D</code>, <code>\W</code>, <code>\S</code>) match the inverse.</p>
-
-      <h2>5 Common Regex Patterns Every Developer Needs</h2>
-      <p><strong>1. Email validation:</strong> <code>{'/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/'}</code> — a basic check that the address contains exactly one @ with non-whitespace characters on both sides and a dot in the domain. Note: full RFC 5322 compliance requires a far more complex pattern; this catches common errors.</p>
-      <p><strong>2. URL matching:</strong> <code>{'/https?:\\/\\/[^\\s]+'}</code> — matches http:// or https:// followed by any non-whitespace characters. Useful for finding URLs in plain text.</p>
-      <p><strong>3. Phone numbers (US):</strong> <code>{'/^\\+?1?[-.\\s]?\\(?[0-9]{3}\\)?[-.\\s]?[0-9]{3}[-.\\s]?[0-9]{4}$/'}</code> — matches common US phone formats including parentheses, dashes, spaces, and an optional +1 country code.</p>
-      <p><strong>4. Date format validation (YYYY-MM-DD):</strong> <code>{'/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$/'}</code> — validates ISO 8601 date format and checks that month is 01–12 and day is 01–31.</p>
-      <p><strong>5. Password strength:</strong> <code>{'/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$/'}</code> — requires at least 8 characters with at least one lowercase letter, one uppercase letter, one digit, and one special character. Uses lookaheads to enforce all conditions simultaneously.</p>
     </BlogLayout>
   );
 }
