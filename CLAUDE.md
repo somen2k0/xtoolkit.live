@@ -33,7 +33,7 @@ pnpm --filter @workspace/api-spec run codegen
 
 ## Architecture Overview
 
-This is a **pnpm monorepo** deployed to Vercel. The site is `xtoolkit.live` — a toolkit of ~50 web tools organized into categories (social media, AI writing, text formatting, developer, SEO, email).
+This is a **pnpm monorepo** deployed to Vercel. The site is `xtoolkit.live` — a toolkit of 44 web tools organized into categories (social media, AI writing, text formatting, developer, SEO, email).
 
 ### Workspace layout
 
