@@ -448,11 +448,6 @@ body::after {
     transition-duration: 0.01ms !important;
   }
 
-  /* Hide app-loader on mobile — it blocks LCP until JS mounts */
-  #app-loader {
-    display: none !important;
-  }
-
   /* Kill full-screen pseudo-element animations — non-composited, block paint */
   body::before,
   body::after {

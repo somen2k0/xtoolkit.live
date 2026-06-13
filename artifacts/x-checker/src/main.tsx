@@ -10,4 +10,3 @@ if (import.meta.env.PROD) {
   createRoot(root).render(<App />);
 }
 
-root.style.animation = "app-fadein 0.2s ease-out both";
