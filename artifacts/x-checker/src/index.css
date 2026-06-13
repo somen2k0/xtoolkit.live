@@ -412,7 +412,8 @@ body::after {
 
   /* Kill expensive GPU layers on mobile — these delay LCP */
   .page-aurora,
-  .bg-orb-1, .bg-orb-2, .bg-orb-3, .bg-orb-4 {
+  .bg-orb-1, .bg-orb-2, .bg-orb-3, .bg-orb-4,
+  .page-orb {
     display: none !important;
   }
 
@@ -444,6 +445,17 @@ body::after {
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .text-shimmer {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: inherit;
+    color: #a78bfa;
+    animation: none;
   }
 }
 
