@@ -233,6 +233,7 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    cursor: auto;
     background-image:
       radial-gradient(ellipse 80% 50% at 20% -5%, hsl(270 80% 60% / 0.42), transparent),
       radial-gradient(ellipse 60% 40% at 80% 10%, hsl(200 90% 60% / 0.30), transparent);
