@@ -6,6 +6,17 @@ import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftR
 
 const ARTICLES = [
   {
+    slug: "temp-mail-complete-guide",
+    href: "/blog/temp-mail-complete-guide",
+    title: "The Complete Temp Mail Guide (2026) — Everything You Need to Know",
+    description: "How temp mail works technically, 10 situations to use it, when to avoid it, how to pick a service, and how it compares to masked email and temp Gmail.",
+    readTime: "8 min",
+    category: "Guide",
+    icon: BookOpen,
+    color: "text-cyan-400",
+    bg: "bg-cyan-400/10 border-cyan-400/20",
+  },
+  {
     slug: "how-to-use-temp-email-extension",
     href: "/blog/how-to-use-temp-email-extension",
     title: "How to Use a Temp Email Chrome Extension",

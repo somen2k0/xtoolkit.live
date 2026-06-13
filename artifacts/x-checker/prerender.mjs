@@ -264,6 +264,13 @@ const STATIC_PAGES = [
       "What is a JWT? Learn how JSON Web Tokens work, their header-payload-signature structure, when to use JWT vs sessions, security best practices, and how to decode JWTs.",
   },
   {
+    path: "/blog/temp-mail-complete-guide",
+    label: "The Complete Temp Mail Guide",
+    title: "The Complete Temp Mail Guide (2026) — Everything You Need to Know | X Toolkit Blog",
+    description:
+      "Everything you need to know about temporary email — how it works technically, 10 situations to use it, when to avoid it, choosing the right service, and privacy tips.",
+  },
+  {
     path: "/chrome-extension",
     label: "Chrome Extension",
     title: "Free Temp Email Chrome Extension — Disposable Inbox & OTP Detector | X Toolkit",
@@ -763,6 +770,7 @@ const BLOG_SLUGS = [
   "what-is-regex",
   "seo-meta-tags-guide",
   "what-is-jwt",
+  "temp-mail-complete-guide",
 ];
 
 // Pre-extract all blog article bodies at build time.

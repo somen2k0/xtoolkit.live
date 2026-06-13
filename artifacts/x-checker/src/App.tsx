@@ -92,6 +92,7 @@ const UrlEncodingGuide = lazy(() => import("@/pages/blog/url-encoding-guide"));
 const WhatIsRegex = lazy(() => import("@/pages/blog/what-is-regex"));
 const SeoMetaTagsGuide = lazy(() => import("@/pages/blog/seo-meta-tags-guide"));
 const WhatIsJwt = lazy(() => import("@/pages/blog/what-is-jwt"));
+const TempMailCompleteGuide = lazy(() => import("@/pages/blog/temp-mail-complete-guide"));
 // Category pages (lazy)
 const AiWritingTools = lazy(() => import("@/pages/categories/ai-writing-tools"));
 const SocialMediaTools = lazy(() => import("@/pages/categories/social-media-tools"));
@@ -228,6 +229,7 @@ function TrackedRouter() {
           <Route path="/blog/what-is-regex" component={WhatIsRegex} />
           <Route path="/blog/seo-meta-tags-guide" component={SeoMetaTagsGuide} />
           <Route path="/blog/what-is-jwt" component={WhatIsJwt} />
+          <Route path="/blog/temp-mail-complete-guide" component={TempMailCompleteGuide} />
 
           {/* Category landing pages */}
           <Route path="/ai-writing-tools" component={AiWritingTools} />

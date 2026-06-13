@@ -142,4 +142,12 @@
     <priority>0.78</priority>
   </url>
 
+  <!-- Complete Temp Mail Guide: primary temp mail guides keyword target -->
+  <url>
+    <loc>https://xtoolkit.live/blog/temp-mail-complete-guide</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
 </urlset>
