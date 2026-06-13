@@ -446,6 +446,19 @@ body::after {
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
+
+  /* Kill full-screen pseudo-element animations — non-composited, block paint */
+  body::before,
+  body::after {
+    display: none !important;
+  }
+
+  /* Kill box-shadow animation on nav active item — box-shadow can't be composited */
+  .nav-active-pulse,
+  [class*="nav-active"] {
+    animation: none !important;
+    box-shadow: none !important;
+  }
 }
 
 @media (max-width: 767px) {
