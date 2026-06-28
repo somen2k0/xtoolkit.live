@@ -90,7 +90,14 @@
     { "source": "/tools/email-privacy-checker", "destination": "/tools/masked-email-generator", "permanent": true },
     { "source": "/tools/email-leak-checker", "destination": "/tools/temp-mail", "permanent": true },
     { "source": "/tools/alias-email-explainer", "destination": "/tools/masked-email-generator", "permanent": true },
-    { "source": "/tools/disposable-email-guide", "destination": "/tools/temp-mail", "permanent": true }
+    { "source": "/tools/disposable-email-guide", "destination": "/tools/temp-mail", "permanent": true },
+
+    { "source": "/tools/at-formatter", "destination": "/tools/x-account-checker", "permanent": true },
+    { "source": "/tools/font-preview", "destination": "/tools/tweet-formatter", "permanent": true },
+    { "source": "/tools/tweet-scheduler", "destination": "/tools/tweet-formatter", "permanent": true },
+    { "source": "/tools/profile-link-generator", "destination": "/tools/x-account-checker", "permanent": true },
+    { "source": "/tools/og-image-preview", "destination": "/tools/meta-tag-generator", "permanent": true },
+    { "source": "/tools/page-speed-checker", "destination": "/tools/sitemap-validator", "permanent": true }
   ],
 
   "rewrites": [

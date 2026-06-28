@@ -27,7 +27,6 @@ const Contact = lazy(() => import("@/pages/contact"));
 const UsernameGenerator = lazy(() => import("@/pages/tools/username-generator"));
 const HashtagFormatter = lazy(() => import("@/pages/tools/hashtag-formatter"));
 const TweetFormatter = lazy(() => import("@/pages/tools/tweet-formatter"));
-const FontPreview = lazy(() => import("@/pages/tools/font-preview"));
 const CharacterCounter = lazy(() => import("@/pages/tools/character-counter"));
 const JsonFormatter = lazy(() => import("@/pages/tools/json-formatter"));
 const Base64Tool = lazy(() => import("@/pages/tools/base64"));
@@ -41,7 +40,6 @@ const UuidGenerator = lazy(() => import("@/pages/tools/uuid-generator"));
 const CaseConverter = lazy(() => import("@/pages/tools/case-converter"));
 const YamlJson = lazy(() => import("@/pages/tools/yaml-json"));
 const TimezoneConverter = lazy(() => import("@/pages/tools/timezone-converter"));
-const OgImagePreview = lazy(() => import("@/pages/tools/og-image-preview"));
 // New utility tools (lazy)
 const PasswordGenerator = lazy(() => import("@/pages/tools/password-generator"));
 const QrCodeGenerator = lazy(() => import("@/pages/tools/qr-code-generator"));
@@ -66,15 +64,10 @@ const EmailValidator = lazy(() => import("@/pages/tools/email-validator"));
 const TempGmail = lazy(() => import("@/pages/tools/temp-gmail"));
 const XAccountChecker = lazy(() => import("@/pages/tools/x-account-checker"));
 const AiDetector = lazy(() => import("@/pages/tools/ai-detector"));
-const ProfileLinkGenerator = lazy(() => import("@/pages/tools/profile-link-generator"));
-const AtFormatter = lazy(() => import("@/pages/tools/at-formatter"));
 const BioGenerator = lazy(() => import("@/pages/tools/bio-generator"));
 const FunnyBios = lazy(() => import("@/pages/tools/funny-bios"));
 // Email privacy tools (lazy)
 const MaskedEmailGenerator = lazy(() => import("@/pages/tools/masked-email-generator"));
-// Previously coming-soon tools (lazy)
-const TweetScheduler = lazy(() => import("@/pages/tools/tweet-scheduler"));
-const PageSpeedChecker = lazy(() => import("@/pages/tools/page-speed-checker"));
 const SchemaGenerator = lazy(() => import("@/pages/tools/schema-generator"));
 const SpamScoreChecker = lazy(() => import("@/pages/tools/spam-score-checker"));
 const NewsletterTemplateGenerator = lazy(() => import("@/pages/tools/newsletter-template-generator"));
@@ -143,7 +136,6 @@ function TrackedRouter() {
           <Route path="/tools/username-generator" component={UsernameGenerator} />
           <Route path="/tools/hashtag-formatter" component={HashtagFormatter} />
           <Route path="/tools/tweet-formatter" component={TweetFormatter} />
-          <Route path="/tools/font-preview" component={FontPreview} />
           <Route path="/tools/character-counter" component={CharacterCounter} />
           <Route path="/tools/word-counter" component={WordCounter} />
 
@@ -160,7 +152,6 @@ function TrackedRouter() {
           <Route path="/tools/case-converter" component={CaseConverter} />
           <Route path="/tools/yaml-json" component={YamlJson} />
           <Route path="/tools/timezone-converter" component={TimezoneConverter} />
-          <Route path="/tools/og-image-preview" component={OgImagePreview} />
           <Route path="/tools/password-generator" component={PasswordGenerator} />
           <Route path="/tools/color-picker" component={ColorPicker} />
           <Route path="/tools/qr-code-generator" component={QrCodeGenerator} />
@@ -180,7 +171,6 @@ function TrackedRouter() {
           <Route path="/tools/keyword-density" component={KeywordDensity} />
           <Route path="/tools/robots-txt-generator" component={RobotsTxtGenerator} />
           <Route path="/tools/sitemap-validator" component={SitemapValidator} />
-          <Route path="/tools/page-speed-checker" component={PageSpeedChecker} />
           <Route path="/tools/schema-generator" component={SchemaGenerator} />
 
           {/* Email Tools */}
@@ -211,10 +201,7 @@ function TrackedRouter() {
 
           {/* Social media X tools */}
           <Route path="/tools/x-account-checker" component={XAccountChecker} />
-          <Route path="/tools/profile-link-generator" component={ProfileLinkGenerator} />
-          <Route path="/tools/at-formatter" component={AtFormatter} />
           <Route path="/tools/bio-generator" component={BioGenerator} />
-          <Route path="/tools/tweet-scheduler" component={TweetScheduler} />
 
           {/* Real tool — not a redirect stub */}
           <Route path="/tools/funny-bios" component={FunnyBios} />

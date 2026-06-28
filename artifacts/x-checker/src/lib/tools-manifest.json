@@ -15,40 +15,6 @@
     "tags": ["x", "twitter", "accounts", "bulk", "check", "suspended", "deleted"]
   },
   {
-    "id": "profile-links",
-    "href": "/tools/profile-link-generator",
-    "label": "Profile Link Generator",
-    "description": "Convert a list of usernames into direct X profile links instantly.",
-    "seoTitle": "Profile Link Generator — Convert Usernames to X Profile URLs | X Toolkit",
-    "seoDescription": "Convert a list of X (Twitter) usernames into direct clickable profile URLs instantly. Paste usernames, get links. Free, no signup needed.",
-    "seoKeywords": "twitter profile link generator, x profile url generator, username to url converter, twitter profile link, x profile url creator, bulk profile links",
-    "category": "social-media",
-    "tags": ["x", "twitter", "links", "profile", "url"]
-  },
-  {
-    "id": "at-formatter",
-    "href": "/tools/at-formatter",
-    "label": "@ Formatter",
-    "description": "Bulk add or remove the @ prefix from username lists in one click.",
-    "seoTitle": "@ Formatter — Bulk Add or Remove @ from X Usernames | X Toolkit",
-    "seoDescription": "Instantly bulk add or remove the @ symbol from a list of X (Twitter) usernames. Clean up lists with one click. Free online tool.",
-    "seoKeywords": "at sign formatter, twitter username formatter, add remove @ symbol, bulk username cleaner, @ prefix formatter, twitter handle formatter",
-    "category": "social-media",
-    "tags": ["x", "twitter", "username", "format", "at"]
-  },
-  {
-    "id": "tweet-scheduler",
-    "href": "/tools/tweet-scheduler",
-    "label": "Tweet Scheduler",
-    "description": "Plan your X content calendar, compose tweets with date/time, and export as CSV.",
-    "seoTitle": "Tweet Scheduler — Free X (Twitter) Content Calendar Planner | X Toolkit",
-    "seoDescription": "Plan your X content calendar, compose tweets with date and time, and export your schedule as CSV. Free tweet scheduler and planner.",
-    "seoKeywords": "tweet scheduler, twitter content calendar, schedule tweets free, x content planner, tweet planner, twitter posting schedule",
-    "category": "social-media",
-    "badge": "New",
-    "tags": ["x", "twitter", "schedule", "calendar", "content", "plan", "tweet"]
-  },
-  {
     "id": "ai-detector",
     "href": "/tools/ai-detector",
     "label": "AI Text Detector & Humanizer",
@@ -119,17 +85,6 @@
     "seoKeywords": "tweet thread formatter, split text into tweets, twitter thread maker, tweet splitter, 280 character formatter, thread creator twitter",
     "category": "text-formatting",
     "tags": ["tweet", "thread", "format", "split"]
-  },
-  {
-    "id": "font-preview",
-    "href": "/tools/font-preview",
-    "label": "Font Preview",
-    "description": "Preview your bio or tweet text in stylish Unicode fonts.",
-    "seoTitle": "Font Preview for X — Free Unicode Text Style Previewer | X Toolkit",
-    "seoDescription": "Preview your X (Twitter) bio or tweet text in stylish Unicode fonts. See bold, italic, and cursive styles before posting. Free.",
-    "seoKeywords": "twitter font generator, unicode font preview, fancy fonts twitter, twitter bio fonts, unicode text style, stylish text generator, x bio fonts",
-    "category": "text-formatting",
-    "tags": ["font", "unicode", "style", "preview"]
   },
   {
     "id": "character-counter",
@@ -304,17 +259,6 @@
     "tags": ["timezone", "convert", "time", "utc", "dst", "developer", "world clock"]
   },
   {
-    "id": "og-image-preview",
-    "href": "/tools/og-image-preview",
-    "label": "OG Image Preview",
-    "description": "Preview how your Open Graph image and meta tags look when shared on social media.",
-    "seoTitle": "OG Image Preview — Free Online Open Graph Preview Tool | X Toolkit",
-    "seoDescription": "Preview how your Open Graph image and meta tags appear on social media platforms before publishing. Free OG preview tool online.",
-    "seoKeywords": "og image preview, open graph preview, social media preview, og tag checker, link preview tool, facebook og preview, twitter card preview",
-    "category": "developer",
-    "tags": ["og", "open graph", "social media", "meta", "preview", "seo"]
-  },
-  {
     "id": "password-generator",
     "href": "/tools/password-generator",
     "label": "Password Generator",
@@ -424,17 +368,6 @@
     "ogDescription": "Validate your XML sitemap instantly. Find errors and missing URLs. Free sitemap checker for SEO.",
     "category": "seo",
     "tags": ["sitemap", "xml", "validate", "seo", "url", "check"]
-  },
-  {
-    "id": "page-speed-checker",
-    "href": "/tools/page-speed-checker",
-    "label": "Page Speed Checker",
-    "description": "Get a quick Page Speed score estimate, identify top bottlenecks, and get actionable tips.",
-    "seoTitle": "Page Speed Checker — Free Online Website Speed Analyzer | X Toolkit",
-    "seoDescription": "Get a quick page speed score estimate, identify top bottlenecks, and get actionable optimization tips for your website. Free tool.",
-    "seoKeywords": "page speed checker, website speed test, pagespeed analyzer, core web vitals checker, site performance tool, website load time checker",
-    "category": "seo",
-    "tags": ["page speed", "performance", "seo", "core web vitals", "optimize"]
   },
   {
     "id": "schema-generator",

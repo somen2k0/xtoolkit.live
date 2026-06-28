@@ -165,12 +165,6 @@
 
   <!-- SEO tools -->
   <url>
-    <loc>https://xtoolkit.live/tools/og-image-preview</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.82</priority>
-  </url>
-  <url>
     <loc>https://xtoolkit.live/tools/meta-tag-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -193,18 +187,6 @@
   <!-- TIER 4 — Standard utility tools (0.75)                         -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
 
-  <url>
-    <loc>https://xtoolkit.live/tools/profile-link-generator</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://xtoolkit.live/tools/at-formatter</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
   <url>
     <loc>https://xtoolkit.live/tools/username-generator</loc>
     <lastmod>2026-05-26</lastmod>
@@ -254,19 +236,6 @@
     <priority>0.75</priority>
   </url>
 
-  <!-- Formerly coming-soon — now live -->
-  <url>
-    <loc>https://xtoolkit.live/tools/tweet-scheduler</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://xtoolkit.live/tools/page-speed-checker</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
   <url>
     <loc>https://xtoolkit.live/tools/schema-generator</loc>
     <lastmod>2026-06-11</lastmod>
@@ -342,13 +311,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
-  <url>
-    <loc>https://xtoolkit.live/tools/font-preview</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.65</priority>
-  </url>
-
   <!-- New developer tools (June 2026) -->
   <url>
     <loc>https://xtoolkit.live/tools/css-gradient-generator</loc>

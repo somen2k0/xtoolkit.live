@@ -6,11 +6,12 @@ import { FeedbackModal } from "@/components/FeedbackModal";
 import {
   MessageSquare, Home, Info, Menu, X, ChevronDown,
   Search, Sparkles, Link2, AtSign, Hash, MessageSquareText,
-  Type, BarChart2, FileJson, Lock, TrendingUp, Globe,
+  BarChart2, FileJson, Lock, TrendingUp, Globe,
   Mail, ShieldCheck, Pencil, Shield, Tag, Clock,
-  Minimize2, Code2, KeyRound, Regex, Database, Shuffle, ArrowLeftRight,
-  ScanSearch, EyeOff, Newspaper, Calendar, Gauge, ShieldAlert, Inbox,
+  Minimize2, Code2, KeyRound, Regex, Shuffle,
+  ScanSearch, EyeOff, Newspaper, ShieldAlert, Inbox,
   AlignLeft, QrCode, ImageIcon, Palette, Laugh, BookOpen, BookMarked,
+  Layers, Pipette,
 } from "lucide-react";
 import { TOTAL_LIVE } from "@/lib/tools-registry";
 import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
@@ -36,18 +37,13 @@ const NAV_CATEGORIES = [
     tools: [
       { icon: Search, label: "Account Checker", href: "/tools/x-account-checker", badge: "Popular" },
       { icon: Sparkles, label: "AI Bio Generator", href: "/tools/bio-generator", badge: "AI" },
-      { icon: ScanSearch, label: "AI Text Detector & Humanizer", href: "/tools/ai-detector", badge: "AI" },
-      { icon: Link2, label: "Profile Link Generator", href: "/tools/profile-link-generator" },
-      { icon: AtSign, label: "@ Formatter", href: "/tools/at-formatter" },
+      { icon: ScanSearch, label: "AI Text Detector", href: "/tools/ai-detector", badge: "AI" },
+      { icon: Laugh, label: "Funny Bio Ideas", href: "/tools/funny-bios" },
       { icon: AtSign, label: "Username Generator", href: "/tools/username-generator" },
       { icon: Hash, label: "Hashtag Formatter", href: "/tools/hashtag-formatter" },
       { icon: MessageSquareText, label: "Tweet Thread Formatter", href: "/tools/tweet-formatter" },
-      { icon: Type, label: "Font Preview", href: "/tools/font-preview" },
       { icon: BarChart2, label: "Character Counter", href: "/tools/character-counter" },
-      { icon: AlignLeft, label: "Word Counter", href: "/tools/word-counter", badge: "New" },
-      { icon: Type, label: "Case Converter", href: "/tools/case-converter", badge: "New" },
-      { icon: Calendar, label: "Tweet Scheduler", href: "/tools/tweet-scheduler", badge: "New" },
-      { icon: Laugh, label: "Funny Bio Ideas", href: "/tools/funny-bios", badge: "AI" },
+      { icon: AlignLeft, label: "Word Counter", href: "/tools/word-counter" },
     ],
     comingSoon: [],
   },
@@ -63,21 +59,19 @@ const NAV_CATEGORIES = [
     href: "/developer-tools",
     tools: [
       { icon: FileJson, label: "JSON Formatter", href: "/tools/json-formatter", badge: "Popular" },
-      { icon: Lock, label: "Base64 Encoder / Decoder", href: "/tools/base64" },
-      { icon: Link2, label: "URL Encoder / Decoder", href: "/tools/url-encoder" },
-      { icon: Minimize2, label: "CSS Minifier", href: "/tools/css-minifier" },
-      { icon: Code2, label: "HTML Formatter", href: "/tools/html-formatter" },
-      { icon: KeyRound, label: "JWT Decoder", href: "/tools/jwt-decoder", badge: "New" },
-      { icon: Regex, label: "Regex Tester", href: "/tools/regex-tester", badge: "New" },
-      { icon: Database, label: "SQL Formatter", href: "/tools/sql-formatter", badge: "New" },
+      { icon: Code2, label: "JavaScript Formatter", href: "/tools/js-formatter", badge: "New" },
+      { icon: KeyRound, label: "JWT Decoder", href: "/tools/jwt-decoder" },
+      { icon: Regex, label: "Regex Tester", href: "/tools/regex-tester" },
+      { icon: Lock, label: "Base64 Encoder", href: "/tools/base64" },
+      { icon: Hash, label: "Hash Generator", href: "/tools/hash-generator", badge: "New" },
       { icon: Shuffle, label: "UUID Generator", href: "/tools/uuid-generator" },
-      { icon: ArrowLeftRight, label: "YAML ↔ JSON Converter", href: "/tools/yaml-json", badge: "New" },
-      { icon: Clock, label: "Timezone Converter", href: "/tools/timezone-converter", badge: "New" },
-      { icon: KeyRound, label: "Password Generator", href: "/tools/password-generator", badge: "New" },
-      { icon: Palette, label: "Color Picker", href: "/tools/color-picker", badge: "New" },
-      { icon: QrCode, label: "QR Code Generator", href: "/tools/qr-code-generator", badge: "New" },
-      { icon: ImageIcon, label: "Image Compressor", href: "/tools/image-compressor", badge: "New" },
-      { icon: Globe, label: "OG Image Preview", href: "/tools/og-image-preview" },
+      { icon: ShieldCheck, label: "Password Generator", href: "/tools/password-generator" },
+      { icon: Palette, label: "CSS Gradient Generator", href: "/tools/css-gradient-generator", badge: "New" },
+      { icon: Layers, label: "CSS Box Shadow", href: "/tools/css-box-shadow-generator", badge: "New" },
+      { icon: ImageIcon, label: "Image Resizer", href: "/tools/image-resizer", badge: "New" },
+      { icon: Minimize2, label: "Image Compressor", href: "/tools/image-compressor" },
+      { icon: Pipette, label: "Color Picker", href: "/tools/color-picker" },
+      { icon: QrCode, label: "QR Code Generator", href: "/tools/qr-code-generator" },
     ],
     comingSoon: [],
   },
@@ -93,12 +87,11 @@ const NAV_CATEGORIES = [
     href: "/seo-tools",
     tools: [
       { icon: Globe, label: "Meta Tag Generator", href: "/tools/meta-tag-generator", badge: "Popular" },
-      { icon: Link2, label: "URL Slug Generator", href: "/tools/url-slug-generator" },
-      { icon: TrendingUp, label: "Keyword Density", href: "/tools/keyword-density" },
+      { icon: Code2, label: "Schema Generator", href: "/tools/schema-generator" },
       { icon: Shield, label: "Robots.txt Generator", href: "/tools/robots-txt-generator" },
       { icon: Tag, label: "Sitemap Validator", href: "/tools/sitemap-validator" },
-      { icon: Gauge, label: "Page Speed Checker", href: "/tools/page-speed-checker" },
-      { icon: Code2, label: "Schema Generator", href: "/tools/schema-generator", badge: "New" },
+      { icon: Link2, label: "URL Slug Generator", href: "/tools/url-slug-generator" },
+      { icon: TrendingUp, label: "Keyword Density", href: "/tools/keyword-density" },
     ],
     comingSoon: [],
   },
@@ -113,12 +106,13 @@ const NAV_CATEGORIES = [
     glowClass: "nav-glow-cyan",
     href: "/email-tools",
     tools: [
-      { icon: Pencil, label: "Subject Line Generator", href: "/tools/subject-line-generator" },
-      { icon: Mail, label: "Email Signature Generator", href: "/tools/email-signature-generator" },
-      { icon: ShieldCheck, label: "Email Validator", href: "/tools/email-validator", badge: "New" },
-      { icon: ShieldAlert, label: "Spam Score Checker", href: "/tools/spam-score-checker", badge: "New" },
-      { icon: Newspaper, label: "Newsletter Template", href: "/tools/newsletter-template-generator", badge: "New" },
-      { icon: EyeOff, label: "Masked Email Generator", href: "/tools/masked-email-generator", badge: "New" },
+      { icon: Inbox, label: "Temp Mail", href: "/tools/temp-mail", badge: "Popular" },
+      { icon: ShieldCheck, label: "Email Validator", href: "/tools/email-validator" },
+      { icon: Pencil, label: "Email Signature", href: "/tools/email-signature-generator" },
+      { icon: EyeOff, label: "Masked Email", href: "/tools/masked-email-generator" },
+      { icon: ShieldAlert, label: "Spam Score Checker", href: "/tools/spam-score-checker" },
+      { icon: Newspaper, label: "Newsletter Template", href: "/tools/newsletter-template-generator" },
+      { icon: Mail, label: "Subject Line Generator", href: "/tools/subject-line-generator" },
     ],
     comingSoon: [],
   },
@@ -223,93 +217,6 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
   );
 }
 
-const TEMP_MAIL_ITEMS = [
-  { icon: Inbox,  label: "Temp Email",   href: "/tools/temp-mail/tempemail",  desc: "Instant disposable inbox — 9 domains, no signup, auto-refreshes every 15s" },
-  { icon: Mail,   label: "Temp Gmail",   href: "/tools/temp-mail/tempgmail",  desc: "Real @gmail.com address — works where disposable emails are blocked" },
-  { icon: Hash,   label: "Gmail Tricks", href: "/tools/temp-mail/gmail-tricks", desc: "Generate unlimited aliases from your own Gmail using dot & plus tricks" },
-];
-
-const PRIVACY_ITEMS = [
-  { icon: EyeOff,      label: "Masked Email Generator", href: "/tools/masked-email-generator", desc: "Create anonymous email aliases" },
-  { icon: ShieldAlert, label: "Spam Score Checker",     href: "/tools/spam-score-checker",     desc: "Check email for spam triggers" },
-];
-
-function TempMailNavItem({ currentPath }: { currentPath: string }) {
-  const [open, setOpen] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const enter = useCallback(() => { if (timer.current) clearTimeout(timer.current); setOpen(true); }, []);
-  const leave = useCallback(() => { timer.current = setTimeout(() => setOpen(false), 150); }, []);
-  const close = useCallback(() => setOpen(false), []);
-
-  const isActive =
-    currentPath.startsWith("/tools/temp-mail") ||
-    currentPath === "/tools/temp-gmail" ||
-    PRIVACY_ITEMS.some(p => currentPath === p.href) ||
-    open;
-
-  return (
-    <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-teal ${
-          isActive
-            ? "bg-teal-500/10 text-teal-400 nav-active-pulse"
-            : "text-teal-400 hover:bg-teal-500/10"
-        }`}
-        style={isActive ? ({ "--nav-glow-color": "hsl(168 80% 52% / 0.28)" } as React.CSSProperties) : undefined}
-      >
-        <Inbox className="h-3.5 w-3.5 shrink-0" />
-        Temp Mail
-        <ChevronDown className={`h-3 w-3 transition-transform duration-150 opacity-60 ${open ? "rotate-180" : ""}`} />
-      </button>
-
-      {open && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 z-50 rounded-xl border border-border/60 bg-background/98 backdrop-blur-xl shadow-2xl shadow-black/20 animate-in fade-in slide-in-from-top-1 duration-150">
-          <div className="p-2">
-            <div className="px-3 pt-1.5 pb-1 flex items-center justify-between">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-500 dark:text-cyan-400">Inbox Tools</span>
-              <Link href="/email-tools" onClick={close}>
-                <span className="text-[10px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer">All Email Tools →</span>
-              </Link>
-            </div>
-            <div className="space-y-0.5 mb-1">
-              {TEMP_MAIL_ITEMS.map(({ icon: Icon, label, href, desc }) => (
-                <Link key={href} href={href} onClick={close}>
-                  <div className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer ${currentPath === href ? "bg-muted/40" : ""}`}>
-                    <Icon className="h-3.5 w-3.5 text-cyan-500 dark:text-cyan-400 shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-medium group-hover:text-primary transition-colors">{label}</div>
-                      <div className="text-[10px] text-muted-foreground truncate">{desc}</div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            <div className="h-px bg-border/40 mx-1 my-1.5" />
-            <div className="px-3 pb-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-purple-500 dark:text-purple-400">Privacy Tools</span>
-            </div>
-            <div className="space-y-0.5">
-              {PRIVACY_ITEMS.map(({ icon: Icon, label, href, desc }) => (
-                <Link key={href} href={href} onClick={close}>
-                  <div className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer ${currentPath === href ? "bg-muted/40" : ""}`}>
-                    <Icon className="h-3.5 w-3.5 text-purple-500 dark:text-purple-400 shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-medium group-hover:text-primary transition-colors">{label}</div>
-                      <div className="text-[10px] text-muted-foreground truncate">{desc}</div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
 export function Navbar() {
   const [location] = useLocation();
   const [showFeedback, setShowFeedback] = useState(false);
@@ -380,7 +287,7 @@ export function Navbar() {
             </div>
             <span className="font-semibold text-sm text-foreground tracking-tight">X Toolkit</span>
             <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-primary/30 text-primary bg-primary/8 px-1.5 py-0">
-              {TOTAL_LIVE}+ Tools
+              {TOTAL_LIVE} Tools
             </Badge>
           </Link>
 
@@ -401,8 +308,6 @@ export function Navbar() {
               {NAV_CATEGORIES.map((cat) => (
                 <NavItem key={cat.key} category={cat} currentPath={location} />
               ))}
-
-              <TempMailNavItem currentPath={location} />
 
               <Link href="/blog">
                 <button className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
@@ -532,30 +437,6 @@ export function Navbar() {
                   </div>
                 );
               })}
-
-              {/* Temp Mail mobile */}
-              <div className="rounded-lg overflow-hidden border border-border/30">
-                <button
-                  className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium hover:bg-muted/50 transition-colors text-left bg-muted/20 nav-glow-teal"
-                  onClick={() => setMobileExpanded(mobileExpanded === "temp-mail" ? null : "temp-mail")}
-                >
-                  <Inbox className="h-4 w-4 shrink-0 text-teal-400" />
-                  <span className="text-sm font-semibold flex-1 text-teal-400">Temp Mail</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 opacity-60 ${mobileExpanded === "temp-mail" ? "rotate-180" : ""}`} />
-                </button>
-                {mobileExpanded === "temp-mail" && (
-                  <div className="bg-muted/10 px-2 py-1.5 space-y-0.5">
-                    {TEMP_MAIL_ITEMS.map(({ icon: Icon, label, href }) => (
-                      <Link key={href} href={href} onClick={closeMenu}>
-                        <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
-                          <Icon className="h-3.5 w-3.5 shrink-0" />
-                          {label}
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
 
               <Link href="/blog" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left nav-glow-white ${
