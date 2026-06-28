@@ -280,8 +280,8 @@ const EmailMessageBody = memo(function EmailMessageBody({ body, isHtml, subject 
   };
 
   const bodyStyle: React.CSSProperties = {
-    background: "#0f0f1a",
-    color: "#e2e8f0",
+    background: "var(--card)",
+    color: "var(--card-foreground)",
     fontFamily: "inherit",
     fontSize: "14px",
     lineHeight: "1.6",
@@ -668,7 +668,7 @@ function UnifiedInboxSection() {
 
         <div className="flex flex-wrap gap-2 items-center">
           <Button onClick={copyAddress} disabled={!email} size="sm"
-            className="text-xs gap-1.5 font-semibold bg-cyan-500 hover:bg-cyan-400 text-black">
+            className="text-xs gap-1.5 font-semibold bg-primary hover:bg-primary/90 text-primary-foreground">
             {copied ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             {copied ? "Copied!" : "Copy Address"}
           </Button>
@@ -753,7 +753,7 @@ function UnifiedInboxSection() {
               <Inbox className="h-3.5 w-3.5 text-muted-foreground" />
               <span className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Inbox</span>
               {unread > 0 && (
-                <span className="h-4 min-w-4 px-1.5 text-[10px] rounded-full flex items-center justify-center font-bold bg-cyan-500 text-black">{unread} new</span>
+                <span className="h-4 min-w-4 px-1.5 text-[10px] rounded-full flex items-center justify-center font-bold bg-primary text-primary-foreground">{unread} new</span>
               )}
               {loadingMsgs && messages.length > 0 && (
                 <span className="text-[10px] text-muted-foreground/50">Checking…</span>
@@ -1128,19 +1128,19 @@ function TempGmailTab() {
           <div className="flex rounded-lg border border-border/60 overflow-hidden text-xs">
             <button
               onClick={() => setGmailType("dot")}
-              className={`px-3 py-1.5 font-medium transition-colors ${gmailType === "dot" ? "bg-red-500 text-white" : "text-muted-foreground hover:text-foreground hover:bg-muted/40"}`}
+              className={`px-3 py-1.5 font-medium transition-colors ${gmailType === "dot" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted/40"}`}
             >
               Dot trick
             </button>
             <button
               onClick={() => setGmailType("plus")}
-              className={`px-3 py-1.5 font-medium transition-colors border-l border-border/60 ${gmailType === "plus" ? "bg-red-500 text-white" : "text-muted-foreground hover:text-foreground hover:bg-muted/40"}`}
+              className={`px-3 py-1.5 font-medium transition-colors border-l border-border/60 ${gmailType === "plus" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted/40"}`}
             >
               Plus alias
             </button>
           </div>
 
-          <Button onClick={copyAddress} disabled={!email} size="sm" className="text-xs gap-1.5 bg-red-500 hover:bg-red-400 text-white font-semibold">
+          <Button onClick={copyAddress} disabled={!email} size="sm" className="text-xs gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
             {copied ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             {copied ? "Copied!" : "Copy"}
           </Button>
@@ -1218,7 +1218,7 @@ function TempGmailTab() {
                 <Inbox className="h-3.5 w-3.5 text-muted-foreground" />
                 <span className="text-xs font-semibold text-foreground/70 uppercase tracking-wide">Inbox</span>
                 {messages.filter(m => !readIds.has(m.id)).length > 0 && (
-                  <span className="h-4 min-w-4 px-1.5 text-[10px] bg-red-500 text-white rounded-full flex items-center justify-center font-bold">
+                  <span className="h-4 min-w-4 px-1.5 text-[10px] bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">
                     {messages.filter(m => !readIds.has(m.id)).length} new
                   </span>
                 )}
@@ -1568,13 +1568,13 @@ function GmailTricksTab() {
       )}
 
       {/* Internal link: Temp Gmail Generator */}
-      <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 flex items-center justify-between gap-4">
+      <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 flex items-center justify-between gap-4">
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium">Also try: Temp Gmail Generator</p>
           <p className="text-xs text-muted-foreground mt-0.5">Generate a ready-to-use @gmail.com address with live inbox — no real Gmail required.</p>
         </div>
         <Link href="/tools/temp-mail/tempgmail">
-          <Button size="sm" variant="outline" className="shrink-0 gap-1.5 text-xs border-red-500/30 text-red-400 hover:bg-red-500/10">
+          <Button size="sm" variant="outline" className="shrink-0 gap-1.5 text-xs border-primary/30 text-primary hover:bg-primary/10">
             <Mail className="h-3.5 w-3.5" /> Try it →
           </Button>
         </Link>
@@ -1655,13 +1655,13 @@ export default function TempMail({ defaultTab = "disposable" }: { defaultTab?: T
         {defaultTab === "disposable" && (
           <>
             <UnifiedInboxSection />
-            <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 flex items-center justify-between gap-4">
+            <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 flex items-center justify-between gap-4">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium">Need a @gmail.com address?</p>
                 <p className="text-xs text-muted-foreground mt-0.5">Our Temp Gmail Generator creates real @gmail.com addresses accepted everywhere — including sites that block disposable emails.</p>
               </div>
               <Link href="/tools/temp-mail/tempgmail">
-                <Button size="sm" variant="outline" className="shrink-0 gap-1.5 text-xs border-red-500/30 text-red-400 hover:bg-red-500/10">
+                <Button size="sm" variant="outline" className="shrink-0 gap-1.5 text-xs border-primary/30 text-primary hover:bg-primary/10">
                   <Mail className="h-3.5 w-3.5" /> Try Temp Gmail →
                 </Button>
               </Link>

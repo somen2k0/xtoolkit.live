@@ -35,12 +35,30 @@ const DEV_TOOLS = [
 export function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [subscribing, setSubscribing] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
     if (!email.includes("@")) return;
-    setSubscribed(true);
-    setEmail("");
+    setSubscribing(true);
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY || "",
+          email,
+          subject: "Newsletter Signup — X Toolkit",
+          message: `New newsletter signup: ${email}`,
+        }),
+      });
+    } catch {
+      // fail silently — show success regardless
+    } finally {
+      setSubscribed(true);
+      setEmail("");
+      setSubscribing(false);
+    }
   };
 
   return (
@@ -182,8 +200,8 @@ export function Footer() {
                     placeholder="your@email.com"
                     className="text-sm bg-background/60 border-border/60 focus-visible:ring-primary/40 h-9"
                   />
-                  <Button onClick={handleSubscribe} disabled={!email.includes("@")} size="sm" className="w-full text-xs shadow-sm shadow-primary/20">
-                    <Mail className="h-3.5 w-3.5 mr-1.5" /> Subscribe
+                  <Button onClick={handleSubscribe} disabled={!email.includes("@") || subscribing} size="sm" className="w-full text-xs shadow-sm shadow-primary/20">
+                    <Mail className="h-3.5 w-3.5 mr-1.5" /> {subscribing ? "Subscribing…" : "Subscribe"}
                   </Button>
                 </div>
               ) : (

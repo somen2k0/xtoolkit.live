@@ -292,6 +292,7 @@ const STATIC_PAGES = [
 const TEMP_MAIL_SUB_ROUTES = [
   {
     path: "/tools/temp-mail/tempemail",
+    canonical: "/tools/temp-mail",
     label: "Disposable Email Inbox",
     title: "Disposable Email Inbox — Free Temporary Email | X Toolkit",
     description:
@@ -1063,8 +1064,8 @@ function buildRootContent(pageData, tool) {
     `</div>`;
 }
 
-function generatePageHtml(template, { path, title, description, ogTitle, ogDescription, isHomepage, category, categoryKey, label, seoKeywords: pageStaticKeywords }, tool) {
-  const canonicalUrl = `${SITE_URL}${path}`;
+function generatePageHtml(template, { path, title, description, ogTitle, ogDescription, isHomepage, category, categoryKey, label, seoKeywords: pageStaticKeywords, canonical }, tool) {
+  const canonicalUrl = `${SITE_URL}${canonical || path}`;
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(description);
   const safeOgTitle = escapeHtml(ogTitle || title);
@@ -1249,7 +1250,7 @@ function main() {
     const pageDir = join(DIST, ...segments);
     mkdirSync(pageDir, { recursive: true });
     const outputPath = join(pageDir, "index.html");
-    const page = { path: sub.path, title: sub.title, description: sub.description, ogTitle: sub.ogTitle, ogDescription: sub.ogDescription, category: sub.category };
+    const page = { path: sub.path, canonical: sub.canonical, title: sub.title, description: sub.description, ogTitle: sub.ogTitle, ogDescription: sub.ogDescription, category: sub.category };
     const fakeTool = { label: sub.label, seoTitle: sub.title, seoDescription: sub.description, seoKeywords: sub.seoKeywords, category: sub.category, id: sub.path };
     writeFileSync(outputPath, generatePageHtml(template, page, fakeTool), "utf-8");
     console.log(`  ✅ ${sub.path}`);
