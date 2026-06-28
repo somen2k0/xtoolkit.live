@@ -538,5 +538,70 @@
     "badge": "New",
     "sitemapPriority": 0.90,
     "tags": ["masked email", "alias", "anonymous", "privacy", "email", "gmail", "simplelogin", "anonaddy"]
+  },
+  {
+    "id": "css-gradient-generator",
+    "label": "CSS Gradient Generator",
+    "href": "/tools/css-gradient-generator",
+    "category": "developer",
+    "description": "Build linear and radial CSS gradients visually with live preview. Add color stops, set direction, and copy the CSS output instantly.",
+    "seoTitle": "CSS Gradient Generator — Free Online Linear & Radial Gradient Builder | X Toolkit",
+    "seoDescription": "Create beautiful CSS gradients visually. Build linear or radial gradients with custom color stops, directions, and positions. Copy the CSS with one click. Free, no signup.",
+    "seoKeywords": "css gradient generator, linear gradient generator, radial gradient css, css gradient maker, gradient color picker, css background gradient, gradient code generator",
+    "ogTitle": "CSS Gradient Generator — Build Beautiful Gradients Visually",
+    "ogDescription": "Create linear and radial CSS gradients with a live preview. Add color stops, adjust direction, copy CSS. Free.",
+    "tags": ["css", "gradient", "design", "color"]
+  },
+  {
+    "id": "css-box-shadow-generator",
+    "label": "CSS Box Shadow Generator",
+    "href": "/tools/css-box-shadow-generator",
+    "category": "developer",
+    "description": "Build CSS box shadows visually with live preview. Control offset, blur, spread, color, and opacity. Supports multiple shadow layers and inset shadows.",
+    "seoTitle": "CSS Box Shadow Generator — Free Online Shadow Builder | X Toolkit",
+    "seoDescription": "Generate CSS box-shadow code visually. Adjust horizontal offset, vertical offset, blur, spread, color, and opacity. Supports inset and layered shadows. Copy the CSS instantly. Free.",
+    "seoKeywords": "css box shadow generator, box shadow tool, css shadow builder, box-shadow css, inset shadow generator, layered shadow css, shadow code generator",
+    "ogTitle": "CSS Box Shadow Generator — Visual Shadow Builder",
+    "ogDescription": "Build CSS box shadows visually with live preview. Multiple layers, inset support, copy CSS. Free.",
+    "tags": ["css", "shadow", "design", "box-shadow"]
+  },
+  {
+    "id": "js-formatter",
+    "label": "JavaScript Formatter & Minifier",
+    "href": "/tools/js-formatter",
+    "category": "developer",
+    "description": "Format and beautify messy JavaScript code for readability, or minify it to reduce file size. Paste your code and get clean output instantly.",
+    "seoTitle": "JavaScript Formatter & Minifier — Free JS Beautifier Online | X Toolkit",
+    "seoDescription": "Format and beautify messy JavaScript code or minify it to reduce file size. Paste JS code, click Format or Minify, copy the output. Free online JS formatter.",
+    "seoKeywords": "javascript formatter, js beautifier, javascript minifier, js formatter online, beautify javascript, minify js, format javascript code, js code formatter",
+    "ogTitle": "JavaScript Formatter & Minifier — Free Online JS Beautifier",
+    "ogDescription": "Beautify messy JavaScript or minify it for production. Free online JS formatter and minifier.",
+    "tags": ["javascript", "formatter", "minifier", "developer"]
+  },
+  {
+    "id": "hash-generator",
+    "label": "Hash Generator",
+    "href": "/tools/hash-generator",
+    "category": "developer",
+    "description": "Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text instantly in your browser. Uses the Web Crypto API — nothing is sent to a server.",
+    "seoTitle": "Hash Generator — Free MD5, SHA-1, SHA-256 & SHA-512 Online | X Toolkit",
+    "seoDescription": "Generate MD5, SHA-1, SHA-256, and SHA-512 cryptographic hashes from any text. Runs entirely in your browser using the Web Crypto API. Free, instant, no signup.",
+    "seoKeywords": "hash generator, md5 generator, sha256 generator, sha-512 hash, sha1 online, hash text online, md5 hash calculator, crypto hash generator, sha256 online, checksum generator",
+    "ogTitle": "Hash Generator — MD5, SHA-1, SHA-256, SHA-512",
+    "ogDescription": "Generate all major cryptographic hashes from any text, instantly in your browser. Free.",
+    "tags": ["hash", "md5", "sha256", "cryptography", "security"]
+  },
+  {
+    "id": "image-resizer",
+    "label": "Image Resizer",
+    "href": "/tools/image-resizer",
+    "category": "developer",
+    "description": "Resize JPEG, PNG, and WebP images in your browser. Set custom dimensions with optional aspect ratio lock, choose quality and output format, then download. No uploads.",
+    "seoTitle": "Image Resizer — Free Online Image Resize Tool | X Toolkit",
+    "seoDescription": "Resize images online for free. Upload JPEG, PNG, or WebP images, set custom width and height, lock aspect ratio, choose quality and format, then download instantly. 100% browser-based — nothing uploaded.",
+    "seoKeywords": "image resizer, resize image online, image resize tool, compress image size, change image dimensions, resize jpg online, resize png, image size reducer, free image resizer",
+    "ogTitle": "Image Resizer — Free Browser-Based Image Resize Tool",
+    "ogDescription": "Resize JPEG, PNG, and WebP images in your browser. Set dimensions, quality, format, download. No uploads. Free.",
+    "tags": ["image", "resize", "compress", "jpeg", "png", "webp"]
   }
 ]

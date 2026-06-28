@@ -48,6 +48,11 @@ const QrCodeGenerator = lazy(() => import("@/pages/tools/qr-code-generator"));
 const ImageCompressor = lazy(() => import("@/pages/tools/image-compressor"));
 const ColorPicker = lazy(() => import("@/pages/tools/color-picker"));
 const WordCounter = lazy(() => import("@/pages/tools/word-counter"));
+const CssGradientGenerator = lazy(() => import("@/pages/tools/css-gradient-generator"));
+const CssBoxShadowGenerator = lazy(() => import("@/pages/tools/css-box-shadow-generator"));
+const JsFormatter = lazy(() => import("@/pages/tools/js-formatter"));
+const HashGenerator = lazy(() => import("@/pages/tools/hash-generator"));
+const ImageResizer = lazy(() => import("@/pages/tools/image-resizer"));
 // SEO Tools (lazy)
 const MetaTagGenerator = lazy(() => import("@/pages/tools/meta-tag-generator"));
 const UrlSlugGenerator = lazy(() => import("@/pages/tools/url-slug-generator"));
@@ -160,6 +165,11 @@ function TrackedRouter() {
           <Route path="/tools/color-picker" component={ColorPicker} />
           <Route path="/tools/qr-code-generator" component={QrCodeGenerator} />
           <Route path="/tools/image-compressor" component={ImageCompressor} />
+          <Route path="/tools/css-gradient-generator" component={CssGradientGenerator} />
+          <Route path="/tools/css-box-shadow-generator" component={CssBoxShadowGenerator} />
+          <Route path="/tools/js-formatter" component={JsFormatter} />
+          <Route path="/tools/hash-generator" component={HashGenerator} />
+          <Route path="/tools/image-resizer" component={ImageResizer} />
 
           {/* AI Tools */}
           <Route path="/tools/ai-detector" component={AiDetector} />

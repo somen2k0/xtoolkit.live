@@ -349,4 +349,36 @@
     <priority>0.65</priority>
   </url>
 
+  <!-- New developer tools (June 2026) -->
+  <url>
+    <loc>https://xtoolkit.live/tools/css-gradient-generator</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/tools/css-box-shadow-generator</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/tools/js-formatter</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/tools/hash-generator</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://xtoolkit.live/tools/image-resizer</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
 </urlset>
