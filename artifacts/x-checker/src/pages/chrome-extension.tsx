@@ -61,8 +61,8 @@ const faqs = [
 function ExtensionPopupMockup() {
   return (
     <div className="relative select-none">
-      <div className="absolute inset-0 rounded-2xl bg-violet-600/20 blur-[50px] scale-110" />
-      <div className="relative w-[272px] rounded-xl overflow-hidden shadow-2xl shadow-violet-900/70 ring-1 ring-white/10">
+      <div className="absolute inset-0 rounded-2xl bg-primary/15 blur-[50px] scale-110" />
+      <div className="relative w-[272px] rounded-xl overflow-hidden shadow-2xl shadow-primary/30 ring-1 ring-white/10">
         {/* Browser chrome bar */}
         <div className="bg-[#202124] px-3 py-2 flex items-center gap-2 border-b border-white/5">
           <div className="flex gap-1.5">
@@ -71,8 +71,8 @@ function ExtensionPopupMockup() {
             <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
           </div>
           <div className="flex-1 text-[9px] text-white/25 font-mono text-center">X Toolkit</div>
-          <div className="h-4 w-4 rounded bg-violet-500/30 flex items-center justify-center">
-            <Puzzle className="h-2.5 w-2.5 text-violet-300" />
+          <div className="h-4 w-4 rounded bg-primary/20 flex items-center justify-center">
+            <Puzzle className="h-2.5 w-2.5 text-primary" />
           </div>
         </div>
         {/* Popup body */}
@@ -80,14 +80,14 @@ function ExtensionPopupMockup() {
           {/* Tabs */}
           <div className="flex gap-1 mb-3 bg-white/5 rounded-lg p-1">
             {["Inbox", "Gmail", "Tricks"].map((tab, i) => (
-              <div key={tab} className={`flex-1 text-center py-1 rounded-md text-[9px] font-semibold ${i === 0 ? "bg-violet-600/50 text-violet-200" : "text-white/30"}`}>{tab}</div>
+              <div key={tab} className={`flex-1 text-center py-1 rounded-md text-[9px] font-semibold ${i === 0 ? "bg-primary/40 text-white" : "text-white/30"}`}>{tab}</div>
             ))}
           </div>
           {/* Address bar */}
           <div className="rounded-lg bg-white/5 border border-white/8 px-2.5 py-2 mb-2 flex items-center justify-between gap-2">
             <div className="min-w-0">
               <div className="text-[7px] text-white/30 mb-0.5 uppercase tracking-wide">Active inbox</div>
-              <div className="text-[9px] text-violet-300 font-mono truncate">xktoolkit@guerrillamail.com</div>
+              <div className="text-[9px] text-primary font-mono truncate">xktoolkit@guerrillamail.com</div>
             </div>
             <div className="rounded bg-white/8 p-1 shrink-0"><Copy className="h-2.5 w-2.5 text-white/40" /></div>
           </div>
@@ -113,7 +113,7 @@ function ExtensionPopupMockup() {
               { from: "Notion", subj: "Verify your account", time: "1h", hi: false },
             ].map((email, i) => (
               <div key={i} className={`flex items-center gap-2 px-1.5 py-1.5 rounded-md ${email.hi ? "bg-white/5" : "opacity-40"}`}>
-                <div className={`h-5 w-5 rounded-full shrink-0 flex items-center justify-center text-[8px] font-bold ${email.hi ? "bg-violet-500/30 text-violet-300" : "bg-white/8 text-white/40"}`}>{email.from[0]}</div>
+                <div className={`h-5 w-5 rounded-full shrink-0 flex items-center justify-center text-[8px] font-bold ${email.hi ? "bg-primary/20 text-primary" : "bg-white/8 text-white/40"}`}>{email.from[0]}</div>
                 <div className="flex-1 min-w-0">
                   <div className="text-[8px] font-semibold text-white/70 truncate">{email.from}</div>
                   <div className="text-[7px] text-white/40 truncate">{email.subj}</div>
@@ -140,7 +140,7 @@ function AddToChrome({ size = "default" }: { size?: "default" | "lg" }) {
       href={CWS_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2.5 ${pad} rounded-xl font-bold text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50 transition-all duration-200 hover:-translate-y-0.5`}
+      className={`inline-flex items-center gap-2.5 ${pad} rounded-xl font-bold text-white bg-primary hover:bg-primary/90 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-200 hover:-translate-y-0.5`}
     >
       <Download className="h-4 w-4" />
       Add to Chrome — it's free
@@ -173,12 +173,11 @@ export default function ChromeExtensionPage() {
 
       {/* ── Hero ── */}
       <div className="relative overflow-hidden">
-        {/* Rich background */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-violet-950/40 via-transparent to-transparent" />
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-violet-600/15 blur-[140px]" />
-          <div className="absolute top-10 right-10 h-72 w-72 rounded-full bg-purple-500/10 blur-[100px]" />
-          <div className="absolute top-10 left-10 h-56 w-56 rounded-full bg-indigo-600/10 blur-[80px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/8 via-transparent to-transparent" />
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-primary/10 blur-[140px]" />
+          <div className="absolute top-10 right-10 h-72 w-72 rounded-full bg-primary/8 blur-[100px]" />
+          <div className="absolute top-10 left-10 h-56 w-56 rounded-full bg-primary/6 blur-[80px]" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-24">
@@ -187,42 +186,42 @@ export default function ChromeExtensionPage() {
             {/* ── Left: text ── */}
             <div className="text-center lg:text-left">
               <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
-                <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 shadow-xl shadow-violet-500/40 ring-1 ring-violet-400/20 shrink-0">
+                <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-primary shadow-xl shadow-primary/30 ring-1 ring-primary/20 shrink-0">
                   <Puzzle className="h-7 w-7 text-white" />
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1.5 text-xs font-semibold text-success">
+                  <span className="h-2 w-2 rounded-full bg-success animate-pulse" />
                   Live on Chrome Web Store
                 </div>
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-5 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-5 leading-tight">
                 Temp email &amp; OTP{" "}
-                <span className="bg-gradient-to-r from-violet-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent">
+                <span className="text-primary">
                   in your toolbar
                 </span>
               </h1>
 
-              <p className="text-white/70 text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mb-8">
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mb-8">
                 Instant disposable inbox, automatic OTP detection, and Gmail tricks —
                 right in Chrome. No website visits. No signups. Just click and go.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-6">
                 <AddToChrome size="lg" />
-                <div className="flex items-center gap-2 text-white/50 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <Chrome className="h-4 w-4" />
                   Chrome, Brave, Edge &amp; Arc
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-white/40 text-xs">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-muted-foreground text-xs">
                 <span className="flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-amber-400" /> Free forever</span>
-                <span className="h-3 w-px bg-white/20" />
+                <span className="h-3 w-px bg-border" />
                 <span>No account needed</span>
-                <span className="h-3 w-px bg-white/20" />
+                <span className="h-3 w-px bg-border" />
                 <span>Manifest V3</span>
-                <span className="h-3 w-px bg-white/20" />
+                <span className="h-3 w-px bg-border" />
                 <span>111 KB</span>
               </div>
             </div>
@@ -237,8 +236,8 @@ export default function ChromeExtensionPage() {
       </div>
 
       {/* ── Stats bar ── */}
-      <div className="border-y border-white/8 bg-white/[0.02]">
-        <div className="max-w-4xl mx-auto px-4 md:px-8 py-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/8">
+      <div className="border-y border-border bg-muted/30">
+        <div className="max-w-4xl mx-auto px-4 md:px-8 py-6 grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
           {[
             { val: "8",    label: "Built-in features" },
             { val: "15s",  label: "Auto-refresh rate" },
@@ -246,8 +245,8 @@ export default function ChromeExtensionPage() {
             { val: "Free", label: "Always & forever" },
           ].map(({ val, label }) => (
             <div key={label} className="text-center px-4 py-2">
-              <div className="text-2xl font-extrabold text-white mb-0.5">{val}</div>
-              <div className="text-xs text-white/50">{label}</div>
+              <div className="text-2xl font-extrabold text-primary mb-0.5">{val}</div>
+              <div className="text-xs text-muted-foreground">{label}</div>
             </div>
           ))}
         </div>
@@ -256,21 +255,21 @@ export default function ChromeExtensionPage() {
       {/* ── Features grid ── */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Everything you need, in one click</h2>
-          <p className="text-white/60 text-lg">All the web tool's power — faster, from any tab, without leaving the page.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Everything you need, in one click</h2>
+          <p className="text-muted-foreground text-lg">All the web tool's power — faster, from any tab, without leaving the page.</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map(({ icon: Icon, title, desc }) => (
             <div
               key={title}
-              className="group relative rounded-2xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] hover:border-violet-500/40 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-violet-500/10"
+              className="group relative rounded-2xl border border-border bg-card hover:bg-muted/50 hover:border-primary/40 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10"
             >
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-600/30 to-purple-600/20 border border-violet-500/20 flex items-center justify-center mb-4">
-                <Icon className="h-5 w-5 text-violet-300" />
+              <div className="h-10 w-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4">
+                <Icon className="h-5 w-5 text-primary" />
               </div>
-              <p className="text-sm font-bold text-white mb-1.5 group-hover:text-violet-200 transition-colors">{title}</p>
-              <p className="text-xs text-white/55 leading-relaxed">{desc}</p>
+              <p className="text-sm font-bold text-foreground mb-1.5 group-hover:text-primary transition-colors">{title}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>
@@ -279,32 +278,32 @@ export default function ChromeExtensionPage() {
       {/* ── Without / With comparison ── */}
       <div className="max-w-4xl mx-auto px-4 md:px-8 pb-16">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Extension vs. visiting the website</h2>
-          <p className="text-white/45 text-sm">The same tools — 10× faster to access.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Extension vs. visiting the website</h2>
+          <p className="text-muted-foreground text-sm">The same tools — 10× faster to access.</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-6">
+          <div className="rounded-2xl border border-border bg-card p-6">
             <div className="flex items-center gap-2 mb-5">
-              <div className="h-6 w-6 rounded-full bg-white/8 flex items-center justify-center text-white/35 text-[10px] font-bold">✕</div>
-              <span className="text-sm font-semibold text-white/40">Without extension</span>
+              <div className="h-6 w-6 rounded-full bg-muted flex items-center justify-center text-muted-foreground text-[10px] font-bold">✕</div>
+              <span className="text-sm font-semibold text-muted-foreground">Without extension</span>
             </div>
             <ul className="space-y-3">
               {["Open a new browser tab", "Type xtoolkit.live", "Navigate to Temp Mail", "Copy your email address", "Switch back to your original tab", "Come back to manually refresh"].map(item => (
-                <li key={item} className="flex items-center gap-2.5 text-sm text-white/35">
-                  <span className="h-1.5 w-1.5 rounded-full bg-white/15 shrink-0" />{item}
+                <li key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                  <span className="h-1.5 w-1.5 rounded-full bg-border shrink-0" />{item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-violet-500/25 bg-violet-500/5 p-6">
+          <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6">
             <div className="flex items-center gap-2 mb-5">
-              <div className="h-6 w-6 rounded-full bg-violet-500/30 flex items-center justify-center text-violet-300 text-[10px] font-bold">✓</div>
-              <span className="text-sm font-semibold text-violet-300">With X Toolkit Extension</span>
+              <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center text-primary text-[10px] font-bold">✓</div>
+              <span className="text-sm font-semibold text-primary">With X Toolkit Extension</span>
             </div>
             <ul className="space-y-3">
               {["Click the toolbar icon", "Inbox is already open", "Address auto-generated", "OTP auto-detected with copy button", "Never leave your current tab", "Auto-refreshes every 15 seconds"].map(item => (
-                <li key={item} className="flex items-center gap-2.5 text-sm text-white/80">
-                  <span className="h-1.5 w-1.5 rounded-full bg-violet-400 shrink-0" />{item}
+                <li key={item} className="flex items-center gap-2.5 text-sm text-foreground">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />{item}
                 </li>
               ))}
             </ul>
@@ -313,14 +312,14 @@ export default function ChromeExtensionPage() {
       </div>
 
       {/* ── How it works ── */}
-      <div className="relative overflow-hidden border-y border-white/8 bg-white/[0.015]">
+      <div className="relative overflow-hidden border-y border-border bg-muted/20">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-64 w-96 bg-violet-600/8 blur-[80px]" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-64 w-96 bg-primary/6 blur-[80px]" />
         </div>
         <div className="max-w-3xl mx-auto px-4 md:px-8 py-20">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Up and running in 30 seconds</h2>
-            <p className="text-white/60">Three steps. No friction.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Up and running in 30 seconds</h2>
+            <p className="text-muted-foreground">Three steps. No friction.</p>
           </div>
           <div className="grid sm:grid-cols-3 gap-8">
             {[
@@ -329,11 +328,11 @@ export default function ChromeExtensionPage() {
               { n: "3", title: "Click to open your inbox",      desc: "Your temp email is ready instantly — copy, paste, done." },
             ].map(({ n, title, desc }) => (
               <div key={n} className="text-center">
-                <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-violet-600 to-purple-700 text-white font-extrabold text-lg mb-4 shadow-lg shadow-violet-500/30">
+                <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary text-white font-extrabold text-lg mb-4 shadow-lg shadow-primary/30">
                   {n}
                 </div>
-                <p className="text-base font-bold text-white mb-2">{title}</p>
-                <p className="text-sm text-white/55 leading-relaxed">{desc}</p>
+                <p className="text-base font-bold text-foreground mb-2">{title}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -343,8 +342,8 @@ export default function ChromeExtensionPage() {
       {/* ── FAQ ── */}
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Frequently asked questions</h2>
-          <p className="text-white/60">Everything you need to know before installing.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Frequently asked questions</h2>
+          <p className="text-muted-foreground">Everything you need to know before installing.</p>
         </div>
 
         <Accordion type="single" collapsible className="space-y-3">
@@ -352,12 +351,12 @@ export default function ChromeExtensionPage() {
             <AccordionItem
               key={i}
               value={`faq-${i}`}
-              className="rounded-xl border border-white/10 bg-white/[0.03] hover:border-violet-500/30 transition-colors px-5 !border-b-0 data-[state=open]:border-violet-500/40 data-[state=open]:bg-white/[0.05]"
+              className="rounded-xl border border-border bg-card hover:border-primary/30 transition-colors px-5 !border-b-0 data-[state=open]:border-primary/40 data-[state=open]:bg-primary/[0.03]"
             >
-              <AccordionTrigger className="text-white/90 hover:text-white font-medium text-sm md:text-base py-5 hover:no-underline [&[data-state=open]]:text-violet-200">
+              <AccordionTrigger className="text-foreground hover:text-foreground font-medium text-sm md:text-base py-5 hover:no-underline [&[data-state=open]]:text-primary">
                 {faq.q}
               </AccordionTrigger>
-              <AccordionContent className="text-white/60 text-sm leading-relaxed pb-5">
+              <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-5">
                 {faq.a}
               </AccordionContent>
             </AccordionItem>
@@ -369,7 +368,7 @@ export default function ChromeExtensionPage() {
       <div className="max-w-2xl mx-auto px-4 md:px-8 pb-4">
         <div className="relative rounded-2xl border border-amber-400/20 bg-gradient-to-br from-amber-500/8 via-amber-400/5 to-transparent p-8 text-center overflow-hidden">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 rounded-2xl bg-white/[0.02]" />
+            <div className="absolute inset-0 rounded-2xl bg-amber-500/[0.03]" />
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-40 w-64 bg-amber-500/10 blur-[60px]" />
           </div>
 
@@ -379,8 +378,8 @@ export default function ChromeExtensionPage() {
             ))}
           </div>
 
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Enjoying X Toolkit?</h3>
-          <p className="text-white/55 text-sm leading-relaxed mb-6 max-w-md mx-auto">
+          <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">Enjoying X Toolkit?</h3>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-md mx-auto">
             A quick review on the Chrome Web Store helps others discover it and takes less than 60 seconds. We read every single one.
           </p>
 
@@ -394,26 +393,26 @@ export default function ChromeExtensionPage() {
             Leave a review
           </a>
 
-          <p className="text-white/25 text-xs mt-4">Opens the Chrome Web Store · Takes &lt;60 seconds</p>
+          <p className="text-muted-foreground text-xs mt-4">Opens the Chrome Web Store · Takes &lt;60 seconds</p>
         </div>
       </div>
 
       {/* ── Bottom CTA ── */}
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-t from-violet-950/30 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-80 w-[700px] bg-violet-600/12 blur-[120px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/6 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-80 w-[700px] bg-primary/8 blur-[120px]" />
         </div>
         <div className="max-w-2xl mx-auto px-4 md:px-8 py-24 text-center">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 shadow-xl shadow-violet-500/30 mb-6">
+          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-primary shadow-xl shadow-primary/30 mb-6">
             <Download className="h-6 w-6 text-white" />
           </div>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4">Install X Toolkit now</h3>
-          <p className="text-white/60 text-lg mb-8 leading-relaxed">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">Install X Toolkit now</h3>
+          <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
             Free on the Chrome Web Store. No account, no signup — just install and your first inbox is ready in seconds.
           </p>
           <AddToChrome size="lg" />
-          <p className="text-white/30 text-xs mt-6">No credit card · No account · Free forever</p>
+          <p className="text-muted-foreground text-xs mt-6">No credit card · No account · Free forever</p>
         </div>
       </div>
     </Layout>
