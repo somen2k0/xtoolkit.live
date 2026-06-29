@@ -74,6 +74,7 @@
       "destination": "https://xtoolkit.live/:path*",
       "permanent": true
     },
+    { "source": "/pricing", "destination": "/", "permanent": true },
     { "source": "/tools/backlink-analyzer", "destination": "/tools/keyword-density", "permanent": true },
     { "source": "/tools/name-ideas", "destination": "/tools/username-generator", "permanent": true },
     { "source": "/tools/professional-bios", "destination": "/tools/bio-generator", "permanent": true },

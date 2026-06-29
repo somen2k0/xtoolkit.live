@@ -21,7 +21,6 @@ const Tools = lazy(() => import("@/pages/tools"));
 const About = lazy(() => import("@/pages/about"));
 const Privacy = lazy(() => import("@/pages/privacy"));
 const Terms = lazy(() => import("@/pages/terms"));
-const Pricing = lazy(() => import("@/pages/pricing"));
 const Contact = lazy(() => import("@/pages/contact"));
 // Lazy-loaded tool pages
 const UsernameGenerator = lazy(() => import("@/pages/tools/username-generator"));
@@ -133,7 +132,6 @@ function TrackedRouter() {
           <Route path="/about" component={About} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />
-          <Route path="/pricing" component={Pricing} />
           <Route path="/contact" component={Contact} />
 
           {/* Text & Formatting Tools */}

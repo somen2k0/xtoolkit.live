@@ -166,11 +166,6 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pricing">
-                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">Pricing</button>
-                  </Link>
-                </li>
-                <li>
                   <Link href="/contact">
                     <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</button>
                   </Link>

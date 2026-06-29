@@ -71,13 +71,6 @@ const STATIC_PAGES = [
     seoKeywords: "x toolkit, about x toolkit, somen biswas developer, free online tools, twitter tools developer, seo tools, temp mail, independent developer tools, xtoolkit.live",
   },
   {
-    path: "/pricing",
-    label: "Pricing",
-    title: "Pricing | X Toolkit — Free Forever",
-    description:
-      "X Toolkit is free to use — no subscription, no credit card, no hidden fees. Every tool works without an account. See what's included.",
-  },
-  {
     path: "/privacy",
     label: "Privacy Policy",
     title: "Privacy Policy | X Toolkit",
