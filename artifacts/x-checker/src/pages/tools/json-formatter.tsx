@@ -594,8 +594,8 @@ export default function JsonFormatter() {
                 },
                 {
                   lang: "jq",
-                  color: "text-cyan-400",
-                  bg: "bg-cyan-400/8 border-cyan-400/20",
+                  color: "text-primary",
+                  bg: "bg-primary/8 border-primary/20",
                   label: "jq (command line)",
                   snippets: [
                     { comment: "Pretty-print a JSON file", code: `jq . data.json` },

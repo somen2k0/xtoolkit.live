@@ -50,24 +50,24 @@ const STATIC_PAGES = [
   {
     path: "/",
     label: "Home",
-    title: "X Toolkit — 44+ Free Tools for X, SEO, Developers & Creators",
+    title: "X Toolkit — 43+ Free Tools for X, SEO, Developers & Creators",
     description:
-      "44+ free online tools for X (Twitter), SEO, developers & creators: account checker, AI bio generator, JSON formatter, JWT decoder, QR code generator, password generator & more. No signup.",
+      "43+ free online tools for X (Twitter), SEO, developers & creators: account checker, AI bio generator, JSON formatter, JWT decoder, QR code generator, password generator & more. No signup.",
     isHomepage: true,
   },
   {
     path: "/tools",
     label: "All Tools",
-    title: "All 44 Free Online Tools | X Toolkit",
+    title: "All 43 Free Online Tools | X Toolkit",
     description:
-      "Browse all 44 free tools from X Toolkit: social media, AI writing, developer, SEO, and email tools. No signup required, instant results.",
+      "Browse all 43 free tools from X Toolkit: social media, AI writing, developer, SEO, and email tools. No signup required, instant results.",
   },
   {
     path: "/about",
     label: "About",
     title: "About X Toolkit — Free Tools for X, SEO & Developers",
     description:
-      "X Toolkit offers 44+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work.",
+      "X Toolkit offers 43+ free online tools for X (Twitter) creators, developers, and SEO professionals. No signup, no fees — tools that just work.",
     seoKeywords: "x toolkit, about x toolkit, somen biswas developer, free online tools, twitter tools developer, seo tools, temp mail, independent developer tools, xtoolkit.live",
   },
   {
@@ -394,7 +394,7 @@ const PAGE_FAQS = {
     { q: "What permissions does the temp email extension need and why?", a: "storage (to remember your inbox across sessions), notifications (to alert you when new mail arrives), alarms (for background polling every 15 seconds), contextMenus (for the right-click 'Copy active email' option), and clipboardWrite (to copy addresses and OTP codes with one click). It only connects to xtoolkit.live — no other domains." },
     { q: "Does the extension check my inbox when the popup is closed?", a: "Yes. A lightweight Manifest V3 service worker runs in the background, polling your inbox every 15 seconds and sending a desktop notification the moment new mail arrives — even if you haven't opened the extension popup." },
     { q: "What is the keyboard shortcut to copy my temp email address?", a: "Press Alt+Shift+C anywhere in your browser to instantly copy your active temp email address to the clipboard — without opening the popup. You can reassign this shortcut in Chrome's extension keyboard shortcut settings (chrome://extensions/shortcuts)." },
-    { q: "Can I use the extension without visiting the xtoolkit.live website?", a: "Exactly — that's the whole point. The extension gives you a full temp email inbox from any tab or page, without ever navigating away. For 44+ additional tools (JSON formatter, X account checker, AI bio generator, SEO tools, and more), visit xtoolkit.live." },
+    { q: "Can I use the extension without visiting the xtoolkit.live website?", a: "Exactly — that's the whole point. The extension gives you a full temp email inbox from any tab or page, without ever navigating away. For 43+ additional tools (JSON formatter, X account checker, AI bio generator, SEO tools, and more), visit xtoolkit.live." },
     { q: "Is it safe to use a Chrome temp email extension?", a: "Yes. The extension is open about every permission it requests, collects zero personal data, requires no account, and only communicates with xtoolkit.live — which you can verify in the Chrome Web Store's 'Privacy practices' tab. Disposable inboxes are public by design, so avoid using them for sensitive communications." },
   ],
   "/tools/ai-detector": [

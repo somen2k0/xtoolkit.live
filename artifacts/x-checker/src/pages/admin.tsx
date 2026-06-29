@@ -534,7 +534,7 @@ function PageAnalytics({ password }: { password: string }) {
     tool: "bg-blue-400",
     blog: "bg-orange-400",
     page: "bg-green-400",
-    email: "bg-cyan-400",
+    email: "bg-primary",
     category: "bg-purple-400",
   };
 

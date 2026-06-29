@@ -79,8 +79,8 @@ export const CATEGORIES: Record<CategoryKey, Category> = {
     label: "Email Tools",
     shortLabel: "Email",
     icon: Mail,
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10 border-cyan-400/20",
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
     description: "Subject line generators, email formatters, signatures, and character counters.",
   },
 };

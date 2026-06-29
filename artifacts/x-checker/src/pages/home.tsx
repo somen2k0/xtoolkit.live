@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
@@ -6,12 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ToolCard } from "@/components/ToolCard";
-import { CATEGORIES, LIVE_TOOLS, TOTAL_LIVE, getPopularTools, getNewTools, getToolsByCategory, LIVE_TOOLS as ALL_TOOLS } from "@/lib/tools-registry";
+import { CATEGORIES, LIVE_TOOLS, TOTAL_LIVE, getPopularTools, getNewTools, getToolsByCategory } from "@/lib/tools-registry";
 import { trackEvent } from "@/lib/analytics";
-import { getTopTools, getRecentlyViewed } from "@/hooks/use-local-analytics";
 import {
-  CheckCircle2, Zap, Shield, Star, ArrowRight, Users,
-  TrendingUp, Clock, Mail,
+  CheckCircle2, Zap, Shield, Star, ArrowRight, Users, Mail,
 } from "lucide-react";
 
 const CATEGORY_ORDER: import("@/lib/tools-registry").CategoryKey[] = [
@@ -65,7 +63,7 @@ function StarRating({ count }: { count: number }) {
 }
 
 const PRIVACY_TOOLS_SPOTLIGHT = [
-  { href: "/tools/masked-email-generator", label: "Masked Email Generator",  desc: "Create anonymous email aliases in seconds",  icon: Mail,    color: "text-cyan-400",    bg: "bg-cyan-400/10 border-cyan-400/20" },
+  { href: "/tools/masked-email-generator", label: "Masked Email Generator",  desc: "Create anonymous email aliases in seconds",  icon: Mail,    color: "text-primary",    bg: "bg-primary/10 border-primary/20" },
   { href: "/tools/spam-score-checker",     label: "Spam Score Checker",      desc: "Find out if your email triggers spam filters", icon: Shield, color: "text-amber-400",   bg: "bg-amber-400/10 border-amber-400/20" },
   { href: "/tools/temp-mail",              label: "Temp Mail",               desc: "Instant disposable inbox, no signup",         icon: Mail,    color: "text-emerald-400", bg: "bg-emerald-400/10 border-emerald-400/20" },
   { href: "/tools/email-validator",        label: "Email Validator",         desc: "Validate email syntax instantly in browser",  icon: Shield,  color: "text-blue-400",    bg: "bg-blue-400/10 border-blue-400/20" },
@@ -108,19 +106,12 @@ export default function Home() {
   const socialTools = getToolsByCategory("social-media");
   const devTools = getToolsByCategory("developer");
 
-  const [trendingTools, setTrendingTools] = useState<Array<{ toolId: string; weeklyCount: number }>>([]);
-  const [recentIds, setRecentIds] = useState<string[]>([]);
-
-  useEffect(() => {
-    setTrendingTools(getTopTools(6));
-    setRecentIds(getRecentlyViewed(4));
-  }, []);
 
   return (
     <Layout>
       <SeoHead
         title={`X Toolkit — ${TOTAL_LIVE}+ Free Tools for X, SEO, Developers & Creators`}
-        description="44+ free online tools for X (Twitter), SEO, developers & creators: X account checker, AI bio generator, JSON formatter, Base64, JWT decoder, temp mail, QR code generator, password generator & more. No signup, instant results."
+        description="43+ free online tools for X (Twitter), SEO, developers & creators: X account checker, CSS generators, hash generator, AI bio tools, JSON formatter, Base64, JWT decoder, temp mail & more. No signup, instant results."
         path="/"
         extraSchemas={[
           {
@@ -177,7 +168,7 @@ export default function Home() {
 
             <div className="hero-badge inline-flex mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full dark:bg-white/5 bg-primary/8 dark:border-white/10 border border-primary/20 dark:text-purple-200 text-primary text-xs font-medium backdrop-blur-md">
-                <Zap className="h-3.5 w-3.5 dark:text-cyan-400 text-primary" /> {TOTAL_LIVE}+ free tools · no signup required
+                <Zap className="h-3.5 w-3.5 dark:text-primary text-primary" /> {TOTAL_LIVE}+ free tools · no signup required
               </span>
             </div>
 
@@ -187,8 +178,8 @@ export default function Home() {
             </h1>
 
             <p className="hero-subtitle text-lg md:text-xl dark:text-blue-100/60 text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8 font-light">
-              X account checker, AI bio generators, JSON formatter, Base64 encoder,
-              text formatters — all free, all instant, all in one place.
+              X account checker, CSS generators, hash generator, AI bio tools,
+              temp email — all free, all instant, all in one place.
             </p>
 
             <div className="hero-actions flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
@@ -313,83 +304,12 @@ export default function Home() {
         </div>
       </ScrollSection>
 
-      {/* ── Trending / Recently Viewed ── */}
-      {(trendingTools.length > 0 || recentIds.length > 0) && (
-        <ScrollSection className="max-w-6xl mx-auto px-4 md:px-8 py-10 md:py-14">
-          <div className="grid md:grid-cols-2 gap-8">
-            {trendingTools.length > 0 && (
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="h-7 w-7 rounded-lg bg-amber-400/10 border border-amber-400/20 flex items-center justify-center">
-                    <TrendingUp className="h-3.5 w-3.5 text-amber-400" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-amber-400">Your usage</p>
-                    <h3 className="text-base font-bold leading-tight">Trending This Week</h3>
-                  </div>
-                </div>
-                <div className="space-y-1.5">
-                  {trendingTools.map(({ toolId, weeklyCount }, i) => {
-                    const tool = ALL_TOOLS.find(t => t.id === toolId);
-                    if (!tool) return null;
-                    const Icon = tool.icon;
-                    return (
-                      <Link key={toolId} href={tool.href} onClick={() => trackEvent("trending_tool_click", { tool: toolId })}>
-                        <div className="group flex items-center gap-3 px-3 py-2.5 rounded-xl border border-border/40 bg-card/40 hover:border-primary/30 hover:bg-card transition-all duration-200 cursor-pointer card-hover-glow">
-                          <span className="text-xs font-bold text-muted-foreground/40 w-4 shrink-0">#{i + 1}</span>
-                          <div className="h-7 w-7 rounded-lg bg-muted/40 border border-border/40 flex items-center justify-center shrink-0">
-                            <Icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
-                          </div>
-                          <span className="text-sm font-medium flex-1 group-hover:text-primary transition-colors truncate">{tool.label}</span>
-                          <span className="text-[10px] text-muted-foreground/50 shrink-0">{weeklyCount}× this week</span>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {recentIds.length > 0 && (
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="h-7 w-7 rounded-lg bg-blue-400/10 border border-blue-400/20 flex items-center justify-center">
-                    <Clock className="h-3.5 w-3.5 text-blue-400" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-blue-400">Jump back in</p>
-                    <h3 className="text-base font-bold leading-tight">Recently Viewed</h3>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {recentIds.map((toolId) => {
-                    const tool = ALL_TOOLS.find(t => t.id === toolId);
-                    if (!tool) return null;
-                    const Icon = tool.icon;
-                    return (
-                      <Link key={toolId} href={tool.href} onClick={() => trackEvent("recent_tool_click", { tool: toolId })}>
-                        <div className="group flex items-center gap-2.5 px-3 py-2.5 rounded-xl border border-border/40 bg-card/40 hover:border-primary/30 hover:bg-card transition-all duration-200 cursor-pointer h-full card-hover-glow">
-                          <div className="h-7 w-7 rounded-lg bg-muted/40 border border-border/40 flex items-center justify-center shrink-0">
-                            <Icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
-                          </div>
-                          <span className="text-xs font-medium flex-1 group-hover:text-primary transition-colors leading-snug">{tool.label}</span>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-        </ScrollSection>
-      )}
-
       {/* ── Email & Privacy Spotlight ── */}
       <ScrollSection className="border-t border-border/50 bg-muted/10">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <Badge variant="outline" className="border-cyan-400/30 text-cyan-400 bg-cyan-400/8 text-xs mb-4">
+              <Badge variant="outline" className="border-primary/30 text-primary bg-primary/8 text-xs mb-4">
                 Email &amp; Privacy Tools
               </Badge>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">

@@ -11,7 +11,7 @@ import {
   Minimize2, Code2, KeyRound, Regex, Shuffle,
   ScanSearch, EyeOff, Newspaper, ShieldAlert, Inbox,
   AlignLeft, QrCode, ImageIcon, Palette, Laugh, BookOpen, BookMarked,
-  Layers, Pipette,
+  Layers, Pipette, Sun, Moon,
 } from "lucide-react";
 import { TOTAL_LIVE } from "@/lib/tools-registry";
 import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
@@ -99,10 +99,10 @@ const NAV_CATEGORIES = [
     key: "email",
     label: "Email Tools",
     icon: Mail,
-    color: "text-cyan-400",
-    activeBg: "bg-cyan-500/10",
-    bg: "bg-cyan-400/10",
-    glowColor: "hsl(187 90% 55% / 0.28)",
+    color: "text-violet-400",
+    activeBg: "bg-violet-500/10",
+    bg: "bg-violet-400/10",
+    glowColor: "hsl(258 82% 60% / 0.28)",
     glowClass: "nav-glow-cyan",
     href: "/email-tools",
     tools: [
@@ -222,16 +222,32 @@ export function Navbar() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [isDark, setIsDark] = useState(
+    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark")
+  );
 
   const closeMenu = () => setMenuOpen(false);
 
+  const toggleTheme = useCallback(() => {
+    const root = document.documentElement;
+    const nowDark = !root.classList.contains("dark");
+    if (nowDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+    setIsDark(nowDark);
+  }, []);
+
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-violet-500/20 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/20 dark:shadow-violet-950/30">
-        {/* Gradient accent line at the bottom — vivid */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/80 to-transparent pointer-events-none" />
-        {/* Subtle top highlight */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent pointer-events-none" />
+      <nav className="sticky top-0 z-50 border-b dark:border-violet-500/20 border-border dark:bg-background/90 bg-white/95 dark:backdrop-blur-xl backdrop-blur-sm dark:shadow-lg dark:shadow-black/20 dark:shadow-violet-950/30 shadow-sm">
+        {/* Gradient accent line at the bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent dark:via-violet-500/80 via-primary/20 to-transparent pointer-events-none" />
+        {/* Subtle top highlight — dark only */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent pointer-events-none dark:block hidden" />
 
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-2">
 
@@ -293,7 +309,7 @@ export function Navbar() {
 
           {/* Desktop nav — command bar style with icon + label */}
           <div className="hidden md:flex flex-1 items-center justify-center">
-            <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-muted/50 border border-violet-500/15 shadow-inner shadow-black/[0.08] dark:shadow-black/30">
+            <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl dark:bg-muted/50 bg-muted/30 dark:border-violet-500/15 border-border/40 dark:shadow-inner dark:shadow-black/30">
               <Link href="/">
                 <button className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap nav-glow-white ${
                   location === "/"
@@ -347,6 +363,15 @@ export function Navbar() {
           {/* Right side */}
           <div className="flex items-center gap-1 shrink-0">
             <NavSearchDialog />
+
+            <button
+              onClick={toggleTheme}
+              className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
 
             <Link href="/chrome-extension">
               <button className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-white whitespace-nowrap transition-all duration-200 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-[0_0_18px_rgba(139,92,246,0.55)] hover:shadow-[0_0_28px_rgba(139,92,246,0.75)] hover:-translate-y-px">

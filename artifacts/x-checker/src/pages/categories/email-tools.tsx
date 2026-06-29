@@ -18,9 +18,9 @@ const config: CategoryPageConfig = {
   description:
     "Browser-based email tools for generating subject lines, building professional signatures, formatting plain text emails, counting characters, and validating addresses — all free, no account required, nothing stored.",
   icon: Mail,
-  color: "text-cyan-400",
-  bg: "bg-cyan-400/10 border-cyan-400/20",
-  heroGradient: "bg-gradient-to-br from-cyan-500/8 via-cyan-500/3 to-transparent",
+  color: "text-primary",
+  bg: "bg-primary/10 border-primary/20",
+  heroGradient: "bg-gradient-to-br from-primary/8 via-primary/3 to-transparent",
   tools,
 
   whatIs:

@@ -644,8 +644,8 @@ function UnifiedInboxSection() {
       {/* Address card */}
       <div className="rounded-xl border border-border/60 bg-card/40 p-4 space-y-3">
         <div className="flex items-start gap-3">
-          <div className="h-9 w-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5 bg-cyan-400/10 border border-cyan-400/20">
-            <Mail className="h-4 w-4 text-cyan-400" />
+          <div className="h-9 w-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5 bg-primary/10 border border-primary/20">
+            <Mail className="h-4 w-4 text-primary" />
           </div>
           <div className="flex-1 min-w-0 space-y-1">
             <p className="text-[10px] text-muted-foreground uppercase tracking-wide font-semibold">
@@ -655,7 +655,7 @@ function UnifiedInboxSection() {
               <div className="flex flex-wrap items-center gap-0.5 font-mono text-base font-semibold">
                 <span className="text-foreground">{user}</span>
                 <span className="text-muted-foreground">@</span>
-                <span className="text-cyan-400">{domain}</span>
+                <span className="text-primary">{domain}</span>
               </div>
             ) : (
               <div className="h-6 bg-muted/60 rounded animate-pulse w-56 mt-1" />
@@ -682,7 +682,7 @@ function UnifiedInboxSection() {
           {/* Domain picker */}
           <div className="relative">
             <Button variant="outline" size="sm" onClick={() => setShowDomainDrop(v => !v)} disabled={!email || creating} className="text-xs gap-1.5">
-              <Zap className="h-3.5 w-3.5 text-cyan-400" />
+              <Zap className="h-3.5 w-3.5 text-primary" />
               {domain}
               <ChevronDown className="h-3 w-3" />
             </Button>
@@ -694,9 +694,9 @@ function UnifiedInboxSection() {
                 </div>
                 {GUERRILLA_DOMAINS.map(d => (
                   <button key={d} onClick={() => { setShowDomainDrop(false); createInbox(d); }}
-                    className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 flex items-center gap-2 ${d === domain ? "text-cyan-400 font-semibold bg-muted/20" : "text-foreground/80"}`}>
-                    {d === domain && <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shrink-0" />}
-                    <span className="font-mono text-cyan-400 flex-1">{d}</span>
+                    className={`w-full text-left px-4 py-2 text-xs hover:bg-muted/60 transition-colors border-b border-border/20 flex items-center gap-2 ${d === domain ? "text-primary font-semibold bg-muted/20" : "text-foreground/80"}`}>
+                    {d === domain && <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />}
+                    <span className="font-mono text-primary flex-1">{d}</span>
                   </button>
                 ))}
                 {/* Mail.tm */}
@@ -780,8 +780,8 @@ function UnifiedInboxSection() {
                   <p className="text-xs text-muted-foreground/40 mt-0.5">Emails sent here appear instantly</p>
                 </div>
                 <div className="inline-flex items-center gap-1.5 bg-muted/30 border border-border/40 rounded-full px-3 py-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                  <span className="text-[11px] text-muted-foreground/60">Auto-checking in <span className="text-cyan-400 font-semibold">{countdown}s</span></span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                  <span className="text-[11px] text-muted-foreground/60">Auto-checking in <span className="text-primary font-semibold">{countdown}s</span></span>
                 </div>
               </div>
             )}
@@ -803,7 +803,7 @@ function UnifiedInboxSection() {
                     <div className="flex items-center gap-1.5 justify-between">
                       <p className={`text-xs truncate ${isUnread ? "font-semibold text-foreground" : "text-foreground/60"}`}>{sender}</p>
                       <div className="flex items-center gap-1.5 shrink-0">
-                        {isUnread && <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />}
+                        {isUnread && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
                         <span className="text-[10px] text-muted-foreground/40">{timeAgo(msg.mail_timestamp)}</span>
                       </div>
                     </div>
@@ -853,7 +853,7 @@ function UnifiedInboxSection() {
                 <p className="text-xs text-muted-foreground/40 mt-1">Messages appear automatically when received</p>
               </div>
               {email && (
-                <div className="flex items-center gap-2 text-xs rounded-lg px-3 py-2 bg-cyan-400/10 border border-cyan-400/20 text-cyan-400">
+                <div className="flex items-center gap-2 text-xs rounded-lg px-3 py-2 bg-primary/10 border border-primary/20 text-primary">
                   <Clock className="h-3.5 w-3.5 shrink-0" />
                   Auto-refreshing every {REFRESH_MS / 1000}s
                 </div>
@@ -871,7 +871,7 @@ function UnifiedInboxSection() {
           { label: "GuerrillaMail · Mail.tm · Mail.gw" },
         ].map(({ label }) => (
           <div key={label} className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground bg-muted/40 border border-border/50 rounded-full px-3 py-1">
-            <Mail className="h-3 w-3 text-cyan-400" />{label}
+            <Mail className="h-3 w-3 text-primary" />{label}
           </div>
         ))}
       </div>

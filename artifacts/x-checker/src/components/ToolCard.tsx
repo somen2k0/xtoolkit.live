@@ -20,7 +20,7 @@ const ACCENT_COLORS: Record<string, string> = {
   "text-formatting": "bg-green-400",
   "developer":       "bg-orange-400",
   "seo":             "bg-pink-400",
-  "email":           "bg-cyan-400",
+  "email":           "bg-primary",
 };
 
 export function ToolCard({ tool, compact = false }: ToolCardProps) {
@@ -30,10 +30,10 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
 
   const card = (
     <div
-      className={`group relative flex flex-col rounded-xl border border-border/60 bg-card/50 overflow-hidden transition-all duration-200 ${
+      className={`group relative flex flex-col rounded-xl border dark:border-border/60 border-border dark:bg-card/50 bg-white dark:shadow-none shadow-sm overflow-hidden transition-all duration-200 ${
         tool.isComingSoon
           ? "opacity-55 cursor-default"
-          : "hover:border-primary/35 hover:bg-card hover:shadow-lg hover:shadow-primary/8 cursor-pointer"
+          : "hover:border-primary/30 dark:hover:bg-card hover:bg-white hover:shadow-md dark:hover:shadow-lg dark:hover:shadow-primary/8 cursor-pointer"
       } ${compact ? "p-4" : "p-5"}`}
     >
       {/* Left accent bar — slides in on hover */}

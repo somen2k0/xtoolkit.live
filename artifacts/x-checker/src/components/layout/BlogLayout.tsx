@@ -84,7 +84,7 @@ export function BlogLayout({
       />
 
       {/* Hero */}
-      <div className="border-b border-border/50 bg-gradient-to-b from-cyan-500/[0.04] to-transparent">
+      <div className="border-b border-border/50 bg-gradient-to-b from-primary/[0.04] to-transparent">
         <div className="max-w-3xl mx-auto px-4 md:px-8 pt-6 pb-8">
           <nav className="flex items-center gap-1.5 text-xs text-muted-foreground mb-5">
             <Link href="/"><span className="flex items-center gap-1 hover:text-foreground transition-colors cursor-pointer"><Home className="h-3 w-3" /> Home</span></Link>
@@ -95,12 +95,12 @@ export function BlogLayout({
           </nav>
 
           <div className="flex items-start gap-4">
-            <div className="h-12 w-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0 shadow-sm shadow-cyan-500/10">
-              <Icon className="h-6 w-6 text-cyan-400" />
+            <div className="h-12 w-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 shadow-sm shadow-primary/10">
+              <Icon className="h-6 w-6 text-primary" />
             </div>
             <div className="flex-1 min-w-0 pt-0.5">
               <div className="flex flex-wrap items-center gap-2 mb-3">
-                <Badge variant="outline" className="border-cyan-400/30 text-cyan-400 bg-cyan-400/8 text-xs">
+                <Badge variant="outline" className="border-primary/30 text-primary bg-primary/8 text-xs">
                   {category}
                 </Badge>
                 <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -180,9 +180,9 @@ export function BlogLayout({
             <div className="space-y-3">
               {relatedArticles.map(({ title: t, href, description: d, readTime: rt }) => (
                 <Link key={href} href={href}>
-                  <div className="flex items-center gap-4 rounded-xl border border-border/60 bg-card/40 p-4 hover:border-cyan-400/30 hover:bg-card transition-all cursor-pointer group">
-                    <div className="h-8 w-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center shrink-0">
-                      <BookOpen className="h-4 w-4 text-cyan-400" />
+                  <div className="flex items-center gap-4 rounded-xl border border-border/60 bg-card/40 p-4 hover:border-primary/30 hover:bg-card transition-all cursor-pointer group">
+                    <div className="h-8 w-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                      <BookOpen className="h-4 w-4 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-medium group-hover:text-primary transition-colors">{t}</div>

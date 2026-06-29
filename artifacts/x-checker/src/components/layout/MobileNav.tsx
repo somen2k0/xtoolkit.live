@@ -106,8 +106,8 @@ const TOOL_CATEGORIES = [
     key: "email",
     label: "Email Tools",
     icon: Mail,
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10 border-cyan-400/20",
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
     tools: [
       { icon: Inbox, label: "Temp Email", desc: "Disposable throwaway inbox", href: "/tools/temp-mail/tempemail", badge: "Popular" },
       { icon: Mail, label: "Temp Gmail", desc: "Real temporary Gmail address", href: "/tools/temp-mail/tempgmail" },
@@ -134,9 +134,9 @@ const BADGE_STYLES: Record<string, string> = {
 };
 
 const TEMP_MAIL_SHEET_ITEMS = [
-  { icon: Inbox,        label: "Temp Email",            href: "/tools/temp-mail/tempemail",  desc: "Anonymous throwaway inbox",         color: "text-cyan-400" },
-  { icon: Mail,         label: "Temp Gmail",            href: "/tools/temp-mail/tempgmail",  desc: "Real temporary Gmail address",      color: "text-cyan-400" },
-  { icon: Hash,         label: "Gmail Tricks",          href: "/tools/temp-mail/gmail-tricks", desc: "Dot & plus-tag address variants", color: "text-cyan-400" },
+  { icon: Inbox,        label: "Temp Email",            href: "/tools/temp-mail/tempemail",  desc: "Anonymous throwaway inbox",         color: "text-primary" },
+  { icon: Mail,         label: "Temp Gmail",            href: "/tools/temp-mail/tempgmail",  desc: "Real temporary Gmail address",      color: "text-primary" },
+  { icon: Hash,         label: "Gmail Tricks",          href: "/tools/temp-mail/gmail-tricks", desc: "Dot & plus-tag address variants", color: "text-primary" },
 ];
 
 const TEMP_PRIVACY_SHEET_ITEMS = [
@@ -259,7 +259,7 @@ export function MobileNav() {
           <SheetHeader className="px-4 pt-2 pb-3 border-b border-border/50 shrink-0">
             <div className="flex items-center justify-between">
               <SheetTitle className="text-base font-semibold flex items-center gap-2">
-                <Inbox className="h-4 w-4 text-cyan-400" />
+                <Inbox className="h-4 w-4 text-primary" />
                 Temp Mail
               </SheetTitle>
               <button
@@ -272,7 +272,7 @@ export function MobileNav() {
           </SheetHeader>
           <div className="overflow-y-auto px-4 pt-3 pb-2">
             {/* Inbox Tools */}
-            <p className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 px-1 mb-2">Inbox Tools</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-primary px-1 mb-2">Inbox Tools</p>
             <div className="space-y-1 mb-4">
               {TEMP_MAIL_SHEET_ITEMS.map(({ icon: Icon, label, href, desc, color }) => (
                 <Link key={href} href={href} onClick={() => setTempMailOpen(false)}>

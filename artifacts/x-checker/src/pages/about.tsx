@@ -64,7 +64,7 @@ export default function About() {
     <Layout>
       <SeoHead
         title="About X Toolkit — Free Tools for X, Developers & SEO"
-        description="X Toolkit is built by Somen — a free collection of 44+ tools for developers, SEO professionals and social media managers. Learn more about the project and its creator."
+        description="X Toolkit is built by Somen — a free collection of 43+ tools for developers, SEO professionals and social media managers. Learn more about the project and its creator."
         path="/about"
         keywords="x toolkit, about x toolkit, somen biswas developer, free online tools, twitter tools developer, seo tools, temp mail, independent developer tools, xtoolkit.live"
       />

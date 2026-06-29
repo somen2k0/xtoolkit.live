@@ -13,8 +13,8 @@ const ARTICLES = [
     readTime: "8 min",
     category: "Guide",
     icon: BookOpen,
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10 border-cyan-400/20",
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
   },
   {
     slug: "how-to-use-temp-email-extension",
@@ -35,8 +35,8 @@ const ARTICLES = [
     readTime: "6 min",
     category: "Guide",
     icon: BookOpen,
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10 border-cyan-400/20",
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
   },
   {
     slug: "best-temp-mail-services",
@@ -90,8 +90,8 @@ const ARTICLES = [
     readTime: "4 min",
     category: "Guide",
     icon: Mail,
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10 border-cyan-400/20",
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
   },
   {
     slug: "what-is-json-ld",
@@ -184,7 +184,7 @@ const ARTICLES = [
 ];
 
 const CATEGORY_BADGE: Record<string, string> = {
-  Guide: "bg-cyan-400/10 text-cyan-400 border-cyan-400/25",
+  Guide: "bg-primary/10 text-primary border-primary/25",
   Comparison: "bg-amber-400/10 text-amber-400 border-amber-400/25",
   Security: "bg-emerald-400/10 text-emerald-400 border-emerald-400/25",
   Explainer: "bg-purple-400/10 text-purple-400 border-purple-400/25",
@@ -205,10 +205,10 @@ export default function BlogIndex() {
       />
 
       {/* Hero */}
-      <div className="border-b border-border/50 bg-gradient-to-b from-cyan-500/[0.04] to-transparent">
+      <div className="border-b border-border/50 bg-gradient-to-b from-primary/[0.04] to-transparent">
         <div className="max-w-5xl mx-auto px-4 md:px-8 pt-10 pb-10">
           <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="h-5 w-5 text-cyan-400" />
+            <BookOpen className="h-5 w-5 text-primary" />
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Blog</h1>
           </div>
           <p className="text-muted-foreground max-w-xl text-sm md:text-base">
@@ -224,7 +224,7 @@ export default function BlogIndex() {
 
         {/* Featured article */}
         <Link href={featured.href}>
-          <div className="group rounded-2xl border border-border/60 bg-card/40 hover:border-cyan-400/30 hover:bg-card transition-all cursor-pointer overflow-hidden">
+          <div className="group rounded-2xl border border-border/60 bg-card/40 hover:border-primary/30 hover:bg-card transition-all cursor-pointer overflow-hidden">
             <div className="p-6 md:p-8">
               <div className="flex items-center gap-2 mb-4">
                 <div className={`h-10 w-10 rounded-xl border flex items-center justify-center shrink-0 ${featured.bg}`}>
