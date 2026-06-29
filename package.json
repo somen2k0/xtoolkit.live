@@ -18,5 +18,8 @@
   "packageManager": "pnpm@11.8.0",
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "@swc/core", "msw", "unrs-resolver", "@resvg/resvg-js"]
   }
 }
