@@ -19,7 +19,7 @@ import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
   New: "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI: "bg-teal-400/15 text-teal-500 border-teal-400/30",
+  AI: "bg-[#6366f1]/15 text-[#6366f1] border-[#6366f1]/30",
   Soon: "bg-slate-400/15 text-slate-400 border-slate-400/30",
 };
 
@@ -120,28 +120,28 @@ function NavDropdown({
   return (
     <div
       className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 z-50
-        rounded-xl border border-[#B2E4E0] bg-white
+        rounded-xl border border-[#E8DDD0] bg-white
         shadow-lg shadow-black/10 animate-in fade-in slide-in-from-top-1 duration-150"
     >
       <div className="p-2">
         <Link href={category.href} onClick={onClose}>
-          <div className="flex items-center justify-between px-3 py-2 rounded-lg mb-1 hover:bg-[#DAF6F4] transition-colors cursor-pointer">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#5EEAD4]">
+          <div className="flex items-center justify-between px-3 py-2 rounded-lg mb-1 hover:bg-[#F5EDE0] transition-colors cursor-pointer">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#6366f1]">
               All {category.label}
             </span>
-            <span className="text-xs text-[#1A4A44]">View all →</span>
+            <span className="text-xs text-[#6B5E52]">View all →</span>
           </div>
         </Link>
-        <div className="h-px bg-[#B2E4E0] mx-1 mb-2" />
+        <div className="h-px bg-[#E8DDD0] mx-1 mb-2" />
         <ul className="space-y-0.5 max-h-[360px] overflow-y-auto">
           {category.tools.map((tool) => {
             const Icon = tool.icon;
             return (
               <li key={tool.label}>
                 <Link href={tool.href} onClick={onClose}>
-                  <div className="group flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#DAF6F4] transition-colors cursor-pointer">
-                    <Icon className="h-3.5 w-3.5 text-[#1A4A44]/60 group-hover:text-[#0D3B36] shrink-0 transition-colors" />
-                    <span className="text-xs font-medium text-[#0D3B36] group-hover:text-[#0D3B36] transition-colors flex-1 leading-tight">
+                  <div className="group flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#F5EDE0] transition-colors cursor-pointer">
+                    <Icon className="h-3.5 w-3.5 text-[#6B5E52]/60 group-hover:text-[#1A1A1A] shrink-0 transition-colors" />
+                    <span className="text-xs font-medium text-[#1A1A1A] group-hover:text-[#1A1A1A] transition-colors flex-1 leading-tight">
                       {tool.label}
                     </span>
                     {tool.badge && (
@@ -157,17 +157,17 @@ function NavDropdown({
         </ul>
         {category.comingSoon && category.comingSoon.length > 0 && (
           <>
-            <div className="h-px bg-[#B2E4E0] mx-1 my-2" />
+            <div className="h-px bg-[#E8DDD0] mx-1 my-2" />
             <div className="px-3 py-1 flex items-center gap-1.5 mb-1">
-              <Clock className="h-3 w-3 text-[#1A4A44]/60" />
-              <span className="text-[10px] font-semibold text-[#1A4A44]/60 uppercase tracking-wider">
+              <Clock className="h-3 w-3 text-[#6B5E52]/60" />
+              <span className="text-[10px] font-semibold text-[#6B5E52]/60 uppercase tracking-wider">
                 Coming Soon
               </span>
             </div>
             {category.comingSoon.map((name) => (
               <div key={name} className="flex items-center gap-2.5 px-3 py-1 opacity-50 cursor-default">
                 <div className="h-1.5 w-1.5 rounded-full bg-[#1A4A44]/40 shrink-0" />
-                <span className="text-xs text-[#1A4A44]">{name}</span>
+                <span className="text-xs text-[#6B5E52]">{name}</span>
               </div>
             ))}
           </>
@@ -195,8 +195,8 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
         aria-expanded={open}
         className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
-            ? "bg-[#1a2d4a] text-[#5EEAD4]"
-            : "text-[#F3F4F5] hover:bg-[#1a2d4a] hover:text-[#5EEAD4]"
+            ? "bg-[#1f1f1f] text-[#6366f1]"
+            : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
         }`}
       >
         <Icon className="h-3.5 w-3.5 shrink-0" />
@@ -220,15 +220,15 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-[#1a2d4a] bg-[#0A1628] shadow-sm">
+      <nav className="sticky top-0 z-50 border-b border-[#222222] bg-[#000000] shadow-sm">
         {/* Teal accent line at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#5EEAD4]/40 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#6366f1]/40 to-transparent pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-2">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-lg shadow-[#5EEAD4]/20 shrink-0">
+            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-lg shadow-[#6366f1]/20 shrink-0">
               <svg width="28" height="28" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="nBg" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
@@ -276,20 +276,20 @@ export function Navbar() {
                 </g>
               </svg>
             </div>
-            <span className="font-semibold text-sm text-[#F3F4F5] tracking-tight">X Toolkit</span>
-            <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-[#5EEAD4]/30 text-[#5EEAD4] bg-[#5EEAD4]/10 px-1.5 py-0">
+            <span className="font-semibold text-sm text-white tracking-tight">X Toolkit</span>
+            <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-white/20 text-white/70 bg-white/10 px-1.5 py-0">
               {TOTAL_LIVE} Tools
             </Badge>
           </Link>
 
           {/* Desktop nav */}
           <div className="hidden md:flex flex-1 items-center justify-center">
-            <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-[#0f1e35] border border-[#1a2d4a]">
+            <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-[#111111] border border-[#222222]">
               <Link href="/">
                 <button className={`${NAV_LINK_BASE} ${
                   location === "/"
-                    ? "bg-[#1a2d4a] text-[#5EEAD4]"
-                    : "text-[#F3F4F5] hover:bg-[#1a2d4a] hover:text-[#5EEAD4]"
+                    ? "bg-[#1f1f1f] text-[#6366f1]"
+                    : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
                 }`}>
                   <Home className="h-3.5 w-3.5 shrink-0" />
                   Home
@@ -303,8 +303,8 @@ export function Navbar() {
               <Link href="/blog">
                 <button className={`${NAV_LINK_BASE} ${
                   location.startsWith("/blog")
-                    ? "bg-[#1a2d4a] text-[#5EEAD4]"
-                    : "text-[#F3F4F5] hover:bg-[#1a2d4a] hover:text-[#5EEAD4]"
+                    ? "bg-[#1f1f1f] text-[#6366f1]"
+                    : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
                 }`}>
                   <BookOpen className="h-3.5 w-3.5 shrink-0" />
                   Blog
@@ -314,8 +314,8 @@ export function Navbar() {
               <Link href="/guides">
                 <button className={`${NAV_LINK_BASE} ${
                   location === "/guides"
-                    ? "bg-[#1a2d4a] text-[#5EEAD4]"
-                    : "text-[#F3F4F5] hover:bg-[#1a2d4a] hover:text-[#5EEAD4]"
+                    ? "bg-[#1f1f1f] text-[#6366f1]"
+                    : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
                 }`}>
                   <BookMarked className="h-3.5 w-3.5 shrink-0" />
                   Guides
@@ -325,8 +325,8 @@ export function Navbar() {
               <Link href="/about">
                 <button className={`${NAV_LINK_BASE} ${
                   location === "/about"
-                    ? "bg-[#1a2d4a] text-[#5EEAD4]"
-                    : "text-[#F3F4F5] hover:bg-[#1a2d4a] hover:text-[#5EEAD4]"
+                    ? "bg-[#1f1f1f] text-[#6366f1]"
+                    : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
                 }`}>
                   <Info className="h-3.5 w-3.5 shrink-0" />
                   About
@@ -340,7 +340,7 @@ export function Navbar() {
             <NavSearchDialog />
 
             <Link href="/chrome-extension">
-              <button className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-[#0A1628] whitespace-nowrap transition-all duration-200 bg-[#5EEAD4] hover:bg-[#4DD9C7] shadow-[0_4px_12px_rgba(94,234,212,0.35)] hover:shadow-[0_4px_16px_rgba(94,234,212,0.5)] hover:-translate-y-px">
+              <button className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-white whitespace-nowrap transition-all duration-200 bg-[#6366f1] hover:bg-[#4F46E5] shadow-[0_4px_12px_rgba(99,102,241,0.35)] hover:shadow-[0_4px_16px_rgba(99,102,241,0.5)] hover:-translate-y-px">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/></svg>
                 Extension
               </button>
@@ -348,14 +348,14 @@ export function Navbar() {
 
             <div className="hidden 2xl:flex items-center gap-1.5 pl-1">
               <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] text-[#F3F4F5]/60">Operational</span>
+              <span className="text-[11px] text-white/60">Operational</span>
             </div>
 
             <Button
               variant="outline"
               size="sm"
               onClick={() => setShowFeedback(true)}
-              className="hidden xl:flex text-xs border-[#1a2d4a] text-[#F3F4F5] hover:bg-[#1a2d4a] hover:text-[#5EEAD4] hover:border-[#1a2d4a] gap-1.5 h-8 px-2.5"
+              className="hidden xl:flex text-xs border-[#222222] text-white hover:bg-[#1f1f1f] hover:text-[#6366f1] hover:border-[#222222] gap-1.5 h-8 px-2.5"
               title="Send Feedback"
             >
               <MessageSquare className="h-3.5 w-3.5 shrink-0" />
@@ -364,7 +364,7 @@ export function Navbar() {
 
             {/* Mobile hamburger */}
             <button
-              className="md:hidden p-1.5 rounded-md text-[#F3F4F5] hover:bg-[#1a2d4a] transition-colors"
+              className="md:hidden p-1.5 rounded-md text-white hover:bg-[#1f1f1f] transition-colors"
               onClick={() => { setMenuOpen((v) => !v); setMobileExpanded(null); }}
               aria-label="Toggle menu"
             >
@@ -375,12 +375,12 @@ export function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden border-t border-[#1a2d4a] bg-[#0A1628]">
+          <div className="md:hidden border-t border-[#222222] bg-[#000000]">
             <div className="px-4 py-3 space-y-1 max-h-[80vh] overflow-y-auto">
 
               <Link href="/" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left ${
-                  location === "/" ? "bg-[#1a2d4a] text-[#5EEAD4]" : "text-[#F3F4F5] hover:bg-[#1a2d4a]"
+                  location === "/" ? "bg-[#1f1f1f] text-[#6366f1]" : "text-white hover:bg-[#1f1f1f]"
                 }`}>
                   <Home className="h-4 w-4 shrink-0" />
                   Home
@@ -391,19 +391,19 @@ export function Navbar() {
                 const expanded = mobileExpanded === cat.key;
                 const CatIcon = cat.icon;
                 return (
-                  <div key={cat.key} className="rounded-lg overflow-hidden border border-[#1a2d4a]">
+                  <div key={cat.key} className="rounded-lg overflow-hidden border border-[#222222]">
                     <button
-                      className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-[#F3F4F5] hover:bg-[#1a2d4a] transition-colors text-left bg-[#0f1e35]"
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-white hover:bg-[#1f1f1f] transition-colors text-left bg-[#111111]"
                       onClick={() => setMobileExpanded(expanded ? null : cat.key)}
                     >
-                      <CatIcon className="h-4 w-4 shrink-0 text-[#5EEAD4]" />
-                      <span className="text-sm font-semibold flex-1 text-[#F3F4F5]">{cat.label}</span>
-                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 text-[#F3F4F5]/50 ${expanded ? "rotate-180" : ""}`} />
+                      <CatIcon className="h-4 w-4 shrink-0 text-[#6366f1]" />
+                      <span className="text-sm font-semibold flex-1 text-white">{cat.label}</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 text-white/50 ${expanded ? "rotate-180" : ""}`} />
                     </button>
                     {expanded && (
-                      <div className="bg-[#0f1e35] px-2 py-1.5 space-y-0.5">
+                      <div className="bg-[#111111] px-2 py-1.5 space-y-0.5">
                         <Link href={cat.href} onClick={closeMenu}>
-                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold text-[#5EEAD4] hover:bg-[#1a2d4a] transition-colors">
+                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold text-[#6366f1] hover:bg-[#1f1f1f] transition-colors">
                             View all {cat.label} →
                           </div>
                         </Link>
@@ -411,7 +411,7 @@ export function Navbar() {
                           const TIcon = tool.icon;
                           return (
                             <Link key={tool.href} href={tool.href} onClick={closeMenu}>
-                              <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md text-xs text-[#F3F4F5]/70 hover:text-[#F3F4F5] hover:bg-[#1a2d4a] transition-colors">
+                              <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md text-xs text-white/70 hover:text-white hover:bg-[#1f1f1f] transition-colors">
                                 <TIcon className="h-3.5 w-3.5 shrink-0" />
                                 {tool.label}
                                 {tool.badge && (
@@ -431,7 +431,7 @@ export function Navbar() {
 
               <Link href="/blog" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left ${
-                  location.startsWith("/blog") ? "bg-[#1a2d4a] text-[#5EEAD4]" : "text-[#F3F4F5] hover:bg-[#1a2d4a]"
+                  location.startsWith("/blog") ? "bg-[#1f1f1f] text-[#6366f1]" : "text-white hover:bg-[#1f1f1f]"
                 }`}>
                   <BookOpen className="h-4 w-4 shrink-0" />
                   Blog
@@ -440,7 +440,7 @@ export function Navbar() {
 
               <Link href="/guides" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left ${
-                  location === "/guides" ? "bg-[#1a2d4a] text-[#5EEAD4]" : "text-[#F3F4F5] hover:bg-[#1a2d4a]"
+                  location === "/guides" ? "bg-[#1f1f1f] text-[#6366f1]" : "text-white hover:bg-[#1f1f1f]"
                 }`}>
                   <BookMarked className="h-4 w-4 shrink-0" />
                   Guides
@@ -449,7 +449,7 @@ export function Navbar() {
 
               <Link href="/about" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left ${
-                  location === "/about" ? "bg-[#1a2d4a] text-[#5EEAD4]" : "text-[#F3F4F5] hover:bg-[#1a2d4a]"
+                  location === "/about" ? "bg-[#1f1f1f] text-[#6366f1]" : "text-white hover:bg-[#1f1f1f]"
                 }`}>
                   <Info className="h-4 w-4 shrink-0" />
                   About
@@ -460,7 +460,7 @@ export function Navbar() {
                 variant="outline"
                 size="sm"
                 onClick={() => { setShowFeedback(true); closeMenu(); }}
-                className="w-full justify-start gap-3 h-10 text-sm font-medium border-[#1a2d4a] text-[#F3F4F5] hover:bg-[#1a2d4a] hover:text-[#5EEAD4]"
+                className="w-full justify-start gap-3 h-10 text-sm font-medium border-[#222222] text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
               >
                 <MessageSquare className="h-4 w-4" />
                 Send Feedback

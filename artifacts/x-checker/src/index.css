@@ -60,36 +60,36 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .06);
 
-  /* #F0FAFA near-white background */
-  --background: 180 49% 96%;
-  /* #0D3B36 dark teal foreground */
-  --foreground: 174 64% 14%;
+  /* #FDF6EE warm cream */
+  --background: 33 79% 96%;
+  /* #1A1A1A near-black */
+  --foreground: 0 0% 10%;
 
   /* #FFFFFF white cards */
   --card: 0 0% 100%;
-  --card-foreground: 174 64% 14%;
-  /* #D1EDE9 */
-  --card-border: 172 43% 87%;
+  --card-foreground: 0 0% 10%;
+  /* #E8DDD0 warm border */
+  --card-border: 33 34% 86%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 174 64% 14%;
-  --popover-border: 175 48% 80%;
+  --popover-foreground: 0 0% 10%;
+  --popover-border: 33 34% 86%;
 
-  /* #5EEAD4 teal primary */
-  --primary: 171 77% 64%;
-  /* #0A1628 dark navy primary-foreground */
-  --primary-foreground: 216 60% 10%;
+  /* #6366f1 indigo/purple */
+  --primary: 239 84% 67%;
+  /* #FFFFFF */
+  --primary-foreground: 0 0% 100%;
 
-  /* #C8F0ED light teal secondary */
-  --secondary: 175 57% 86%;
-  --secondary-foreground: 174 64% 14%;
+  /* #F5EDE0 cream secondary */
+  --secondary: 37 52% 92%;
+  --secondary-foreground: 0 0% 10%;
 
-  --muted: 175 57% 86%;
-  /* #1A4A44 medium teal muted text */
-  --muted-foreground: 173 48% 20%;
+  --muted: 37 52% 92%;
+  /* #6B5E52 warm gray */
+  --muted-foreground: 29 13% 37%;
 
-  --accent: 171 77% 64%;
-  --accent-foreground: 216 60% 10%;
+  --accent: 37 52% 92%;
+  --accent-foreground: 239 84% 67%;
 
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 100%;
@@ -100,18 +100,14 @@
   --warning: 38 92% 46%;
   --warning-foreground: 0 0% 0%;
 
-  /* #B2E4E0 light teal border */
-  --border: 175 48% 80%;
-  --input: 175 48% 80%;
-  --ring: 171 77% 64%;
+  /* #E8DDD0 warm border */
+  --border: 33 34% 86%;
+  --input: 33 34% 86%;
+  --ring: 239 84% 67%;
 
   --app-font-sans: 'Inter', system-ui, sans-serif;
   --app-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --radius: 0.75rem;
-
-  /* Navbar */
-  --navbar-bg: 216 60% 10%;
-  --navbar-text: 210 9% 96%;
 
   --primary-border: hsl(var(--primary));
   --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
@@ -141,7 +137,7 @@
 
   body {
     @apply font-sans antialiased text-foreground;
-    background: linear-gradient(180deg, #C8F0ED 0%, #E8FAF9 30%, #F0FAFA 60%, #ffffff 100%);
+    background: linear-gradient(180deg, #FAE8C0 0%, #FDF0D5 15%, #FDF6EE 40%, #FDF6EE 100%);
     min-height: 100vh;
     cursor: auto;
   }
@@ -166,8 +162,8 @@
 }
 
 .card-hover-glow:hover {
-  border-color: hsl(171 77% 64% / 0.5);
-  box-shadow: 0 4px 12px rgba(94, 234, 212, 0.2);
+  border-color: hsl(239 84% 67% / 0.4);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
 }
 
 /* ── Scroll fade-in utility ──────────────────────────────────────────────── */

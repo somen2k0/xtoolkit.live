@@ -24,8 +24,8 @@ const TOOL_CATEGORIES = [
     key: "ai-writing",
     label: "AI Writing Tools",
     icon: Sparkles,
-    color: "text-teal-500",
-    bg: "bg-teal-400/10 border-teal-400/20",
+    color: "text-indigo-500",
+    bg: "bg-indigo-400/10 border-indigo-400/20",
     tools: [
       { icon: ScanSearch, label: "AI Text Detector & Humanizer", desc: "Detect AI content & rewrite it human", href: "/tools/ai-detector", badge: "AI" },
       { icon: Sparkles, label: "AI Bio Generator", desc: "Generate 3 X bios instantly", href: "/tools/bio-generator", badge: "AI" },
@@ -129,7 +129,7 @@ const ALL_TOOLS_FLAT = TOOL_CATEGORIES.flatMap((c) =>
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
   New: "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI: "bg-teal-400/15 text-teal-500 border-teal-400/30",
+  AI: "bg-[#6366f1]/15 text-[#6366f1] border-[#6366f1]/30",
   Soon: "bg-muted/60 text-muted-foreground border-border/50",
 };
 
@@ -140,8 +140,8 @@ const TEMP_MAIL_SHEET_ITEMS = [
 ];
 
 const TEMP_PRIVACY_SHEET_ITEMS = [
-  { icon: EyeOff,      label: "Masked Email Generator", href: "/tools/masked-email-generator", desc: "Create anonymous email aliases",       color: "text-teal-500" },
-  { icon: ShieldAlert, label: "Spam Score Checker",     href: "/tools/spam-score-checker",     desc: "Check your email for spam triggers",  color: "text-teal-500" },
+  { icon: EyeOff,      label: "Masked Email Generator", href: "/tools/masked-email-generator", desc: "Create anonymous email aliases",       color: "text-indigo-500" },
+  { icon: ShieldAlert, label: "Spam Score Checker",     href: "/tools/spam-score-checker",     desc: "Check your email for spam triggers",  color: "text-indigo-500" },
 ];
 
 const NAV = [
@@ -288,7 +288,7 @@ export function MobileNav() {
               ))}
             </div>
             {/* Privacy Tools */}
-            <p className="text-[10px] font-bold uppercase tracking-wider text-teal-500 px-1 mb-2">Privacy Tools</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-indigo-500 px-1 mb-2">Privacy Tools</p>
             <div className="space-y-1">
               {TEMP_PRIVACY_SHEET_ITEMS.map(({ icon: Icon, label, href, desc, color }) => (
                 <Link key={href} href={href} onClick={() => setTempMailOpen(false)}>

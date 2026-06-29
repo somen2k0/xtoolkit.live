@@ -7,7 +7,7 @@ import { searchTools, CATEGORIES } from "@/lib/tools-registry";
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
   New:     "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI:      "bg-teal-400/15 text-teal-500 border-teal-400/30",
+  AI:      "bg-[#6366f1]/15 text-[#6366f1] border-[#6366f1]/30",
 };
 
 export function NavSearchDialog() {
