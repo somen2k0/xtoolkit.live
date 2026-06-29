@@ -112,6 +112,7 @@ const TOOL_CATEGORIES = [
       { icon: Inbox, label: "Temp Email", desc: "Disposable throwaway inbox", href: "/tools/temp-mail/tempemail", badge: "Popular" },
       { icon: Mail, label: "Temp Gmail", desc: "Real temporary Gmail address", href: "/tools/temp-mail/tempgmail" },
       { icon: Hash, label: "Gmail Tricks", desc: "Dot & plus-tag address variants", href: "/tools/temp-mail/gmail-tricks" },
+      { icon: Search, label: "Gmail Account Checker", desc: "Verify Gmail addresses in bulk", href: "/tools/gmail-checker", badge: "New" },
       { icon: Pencil, label: "Subject Line Generator", desc: "High-converting subject line templates", href: "/tools/subject-line-generator" },
       { icon: Mail, label: "Email Signature Generator", desc: "Professional email signature builder", href: "/tools/email-signature-generator", badge: "New" },
       { icon: ShieldCheck, label: "Email Validator", desc: "Validate format & MX records", href: "/tools/email-validator", badge: "New" },
@@ -134,9 +135,10 @@ const BADGE_STYLES: Record<string, string> = {
 };
 
 const TEMP_MAIL_SHEET_ITEMS = [
-  { icon: Inbox,        label: "Temp Email",            href: "/tools/temp-mail/tempemail",  desc: "Anonymous throwaway inbox",         color: "text-primary" },
-  { icon: Mail,         label: "Temp Gmail",            href: "/tools/temp-mail/tempgmail",  desc: "Real temporary Gmail address",      color: "text-primary" },
-  { icon: Hash,         label: "Gmail Tricks",          href: "/tools/temp-mail/gmail-tricks", desc: "Dot & plus-tag address variants", color: "text-primary" },
+  { icon: Inbox,        label: "Temp Email",             href: "/tools/temp-mail/tempemail",  desc: "Anonymous throwaway inbox",         color: "text-primary", badge: "Popular" },
+  { icon: Mail,         label: "Temp Gmail",             href: "/tools/temp-mail/tempgmail",  desc: "Real temporary Gmail address",      color: "text-primary" },
+  { icon: Hash,         label: "Gmail Tricks",           href: "/tools/temp-mail/gmail-tricks", desc: "Dot & plus-tag address variants", color: "text-primary" },
+  { icon: Search,       label: "Gmail Account Checker",  href: "/tools/gmail-checker",        desc: "Verify Gmail addresses in bulk",    color: "text-primary", badge: "New" },
 ];
 
 const TEMP_PRIVACY_SHEET_ITEMS = [
@@ -274,7 +276,7 @@ export function MobileNav() {
             {/* Inbox Tools */}
             <p className="text-[10px] font-bold uppercase tracking-wider text-primary px-1 mb-2">Inbox Tools</p>
             <div className="space-y-1 mb-4">
-              {TEMP_MAIL_SHEET_ITEMS.map(({ icon: Icon, label, href, desc, color }) => (
+              {TEMP_MAIL_SHEET_ITEMS.map(({ icon: Icon, label, href, desc, color, badge }) => (
                 <Link key={href} href={href} onClick={() => setTempMailOpen(false)}>
                   <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-muted/60 active:bg-muted transition-colors cursor-pointer">
                     <Icon className={`h-4 w-4 shrink-0 ${color}`} />
@@ -282,6 +284,11 @@ export function MobileNav() {
                       <div className="text-sm font-medium">{label}</div>
                       <div className="text-xs text-muted-foreground">{desc}</div>
                     </div>
+                    {badge && (
+                      <span className={`text-[9px] font-semibold px-1.5 py-px rounded-full border shrink-0 ${BADGE_STYLES[badge]}`}>
+                        {badge}
+                      </span>
+                    )}
                     <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/40 shrink-0" />
                   </div>
                 </Link>
