@@ -172,19 +172,19 @@ export function MiniToolLayout({
 
         {/* FAQ */}
         <article className="prose dark:prose-invert max-w-none border-t pt-8 mt-8">
-          <h2 className="not-prose text-xl font-semibold mb-5">Frequently Asked Questions</h2>
+          <h2 className="not-prose text-xl font-semibold text-[#1a1a1a] mb-5">Frequently Asked Questions</h2>
           <div className="not-prose">
             <Accordion type="single" collapsible className="space-y-2">
               {faqs.map(({ q, a }, i) => (
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
-                  className="rounded-xl border border-border/60 bg-card/40 px-5 data-[state=open]:bg-card/70 transition-colors"
+                  className="rounded-lg border border-[#e5e7eb] bg-white px-5 data-[state=open]:bg-[#f9fafb] transition-colors"
                 >
-                  <AccordionTrigger className="text-sm font-medium text-left hover:no-underline py-4">
+                  <AccordionTrigger className="text-sm font-medium text-[#374151] text-left hover:no-underline hover:text-[#474bff] py-4 transition-colors">
                     {q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
+                  <AccordionContent className="text-sm text-[#6b7280] pb-4 leading-relaxed">
                     {a}
                   </AccordionContent>
                 </AccordionItem>
