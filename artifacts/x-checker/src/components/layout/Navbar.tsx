@@ -19,7 +19,7 @@ import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
   New: "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI: "bg-[#6366f1]/15 text-primary border-[#6366f1]/30",
+  AI: "bg-[#f0f0ff] text-[#474bff] border-[#474bff]/20",
   Soon: "bg-slate-400/15 text-slate-400 border-slate-400/30",
 };
 
@@ -277,7 +277,7 @@ export function Navbar() {
               </svg>
             </div>
             <span className="font-semibold text-sm text-foreground tracking-tight">X Toolkit</span>
-            <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-foreground/20 text-foreground/70 bg-foreground/10 px-1.5 py-0">
+            <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-[#474bff]/20 text-[#474bff] bg-[#f0f0ff] px-1.5 py-0">
               {TOTAL_LIVE} Tools
             </Badge>
           </Link>
@@ -340,7 +340,7 @@ export function Navbar() {
             <NavSearchDialog />
 
             <Link href="/chrome-extension">
-              <button className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-white whitespace-nowrap transition-all duration-200 bg-[#6366f1] hover:bg-[#4F46E5] shadow-[0_4px_12px_rgba(99,102,241,0.35)] hover:shadow-[0_4px_16px_rgba(99,102,241,0.5)] hover:-translate-y-px">
+              <button className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-white whitespace-nowrap transition-all duration-200 bg-[#474bff] hover:bg-[#3538e8] shadow-[0_2px_8px_rgba(71,75,255,0.3)] hover:shadow-[0_4px_12px_rgba(71,75,255,0.4)] hover:-translate-y-px">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/></svg>
                 Extension
               </button>

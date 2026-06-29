@@ -9,18 +9,18 @@ interface ToolCardProps {
 }
 
 const BADGE_STYLES: Record<string, string> = {
-  Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
-  New: "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI: "bg-[#6366f1]/15 text-[#6366f1] border-[#6366f1]/30",
+  Popular: "bg-amber-50 text-amber-600 border-amber-200",
+  New: "bg-emerald-50 text-emerald-600 border-emerald-200",
+  AI: "bg-[#f0f0ff] text-[#474bff] border-[#474bff]/20",
 };
 
 const ACCENT_COLORS: Record<string, string> = {
-  "social-media":    "bg-blue-400",
-  "ai-writing":      "bg-[#6366f1]",
-  "text-formatting": "bg-green-400",
-  "developer":       "bg-orange-400",
-  "seo":             "bg-pink-400",
-  "email":           "bg-primary",
+  "social-media":    "bg-blue-500",
+  "ai-writing":      "bg-[#474bff]",
+  "text-formatting": "bg-green-500",
+  "developer":       "bg-orange-500",
+  "seo":             "bg-pink-500",
+  "email":           "bg-violet-500",
 };
 
 export function ToolCard({ tool, compact = false }: ToolCardProps) {

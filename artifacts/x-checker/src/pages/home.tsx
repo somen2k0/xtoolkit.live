@@ -139,8 +139,8 @@ export default function Home() {
       />
 
       {/* ── Hero ── */}
-      <section className="relative text-center overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(258 82% 12%) 0%, hsl(222 22% 9%) 100%)" }}>
-        <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+      <section className="relative text-center overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-[#474bff]/5 to-transparent pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-4 md:px-8 pt-16 pb-14 md:pt-24 md:pb-20">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20 mb-6">
             <Zap className="h-3 w-3" />
