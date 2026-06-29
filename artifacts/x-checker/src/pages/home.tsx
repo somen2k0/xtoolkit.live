@@ -6,7 +6,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ToolCard } from "@/components/ToolCard";
 import { CATEGORIES, LIVE_TOOLS, TOTAL_LIVE, getPopularTools } from "@/lib/tools-registry";
 import { trackEvent } from "@/lib/analytics";
-import { Shield, Zap, Code, ArrowRight } from "lucide-react";
+import {
+  Search, Sparkles, Type, TrendingUp, Mail, Code2,
+  ArrowRight, Shield, Zap, CheckCircle,
+} from "lucide-react";
 
 type CategoryKey = import("@/lib/tools-registry").CategoryKey;
 
@@ -17,48 +20,6 @@ const CATEGORY_ORDER: CategoryKey[] = [
   "developer",
   "seo",
   "email",
-];
-
-const WHY_ITEMS = [
-  {
-    icon: Shield,
-    title: "Runs in your browser",
-    desc: "All tools process data locally. Nothing is sent to our servers or stored anywhere.",
-  },
-  {
-    icon: Zap,
-    title: "No signup ever",
-    desc: "Every tool works immediately. No account, no email, no credit card required.",
-  },
-  {
-    icon: Code,
-    title: "Built for real work",
-    desc: "Tools that developers, marketers and creators actually use daily — not demos.",
-  },
-];
-
-const UNIQUE_TOOLS = [
-  {
-    href: "/tools/x-account-checker",
-    title: "X Account Checker",
-    headline: "Check 100 Twitter/X accounts at once",
-    desc: "See followers, join date, verified status instantly",
-    cta: "Try Account Checker",
-  },
-  {
-    href: "/tools/temp-mail/tempgmail",
-    title: "Temp Gmail Generator",
-    headline: "Real @gmail.com addresses that actually work",
-    desc: "Works on sites that block disposable emails",
-    cta: "Get Temp Gmail",
-  },
-  {
-    href: "/tools/gmail-checker",
-    title: "Gmail Account Checker",
-    headline: "Verify if Gmail addresses are valid in bulk",
-    desc: "Check up to 50 accounts instantly, download CSV",
-    cta: "Check Gmail Accounts",
-  },
 ];
 
 const FAQS = [
@@ -83,13 +44,18 @@ const FAQS = [
     a: "Yes. All tools are mobile-optimized and work on any device without installing anything.",
   },
   {
-    q: "How often are new tools added?",
-    a: "We regularly add new tools based on user requests. Recent additions include CSS Gradient Generator, Hash Generator, Image Resizer, and Gmail Checker.",
-  },
-  {
     q: "Is X Toolkit really free?",
     a: "Yes, completely free. No hidden costs, no premium tiers, no usage limits. Free forever.",
   },
+];
+
+const TOOL_ICONS = [
+  { icon: Search,     label: "X Tools",    bg: "bg-blue-100",   color: "text-blue-600" },
+  { icon: Sparkles,   label: "AI Writing", bg: "bg-violet-100", color: "text-violet-600" },
+  { icon: Code2,      label: "Developer",  bg: "bg-orange-100", color: "text-orange-600" },
+  { icon: Type,       label: "Text",       bg: "bg-green-100",  color: "text-green-600" },
+  { icon: TrendingUp, label: "SEO",        bg: "bg-pink-100",   color: "text-pink-600" },
+  { icon: Mail,       label: "Email",      bg: "bg-indigo-100", color: "text-indigo-600" },
 ];
 
 export default function Home() {
@@ -110,10 +76,7 @@ export default function Home() {
             "description": "Free online tools for X (Twitter), SEO, developers and creators.",
             "potentialAction": {
               "@type": "SearchAction",
-              "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://xtoolkit.live/tools?q={search_term_string}",
-              },
+              "target": { "@type": "EntryPoint", "urlTemplate": "https://xtoolkit.live/tools?q={search_term_string}" },
               "query-input": "required name=search_term_string",
             },
           },
@@ -122,57 +85,116 @@ export default function Home() {
             "@type": "Organization",
             "name": "X Toolkit",
             "url": "https://xtoolkit.live",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://xtoolkit.live/favicon-512.png",
-            },
-            "founder": {
-              "@type": "Person",
-              "name": "Somen Biswas",
-            },
-            "sameAs": [
-              "https://twitter.com/somen_2k",
-              "https://github.com/somen2k0",
-            ],
+            "logo": { "@type": "ImageObject", "url": "https://xtoolkit.live/favicon-512.png" },
+            "founder": { "@type": "Person", "name": "Somen Biswas" },
+            "sameAs": ["https://twitter.com/somen_2k", "https://github.com/somen2k0"],
           },
         ]}
       />
 
-      {/* ── Hero ── */}
-      <section className="relative text-center overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-        <div className="relative max-w-6xl mx-auto px-4 md:px-8 pt-16 pb-14 md:pt-24 md:pb-20">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20 mb-6">
-            <Zap className="h-3 w-3" />
-            Free forever · No signup · {TOTAL_LIVE} tools
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-foreground mb-5 leading-tight">
-            Free tools for X, developers &amp; SEO
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-            Bulk-check 100 X accounts, generate JSON-LD schema,{" "}
-            <br className="hidden sm:block" />
-            decode JWTs, create temp emails — all in your browser.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/tools">
-              <Button size="lg" className="w-full sm:w-auto px-8">
-                Browse All Tools <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            </Link>
-            <a href="#categories">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto px-8">
-                See All Categories
-              </Button>
-            </a>
+      {/* ── Hero — left text + right illustration ── */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 pt-14 pb-12 md:pt-20 md:pb-16">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-12">
+
+            {/* Left: headline + text + CTAs */}
+            <div className="flex-1 md:max-w-[520px]">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4 leading-tight">
+                All Free Tools in{" "}
+                <span className="text-primary relative">
+                  "One Box"
+                  <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M2 6 C40 2, 80 2, 120 4 C160 6, 180 2, 198 3" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.5"/>
+                  </svg>
+                </span>
+              </h1>
+              <p className="text-base text-muted-foreground mb-2">
+                No need to bookmark tools from 10 different websites separately.
+              </p>
+              <p className="text-base text-muted-foreground mb-8">
+                X Toolkit is a <strong className="text-foreground font-semibold">"free all-in-one toolbox"</strong> built for
+                developers, creators and SEO professionals — {TOTAL_LIVE}+ tools, no signup ever required.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/tools">
+                  <Button size="lg" className="px-7 font-semibold shadow-sm shadow-primary/20">
+                    Explore Tools <ArrowRight className="h-4 w-4 ml-1.5" />
+                  </Button>
+                </Link>
+                <Link href="/chrome-extension">
+                  <Button variant="outline" size="lg" className="px-7">
+                    Get Extension
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right: category icon grid */}
+            <div className="flex-1 flex justify-center md:justify-end">
+              <div className="grid grid-cols-3 gap-3 max-w-[280px] md:max-w-[320px]">
+                {TOOL_ICONS.map(({ icon: Icon, label, bg, color }) => (
+                  <div key={label} className={`${bg} rounded-2xl p-4 flex flex-col items-center justify-center gap-2 aspect-square shadow-sm`}>
+                    <Icon className={`h-6 w-6 ${color}`} />
+                    <span className={`text-[10px] font-semibold ${color}`}>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* ── Categories ── */}
-      <section id="categories" className="border-t border-border/50 bg-muted/30">
+      {/* ── Value section — visual left + text right ── */}
+      <section className="border-t border-border/50 bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+
+            {/* Left: stat blocks */}
+            <div className="flex-1 grid grid-cols-2 gap-4 max-w-xs md:max-w-sm mx-auto md:mx-0">
+              {[
+                { value: `${TOTAL_LIVE}+`, label: "Free Tools", icon: Zap,          color: "text-primary",   bg: "bg-primary/10" },
+                { value: "6",              label: "Categories",  icon: CheckCircle,  color: "text-green-600", bg: "bg-green-100" },
+                { value: "0",              label: "Data Stored", icon: Shield,       color: "text-blue-600",  bg: "bg-blue-100" },
+                { value: "∞",              label: "Free Forever",icon: Sparkles,     color: "text-violet-600",bg: "bg-violet-100" },
+              ].map(({ value, label, icon: Icon, color, bg }) => (
+                <div key={label} className="rounded-2xl border border-border bg-card p-5 flex flex-col gap-2 shadow-sm">
+                  <div className={`h-8 w-8 rounded-lg ${bg} flex items-center justify-center`}>
+                    <Icon className={`h-4 w-4 ${color}`} />
+                  </div>
+                  <div className={`text-2xl font-bold ${color}`}>{value}</div>
+                  <div className="text-xs text-muted-foreground font-medium">{label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: text */}
+            <div className="flex-1 max-w-lg">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-5 tracking-tight">
+                Best All-In-One Toolkit for the Web
+              </h2>
+              <p className="text-base text-muted-foreground leading-relaxed mb-4">
+                X Toolkit brings together tools you actually use — X/Twitter account checker, AI bio generator,
+                JSON formatter, temp Gmail, JWT decoder, schema generator, and more. If you got tired of
+                opening a different website for each tool, you're in the right place.
+              </p>
+              <p className="text-base text-muted-foreground leading-relaxed mb-4">
+                Every tool is designed to be as simple as possible — focused on doing one thing well,
+                with the minimum number of steps. No clutter, no paywalls, no dark patterns.
+              </p>
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Start using X Toolkit and forget all the other tool tabs you have open right now.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── Tool Categories ── */}
+      <section id="categories" className="border-t border-border/50">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
-          <div className="text-center mb-10">
+          <div className="mb-10">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
               Tool Categories
             </h2>
@@ -202,7 +224,7 @@ export default function Home() {
                       {cat.description}
                     </p>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground/50">
+                      <span className="text-xs text-muted-foreground/60">
                         {count} {count === 1 ? "tool" : "tools"}
                       </span>
                       <ArrowRight className="h-3.5 w-3.5 text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
@@ -215,15 +237,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Most Used Tools ── */}
-      <section className="border-t border-border/50">
+      {/* ── Featured Tools ── */}
+      <section className="border-t border-border/50 bg-muted/30">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-1">
-                Most Used Tools
+                Featured Tools
               </h2>
-              <p className="text-sm text-muted-foreground">The tools people come back to.</p>
+              <p className="text-sm text-muted-foreground">The tools people come back to every day.</p>
             </div>
             <Link href="/tools">
               <Button variant="outline" size="sm" className="text-xs hidden sm:flex">
@@ -242,74 +264,20 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── Why X Toolkit ── */}
-      <section className="border-t border-border/50 bg-muted/30">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
-              Why X Toolkit?
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              No dark patterns. No upsells. Just tools that work.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-10">
-            {WHY_ITEMS.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex flex-col gap-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                  <Icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-base font-semibold text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Unique Tools ── */}
-      <section className="border-t border-border/50">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
-          <div className="mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
-              Tools you won't find elsewhere for free
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              These are the reason most people come to X Toolkit.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {UNIQUE_TOOLS.map(({ href, title, headline, desc, cta }) => (
-              <Link key={href} href={href}>
-                <div className="group h-full rounded-xl border border-border border-l-[4px] border-l-primary bg-card shadow-sm hover:shadow-md transition-shadow duration-200 p-6 flex flex-col gap-4">
-                  <div>
-                    <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
-                      {title}
-                    </p>
-                    <h3 className="text-base font-semibold text-foreground leading-snug mb-1">
-                      {headline}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">{desc}</p>
-                  </div>
-                  <div className="mt-auto pt-2">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary group-hover:gap-2.5 transition-all duration-150">
-                      {cta} <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+          <div className="mt-8 text-center sm:hidden">
+            <Link href="/tools">
+              <Button variant="outline" size="sm">
+                See All {TOTAL_LIVE} Tools <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ── FAQ ── */}
-      <section className="border-t border-border/50 bg-muted/30">
+      <section className="border-t border-border/50">
         <div className="max-w-3xl mx-auto px-4 md:px-8 py-12 md:py-20">
-          <div className="text-center mb-10">
+          <div className="mb-10">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
               Frequently Asked Questions
             </h2>
@@ -334,18 +302,18 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="border-t border-border/50">
+      <section className="border-t border-border/50 bg-muted/30">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
           <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/8 via-primary/4 to-transparent p-8 md:p-12 text-center">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-3">
               Ready to get started?
             </h2>
             <p className="text-muted-foreground mb-6 text-sm md:text-base">
-              {TOTAL_LIVE} free tools, no signup required.
+              {TOTAL_LIVE} free tools — no account, no signup, no credit card.
             </p>
             <Link href="/tools">
-              <Button size="lg" className="px-8">
-                Browse All Tools <ArrowRight className="h-4 w-4 ml-2" />
+              <Button size="lg" className="px-8 shadow-sm shadow-primary/20">
+                Explore All Tools <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             </Link>
           </div>
