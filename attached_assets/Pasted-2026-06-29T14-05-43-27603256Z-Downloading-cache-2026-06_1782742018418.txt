@@ -1,0 +1,47 @@
+2026-06-29T14:05:43.27603256Z ==> Downloading cache...
+2026-06-29T14:05:43.311782421Z ==> Cloning from https://github.com/somen2k0/xtoolkit.live
+2026-06-29T14:05:44.851077188Z ==> Checking out commit aa86db012929ca6a9a7dde2427a4033a37b15c76 in branch main
+2026-06-29T14:05:51.783481182Z ==> Downloaded 106MB in 3s. Extraction took 5s.
+2026-06-29T14:05:55.427296588Z ==> Using Node.js version 24.14.1 (default)
+2026-06-29T14:05:55.427310028Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-06-29T14:05:55.48209735Z ==> Running build command 'pnpm install --frozen-lockfile && pnpm --filter @workspace/api-server run build'...
+2026-06-29T14:05:58.207766448Z 
+2026-06-29T14:05:58.207782249Z > @workspace/api-server@0.0.0 build /opt/render/project/src/artifacts/api-server
+2026-06-29T14:05:58.207787558Z > node ./build.mjs
+2026-06-29T14:05:58.207790049Z 
+2026-06-29T14:05:58.662746882Z 
+2026-06-29T14:05:58.662762012Z   dist/index.mjs                       1.9mb ⚠️
+2026-06-29T14:05:58.662766092Z   dist/handler.mjs                     1.9mb ⚠️
+2026-06-29T14:05:58.662772452Z   dist/pino-worker.mjs               153.4kb
+2026-06-29T14:05:58.662776102Z   dist/pino-file.mjs                 142.1kb
+2026-06-29T14:05:58.662779253Z   dist/pino-pretty.mjs               114.6kb
+2026-06-29T14:05:58.662782393Z   dist/thread-stream-worker.mjs        7.3kb
+2026-06-29T14:05:58.662785242Z   dist/index.mjs.map                   3.1mb
+2026-06-29T14:05:58.662788433Z   dist/handler.mjs.map                 3.1mb
+2026-06-29T14:05:58.662791533Z   dist/pino-worker.mjs.map           256.9kb
+2026-06-29T14:05:58.662793593Z   dist/pino-file.mjs.map             229.0kb
+2026-06-29T14:05:58.662795493Z   dist/pino-pretty.mjs.map           203.9kb
+2026-06-29T14:05:58.662797773Z   dist/thread-stream-worker.mjs.map   12.0kb
+2026-06-29T14:05:58.662799623Z 
+2026-06-29T14:05:58.662802773Z ⚡ Done in 400ms
+2026-06-29T14:05:59.41179072Z ==> Uploading build...
+2026-06-29T14:06:08.693563533Z ==> Uploaded in 5.3s. Compression took 4.0s
+2026-06-29T14:06:08.729174761Z ==> Build successful 🎉
+2026-06-29T14:06:11.682542876Z ==> Deploying...
+2026-06-29T14:06:11.752777047Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+2026-06-29T14:06:34.227271098Z ==> Running 'node --enable-source-maps ./dist/index.mjs'
+2026-06-29T14:06:36.524270694Z [env] NODE_ENV=production | PORT=10000
+2026-06-29T14:06:36.524558461Z [env] OPTIONAL not set: TWITTER_BEARER_TOKEN — Twitter/X bearer token for account-check requests. Falls back to X's own public app token if not set. Set this if the public token gets rate-limited.
+2026-06-29T14:06:36.524691384Z GROQ_API_KEY present: true
+2026-06-29T14:06:36.528616077Z {"level":30,"time":1782741996527,"pid":76,"hostname":"srv-d914ldegvqtc73a0m5ng-hibernate-5f779fcfcc-wqv4k","port":10000,"msg":"Server listening"}
+2026-06-29T14:06:36.811222562Z {"level":30,"time":1782741996810,"pid":76,"hostname":"srv-d914ldegvqtc73a0m5ng-hibernate-5f779fcfcc-wqv4k","req":{"id":1,"method":"HEAD","url":"/"},"res":{"statusCode":404},"responseTime":6,"msg":"request completed"}
+2026-06-29T14:06:36.811768795Z Error: ENOENT: no such file or directory, stat '/opt/render/project/src/artifacts/x-checker/dist/public/index.html'
+2026-06-29T14:06:42.624801151Z ==> Your service is live 🎉
+2026-06-29T14:06:42.795117341Z ==> 
+2026-06-29T14:06:42.797415138Z ==> ///////////////////////////////////////////////////////////
+2026-06-29T14:06:42.799878067Z ==> 
+2026-06-29T14:06:42.805512928Z ==> Available at your primary URL https://xtoolkit-live.onrender.com
+2026-06-29T14:06:42.807952986Z ==> 
+2026-06-29T14:06:42.810851506Z ==> ///////////////////////////////////////////////////////////
+2026-06-29T14:06:42.753608478Z {"level":30,"time":1782742002753,"pid":76,"hostname":"srv-d914ldegvqtc73a0m5ng-hibernate-5f779fcfcc-wqv4k","req":{"id":2,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":2,"msg":"request completed"}
+2026-06-29T14:06:42.75365351Z Error: ENOENT: no such file or directory, stat '/opt/render/project/src/artifacts/x-checker/dist/public/index.html'
