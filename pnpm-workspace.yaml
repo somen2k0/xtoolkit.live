@@ -67,8 +67,6 @@ catalog:
 
 autoInstallPeers: false
 
-ignoredBuilds: []
-
 onlyBuiltDependencies:
   - '@swc/core'
   - '@resvg/resvg-js'
