@@ -23,6 +23,7 @@ interface RelatedTool {
 interface BlogLayoutProps {
   seoTitle: string;
   seoDescription: string;
+  seoKeywords?: string;
   title: string;
   description: string;
   icon: LucideIcon;

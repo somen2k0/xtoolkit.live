@@ -18,6 +18,7 @@ import guerrillaRouter from "./guerrilla";
 import freemailRouter from "./freemail";
 import onesecmailRouter from "./onesecmail";
 import harakirimailRouter from "./harakirimail";
+import gmailCheckerRouter from "./gmail-checker";
 
 const router: IRouter = Router();
 
@@ -48,6 +49,7 @@ router.use('/guerrilla', guerrillaRouter);
 router.use('/freemail', freemailRouter);
 router.use('/onesecmail', onesecmailRouter);
 router.use('/harakirimail', harakirimailRouter);
+router.use(gmailCheckerRouter);
 
 // ─── AI routes ────────────────────────────────────────────────────────────────
 // Input validation, response cache (detector only), and usage logging.

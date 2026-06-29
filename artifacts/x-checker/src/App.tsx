@@ -68,6 +68,7 @@ const BioGenerator = lazy(() => import("@/pages/tools/bio-generator"));
 const FunnyBios = lazy(() => import("@/pages/tools/funny-bios"));
 // Email privacy tools (lazy)
 const MaskedEmailGenerator = lazy(() => import("@/pages/tools/masked-email-generator"));
+const GmailChecker = lazy(() => import("@/pages/tools/gmail-checker"));
 const SchemaGenerator = lazy(() => import("@/pages/tools/schema-generator"));
 const SpamScoreChecker = lazy(() => import("@/pages/tools/spam-score-checker"));
 const NewsletterTemplateGenerator = lazy(() => import("@/pages/tools/newsletter-template-generator"));
@@ -174,6 +175,7 @@ function TrackedRouter() {
           <Route path="/tools/schema-generator" component={SchemaGenerator} />
 
           {/* Email Tools */}
+          <Route path="/tools/gmail-checker" component={GmailChecker} />
           <Route path="/tools/subject-line-generator" component={SubjectLineGenerator} />
           <Route path="/tools/email-signature-generator" component={EmailSignatureGenerator} />
           <Route path="/tools/email-validator" component={EmailValidator} />

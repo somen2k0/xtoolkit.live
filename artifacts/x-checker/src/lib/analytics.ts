@@ -46,7 +46,9 @@ export type EventName =
   | "account_check"
   | "trending_tool_click"
   | "recent_tool_click"
-  | "privacy_tool_click";
+  | "privacy_tool_click"
+  | "gmail_check"
+  | "gmail_check_csv_download";
 
 export interface TrackParams {
   tool?: string;

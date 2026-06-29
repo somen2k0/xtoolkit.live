@@ -536,5 +536,18 @@
     "ogTitle": "Image Resizer — Free Browser-Based Image Resize Tool",
     "ogDescription": "Resize JPEG, PNG, and WebP images in your browser. Set dimensions, quality, format, download. No uploads. Free.",
     "tags": ["image", "resize", "compress", "jpeg", "png", "webp"]
+  },
+  {
+    "id": "gmail-checker",
+    "href": "/tools/gmail-checker",
+    "label": "Gmail Account Checker",
+    "description": "Check if Gmail addresses are valid, active or invalid in bulk. Free, no login required.",
+    "seoTitle": "Gmail Account Checker — Bulk Gmail Validator | X Toolkit",
+    "seoDescription": "Check if Gmail addresses are valid or invalid in bulk. Paste up to 50 Gmail addresses and instantly see which are active. Free, no signup.",
+    "seoKeywords": "gmail checker, gmail account checker, bulk gmail checker, gmail validator, check gmail account, gmail status checker, valid gmail checker",
+    "category": "email",
+    "badge": "New",
+    "sitemapPriority": 0.82,
+    "tags": ["gmail", "email", "checker", "validator", "bulk", "account"]
   }
 ]
