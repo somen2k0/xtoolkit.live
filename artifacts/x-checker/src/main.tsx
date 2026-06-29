@@ -10,3 +10,6 @@ if (import.meta.env.PROD) {
   createRoot(root).render(<App />);
 }
 
+// Fade in after React mounts — hides prerender flash
+requestAnimationFrame(() => root.classList.add("hydrated"));
+

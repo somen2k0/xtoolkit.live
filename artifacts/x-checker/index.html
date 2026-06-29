@@ -45,9 +45,11 @@
     <meta name="twitter:image" content="https://xtoolkit.live/opengraph.png" />
     <meta name="twitter:image:alt" content="X Toolkit — 44+ free online tools for X, SEO, developers and creators" />
 
-    <!-- Anti-FOUC: instant background before React mounts -->
+    <!-- Anti-FOUC: instant background + hide prerender until React mounts -->
     <style>
       html, body { background-color: #F5EFE6; margin: 0; padding: 0; }
+      #root { opacity: 0; transition: opacity 0.15s ease; }
+      #root.hydrated { opacity: 1; }
     </style>
 
     <!-- Favicon — ICO for older browsers, PNG for modern browsers, SVG for supporting browsers -->
