@@ -54,33 +54,33 @@
 
 /* ── Theme variables ─────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #1a1a1a;
+  --background: #F5EFE6;
+  --foreground: #1C1C1C;
 
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-  --card-border: #e5e7eb;
+  --card: #FFFCF8;
+  --card-foreground: #1C1C1C;
+  --card-border: #E4D8CC;
 
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --popover-border: #e5e7eb;
+  --popover: #FFFCF8;
+  --popover-foreground: #1C1C1C;
+  --popover-border: #E4D8CC;
 
-  /* Blue-purple accent — matches 10015.io */
-  --primary: #474bff;
+  /* Replit orange-red accent */
+  --primary: #F5390A;
   --primary-foreground: #ffffff;
-  --primary-border: #474bff;
+  --primary-border: #F5390A;
 
-  --secondary: #f3f4f6;
-  --secondary-foreground: #1a1a1a;
-  --secondary-border: #e5e7eb;
+  --secondary: #F0E8DF;
+  --secondary-foreground: #1C1C1C;
+  --secondary-border: #E4D8CC;
 
-  --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
-  --muted-border: #e5e7eb;
+  --muted: #F0E8DF;
+  --muted-foreground: #6B6560;
+  --muted-border: #E4D8CC;
 
-  --accent: #f0f0ff;
-  --accent-foreground: #474bff;
-  --accent-border: #c7d2fe;
+  --accent: #FDE8E2;
+  --accent-foreground: #C73008;
+  --accent-border: #F5C4B5;
 
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
@@ -92,9 +92,9 @@
   --warning: #f59e0b;
   --warning-foreground: #000000;
 
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #474bff;
+  --border: #E4D8CC;
+  --input: #E4D8CC;
+  --ring: #F5390A;
 
   --app-font-sans: 'Inter', system-ui, sans-serif;
   --app-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -117,7 +117,7 @@
 
   body {
     @apply font-sans antialiased text-foreground;
-    background-color: #ffffff;
+    background-color: #F5EFE6;
     min-height: 100vh;
     cursor: auto;
   }
@@ -142,8 +142,8 @@
 }
 
 .card-hover-glow:hover {
-  border-color: #474bff66;
-  box-shadow: 0 2px 8px rgba(71, 75, 255, 0.12);
+  border-color: rgba(245, 57, 10, 0.4);
+  box-shadow: 0 2px 8px rgba(245, 57, 10, 0.12);
 }
 
 /* ── Scroll fade-in utility ──────────────────────────────────────────────── */
