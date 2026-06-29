@@ -15,7 +15,7 @@
     "prettier": "^3.8.1",
     "typescript": "~5.9.2"
   },
-  "packageManager": "pnpm@11.8.0",
+  "packageManager": "pnpm@10.26.1",
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"
   }
