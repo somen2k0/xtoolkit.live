@@ -1,67 +1,83 @@
 import { Router, type IRouter } from "express";
+import net from "net";
 
 const router: IRouter = Router();
+
+const GMAIL_MX = "aspmx.l.google.com";
 
 const GMAIL_LOCAL_RE = /^[a-zA-Z0-9]+([.][a-zA-Z0-9]+)*$/;
 
 function validateGmailFormat(email: string): boolean {
   const lower = email.toLowerCase();
   if (!lower.endsWith("@gmail.com")) return false;
-  const local = lower.slice(0, -10); // strip @gmail.com
+  const local = lower.slice(0, -10);
   if (local.length < 6 || local.length > 30) return false;
   if (!GMAIL_LOCAL_RE.test(local)) return false;
   return true;
 }
 
-async function checkGmailExists(
+async function smtpCheck(
   email: string
-): Promise<"valid" | "invalid" | "unknown"> {
+): Promise<"valid" | "invalid" | "disabled" | "unknown"> {
   if (!validateGmailFormat(email)) return "invalid";
 
-  try {
-    const controller = new AbortController();
-    const tid = setTimeout(() => controller.abort(), 6000);
+  return new Promise((resolve) => {
+    const timeout = setTimeout(() => {
+      socket.destroy();
+      resolve("unknown");
+    }, 10000);
 
-    const url = `https://mail.google.com/mail/gxlu?email=${encodeURIComponent(email.toLowerCase())}`;
-    const res = await fetch(url, {
-      method: "GET",
-      redirect: "manual",
-      signal: controller.signal,
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        Accept: "text/html,application/xhtml+xml,*/*",
-        "Accept-Language": "en-US,en;q=0.9",
-      },
+    const socket = net.createConnection(25, GMAIL_MX);
+    let stage = 0;
+    let buffer = "";
+
+    socket.on("data", (data) => {
+      buffer += data.toString();
+      const lines = buffer.split("\r\n");
+      buffer = lines.pop() || "";
+
+      for (const line of lines) {
+        const code = parseInt(line.substring(0, 3));
+        if (isNaN(code)) continue;
+
+        if (stage === 0 && code === 220) {
+          socket.write("EHLO mail.xtoolkit.live\r\n");
+          stage = 1;
+        } else if (stage === 1 && (code === 250 || line.startsWith("250"))) {
+          // Wait for last 250 line (no hyphen after code)
+          if (!line.startsWith("250-")) {
+            socket.write("MAIL FROM:<verify@xtoolkit.live>\r\n");
+            stage = 2;
+          }
+        } else if (stage === 2 && code === 250) {
+          socket.write(`RCPT TO:<${email}>\r\n`);
+          stage = 3;
+        } else if (stage === 3) {
+          clearTimeout(timeout);
+          socket.write("QUIT\r\n");
+          socket.destroy();
+          if (code === 250 || code === 251) {
+            resolve("valid");
+          } else if (code === 550 || code === 551 || code === 553) {
+            if (line.toLowerCase().includes("disabled")) {
+              resolve("disabled");
+            } else {
+              resolve("invalid");
+            }
+          } else if (code === 552 || code === 554) {
+            resolve("disabled");
+          } else {
+            resolve("unknown");
+          }
+        }
+      }
     });
 
-    clearTimeout(tid);
-
-    // Valid account: Google sets GMAIL_AT cookie and returns 200
-    if (res.status === 200) {
-      const cookie = res.headers.get("set-cookie") ?? "";
-      if (cookie.includes("GMAIL_AT")) return "valid";
-      // 200 without cookie = account doesn't exist
-      return "invalid";
-    }
-
-    // Redirect (302/307): valid account — Google redirects to sign-in
-    if (res.status === 302 || res.status === 307) {
-      const loc = res.headers.get("location") ?? "";
-      // Redirect to accounts.google.com = account exists
-      if (loc.includes("accounts.google.com") || loc.includes("checkCookie")) {
-        return "valid";
-      }
-      return "unknown";
-    }
-
-    // 404 = account does not exist
-    if (res.status === 404) return "invalid";
-
-    return "unknown";
-  } catch {
-    return "unknown";
-  }
+    socket.on("error", () => {
+      clearTimeout(timeout);
+      resolve("unknown");
+    });
+  });
 }
 
 router.post("/gmail-checker/check", async (req, res) => {
@@ -83,7 +99,7 @@ router.post("/gmail-checker/check", async (req, res) => {
   const results = await Promise.all(
     sanitized.map(async (email) => ({
       email,
-      status: await checkGmailExists(email),
+      status: await smtpCheck(email),
     }))
   );
 
