@@ -44,7 +44,6 @@ async function smtpCheck(
           socket.write("EHLO mail.xtoolkit.live\r\n");
           stage = 1;
         } else if (stage === 1 && (code === 250 || line.startsWith("250"))) {
-          // Wait for last 250 line (no hyphen after code)
           if (!line.startsWith("250-")) {
             socket.write("MAIL FROM:<verify@xtoolkit.live>\r\n");
             stage = 2;

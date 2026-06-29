@@ -1,0 +1,92 @@
+There's one important constraint to know upfront: Vercel blocks outbound port 25, which is what the Gmail SMTP checker uses. So the API can't run on Vercel itself. Here's the cleanest integration path:
+The architecture
+
+```
+Your Vercel site (frontend)
+```
+
+`        ↓ fetch()`
+`  API Server (deployed separately)`
+`        ↓ TCP port 25`
+`  Gmail's MX server`
+Step 1 — Deploy the API server
+Easiest option: Deploy it right here from Replit.
+Click the Deploy button at the top of this Replit. It gives you a public URL like `https://your-project.replit.app`. That's your API base URL.
+Alternative: Deploy to Railway / Render (more control, free tier available).
+Give Claude Code the `artifacts/api-server/` folder — it's a standalone Express 5 app. Tell it:
+"Deploy this Express app to Railway. It needs `PORT` as an env var. The entry point is `src/index.ts`, built with esbuild."
+Step 2 — Call the API from your Vercel site
+Give Claude Code these endpoint specs and tell it to add them to your project:
+Gmail checker
+
+```
+// POST https://YOUR_API_URL/api/gmail/check-single
+```
+
+`// Body: { email: string }`
+`// Response: { email: string, status: "good" | "not_exist" | "disabled" | "unknown", details?: string }`
+`const res = await fetch(`${process.env.NEXT_PUBLIC_CHECKER_API_URL}/api/gmail/check-single`, {`
+`method: "POST",`
+`headers: { "Content-Type": "application/json" },`
+`body: JSON.stringify({ email: "user@gmail.com" }),`
+`});`
+`const data = await res.json();`
+`// data.status === "good" → valid account`
+X / Twitter checker
+
+```
+// POST https://YOUR_API_URL/api/x/check-single
+```
+
+`// Body: { username: string }`
+`// Response: { username: string, status: "active" | "not_found" | "suspended" | "unknown", profile_image?: string }`
+`const res = await fetch(`${process.env.NEXT_PUBLIC_CHECKER_API_URL}/api/x/check-single`, {`
+`method: "POST",`
+`headers: { "Content-Type": "application/json" },`
+`body: JSON.stringify({ username: "elonmusk" }),`
+`});`
+GitHub checker
+
+```
+// POST https://YOUR_API_URL/api/github/check-single
+```
+
+`// Body: { username: string }`
+`// Response: { username, status: "active"|"not_found"|"unknown", display_name, followers, following, public_repos, joined, avatar_url, bio, location }`
+`const res = await fetch(`${process.env.NEXT_PUBLIC_CHECKER_API_URL}/api/github/check-single`, {`
+`method: "POST",`
+`headers: { "Content-Type": "application/json" },`
+`body: JSON.stringify({ username: "torvalds" }),`
+`});`
+Step 3 — CORS (Claude Code must do this)
+The API server needs to allow requests from your Vercel domain. Tell Claude Code:
+"In `artifacts/api-server/src/index.ts`, add this CORS config and replace `YOUR_VERCEL_DOMAIN` with the actual domain:"
+
+```
+import cors from "cors";
+```
+
+`app.use(cors({`
+`origin: ["https://YOUR_VERCEL_DOMAIN.vercel.app", "http://localhost:3000"],`
+`}));`
+Then install the package:
+
+```
+pnpm --filter @workspace/api-server add cors
+```
+
+`pnpm --filter @workspace/api-server add -D @types/cors`
+Step 4 — Environment variable in Vercel
+In your Vercel dashboard → Settings → Environment Variables, add:
+
+```
+NEXT_PUBLIC_CHECKER_API_URL = https://your-deployed-api.replit.app
+```
+
+What to hand Claude Code
+The simplest prompt:
+"I have an external API at `process.env.NEXT_PUBLIC_CHECKER_API_URL`. Add a Gmail bulk checker feature: a textarea for emails (one per line), a Check button that calls `POST /api/gmail/check-single` for each email sequentially, and shows results as `Good | email` or `Not Exist | email`. Also add X/Twitter and GitHub username checkers using `POST /api/x/check-single` and `POST /api/github/check-single`."
+That's everything Claude Code needs to wire it up on the Vercel side.
+Next, I can add CORS support to this API server right now and deploy it, so you have a live URL ready to paste into Vercel. Would you like me to do that?
+
+This is replit said
