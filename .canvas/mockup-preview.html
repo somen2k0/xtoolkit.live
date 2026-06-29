@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Replit Theme – X Toolkit Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5EFE6;
+    --bg-card: #FFFCF8;
+    --primary: #F5390A;
+    --primary-dark: #D42D06;
+    --text: #1C1C1C;
+    --muted: #6B6560;
+    --border: #E4D8CC;
+    --accent-bg: #FDE8E2;
+    --accent-text: #C73008;
+    --badge-bg: #FDEEE9;
+    --badge-border: #F5C4B5;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    background: rgba(245,239,230,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 50;
+    padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--primary); }
+  .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  .nav-links a { cursor: pointer; text-decoration: none; color: inherit; }
+  .nav-links a:hover { color: var(--text); }
+  .btn-primary {
+    background: var(--primary); color: #fff; border: none;
+    border-radius: 8px; padding: 8px 18px; font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--primary-dark); }
+
+  /* HERO */
+  .hero {
+    padding: 80px 24px 60px;
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--badge-bg); border: 1px solid var(--badge-border);
+    border-radius: 999px; padding: 5px 16px; margin-bottom: 28px;
+    font-size: 13px; font-weight: 600; color: var(--accent-text);
+  }
+  .hero-badge-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--primary); display: inline-block;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 800; line-height: 1.1;
+    letter-spacing: -1.5px; margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--primary); }
+  .hero p {
+    font-size: 18px; color: var(--muted);
+    max-width: 520px; margin: 0 auto 36px; line-height: 1.65;
+  }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 14px 28px; font-size: 16px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+    transition: border-color 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--primary); }
+  .btn-lg {
+    border-radius: 10px; padding: 14px 28px;
+    font-size: 16px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  /* SEARCH + FILTER */
+  .search-section {
+    max-width: 1100px; margin: 0 auto; padding: 0 24px 32px;
+  }
+  .search-wrap {
+    position: relative; margin-bottom: 16px;
+  }
+  .search-icon {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 16px;
+  }
+  .search-input {
+    width: 100%; padding: 13px 14px 13px 42px;
+    background: var(--bg-card); border: 1.5px solid var(--border);
+    border-radius: 10px; font-size: 15px; color: var(--text);
+    outline: none; font-family: inherit;
+    transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--primary); }
+  .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    border: 1.5px solid var(--border); background: var(--bg-card);
+    color: var(--muted); cursor: pointer; transition: all 0.15s;
+  }
+  .pill:hover { border-color: var(--primary); color: var(--primary); }
+  .pill.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+  /* TOOL GRID */
+  .tools-section {
+    max-width: 1100px; margin: 0 auto; padding: 0 24px 64px;
+  }
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px;
+  }
+  .tool-card {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 20px 22px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .tool-card:hover {
+    border-color: rgba(245,57,10,0.45);
+    box-shadow: 0 2px 12px rgba(245,57,10,0.10);
+  }
+  .tool-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--accent-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 21px; flex-shrink: 0;
+  }
+  .tool-info { flex: 1; }
+  .tool-name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .tool-name { font-weight: 700; font-size: 14px; color: var(--text); }
+  .tool-cat {
+    font-size: 11px; font-weight: 600; color: var(--accent-text);
+    background: var(--badge-bg); border: 1px solid var(--badge-border);
+    border-radius: 999px; padding: 1px 9px;
+  }
+  .tool-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* WHY SECTION */
+  .why-section {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 64px 24px;
+  }
+  .why-inner { max-width: 1100px; margin: 0 auto; }
+  .why-inner h2 {
+    font-size: 30px; font-weight: 800; text-align: center;
+    margin-bottom: 44px; letter-spacing: -0.5px;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+  }
+  .why-item { display: flex; gap: 16px; align-items: flex-start; }
+  .why-icon-wrap {
+    width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
+    background: var(--accent-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .why-title { font-weight: 700; font-size: 16px; margin-bottom: 6px; }
+  .why-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 24px; text-align: center;
+    color: var(--muted); font-size: 13px;
+  }
+  .footer-links {
+    display: flex; gap: 28px; justify-content: center;
+    margin-bottom: 16px; font-weight: 500;
+  }
+  .footer-links a { cursor: pointer; text-decoration: none; color: inherit; }
+  .footer-links a:hover { color: var(--primary); }
+
+  /* COLOR PALETTE LEGEND */
+  .palette {
+    position: fixed; bottom: 16px; right: 16px;
+    background: #fff; border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+    font-size: 12px; font-family: monospace;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    z-index: 100;
+  }
+  .palette h4 { font-size: 11px; font-weight: 700; margin-bottom: 10px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; color: #999; text-transform: uppercase; }
+  .swatch { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .swatch-dot { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">X <span>Toolkit</span></div>
+  <div class="nav-links">
+    <a>Tools</a>
+    <a>Blog</a>
+    <a>Pricing</a>
+    <a>Chrome Extension</a>
+    <button class="btn-primary">Get Extension</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    44 Free Tools — No Signup Required
+  </div>
+  <h1>The toolkit built for<br><span>X / Twitter creators</span></h1>
+  <p>44 free tools for developers, marketers & creators — no account, no credit card, just open and use.</p>
+  <div class="hero-btns">
+    <button class="btn-primary btn-lg">Browse All Tools →</button>
+    <button class="btn-outline btn-lg">Get Chrome Extension</button>
+  </div>
+</section>
+
+<!-- SEARCH + FILTER -->
+<section class="search-section">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" placeholder="Search 44 tools…" readonly>
+  </div>
+  <div class="filter-pills">
+    <span class="pill active">All</span>
+    <span class="pill">Social Media</span>
+    <span class="pill">AI Writing</span>
+    <span class="pill">Developer</span>
+    <span class="pill">SEO</span>
+    <span class="pill">Email</span>
+    <span class="pill">Text Tools</span>
+  </div>
+</section>
+
+<!-- TOOL GRID -->
+<section class="tools-section">
+  <div class="tool-grid">
+    <div class="tool-card">
+      <div class="tool-icon">🐦</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">X Account Checker</span><span class="tool-cat">Social</span></div>
+        <div class="tool-desc">Check 100 Twitter/X accounts at once — followers, join date, verified status</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📧</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">Temp Gmail Generator</span><span class="tool-cat">Email</span></div>
+        <div class="tool-desc">Real @gmail.com addresses that actually work on strict sites</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔑</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">JWT Decoder</span><span class="tool-cat">Dev</span></div>
+        <div class="tool-desc">Decode & inspect JWT tokens instantly, no server needed</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🤖</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">AI Detector</span><span class="tool-cat">AI</span></div>
+        <div class="tool-desc">Detect AI-written content with confidence score</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">✍️</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">Bio Generator</span><span class="tool-cat">AI</span></div>
+        <div class="tool-desc">Generate compelling Twitter bios using AI in seconds</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔗</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">URL Slug Generator</span><span class="tool-cat">SEO</span></div>
+        <div class="tool-desc">Create clean, SEO-friendly URL slugs from any text</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔒</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">Password Generator</span><span class="tool-cat">Dev</span></div>
+        <div class="tool-desc">Generate cryptographically secure passwords instantly</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📊</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">Keyword Density</span><span class="tool-cat">SEO</span></div>
+        <div class="tool-desc">Analyze keyword frequency and distribution in your content</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🎨</div>
+      <div class="tool-info">
+        <div class="tool-name-row"><span class="tool-name">CSS Gradient Generator</span><span class="tool-cat">Dev</span></div>
+        <div class="tool-desc">Build beautiful CSS gradients with a live visual editor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SECTION -->
+<section class="why-section">
+  <div class="why-inner">
+    <h2>Why X Toolkit?</h2>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon-wrap">🛡️</div>
+        <div>
+          <div class="why-title">Runs in your browser</div>
+          <div class="why-desc">All tools process data locally. Nothing is sent to our servers or stored anywhere.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon-wrap">⚡</div>
+        <div>
+          <div class="why-title">No signup ever</div>
+          <div class="why-desc">Every tool works immediately. No account, no email, no credit card required.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon-wrap">💻</div>
+        <div>
+          <div class="why-title">Built for real work</div>
+          <div class="why-desc">Tools that developers, marketers and creators actually use daily — not demos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a>Privacy</a><a>Terms</a><a>Contact</a><a>Blog</a>
+  </div>
+  <p>© 2025 X Toolkit · All tools are free, forever.</p>
+</footer>
+
+<!-- COLOR PALETTE LEGEND -->
+<div class="palette">
+  <h4>Replit Palette</h4>
+  <div class="swatch"><div class="swatch-dot" style="background:#F5EFE6;"></div>#F5EFE6 — Background</div>
+  <div class="swatch"><div class="swatch-dot" style="background:#F5390A;"></div>#F5390A — Primary (orange-red)</div>
+  <div class="swatch"><div class="swatch-dot" style="background:#1C1C1C;"></div>#1C1C1C — Text</div>
+  <div class="swatch"><div class="swatch-dot" style="background:#FFFCF8;"></div>#FFFCF8 — Card bg</div>
+  <div class="swatch"><div class="swatch-dot" style="background:#E4D8CC;"></div>#E4D8CC — Border</div>
+  <div class="swatch"><div class="swatch-dot" style="background:#6B6560;"></div>#6B6560 — Muted text</div>
+</div>
+
+</body>
+</html>
