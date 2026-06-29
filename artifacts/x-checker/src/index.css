@@ -54,56 +54,51 @@
 
 /* ── Theme variables ─────────────────────────────────────────────────────── */
 :root {
-  --button-outline: rgba(0,0,0, .08);
-  --badge-outline: rgba(0,0,0, .05);
+  --button-outline: rgba(255,255,255, .08);
+  --badge-outline: rgba(255,255,255, .05);
   --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .06);
+  --elevate-1: rgba(255,255,255, .03);
+  --elevate-2: rgba(255,255,255, .06);
 
-  /* #FDF6EE warm cream */
-  --background: 33 79% 96%;
-  /* #1A1A1A near-black */
-  --foreground: 0 0% 10%;
+  /* Dark navy background */
+  --background: 222 22% 9%;
+  --foreground: 215 22% 92%;
 
-  /* #FFFFFF white cards */
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 10%;
-  /* #E8DDD0 warm border */
-  --card-border: 33 34% 86%;
+  /* Card — slightly lighter navy */
+  --card: 222 20% 14%;
+  --card-foreground: 215 22% 92%;
+  --card-border: 222 18% 22%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 10%;
-  --popover-border: 33 34% 86%;
+  --popover: 222 20% 14%;
+  --popover-foreground: 215 22% 92%;
+  --popover-border: 222 18% 22%;
 
-  /* #6366f1 indigo/purple */
-  --primary: 239 84% 67%;
-  /* #FFFFFF */
+  /* Purple primary */
+  --primary: 258 82% 70%;
   --primary-foreground: 0 0% 100%;
 
-  /* #F5EDE0 cream secondary */
-  --secondary: 37 52% 92%;
-  --secondary-foreground: 0 0% 10%;
+  /* Secondary — dark muted */
+  --secondary: 222 16% 18%;
+  --secondary-foreground: 215 22% 92%;
 
-  --muted: 37 52% 92%;
-  /* #6B5E52 warm gray */
-  --muted-foreground: 29 13% 37%;
+  --muted: 222 16% 18%;
+  --muted-foreground: 215 14% 62%;
 
-  --accent: 37 52% 92%;
-  --accent-foreground: 239 84% 67%;
+  --accent: 258 80% 68%;
+  --accent-foreground: 0 0% 100%;
 
-  --destructive: 0 72% 51%;
+  --destructive: 0 70% 55%;
   --destructive-foreground: 0 0% 100%;
 
-  --success: 142 72% 38%;
+  --success: 142 70% 44%;
   --success-foreground: 0 0% 100%;
 
-  --warning: 38 92% 46%;
+  --warning: 38 90% 52%;
   --warning-foreground: 0 0% 0%;
 
-  /* #E8DDD0 warm border */
-  --border: 33 34% 86%;
-  --input: 33 34% 86%;
-  --ring: 239 84% 67%;
+  --border: 222 18% 22%;
+  --input: 222 18% 22%;
+  --ring: 258 80% 68%;
 
   --app-font-sans: 'Inter', system-ui, sans-serif;
   --app-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -137,7 +132,7 @@
 
   body {
     @apply font-sans antialiased text-foreground;
-    background: linear-gradient(180deg, #FAE8C0 0%, #FDF0D5 15%, #FDF6EE 40%, #FDF6EE 100%);
+    background-color: hsl(222 22% 9%);
     min-height: 100vh;
     cursor: auto;
   }
@@ -162,8 +157,8 @@
 }
 
 .card-hover-glow:hover {
-  border-color: hsl(239 84% 67% / 0.4);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+  border-color: hsl(258 82% 70% / 0.4);
+  box-shadow: 0 4px 12px rgba(124, 92, 230, 0.2);
 }
 
 /* ── Scroll fade-in utility ──────────────────────────────────────────────── */

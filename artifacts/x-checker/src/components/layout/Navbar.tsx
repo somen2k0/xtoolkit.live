@@ -19,7 +19,7 @@ import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
   New: "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI: "bg-[#6366f1]/15 text-[#6366f1] border-[#6366f1]/30",
+  AI: "bg-[#6366f1]/15 text-primary border-[#6366f1]/30",
   Soon: "bg-slate-400/15 text-slate-400 border-slate-400/30",
 };
 
@@ -120,28 +120,28 @@ function NavDropdown({
   return (
     <div
       className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 z-50
-        rounded-xl border border-[#E8DDD0] bg-white
-        shadow-lg shadow-black/10 animate-in fade-in slide-in-from-top-1 duration-150"
+        rounded-xl border border-border bg-popover
+        shadow-lg shadow-black/30 animate-in fade-in slide-in-from-top-1 duration-150"
     >
       <div className="p-2">
         <Link href={category.href} onClick={onClose}>
-          <div className="flex items-center justify-between px-3 py-2 rounded-lg mb-1 hover:bg-[#F5EDE0] transition-colors cursor-pointer">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#6366f1]">
+          <div className="flex items-center justify-between px-3 py-2 rounded-lg mb-1 hover:bg-secondary transition-colors cursor-pointer">
+            <span className="text-xs font-bold uppercase tracking-wider text-primary">
               All {category.label}
             </span>
-            <span className="text-xs text-[#6B5E52]">View all →</span>
+            <span className="text-xs text-muted-foreground">View all →</span>
           </div>
         </Link>
-        <div className="h-px bg-[#E8DDD0] mx-1 mb-2" />
+        <div className="h-px bg-border mx-1 mb-2" />
         <ul className="space-y-0.5 max-h-[360px] overflow-y-auto">
           {category.tools.map((tool) => {
             const Icon = tool.icon;
             return (
               <li key={tool.label}>
                 <Link href={tool.href} onClick={onClose}>
-                  <div className="group flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-[#F5EDE0] transition-colors cursor-pointer">
-                    <Icon className="h-3.5 w-3.5 text-[#6B5E52]/60 group-hover:text-[#1A1A1A] shrink-0 transition-colors" />
-                    <span className="text-xs font-medium text-[#1A1A1A] group-hover:text-[#1A1A1A] transition-colors flex-1 leading-tight">
+                  <div className="group flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-secondary transition-colors cursor-pointer">
+                    <Icon className="h-3.5 w-3.5 text-muted-foreground/60 group-hover:text-foreground shrink-0 transition-colors" />
+                    <span className="text-xs font-medium text-foreground group-hover:text-foreground transition-colors flex-1 leading-tight">
                       {tool.label}
                     </span>
                     {tool.badge && (
@@ -157,17 +157,17 @@ function NavDropdown({
         </ul>
         {category.comingSoon && category.comingSoon.length > 0 && (
           <>
-            <div className="h-px bg-[#E8DDD0] mx-1 my-2" />
+            <div className="h-px bg-border mx-1 my-2" />
             <div className="px-3 py-1 flex items-center gap-1.5 mb-1">
-              <Clock className="h-3 w-3 text-[#6B5E52]/60" />
-              <span className="text-[10px] font-semibold text-[#6B5E52]/60 uppercase tracking-wider">
+              <Clock className="h-3 w-3 text-muted-foreground/60" />
+              <span className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-wider">
                 Coming Soon
               </span>
             </div>
             {category.comingSoon.map((name) => (
               <div key={name} className="flex items-center gap-2.5 px-3 py-1 opacity-50 cursor-default">
-                <div className="h-1.5 w-1.5 rounded-full bg-[#1A4A44]/40 shrink-0" />
-                <span className="text-xs text-[#6B5E52]">{name}</span>
+                <div className="h-1.5 w-1.5 rounded-full bg-border shrink-0" />
+                <span className="text-xs text-muted-foreground">{name}</span>
               </div>
             ))}
           </>
@@ -195,8 +195,8 @@ function NavItem({ category, currentPath }: { category: typeof NAV_CATEGORIES[nu
         aria-expanded={open}
         className={`flex items-center gap-1 px-2 py-1.5 rounded-xl text-[12px] font-semibold transition-all duration-150 whitespace-nowrap ${
           isActive
-            ? "bg-[#1f1f1f] text-[#6366f1]"
-            : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
+            ? "bg-secondary text-primary"
+            : "text-foreground hover:bg-secondary hover:text-primary"
         }`}
       >
         <Icon className="h-3.5 w-3.5 shrink-0" />
@@ -220,15 +220,15 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-[#222222] bg-[#000000] shadow-sm">
+      <nav className="sticky top-0 z-50 border-b border-border bg-background shadow-sm">
         {/* Teal accent line at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#6366f1]/40 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-2">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-lg shadow-[#6366f1]/20 shrink-0">
+            <div className="h-7 w-7 rounded-lg overflow-hidden shadow-lg shadow-primary/20 shrink-0">
               <svg width="28" height="28" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="nBg" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
@@ -276,20 +276,20 @@ export function Navbar() {
                 </g>
               </svg>
             </div>
-            <span className="font-semibold text-sm text-white tracking-tight">X Toolkit</span>
-            <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-white/20 text-white/70 bg-white/10 px-1.5 py-0">
+            <span className="font-semibold text-sm text-foreground tracking-tight">X Toolkit</span>
+            <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-foreground/20 text-foreground/70 bg-foreground/10 px-1.5 py-0">
               {TOTAL_LIVE} Tools
             </Badge>
           </Link>
 
           {/* Desktop nav */}
           <div className="hidden md:flex flex-1 items-center justify-center">
-            <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-[#111111] border border-[#222222]">
+            <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-card border border-border">
               <Link href="/">
                 <button className={`${NAV_LINK_BASE} ${
                   location === "/"
-                    ? "bg-[#1f1f1f] text-[#6366f1]"
-                    : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
+                    ? "bg-secondary text-primary"
+                    : "text-foreground hover:bg-secondary hover:text-primary"
                 }`}>
                   <Home className="h-3.5 w-3.5 shrink-0" />
                   Home
@@ -303,8 +303,8 @@ export function Navbar() {
               <Link href="/blog">
                 <button className={`${NAV_LINK_BASE} ${
                   location.startsWith("/blog")
-                    ? "bg-[#1f1f1f] text-[#6366f1]"
-                    : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
+                    ? "bg-secondary text-primary"
+                    : "text-foreground hover:bg-secondary hover:text-primary"
                 }`}>
                   <BookOpen className="h-3.5 w-3.5 shrink-0" />
                   Blog
@@ -314,8 +314,8 @@ export function Navbar() {
               <Link href="/guides">
                 <button className={`${NAV_LINK_BASE} ${
                   location === "/guides"
-                    ? "bg-[#1f1f1f] text-[#6366f1]"
-                    : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
+                    ? "bg-secondary text-primary"
+                    : "text-foreground hover:bg-secondary hover:text-primary"
                 }`}>
                   <BookMarked className="h-3.5 w-3.5 shrink-0" />
                   Guides
@@ -325,8 +325,8 @@ export function Navbar() {
               <Link href="/about">
                 <button className={`${NAV_LINK_BASE} ${
                   location === "/about"
-                    ? "bg-[#1f1f1f] text-[#6366f1]"
-                    : "text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
+                    ? "bg-secondary text-primary"
+                    : "text-foreground hover:bg-secondary hover:text-primary"
                 }`}>
                   <Info className="h-3.5 w-3.5 shrink-0" />
                   About
@@ -348,14 +348,14 @@ export function Navbar() {
 
             <div className="hidden 2xl:flex items-center gap-1.5 pl-1">
               <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] text-white/60">Operational</span>
+              <span className="text-[11px] text-foreground/60">Operational</span>
             </div>
 
             <Button
               variant="outline"
               size="sm"
               onClick={() => setShowFeedback(true)}
-              className="hidden xl:flex text-xs border-[#222222] text-white hover:bg-[#1f1f1f] hover:text-[#6366f1] hover:border-[#222222] gap-1.5 h-8 px-2.5"
+              className="hidden xl:flex text-xs border-border text-foreground hover:bg-secondary hover:text-primary hover:border-border gap-1.5 h-8 px-2.5"
               title="Send Feedback"
             >
               <MessageSquare className="h-3.5 w-3.5 shrink-0" />
@@ -364,7 +364,7 @@ export function Navbar() {
 
             {/* Mobile hamburger */}
             <button
-              className="md:hidden p-1.5 rounded-md text-white hover:bg-[#1f1f1f] transition-colors"
+              className="md:hidden p-1.5 rounded-md text-foreground hover:bg-secondary transition-colors"
               onClick={() => { setMenuOpen((v) => !v); setMobileExpanded(null); }}
               aria-label="Toggle menu"
             >
@@ -375,12 +375,12 @@ export function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden border-t border-[#222222] bg-[#000000]">
+          <div className="md:hidden border-t border-border bg-background">
             <div className="px-4 py-3 space-y-1 max-h-[80vh] overflow-y-auto">
 
               <Link href="/" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left ${
-                  location === "/" ? "bg-[#1f1f1f] text-[#6366f1]" : "text-white hover:bg-[#1f1f1f]"
+                  location === "/" ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary"
                 }`}>
                   <Home className="h-4 w-4 shrink-0" />
                   Home
@@ -391,19 +391,19 @@ export function Navbar() {
                 const expanded = mobileExpanded === cat.key;
                 const CatIcon = cat.icon;
                 return (
-                  <div key={cat.key} className="rounded-lg overflow-hidden border border-[#222222]">
+                  <div key={cat.key} className="rounded-lg overflow-hidden border border-border">
                     <button
-                      className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-white hover:bg-[#1f1f1f] transition-colors text-left bg-[#111111]"
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-foreground hover:bg-secondary transition-colors text-left bg-card"
                       onClick={() => setMobileExpanded(expanded ? null : cat.key)}
                     >
-                      <CatIcon className="h-4 w-4 shrink-0 text-[#6366f1]" />
-                      <span className="text-sm font-semibold flex-1 text-white">{cat.label}</span>
-                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 text-white/50 ${expanded ? "rotate-180" : ""}`} />
+                      <CatIcon className="h-4 w-4 shrink-0 text-primary" />
+                      <span className="text-sm font-semibold flex-1 text-foreground">{cat.label}</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 text-foreground/50 ${expanded ? "rotate-180" : ""}`} />
                     </button>
                     {expanded && (
-                      <div className="bg-[#111111] px-2 py-1.5 space-y-0.5">
+                      <div className="bg-card px-2 py-1.5 space-y-0.5">
                         <Link href={cat.href} onClick={closeMenu}>
-                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold text-[#6366f1] hover:bg-[#1f1f1f] transition-colors">
+                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold text-primary hover:bg-secondary transition-colors">
                             View all {cat.label} →
                           </div>
                         </Link>
@@ -411,7 +411,7 @@ export function Navbar() {
                           const TIcon = tool.icon;
                           return (
                             <Link key={tool.href} href={tool.href} onClick={closeMenu}>
-                              <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md text-xs text-white/70 hover:text-white hover:bg-[#1f1f1f] transition-colors">
+                              <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md text-xs text-foreground/70 hover:text-foreground hover:bg-secondary transition-colors">
                                 <TIcon className="h-3.5 w-3.5 shrink-0" />
                                 {tool.label}
                                 {tool.badge && (
@@ -431,7 +431,7 @@ export function Navbar() {
 
               <Link href="/blog" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left ${
-                  location.startsWith("/blog") ? "bg-[#1f1f1f] text-[#6366f1]" : "text-white hover:bg-[#1f1f1f]"
+                  location.startsWith("/blog") ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary"
                 }`}>
                   <BookOpen className="h-4 w-4 shrink-0" />
                   Blog
@@ -440,7 +440,7 @@ export function Navbar() {
 
               <Link href="/guides" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left ${
-                  location === "/guides" ? "bg-[#1f1f1f] text-[#6366f1]" : "text-white hover:bg-[#1f1f1f]"
+                  location === "/guides" ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary"
                 }`}>
                   <BookMarked className="h-4 w-4 shrink-0" />
                   Guides
@@ -449,7 +449,7 @@ export function Navbar() {
 
               <Link href="/about" onClick={closeMenu}>
                 <button className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left ${
-                  location === "/about" ? "bg-[#1f1f1f] text-[#6366f1]" : "text-white hover:bg-[#1f1f1f]"
+                  location === "/about" ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary"
                 }`}>
                   <Info className="h-4 w-4 shrink-0" />
                   About
@@ -460,7 +460,7 @@ export function Navbar() {
                 variant="outline"
                 size="sm"
                 onClick={() => { setShowFeedback(true); closeMenu(); }}
-                className="w-full justify-start gap-3 h-10 text-sm font-medium border-[#222222] text-white hover:bg-[#1f1f1f] hover:text-[#6366f1]"
+                className="w-full justify-start gap-3 h-10 text-sm font-medium border-border text-foreground hover:bg-secondary hover:text-primary"
               >
                 <MessageSquare className="h-4 w-4" />
                 Send Feedback

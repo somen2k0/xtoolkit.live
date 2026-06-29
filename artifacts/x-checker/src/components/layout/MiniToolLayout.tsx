@@ -109,7 +109,7 @@ export function MiniToolLayout({
 
   return (
     <Layout>
-      <div className="bg-white min-h-screen">
+      <div className="bg-background min-h-screen">
       <SeoHead
         title={seoTitle}
         description={seoDescription}
