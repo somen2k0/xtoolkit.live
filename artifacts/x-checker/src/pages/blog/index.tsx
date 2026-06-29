@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key } from "lucide-react";
+import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key, Users } from "lucide-react";
 
 const ARTICLES = [
   {
@@ -180,6 +180,39 @@ const ARTICLES = [
     icon: Key,
     color: "text-sky-400",
     bg: "bg-sky-400/10 border-sky-400/20",
+  },
+  {
+    slug: "bulk-twitter-account-checker",
+    href: "/blog/bulk-twitter-account-checker",
+    title: "Bulk Twitter/X Account Checker — Check 100 Accounts Free",
+    description: "Check up to 100 Twitter/X accounts at once — active, suspended, or deleted. Follower counts, join dates, verified status, and CSV export. No signup required.",
+    readTime: "7 min",
+    category: "Social Media",
+    icon: Users,
+    color: "text-pink-400",
+    bg: "bg-pink-400/10 border-pink-400/20",
+  },
+  {
+    slug: "free-temp-gmail",
+    href: "/blog/free-temp-gmail",
+    title: "How to Get a Free Temp Gmail Address (That Actually Works)",
+    description: "A real @gmail.com address for one-time signups that works on sites blocking disposable email. How the Gmail dot trick works, when to use it, and step-by-step guide.",
+    readTime: "7 min",
+    category: "Guide",
+    icon: Mail,
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
+  },
+  {
+    slug: "json-ld-schema-generator",
+    href: "/blog/json-ld-schema-generator",
+    title: "Free JSON-LD Schema Generator — Get Rich Results in Google",
+    description: "Generate Article, FAQ, Product, and BreadcrumbList schema markup instantly. Add structured data to your pages and qualify for rich results in Google Search.",
+    readTime: "8 min",
+    category: "SEO",
+    icon: Code,
+    color: "text-orange-400",
+    bg: "bg-orange-400/10 border-orange-400/20",
   },
 ];
 

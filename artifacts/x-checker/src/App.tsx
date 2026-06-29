@@ -92,6 +92,9 @@ const WhatIsRegex = lazy(() => import("@/pages/blog/what-is-regex"));
 const SeoMetaTagsGuide = lazy(() => import("@/pages/blog/seo-meta-tags-guide"));
 const WhatIsJwt = lazy(() => import("@/pages/blog/what-is-jwt"));
 const TempMailCompleteGuide = lazy(() => import("@/pages/blog/temp-mail-complete-guide"));
+const BulkTwitterAccountChecker = lazy(() => import("@/pages/blog/bulk-twitter-account-checker"));
+const FreeTempGmail = lazy(() => import("@/pages/blog/free-temp-gmail"));
+const JsonLdSchemaGenerator = lazy(() => import("@/pages/blog/json-ld-schema-generator"));
 // Category pages (lazy)
 const AiWritingTools = lazy(() => import("@/pages/categories/ai-writing-tools"));
 const SocialMediaTools = lazy(() => import("@/pages/categories/social-media-tools"));
@@ -229,6 +232,9 @@ function TrackedRouter() {
           <Route path="/blog/seo-meta-tags-guide" component={SeoMetaTagsGuide} />
           <Route path="/blog/what-is-jwt" component={WhatIsJwt} />
           <Route path="/blog/temp-mail-complete-guide" component={TempMailCompleteGuide} />
+          <Route path="/blog/bulk-twitter-account-checker" component={BulkTwitterAccountChecker} />
+          <Route path="/blog/free-temp-gmail" component={FreeTempGmail} />
+          <Route path="/blog/json-ld-schema-generator" component={JsonLdSchemaGenerator} />
 
           {/* Category landing pages */}
           <Route path="/ai-writing-tools" component={AiWritingTools} />

@@ -271,6 +271,27 @@ const STATIC_PAGES = [
       "Everything you need to know about temporary email — how it works technically, 10 situations to use it, when to avoid it, choosing the right service, and privacy tips.",
   },
   {
+    path: "/blog/bulk-twitter-account-checker",
+    label: "Bulk Twitter/X Account Checker",
+    title: "Bulk Twitter/X Account Checker — Check 100 Accounts Free | X Toolkit Blog",
+    description:
+      "Check up to 100 Twitter/X accounts at once — see which are active, suspended, or deleted. Follower counts, join dates, verified status, and CSV export. No signup required.",
+  },
+  {
+    path: "/blog/free-temp-gmail",
+    label: "How to Get a Free Temp Gmail Address",
+    title: "How to Get a Free Temp Gmail Address (That Actually Works) | X Toolkit Blog",
+    description:
+      "Get a real @gmail.com address for one-time signups that works on sites blocking disposable email. How the Gmail dot trick works, when to use it, and step-by-step guide.",
+  },
+  {
+    path: "/blog/json-ld-schema-generator",
+    label: "Free JSON-LD Schema Generator",
+    title: "Free JSON-LD Schema Generator — Get Rich Results in Google | X Toolkit Blog",
+    description:
+      "Generate Article, FAQ, Product, and BreadcrumbList JSON-LD schema markup instantly. Add structured data to your pages and qualify for rich results in Google Search.",
+  },
+  {
     path: "/chrome-extension",
     label: "Chrome Extension",
     title: "Free Temp Email Chrome Extension — Disposable Inbox & OTP Detector | X Toolkit",

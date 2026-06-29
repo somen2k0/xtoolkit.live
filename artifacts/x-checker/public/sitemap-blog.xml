@@ -150,4 +150,28 @@
     <priority>0.82</priority>
   </url>
 
+  <!-- Bulk Twitter checker: high commercial intent, targets X/Twitter power users -->
+  <url>
+    <loc>https://xtoolkit.live/blog/bulk-twitter-account-checker</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- Free temp Gmail: high search volume, blocks disposable-email objection -->
+  <url>
+    <loc>https://xtoolkit.live/blog/free-temp-gmail</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- JSON-LD schema generator: developer/SEO high-intent keyword with tool CTA -->
+  <url>
+    <loc>https://xtoolkit.live/blog/json-ld-schema-generator</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
 </urlset>
