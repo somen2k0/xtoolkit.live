@@ -86,7 +86,7 @@ export function Footer() {
 
             {/* X Tools */}
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/50">X Tools</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/70">X Tools</h3>
               <ul className="space-y-2">
                 {X_TOOLS.map(({ icon: Icon, label, href }) => (
                   <li key={label}>
@@ -103,7 +103,7 @@ export function Footer() {
 
             {/* Content Tools */}
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/50">Content</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Content</h3>
               <ul className="space-y-2">
                 {CONTENT_TOOLS.map(({ icon: Icon, label, href }) => (
                   <li key={label}>
@@ -120,7 +120,7 @@ export function Footer() {
 
             {/* Formatting + Dev Tools */}
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/50">Formatting</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Formatting</h3>
               <ul className="space-y-2">
                 {FORMATTING_TOOLS.map(({ icon: Icon, label, href }) => (
                   <li key={label}>
@@ -133,7 +133,7 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/50 pt-3">Developer</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/70 pt-3">Developer</h3>
               <ul className="space-y-2">
                 {DEV_TOOLS.map(({ icon: Icon, label, href }) => (
                   <li key={label}>
@@ -150,7 +150,7 @@ export function Footer() {
 
             {/* Company */}
             <div className="col-span-2 md:col-span-1 space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/50">Company</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Company</h3>
               <ul className="space-y-2">
                 <li>
                   <a href="/about" rel="external" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
@@ -186,7 +186,7 @@ export function Footer() {
 
             {/* Newsletter */}
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/50">Stay Updated</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Stay Updated</h3>
               <p className="text-sm text-muted-foreground">New tools and features in your inbox.</p>
               {!subscribed ? (
                 <div className="flex flex-col gap-2">
@@ -216,7 +216,7 @@ export function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-10 pt-6 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground/60">
+          <div className="mt-10 pt-6 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
             <span>© {new Date().getFullYear()} X Toolkit. All rights reserved.</span>
             <div className="flex items-center gap-4">
               <a href="/about" rel="external" className="hover:text-foreground transition-colors">About</a>
