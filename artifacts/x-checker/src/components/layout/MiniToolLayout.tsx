@@ -109,7 +109,7 @@ export function MiniToolLayout({
 
   return (
     <Layout>
-      <div className="bg-[#f9fafb] min-h-screen">
+      <div className="bg-background min-h-screen">
       <SeoHead
         title={seoTitle}
         description={seoDescription}
@@ -172,19 +172,19 @@ export function MiniToolLayout({
 
         {/* FAQ */}
         <article className="prose dark:prose-invert max-w-none border-t pt-8 mt-8">
-          <h2 className="not-prose text-xl font-semibold text-[#1a1a1a] mb-5">Frequently Asked Questions</h2>
+          <h2 className="not-prose text-xl font-semibold text-foreground mb-5">Frequently Asked Questions</h2>
           <div className="not-prose">
             <Accordion type="single" collapsible className="space-y-2">
               {faqs.map(({ q, a }, i) => (
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
-                  className="rounded-lg border border-[#e5e7eb] bg-white px-5 data-[state=open]:bg-[#f9fafb] transition-colors"
+                  className="rounded-lg border border-border bg-card px-5 data-[state=open]:bg-secondary data-[state=open]:border-primary/20 transition-colors"
                 >
-                  <AccordionTrigger className="text-sm font-medium text-[#374151] text-left hover:no-underline hover:text-[#474bff] py-4 transition-colors">
+                  <AccordionTrigger className="text-sm font-medium text-foreground text-left hover:no-underline hover:text-primary py-4 transition-colors">
                     {q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-[#6b7280] pb-4 leading-relaxed">
+                  <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
                     {a}
                   </AccordionContent>
                 </AccordionItem>

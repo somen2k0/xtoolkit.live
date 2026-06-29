@@ -140,7 +140,7 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <section className="relative text-center overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-[#474bff]/5 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-4 md:px-8 pt-16 pb-14 md:pt-24 md:pb-20">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20 mb-6">
             <Zap className="h-3 w-3" />
@@ -319,12 +319,12 @@ export default function Home() {
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
-                className="rounded-lg border border-[#e5e7eb] bg-white px-5 data-[state=open]:bg-[#f9fafb] data-[state=open]:border-[#474bff]/20 transition-colors duration-150"
+                className="rounded-lg border border-border bg-card px-5 data-[state=open]:bg-secondary data-[state=open]:border-primary/20 transition-colors duration-150"
               >
-                <AccordionTrigger className="text-sm font-medium text-[#374151] text-left hover:no-underline py-4 hover:text-[#474bff] transition-colors">
+                <AccordionTrigger className="text-sm font-medium text-foreground text-left hover:no-underline py-4 hover:text-primary transition-colors">
                   {q}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm text-[#6b7280] pb-4 leading-relaxed">
+                <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
                   {a}
                 </AccordionContent>
               </AccordionItem>

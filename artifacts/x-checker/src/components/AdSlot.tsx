@@ -28,11 +28,11 @@ export function AdSlot({ slot, format = "auto", className = "" }: AdSlotProps) {
   }, []);
 
   return (
-    <div className={`w-full overflow-hidden ${className}`}>
+    <div className={`w-full overflow-hidden min-h-0 ${className}`}>
       <ins
         ref={adRef}
         className="adsbygoogle"
-        style={{ display: "block" }}
+        style={{ display: "block", minHeight: 0 }}
         data-ad-client="ca-pub-9994285234413878"
         data-ad-slot={slot}
         data-ad-format={format}

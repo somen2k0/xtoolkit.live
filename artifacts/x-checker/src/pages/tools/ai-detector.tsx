@@ -196,7 +196,7 @@ export default function AiDetector() {
                 : "Paste AI-generated text here to rewrite it and make it sound human…"
             }
             rows={8}
-            className="w-full rounded-xl border border-border/60 bg-background/60 px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-purple-400/30 placeholder:text-muted-foreground/40 leading-relaxed"
+            className="w-full rounded-xl border border-border/60 bg-background/60 px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/40 leading-relaxed"
           />
           {tab === "detect" && (
             <p className={`text-[11px] flex items-center gap-1.5 ${
@@ -221,7 +221,7 @@ export default function AiDetector() {
                 <button key={s.id} onClick={() => setHumanizeStyle(s.id)}
                   className={`rounded-xl border p-3 text-left transition-all ${
                     humanizeStyle === s.id
-                      ? "border-purple-500/50 bg-purple-500/10 text-purple-300"
+                      ? "border-primary/50 bg-primary/10 text-primary"
                       : "border-border/50 bg-muted/20 text-muted-foreground hover:border-border hover:text-foreground"
                   }`}>
                   <div className="text-xs font-semibold">{s.label}</div>
@@ -246,7 +246,7 @@ export default function AiDetector() {
           {tab === "detect" ? (
             <>
               <Button onClick={detect} disabled={detecting || wCount > 1000 || !text.trim()}
-                className="gap-2 bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6">
+                className="gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-6">
                 {detecting ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
                 {detecting ? "Analyzing…" : "Detect AI Content"}
               </Button>
@@ -268,7 +268,7 @@ export default function AiDetector() {
           ) : (
             <>
               <Button onClick={humanize} disabled={humanizing || charCount > maxChars || !text.trim()}
-                className="gap-2 bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6">
+                className="gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-6">
                 {humanizing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Wand2 className="h-4 w-4" />}
                 {humanizing ? "Humanizing…" : "Humanize Text"}
               </Button>

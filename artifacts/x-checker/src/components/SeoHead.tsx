@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 const SITE_URL = "https://xtoolkit.live";
+const DEFAULT_OG_IMAGE = "https://xtoolkit.live/opengraph.png";
 
 interface SeoHeadProps {
   title: string;
@@ -8,15 +9,18 @@ interface SeoHeadProps {
   ogTitle?: string;
   ogDescription?: string;
   ogType?: string;
+  ogImage?: string;
+  twitterCard?: "summary" | "summary_large_image";
   path?: string;
   keywords?: string;
   extraSchemas?: object[];
   noindex?: boolean;
 }
 
-export function SeoHead({ title, description, ogTitle, ogDescription, ogType, path, keywords, extraSchemas, noindex }: SeoHeadProps) {
+export function SeoHead({ title, description, ogTitle, ogDescription, ogType, ogImage, twitterCard, path, keywords, extraSchemas, noindex }: SeoHeadProps) {
   useEffect(() => {
     const canonicalUrl = path ? `${SITE_URL}${path}` : SITE_URL;
+    const resolvedOgImage = ogImage ?? DEFAULT_OG_IMAGE;
 
     const prev = document.title;
     document.title = title;
@@ -47,6 +51,14 @@ export function SeoHead({ title, description, ogTitle, ogDescription, ogType, pa
     const prevOgUrl = metaOgUrl?.getAttribute("content") ?? "";
     metaOgUrl?.setAttribute("content", canonicalUrl);
 
+    const metaOgImage = document.querySelector('meta[property="og:image"]');
+    const prevOgImage = metaOgImage?.getAttribute("content") ?? "";
+    metaOgImage?.setAttribute("content", resolvedOgImage);
+
+    const metaTwitterCard = document.querySelector('meta[name="twitter:card"]');
+    const prevTwitterCard = metaTwitterCard?.getAttribute("content") ?? "";
+    if (metaTwitterCard) metaTwitterCard.setAttribute("content", twitterCard ?? "summary_large_image");
+
     const metaTwitterTitle = document.querySelector('meta[name="twitter:title"]');
     const prevTwitterTitle = metaTwitterTitle?.getAttribute("content") ?? "";
     metaTwitterTitle?.setAttribute("content", ogTitle || title);
@@ -54,6 +66,10 @@ export function SeoHead({ title, description, ogTitle, ogDescription, ogType, pa
     const metaTwitterDesc = document.querySelector('meta[name="twitter:description"]');
     const prevTwitterDesc = metaTwitterDesc?.getAttribute("content") ?? "";
     metaTwitterDesc?.setAttribute("content", ogDescription || description);
+
+    const metaTwitterImage = document.querySelector('meta[name="twitter:image"]');
+    const prevTwitterImage = metaTwitterImage?.getAttribute("content") ?? "";
+    metaTwitterImage?.setAttribute("content", resolvedOgImage);
 
     let canonicalEl = document.querySelector('link[rel="canonical"]');
     const prevCanonical = canonicalEl?.getAttribute("href") ?? "";
@@ -93,13 +109,16 @@ export function SeoHead({ title, description, ogTitle, ogDescription, ogType, pa
       metaOgTitle?.setAttribute("content", prevOgTitle);
       metaOgDesc?.setAttribute("content", prevOgDesc);
       metaOgUrl?.setAttribute("content", prevOgUrl);
+      metaOgImage?.setAttribute("content", prevOgImage);
+      if (metaTwitterCard) metaTwitterCard.setAttribute("content", prevTwitterCard);
       metaTwitterTitle?.setAttribute("content", prevTwitterTitle);
       metaTwitterDesc?.setAttribute("content", prevTwitterDesc);
+      metaTwitterImage?.setAttribute("content", prevTwitterImage);
       canonicalEl?.setAttribute("href", prevCanonical);
       injectedScripts.forEach((el) => el.remove());
       noindexMeta?.remove();
     };
-  }, [title, description, ogTitle, ogDescription, ogType, path, keywords, extraSchemas, noindex]);
+  }, [title, description, ogTitle, ogDescription, ogType, ogImage, twitterCard, path, keywords, extraSchemas, noindex]);
 
   return null;
 }

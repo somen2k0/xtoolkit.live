@@ -70,8 +70,8 @@ export function Footer() {
             {/* Brand */}
             <div className="col-span-2 md:col-span-2 space-y-4">
               <div className="flex items-center gap-2.5">
-                <div className="h-7 w-7 rounded-md bg-primary flex items-center justify-center shadow-md shadow-primary/30">
-                  <span className="text-white font-bold text-sm leading-none">XT</span>
+                <div className="h-7 w-7 rounded-md overflow-hidden shadow-md shadow-primary/30 shrink-0">
+                  <img src="/logo.png" alt="X Toolkit Logo" className="h-full w-full object-cover" />
                 </div>
                 <span className="font-semibold text-foreground">X Toolkit</span>
               </div>
@@ -79,7 +79,7 @@ export function Footer() {
                 Free tools for creators and developers. X tools, content generators, and developer utilities — no signup, no data stored.
               </p>
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <div className="h-1.5 w-1.5 rounded-full bg-success" />
                 All services operational
               </div>
             </div>
@@ -205,7 +205,7 @@ export function Footer() {
                   </Button>
                 </div>
               ) : (
-                <div className="flex items-center gap-2 text-sm text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-lg px-3 py-2.5">
+                <div className="flex items-center gap-2 text-sm text-success bg-success/10 border border-success/20 rounded-lg px-3 py-2.5">
                   <CheckCheck className="h-4 w-4 shrink-0" />
                   <span>You're subscribed!</span>
                 </div>

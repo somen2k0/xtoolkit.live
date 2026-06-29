@@ -17,10 +17,10 @@ import { TOTAL_LIVE } from "@/lib/tools-registry";
 import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
 
 const BADGE_STYLES: Record<string, string> = {
-  Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
-  New: "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
+  Popular: "bg-primary/15 text-primary border-primary/30",
+  New: "bg-success/15 text-success border-success/30",
   AI: "bg-accent text-accent-foreground border-accent-border",
-  Soon: "bg-slate-400/15 text-slate-400 border-slate-400/30",
+  Soon: "bg-muted text-muted-foreground border-muted-border",
 };
 
 const NAV_CATEGORIES = [
@@ -302,7 +302,7 @@ export function Navbar() {
             </Link>
 
             <div className="hidden 2xl:flex items-center gap-1.5 pl-1">
-              <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
               <span className="text-[11px] text-foreground/60">Operational</span>
             </div>
 

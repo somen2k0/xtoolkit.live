@@ -326,7 +326,7 @@ export default function Base64Tool() {
                   <span className="text-[10px] font-mono text-muted-foreground/60 bg-muted/50 px-1.5 py-0.5 rounded">
                     {outputChars.toLocaleString()} chars
                     {sizeIncrease && (
-                      <span className="ml-1 text-yellow-500">{sizeIncrease}</span>
+                      <span className="ml-1 text-warning">{sizeIncrease}</span>
                     )}
                   </span>
                 )}
@@ -511,9 +511,9 @@ export default function Base64Tool() {
                   a JWT token manually.
                 </p>
               </div>
-              <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-4 space-y-2">
+              <div className="rounded-xl border border-success/20 bg-success/5 p-4 space-y-2">
                 <div className="flex items-center gap-2">
-                  <Unlock className="h-4 w-4 text-green-500" />
+                  <Unlock className="h-4 w-4 text-success" />
                   <h3 className="text-sm font-semibold">Decode (Base64 → Text)</h3>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
@@ -559,8 +559,8 @@ export default function Base64Tool() {
               {[
                 {
                   lang: "bash",
-                  color: "text-green-400",
-                  bg: "bg-green-400/8 border-green-400/20",
+                  color: "text-success",
+                  bg: "bg-success/8 border-success/20",
                   label: "Bash / Linux / macOS",
                   snippets: [
                     { comment: "Encode a string", code: 'echo -n "Hello, World!" | base64' },
@@ -571,8 +571,8 @@ export default function Base64Tool() {
                 },
                 {
                   lang: "openssl",
-                  color: "text-blue-400",
-                  bg: "bg-blue-400/8 border-blue-400/20",
+                  color: "text-primary",
+                  bg: "bg-primary/8 border-primary/20",
                   label: "OpenSSL (cross-platform)",
                   snippets: [
                     { comment: "Encode a string", code: 'echo -n "Hello, World!" | openssl base64' },
@@ -582,8 +582,8 @@ export default function Base64Tool() {
                 },
                 {
                   lang: "python",
-                  color: "text-yellow-400",
-                  bg: "bg-yellow-400/8 border-yellow-400/20",
+                  color: "text-warning",
+                  bg: "bg-warning/8 border-warning/20",
                   label: "Python 3",
                   snippets: [
                     { comment: "Encode", code: 'import base64\nbase64.b64encode(b"Hello, World!").decode()' },
@@ -593,8 +593,8 @@ export default function Base64Tool() {
                 },
                 {
                   lang: "node",
-                  color: "text-emerald-400",
-                  bg: "bg-emerald-400/8 border-emerald-400/20",
+                  color: "text-accent-foreground",
+                  bg: "bg-accent border-accent-border",
                   label: "Node.js",
                   snippets: [
                     { comment: "Encode", code: 'Buffer.from("Hello, World!").toString("base64")' },
@@ -604,8 +604,8 @@ export default function Base64Tool() {
                 },
                 {
                   lang: "powershell",
-                  color: "text-purple-400",
-                  bg: "bg-purple-400/8 border-purple-400/20",
+                  color: "text-secondary-foreground",
+                  bg: "bg-secondary border-secondary-border",
                   label: "PowerShell",
                   snippets: [
                     { comment: "Encode", code: '[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("Hello, World!"))' },

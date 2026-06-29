@@ -9,10 +9,10 @@ import { useTrack, useToolView } from "@/hooks/use-track";
 import { trackEvent } from "@/lib/analytics";
 
 const LIMITS = [
-  { label: "X Tweet", max: 280, color: "bg-blue-500" },
-  { label: "X Bio", max: 160, color: "bg-purple-500" },
-  { label: "LinkedIn Post", max: 3000, color: "bg-sky-500" },
-  { label: "Instagram Bio", max: 150, color: "bg-pink-500" },
+  { label: "X Tweet", max: 280, color: "bg-primary" },
+  { label: "X Bio", max: 160, color: "bg-primary/70" },
+  { label: "LinkedIn Post", max: 3000, color: "bg-accent-foreground/70" },
+  { label: "Instagram Bio", max: 150, color: "bg-primary/50" },
 ];
 
 const faqs = [
@@ -55,8 +55,8 @@ export default function CharacterCounter() {
 
   const getBarColor = (pct: number, max: number) => {
     if (charCount > max) return "bg-destructive";
-    if (pct > 80) return "bg-yellow-500";
-    return "bg-green-500";
+    if (pct > 80) return "bg-warning";
+    return "bg-success";
   };
 
   return (
@@ -132,7 +132,7 @@ export default function CharacterCounter() {
               <div key={label} className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">{label}</span>
-                  <span className={`font-mono font-semibold ${over ? "text-destructive" : pct > 80 ? "text-yellow-500" : "text-green-500"}`}>
+                  <span className={`font-mono font-semibold ${over ? "text-destructive" : pct > 80 ? "text-warning" : "text-success"}`}>
                     {charCount} / {max} {over && `(+${charCount - max} over)`}
                   </span>
                 </div>
