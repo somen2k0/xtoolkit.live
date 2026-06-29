@@ -17,6 +17,8 @@ WORKDIR /app
 
 COPY --from=builder /app/artifacts/api-server/dist ./dist
 
-EXPOSE 8080
+EXPOSE 10000
+
+ENV PORT=10000
 
 CMD ["node", "--enable-source-maps", "./dist/index.mjs"]

@@ -37,7 +37,7 @@ export default async function handler(
           "Content-Type": "application/json",
         },
         body: req.method !== "GET" ? JSON.stringify(req.body) : undefined,
-        signal: AbortSignal.timeout(30_000),
+        signal: AbortSignal.timeout(35_000),
       });
 
       const data = await upstream.json();
