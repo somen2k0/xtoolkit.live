@@ -568,8 +568,8 @@ export default function JsonFormatter() {
               {([
                 {
                   lang: "js",
-                  color: "text-yellow-400",
-                  bg: "bg-yellow-400/8 border-yellow-400/20",
+                  color: "text-gray-600",
+                  bg: "bg-gray-50 border-gray-200",
                   label: "JavaScript / TypeScript",
                   snippets: [
                     { comment: "Parse a JSON string into an object", code: `const data = JSON.parse('{"name":"Alex","score":42}');` },
@@ -581,8 +581,8 @@ export default function JsonFormatter() {
                 },
                 {
                   lang: "python",
-                  color: "text-blue-400",
-                  bg: "bg-blue-400/8 border-blue-400/20",
+                  color: "text-gray-600",
+                  bg: "bg-gray-50 border-gray-200",
                   label: "Python 3",
                   snippets: [
                     { comment: "Parse a JSON string", code: `import json\ndata = json.loads('{"name": "Alex", "score": 42}')` },
@@ -594,8 +594,8 @@ export default function JsonFormatter() {
                 },
                 {
                   lang: "jq",
-                  color: "text-primary",
-                  bg: "bg-primary/8 border-primary/20",
+                  color: "text-gray-600",
+                  bg: "bg-gray-50 border-gray-200",
                   label: "jq (command line)",
                   snippets: [
                     { comment: "Pretty-print a JSON file", code: `jq . data.json` },
@@ -610,8 +610,8 @@ export default function JsonFormatter() {
                 },
                 {
                   lang: "node",
-                  color: "text-green-400",
-                  bg: "bg-green-400/8 border-green-400/20",
+                  color: "text-gray-600",
+                  bg: "bg-gray-50 border-gray-200",
                   label: "Node.js (file I/O)",
                   snippets: [
                     { comment: "Read and parse a JSON file synchronously", code: `const data = JSON.parse(require("fs").readFileSync("data.json", "utf8"));` },
@@ -622,8 +622,8 @@ export default function JsonFormatter() {
                 },
                 {
                   lang: "php",
-                  color: "text-purple-400",
-                  bg: "bg-purple-400/8 border-purple-400/20",
+                  color: "text-gray-600",
+                  bg: "bg-gray-50 border-gray-200",
                   label: "PHP",
                   snippets: [
                     { comment: "Decode JSON string to associative array", code: `$data = json_decode('{"name":"Alex"}', true);` },

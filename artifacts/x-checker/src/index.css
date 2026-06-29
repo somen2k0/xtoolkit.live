@@ -60,15 +60,16 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .06);
 
-  /* #DAF6F4 mint background */
-  --background: 176 61% 91%;
+  /* #F0FAFA near-white background */
+  --background: 180 49% 96%;
   /* #0D3B36 dark teal foreground */
   --foreground: 174 64% 14%;
 
   /* #FFFFFF white cards */
   --card: 0 0% 100%;
   --card-foreground: 174 64% 14%;
-  --card-border: 175 48% 80%;
+  /* #D1EDE9 */
+  --card-border: 172 43% 87%;
 
   --popover: 0 0% 100%;
   --popover-foreground: 174 64% 14%;
@@ -139,7 +140,9 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased text-foreground;
+    background: linear-gradient(180deg, #C8F0ED 0%, #E8FAF9 30%, #F0FAFA 60%, #ffffff 100%);
+    min-height: 100vh;
     cursor: auto;
   }
 }

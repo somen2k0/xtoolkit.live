@@ -109,6 +109,7 @@ export function MiniToolLayout({
 
   return (
     <Layout>
+      <div className="bg-white min-h-screen">
       <SeoHead
         title={seoTitle}
         description={seoDescription}
@@ -236,6 +237,7 @@ export function MiniToolLayout({
 
       {/* Sticky upgrade bar — appears after 20s */}
       <StickyUpgradeCTA delay={20000} />
+      </div>
     </Layout>
   );
 }
