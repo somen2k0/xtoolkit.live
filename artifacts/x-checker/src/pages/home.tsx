@@ -1,18 +1,16 @@
-import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ToolCard } from "@/components/ToolCard";
-import { CATEGORIES, LIVE_TOOLS, TOTAL_LIVE, getPopularTools, getNewTools, getToolsByCategory } from "@/lib/tools-registry";
+import { CATEGORIES, LIVE_TOOLS, TOTAL_LIVE, getPopularTools } from "@/lib/tools-registry";
 import { trackEvent } from "@/lib/analytics";
-import {
-  CheckCircle2, Zap, Shield, Star, ArrowRight, Users, Mail,
-} from "lucide-react";
+import { Shield, Zap, Code, ArrowRight } from "lucide-react";
 
-const CATEGORY_ORDER: import("@/lib/tools-registry").CategoryKey[] = [
+type CategoryKey = import("@/lib/tools-registry").CategoryKey;
+
+const CATEGORY_ORDER: CategoryKey[] = [
   "social-media",
   "ai-writing",
   "text-formatting",
@@ -21,97 +19,87 @@ const CATEGORY_ORDER: import("@/lib/tools-registry").CategoryKey[] = [
   "email",
 ];
 
-const TESTIMONIALS = [
+const WHY_ITEMS = [
   {
-    quote: "Saved me hours of manual checking. I manage 5 brand accounts and needed to bulk-verify a list of 80+ influencers. Done in 10 seconds.",
-    name: "Sarah K.",
-    role: "Social Media Manager",
-    stars: 5,
+    icon: Shield,
+    title: "Runs in your browser",
+    desc: "All tools process data locally. Nothing is sent to our servers or stored anywhere.",
   },
   {
-    quote: "The JSON formatter is exactly what I needed — real-time validation with proper error messages. Way cleaner than pasting into browser devtools.",
-    name: "DevMike",
-    role: "Web Developer",
-    stars: 5,
+    icon: Zap,
+    title: "No signup ever",
+    desc: "Every tool works immediately. No account, no email, no credit card required.",
   },
   {
-    quote: "Clean, fast, no signup. I use the bio generator and @ formatter constantly. The Base64 tool saved me when debugging an API last week.",
-    name: "XGrowthPro",
-    role: "Growth Marketer",
-    stars: 5,
+    icon: Code,
+    title: "Built for real work",
+    desc: "Tools that developers, marketers and creators actually use daily — not demos.",
+  },
+];
+
+const UNIQUE_TOOLS = [
+  {
+    href: "/tools/x-account-checker",
+    title: "X Account Checker",
+    headline: "Check 100 Twitter/X accounts at once",
+    desc: "See followers, join date, verified status instantly",
+    cta: "Try Account Checker",
+  },
+  {
+    href: "/tools/temp-mail/tempgmail",
+    title: "Temp Gmail Generator",
+    headline: "Real @gmail.com addresses that actually work",
+    desc: "Works on sites that block disposable emails",
+    cta: "Get Temp Gmail",
+  },
+  {
+    href: "/tools/gmail-checker",
+    title: "Gmail Account Checker",
+    headline: "Verify if Gmail addresses are valid in bulk",
+    desc: "Check up to 50 accounts instantly, download CSV",
+    cta: "Check Gmail Accounts",
   },
 ];
 
 const FAQS = [
-  { q: "Is everything here completely free?", a: "Yes — 100% free, forever. No signup, no credit card, no hidden fees. Every tool works without an account." },
-  { q: "How many X accounts can I check at once?", a: "Up to 100 usernames in a single batch, all checked in parallel. Results come back in seconds." },
-  { q: "Do the developer tools send my data to a server?", a: "No. The JSON Formatter, Base64 Encoder, and all other developer tools run entirely in your browser. Nothing is sent to a server." },
-  { q: "How does the AI bio generator work?", a: "It uses Groq's fast LLM API. Enter your niche and tone and get 3 ready-to-use bios instantly. Provide your own free Groq API key for unlimited generations." },
-  { q: "Is my data stored or tracked?", a: "No. We don't store usernames, results, bios, or any personal data. Everything is processed in real-time and immediately discarded." },
-  { q: "What new tools are coming?", a: "We're building SEO tools (meta checker, keyword density), more developer utilities (URL encoder, CSS minifier), and creator tools. Subscribe to get notified." },
-  { q: "Does this work on mobile?", a: "Yes — every tool is fully responsive and optimized for mobile, tablet, and desktop." },
+  {
+    q: "How many tools does X Toolkit have?",
+    a: `${TOTAL_LIVE} free tools across 6 categories — X/Twitter tools, developer utilities, SEO tools, email & privacy tools, text formatting, and AI writing tools. All free forever.`,
+  },
+  {
+    q: "Do I need to create an account?",
+    a: "No. Every tool works immediately with no signup, no email address, and no credit card required.",
+  },
+  {
+    q: "Is my data safe?",
+    a: "All tools run entirely in your browser. No data is sent to our servers or stored anywhere. Your JWTs, code, and emails never leave your device.",
+  },
+  {
+    q: "What makes X Toolkit different from other tool sites?",
+    a: "We focus on tools developers and creators actually need daily — especially X/Twitter tools that nobody else offers free. Our X Account Checker, Temp Gmail, and Gmail Checker are unique to X Toolkit.",
+  },
+  {
+    q: "Can I use these tools on mobile?",
+    a: "Yes. All tools are mobile-optimized and work on any device without installing anything.",
+  },
+  {
+    q: "How often are new tools added?",
+    a: "We regularly add new tools based on user requests. Recent additions include CSS Gradient Generator, Hash Generator, Image Resizer, and Gmail Checker.",
+  },
+  {
+    q: "Is X Toolkit really free?",
+    a: "Yes, completely free. No hidden costs, no premium tiers, no usage limits. Free forever.",
+  },
 ];
-
-function StarRating({ count }: { count: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} className="h-3.5 w-3.5 fill-warning text-warning" />
-      ))}
-    </div>
-  );
-}
-
-const PRIVACY_TOOLS_SPOTLIGHT = [
-  { href: "/tools/masked-email-generator", label: "Masked Email Generator",  desc: "Create anonymous email aliases in seconds",  icon: Mail,    color: "text-primary",    bg: "bg-primary/10 border-primary/20" },
-  { href: "/tools/spam-score-checker",     label: "Spam Score Checker",      desc: "Find out if your email triggers spam filters", icon: Shield, color: "text-amber-400",   bg: "bg-amber-400/10 border-amber-400/20" },
-  { href: "/tools/temp-mail",              label: "Temp Mail",               desc: "Instant disposable inbox, no signup",         icon: Mail,    color: "text-emerald-400", bg: "bg-emerald-400/10 border-emerald-400/20" },
-  { href: "/tools/email-validator",        label: "Email Validator",         desc: "Validate email syntax instantly in browser",  icon: Shield,  color: "text-blue-400",    bg: "bg-blue-400/10 border-blue-400/20" },
-];
-
-function useScrollFade(threshold = 0.15) {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("visible");
-          observer.disconnect();
-        }
-      },
-      { threshold },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
-
-  return ref;
-}
-
-function ScrollSection({ children, className = "", id }: { children: React.ReactNode; className?: string; id?: string }) {
-  const ref = useScrollFade();
-  return (
-    <section ref={ref} id={id} className={`scroll-fade ${className}`}>
-      {children}
-    </section>
-  );
-}
 
 export default function Home() {
-  const popularTools = getPopularTools();
-  const newTools = getNewTools();
-  const socialTools = getToolsByCategory("social-media");
-  const devTools = getToolsByCategory("developer");
-
+  const popularTools = getPopularTools().slice(0, 6);
 
   return (
     <Layout>
       <SeoHead
-        title={`X Toolkit — ${TOTAL_LIVE}+ Free Tools for X, SEO, Developers & Creators`}
-        description="43+ free online tools for X (Twitter), SEO, developers & creators: X account checker, CSS generators, hash generator, AI bio tools, JSON formatter, Base64, JWT decoder, temp mail & more. No signup, instant results."
+        title={`X Toolkit — ${TOTAL_LIVE}+ Free Tools for X, SEO & Developers`}
+        description={`${TOTAL_LIVE}+ free online tools: bulk X account checker, JWT decoder, JSON formatter, temp Gmail, Gmail account checker, schema generator & more. No signup required.`}
         path="/"
         extraSchemas={[
           {
@@ -124,10 +112,10 @@ export default function Home() {
               "@type": "SearchAction",
               "target": {
                 "@type": "EntryPoint",
-                "urlTemplate": "https://xtoolkit.live/tools?q={search_term_string}"
+                "urlTemplate": "https://xtoolkit.live/tools?q={search_term_string}",
               },
-              "query-input": "required name=search_term_string"
-            }
+              "query-input": "required name=search_term_string",
+            },
           },
           {
             "@context": "https://schema.org",
@@ -136,406 +124,233 @@ export default function Home() {
             "url": "https://xtoolkit.live",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://xtoolkit.live/favicon-512.png"
+              "url": "https://xtoolkit.live/favicon-512.png",
             },
             "founder": {
               "@type": "Person",
-              "name": "Somen Biswas"
+              "name": "Somen Biswas",
             },
             "sameAs": [
               "https://twitter.com/somen_2k",
-              "https://github.com/somen2k0"
-            ]
-          }
+              "https://github.com/somen2k0",
+            ],
+          },
         ]}
       />
 
       {/* ── Hero ── */}
-      <section className="hero-section relative overflow-hidden">
-
-        {/* Star/dot background pattern — hidden on mobile */}
-        <div
-          className="hero-dot-pattern absolute inset-0 pointer-events-none dark:opacity-[0.18] opacity-[0.07]"
-          style={{
-            backgroundImage: "radial-gradient(circle at center, currentColor 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-
-        <div className="max-w-6xl mx-auto px-4 md:px-8 pt-14 pb-12 md:pt-20 md:pb-16 text-center relative">
-          {/* Glassmorphism card */}
-          <div className="hero-glass hero-glass-card rounded-[2rem] border dark:border-white/10 border-border/60 dark:bg-white/[0.03] bg-background/80 backdrop-blur-xl dark:shadow-2xl dark:shadow-black/40 shadow-lg shadow-black/8 px-6 md:px-12 lg:px-16 py-10 md:py-14">
-
-            <div className="hero-badge inline-flex mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full dark:bg-white/5 bg-primary/8 dark:border-white/10 border border-primary/20 dark:text-purple-200 text-primary text-xs font-medium backdrop-blur-md">
-                <Zap className="h-3.5 w-3.5 dark:text-primary text-primary" /> {TOTAL_LIVE}+ free tools · no signup required
-              </span>
-            </div>
-
-            <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-5">
-              Free online tools for<br />
-              <span className="text-shimmer">SEO, creators &amp; developers</span>
-            </h1>
-
-            <p className="hero-subtitle text-lg md:text-xl dark:text-blue-100/60 text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8 font-light">
-              X account checker, CSS generators, hash generator, AI bio tools,
-              temp email — all free, all instant, all in one place.
-            </p>
-
-            <div className="hero-actions flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
-              <Link href="/tools">
-                <Button size="lg" className="w-full sm:w-auto text-sm font-medium px-8 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white border-0 shadow-lg shadow-purple-500/25 hover:scale-[1.03] transition-all duration-200">
-                  Browse All Tools <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-              <a href="#categories">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto text-sm dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white hover:scale-[1.02] transition-all duration-200">
-                  See All Categories
-                </Button>
-              </a>
-            </div>
-
-            <div className="hero-trust grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
-              {[
-                { icon: Shield, text: "No data stored" },
-                { icon: CheckCircle2, text: "No login required" },
-                { icon: Zap, text: "Instant results" },
-                { icon: Users, text: "Free forever" },
-              ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-xl dark:bg-white/[0.03] bg-muted/60 dark:border-white/[0.07] border border-border/60 backdrop-blur-sm">
-                  <div className="h-8 w-8 rounded-full dark:bg-white/5 bg-primary/10 flex items-center justify-center">
-                    <Icon className="h-4 w-4 dark:text-purple-300 text-primary" />
-                  </div>
-                  <span className="text-[11px] font-medium dark:text-purple-100/60 text-muted-foreground text-center leading-tight">{text}</span>
-                </div>
-              ))}
-            </div>
-
+      <section className="relative text-center overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-primary/8 to-transparent pointer-events-none" />
+        <div className="relative max-w-6xl mx-auto px-4 md:px-8 pt-16 pb-14 md:pt-24 md:pb-20">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20 mb-6">
+            <Zap className="h-3 w-3" />
+            Free forever · No signup · {TOTAL_LIVE} tools
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-foreground mb-5 leading-tight">
+            Free tools for X, developers &amp; SEO
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
+            Bulk-check 100 X accounts, generate JSON-LD schema,{" "}
+            <br className="hidden sm:block" />
+            decode JWTs, create temp emails — all in your browser.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/tools">
+              <Button size="lg" className="w-full sm:w-auto px-8">
+                Browse All Tools <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </Link>
+            <a href="#categories">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto px-8">
+                See All Categories
+              </Button>
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── Stats bar ── */}
-      <ScrollSection className="border-y border-border/50 bg-muted/10">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { value: `${TOTAL_LIVE}+`, label: "Free tools", icon: Zap, color: "text-amber-400", bg: "bg-amber-400/10 border-amber-400/20" },
-              { value: "6", label: "Tool categories", icon: Shield, color: "text-blue-400", bg: "bg-blue-400/10 border-blue-400/20" },
-              { value: "None", label: "Signup required", icon: CheckCircle2, color: "text-emerald-400", bg: "bg-emerald-400/10 border-emerald-400/20" },
-              { value: "~2s", label: "Average result time", icon: Users, color: "text-purple-400", bg: "bg-purple-400/10 border-purple-400/20" },
-            ].map(({ value, label, icon: Icon, color, bg }) => (
-              <div key={label} className={`flex items-center gap-3 rounded-xl border p-4 transition-all duration-300 hover:scale-[1.02] card-hover-glow ${bg}`}>
-                <div className="h-9 w-9 rounded-lg bg-background/60 border border-border/40 flex items-center justify-center shrink-0">
-                  <Icon className={`h-4 w-4 ${color}`} />
-                </div>
-                <div>
-                  <div className="text-xl font-bold leading-tight">{value}</div>
-                  <div className="text-[11px] text-muted-foreground leading-tight">{label}</div>
-                </div>
-              </div>
-            ))}
+      {/* ── Categories ── */}
+      <section id="categories" className="border-t border-border/50 bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
+              Tool Categories
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Six categories. Every tool is free — no paywall, no account.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {CATEGORY_ORDER.map((key) => {
+              const cat = CATEGORIES[key];
+              const Icon = cat.icon;
+              const count = LIVE_TOOLS.filter((t) => t.category === key).length;
+              return (
+                <Link
+                  key={key}
+                  href={`/tools#${key}`}
+                  onClick={() => trackEvent("category_click", { label: cat.label })}
+                >
+                  <div className="group rounded-xl border border-border bg-card p-5 hover:border-primary/30 hover:shadow-md transition-all duration-200 cursor-pointer shadow-sm h-full">
+                    <div className={`h-10 w-10 rounded-xl border flex items-center justify-center mb-3 transition-transform duration-200 group-hover:scale-110 ${cat.bg}`}>
+                      <Icon className={`h-5 w-5 ${cat.color}`} />
+                    </div>
+                    <h3 className="text-sm font-semibold mb-1 group-hover:text-primary transition-colors">
+                      {cat.label}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+                      {cat.description}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-muted-foreground/50">
+                        {count} {count === 1 ? "tool" : "tools"}
+                      </span>
+                      <ArrowRight className="h-3.5 w-3.5 text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
-      </ScrollSection>
+      </section>
 
-      {/* ── Categories Overview ── */}
-      <ScrollSection className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20" id="categories">
-        <div className="text-center mb-10">
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Everything in one place</p>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">Tool Categories</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-sm">
-            Six categories and growing. Every tool is free — no paywall, no account.
-          </p>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {CATEGORY_ORDER.map((key) => {
-            const cat = CATEGORIES[key];
-            const Icon = cat.icon;
-            const count = LIVE_TOOLS.filter((t) => t.category === key).length;
-            return (
-              <Link
-                key={key}
-                href={`/tools#${key}`}
-                onClick={() => trackEvent("category_click", { label: cat.label })}
-              >
-                <div className="group relative rounded-xl border border-border/60 bg-card/50 p-5 hover:border-primary/30 hover:bg-card transition-all duration-200 cursor-pointer card-hover-glow">
-                  <div className={`h-10 w-10 rounded-xl border flex items-center justify-center mb-3 transition-transform duration-200 group-hover:scale-110 ${cat.bg}`}>
-                    <Icon className={`h-5 w-5 ${cat.color}`} />
-                  </div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <h3 className="text-sm font-semibold group-hover:text-primary transition-colors">{cat.label}</h3>
-                  </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-3">{cat.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground/50">{count} {count === 1 ? "tool" : "tools"}</span>
-                    <ArrowRight className="h-3.5 w-3.5 text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </ScrollSection>
-
-      {/* ── Popular Tools ── */}
-      <ScrollSection className="border-t border-border/50 bg-muted/10">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
+      {/* ── Most Used Tools ── */}
+      <section className="border-t border-border/50">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-2">Most used</p>
-              <h2 className="text-2xl font-bold tracking-tight mb-1">Popular Tools</h2>
-              <p className="text-sm text-muted-foreground">Most-used tools across the platform.</p>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-1">
+                Most Used Tools
+              </h2>
+              <p className="text-sm text-muted-foreground">The tools people come back to.</p>
             </div>
             <Link href="/tools">
-              <Button variant="outline" size="sm" className="text-xs border-border/60 hidden sm:flex hover:border-primary/30 transition-colors">
+              <Button variant="outline" size="sm" className="text-xs hidden sm:flex">
                 All Tools <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
               </Button>
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {popularTools.map((tool) => (
-              <div key={tool.id} onClick={() => trackEvent("popular_tool_click", { tool: tool.id })}
-                className="transition-transform duration-200 hover:-translate-y-0.5">
+              <div
+                key={tool.id}
+                onClick={() => trackEvent("popular_tool_click", { tool: tool.id })}
+                className="transition-transform duration-200 hover:-translate-y-0.5"
+              >
                 <ToolCard tool={tool} />
               </div>
             ))}
           </div>
         </div>
-      </ScrollSection>
+      </section>
 
-      {/* ── Email & Privacy Spotlight ── */}
-      <ScrollSection className="border-t border-border/50 bg-muted/10">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <Badge variant="outline" className="border-primary/30 text-primary bg-primary/8 text-xs mb-4">
-                Email &amp; Privacy Tools
-              </Badge>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
-                Protect your inbox from spam and data brokers
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
-                Get a disposable inbox instantly, score your real address privacy, generate masked aliases, and understand what websites know about your email — all free, all in your browser.
-              </p>
-              <ul className="space-y-3 mb-6">
-                {[
-                  "Disposable inbox ready in under 2 seconds",
-                  "Privacy score across 7 factors for any email",
-                  "Masked alias generator — hide your real address",
-                  "Check if your email is exposed in public databases",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-4 w-4 text-success shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2">
-                <Link href="/tools/temp-mail/tempemail">
-                  <Button size="sm" className="shadow-sm shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.03] transition-all">
-                    Get Temp Email <ArrowRight className="h-3.5 w-3.5 ml-2" />
-                  </Button>
-                </Link>
-                <Link href="/email-tools">
-                  <Button variant="outline" size="sm" className="border-border/60 hover:border-primary/30 transition-colors">
-                    All Email Tools
-                  </Button>
-                </Link>
+      {/* ── Why X Toolkit ── */}
+      <section className="border-t border-border/50 bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
+              Why X Toolkit?
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              No dark patterns. No upsells. Just tools that work.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-10">
+            {WHY_ITEMS.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="flex flex-col gap-3">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                  <Icon className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-base font-semibold text-foreground">{title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
               </div>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {PRIVACY_TOOLS_SPOTLIGHT.map(({ href, label, desc, icon: Icon, color, bg }) => (
-                <Link key={href} href={href} onClick={() => trackEvent("privacy_tool_click", { tool: href })}>
-                  <div className={`group relative rounded-xl border p-4 hover:shadow-sm transition-all duration-200 cursor-pointer h-full card-hover-glow ${bg}`}>
-                    <div className="h-8 w-8 rounded-lg bg-background/60 border border-border/30 flex items-center justify-center mb-3 transition-transform duration-200 group-hover:scale-110">
-                      <Icon className={`h-4 w-4 ${color}`} />
-                    </div>
-                    <p className="text-xs font-semibold mb-1 group-hover:text-primary transition-colors leading-snug">{label}</p>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed">{desc}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
-      </ScrollSection>
+      </section>
 
-      {/* ── Social Media Spotlight ── */}
-      <ScrollSection className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <Badge variant="outline" className="border-blue-400/30 text-blue-400 bg-blue-400/8 text-xs mb-4">
-              Social Media Tools
-            </Badge>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
-              Manage X accounts at scale
+      {/* ── Unique Tools ── */}
+      <section className="border-t border-border/50">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
+          <div className="mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
+              Tools you won't find elsewhere for free
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
-              Bulk-check up to 100 X accounts in seconds, convert usernames to profile links, format @ lists, and generate AI-powered bios — all without logging in.
+            <p className="text-sm text-muted-foreground">
+              These are the reason most people come to X Toolkit.
             </p>
-            <ul className="space-y-3 mb-6">
-              {[
-                "Check 100 accounts in ~2 seconds",
-                "Active, suspended, and deleted detection",
-                "AI bio generation with Groq",
-                "Bulk @ prefix add / remove",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                  <CheckCircle2 className="h-4 w-4 text-success shrink-0 mt-0.5" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Link href="/tools/x-account-checker">
-              <Button size="sm" className="shadow-sm shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.03] transition-all">
-                Try Account Checker <ArrowRight className="h-3.5 w-3.5 ml-2" />
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {UNIQUE_TOOLS.map(({ href, title, headline, desc, cta }) => (
+              <Link key={href} href={href}>
+                <div className="group h-full rounded-xl border border-border border-l-[4px] border-l-primary bg-card shadow-sm hover:shadow-md transition-shadow duration-200 p-6 flex flex-col gap-4">
+                  <div>
+                    <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
+                      {title}
+                    </p>
+                    <h3 className="text-base font-semibold text-foreground leading-snug mb-1">
+                      {headline}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">{desc}</p>
+                  </div>
+                  <div className="mt-auto pt-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary group-hover:gap-2.5 transition-all duration-150">
+                      {cta} <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="border-t border-border/50 bg-muted/30">
+        <div className="max-w-3xl mx-auto px-4 md:px-8 py-12 md:py-20">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <Accordion type="single" collapsible className="space-y-2">
+            {FAQS.map(({ q, a }, i) => (
+              <AccordionItem
+                key={i}
+                value={`faq-${i}`}
+                className="rounded-xl border border-border/60 bg-card px-5 data-[state=open]:border-primary/20 transition-colors duration-150"
+              >
+                <AccordionTrigger className="text-sm font-medium text-left hover:no-underline py-4 hover:text-primary transition-colors">
+                  {q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
+                  {a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="border-t border-border/50">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
+          <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/8 via-primary/4 to-transparent p-8 md:p-12 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-3">
+              Ready to get started?
+            </h2>
+            <p className="text-muted-foreground mb-6 text-sm md:text-base">
+              {TOTAL_LIVE} free tools, no signup required.
+            </p>
+            <Link href="/tools">
+              <Button size="lg" className="px-8">
+                Browse All Tools <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            {socialTools.map((tool) => (
-              <div key={tool.id} className="transition-transform duration-200 hover:-translate-y-0.5">
-                <ToolCard tool={tool} compact />
-              </div>
-            ))}
-          </div>
         </div>
-      </ScrollSection>
-
-      {/* ── Developer Tools Spotlight ── */}
-      <ScrollSection className="border-t border-border/50 bg-muted/10">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="grid grid-cols-1 gap-3 order-2 md:order-1">
-              {devTools.map((tool) => (
-                <div key={tool.id} className="transition-transform duration-200 hover:-translate-y-0.5">
-                  <ToolCard tool={tool} />
-                </div>
-              ))}
-            </div>
-            <div className="order-1 md:order-2">
-              <Badge variant="outline" className="border-orange-400/30 text-orange-400 bg-orange-400/8 text-xs mb-4">
-                Developer Tools
-              </Badge>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
-                Developer utilities that just work
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
-                Format and validate JSON with real-time error highlighting. Encode and decode Base64 strings including emojis and Unicode. All processing happens in your browser — nothing is sent to a server.
-              </p>
-              <ul className="space-y-3 mb-6">
-                {[
-                  "Real-time JSON validation with line numbers",
-                  "Format or minify with one click",
-                  "Base64 with full Unicode support",
-                  "JWT payload decoding built in",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-4 w-4 text-success shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/tools/json-formatter">
-                <Button variant="outline" size="sm" className="border-border/60 hover:border-primary/30 transition-colors">
-                  Try JSON Formatter <ArrowRight className="h-3.5 w-3.5 ml-2" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </ScrollSection>
-
-      {/* ── Newly Added ── */}
-      {newTools.length > 0 && (
-        <ScrollSection className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight mb-1">Recently Added</h2>
-              <p className="text-sm text-muted-foreground">Fresh tools, just launched.</p>
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {newTools.map((tool) => (
-              <div key={tool.id} onClick={() => trackEvent("new_tool_click", { tool: tool.id })}
-                className="transition-transform duration-200 hover:-translate-y-0.5">
-                <ToolCard tool={tool} />
-              </div>
-            ))}
-          </div>
-        </ScrollSection>
-      )}
-
-      {/* ── Testimonials ── */}
-      <ScrollSection className="border-t border-border/50 bg-muted/10">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
-          <div className="text-center mb-10">
-            <p className="text-xs font-semibold uppercase tracking-widest text-emerald-400 mb-3">User reviews</p>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">Loved by creators &amp; developers</h2>
-            <p className="text-muted-foreground text-sm">What people are saying.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {TESTIMONIALS.map(({ quote, name, role, stars }) => (
-              <div key={name} className="relative rounded-xl border border-border/60 bg-card/50 p-6 space-y-4 overflow-hidden card-hover-glow transition-all duration-200 hover:-translate-y-1">
-                <div className="absolute top-3 right-4 text-7xl font-serif leading-none select-none text-primary/6 pointer-events-none">"</div>
-                <StarRating count={stars} />
-                <p className="text-sm text-muted-foreground leading-relaxed relative">"{quote}"</p>
-                <div className="flex items-center gap-2.5 pt-1 border-t border-border/40">
-                  <div className="h-8 w-8 rounded-full bg-primary/15 border border-primary/20 flex items-center justify-center shrink-0">
-                    <span className="text-xs font-bold text-primary">{name[0]}</span>
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium">{name}</div>
-                    <div className="text-xs text-muted-foreground">{role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </ScrollSection>
-
-      {/* ── FAQ ── */}
-      <ScrollSection className="max-w-3xl mx-auto px-4 md:px-8 py-14 md:py-20">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">Frequently Asked Questions</h2>
-          <p className="text-muted-foreground text-sm">Everything you need to know.</p>
-        </div>
-        <Accordion type="single" collapsible className="space-y-2">
-          {FAQS.map(({ q, a }, i) => (
-            <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border border-border/60 bg-card/40 px-5 data-[state=open]:bg-card/70 data-[state=open]:border-primary/20 transition-all duration-200">
-              <AccordionTrigger className="text-sm font-medium text-left hover:no-underline py-4 hover:text-primary transition-colors">{q}</AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">{a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </ScrollSection>
-
-      {/* ── CTA ── */}
-      <ScrollSection className="max-w-6xl mx-auto px-4 md:px-8 pb-16 md:pb-20">
-        <div className="relative rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-8 md:p-12 text-center overflow-hidden cta-pulse">
-          {/* CTA background orb */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-40 rounded-full opacity-30"
-              style={{
-                background: "radial-gradient(ellipse, hsl(258 82% 66% / 0.2), transparent 70%)",
-                filter: "blur(40px)",
-              }}
-            />
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 relative">Ready to get started?</h2>
-          <p className="text-muted-foreground max-w-md mx-auto mb-6 text-sm md:text-base relative">
-            {TOTAL_LIVE}+ free tools. No account, no signup, no payment. Ever.
-          </p>
-          <Link href="/tools">
-            <Button size="lg" className="shadow-lg shadow-primary/30 px-8 hover:shadow-primary/50 hover:scale-[1.04] transition-all duration-200 relative">
-              Browse All Tools <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          </Link>
-        </div>
-      </ScrollSection>
+      </section>
     </Layout>
   );
 }
