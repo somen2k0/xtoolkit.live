@@ -1,0 +1,50 @@
+2026-06-29T13:52:19.186276798Z   dist/handler.mjs.map                 3.1mb
+2026-06-29T13:52:19.186279768Z   dist/pino-worker.mjs.map           256.9kb
+2026-06-29T13:52:19.186283078Z   dist/pino-file.mjs.map             229.0kb
+2026-06-29T13:52:19.186286108Z   dist/pino-pretty.mjs.map           203.9kb
+2026-06-29T13:52:19.186289048Z   dist/thread-stream-worker.mjs.map   12.0kb
+2026-06-29T13:52:19.186291928Z 
+2026-06-29T13:52:19.186295618Z ⚡ Done in 524ms
+2026-06-29T13:52:33.846922583Z ==> Uploading build...
+2026-06-29T13:52:45.733312274Z ==> Uploaded in 4.6s. Compression took 7.3s
+2026-06-29T13:52:45.763160918Z ==> Build successful 🎉
+2026-06-29T13:53:47.107091903Z ==> Deploying...
+2026-06-29T13:53:47.171521556Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+2026-06-29T13:54:07.898030467Z ==> Running 'node dist/index.js'
+2026-06-29T13:54:08.187026011Z node:internal/modules/cjs/loader:1459
+2026-06-29T13:54:08.187044982Z   throw err;
+2026-06-29T13:54:08.187047612Z   ^
+2026-06-29T13:54:08.187049662Z 
+2026-06-29T13:54:08.187053493Z Error: Cannot find module '/opt/render/project/src/artifacts/api-server/dist/index.js'
+2026-06-29T13:54:08.187058403Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1456:15)
+2026-06-29T13:54:08.187061773Z     at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+2026-06-29T13:54:08.187065033Z     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+2026-06-29T13:54:08.187069694Z     at Module._load (node:internal/modules/cjs/loader:1242:25)
+2026-06-29T13:54:08.187072554Z     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+2026-06-29T13:54:08.187075084Z     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+2026-06-29T13:54:08.187077684Z     at node:internal/main/run_main_module:33:47 {
+2026-06-29T13:54:08.187081344Z   code: 'MODULE_NOT_FOUND',
+2026-06-29T13:54:08.187085505Z   requireStack: []
+2026-06-29T13:54:08.187088525Z }
+2026-06-29T13:54:08.187091675Z 
+2026-06-29T13:54:08.187094345Z Node.js v24.14.1
+2026-06-29T13:54:10.378394232Z ==> Exited with status 1
+2026-06-29T13:54:10.383771114Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-06-29T13:54:16.086363101Z ==> Running 'node dist/index.js'
+2026-06-29T13:54:16.309680408Z node:internal/modules/cjs/loader:1459
+2026-06-29T13:54:16.309706549Z   throw err;
+2026-06-29T13:54:16.30971011Z   ^
+2026-06-29T13:54:16.30971261Z 
+2026-06-29T13:54:16.30971725Z Error: Cannot find module '/opt/render/project/src/artifacts/api-server/dist/index.js'
+2026-06-29T13:54:16.30972078Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1456:15)
+2026-06-29T13:54:16.30972344Z     at defaultResolveImpl (node:internal/modules/cjs/loader:1066:19)
+2026-06-29T13:54:16.309726151Z     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1071:22)
+2026-06-29T13:54:16.309729041Z     at Module._load (node:internal/modules/cjs/loader:1242:25)
+2026-06-29T13:54:16.309731971Z     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+2026-06-29T13:54:16.309734511Z     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+2026-06-29T13:54:16.309737101Z     at node:internal/main/run_main_module:33:47 {
+2026-06-29T13:54:16.309740532Z   code: 'MODULE_NOT_FOUND',
+2026-06-29T13:54:16.309743582Z   requireStack: []
+2026-06-29T13:54:16.309746042Z }
+2026-06-29T13:54:16.309748722Z 
+2026-06-29T13:54:16.309751792Z Node.js v24.14.1
