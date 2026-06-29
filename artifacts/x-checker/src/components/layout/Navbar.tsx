@@ -19,7 +19,7 @@ import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
   New: "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI: "bg-[#f0f0ff] text-[#474bff] border-[#474bff]/20",
+  AI: "bg-accent text-accent-foreground border-accent-border",
   Soon: "bg-slate-400/15 text-slate-400 border-slate-400/30",
 };
 
