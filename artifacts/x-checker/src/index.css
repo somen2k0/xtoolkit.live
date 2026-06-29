@@ -2,8 +2,6 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -54,7 +52,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ── Light theme (default) ───────────────────────────────────────────────── */
+/* ── Theme variables ─────────────────────────────────────────────────────── */
 :root {
   --button-outline: rgba(0,0,0, .08);
   --badge-outline: rgba(0,0,0, .05);
@@ -62,28 +60,35 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .06);
 
-  --background: 220 20% 97%;
-  --foreground: 224 40% 12%;
+  /* #DAF6F4 mint background */
+  --background: 176 61% 91%;
+  /* #0D3B36 dark teal foreground */
+  --foreground: 174 64% 14%;
 
+  /* #FFFFFF white cards */
   --card: 0 0% 100%;
-  --card-foreground: 224 40% 12%;
-  --card-border: 220 15% 91%;
+  --card-foreground: 174 64% 14%;
+  --card-border: 175 48% 80%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 224 40% 12%;
-  --popover-border: 220 15% 91%;
+  --popover-foreground: 174 64% 14%;
+  --popover-border: 175 48% 80%;
 
-  --primary: 258 82% 58%;
-  --primary-foreground: 0 0% 100%;
+  /* #5EEAD4 teal primary */
+  --primary: 171 77% 64%;
+  /* #0A1628 dark navy primary-foreground */
+  --primary-foreground: 216 60% 10%;
 
-  --secondary: 220 15% 95%;
-  --secondary-foreground: 224 40% 12%;
+  /* #C8F0ED light teal secondary */
+  --secondary: 175 57% 86%;
+  --secondary-foreground: 174 64% 14%;
 
-  --muted: 220 15% 94%;
-  --muted-foreground: 220 12% 46%;
+  --muted: 175 57% 86%;
+  /* #1A4A44 medium teal muted text */
+  --muted-foreground: 173 48% 20%;
 
-  --accent: 258 82% 96%;
-  --accent-foreground: 258 82% 40%;
+  --accent: 171 77% 64%;
+  --accent-foreground: 216 60% 10%;
 
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 100%;
@@ -94,13 +99,18 @@
   --warning: 38 92% 46%;
   --warning-foreground: 0 0% 0%;
 
-  --border: 220 15% 88%;
-  --input: 220 15% 88%;
-  --ring: 258 82% 58%;
+  /* #B2E4E0 light teal border */
+  --border: 175 48% 80%;
+  --input: 175 48% 80%;
+  --ring: 171 77% 64%;
 
   --app-font-sans: 'Inter', system-ui, sans-serif;
   --app-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --radius: 0.75rem;
+
+  /* Navbar */
+  --navbar-bg: 216 60% 10%;
+  --navbar-text: 210 9% 96%;
 
   --primary-border: hsl(var(--primary));
   --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
@@ -114,114 +124,11 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
-/* ── Dark theme ──────────────────────────────────────────────────────────── */
-.dark {
-  --button-outline: rgba(255,255,255, .10);
-  --badge-outline: rgba(255,255,255, .06);
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .08);
-  --opaque-button-border-intensity: -6;
-
-  /* Slate blue-gray — professional, not pitch black */
-  --background: 222 22% 9%;
-  --foreground: 215 22% 92%;
-
-  --card: 222 20% 14%;
-  --card-foreground: 215 22% 92%;
-  --card-border: 222 18% 22%;
-
-  --popover: 222 22% 8%;
-  --popover-foreground: 215 22% 92%;
-  --popover-border: 222 18% 20%;
-
-  --primary: 258 82% 70%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 222 16% 21%;
-  --secondary-foreground: 215 22% 92%;
-
-  --muted: 222 16% 18%;
-  --muted-foreground: 215 14% 62%;
-
-  --accent: 258 80% 68%;
-  --accent-foreground: 0 0% 100%;
-
-  --destructive: 0 70% 55%;
-  --destructive-foreground: 0 0% 100%;
-
-  --success: 142 70% 44%;
-  --success-foreground: 0 0% 0%;
-
-  --warning: 38 90% 52%;
-  --warning-foreground: 0 0% 0%;
-
-  --border: 222 16% 23%;
-  --input: 222 16% 20%;
-  --ring: 258 80% 68%;
-}
-
 /* ── Keyframe animations ─────────────────────────────────────────────────── */
-
-@keyframes orb-float-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(60px, -80px) scale(1.08); }
-  66%       { transform: translate(-40px, 50px) scale(0.95); }
-}
-
-@keyframes orb-float-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  40%       { transform: translate(-70px, 60px) scale(1.05); }
-  70%       { transform: translate(50px, -40px) scale(0.92); }
-}
-
-@keyframes orb-float-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%       { transform: translate(80px, 80px) scale(1.1); }
-}
-
-@keyframes grid-breathe {
-  0%, 100% { opacity: 0.55; }
-  50%       { opacity: 1; }
-}
-
-@keyframes aurora-sweep {
-  0%   { transform: translateX(-50%) translateX(-60px) scaleX(1)    scaleY(1)    rotate(-1.5deg); opacity: 0.72; }
-  20%  { transform: translateX(-50%) translateX(30px)  scaleX(1.08) scaleY(1.14) rotate(0.5deg);  opacity: 0.92; }
-  45%  { transform: translateX(-50%) translateX(70px)  scaleX(1.14) scaleY(1.08) rotate(2deg);    opacity: 0.80; }
-  70%  { transform: translateX(-50%) translateX(-20px) scaleX(1.06) scaleY(0.96) rotate(-1deg);   opacity: 0.88; }
-  100% { transform: translateX(-50%) translateX(-60px) scaleX(1)    scaleY(1)    rotate(-1.5deg); opacity: 0.72; }
-}
-
-@keyframes aurora-sweep-2 {
-  0%   { transform: translateX(-50%) translateX(50px)  scaleX(1.05) scaleY(0.95) rotate(1deg);    opacity: 0.60; }
-  35%  { transform: translateX(-50%) translateX(-70px) scaleX(0.95) scaleY(1.12) rotate(-2deg);   opacity: 0.80; }
-  65%  { transform: translateX(-50%) translateX(-20px) scaleX(1.10) scaleY(1.05) rotate(0.5deg);  opacity: 0.68; }
-  100% { transform: translateX(-50%) translateX(50px)  scaleX(1.05) scaleY(0.95) rotate(1deg);    opacity: 0.60; }
-}
-
-@keyframes nav-active-glow {
-  0%, 100% { box-shadow: 0 0 0 0 var(--nav-glow-color, hsl(258 82% 66% / 0.20)); }
-  50%       { box-shadow: 0 0 14px 3px var(--nav-glow-color, hsl(258 82% 66% / 0.18)); }
-}
-
-@keyframes pulse-ring {
-  0%, 100% { box-shadow: 0 0 0 0 hsl(258 82% 66% / 0.15); }
-  50%       { box-shadow: 0 0 0 12px hsl(258 82% 66% / 0); }
-}
-
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
 
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes badge-glow {
-  0%, 100% { box-shadow: 0 0 0 0 hsl(258 82% 66% / 0); }
-  50%       { box-shadow: 0 0 16px 2px hsl(258 82% 66% / 0.2); }
 }
 
 /* ── Base styles ─────────────────────────────────────────────────────────── */
@@ -234,79 +141,7 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     cursor: auto;
-    background-image:
-      radial-gradient(ellipse 80% 50% at 20% -5%, hsl(270 80% 60% / 0.42), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 10%, hsl(258 82% 65% / 0.28), transparent);
   }
-
-  html:not(.dark) body {
-    background-image: none;
-  }
-}
-
-/* Light mode: hide all heavy background effects */
-html:not(.dark) body::before,
-html:not(.dark) body::after,
-html:not(.dark) .page-orb,
-html:not(.dark) .page-aurora,
-html:not(.dark) .bg-orb {
-  display: none !important;
-}
-
-html:not(.dark) {
-  background: hsl(220 20% 97%);
-}
-
-/* Light mode: disable nav text glows */
-html:not(.dark) .nav-glow-blue,
-html:not(.dark) .nav-glow-orange,
-html:not(.dark) .nav-glow-pink,
-html:not(.dark) .nav-glow-cyan,
-html:not(.dark) .nav-glow-teal,
-html:not(.dark) .nav-glow-emerald,
-html:not(.dark) .nav-glow-white {
-  text-shadow: none;
-}
-
-/* Light mode: shimmer headline becomes solid primary color */
-html:not(.dark) .text-shimmer {
-  background: none;
-  -webkit-background-clip: unset;
-  background-clip: unset;
-  -webkit-text-fill-color: inherit;
-  color: hsl(var(--primary));
-  animation: none;
-}
-
-/* Subtle static grid — slow opacity breathe, no position drift */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(hsl(220 20% 90% / 0.030) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(220 20% 90% / 0.030) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: grid-breathe 14s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Primary aurora curtain — wide sweeping light band */
-body::after {
-  content: '';
-  position: fixed;
-  top: -28%;
-  left: 50%;
-  width: 140vw;
-  height: 78vh;
-  background:
-    radial-gradient(ellipse 55% 55% at 22% 55%, hsl(258 82% 66% / 0.42), transparent 65%),
-    radial-gradient(ellipse 45% 45% at 78% 45%, hsl(258 82% 60% / 0.32), transparent 65%),
-    radial-gradient(ellipse 35% 35% at 50% 70%, hsl(270 78% 62% / 0.22), transparent 65%);
-  animation: aurora-sweep 14s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
 }
 
 #root {
@@ -314,232 +149,12 @@ body::after {
   z-index: 1;
 }
 
-/* ── Floating orb styles ─────────────────────────────────────────────────── */
+/* ── Hero entrance animations ────────────────────────────────────────────── */
 
-/* ── Page-level themed orbs (rendered by Layout.tsx) ────────────────────── */
-
-.page-aurora {
-  position: absolute;
-  top: -28%;
-  left: 50%;
-  width: 130vw;
-  height: 72vh;
-  animation: aurora-sweep-2 18s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.nav-active-pulse {
-  animation: nav-active-glow 2.8s ease-in-out infinite;
-}
-
-/* Nav item text glow — always on */
-.nav-glow-blue   { text-shadow: 0 0 10px hsl(217 91% 60% / 0.7), 0 0 22px hsl(217 91% 60% / 0.35); }
-.nav-glow-orange { text-shadow: 0 0 10px hsl(25 95% 58% / 0.7),  0 0 22px hsl(25 95% 58% / 0.35); }
-.nav-glow-pink   { text-shadow: 0 0 10px hsl(330 80% 62% / 0.7), 0 0 22px hsl(330 80% 62% / 0.35); }
-.nav-glow-cyan    { text-shadow: 0 0 10px hsl(258 82% 60% / 0.7), 0 0 22px hsl(258 82% 60% / 0.35); }
-.nav-glow-teal    { text-shadow: 0 0 10px hsl(258 82% 60% / 0.7), 0 0 22px hsl(258 82% 60% / 0.35); }
-.nav-glow-emerald { text-shadow: 0 0 10px hsl(158 64% 52% / 0.7), 0 0 22px hsl(158 64% 52% / 0.35); }
-.nav-glow-white   { text-shadow: 0 0 10px hsl(0 0% 100% / 0.55),  0 0 20px hsl(0 0% 100% / 0.25); }
-
-.page-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(88px);
-  pointer-events: none;
-  mix-blend-mode: screen;
-  will-change: transform;
-}
-
-/* ── Legacy orbs (home.tsx hero section) ─────────────────────────────────── */
-
-.bg-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-  will-change: transform;
-}
-
-.bg-orb-1 {
-  width: 720px;
-  height: 720px;
-  background: radial-gradient(circle, hsl(270 85% 65% / 0.58) 0%, transparent 70%);
-  top: -15%;
-  left: -12%;
-  mix-blend-mode: screen;
-  animation: orb-float-1 18s ease-in-out infinite;
-}
-
-.bg-orb-2 {
-  width: 560px;
-  height: 560px;
-  background: radial-gradient(circle, hsl(258 82% 65% / 0.46) 0%, transparent 70%);
-  top: 15%;
-  right: -10%;
-  mix-blend-mode: screen;
-  animation: orb-float-2 22s ease-in-out infinite;
-}
-
-.bg-orb-3 {
-  width: 460px;
-  height: 460px;
-  background: radial-gradient(circle, hsl(280 70% 60% / 0.36) 0%, transparent 70%);
-  bottom: 5%;
-  left: 25%;
-  mix-blend-mode: screen;
-  animation: orb-float-3 16s ease-in-out infinite;
-}
-
-.bg-orb-4 {
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, hsl(240 90% 72% / 0.40) 0%, transparent 70%);
-  bottom: 20%;
-  right: 15%;
-  mix-blend-mode: screen;
-  animation: orb-float-1 20s ease-in-out infinite reverse;
-}
-
-/* ── Hero entrance animation helpers ────────────────────────────────────── */
-
-.hero-badge {
-  animation: fade-up 0.6s ease-out 0.1s both;
-}
-
-.hero-title {
-  animation: fade-up 0.7s ease-out 0.25s both;
-}
-
-.hero-subtitle {
-  animation: fade-up 0.7s ease-out 0.4s both;
-}
-
-.hero-actions {
-  animation: fade-up 0.7s ease-out 0.55s both;
-}
-
-.hero-trust {
-  animation: fade-up 0.6s ease-out 0.7s both;
-}
-
-@media (max-width: 767px) {
-  .hero-badge,
-  .hero-title,
-  .hero-subtitle,
-  .hero-actions,
-  .hero-trust {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .scroll-fade {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  /* Kill expensive GPU layers on mobile — these delay LCP */
-  .page-aurora,
-  .bg-orb-1, .bg-orb-2, .bg-orb-3, .bg-orb-4,
-  .page-orb {
-    display: none !important;
-  }
-
-  /* Remove ALL backdrop-blur on mobile — every blur layer delays paint */
-  .hero-glass,
-  .hero-glass-card {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(15, 15, 31, 0.95) !important;
-    border: 1px solid rgba(99, 102, 241, 0.2) !important;
-    box-shadow: none !important;
-    border-radius: 1rem !important;
-  }
-
-  /* Kill backdrop-blur on badge and trust items too */
-  .hero-section [class*="backdrop-blur"] {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  /* Hide the dot grid pattern — repeated radial-gradient across full screen */
-  .hero-dot-pattern {
-    display: none !important;
-  }
-
-  /* STEP 5: Force immediate render — zero out all animation delays in hero */
-  .hero-section,
-  .hero-section * {
-    animation-duration: 0.01ms !important;
-    animation-delay: 0ms !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  /* Kill full-screen pseudo-element animations — non-composited, block paint */
-  body::before,
-  body::after {
-    display: none !important;
-  }
-
-  /* Kill box-shadow animation on nav active item — box-shadow can't be composited */
-  .nav-active-pulse,
-  [class*="nav-active"] {
-    animation: none !important;
-    box-shadow: none !important;
-  }
-}
-
-@media (max-width: 767px) {
-  .text-shimmer {
-    background: none;
-    -webkit-background-clip: unset;
-    background-clip: unset;
-    -webkit-text-fill-color: inherit;
-    color: #a78bfa;
-    animation: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-badge,
-  .hero-title,
-  .hero-subtitle,
-  .hero-actions,
-  .hero-trust {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .scroll-fade {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .text-shimmer {
-    animation: none;
-  }
-}
-
-/* ── Shimmer text for headline ───────────────────────────────────────────── */
-
-.text-shimmer {
-  background: linear-gradient(
-    90deg,
-    hsl(270 80% 72%),
-    hsl(258 82% 80%),
-    hsl(280 75% 72%),
-    hsl(258 82% 78%),
-    hsl(270 80% 72%)
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 4s linear infinite;
-}
+.hero-badge   { animation: fade-up 0.6s ease-out 0.1s  both; }
+.hero-title   { animation: fade-up 0.7s ease-out 0.25s both; }
+.hero-subtitle { animation: fade-up 0.7s ease-out 0.4s both; }
+.hero-actions { animation: fade-up 0.7s ease-out 0.55s both; }
 
 /* ── Card hover glow ─────────────────────────────────────────────────────── */
 
@@ -548,14 +163,8 @@ body::after {
 }
 
 .card-hover-glow:hover {
-  border-color: hsl(258 82% 66% / 0.35);
-  box-shadow: 0 0 20px hsl(258 82% 66% / 0.08), 0 4px 16px hsl(0 0% 0% / 0.3);
-}
-
-/* ── CTA pulse ring ──────────────────────────────────────────────────────── */
-
-.cta-pulse {
-  animation: pulse-ring 3s ease-in-out infinite;
+  border-color: hsl(171 77% 64% / 0.5);
+  box-shadow: 0 4px 12px rgba(94, 234, 212, 0.2);
 }
 
 /* ── Scroll fade-in utility ──────────────────────────────────────────────── */
@@ -569,4 +178,40 @@ body::after {
 .scroll-fade.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ── Mobile performance ──────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .hero-badge,
+  .hero-title,
+  .hero-subtitle,
+  .hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .scroll-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge,
+  .hero-title,
+  .hero-subtitle,
+  .hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .scroll-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

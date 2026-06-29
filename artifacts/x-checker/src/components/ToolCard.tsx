@@ -11,12 +11,12 @@ interface ToolCardProps {
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-400/15 text-amber-400 border-amber-400/30",
   New: "bg-emerald-400/15 text-emerald-400 border-emerald-400/30",
-  AI: "bg-purple-400/15 text-purple-400 border-purple-400/30",
+  AI: "bg-teal-400/15 text-teal-500 border-teal-400/30",
 };
 
 const ACCENT_COLORS: Record<string, string> = {
   "social-media":    "bg-blue-400",
-  "ai-writing":      "bg-purple-400",
+  "ai-writing":      "bg-teal-400",
   "text-formatting": "bg-green-400",
   "developer":       "bg-orange-400",
   "seo":             "bg-pink-400",
@@ -30,10 +30,10 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
 
   const card = (
     <div
-      className={`group relative flex flex-col rounded-xl border dark:border-border/60 border-border dark:bg-card/50 bg-white dark:shadow-none shadow-sm overflow-hidden transition-all duration-200 ${
+      className={`group relative flex flex-col rounded-xl border border-border bg-white shadow-sm overflow-hidden transition-all duration-200 ${
         tool.isComingSoon
           ? "opacity-55 cursor-default"
-          : "hover:border-primary/30 dark:hover:bg-card hover:bg-white hover:shadow-md dark:hover:shadow-lg dark:hover:shadow-primary/8 cursor-pointer"
+          : "hover:border-primary/30 hover:bg-white hover:shadow-md cursor-pointer"
       } ${compact ? "p-4" : "p-5"}`}
     >
       {/* Left accent bar — slides in on hover */}

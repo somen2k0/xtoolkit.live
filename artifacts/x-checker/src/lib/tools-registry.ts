@@ -43,8 +43,8 @@ export const CATEGORIES: Record<CategoryKey, Category> = {
     label: "AI Writing Tools",
     shortLabel: "AI Writing",
     icon: Sparkles,
-    color: "text-purple-400",
-    bg: "bg-purple-400/10 border-purple-400/20",
+    color: "text-teal-500",
+    bg: "bg-teal-400/10 border-teal-400/20",
     description: "AI-powered bio generators, writing prompts, and content ideas.",
   },
   "text-formatting": {
