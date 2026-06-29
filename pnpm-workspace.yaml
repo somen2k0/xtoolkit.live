@@ -67,12 +67,14 @@ catalog:
 
 autoInstallPeers: false
 
+ignoredBuilds: []
+
 onlyBuiltDependencies:
   - '@swc/core'
+  - '@resvg/resvg-js'
   - esbuild
   - msw
   - unrs-resolver
-  - '@resvg/resvg-js'
 
 overrides:
   # replit uses linux-x64 only, we can exclude all other platforms
