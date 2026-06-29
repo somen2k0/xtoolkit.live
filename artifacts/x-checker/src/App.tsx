@@ -253,12 +253,42 @@ function App() {
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <TrackedRouter />
-            <CookieBanner />
-            <MobileNav />
-          </WouterRouter>
-          <Toaster />
+          {/* Global animated background — covers every page */}
+          <div aria-hidden="true" style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden" }}>
+            <div style={{
+              position: "absolute", top: "-200px", left: "-200px",
+              width: "700px", height: "700px", borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(245,57,10,0.18) 0%, transparent 65%)",
+              animation: "bg-drift-1 18s ease-in-out infinite",
+            }} />
+            <div style={{
+              position: "absolute", top: "30%", right: "-220px",
+              width: "650px", height: "650px", borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(245,57,10,0.14) 0%, transparent 65%)",
+              animation: "bg-drift-2 24s ease-in-out infinite",
+            }} />
+            <div style={{
+              position: "absolute", bottom: "-150px", left: "30%",
+              width: "600px", height: "600px", borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(245,196,181,0.22) 0%, transparent 65%)",
+              animation: "bg-drift-3 28s ease-in-out infinite",
+            }} />
+            <div style={{
+              position: "absolute", top: "60%", left: "-100px",
+              width: "400px", height: "400px", borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(245,57,10,0.10) 0%, transparent 65%)",
+              animation: "bg-drift-2 20s ease-in-out infinite reverse",
+            }} />
+          </div>
+
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <TrackedRouter />
+              <CookieBanner />
+              <MobileNav />
+            </WouterRouter>
+            <Toaster />
+          </div>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>
