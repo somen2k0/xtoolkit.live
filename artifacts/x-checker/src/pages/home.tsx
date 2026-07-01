@@ -115,31 +115,39 @@ export default function Home() {
                 X Toolkit is a <strong className="text-foreground font-semibold">"free all-in-one toolbox"</strong> built for
                 developers, creators and SEO professionals — {TOTAL_LIVE}+ tools, no signup ever required.
               </p>
-              <div className="flex flex-wrap gap-3">
+             <div className="flex flex-wrap gap-3">
                 <Link href="/tools">
-                  <Button size="lg" className="px-7 font-semibold shadow-sm shadow-primary/20">
-                    Explore Tools <ArrowRight className="h-4 w-4 ml-1.5" />
+                  <Button size="lg" className="px-7 font-semibold shadow-sm shadow-primary/20 group transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-md">
+                    Explore Tools <ArrowRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
                 </Link>
                 <Link href="/chrome-extension">
-                  <Button variant="outline" size="lg" className="px-7">
+                  <Button variant="outline" size="lg" className="px-7 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-[#F5390A]/5 hover:border-[#F5390A]/30 hover:shadow-sm">
                     Get Extension
                   </Button>
                 </Link>
               </div>
             </div>
 
-            {/* Right: category icon grid */}
+           {/* Right: category icon grid with an elegant panel card frame */}
             <div className="flex-1 flex justify-center md:justify-end">
-              <div className="grid grid-cols-3 gap-3 max-w-[280px] md:max-w-[320px]">
-                {TOOL_ICONS.map(({ icon: Icon, label, bg, color }) => (
-                  <div key={label} className={`${bg} rounded-2xl p-4 flex flex-col items-center justify-center gap-2 aspect-square shadow-sm`}>
-                    <Icon className={`h-6 w-6 ${color}`} />
-                    <span className={`text-[10px] font-semibold ${color}`}>{label}</span>
-                  </div>
-                ))}
+              <div className="bg-[#FFFCF8] p-6 rounded-2xl border border-[#F5390A]/10 shadow-sm max-w-sm w-full">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[#F5390A] mb-4 text-center md:text-left opacity-80">
+                </p>
+                <div className="grid grid-cols-3 gap-3">
+                  {TOOL_ICONS.map(({ icon: Icon, label, bg, color }, index) => (
+                    <div 
+                      key={label} 
+                      style={{ animationDelay: `${index * 150}ms` }}
+                      className={`${bg} rounded-2xl p-4 flex flex-col items-center justify-center gap-2 aspect-square shadow-sm animate-bounce [animation-duration:3s] transition-all duration-300 ease-out hover:scale-105 hover:shadow-md cursor-default`}
+                    >
+                      <Icon className={`h-6 w-6 ${color}`} />
+                      <span className={`text-[10px] font-semibold ${color}`}>{label}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+           </div>
 
           </div>
         </div>
