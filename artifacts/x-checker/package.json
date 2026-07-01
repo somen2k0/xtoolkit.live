@@ -75,11 +75,18 @@
     "zod": "catalog:"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
     "@types/js-yaml": "^4.0.9",
     "js-yaml": "^4.1.1",
     "qrcode.react": "^4.2.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@resvg/resvg-js", "@swc/core", "esbuild", "msw", "unrs-resolver"]
+    "onlyBuiltDependencies": [
+      "@resvg/resvg-js",
+      "@swc/core",
+      "esbuild",
+      "msw",
+      "unrs-resolver"
+    ]
   }
 }
