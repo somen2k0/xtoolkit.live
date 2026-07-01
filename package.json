@@ -18,5 +18,9 @@
   "packageManager": "pnpm@10.26.1",
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.62.2",
+    "lightningcss-win32-x64-msvc": "^1.32.0"
   }
 }
