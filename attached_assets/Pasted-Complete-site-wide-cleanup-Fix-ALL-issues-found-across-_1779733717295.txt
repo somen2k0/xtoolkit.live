@@ -10,8 +10,8 @@ Run these and show ALL output before changing anything:
 grep -rn "55+" artifacts/x-checker/src --include="*.tsx" --include="*.ts"
 grep -rn "55+" prerender.mjs
 grep -rn "55+" artifacts/x-checker/index.html
-grep -rn "43+" artifacts/x-checker/src --include="*.tsx" --include="*.ts"
-grep -rn "43+" prerender.mjs
+grep -rn "44+" artifacts/x-checker/src --include="*.tsx" --include="*.ts"
+grep -rn "44+" prerender.mjs
 grep -rn "55 free" artifacts/x-checker/src --include="*.tsx"
 grep -rn "all 55" artifacts/x-checker/src --include="*.tsx"
 grep -rn "all 43" artifacts/x-checker/src --include="*.tsx"
@@ -27,7 +27,7 @@ STEP 2 — FIX ALL WRONG TOOL COUNTS
 
 In prerender.mjs:
 - Change ALL "55+" → "44+"
-- Change ALL "43+" → "44+"
+- Change ALL "44+" → "44+"
 - Change ALL "55 free tools" → "44 free tools"
 - Change ALL "43 free tools" → "44 free tools"
 - Change ALL "Browse all 55" → "Browse all 44"
@@ -40,7 +40,7 @@ In artifacts/x-checker/index.html:
 
 In artifacts/x-checker/src/pages/about.tsx:
 - Change ALL "55+" → "44+"
-- Change ALL "43+" → "44+"
+- Change ALL "44+" → "44+"
 - Change "Browse all 55" → "Browse all 44"
 - Change "Browse all 43" → "Browse all 44"
 
@@ -56,18 +56,18 @@ that is applied globally to all pages.
 
 Change from ANY of these:
 "X Toolkit — 55+ free online tools..."
-"X Toolkit — 43+ free online tools..."
+"X Toolkit — 44+ free online tools..."
 
 To:
 "X Toolkit — 44+ free online tools for X, SEO,
 developers and creators"
 
 Also find any page-specific ogImageAlt overrides
-that show "55+" or "43+" and update to "44+".
+that show "55+" or "44+" and update to "44+".
 
 After fix run:
 grep -n "55+" prerender.mjs
-grep -n "43+" prerender.mjs
+grep -n "44+" prerender.mjs
 Should return ZERO results.
 
 ===================================================
@@ -407,7 +407,7 @@ STEP 10 — FINAL VERIFICATION
 
 After all changes run:
 grep -rn "55+" artifacts/x-checker/src prerender.mjs artifacts/x-checker/index.html
-grep -rn "43+" artifacts/x-checker/src prerender.mjs artifacts/x-checker/index.html
+grep -rn "44+" artifacts/x-checker/src prerender.mjs artifacts/x-checker/index.html
 grep -rn "all 55" artifacts/x-checker/src prerender.mjs
 grep -rn "all 43" artifacts/x-checker/src prerender.mjs
 grep -rn "16 domains" artifacts/x-checker/src

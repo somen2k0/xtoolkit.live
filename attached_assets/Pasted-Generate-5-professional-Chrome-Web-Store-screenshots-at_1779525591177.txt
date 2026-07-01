@@ -212,7 +212,7 @@ const screenshots = [
         <span class="ext-logo-text">X Toolkit</span>
         <span class="ext-logo-sub">Temp Mail</span>
       </div>
-      <span class="ext-tools-link">43+ tools ↗</span>
+      <span class="ext-tools-link">44+ tools ↗</span>
     </div>
     <div class="email-bar">
       <span class="email-text">sarah.thomas76@guerrillamail.com</span>
@@ -237,7 +237,7 @@ const screenshots = [
       <div class="refresh-text">Refreshes every 15s automatically</div>
     </div>
     <div class="footer-link">
-      Want 43+ more tools? <span>Visit xtoolkit.live →</span>
+      Want 44+ more tools? <span>Visit xtoolkit.live →</span>
     </div>
     <div class="ext-footer">
       <div class="tab active">
@@ -338,7 +338,7 @@ const screenshots = [
         <span class="ext-logo-text">X Toolkit</span>
         <span class="ext-logo-sub">Temp Mail</span>
       </div>
-      <span class="ext-tools-link">43+ tools ↗</span>
+      <span class="ext-tools-link">44+ tools ↗</span>
     </div>
     <div class="email-bar">
       <span class="email-text">richard.taylor76@guerrillamail.com</span>
@@ -395,7 +395,7 @@ const screenshots = [
         <div class="email-time">1h ago</div>
       </div>
     </div>
-    <div class="footer-link">Want 43+ more tools? <span>Visit xtoolkit.live →</span></div>
+    <div class="footer-link">Want 44+ more tools? <span>Visit xtoolkit.live →</span></div>
     <div class="ext-footer">
       <div class="tab active">✉ Temp Mail</div>
       <div class="tab">M Gmail</div>
@@ -467,7 +467,7 @@ const screenshots = [
         <span class="ext-logo-text">X Toolkit</span>
         <span class="ext-logo-sub">Temp Mail</span>
       </div>
-      <span class="ext-tools-link">43+ tools ↗</span>
+      <span class="ext-tools-link">44+ tools ↗</span>
     </div>
     <div class="email-bar">
       <span class="email-text">sarah.thomas76@guerrillamail.com</span>
@@ -490,7 +490,7 @@ const screenshots = [
     <div class="inbox-area">
       <div style="font-size:14px;color:#4b5563">Select a domain to get started</div>
     </div>
-    <div class="footer-link">Want 43+ more tools? <span>Visit xtoolkit.live →</span></div>
+    <div class="footer-link">Want 44+ more tools? <span>Visit xtoolkit.live →</span></div>
     <div class="ext-footer">
       <div class="tab active">✉ Temp Mail</div>
       <div class="tab">M Gmail</div>
@@ -560,7 +560,7 @@ const screenshots = [
         <span class="ext-logo-text">X Toolkit</span>
         <span class="ext-logo-sub">Temp Mail</span>
       </div>
-      <span class="ext-tools-link">43+ tools ↗</span>
+      <span class="ext-tools-link">44+ tools ↗</span>
     </div>
     <div class="gmail-tabs">
       <div class="gmail-tab active">Temp Gmail</div>
@@ -583,7 +583,7 @@ const screenshots = [
       </svg>
       <div class="no-msg">No messages yet · inbox updates every 15s</div>
     </div>
-    <div class="footer-link">Want 43+ more tools? <span>Visit xtoolkit.live →</span></div>
+    <div class="footer-link">Want 44+ more tools? <span>Visit xtoolkit.live →</span></div>
     <div class="ext-footer">
       <div class="tab">✉ Temp Mail</div>
       <div class="tab active">M Gmail</div>
@@ -670,7 +670,7 @@ const screenshots = [
       <p class="msg-expire">This code expires in 10 minutes.</p>
       <p style="margin-top:12px;color:#4b5563;font-size:12px">If you did not request this, you can safely ignore this email.</p>
     </div>
-    <div class="footer-link">Want 43+ more tools? <span>Visit xtoolkit.live →</span></div>
+    <div class="footer-link">Want 44+ more tools? <span>Visit xtoolkit.live →</span></div>
     <div class="ext-footer">
       <div class="tab active">✉ Temp Mail</div>
       <div class="tab">M Gmail</div>

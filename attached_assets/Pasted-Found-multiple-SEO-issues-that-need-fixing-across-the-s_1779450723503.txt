@@ -11,19 +11,19 @@ these occurrences:
 
 1. Homepage <title>:
    WRONG: "X Toolkit — 55+ Free Tools for X, SEO, Developers & Creators"
-   FIX:   "X Toolkit — 43+ Free Tools for X, SEO, Developers & Creators"
+   FIX:   "X Toolkit — 44+ Free Tools for X, SEO, Developers & Creators"
 
 2. Homepage meta-description:
    WRONG: "55+ free online tools for X (Twitter)..."
-   FIX:   "43+ free online tools for X (Twitter)..."
+   FIX:   "44+ free online tools for X (Twitter)..."
 
 3. OG tags on homepage:
    WRONG: og:title and og:description showing "55+"
-   FIX:   Update to "43+"
+   FIX:   Update to "44+"
 
 4. OG image alt text everywhere:
    WRONG: "X Toolkit — 55+ free online tools..."
-   FIX:   "X Toolkit — 43+ free online tools..."
+   FIX:   "X Toolkit — 44+ free online tools..."
 
 5. Temp mail page footer link:
    WRONG: "Browse all 55 free tools"
@@ -54,7 +54,7 @@ these occurrences:
    homepage prerender and tools manifest.
 
 Search the ENTIRE codebase for "55" and "55+" and
-replace every instance with "43" and "43+".
+replace every instance with "43" and "44+".
 Also search for "55 free" and replace with "43 free".
 
 ===================================================
@@ -166,7 +166,7 @@ Every page has this OG image alt:
 developers and creators"
 
 Update to:
-"X Toolkit — 43+ free online tools for X, SEO,
+"X Toolkit — 44+ free online tools for X, SEO,
 developers and creators"
 
 This appears in both og:image:alt and twitter:image:alt

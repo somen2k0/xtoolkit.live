@@ -33,6 +33,6 @@ several issues. Let me list what's wrong:
 
 theme-color is purple #6366f1 — should be your Replit orange #F5390A
 Anti-FOUC background is white #ffffff — causes a white flash before React loads instead of your beige theme
-Tool count mismatch — index.html says "43+" everywhere but your app shows 44 tools
+Tool count mismatch — index.html says "44+" everywhere but your app shows 44 tools
 SeoHead doesn't update og:image — every page shares the homepage OG image with no per-page override
 SeoHead missing twitter:card update — card type never changes on navigation
