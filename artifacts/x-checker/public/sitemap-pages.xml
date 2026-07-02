@@ -7,7 +7,7 @@
     0.95 Email Tools category (highest-engagement category per analytics)
     0.90 Developer Tools, Tools index
     0.85 Other category landings
-    0.55 About, Pricing
+    0.55 About
     0.40 Legal (privacy, terms)
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -16,7 +16,7 @@
   <!-- ── Tier 1: Homepage ─────────────────────────────────────────── -->
   <url>
     <loc>https://xtoolkit.live/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <!-- hreflang-ready: add <xhtml:link> elements here when i18n launches -->
