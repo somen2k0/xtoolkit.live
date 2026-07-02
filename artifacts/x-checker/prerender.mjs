@@ -285,6 +285,13 @@ const STATIC_PAGES = [
       "Generate Article, FAQ, Product, and BreadcrumbList JSON-LD schema markup instantly. Add structured data to your pages and qualify for rich results in Google Search.",
   },
   {
+    path: "/blog/gmail-account-checker",
+    label: "Gmail Account Checker",
+    title: "Gmail Account Checker — How to Verify Gmail Addresses in Bulk (Free) | X Toolkit Blog",
+    description:
+      "Check if Gmail addresses are valid, invalid or disabled in bulk. Free Gmail account checker — no signup, no API key needed. SMTP verification explained, 4 status results, step-by-step guide.",
+  },
+  {
     path: "/chrome-extension",
     label: "Chrome Extension",
     title: "Free Temp Email Chrome Extension — Disposable Inbox & OTP Detector | X Toolkit",

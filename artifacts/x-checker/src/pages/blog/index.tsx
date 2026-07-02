@@ -214,6 +214,17 @@ const ARTICLES = [
     color: "text-orange-400",
     bg: "bg-orange-400/10 border-orange-400/20",
   },
+  {
+    slug: "gmail-account-checker",
+    href: "/blog/gmail-account-checker",
+    title: "Gmail Account Checker — How to Verify Gmail Addresses in Bulk (Free)",
+    description: "Check if Gmail addresses are valid, invalid, or disabled without sending a single email. How SMTP verification works, the 4 status results explained, and a step-by-step guide.",
+    readTime: "6 min",
+    category: "Email",
+    icon: Mail,
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
+  },
 ];
 
 const CATEGORY_BADGE: Record<string, string> = {
@@ -224,6 +235,7 @@ const CATEGORY_BADGE: Record<string, string> = {
   SEO: "bg-orange-400/10 text-orange-400 border-orange-400/25",
   Developer: "bg-sky-400/10 text-sky-400 border-sky-400/25",
   "Social Media": "bg-pink-400/10 text-pink-400 border-pink-400/25",
+  Email: "bg-primary/10 text-primary border-primary/25",
 };
 
 export default function BlogIndex() {

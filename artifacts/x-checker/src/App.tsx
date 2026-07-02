@@ -94,6 +94,7 @@ const TempMailCompleteGuide = lazy(() => import("@/pages/blog/temp-mail-complete
 const BulkTwitterAccountChecker = lazy(() => import("@/pages/blog/bulk-twitter-account-checker"));
 const FreeTempGmail = lazy(() => import("@/pages/blog/free-temp-gmail"));
 const JsonLdSchemaGenerator = lazy(() => import("@/pages/blog/json-ld-schema-generator"));
+const GmailAccountCheckerBlog = lazy(() => import("@/pages/blog/gmail-account-checker"));
 // Category pages (lazy)
 const AiWritingTools = lazy(() => import("@/pages/categories/ai-writing-tools"));
 const SocialMediaTools = lazy(() => import("@/pages/categories/social-media-tools"));
@@ -233,6 +234,7 @@ function TrackedRouter() {
           <Route path="/blog/bulk-twitter-account-checker" component={BulkTwitterAccountChecker} />
           <Route path="/blog/free-temp-gmail" component={FreeTempGmail} />
           <Route path="/blog/json-ld-schema-generator" component={JsonLdSchemaGenerator} />
+          <Route path="/blog/gmail-account-checker" component={GmailAccountCheckerBlog} />
 
           {/* Category landing pages */}
           <Route path="/ai-writing-tools" component={AiWritingTools} />
