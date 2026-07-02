@@ -82,27 +82,41 @@ export default function BestTempMailServices() {
       <hr />
 
       <h2>Comparison Summary</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Service</th>
-            <th>Domains</th>
-            <th>Mobile App</th>
-            <th>Custom Username</th>
-            <th>Best For</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>X Toolkit Temp Mail</td><td>9</td><td>No (browser)</td><td>Yes</td><td>General use + 9 domains</td></tr>
-          <tr><td>Mailinator</td><td>Many</td><td>No</td><td>Yes</td><td>QA teams + API</td></tr>
-          <tr><td>10MinuteMail</td><td>1</td><td>No</td><td>No</td><td>Quickest one-use</td></tr>
-          <tr><td>Temp-Mail.org</td><td>10+</td><td>Yes</td><td>Yes</td><td>Mobile users</td></tr>
-          <tr><td>Inboxes</td><td>1</td><td>No</td><td>Yes</td><td>Team testing</td></tr>
-          <tr><td>Guerrilla Mail</td><td>5</td><td>No</td><td>Yes</td><td>Send + receive</td></tr>
-          <tr><td>YOPmail</td><td>3</td><td>No</td><td>Yes</td><td>8-day persistence</td></tr>
-          <tr><td>DisposableMail</td><td>Several</td><td>No</td><td>Yes</td><td>Privacy-focused</td></tr>
-        </tbody>
-      </table>
+      <div className="overflow-x-auto rounded-xl border border-border/60 not-prose">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-primary/8 border-b border-border/60">
+              <th className="text-left text-foreground font-semibold px-4 py-3">Service</th>
+              <th className="text-left text-foreground font-semibold px-4 py-3">Domains</th>
+              <th className="text-left text-foreground font-semibold px-4 py-3">Mobile App</th>
+              <th className="text-left text-foreground font-semibold px-4 py-3">Custom Username</th>
+              <th className="text-left text-foreground font-semibold px-4 py-3">Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ["X Toolkit Temp Mail", "9", "No (browser)", "Yes", "General use + 9 domains"],
+              ["Mailinator", "Many", "No", "Yes", "QA teams + API"],
+              ["10MinuteMail", "1", "No", "No", "Quickest one-use"],
+              ["Temp-Mail.org", "10+", "Yes", "Yes", "Mobile users"],
+              ["Inboxes", "1", "No", "Yes", "Team testing"],
+              ["Guerrilla Mail", "5", "No", "Yes", "Send + receive"],
+              ["YOPmail", "3", "No", "Yes", "8-day persistence"],
+              ["DisposableMail", "Several", "No", "Yes", "Privacy-focused"],
+            ].map(([service, domains, mobile, username, bestFor], i) => (
+              <tr key={service} className={i % 2 === 0 ? "bg-card" : "bg-muted/20"}>
+                <td className="px-4 py-2.5 text-foreground font-medium border-b border-border/30">{service}</td>
+                <td className="px-4 py-2.5 text-muted-foreground border-b border-border/30">{domains}</td>
+                <td className="px-4 py-2.5 text-muted-foreground border-b border-border/30">{mobile}</td>
+                <td className="px-4 py-2.5 border-b border-border/30">
+                  <span className={username === "Yes" ? "text-primary font-medium" : "text-muted-foreground"}>{username}</span>
+                </td>
+                <td className="px-4 py-2.5 text-muted-foreground border-b border-border/30">{bestFor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <h2>What About Permanent Alias Services?</h2>
       <p>If you need a temp-style address that <em>never expires</em> and forwards to your real inbox, the above are the wrong tools. Consider <strong>SimpleLogin</strong> (free, 10 aliases on the free plan) or <strong>AnonAddy</strong> (free, unlimited aliases) for permanent anonymous forwarding that you can disable per-service. These are better choices for services you'll actually use long-term — subscriptions, apps, tools you'll return to — because you maintain access to the account while keeping your real address private.</p>
