@@ -6,7 +6,7 @@ import {
   Hash, MessageSquare as MessageSquareIcon, BarChart2, FileJson, Lock, Link2,
   Globe, Mail, ShieldCheck, Pencil, Inbox, Minimize2, KeyRound, Database,
   Shuffle, Shield, Tag, BarChart, Clock, ArrowLeftRight, ScanSearch,
-  EyeOff, ShieldAlert, Newspaper, Calendar, Gauge,
+  EyeOff, ShieldAlert, Newspaper,
   AlignLeft, QrCode, ImageIcon, Laugh,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -39,10 +39,7 @@ const TOOL_CATEGORIES = [
     bg: "bg-blue-400/10 border-blue-400/20",
     tools: [
       { icon: Search, label: "Account Checker", desc: "Bulk-check 100 X accounts", href: "/tools/x-account-checker", badge: "Popular" },
-      { icon: Link2, label: "Profile Link Generator", desc: "Convert usernames to links", href: "/tools/profile-link-generator" },
-      { icon: AtSign, label: "@ Formatter", desc: "Add/remove @ prefix in bulk", href: "/tools/at-formatter" },
       { icon: AtSign, label: "Username Generator", desc: "Unique X handle ideas", href: "/tools/username-generator" },
-      { icon: Calendar, label: "Tweet Scheduler", desc: "Plan & export your content calendar", href: "/tools/tweet-scheduler", badge: "New" },
       { icon: Laugh, label: "Funny Bio Ideas", desc: "30+ funny bios + AI generator", href: "/tools/funny-bios", badge: "AI" },
     ],
   },
@@ -55,7 +52,6 @@ const TOOL_CATEGORIES = [
     tools: [
       { icon: Hash, label: "Hashtag Formatter", desc: "Format & deduplicate hashtags", href: "/tools/hashtag-formatter" },
       { icon: MessageSquareIcon, label: "Tweet Thread Formatter", desc: "Split text into tweet threads", href: "/tools/tweet-formatter" },
-      { icon: Type, label: "Font Preview", desc: "Preview text in Unicode fonts", href: "/tools/font-preview" },
       { icon: BarChart2, label: "Character Counter", desc: "Fit X's 280-char limit", href: "/tools/character-counter" },
       { icon: AlignLeft, label: "Word Counter", desc: "Count words, characters & paragraphs", href: "/tools/word-counter", badge: "New" },
       { icon: Type, label: "Case Converter", desc: "camelCase, snake_case, UPPERCASE & more", href: "/tools/case-converter", badge: "New" },
@@ -83,7 +79,6 @@ const TOOL_CATEGORIES = [
       { icon: Palette, label: "Color Picker", desc: "Convert HEX, RGB, HSL instantly", href: "/tools/color-picker", badge: "New" },
       { icon: QrCode, label: "QR Code Generator", desc: "Create QR codes for URLs & more", href: "/tools/qr-code-generator", badge: "New" },
       { icon: ImageIcon, label: "Image Compressor", desc: "Compress images in your browser", href: "/tools/image-compressor", badge: "New" },
-      { icon: Globe, label: "OG Image Preview", desc: "Preview social share cards", href: "/tools/og-image-preview" },
     ],
   },
   {
@@ -98,7 +93,6 @@ const TOOL_CATEGORIES = [
       { icon: TrendingUp, label: "Keyword Density", desc: "Check keyword frequency", href: "/tools/keyword-density" },
       { icon: Shield, label: "Robots.txt Generator", desc: "Generate robots.txt rules", href: "/tools/robots-txt-generator" },
       { icon: Tag, label: "Sitemap Validator", desc: "Validate XML sitemaps", href: "/tools/sitemap-validator" },
-      { icon: Gauge, label: "Page Speed Checker", desc: "Audit your site speed & Core Web Vitals", href: "/tools/page-speed-checker" },
       { icon: Code2, label: "Schema Generator", desc: "Generate JSON-LD structured data markup", href: "/tools/schema-generator", badge: "New" },
     ],
   },
