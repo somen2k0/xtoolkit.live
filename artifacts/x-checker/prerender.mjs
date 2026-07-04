@@ -292,6 +292,13 @@ const STATIC_PAGES = [
       "Check if Gmail addresses are valid, invalid or disabled in bulk. Free Gmail account checker — no signup, no API key needed. SMTP verification explained, 4 status results, step-by-step guide.",
   },
   {
+    path: "/blog/temp-mail-guides",
+    label: "Temp Mail Guides",
+    title: "Temp Mail Guides — Everything You Need to Know About Disposable Email | X Toolkit Blog",
+    description:
+      "Complete temp mail guides covering how disposable email works, best services, Gmail tricks, privacy tips and step-by-step tutorials. Free, no signup.",
+  },
+  {
     path: "/chrome-extension",
     label: "Chrome Extension",
     title: "Free Temp Email Chrome Extension — Disposable Inbox & OTP Detector | X Toolkit",

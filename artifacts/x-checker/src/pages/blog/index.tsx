@@ -225,6 +225,17 @@ const ARTICLES = [
     color: "text-primary",
     bg: "bg-primary/10 border-primary/20",
   },
+  {
+    slug: "temp-mail-guides",
+    href: "/blog/temp-mail-guides",
+    title: "Temp Mail Guides — Everything You Need to Know About Disposable Email",
+    description: "Complete hub of temp mail guides: how disposable email works, step-by-step tool tutorials, Gmail tricks, privacy tips, and answers to common questions.",
+    readTime: "8 min",
+    category: "Guide",
+    icon: BookOpen,
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
+  },
 ];
 
 const CATEGORY_BADGE: Record<string, string> = {

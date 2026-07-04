@@ -182,4 +182,12 @@
     <priority>0.82</priority>
   </url>
 
+  <!-- Temp mail guides hub: targets "temp mail guides" hub keyword, links all temp mail content -->
+  <url>
+    <loc>https://xtoolkit.live/blog/temp-mail-guides</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
 </urlset>
