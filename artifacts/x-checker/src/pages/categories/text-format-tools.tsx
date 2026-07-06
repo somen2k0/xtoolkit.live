@@ -17,9 +17,9 @@ const config: CategoryPageConfig = {
   description:
     "Text formatting tools help you shape, clean, and style written content before it goes live on X (Twitter) or any other platform. Whether you're splitting a long essay into a numbered tweet thread, previewing your bio in stylized Unicode fonts, or normalizing a messy list of hashtags, these browser-based utilities handle the tedious formatting work instantly — no account required. All six tools run entirely in your browser, so your text never leaves your device.",
   icon: Type,
-  color: "text-green-400",
-  bg: "bg-green-400/10 border-green-400/20",
-  heroGradient: "bg-gradient-to-br from-green-500/8 via-green-500/3 to-transparent",
+  color: "text-primary",
+  bg: "bg-primary/10 border-primary/20",
+  heroGradient: "bg-gradient-to-br from-primary/8 via-primary/3 to-transparent",
   tools,
 
   whatIs:

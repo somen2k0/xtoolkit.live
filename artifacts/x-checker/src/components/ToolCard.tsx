@@ -17,7 +17,7 @@ const BADGE_STYLES: Record<string, string> = {
 const ACCENT_COLORS: Record<string, string> = {
   "social-media":    "bg-blue-500",
   "ai-writing":      "bg-primary",
-  "text-formatting": "bg-green-500",
+  "text-formatting": "bg-primary",
   "developer":       "bg-orange-500",
   "seo":             "bg-pink-500",
   "email":           "bg-violet-500",

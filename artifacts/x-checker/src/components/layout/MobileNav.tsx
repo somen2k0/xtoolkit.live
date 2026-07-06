@@ -47,8 +47,8 @@ const TOOL_CATEGORIES = [
     key: "text-formatting",
     label: "Text & Format Tools",
     icon: Type,
-    color: "text-green-400",
-    bg: "bg-green-400/10 border-green-400/20",
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
     tools: [
       { icon: Hash, label: "Hashtag Formatter", desc: "Format & deduplicate hashtags", href: "/tools/hashtag-formatter" },
       { icon: MessageSquareIcon, label: "Tweet Thread Formatter", desc: "Split text into tweet threads", href: "/tools/tweet-formatter" },

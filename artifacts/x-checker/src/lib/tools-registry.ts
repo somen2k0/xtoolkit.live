@@ -43,8 +43,8 @@ export const CATEGORIES: Record<CategoryKey, Category> = {
     label: "AI Writing Tools",
     shortLabel: "AI Writing",
     icon: Sparkles,
-    color: "text-[#474bff]",
-    bg: "bg-[#f0f0ff] border-[#474bff]/20",
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
     description: "AI-powered bio generators, writing prompts, and content ideas.",
   },
   "text-formatting": {
@@ -52,8 +52,8 @@ export const CATEGORIES: Record<CategoryKey, Category> = {
     label: "Text & Formatting",
     shortLabel: "Text & Format",
     icon: Type,
-    color: "text-green-600",
-    bg: "bg-green-50 border-green-200",
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
     description: "Format tweets, count characters, preview fonts, and clean up text.",
   },
   developer: {
