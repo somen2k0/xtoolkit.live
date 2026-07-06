@@ -110,7 +110,7 @@ export default function CssBoxShadowGenerator() {
         {/* Live Preview */}
         <div className="rounded-xl border border-border/60 bg-muted/30 p-6 flex items-center justify-center min-h-[160px]">
           <div
-            className="w-48 h-24 rounded-xl bg-white dark:bg-card border border-border/40 transition-all duration-200"
+            className="w-48 h-24 rounded-xl bg-white border border-border/40 transition-all duration-200"
             style={{ boxShadow: cssValue }}
           />
         </div>

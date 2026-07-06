@@ -305,7 +305,7 @@ export default function OgImagePreview() {
               if (missing.length === 0) return null;
               return (
                 <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/5 px-4 py-3 space-y-1.5">
-                  <p className="text-sm font-semibold text-yellow-600 dark:text-yellow-400">Missing tags detected</p>
+                  <p className="text-sm font-semibold text-yellow-600">Missing tags detected</p>
                   <p className="text-xs text-muted-foreground">
                     The following important tags were not found: <span className="font-mono">{missing.join(", ")}</span>. 
                     Use the <a href="/tools/meta-tag-generator" className="underline text-primary">Meta Tag Generator</a> to create them.

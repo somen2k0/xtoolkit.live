@@ -11,12 +11,12 @@ interface ToolCardProps {
 const BADGE_STYLES: Record<string, string> = {
   Popular: "bg-amber-50 text-amber-600 border-amber-200",
   New: "bg-emerald-50 text-emerald-600 border-emerald-200",
-  AI: "bg-[#f0f0ff] text-[#474bff] border-[#474bff]/20",
+  AI: "bg-primary/10 text-primary border-primary/25",
 };
 
 const ACCENT_COLORS: Record<string, string> = {
   "social-media":    "bg-blue-500",
-  "ai-writing":      "bg-[#474bff]",
+  "ai-writing":      "bg-primary",
   "text-formatting": "bg-green-500",
   "developer":       "bg-orange-500",
   "seo":             "bg-pink-500",

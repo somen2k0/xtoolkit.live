@@ -171,7 +171,7 @@ export function MiniToolLayout({
         />
 
         {/* FAQ */}
-        <article className="prose dark:prose-invert max-w-none border-t pt-8 mt-8">
+        <article className="prose max-w-none border-t pt-8 mt-8">
           <h2 className="not-prose text-xl font-semibold text-foreground mb-5">Frequently Asked Questions</h2>
           <div className="not-prose">
             <Accordion type="single" collapsible className="space-y-2">

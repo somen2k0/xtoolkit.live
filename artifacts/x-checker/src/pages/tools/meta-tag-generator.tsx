@@ -225,10 +225,10 @@ export default function MetaTagGenerator() {
             </div>
           </div>
           <div className={`rounded-lg border border-border/40 bg-background p-4 ${preview === "mobile" ? "max-w-xs" : ""}`}>
-            <div className="text-xs text-green-600 dark:text-green-400 mb-0.5 font-mono truncate">
+            <div className="text-xs text-[#22c55e] mb-0.5 font-mono truncate">
               {canonicalUrl || "https://example.com/your-page"}
             </div>
-            <div className="text-base text-blue-600 dark:text-blue-400 font-medium leading-snug mb-1 line-clamp-1">
+            <div className="text-base text-[#F5390A] font-medium leading-snug mb-1 line-clamp-1">
               {seoTitle || <span className="text-muted-foreground/40 italic">Page title will appear here</span>}
               {seoTitle.length > SEO_TITLE_MAX && (
                 <span className="text-muted-foreground/60">...</span>

@@ -309,10 +309,10 @@ const EmailMessageBody = memo(function EmailMessageBody({ body, isHtml, subject 
           gap: "12px",
         }}>
           <div>
-            <div style={{ fontSize: "10px", color: "#10b981", fontWeight: 600, letterSpacing: "1px", marginBottom: "4px" }}>
+            <div style={{ fontSize: "10px", color: "var(--success)", fontWeight: 600, letterSpacing: "1px", marginBottom: "4px" }}>
               VERIFICATION CODE
             </div>
-            <div style={{ fontSize: "28px", color: "#4ade80", fontWeight: 700, fontFamily: "monospace", letterSpacing: "4px" }}>
+            <div style={{ fontSize: "28px", color: "var(--success)", fontWeight: 700, fontFamily: "monospace", letterSpacing: "4px" }}>
               {otp}
             </div>
           </div>
