@@ -7,9 +7,7 @@ import { SeoHead } from "@/components/SeoHead";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { EmailCapture } from "@/components/monetization/EmailCapture";
 import { AffiliateSection } from "@/components/monetization/AffiliateSection";
-import { StickyUpgradeCTA } from "@/components/monetization/StickyUpgradeCTA";
 
 interface RelatedTool {
   title: string;
@@ -162,14 +160,6 @@ export function MiniToolLayout({
           {children}
         </main>
 
-        {/* Email capture — pro waitlist */}
-        <EmailCapture
-          variant="banner"
-          headline="Pro features are coming — join the waitlist"
-          subline="Bulk checking, CSV export, AI bios, no ads. Get 40% off launch pricing."
-          source={seoTitle.split("—")[0].trim().toLowerCase().replace(/\s+/g, "_")}
-        />
-
         {/* FAQ */}
         <article className="prose max-w-none border-t pt-8 mt-8">
           <h2 className="not-prose text-xl font-semibold text-foreground mb-5">Frequently Asked Questions</h2>
@@ -235,8 +225,6 @@ export function MiniToolLayout({
 
       </div>
 
-      {/* Sticky upgrade bar — appears after 20s */}
-      <StickyUpgradeCTA delay={20000} />
       </div>
     </Layout>
   );
