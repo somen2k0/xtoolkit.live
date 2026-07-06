@@ -7,7 +7,7 @@ import {
   Globe, Mail, ShieldCheck, Pencil, Inbox, Minimize2, KeyRound, Database,
   Shuffle, Shield, Tag, BarChart, Clock, ArrowLeftRight, ScanSearch,
   EyeOff, ShieldAlert, Newspaper,
-  AlignLeft, QrCode, ImageIcon, Laugh,
+  AlignLeft, QrCode, ImageIcon, Laugh, FileText,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
@@ -79,6 +79,7 @@ const TOOL_CATEGORIES = [
       { icon: Palette, label: "Color Picker", desc: "Convert HEX, RGB, HSL instantly", href: "/tools/color-picker", badge: "New" },
       { icon: QrCode, label: "QR Code Generator", desc: "Create QR codes for URLs & more", href: "/tools/qr-code-generator", badge: "New" },
       { icon: ImageIcon, label: "Image Compressor", desc: "Compress images in your browser", href: "/tools/image-compressor", badge: "New" },
+      { icon: FileText, label: "Resume Builder", desc: "10 templates, AI bullets, PDF export", href: "/tools/resume-builder", badge: "New" },
     ],
   },
   {

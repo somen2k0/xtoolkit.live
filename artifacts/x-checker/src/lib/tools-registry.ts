@@ -163,6 +163,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   "email-leak-checker": AlertOctagon,
   "alias-email-explainer": EyeOff,
   "disposable-email-guide": BookOpen,
+  "resume-builder": FileText,
 };
 
 /**

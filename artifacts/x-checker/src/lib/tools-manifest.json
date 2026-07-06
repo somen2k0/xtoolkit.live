@@ -538,6 +538,19 @@
     "tags": ["image", "resize", "compress", "jpeg", "png", "webp"]
   },
   {
+    "id": "resume-builder",
+    "label": "Resume Builder",
+    "description": "Build a professional resume with 10 templates, AI bullet suggestions, and free PDF export. ATS-friendly. No signup.",
+    "href": "/tools/resume-builder",
+    "category": "developer",
+    "badge": "New",
+    "seoTitle": "Free Resume Builder — 10 Templates, AI Suggestions & PDF Export | X Toolkit",
+    "seoDescription": "Create a professional resume free with 10 templates, AI-powered bullet suggestions, and instant PDF download. ATS-friendly. No signup required.",
+    "seoKeywords": "resume builder free, free resume maker, online resume builder, ATS resume builder, resume templates, CV builder free",
+    "sitemapPriority": 0.85,
+    "tags": ["resume", "cv", "builder", "template", "pdf", "ai", "ats", "free"]
+  },
+  {
     "id": "gmail-checker",
     "href": "/tools/gmail-checker",
     "label": "Gmail Account Checker",

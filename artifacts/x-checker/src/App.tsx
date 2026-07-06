@@ -69,6 +69,7 @@ const FunnyBios = lazy(() => import("@/pages/tools/funny-bios"));
 const MaskedEmailGenerator = lazy(() => import("@/pages/tools/masked-email-generator"));
 const GmailChecker = lazy(() => import("@/pages/tools/gmail-checker"));
 const SchemaGenerator = lazy(() => import("@/pages/tools/schema-generator"));
+const ResumeBuilder = lazy(() => import("@/pages/tools/resume-builder"));
 const SpamScoreChecker = lazy(() => import("@/pages/tools/spam-score-checker"));
 const NewsletterTemplateGenerator = lazy(() => import("@/pages/tools/newsletter-template-generator"));
 // Guides (lazy)
@@ -176,6 +177,7 @@ function TrackedRouter() {
           <Route path="/tools/robots-txt-generator" component={RobotsTxtGenerator} />
           <Route path="/tools/sitemap-validator" component={SitemapValidator} />
           <Route path="/tools/schema-generator" component={SchemaGenerator} />
+          <Route path="/tools/resume-builder" component={ResumeBuilder} />
 
           {/* Email Tools */}
           <Route path="/tools/gmail-checker" component={GmailChecker} />

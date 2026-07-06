@@ -19,6 +19,7 @@ import freemailRouter from "./freemail";
 import onesecmailRouter from "./onesecmail";
 import harakirimailRouter from "./harakirimail";
 import gmailCheckerRouter from "./gmail-checker";
+import resumeRouter from "./resume";
 
 const router: IRouter = Router();
 
@@ -69,5 +70,6 @@ const aiProtectionNoCache = [
 
 router.use(...aiProtectionNoCache, bioRouter);
 router.use(...aiProtection, aiDetectorRouter);
+router.use(...aiProtectionNoCache, resumeRouter);
 
 export default router;
