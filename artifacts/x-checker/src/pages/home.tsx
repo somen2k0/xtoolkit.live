@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
@@ -58,8 +59,99 @@ const TOOL_ICONS = [
   { icon: Mail,       label: "Email",      bg: "bg-indigo-100", color: "text-indigo-600" },
 ];
 
+// ── Hooks ────────────────────────────────────────────────────────────────────
+
+const useCountUp = (target: number, duration = 1200) => {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    let startTime = 0;
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [started]);
+
+  return { count, ref };
+};
+
+const useFadeInSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, cls: visible ? "animate-fade-in-up" : "opacity-0" };
+};
+
+// ── StatCard component ────────────────────────────────────────────────────────
+
+function StatCard({ target, suffix = "", label, icon: Icon, color, bg, isGlow = false, isInfinity = false }: {
+  target: number;
+  suffix?: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
+  bg: string;
+  isGlow?: boolean;
+  isInfinity?: boolean;
+}) {
+  const { count, ref } = useCountUp(target);
+  return (
+    <div
+      ref={ref}
+      className={[
+        "group rounded-2xl border border-border bg-card p-5 flex flex-col gap-2 shadow-sm",
+        "transition-all duration-200 hover:-translate-y-[3px] hover:shadow-md cursor-default",
+        isGlow ? "hover:shadow-green-100 hover:border-green-200/60" : "",
+      ].join(" ")}
+    >
+      <div className={`h-8 w-8 rounded-lg ${bg} flex items-center justify-center transition-transform duration-200 group-hover:scale-110`}>
+        <Icon className={`h-4 w-4 ${color}`} />
+      </div>
+      <div className={`text-2xl font-bold ${color}`}>
+        {isInfinity
+          ? <span className="float-infinity">∞</span>
+          : `${count}${suffix}`
+        }
+      </div>
+      <div className="text-xs text-muted-foreground font-medium">{label}</div>
+    </div>
+  );
+}
+
+// ── Page ─────────────────────────────────────────────────────────────────────
+
 export default function Home() {
   const popularTools = getPopularTools().slice(0, 6);
+  const valueSection  = useFadeInSection();
+  const catSection    = useFadeInSection();
+  const featSection   = useFadeInSection();
 
   return (
     <Layout>
@@ -92,12 +184,11 @@ export default function Home() {
         ]}
       />
 
-      {/* ── Hero — left text + right illustration ── */}
+      {/* ── Hero ── */}
       <section className="relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 md:px-8 pt-14 pb-12 md:pt-20 md:pb-16">
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-12">
 
-            {/* Left: headline + text + CTAs */}
             <div className="flex-1 md:max-w-[520px]">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4 leading-tight">
                 All Free Tools in{" "}
@@ -115,7 +206,7 @@ export default function Home() {
                 X Toolkit is a <strong className="text-foreground font-semibold">"free all-in-one toolbox"</strong> built for
                 developers, creators and SEO professionals — {TOTAL_LIVE}+ tools, no signup ever required.
               </p>
-             <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3">
                 <Link href="/tools">
                   <Button size="lg" className="px-7 font-semibold shadow-sm shadow-primary/20 group transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-md">
                     Explore Tools <ArrowRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -129,15 +220,14 @@ export default function Home() {
               </div>
             </div>
 
-           {/* Right: category icon grid with an elegant panel card frame */}
             <div className="flex-1 flex justify-center md:justify-end">
               <div className="bg-[#FFFCF8] p-6 rounded-2xl border border-[#F5390A]/10 shadow-sm max-w-sm w-full">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#F5390A] mb-4 text-center md:text-left opacity-80">
                 </p>
                 <div className="grid grid-cols-3 gap-3">
                   {TOOL_ICONS.map(({ icon: Icon, label, bg, color }, index) => (
-                    <div 
-                      key={label} 
+                    <div
+                      key={label}
                       style={{ animationDelay: `${index * 150}ms` }}
                       className={`${bg} rounded-2xl p-4 flex flex-col items-center justify-center gap-2 aspect-square shadow-sm animate-bounce [animation-duration:3s] transition-all duration-300 ease-out hover:scale-105 hover:shadow-md cursor-default`}
                     >
@@ -147,36 +237,24 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-           </div>
+            </div>
 
           </div>
         </div>
       </section>
 
-      {/* ── Value section — visual left + text right ── */}
+      {/* ── Value / Why X Toolkit ── */}
       <section className="border-t border-border/50 bg-muted/30">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
+        <div ref={valueSection.ref} className={`max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20 ${valueSection.cls}`}>
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
 
-            {/* Left: stat blocks */}
             <div className="flex-1 grid grid-cols-2 gap-4 max-w-xs md:max-w-sm mx-auto md:mx-0">
-              {[
-                { value: `${TOTAL_LIVE}+`, label: "Free Tools", icon: Zap,          color: "text-primary",   bg: "bg-primary/10" },
-                { value: "6",              label: "Categories",  icon: CheckCircle,  color: "text-green-600", bg: "bg-green-100" },
-                { value: "0",              label: "Data Stored", icon: Shield,       color: "text-blue-600",  bg: "bg-blue-100" },
-                { value: "∞",              label: "Free Forever",icon: Sparkles,     color: "text-violet-600",bg: "bg-violet-100" },
-              ].map(({ value, label, icon: Icon, color, bg }) => (
-                <div key={label} className="rounded-2xl border border-border bg-card p-5 flex flex-col gap-2 shadow-sm">
-                  <div className={`h-8 w-8 rounded-lg ${bg} flex items-center justify-center`}>
-                    <Icon className={`h-4 w-4 ${color}`} />
-                  </div>
-                  <div className={`text-2xl font-bold ${color}`}>{value}</div>
-                  <div className="text-xs text-muted-foreground font-medium">{label}</div>
-                </div>
-              ))}
+              <StatCard target={TOTAL_LIVE} suffix="+" label="Free Tools"   icon={Zap}         color="text-primary"    bg="bg-primary/10"  />
+              <StatCard target={6}          suffix=""  label="Categories"   icon={CheckCircle}  color="text-green-600"  bg="bg-green-100"   />
+              <StatCard target={0}          suffix=""  label="Data Stored"  icon={Shield}       color="text-blue-600"   bg="bg-blue-100"    isGlow />
+              <StatCard target={0}          suffix=""  label="Free Forever" icon={Sparkles}     color="text-violet-600" bg="bg-violet-100"  isInfinity />
             </div>
 
-            {/* Right: text */}
             <div className="flex-1 max-w-lg">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-5 tracking-tight">
                 Best All-In-One Toolkit for the Web
@@ -201,7 +279,7 @@ export default function Home() {
 
       {/* ── Tool Categories ── */}
       <section id="categories" className="border-t border-border/50">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
+        <div ref={catSection.ref} className={`max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20 ${catSection.cls}`}>
           <div className="mb-10">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
               Tool Categories
@@ -247,7 +325,7 @@ export default function Home() {
 
       {/* ── Featured Tools ── */}
       <section className="border-t border-border/50 bg-muted/30">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
+        <div ref={featSection.ref} className={`max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20 ${featSection.cls}`}>
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-1">
