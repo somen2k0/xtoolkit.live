@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { ArrowRight, Shield, Code2, AtSign, Clock } from "lucide-react";
+import { TOTAL_LIVE } from "@/lib/tools-registry";
 
 const GUIDES = [
   {
@@ -174,7 +175,7 @@ export default function Guides() {
         <div className="mt-12 rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 text-center">
           <h2 className="text-lg font-semibold mb-2">Need a tool, not a guide?</h2>
           <p className="text-muted-foreground text-sm mb-5">
-            All 44+ tools are free, instant, and require no signup.
+            All {TOTAL_LIVE}+ tools are free, instant, and require no signup.
           </p>
           <Link href="/tools">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors cursor-pointer shadow-sm shadow-primary/20">
