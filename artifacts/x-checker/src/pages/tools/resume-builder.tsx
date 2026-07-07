@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
+import { pdf } from "@react-pdf/renderer";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { ResumeForm } from "@/components/resume/ResumeForm";
 import { ResumePreview } from "@/components/resume/ResumePreview";
+import { PDFDocument } from "@/components/resume/pdf/PDFDocument";
 import { DEFAULT_RESUME, TEMPLATES, ACCENT_PRESETS, type ResumeData } from "@/components/resume/types";
 import { Button } from "@/components/ui/button";
 import { Download, Loader2, Eye, Pencil } from "lucide-react";
@@ -56,45 +56,17 @@ export default function ResumeBuilder() {
   const handleData = useCallback((next: ResumeData) => setData(next), []);
 
   async function handleDownloadPDF() {
-    if (!previewRef.current || isGenerating) return;
+    if (isGenerating) return;
     setIsGenerating(true);
     try {
-      const element = previewRef.current;
-      const parent = element.parentElement;
-      const originalTransform = parent?.style.transform || "";
-      if (parent) parent.style.transform = "scale(1)";
-
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#ffffff",
-        logging: false,
-        width: A4_WIDTH_PX,
-        height: element.scrollHeight,
-        windowWidth: A4_WIDTH_PX,
-      });
-
-      if (parent) parent.style.transform = originalTransform;
-
-      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-      const pageHeightPx = A4_HEIGHT_PX * 2;
-      const totalPages = Math.ceil(canvas.height / pageHeightPx);
-
-      for (let page = 0; page < totalPages; page++) {
-        if (page > 0) pdf.addPage();
-        const sourceY = page * pageHeightPx;
-        const sourceHeight = Math.min(pageHeightPx, canvas.height - sourceY);
-        const pageCanvas = document.createElement("canvas");
-        pageCanvas.width = canvas.width;
-        pageCanvas.height = sourceHeight;
-        const ctx = pageCanvas.getContext("2d")!;
-        ctx.drawImage(canvas, 0, sourceY, canvas.width, sourceHeight, 0, 0, canvas.width, sourceHeight);
-        const imgData = pageCanvas.toDataURL("image/jpeg", 0.95);
-        pdf.addImage(imgData, "JPEG", 0, 0, 210, (sourceHeight / (A4_WIDTH_PX * 2)) * 210);
-      }
-
+      const blob = await pdf(<PDFDocument data={data} />).toBlob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
       const name = data.personal.name || "resume";
-      pdf.save(`${name.replace(/\s+/g, "_")}_Resume.pdf`);
+      link.download = `${name.replace(/\s+/g, "_")}_Resume.pdf`;
+      link.click();
+      URL.revokeObjectURL(url);
     } finally {
       setIsGenerating(false);
     }
