@@ -11,6 +11,8 @@ import { Download, Loader2, Eye, Pencil } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const LS_KEY = "xtoolkit_resume";
+const A4_WIDTH_PX = 794;
+const A4_HEIGHT_PX = 1123;
 
 function loadFromStorage(): ResumeData {
   try {
@@ -25,7 +27,23 @@ export default function ResumeBuilder() {
   const [mobileView, setMobileView] = useState<"edit" | "preview">("edit");
   const [customColor, setCustomColor] = useState(data.accentColor);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [previewScale, setPreviewScale] = useState(1);
   const previewRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateScale = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth - 48;
+        const scale = Math.min(containerWidth / A4_WIDTH_PX, 1);
+        setPreviewScale(scale);
+      }
+    };
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // Auto-save every 30s
   useEffect(() => {
@@ -41,34 +59,42 @@ export default function ResumeBuilder() {
     if (!previewRef.current || isGenerating) return;
     setIsGenerating(true);
     try {
-      const canvas = await html2canvas(previewRef.current, {
+      const element = previewRef.current;
+      const parent = element.parentElement;
+      const originalTransform = parent?.style.transform || "";
+      if (parent) parent.style.transform = "scale(1)";
+
+      const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
         backgroundColor: "#ffffff",
         logging: false,
+        width: A4_WIDTH_PX,
+        height: element.scrollHeight,
+        windowWidth: A4_WIDTH_PX,
       });
-      const imgData = canvas.toDataURL("image/jpeg", 0.97);
-      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      const imgRatio = canvas.height / canvas.width;
-      const imgHeight = pageWidth * imgRatio;
 
-      if (imgHeight <= pageHeight) {
-        pdf.addImage(imgData, "JPEG", 0, 0, pageWidth, imgHeight);
-      } else {
-        let y = 0;
-        while (y < imgHeight) {
-          if (y > 0) pdf.addPage();
-          pdf.addImage(imgData, "JPEG", 0, -y, pageWidth, imgHeight);
-          y += pageHeight;
-        }
+      if (parent) parent.style.transform = originalTransform;
+
+      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const pageHeightPx = A4_HEIGHT_PX * 2;
+      const totalPages = Math.ceil(canvas.height / pageHeightPx);
+
+      for (let page = 0; page < totalPages; page++) {
+        if (page > 0) pdf.addPage();
+        const sourceY = page * pageHeightPx;
+        const sourceHeight = Math.min(pageHeightPx, canvas.height - sourceY);
+        const pageCanvas = document.createElement("canvas");
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = sourceHeight;
+        const ctx = pageCanvas.getContext("2d")!;
+        ctx.drawImage(canvas, 0, sourceY, canvas.width, sourceHeight, 0, 0, canvas.width, sourceHeight);
+        const imgData = pageCanvas.toDataURL("image/jpeg", 0.95);
+        pdf.addImage(imgData, "JPEG", 0, 0, 210, (sourceHeight / (A4_WIDTH_PX * 2)) * 210);
       }
 
-      const filename = data.personal.name
-        ? `${data.personal.name.replace(/\s+/g, "_")}_Resume.pdf`
-        : "Resume.pdf";
-      pdf.save(filename);
+      const name = data.personal.name || "resume";
+      pdf.save(`${name.replace(/\s+/g, "_")}_Resume.pdf`);
     } finally {
       setIsGenerating(false);
     }
@@ -179,9 +205,20 @@ export default function ResumeBuilder() {
           </div>
 
           {/* Right: Preview */}
-          <div className={`flex-1 overflow-auto bg-muted/30 p-4 md:p-6 ${mobileView === "edit" ? "hidden md:block" : "block"}`}>
-            <div className="max-w-[860px] mx-auto">
-              <ResumePreview ref={previewRef} data={data} />
+          <div
+            ref={containerRef}
+            className={`flex-1 overflow-auto bg-muted/30 p-4 md:p-6 ${mobileView === "edit" ? "hidden md:block" : "block"}`}
+          >
+            <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "flex-start" }}>
+              <div
+                style={{
+                  transform: `scale(${previewScale})`,
+                  transformOrigin: "top center",
+                  marginBottom: `${(A4_HEIGHT_PX * previewScale) - A4_HEIGHT_PX}px`,
+                }}
+              >
+                <ResumePreview ref={previewRef} data={data} />
+              </div>
             </div>
           </div>
         </div>

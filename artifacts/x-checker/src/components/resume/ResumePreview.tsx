@@ -28,6 +28,9 @@ const TEMPLATE_MAP: Record<string, React.ComponentType<{ data: ResumeData }>> = 
   compact:   TemplateCompact,
 };
 
+const A4_WIDTH_PX = 794;
+const A4_HEIGHT_PX = 1123;
+
 export const ResumePreview = forwardRef<HTMLDivElement, ResumePreviewProps>(
   ({ data }, ref) => {
     const Template = TEMPLATE_MAP[data.selectedTemplate] ?? TemplateClassic;
@@ -35,12 +38,15 @@ export const ResumePreview = forwardRef<HTMLDivElement, ResumePreviewProps>(
     return (
       <div
         ref={ref}
-        className="resume-preview bg-white shadow-lg"
+        className="resume-preview shadow-lg"
         style={{
-          width: "100%",
-          minHeight: 297 * (96 / 25.4),
+          width: `${A4_WIDTH_PX}px`,
+          minHeight: `${A4_HEIGHT_PX}px`,
+          backgroundColor: "#ffffff",
           transformOrigin: "top left",
           overflow: "hidden",
+          fontFamily: "inherit",
+          boxSizing: "border-box",
         }}
       >
         <Template data={data} />
