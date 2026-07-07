@@ -11,7 +11,7 @@ import {
   Minimize2, Code2, KeyRound, Regex, Shuffle,
   ScanSearch, EyeOff, Newspaper, ShieldAlert, Inbox,
   AlignLeft, QrCode, ImageIcon, Palette, Laugh, BookOpen, BookMarked,
-  Layers, Pipette,
+  Layers, Pipette, FileText,
 } from "lucide-react";
 import { TOTAL_LIVE } from "@/lib/tools-registry";
 import { NavSearchDialog } from "@/components/layout/NavSearchDialog";
@@ -62,6 +62,7 @@ const NAV_CATEGORIES = [
       { icon: Minimize2, label: "Image Compressor", href: "/tools/image-compressor" },
       { icon: Pipette, label: "Color Picker", href: "/tools/color-picker" },
       { icon: QrCode, label: "QR Code Generator", href: "/tools/qr-code-generator" },
+      { icon: FileText, label: "Resume Builder", href: "/tools/resume-builder", badge: "New" },
     ],
     comingSoon: [],
   },

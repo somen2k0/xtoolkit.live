@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Plus, Trash2, Sparkles, Loader2, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useRef } from "react";
+import { Plus, Trash2, Sparkles, Loader2, ChevronDown, ChevronUp, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { ResumeData } from "./types";
@@ -38,6 +38,18 @@ export function ResumeForm({ data, onChange }: Props) {
   const [loadingBullets, setLoadingBullets] = useState<string | null>(null);
   const [bulletSuggestions, setBulletSuggestions] = useState<Record<string, string[]>>({});
   const [expandedExp, setExpandedExp] = useState<string | null>(data.experience[0]?.id ?? null);
+  const photoInputRef = useRef<HTMLInputElement>(null);
+
+  function handlePhotoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const base64 = ev.target?.result as string;
+      setPersonal({ photo: base64 });
+    };
+    reader.readAsDataURL(file);
+  }
 
   const set = (patch: Partial<ResumeData>) => onChange({ ...data, ...patch });
   const setPersonal = (patch: Partial<ResumeData["personal"]>) =>
@@ -97,6 +109,46 @@ export function ResumeForm({ data, onChange }: Props) {
       <div className="flex-1 overflow-y-auto p-4">
         {tab === "personal" && (
           <Section>
+            {/* Photo upload */}
+            <div className="flex items-center gap-4">
+              <div
+                className="h-20 w-20 rounded-full border-2 border-dashed border-border flex items-center justify-center shrink-0 overflow-hidden bg-muted/40 cursor-pointer hover:border-primary/50 transition-colors"
+                onClick={() => photoInputRef.current?.click()}
+              >
+                {data.personal.photo
+                  ? <img src={data.personal.photo} alt="Photo" className="h-full w-full object-cover" />
+                  : <Camera className="h-6 w-6 text-muted-foreground/50" />
+                }
+              </div>
+              <div className="flex-1">
+                <div className="text-xs font-medium mb-1">Profile Photo <span className="text-muted-foreground">(optional)</span></div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => photoInputRef.current?.click()}
+                    className="text-xs text-primary hover:underline"
+                  >
+                    {data.personal.photo ? "Change photo" : "Upload photo"}
+                  </button>
+                  {data.personal.photo && (
+                    <button
+                      onClick={() => setPersonal({ photo: undefined })}
+                      className="text-xs text-muted-foreground hover:text-destructive"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+                <div className="text-[11px] text-muted-foreground mt-1">Only shown in Creative template sidebar</div>
+              </div>
+              <input
+                ref={photoInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handlePhotoUpload}
+              />
+            </div>
+
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <FieldLabel>Full Name</FieldLabel>

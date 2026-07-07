@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { ResumeForm } from "@/components/resume/ResumeForm";
 import { ResumePreview } from "@/components/resume/ResumePreview";
 import { DEFAULT_RESUME, TEMPLATES, ACCENT_PRESETS, type ResumeData } from "@/components/resume/types";
 import { Button } from "@/components/ui/button";
-import { Download, Printer, Eye, Pencil } from "lucide-react";
+import { Download, Loader2, Eye, Pencil } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const LS_KEY = "xtoolkit_resume";
@@ -22,6 +24,7 @@ export default function ResumeBuilder() {
   const [data, setData] = useState<ResumeData>(loadFromStorage);
   const [mobileView, setMobileView] = useState<"edit" | "preview">("edit");
   const [customColor, setCustomColor] = useState(data.accentColor);
+  const [isGenerating, setIsGenerating] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
 
   // Auto-save every 30s
@@ -34,8 +37,41 @@ export default function ResumeBuilder() {
 
   const handleData = useCallback((next: ResumeData) => setData(next), []);
 
-  function handlePrint() {
-    window.print();
+  async function handleDownloadPDF() {
+    if (!previewRef.current || isGenerating) return;
+    setIsGenerating(true);
+    try {
+      const canvas = await html2canvas(previewRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        logging: false,
+      });
+      const imgData = canvas.toDataURL("image/jpeg", 0.97);
+      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imgRatio = canvas.height / canvas.width;
+      const imgHeight = pageWidth * imgRatio;
+
+      if (imgHeight <= pageHeight) {
+        pdf.addImage(imgData, "JPEG", 0, 0, pageWidth, imgHeight);
+      } else {
+        let y = 0;
+        while (y < imgHeight) {
+          if (y > 0) pdf.addPage();
+          pdf.addImage(imgData, "JPEG", 0, -y, pageWidth, imgHeight);
+          y += pageHeight;
+        }
+      }
+
+      const filename = data.personal.name
+        ? `${data.personal.name.replace(/\s+/g, "_")}_Resume.pdf`
+        : "Resume.pdf";
+      pdf.save(filename);
+    } finally {
+      setIsGenerating(false);
+    }
   }
 
   function handleColorChange(color: string) {
@@ -52,32 +88,7 @@ export default function ResumeBuilder() {
         path="/tools/resume-builder"
       />
 
-      {/* Print styles */}
-      <style>{`
-        @media print {
-          .no-print { display: none !important; }
-          body > * { display: none !important; }
-          .print-only { display: block !important; }
-          .resume-preview {
-            width: 210mm !important;
-            min-height: 297mm !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            box-shadow: none !important;
-            position: fixed !important;
-            top: 0; left: 0;
-          }
-          @page { margin: 0; size: A4; }
-        }
-        .print-only { display: none; }
-      `}</style>
-
-      {/* Hidden print target */}
-      <div className="print-only">
-        <ResumePreview data={data} />
-      </div>
-
-      <div className="no-print min-h-screen bg-background flex flex-col">
+      <div className="min-h-screen bg-background flex flex-col">
         {/* Top toolbar */}
         <div className="border-b border-border/50 bg-background/95 backdrop-blur sticky top-0 z-20">
           <div className="max-w-[1400px] mx-auto px-3 md:px-5 py-2.5 flex flex-col gap-2">
@@ -104,10 +115,10 @@ export default function ResumeBuilder() {
                   </button>
                 </div>
 
-                <Button size="sm" onClick={handlePrint} className="shadow-sm shadow-primary/20 gap-1.5">
-                  <Download className="h-3.5 w-3.5" />
-                  <span className="hidden sm:inline">Download PDF</span>
-                  <span className="sm:hidden">PDF</span>
+                <Button size="sm" onClick={handleDownloadPDF} disabled={isGenerating} className="shadow-sm shadow-primary/20 gap-1.5">
+                  {isGenerating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+                  <span className="hidden sm:inline">{isGenerating ? "Generating…" : "Download PDF"}</span>
+                  <span className="sm:hidden">{isGenerating ? "…" : "PDF"}</span>
                 </Button>
               </div>
             </div>
@@ -157,11 +168,6 @@ export default function ResumeBuilder() {
               </div>
             </div>
 
-            {/* Print tip */}
-            <div className="flex items-start gap-1.5 text-xs text-muted-foreground bg-amber-50 border border-amber-200/60 rounded-md px-3 py-1.5">
-              <Printer className="h-3.5 w-3.5 shrink-0 mt-0.5 text-amber-600" />
-              <span>To export PDF: click <strong>Download PDF</strong>, then in the print dialog set <strong>Margins → None</strong> and enable <strong>Background graphics</strong>.</span>
-            </div>
           </div>
         </div>
 
@@ -182,7 +188,7 @@ export default function ResumeBuilder() {
       </div>
 
       {/* ── SEO content ── */}
-      <div className="no-print max-w-4xl mx-auto px-4 md:px-8 py-12 space-y-10">
+      <div className="max-w-4xl mx-auto px-4 md:px-8 py-12 space-y-10">
         <div className="prose max-w-none">
           <h2 className="text-2xl font-bold mb-3">Free Online Resume Builder — No Signup, No Watermark</h2>
           <p className="text-muted-foreground leading-relaxed">X Toolkit's Resume Builder is a completely free, browser-based tool that lets you create a professional resume in minutes. Everything runs in your browser — your data is never sent to a server, stored in a database, or shared with third parties. The only persistence is your own browser's localStorage, which auto-saves your progress every 30 seconds.</p>
@@ -212,7 +218,7 @@ export default function ResumeBuilder() {
             <li><strong>Avoid tables, text boxes, and images</strong> — ATS systems often can't parse these correctly.</li>
             <li><strong>Mirror job description keywords</strong> — If the JD says "TypeScript," use "TypeScript" not "TS."</li>
             <li><strong>Use standard section headers</strong> — "Experience," "Education," "Skills" — not creative alternatives like "Where I've Been."</li>
-            <li><strong>Export as PDF</strong> — Most ATS systems accept PDF well when generated from HTML. Use Chrome's built-in PDF export via the print dialog.</li>
+            <li><strong>Export as PDF</strong> — Most ATS systems accept PDF well. Use the Download PDF button for a one-click A4 PDF export.</li>
             <li><strong>Keep to one page</strong> for under 10 years of experience; two pages is acceptable for senior roles.</li>
           </ul>
 
@@ -250,7 +256,7 @@ export default function ResumeBuilder() {
               },
               {
                 q: "How do I export my resume as a PDF?",
-                a: "Click the 'Download PDF' button at the top. In the browser print dialog, select your printer (or 'Save as PDF'), set Margins to None, and enable Background graphics. This produces a clean A4 PDF from the browser's native print engine — no external libraries needed.",
+                a: "Click the 'Download PDF' button at the top. The tool uses html2canvas and jsPDF to render your resume to a pixel-perfect A4 PDF and download it automatically — no print dialog, no browser configuration needed. The file is named after your name (e.g. Alex_Johnson_Resume.pdf).",
               },
               {
                 q: "Is my resume data saved anywhere?",
