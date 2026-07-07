@@ -38,9 +38,20 @@ export default defineConfig({
   ],
 
   optimizeDeps: {
-    // react-pdf uses a browser-field remap (no exports map) — pre-bundling it
-    // picks up the Node.js entry instead of the browser bundle, breaking pdf().
-    exclude: ["@react-pdf/renderer"],
+    // All @react-pdf/* packages use browser-field remapping (no exports map).
+    // Vite's pre-bundler ignores the browser field for these ESM packages and
+    // picks up Node.js entries — critically @react-pdf/pdfkit Node build (506KB)
+    // vs browser build (739KB) lacks browser PDF encoding, silently breaking pdf().
+    exclude: [
+      "@react-pdf/renderer",
+      "@react-pdf/pdfkit",
+      "@react-pdf/font",
+      "@react-pdf/layout",
+      "@react-pdf/render",
+      "@react-pdf/fns",
+      "@react-pdf/reconciler",
+      "@react-pdf/primitives",
+    ],
   },
 
   resolve: {
