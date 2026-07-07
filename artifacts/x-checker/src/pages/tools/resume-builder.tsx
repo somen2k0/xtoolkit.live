@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { pdf } from "@react-pdf/renderer";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { ResumeForm } from "@/components/resume/ResumeForm";
 import { ResumePreview } from "@/components/resume/ResumePreview";
-import { PDFDocument } from "@/components/resume/pdf/PDFDocument";
 import { DEFAULT_RESUME, TEMPLATES, ACCENT_PRESETS, type ResumeData } from "@/components/resume/types";
 import { Button } from "@/components/ui/button";
 import { Download, Loader2, Eye, Pencil } from "lucide-react";
@@ -59,17 +57,28 @@ export default function ResumeBuilder() {
     if (isGenerating) return;
     setIsGenerating(true);
     try {
-      const blob = await pdf(<PDFDocument data={data} />).toBlob();
+      console.log("Starting PDF generation...");
+      const { pdf } = await import("@react-pdf/renderer");
+      console.log("pdf imported:", pdf);
+      const { PDFDocument } = await import("@/components/resume/pdf/PDFDocument");
+      console.log("PDFDocument imported:", PDFDocument);
+      const element = React.createElement(PDFDocument, { data });
+      console.log("element created:", element);
+      const instance = pdf(element);
+      console.log("instance:", instance);
+      const blob = await instance.toBlob();
+      console.log("blob:", blob);
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      const name = data.personal.name || "resume";
-      link.download = `${name.replace(/\s+/g, "_")}_Resume.pdf`;
-      link.style.display = "none";
+      link.download = `${(data.personal.name || "resume").replace(/\s+/g, "_")}_Resume.pdf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("PDF error:", err);
+      alert(`PDF failed: ${err}`);
     } finally {
       setIsGenerating(false);
     }
