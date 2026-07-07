@@ -37,6 +37,12 @@ export default defineConfig({
       : []),
   ],
 
+  optimizeDeps: {
+    // react-pdf uses a browser-field remap (no exports map) — pre-bundling it
+    // picks up the Node.js entry instead of the browser bundle, breaking pdf().
+    exclude: ["@react-pdf/renderer"],
+  },
+
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
