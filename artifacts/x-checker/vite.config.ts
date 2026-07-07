@@ -46,11 +46,14 @@ export default defineConfig({
       "@react-pdf/renderer",
       "@react-pdf/pdfkit",
       "@react-pdf/font",
+      "@react-pdf/image",
       "@react-pdf/layout",
+      "@react-pdf/png-js",
+      "@react-pdf/primitives",
+      "@react-pdf/stylesheet",
       "@react-pdf/render",
       "@react-pdf/fns",
       "@react-pdf/reconciler",
-      "@react-pdf/primitives",
     ],
   },
 
@@ -76,6 +79,9 @@ export default defineConfig({
     emptyOutDir: true,
     chunkSizeWarningLimit: 500,
     cssMinify: "lightningcss",
+    commonjsOptions: {
+      exclude: ["@react-pdf/pdfkit"],
+    },
     rollupOptions: {
       onwarn(warning, warn) {
         if (warning.code === "SOURCEMAP_ERROR") return;
