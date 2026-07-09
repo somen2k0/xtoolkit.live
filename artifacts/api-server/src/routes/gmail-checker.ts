@@ -24,6 +24,7 @@ async function smtpCheck(
   return new Promise((resolve) => {
     const timeout = setTimeout(() => {
       socket.destroy();
+      console.error(`SMTP timeout for ${email} after 10s`);
       resolve("unknown");
     }, 10000);
 
@@ -72,8 +73,9 @@ async function smtpCheck(
       }
     });
 
-    socket.on("error", () => {
+    socket.on("error", (err) => {
       clearTimeout(timeout);
+      console.error(`SMTP error for ${email}:`, err.message, (err as NodeJS.ErrnoException).code);
       resolve("unknown");
     });
   });
