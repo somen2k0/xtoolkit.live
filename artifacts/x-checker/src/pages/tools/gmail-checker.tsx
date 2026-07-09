@@ -126,8 +126,7 @@ export default function GmailChecker() {
     trackEvent("gmail_check", { label: String(lines.length) });
 
     try {
-      const apiBase = import.meta.env.VITE_RENDER_API_URL ?? "";
-      const res = await fetch(`${apiBase}/api/gmail-checker/check`, {
+      const res = await fetch("/api/gmail-checker/check", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ emails: lines }),
