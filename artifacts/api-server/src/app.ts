@@ -41,9 +41,14 @@ app.use(
 );
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
-// Production: only https://xtoolkit.live
+// Production: xtoolkit.live + www variant + localhost for dev
 // Development: allow all origins (Replit preview, localhost, etc.)
-const PRODUCTION_ORIGINS = ["https://xtoolkit.live"];
+const PRODUCTION_ORIGINS = [
+  "https://xtoolkit.live",
+  "https://www.xtoolkit.live",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
 
 const REPLIT_ORIGIN_RE = /^https?:\/\/[a-zA-Z0-9-]+\.(replit\.dev|repl\.co|replit\.app)$/;
 
@@ -66,7 +71,7 @@ app.use(
     },
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "x-admin-password"],
-    credentials: false,
+    credentials: true,
   }),
 );
 
