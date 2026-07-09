@@ -105,7 +105,6 @@ const NAV_CATEGORIES = [
       { icon: Inbox, label: "Temp Email", href: "/tools/temp-mail", badge: "Popular" },
       { icon: Mail, label: "Temp Gmail", href: "/tools/temp-mail/tempgmail" },
       { icon: Hash, label: "Gmail Tricks", href: "/tools/temp-mail/gmail-tricks" },
-      { icon: ScanSearch, label: "Gmail Account Checker", href: "/tools/gmail-checker", badge: "New" },
     ],
     comingSoon: [],
   },

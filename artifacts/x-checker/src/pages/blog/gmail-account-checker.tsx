@@ -18,7 +18,6 @@ export default function GmailAccountChecker() {
         { title: "Why Websites Ask for Email Verification", href: "/blog/why-websites-ask-email-verification", description: "The real business and technical reasons behind every verify-your-email prompt.", readTime: "4 min" },
       ]}
       relatedTools={[
-        { title: "Gmail Account Checker", href: "/tools/gmail-checker", description: "Verify up to 50 Gmail addresses in bulk — valid, invalid, disabled, or unknown.", icon: Search },
         { title: "Email Validator", href: "/tools/email-validator", description: "Check email address syntax and format instantly in your browser.", icon: CheckCircle },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate random email aliases to protect your real inbox.", icon: Mail },
         { title: "Temp Email", href: "/tools/temp-mail/tempemail", description: "Create a free disposable inbox instantly — no signup required.", icon: Download },
@@ -32,7 +31,7 @@ export default function GmailAccountChecker() {
         This is fundamentally different from a basic email format validator. A format validator only checks whether an address <em>looks</em> correct (<code>name@domain.com</code>). A Gmail account checker goes one step further and verifies whether Google actually has an account registered to that address — in real time.
       </p>
       <p>
-        X Toolkit's free <a href="/tools/gmail-checker">Gmail Account Checker</a> handles up to 50 addresses per batch with no signup, no API key, and no email sent to the recipients. Results appear in seconds with a one-click CSV export.
+        Gmail verification requires direct SMTP access — <strong>coming soon</strong>. In the meantime, use X Toolkit's <a href="/tools/email-validator">Email Validator</a> for instant format and MX record checking.
       </p>
 
       <h2>Why You Need to Verify Gmail Addresses</h2>
@@ -113,7 +112,7 @@ export default function GmailAccountChecker() {
       </p>
       <ol>
         <li>
-          <strong>Open the tool</strong> — Go to <a href="/tools/gmail-checker">xtoolkit.live/tools/gmail-checker</a>. No account or signup required — the tool works immediately in your browser.
+          <strong>Open the tool</strong> — Go to <a href="/tools/email-validator">xtoolkit.live/tools/email-validator</a>. No account or signup required — the tool works immediately in your browser.
         </li>
         <li>
           <strong>Paste your Gmail addresses</strong> — Enter up to 50 <code>@gmail.com</code> addresses in the input box, one per line. The tool accepts plain addresses (<code>john@gmail.com</code>) and will ignore any extra whitespace or blank lines. You can paste directly from a spreadsheet column.
@@ -145,7 +144,7 @@ export default function GmailAccountChecker() {
         </li>
       </ul>
       <p>
-        For most production use cases — especially email marketing, user registration, and sales outreach — format validation alone is not sufficient. You need account-level verification to catch the addresses that look valid but don't exist. Use X Toolkit's <a href="/tools/email-validator">Email Validator</a> for fast format checking, and the <a href="/tools/gmail-checker">Gmail Account Checker</a> when you need confirmation that the account is real.
+        For most production use cases — especially email marketing, user registration, and sales outreach — format validation alone is not sufficient. Use X Toolkit's <a href="/tools/email-validator">Email Validator</a> for fast format and MX record checking. Full SMTP account verification is coming soon.
       </p>
 
       <h2>Limitations to Know Before You Start</h2>

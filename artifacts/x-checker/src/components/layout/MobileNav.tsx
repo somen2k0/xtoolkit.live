@@ -107,7 +107,6 @@ const TOOL_CATEGORIES = [
       { icon: Inbox, label: "Temp Email", desc: "Disposable throwaway inbox", href: "/tools/temp-mail/tempemail", badge: "Popular" },
       { icon: Mail, label: "Temp Gmail", desc: "Real temporary Gmail address", href: "/tools/temp-mail/tempgmail" },
       { icon: Hash, label: "Gmail Tricks", desc: "Dot & plus-tag address variants", href: "/tools/temp-mail/gmail-tricks" },
-      { icon: Search, label: "Gmail Account Checker", desc: "Verify Gmail addresses in bulk", href: "/tools/gmail-checker", badge: "New" },
       { icon: Pencil, label: "Subject Line Generator", desc: "High-converting subject line templates", href: "/tools/subject-line-generator" },
       { icon: Mail, label: "Email Signature Generator", desc: "Professional email signature builder", href: "/tools/email-signature-generator", badge: "New" },
       { icon: ShieldCheck, label: "Email Validator", desc: "Validate format & MX records", href: "/tools/email-validator", badge: "New" },
@@ -133,7 +132,6 @@ const TEMP_MAIL_SHEET_ITEMS = [
   { icon: Inbox,        label: "Temp Email",             href: "/tools/temp-mail/tempemail",  desc: "Anonymous throwaway inbox",         color: "text-primary", badge: "Popular" },
   { icon: Mail,         label: "Temp Gmail",             href: "/tools/temp-mail/tempgmail",  desc: "Real temporary Gmail address",      color: "text-primary" },
   { icon: Hash,         label: "Gmail Tricks",           href: "/tools/temp-mail/gmail-tricks", desc: "Dot & plus-tag address variants", color: "text-primary" },
-  { icon: Search,       label: "Gmail Account Checker",  href: "/tools/gmail-checker",        desc: "Verify Gmail addresses in bulk",    color: "text-primary", badge: "New" },
 ];
 
 const TEMP_PRIVACY_SHEET_ITEMS = [
