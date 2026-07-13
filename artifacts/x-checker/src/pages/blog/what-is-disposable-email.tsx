@@ -10,7 +10,7 @@ export default function WhatIsDisposableEmail() {
       description="Disposable email lets you receive messages without exposing your real address. Here's how it works, when to use it, and what to watch out for."
       icon={BookOpen}
       readTime="6 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "Temp Mail vs Gmail — What's the Difference?", href: "/blog/temp-mail-vs-gmail", description: "Side-by-side comparison of temporary email and Gmail.", readTime: "5 min" },
@@ -18,10 +18,9 @@ export default function WhatIsDisposableEmail() {
         { title: "Best Temp Mail Services (2026)", href: "/blog/best-temp-mail-services", description: "Top disposable email providers compared.", readTime: "7 min" },
       ]}
       relatedTools={[
-        { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a throwaway inbox instantly.", icon: Mail },
-        { title: "Temp Mail", href: "/tools/temp-mail", description: "Get a disposable inbox instantly — no signup.", icon: BookOpen },
-        { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous aliases.", icon: EyeOff },
-        { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Score your email's privacy level.", icon: Shield },
+        { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Get a disposable inbox instantly — no signup required.", icon: Mail },
+        { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous aliases that forward to your real inbox.", icon: EyeOff },
+        { title: "Email Validator", href: "/tools/email-validator", description: "Check whether an email address is valid before sending to it.", icon: Shield },
       ]}
     >
       <h2>What Is a Disposable Email Address?</h2>
