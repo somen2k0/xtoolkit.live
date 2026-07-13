@@ -10,7 +10,7 @@ export default function WhatIsJwt() {
       description="JWTs are the standard for stateless authentication in modern web apps and APIs. Here's how they work, when to use them, and how to avoid the common security pitfalls."
       icon={Key}
       readTime="8 min read"
-      publishDate="2026"
+      publishDate="June 2026"
       category="Developer"
       relatedArticles={[
         { title: "What Is Base64?", href: "/blog/what-is-base64", description: "Base64 encoding explained — JWTs use Base64URL internally.", readTime: "6 min" },
@@ -127,9 +127,43 @@ export default function WhatIsJwt() {
         <strong>When to use JWTs:</strong> microservices architectures where services need to authenticate requests independently, mobile apps where cookie management is less natural, or APIs that need to be stateless for horizontal scaling. <strong>When to prefer sessions:</strong> traditional web applications with a single server, applications requiring immediate revocation (banking, healthcare), or when simplicity is more valuable than scalability.
       </p>
 
+      <h2>The Dual-Token Pattern: Access Tokens and Refresh Tokens</h2>
+      <p>
+        In production applications, JWTs are rarely used alone. The standard approach is a <strong>dual-token pattern</strong> that balances security with user experience:
+      </p>
+      <ul>
+        <li><strong>Access token</strong>: A short-lived JWT (typically 15 minutes to 1 hour). Sent with every API request in the <code>Authorization: Bearer</code> header. Because it expires quickly, the window of damage from a stolen token is small — an attacker can only use it for minutes.</li>
+        <li><strong>Refresh token</strong>: A long-lived opaque random string (not a JWT) stored in an HttpOnly cookie. Not sent with every request — only used to obtain a new access token when the current one expires. Stored server-side in the database so it can be revoked at any time.</li>
+      </ul>
+      <p>
+        The flow: when the access token expires, the client silently sends the refresh token to a dedicated <code>/auth/refresh</code> endpoint. The server validates the refresh token against the database, issues a new access token (and optionally rotates the refresh token), and returns it to the client. The user never sees a forced logout.
+      </p>
+      <p>
+        To log out a user immediately — for example after a password change or a detected breach — you invalidate the refresh token in the database. Even if the access token is still technically valid, it will expire within minutes and cannot be renewed. This gives you practical revocation without maintaining a large-scale blocklist of every issued token.
+      </p>
+      <p>
+        <strong>Refresh token rotation</strong> (issuing a new refresh token on every use and invalidating the old one) adds an extra security layer: if an attacker steals a refresh token and uses it before the legitimate user does, the legitimate user's next refresh attempt will fail because the stolen token has already been consumed. This signals a compromise and forces a re-login — a pattern used by Google, GitHub, and most major OAuth providers.
+      </p>
+
+      <h2>JWT Libraries by Language</h2>
+      <p>
+        Never implement JWT signing or verification yourself — use a well-audited library. Here are the most widely used options:
+      </p>
+      <ul>
+        <li><strong>Node.js / JavaScript:</strong> <code>jsonwebtoken</code> (most popular), <code>jose</code> (modern, standards-compliant, works in browser and edge runtimes)</li>
+        <li><strong>Python:</strong> <code>PyJWT</code> — <code>jwt.encode(payload, secret, algorithm="HS256")</code> to sign, <code>jwt.decode(token, secret, algorithms=["HS256"])</code> to verify</li>
+        <li><strong>Java / Spring:</strong> <code>java-jwt</code> (Auth0), <code>jjwt</code> (Java JWT) — both have builder APIs for creating and validating tokens</li>
+        <li><strong>Go:</strong> <code>golang-jwt/jwt</code> — idiomatic Go library with support for HS256, RS256, and ES256</li>
+        <li><strong>PHP:</strong> <code>firebase/php-jwt</code> — the standard library, used by Firebase Auth and most PHP frameworks</li>
+        <li><strong>Ruby:</strong> <code>ruby-jwt</code> — supports all standard algorithms and claim validation</li>
+      </ul>
+      <p>
+        When choosing between HS256 and RS256: use HS256 when only one service signs and verifies tokens (monolith or single API gateway). Use RS256 in microservices architectures where multiple downstream services need to verify tokens independently — they only need the public key, never the private signing key.
+      </p>
+
       <h2>Decode and Inspect JWTs</h2>
       <p>
-        Use our free <a href="/tools/jwt-decoder"><strong>JWT Decoder</strong></a> to decode any JWT token and inspect its header, payload, and signature. Paste a token to see all claims including the user ID, email, role, expiration time, and any custom claims — instantly, with no server calls.
+        Use our free <a href="/tools/jwt-decoder"><strong>JWT Decoder</strong></a> to decode any JWT token and inspect its header, payload, and signature. Paste a token to see all claims including the user ID, email, role, expiration time, and any custom claims — instantly, with no server calls. Useful for debugging auth issues, checking expiration times, and verifying that your token-issuing code is setting the right claims.
       </p>
     </BlogLayout>
   );

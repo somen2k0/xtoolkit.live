@@ -10,7 +10,7 @@ export default function WhatIsRegex() {
       description="Regex lets you search, match, and manipulate text using patterns. Here's everything you need to know — from basic syntax to 10 practical real-world examples."
       icon={Code}
       readTime="9 min read"
-      publishDate="2026"
+      publishDate="June 2026"
       category="Developer"
       relatedArticles={[
         { title: "What Is Base64?", href: "/blog/what-is-base64", description: "Base64 encoding explained for developers.", readTime: "6 min" },
@@ -91,6 +91,21 @@ export default function WhatIsRegex() {
         <li><code>(?:abc)</code> — non-capturing group — groups without capturing</li>
         <li><code>a|b</code> — alternation — matches <code>a</code> or <code>b</code></li>
       </ul>
+
+      <h3>Named Capture Groups</h3>
+      <p>Named groups use the syntax <code>(?&lt;name&gt;...)</code> and let you access captured text by a meaningful name instead of a numeric index — critical for readability when patterns have multiple groups:</p>
+      <p><code>{`(?<year>\\d{4})-(?<month>0[1-9]|1[0-2])-(?<day>0[1-9]|[12]\\d|3[01])`}</code></p>
+      <p>In JavaScript: <code>match.groups.year</code>, <code>match.groups.month</code>, <code>match.groups.day</code>. In Python: <code>match.group('year')</code>. Supported in all modern engines — use them whenever your pattern has more than one group.</p>
+
+      <h3>Lookahead and Lookbehind</h3>
+      <p>Lookarounds match a <em>position</em> rather than a character — they assert that a pattern does or doesn't appear at the current position, without including it in the match:</p>
+      <ul>
+        <li><code>(?=...)</code> — <strong>positive lookahead</strong>: match must be followed by the pattern</li>
+        <li><code>(?!...)</code> — <strong>negative lookahead</strong>: match must NOT be followed by the pattern</li>
+        <li><code>(?&lt;=...)</code> — <strong>positive lookbehind</strong>: match must be preceded by the pattern</li>
+        <li><code>(?&lt;!...)</code> — <strong>negative lookbehind</strong>: match must NOT be preceded by the pattern</li>
+      </ul>
+      <p>Example: <code>{`\\d+(?= USD)`}</code> matches the number in <code>"Price: 49 USD"</code> but not in <code>"49 EUR"</code> — the <code> USD</code> part is not included in the result. Useful for extracting values that appear in a specific context without capturing the context itself.</p>
 
       <h2>10 Practical Regex Examples</h2>
       <p>Here are real-world patterns you can use directly in your projects:</p>
@@ -173,7 +188,7 @@ export default function WhatIsRegex() {
 
       <h2>Test Your Regex</h2>
       <p>
-        Use our <a href="/tools/regex-tester"><strong>Regex Tester</strong></a> to write and test regular expressions in real time. Paste a pattern, enter test strings, and see matches highlighted instantly — with support for flags and capture groups.
+        Use our <a href="/tools/regex-tester"><strong>Regex Tester</strong></a> to write and test regular expressions in real time. Paste a pattern, enter test strings, and see matches highlighted instantly — with support for all flags (<code>g</code>, <code>i</code>, <code>m</code>, <code>s</code>) and capture groups. It's the fastest way to iterate on a regex before committing it to code, and to verify that your pattern handles edge cases correctly.
       </p>
 
     </BlogLayout>
