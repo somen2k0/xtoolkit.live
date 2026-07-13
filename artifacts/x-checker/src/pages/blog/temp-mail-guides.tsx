@@ -21,7 +21,7 @@ export default function TempMailGuides() {
       relatedTools={[
         { title: "Temp Email", href: "/tools/temp-mail/tempemail", description: "Get a disposable inbox instantly — no signup.", icon: Inbox },
         { title: "Temp Gmail", href: "/tools/temp-mail/tempgmail", description: "Real @gmail.com address for sites blocking disposable domains.", icon: Mail },
-        { title: "Gmail Account Checker", href: "/tools/gmail-checker", description: "Verify whether Gmail addresses are valid or disabled.", icon: Search },
+        { title: "Email Validator", href: "/tools/email-validator", description: "Check email address syntax and MX records instantly in your browser.", icon: Search },
       ]}
     >
       <h2>What Are Temp Mail Guides?</h2>
@@ -81,17 +81,16 @@ export default function TempMailGuides() {
       <hr />
 
       <h2>Guide 4: How to Check Gmail Account Status</h2>
-      <p><strong>The tool:</strong> <a href="/tools/gmail-checker">Gmail Account Checker → /tools/gmail-checker</a></p>
-      <p>If you have a list of Gmail addresses and need to verify which are real, active, or disabled before sending to them, the <a href="/tools/gmail-checker">Gmail Account Checker</a> handles this without sending a single email. The tool uses <strong>SMTP RCPT TO verification</strong>: it connects to Gmail's mail server and asks whether it would accept delivery for each address, receiving a definitive accept or reject response at the protocol level.</p>
-      <p>How to use it:</p>
+      <p><strong>Coming soon:</strong> Gmail SMTP account verification (checking whether a Gmail address is valid or disabled without sending an email) requires a server with direct outbound port 25 access. This feature is in development. In the meantime, use the <a href="/tools/email-validator">Email Validator</a> for instant format and MX record checking.</p>
+      <p>The Email Validator confirms that an address is correctly formatted and that the domain has working mail servers — which catches the majority of invalid addresses (typos, dead domains, non-existent TLDs) without requiring SMTP access. For a full explanation of how SMTP verification works and what statuses it returns, see the <a href="/blog/gmail-account-checker">Gmail Account Checker guide</a>.</p>
+      <p>How to validate a Gmail address today:</p>
       <ol>
-        <li>Open <a href="/tools/gmail-checker">Gmail Account Checker</a></li>
-        <li>Paste up to 50 Gmail addresses (one per line, or comma-separated)</li>
-        <li>Click <strong>Check All</strong> — results appear within a few seconds</li>
-        <li>Each address gets one of four statuses: <strong>Valid</strong> (inbox exists and accepts mail), <strong>Invalid</strong> (address does not exist), <strong>Disabled</strong> (account suspended or deactivated by Google), or <strong>Unknown</strong> (server timeout or rate-limiting)</li>
-        <li>Export the results as CSV for use in your email tool or CRM</li>
+        <li>Open <a href="/tools/email-validator">Email Validator</a></li>
+        <li>Enter the Gmail address (or paste a list)</li>
+        <li>The tool checks format validity and MX records for <code>gmail.com</code> in real time</li>
+        <li>Addresses with correct syntax and a live MX record pass validation — invalid format, missing <code>@</code>, or unreachable domain fail immediately</li>
       </ol>
-      <p>This is useful for cleaning email lists before a campaign, verifying user registrations, or checking whether an address you have on file is still active. See the <a href="/blog/gmail-account-checker">Gmail Account Checker guide</a> for the full technical explanation of how SMTP verification works.</p>
+      <p>For full SMTP-level verification (valid/invalid/disabled status per account), bookmark this page — the feature will appear here when it launches.</p>
 
       <hr />
 
