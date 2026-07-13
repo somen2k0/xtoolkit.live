@@ -10,7 +10,7 @@ export default function IsTempMailSafe() {
       description="An honest look at what temp mail actually protects you from, the real risks involved, and exactly when you should and shouldn't use it."
       icon={Shield}
       readTime="4 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "Complete guide to temporary email.", readTime: "6 min" },

@@ -10,7 +10,7 @@ export default function GmailAccountChecker() {
       description="Check if Gmail addresses are valid, invalid, or disabled without sending a single email. Free, instant, no signup required."
       icon={Mail}
       readTime="6 min read"
-      publishDate="2026"
+      publishDate="July 2026"
       category="Email"
       relatedArticles={[
         { title: "Free Temp Gmail Address (That Actually Works)", href: "/blog/free-temp-gmail", description: "How to get a real @gmail.com address for one-time signups.", readTime: "5 min" },

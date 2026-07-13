@@ -10,7 +10,7 @@ export default function FreeTempGmail() {
       description="A real @gmail.com address you can use once and never touch again. Learn how temp Gmail works, how the dot trick creates unlimited variants, and when to use it instead of a throwaway address."
       icon={Mail}
       readTime="7 min read"
-      publishDate="2026"
+      publishDate="June 2026"
       category="Guide"
       relatedArticles={[
         { title: "Temp Gmail Explained", href: "/blog/temp-gmail-explained", description: "How Gmail's dot trick, plus trick, and temp Gmail addresses work.", readTime: "4 min" },

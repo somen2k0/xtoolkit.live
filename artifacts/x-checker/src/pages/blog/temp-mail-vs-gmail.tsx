@@ -10,7 +10,7 @@ export default function TempMailVsGmail() {
       description="A clear, honest comparison of temporary email services and Gmail. When each is the right choice, and what Google can't offer that temp mail can."
       icon={ArrowLeftRight}
       readTime="5 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "Complete guide to temporary email addresses.", readTime: "6 min" },

@@ -10,7 +10,7 @@ export default function HowToUseTempEmailExtension() {
       description="A complete step-by-step guide to installing a disposable email extension, generating throwaway inboxes, auto-copying OTP codes, and never switching tabs for a verification email again."
       icon={Chrome}
       readTime="7 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Guide"
       relatedArticles={[
         { title: "What Is Disposable Email? A Complete Guide", href: "/blog/what-is-disposable-email", description: "How throwaway email works and when to use it.", readTime: "6 min" },

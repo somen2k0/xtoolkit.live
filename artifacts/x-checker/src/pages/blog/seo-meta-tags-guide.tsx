@@ -10,7 +10,7 @@ export default function SeoMetaTagsGuide() {
       description="Meta tags control how your pages appear in search results and on social media. Here's what each tag does, how to write them, and how to avoid the most common mistakes."
       icon={Search}
       readTime="9 min read"
-      publishDate="2026"
+      publishDate="June 2026"
       category="SEO"
       relatedArticles={[
         { title: "What Is JSON-LD?", href: "/blog/what-is-json-ld", description: "Structured data markup for SEO explained.", readTime: "7 min" },

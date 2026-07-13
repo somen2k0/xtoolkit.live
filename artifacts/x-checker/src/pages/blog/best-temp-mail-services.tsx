@@ -10,7 +10,7 @@ export default function BestTempMailServices() {
       description="We compared the top temporary email providers on privacy, features, reliability, and ease of use. Here's which one to use for each situation."
       icon={Star}
       readTime="7 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "Complete guide to disposable email addresses.", readTime: "6 min" },

@@ -10,7 +10,7 @@ export default function UrlEncodingGuide() {
       description="URL encoding converts unsafe characters into percent-escaped sequences for safe use in URLs. Here's how it works, which characters need encoding, and when to use it."
       icon={Link}
       readTime="5 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Developer"
       relatedArticles={[
         { title: "What Is Base64?", href: "/blog/what-is-base64", description: "Base64 encoding explained for developers.", readTime: "6 min" },

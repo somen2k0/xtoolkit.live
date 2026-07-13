@@ -10,7 +10,7 @@ export default function WhatIsBase64() {
       description="Base64 encoding converts binary data to ASCII text for safe transmission. Here's how it works, where you'll encounter it, and when to use it in your own projects."
       icon={Binary}
       readTime="6 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Developer"
       relatedArticles={[
         { title: "What Is JSON-LD?", href: "/blog/what-is-json-ld", description: "Structured data markup for SEO explained.", readTime: "7 min" },

@@ -10,7 +10,7 @@ export default function TempGmailExplained() {
       description="How to get a temporary Gmail-style address using the dot trick, plus trick, or a real Gmail-linked disposable inbox — and when each approach is the right choice."
       icon={Mail}
       readTime="4 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "Temp Mail vs Gmail", href: "/blog/temp-mail-vs-gmail", description: "Full comparison of temporary email and real Gmail.", readTime: "5 min" },

@@ -10,7 +10,7 @@ export default function JsonLdSchemaGenerator() {
       description="Structured data markup helps Google understand your pages and unlock rich results — star ratings, FAQ dropdowns, breadcrumbs, and more. Generate it for free in seconds with no coding required."
       icon={Code}
       readTime="8 min read"
-      publishDate="2026"
+      publishDate="June 2026"
       category="SEO"
       relatedArticles={[
         { title: "What Is JSON-LD? Structured Data for SEO Explained", href: "/blog/what-is-json-ld", description: "The technical foundations of JSON-LD and Schema.org.", readTime: "7 min" },

@@ -10,7 +10,7 @@ export default function WhatIsUuid() {
       description="UUIDs are 128-bit identifiers used in distributed systems, databases, and APIs. Here's what they are, how the format works, and when to use each version."
       icon={Hash}
       readTime="6 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Developer"
       relatedArticles={[
         { title: "What Is Base64?", href: "/blog/what-is-base64", description: "Base64 encoding explained for developers.", readTime: "6 min" },

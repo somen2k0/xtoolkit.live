@@ -10,7 +10,7 @@ export default function WhatIsJsonLd() {
       description="JSON-LD is the modern way to add structured data to web pages. Here's what it is, why it matters for search rankings, and how to implement it correctly."
       icon={Code}
       readTime="7 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="SEO"
       relatedArticles={[
         { title: "What Is URL Encoding?", href: "/blog/url-encoding-guide", description: "How URL encoding works and when to use it.", readTime: "5 min" },

@@ -10,7 +10,7 @@ export default function TempMailGuides() {
       description="A complete hub of temp mail guides: how disposable email works, step-by-step tutorials for every tool, Gmail tricks, privacy tips, and answers to the most common questions."
       icon={Mail}
       readTime="8 min read"
-      publishDate="2026"
+      publishDate="July 2026"
       category="Guide"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "Complete guide to how throwaway email addresses work.", readTime: "6 min" },

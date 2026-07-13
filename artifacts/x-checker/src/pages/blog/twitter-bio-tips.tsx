@@ -10,7 +10,7 @@ export default function TwitterBioTips() {
       description="Your Twitter/X bio is 160 characters to convince someone to follow you. Here's exactly how to write one that works, with examples and the mistakes most people make."
       icon={User}
       readTime="6 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Social Media"
       relatedArticles={[
         { title: "What Is JSON-LD?", href: "/blog/what-is-json-ld", description: "Structured data for SEO explained.", readTime: "7 min" },

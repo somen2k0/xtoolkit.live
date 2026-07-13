@@ -11,7 +11,7 @@ export default function TempMailCompleteGuide() {
       description="One guide covering everything: how temp mail works technically, exactly when to use it, when to avoid it, which service to pick, and how it compares to masked email and temp Gmail."
       icon={BookOpen}
       readTime="8 min read"
-      publishDate="2026"
+      publishDate="June 2026"
       category="Guide"
       relatedArticles={[
         { title: "Best Temp Mail Services (2026)", href: "/blog/best-temp-mail-services", description: "8 top disposable email providers compared on privacy, features, and reliability.", readTime: "7 min" },

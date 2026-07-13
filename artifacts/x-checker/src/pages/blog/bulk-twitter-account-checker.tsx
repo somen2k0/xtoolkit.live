@@ -10,7 +10,7 @@ export default function BulkTwitterAccountChecker() {
       description="Check up to 100 X (Twitter) accounts at once. See which are active, suspended, or deleted — with follower counts, join dates, and verified status. No signup required."
       icon={Search}
       readTime="7 min read"
-      publishDate="2026"
+      publishDate="June 2026"
       category="Social Media"
       relatedArticles={[
         { title: "How to Write a Twitter Bio That Gets Followers", href: "/blog/twitter-bio-tips", description: "Proven bio structure, examples, and mistakes to avoid.", readTime: "6 min" },

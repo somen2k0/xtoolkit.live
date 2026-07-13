@@ -10,7 +10,7 @@ export default function WhyWebsitesAskEmailVerification() {
       description="The actual business and technical reasons behind every 'please verify your email' prompt — and what it really means for your data."
       icon={HelpCircle}
       readTime="4 min read"
-      publishDate="2026"
+      publishDate="May 2026"
       category="Email & Privacy"
       relatedArticles={[
         { title: "What Is Disposable Email?", href: "/blog/what-is-disposable-email", description: "How disposable email bypasses verification.", readTime: "6 min" },
