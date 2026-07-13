@@ -19,8 +19,8 @@ export default function WhyWebsitesAskEmailVerification() {
       ]}
       relatedTools={[
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Receive verification emails without your real address.", icon: Mail },
-        { title: "Email Privacy Checker", href: "/tools/masked-email-generator", description: "Understand your email's privacy exposure.", icon: Shield },
         { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Create permanent anonymous forwarding aliases.", icon: EyeOff },
+        { title: "Email Validator", href: "/tools/email-validator", description: "Instantly check if an email address is valid and deliverable.", icon: Shield },
       ]}
     >
       <h2>The Surface-Level Answer: Account Security</h2>
@@ -88,6 +88,22 @@ export default function WhyWebsitesAskEmailVerification() {
       <h2>How to Identify Cynical vs Legitimate Email Gates</h2>
       <p>Not every email gate is a marketing tactic. Here's a quick mental filter for deciding whether to use your real address or a temp one: Ask whether you would care if you lost access to this account permanently. If the answer is no — it's a free trial, a gated whitepaper, a one-time forum signup — use temp mail. If the answer is yes — it's a service you'll pay for, a platform you'll keep, an account linked to your finances — use your real email or a permanent alias.</p>
       <p>Also consider whether the service's core value proposition requires ongoing email communication. A news site offering gated articles primarily wants your email for their newsletter — temp mail is appropriate. A project management tool you're trialing with real work data needs your real email for account recovery and team invitations — real email is appropriate.</p>
+
+      <h2>How Verification Links Work Technically</h2>
+      <p>When you click "Send Verification Email," here's what happens on the server side:</p>
+      <ol>
+        <li>The server generates a cryptographically random token — typically 32–64 characters of random hex or Base64 data.</li>
+        <li>It stores that token in the database alongside your user ID and an expiration time (usually 15 minutes to 24 hours).</li>
+        <li>It emails you a link: <code>https://example.com/verify?token=abc123...</code>.</li>
+        <li>When you click the link, the server finds that token in the database, marks your account as verified, and deletes or invalidates the token so it can't be reused.</li>
+      </ol>
+      <p>The token is the security mechanism. It's assumed that only the person controlling the email inbox could have clicked the link — so clicking it proves ownership of the address. This is why tokens must be long and random: a guessable token would let anyone verify any email address. This is also why verification links expire: an unused link sitting in someone else's hands (a forwarded email, a shared inbox) should stop working quickly.</p>
+      <p>Using temp mail works perfectly here because you do control the inbox — you click the link, the server is satisfied, and the verification is genuine from a technical standpoint. The site gets a verified address; you don't expose your real one.</p>
+
+      <h2>Magic Links: When Verification Becomes Login</h2>
+      <p>A growing trend is the <strong>magic link</strong> — a one-time login link that both verifies your email and authenticates you in a single step, with no password required. Services like Notion, Slack, and Linear offer this as an alternative to passwords.</p>
+      <p>Magic links work exactly like verification tokens, except they're generated at login time rather than just once at registration. You enter your email, the service sends a link, you click it, and you're logged in. The link is immediately invalidated after use. No password is ever set, stored, or phished.</p>
+      <p>This shifts the security model: instead of "something you know" (a password), authentication depends on "something you control" (inbox access). It eliminates weak passwords and credential stuffing, but means that whoever controls your email controls all your magic-link-based accounts. This makes your primary email account an even higher-value target than it already was — one reason to use a permanent alias or masked email for services using this pattern, rather than your main inbox.</p>
 
       <h2>Frequently Asked Questions</h2>
 

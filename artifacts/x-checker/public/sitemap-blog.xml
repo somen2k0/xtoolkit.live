@@ -57,7 +57,7 @@
   <!-- Trust/safety content: converts users still on the fence -->
   <url>
     <loc>https://xtoolkit.live/blog/is-temp-mail-safe</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -65,7 +65,7 @@
   <!-- Explainer: captures "why do websites ask for email" queries -->
   <url>
     <loc>https://xtoolkit.live/blog/why-websites-ask-email-verification</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
   </url>
@@ -89,7 +89,7 @@
   <!-- Base64: high-volume developer evergreen query -->
   <url>
     <loc>https://xtoolkit.live/blog/what-is-base64</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
   </url>
@@ -105,7 +105,7 @@
   <!-- UUID: developer evergreen, high search volume -->
   <url>
     <loc>https://xtoolkit.live/blog/what-is-uuid</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
   </url>
@@ -145,7 +145,7 @@
   <!-- Complete Temp Mail Guide: primary temp mail guides keyword target -->
   <url>
     <loc>https://xtoolkit.live/blog/temp-mail-complete-guide</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>

@@ -101,6 +101,36 @@ export default function TempMailCompleteGuide() {
         For maximum privacy, combine temp mail with a VPN (so your IP isn't logged alongside the inbox session) and use a less well-known domain that is less likely to trigger bot detection on the site you're registering on.
       </p>
 
+      <h2>Getting Past Disposable Email Blockers</h2>
+      <p>The most common frustration with temp mail is having a site reject your address. Here are five reliable techniques to get around domain-based blocking:</p>
+      <ol>
+        <li>
+          <strong>Switch domains first.</strong> Blocklists target specific domains, not the concept of disposable email. A site that blocks <code>guerrillamail.com</code> may not block a newer, less-known domain from the same provider. Our Temp Mail tool offers 9 domains — try a different one before assuming the platform blocks all disposable email.
+        </li>
+        <li>
+          <strong>Use Temp Gmail.</strong> A real <code>@gmail.com</code> address generated via the Gmail dot trick passes every domain-based filter because it is technically a real Gmail address. It's the most reliable bypass for platforms that explicitly require Gmail. See our <a href="/tools/temp-mail/tempgmail">Temp Gmail</a> tool.
+        </li>
+        <li>
+          <strong>Use a masked email alias.</strong> Services like SimpleLogin and AnonAddy give you aliases on their own trusted domains. Because these aren't "disposable" services in the traditional sense — they forward to real inboxes — most disposable email detectors don't flag them.
+        </li>
+        <li>
+          <strong>Try a less-indexed provider.</strong> Disposable email blocklists are maintained by third-party services that scrape the web for temp mail domains. Newer or less-publicized providers haven't been scraped yet, so they slip through more often.
+        </li>
+        <li>
+          <strong>Read the error message carefully.</strong> "This email is not allowed" = domain blocklist. "Email already registered" = the address exists (try a different username or domain). "Invalid email format" = something else is wrong with how you typed it. Knowing which type of rejection you're facing tells you exactly how to fix it.
+        </li>
+      </ol>
+
+      <h2>Troubleshooting: Email Not Arriving</h2>
+      <p>If you've registered but the verification email hasn't arrived, work through these checks in order:</p>
+      <ul>
+        <li><strong>Wait 30–60 seconds.</strong> Most verification emails arrive in under 10 seconds, but delivery can be delayed when the sending service is under load or their SMTP queue is backed up.</li>
+        <li><strong>Check that you copied the exact address.</strong> A single character difference means mail goes to a completely different inbox. Copy the address fresh from the tool and paste it to verify.</li>
+        <li><strong>Try requesting a resend.</strong> Most services have a "resend verification email" button. Resend once, wait 30 seconds, then check again.</li>
+        <li><strong>Switch to a different domain and re-register.</strong> If the email is consistently not arriving, the service may be silently rejecting your domain without showing an error. Switch domains and create a new account.</li>
+        <li><strong>Check if the service has a sending delay for new accounts.</strong> Some anti-spam systems hold emails from new senders for a few minutes. Wait up to 5 minutes before switching domains.</li>
+      </ul>
+
       <h2>Frequently Asked Questions</h2>
 
       <p><strong>How long does a temp mail inbox last?</strong><br />It depends on the provider. Most disposable email services keep inboxes active for 1–24 hours of inactivity. Some (like mail.tm) offer longer-lived sessions. The inbox in <a href="/tools/temp-mail">X Toolkit's Temp Mail</a> is session-based — it persists as long as your browser session is alive and you haven't cleared local storage.</p>

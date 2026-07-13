@@ -78,6 +78,30 @@ export default function WhatIsBase64() {
         <li><strong>Instead of proper binary storage</strong> — if your database, API, or protocol supports binary data natively, use that instead of Base64.</li>
       </ul>
 
+      <h2>Base64 in Different Programming Languages</h2>
+      <p>Every major language has built-in Base64 support. Here's the encode/decode pattern in the most common ones:</p>
+      <ul>
+        <li>
+          <strong>JavaScript (browser):</strong> <code>btoa(str)</code> to encode, <code>atob(str)</code> to decode. For Unicode/emoji: <code>btoa(unescape(encodeURIComponent(str)))</code> — the extra step converts multi-byte characters to single bytes first.
+        </li>
+        <li>
+          <strong>Node.js:</strong> <code>Buffer.from('hello').toString('base64')</code> to encode; <code>Buffer.from('aGVsbG8=', 'base64').toString()</code> to decode. Handles Unicode automatically. URL-safe: <code>Buffer.from(str).toString('base64url')</code>.
+        </li>
+        <li>
+          <strong>Python:</strong> <code>import base64; base64.b64encode(b'hello')</code> → <code>b'aGVsbG8='</code>. Decode: <code>base64.b64decode(b'aGVsbG8=')</code>. URL-safe variant: <code>base64.urlsafe_b64encode()</code> and <code>base64.urlsafe_b64decode()</code>.
+        </li>
+        <li>
+          <strong>Go:</strong> Standard library <code>encoding/base64</code>. Encode: <code>base64.StdEncoding.EncodeToString([]byte("hello"))</code>. URL-safe: <code>base64.URLEncoding.EncodeToString(...)</code>. Both standard and URL-safe encoders/decoders are included.
+        </li>
+        <li>
+          <strong>Java:</strong> <code>Base64.getEncoder().encodeToString("hello".getBytes())</code>. URL-safe: <code>Base64.getUrlEncoder()</code>. Available natively since Java 8 — no third-party dependency needed.
+        </li>
+        <li>
+          <strong>PHP:</strong> <code>base64_encode($str)</code> and <code>base64_decode($str)</code>. URL-safe requires manual substitution: <code>strtr(base64_encode($str), '+/', '-_')</code> to encode and the reverse when decoding.
+        </li>
+      </ul>
+      <p>The output is identical across all languages for the same input: <code>base64.b64encode(b'hello')</code> in Python produces the same string as <code>Buffer.from('hello').toString('base64')</code> in Node.js. The one compatibility gotcha is the URL-safe variant — make sure both encoder and decoder agree on whether to use <code>+/</code> (standard) or <code>-_</code> (URL-safe), and whether to include <code>=</code> padding or omit it.</p>
+
       <h2>How to Encode and Decode Base64 Online</h2>
       <p>Our <strong>Base64 Encoder / Decoder</strong> tool converts text or data to Base64 and back in your browser — no server required. Paste any text to encode it to Base64, or paste a Base64 string to decode it back. The tool handles both standard Base64 and Base64URL, and shows the character count so you can verify the expected ~33% size increase.</p>
 

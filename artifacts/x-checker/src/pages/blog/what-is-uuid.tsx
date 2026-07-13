@@ -75,6 +75,27 @@ export default function WhatIsUuid() {
         <li><strong>SQL Server</strong> — native <code>uniqueidentifier</code> type (GUID). Generates v4 via <code>NEWID()</code> and sequential GUIDs via <code>NEWSEQUENTIALID()</code>.</li>
       </ul>
 
+      <h2>Generating UUIDs in Code</h2>
+      <p>Every major language has built-in or widely used UUID support:</p>
+      <ul>
+        <li><strong>JavaScript / Node.js:</strong> Built-in <code>crypto.randomUUID()</code> (Node 15.6+, all modern browsers): <code>const id = crypto.randomUUID();</code>. Or the <code>uuid</code> package: <code>import {'{ v4 as uuidv4 }'} from 'uuid'; const id = uuidv4();</code></li>
+        <li><strong>Python:</strong> Built-in <code>uuid</code> module: <code>import uuid; id = str(uuid.uuid4())</code>. For UUID v7 (time-ordered): use the <code>uuid7</code> third-party package.</li>
+        <li><strong>Go:</strong> The <code>google/uuid</code> package: <code>id := uuid.New().String()</code>. Or <code>uuid.NewRandom()</code> for explicit v4 with error handling.</li>
+        <li><strong>Java / Kotlin:</strong> Built-in: <code>UUID id = UUID.randomUUID();</code> — generates v4 UUIDs.</li>
+        <li><strong>C# / .NET:</strong> Built-in: <code>Guid id = Guid.NewGuid();</code> — generates v4. <code>id.ToString()</code> formats it as the standard hyphenated string.</li>
+        <li><strong>PHP:</strong> Use <code>ramsey/uuid</code> package: <code>$id = Uuid::uuid4()->toString();</code>. In Laravel: <code>Str::uuid()</code>.</li>
+        <li><strong>PostgreSQL:</strong> Built-in function: <code>SELECT gen_random_uuid();</code> — generates v4 UUIDs natively without any extension.</li>
+      </ul>
+
+      <h2>UUID Alternatives: ULID, NanoID, and KSUID</h2>
+      <p>UUID isn't the only option. Newer ID formats address UUID's main limitations (random v4 UUIDs cause B-tree index fragmentation, and the standard format is verbose):</p>
+      <ul>
+        <li><strong>ULID</strong> (Universally Unique Lexicographically Sortable Identifier) — 128-bit, time-sorted, Base32-encoded into 26 characters. Like UUID v7 but more compact and human-readable. Sorts chronologically as a plain string: <code>01ARZ3NDEKTSV4RRFFQ69G5FAV</code>.</li>
+        <li><strong>NanoID</strong> — a small URL-friendly random ID (21 characters by default using a 64-character alphabet). Not time-ordered. Zero dependencies, browser-compatible, and more compact than UUID. Widely used in frontend apps: <code>V1StGXR8_Z5jdHi6B-myT</code>.</li>
+        <li><strong>KSUID</strong> (K-Sortable Unique IDentifier) — time-ordered, Base62-encoded, 27 characters. Used by Stripe for their public API IDs (<code>cus_</code>, <code>pi_</code> prefixes are followed by a KSUID-based value).</li>
+      </ul>
+      <p>UUID v4 remains the right default for most applications: it's natively supported in every major database, has no dependencies in most languages, and is universally understood. Switch to UUID v7 or ULID when time-ordering matters for database index performance (inserting records in time order reduces B-tree rebalancing). Switch to NanoID when URL brevity is a priority and time-ordering is not needed.</p>
+
       <h2>Frequently Asked Questions</h2>
 
       <p><strong>Can two UUIDs ever be identical?</strong><br />Theoretically yes, practically never. For v4 UUIDs, you'd need to generate approximately 2.7 × 10¹⁸ UUIDs before reaching a 50% probability of a single collision. At a rate of 1 billion UUIDs per second, this would take 85 years. Real applications generate nowhere near this volume, making UUID collisions effectively impossible.</p>

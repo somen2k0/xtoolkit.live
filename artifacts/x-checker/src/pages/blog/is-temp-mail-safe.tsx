@@ -19,9 +19,8 @@ export default function IsTempMailSafe() {
       ]}
       relatedTools={[
         { title: "Temp Mail", href: "/tools/temp-mail/tempemail", description: "Anonymous throwaway inbox — free, no signup.", icon: Mail },
-        { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous email aliases.", icon: Shield },
-        { title: "Email Leak Checker", href: "/tools/temp-mail/tempemail", description: "Understand how email leaks happen.", icon: AlertTriangle },
-        { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Create permanent anonymous aliases.", icon: EyeOff },
+        { title: "Masked Email Generator", href: "/tools/masked-email-generator", description: "Generate permanent anonymous email aliases.", icon: EyeOff },
+        { title: "Spam Score Checker", href: "/tools/spam-score-checker", description: "Check if your email content triggers spam filters.", icon: AlertTriangle },
       ]}
     >
       <h2>The Short Answer</h2>
@@ -89,6 +88,22 @@ export default function IsTempMailSafe() {
 
       <h2>How Temp Mail Compares to VPNs for Privacy</h2>
       <p>Temp mail and VPNs protect different aspects of your privacy. A VPN masks your IP address and encrypts your internet connection — preventing your ISP, network operators, and websites from seeing what you're doing or where you're connecting from. Temp mail protects your email identity — preventing companies from linking your real email address to your activity and building a profile from it. They complement each other but don't overlap. For casual use, temp mail alone is sufficient for most email privacy needs. For high-stakes anonymity, combine both.</p>
+
+      <h2>How to Choose a Safe Temp Mail Service</h2>
+      <p>Not all temp mail providers handle your data the same way. These signals separate trustworthy services from risky ones:</p>
+      <ul>
+        <li><strong>HTTPS only.</strong> The site must use HTTPS. Plain HTTP exposes your inbox content to anyone on the same network. Never use HTTP temp mail services.</li>
+        <li><strong>Session-based (private) vs username-based (public) inboxes.</strong> Session-based services generate a token stored in your browser — only you can access your inbox. Username-based services (Mailinator is the main example) are fully public: anyone who types your address sees the same inbox. For anything with a one-time code or verification link, use session-based services only.</li>
+        <li><strong>Explicit privacy policy.</strong> Reputable services publish a privacy policy stating they don't log or sell email content. No privacy policy at all is a red flag.</li>
+        <li><strong>Minimal third-party tracking.</strong> Some temp mail services embed ad SDKs that send your activity to third parties. Open your browser's network tab and check what loads. A trustworthy service loads only its own resources.</li>
+        <li><strong>Multiple domains.</strong> A provider with many active domains is more likely to have at least one that isn't yet on a platform's blocklist, giving you better success rates across different sites.</li>
+        <li><strong>Auto-refresh without manual reload.</strong> The inbox should poll for new mail automatically. If you have to manually refresh to see new messages, you risk losing time-sensitive verification emails before they arrive.</li>
+      </ul>
+      <p>X Toolkit's Temp Mail uses session-based authentication — your inbox is private to your browser session. The service runs over HTTPS and does not retain email content after your session ends.</p>
+
+      <h2>Temp Mail and Your IP Address</h2>
+      <p>Using temp mail does not make you fully anonymous. At minimum, the temp mail provider's server logs your IP address when you access the inbox — just as any website does. In most everyday privacy scenarios this doesn't matter: you're avoiding spam and data brokers, not evading surveillance. But if you need stronger anonymity — for example, you don't want even the temp mail provider to see your IP — combine temp mail with a VPN or use the Tor Browser. The VPN ensures the provider's logs show the VPN server's IP rather than yours.</p>
+      <p>Note that the website you registered on also logs your IP. If you used temp mail to register but connected from your real IP, the site can still correlate your activity to your device, even without your real email address. For high-stakes anonymity, the email is only one part of the picture.</p>
 
       <h2>Frequently Asked Questions</h2>
 
