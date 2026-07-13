@@ -96,6 +96,9 @@ const FreeTempGmail = lazy(() => import("@/pages/blog/free-temp-gmail"));
 const JsonLdSchemaGenerator = lazy(() => import("@/pages/blog/json-ld-schema-generator"));
 const GmailAccountCheckerBlog = lazy(() => import("@/pages/blog/gmail-account-checker"));
 const TempMailGuides = lazy(() => import("@/pages/blog/temp-mail-guides"));
+const XBioWritingGuide = lazy(() => import("@/pages/blog/x-bio-writing-guide"));
+const WhatIsAMetaTag = lazy(() => import("@/pages/blog/what-is-a-meta-tag"));
+const WhatIsAQrCode = lazy(() => import("@/pages/blog/what-is-a-qr-code"));
 // Category pages (lazy)
 const AiWritingTools = lazy(() => import("@/pages/categories/ai-writing-tools"));
 const SocialMediaTools = lazy(() => import("@/pages/categories/social-media-tools"));
@@ -237,6 +240,9 @@ function TrackedRouter() {
           <Route path="/blog/json-ld-schema-generator" component={JsonLdSchemaGenerator} />
           <Route path="/blog/gmail-account-checker" component={GmailAccountCheckerBlog} />
           <Route path="/blog/temp-mail-guides" component={TempMailGuides} />
+          <Route path="/blog/x-bio-writing-guide" component={XBioWritingGuide} />
+          <Route path="/blog/what-is-a-meta-tag" component={WhatIsAMetaTag} />
+          <Route path="/blog/what-is-a-qr-code" component={WhatIsAQrCode} />
 
           {/* Category landing pages */}
           <Route path="/ai-writing-tools" component={AiWritingTools} />

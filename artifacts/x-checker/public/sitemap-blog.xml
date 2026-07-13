@@ -190,4 +190,28 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- X bio writing guide: social media / creator audience, targets bio generator tool -->
+  <url>
+    <loc>https://xtoolkit.live/blog/x-bio-writing-guide</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Meta tags explainer: high-intent SEO/developer query, targets meta tag generator -->
+  <url>
+    <loc>https://xtoolkit.live/blog/what-is-a-meta-tag</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- QR code explainer: broad consumer + developer query, targets QR code generator -->
+  <url>
+    <loc>https://xtoolkit.live/blog/what-is-a-qr-code</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
 </urlset>

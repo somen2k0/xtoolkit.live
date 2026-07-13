@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key, Users } from "lucide-react";
+import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key, Users, Edit, Tag, QrCode } from "lucide-react";
 
 const ARTICLES = [
   {
@@ -235,6 +235,39 @@ const ARTICLES = [
     icon: BookOpen,
     color: "text-primary",
     bg: "bg-primary/10 border-primary/20",
+  },
+  {
+    slug: "x-bio-writing-guide",
+    href: "/blog/x-bio-writing-guide",
+    title: "How to Write an X (Twitter) Bio That Gets Followers",
+    description: "Your X bio is 160 characters to convince someone to follow you. The 5 elements of a high-converting bio, examples by account type, and an AI bio generator.",
+    readTime: "6 min",
+    category: "Social Media",
+    icon: Edit,
+    color: "text-pink-400",
+    bg: "bg-pink-400/10 border-pink-400/20",
+  },
+  {
+    slug: "what-is-a-meta-tag",
+    href: "/blog/what-is-a-meta-tag",
+    title: "What Is a Meta Tag? HTML Meta Tags for SEO Explained",
+    description: "Title tags, meta descriptions, robots directives, canonical URLs, Open Graph, and Twitter Cards — which ones matter for SEO and how to set them correctly.",
+    readTime: "7 min",
+    category: "SEO",
+    icon: Tag,
+    color: "text-orange-400",
+    bg: "bg-orange-400/10 border-orange-400/20",
+  },
+  {
+    slug: "what-is-a-qr-code",
+    href: "/blog/what-is-a-qr-code",
+    title: "What Is a QR Code? How They Work and When to Use Them",
+    description: "QR codes store URLs, contacts, WiFi credentials, and more. How they encode data, error correction levels, static vs dynamic codes, and QRishing security risks.",
+    readTime: "7 min",
+    category: "Developer",
+    icon: QrCode,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10 border-sky-400/20",
   },
 ];
 
