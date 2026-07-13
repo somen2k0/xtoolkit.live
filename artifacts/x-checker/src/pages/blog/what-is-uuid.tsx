@@ -83,7 +83,7 @@ export default function WhatIsUuid() {
         <li><strong>Go:</strong> The <code>google/uuid</code> package: <code>id := uuid.New().String()</code>. Or <code>uuid.NewRandom()</code> for explicit v4 with error handling.</li>
         <li><strong>Java / Kotlin:</strong> Built-in: <code>UUID id = UUID.randomUUID();</code> — generates v4 UUIDs.</li>
         <li><strong>C# / .NET:</strong> Built-in: <code>Guid id = Guid.NewGuid();</code> — generates v4. <code>id.ToString()</code> formats it as the standard hyphenated string.</li>
-        <li><strong>PHP:</strong> Use <code>ramsey/uuid</code> package: <code>$id = Uuid::uuid4()->toString();</code>. In Laravel: <code>Str::uuid()</code>.</li>
+        <li><strong>PHP:</strong> Use <code>ramsey/uuid</code> package: <code>{'$id = Uuid::uuid4()->toString();'}</code>. In Laravel: <code>Str::uuid()</code>.</li>
         <li><strong>PostgreSQL:</strong> Built-in function: <code>SELECT gen_random_uuid();</code> — generates v4 UUIDs natively without any extension.</li>
       </ul>
 
