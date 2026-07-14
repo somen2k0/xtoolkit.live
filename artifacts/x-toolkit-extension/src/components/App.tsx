@@ -6,7 +6,7 @@ import { HistoryTab } from "./tabs/HistoryTab";
 
 type Tab = "tempmail" | "gmail" | "history";
 
-const SITE_URL = "https://xtoolkit.live";
+const SITE_URL = "https://www.xtoolkit.live";
 const TAB_STORAGE_KEY = "activePopupTab";
 
 function DisposableIcon({ size = 18 }: { size?: number }) {

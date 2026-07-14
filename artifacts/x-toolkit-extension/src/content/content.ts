@@ -280,7 +280,7 @@
     } as CSSStyleDeclaration);
     dash.addEventListener("mousedown", (e) => e.preventDefault());
     dash.addEventListener("click", () => {
-      window.open("https://xtoolkit.live/tools/temp-mail", "_blank");
+      window.open("https://www.xtoolkit.live/tools/temp-mail", "_blank");
       hidePopup();
     });
     popup.appendChild(dash);

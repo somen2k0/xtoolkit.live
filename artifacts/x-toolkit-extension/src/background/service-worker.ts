@@ -65,7 +65,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
       }
     });
   } else if (info.menuItemId === "open-xtoolkit") {
-    void chrome.tabs.create({ url: "https://xtoolkit.live" });
+    void chrome.tabs.create({ url: "https://www.xtoolkit.live" });
   }
 });
 
@@ -238,7 +238,7 @@ async function generateNewDisposable(): Promise<string> {
 }
 
 async function generateNewGmail(): Promise<string> {
-  const r = await fetch("https://xtoolkit.live/api/temptf/generate", {
+  const r = await fetch("https://www.xtoolkit.live/api/temptf/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ type: "dot" }),

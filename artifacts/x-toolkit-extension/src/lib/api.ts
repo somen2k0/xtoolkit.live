@@ -1,6 +1,6 @@
 import { stripHtml, getIntro } from "./otp";
 
-const API_BASE = "https://xtoolkit.live";
+const API_BASE = "https://www.xtoolkit.live";
 
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
