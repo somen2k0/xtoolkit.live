@@ -71,7 +71,13 @@
     {
       "source": "/:path*",
       "has": [{ "type": "header", "key": "x-forwarded-proto", "value": "http" }],
-      "destination": "https://xtoolkit.live/:path*",
+      "destination": "https://www.xtoolkit.live/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "xtoolkit.live" }],
+      "destination": "https://www.xtoolkit.live/:path*",
       "permanent": true
     },
     { "source": "/pricing", "destination": "/", "permanent": true },

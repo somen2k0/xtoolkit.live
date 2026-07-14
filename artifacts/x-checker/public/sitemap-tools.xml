@@ -34,7 +34,7 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
 
   <url>
-    <loc>https://xtoolkit.live/tools/temp-mail</loc>
+    <loc>https://www.xtoolkit.live/tools/temp-mail</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -45,25 +45,25 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
 
   <url>
-    <loc>https://xtoolkit.live/tools/temp-mail/tempemail</loc>
+    <loc>https://www.xtoolkit.live/tools/temp-mail/tempemail</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/temp-mail/tempgmail</loc>
+    <loc>https://www.xtoolkit.live/tools/temp-mail/tempgmail</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/temp-mail/gmail-tricks</loc>
+    <loc>https://www.xtoolkit.live/tools/temp-mail/gmail-tricks</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/masked-email-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/masked-email-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
@@ -75,19 +75,19 @@
 
   <!-- Social Media / X tools -->
   <url>
-    <loc>https://xtoolkit.live/tools/x-account-checker</loc>
+    <loc>https://www.xtoolkit.live/tools/x-account-checker</loc>
     <lastmod>2026-05-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/bio-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/bio-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/ai-detector</loc>
+    <loc>https://www.xtoolkit.live/tools/ai-detector</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -95,49 +95,49 @@
 
   <!-- Developer tools (high-engagement category) -->
   <url>
-    <loc>https://xtoolkit.live/tools/json-formatter</loc>
+    <loc>https://www.xtoolkit.live/tools/json-formatter</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/base64</loc>
+    <loc>https://www.xtoolkit.live/tools/base64</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/jwt-decoder</loc>
+    <loc>https://www.xtoolkit.live/tools/jwt-decoder</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/regex-tester</loc>
+    <loc>https://www.xtoolkit.live/tools/regex-tester</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/url-encoder</loc>
+    <loc>https://www.xtoolkit.live/tools/url-encoder</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/yaml-json</loc>
+    <loc>https://www.xtoolkit.live/tools/yaml-json</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/timezone-converter</loc>
+    <loc>https://www.xtoolkit.live/tools/timezone-converter</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/case-converter</loc>
+    <loc>https://www.xtoolkit.live/tools/case-converter</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -145,19 +145,19 @@
 
   <!-- Email utility tools -->
   <url>
-    <loc>https://xtoolkit.live/tools/email-validator</loc>
+    <loc>https://www.xtoolkit.live/tools/email-validator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/subject-line-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/subject-line-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/email-signature-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/email-signature-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
@@ -165,19 +165,19 @@
 
   <!-- SEO tools -->
   <url>
-    <loc>https://xtoolkit.live/tools/meta-tag-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/meta-tag-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/url-slug-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/url-slug-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/keyword-density</loc>
+    <loc>https://www.xtoolkit.live/tools/keyword-density</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -188,68 +188,68 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
 
   <url>
-    <loc>https://xtoolkit.live/tools/username-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/username-generator</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/character-counter</loc>
+    <loc>https://www.xtoolkit.live/tools/character-counter</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/html-formatter</loc>
+    <loc>https://www.xtoolkit.live/tools/html-formatter</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/css-minifier</loc>
+    <loc>https://www.xtoolkit.live/tools/css-minifier</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/sql-formatter</loc>
+    <loc>https://www.xtoolkit.live/tools/sql-formatter</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/uuid-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/uuid-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/robots-txt-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/robots-txt-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/sitemap-validator</loc>
+    <loc>https://www.xtoolkit.live/tools/sitemap-validator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
 
   <url>
-    <loc>https://xtoolkit.live/tools/schema-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/schema-generator</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/spam-score-checker</loc>
+    <loc>https://www.xtoolkit.live/tools/spam-score-checker</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/newsletter-template-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/newsletter-template-generator</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -257,7 +257,7 @@
 
   <!-- Social bio / display name tools -->
   <url>
-    <loc>https://xtoolkit.live/tools/funny-bios</loc>
+    <loc>https://www.xtoolkit.live/tools/funny-bios</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -269,81 +269,81 @@
 
   <!-- New utility tools (high-quality content, previously missing) -->
   <url>
-    <loc>https://xtoolkit.live/tools/color-picker</loc>
+    <loc>https://www.xtoolkit.live/tools/color-picker</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/image-compressor</loc>
+    <loc>https://www.xtoolkit.live/tools/image-compressor</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/password-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/password-generator</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/qr-code-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/qr-code-generator</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/word-counter</loc>
+    <loc>https://www.xtoolkit.live/tools/word-counter</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.70</priority>
   </url>
 
   <url>
-    <loc>https://xtoolkit.live/tools/hashtag-formatter</loc>
+    <loc>https://www.xtoolkit.live/tools/hashtag-formatter</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/tweet-formatter</loc>
+    <loc>https://www.xtoolkit.live/tools/tweet-formatter</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <!-- New developer tools (June 2026) -->
   <url>
-    <loc>https://xtoolkit.live/tools/css-gradient-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/css-gradient-generator</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/css-box-shadow-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/css-box-shadow-generator</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/js-formatter</loc>
+    <loc>https://www.xtoolkit.live/tools/js-formatter</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/hash-generator</loc>
+    <loc>https://www.xtoolkit.live/tools/hash-generator</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/image-resizer</loc>
+    <loc>https://www.xtoolkit.live/tools/image-resizer</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools/resume-builder</loc>
+    <loc>https://www.xtoolkit.live/tools/resume-builder</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>

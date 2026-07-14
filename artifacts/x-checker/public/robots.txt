@@ -77,4 +77,4 @@ Disallow: /
 #   sitemap-blog.xml   — blog articles
 #   sitemap-images.xml — image sitemap for OG/preview images
 
-Sitemap: https://xtoolkit.live/sitemap.xml
+Sitemap: https://www.xtoolkit.live/sitemap.xml

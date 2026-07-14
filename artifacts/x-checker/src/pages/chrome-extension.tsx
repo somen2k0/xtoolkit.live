@@ -160,7 +160,7 @@ export default function ChromeExtensionPage() {
           {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "@id": "https://xtoolkit.live/chrome-extension#software",
+            "@id": "https://www.xtoolkit.live/chrome-extension#software",
             name: "X Toolkit – Free Temp Email Chrome Extension",
             applicationCategory: "BrowserApplication",
             operatingSystem: ["Chrome", "Brave", "Microsoft Edge", "Opera", "Arc"],

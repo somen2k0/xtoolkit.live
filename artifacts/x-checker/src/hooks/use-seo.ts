@@ -17,7 +17,7 @@ export function useSeo({ title, description, canonical }: SeoOptions) {
 
     if (canonical) {
       let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-      if (link) link.href = `https://xtoolkit.live${canonical}`;
+      if (link) link.href = `https://www.xtoolkit.live${canonical}`;
     }
   }, [title, description, canonical]);
 }

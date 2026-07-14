@@ -15,7 +15,7 @@
 
   <!-- ── Tier 1: Homepage ─────────────────────────────────────────── -->
   <url>
-    <loc>https://xtoolkit.live/</loc>
+    <loc>https://www.xtoolkit.live/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -24,7 +24,7 @@
 
   <!-- ── Tier 2: High-engagement category landings ────────────────── -->
   <url>
-    <loc>https://xtoolkit.live/email-tools</loc>
+    <loc>https://www.xtoolkit.live/email-tools</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -32,20 +32,20 @@
 
   <!-- Chrome Extension — high-intent download page; updated with new SEO content -->
   <url>
-    <loc>https://xtoolkit.live/chrome-extension</loc>
+    <loc>https://www.xtoolkit.live/chrome-extension</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.92</priority>
   </url>
 
   <url>
-    <loc>https://xtoolkit.live/developer-tools</loc>
+    <loc>https://www.xtoolkit.live/developer-tools</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/tools</loc>
+    <loc>https://www.xtoolkit.live/tools</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
@@ -53,25 +53,25 @@
 
   <!-- ── Tier 3: Remaining category landings ──────────────────────── -->
   <url>
-    <loc>https://xtoolkit.live/social-media-tools</loc>
+    <loc>https://www.xtoolkit.live/social-media-tools</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/ai-writing-tools</loc>
+    <loc>https://www.xtoolkit.live/ai-writing-tools</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/text-format-tools</loc>
+    <loc>https://www.xtoolkit.live/text-format-tools</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/seo-tools</loc>
+    <loc>https://www.xtoolkit.live/seo-tools</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -79,19 +79,19 @@
 
   <!-- ── Tier 4: Supporting static pages ──────────────────────────── -->
   <url>
-    <loc>https://xtoolkit.live/about</loc>
+    <loc>https://www.xtoolkit.live/about</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/guides</loc>
+    <loc>https://www.xtoolkit.live/guides</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/contact</loc>
+    <loc>https://www.xtoolkit.live/contact</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
@@ -99,13 +99,13 @@
 
   <!-- ── Tier 5: Legal ─────────────────────────────────────────────── -->
   <url>
-    <loc>https://xtoolkit.live/privacy</loc>
+    <loc>https://www.xtoolkit.live/privacy</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>
   <url>
-    <loc>https://xtoolkit.live/terms</loc>
+    <loc>https://www.xtoolkit.live/terms</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>

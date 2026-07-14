@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-const SITE_URL = "https://xtoolkit.live";
-const DEFAULT_OG_IMAGE = "https://xtoolkit.live/opengraph.png";
+const SITE_URL = "https://www.xtoolkit.live";
+const DEFAULT_OG_IMAGE = "https://www.xtoolkit.live/opengraph.png";
 
 interface SeoHeadProps {
   title: string;

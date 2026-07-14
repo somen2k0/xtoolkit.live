@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { type Tool } from "@/lib/tools-registry";
 
-const SITE_URL = "https://xtoolkit.live";
+const SITE_URL = "https://www.xtoolkit.live";
 
 export interface CategoryBenefit {
   icon: LucideIcon;

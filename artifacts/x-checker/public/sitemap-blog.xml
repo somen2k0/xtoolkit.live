@@ -14,7 +14,7 @@
 
   <!-- Blog hub -->
   <url>
-    <loc>https://xtoolkit.live/blog</loc>
+    <loc>https://www.xtoolkit.live/blog</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -24,7 +24,7 @@
 
   <!-- High commercial intent: "how to use temp email extension" — targets downloaders -->
   <url>
-    <loc>https://xtoolkit.live/blog/how-to-use-temp-email-extension</loc>
+    <loc>https://www.xtoolkit.live/blog/how-to-use-temp-email-extension</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.83</priority>
@@ -32,7 +32,7 @@
 
   <!-- High intent / evergreen: "what is disposable email" is a top TOFU query -->
   <url>
-    <loc>https://xtoolkit.live/blog/what-is-disposable-email</loc>
+    <loc>https://www.xtoolkit.live/blog/what-is-disposable-email</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
@@ -40,7 +40,7 @@
 
   <!-- Comparison content: high CTR, commercial intent -->
   <url>
-    <loc>https://xtoolkit.live/blog/best-temp-mail-services</loc>
+    <loc>https://www.xtoolkit.live/blog/best-temp-mail-services</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
@@ -48,7 +48,7 @@
 
   <!-- Comparison: "temp mail vs gmail" — very high search volume -->
   <url>
-    <loc>https://xtoolkit.live/blog/temp-mail-vs-gmail</loc>
+    <loc>https://www.xtoolkit.live/blog/temp-mail-vs-gmail</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
@@ -56,7 +56,7 @@
 
   <!-- Trust/safety content: converts users still on the fence -->
   <url>
-    <loc>https://xtoolkit.live/blog/is-temp-mail-safe</loc>
+    <loc>https://www.xtoolkit.live/blog/is-temp-mail-safe</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
@@ -64,7 +64,7 @@
 
   <!-- Explainer: captures "why do websites ask for email" queries -->
   <url>
-    <loc>https://xtoolkit.live/blog/why-websites-ask-email-verification</loc>
+    <loc>https://www.xtoolkit.live/blog/why-websites-ask-email-verification</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -72,7 +72,7 @@
 
   <!-- Temp Gmail: captures Gmail-specific temp mail queries -->
   <url>
-    <loc>https://xtoolkit.live/blog/temp-gmail-explained</loc>
+    <loc>https://www.xtoolkit.live/blog/temp-gmail-explained</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -80,7 +80,7 @@
 
   <!-- JSON-LD: developer/SEO educational content -->
   <url>
-    <loc>https://xtoolkit.live/blog/what-is-json-ld</loc>
+    <loc>https://www.xtoolkit.live/blog/what-is-json-ld</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -88,7 +88,7 @@
 
   <!-- Base64: high-volume developer evergreen query -->
   <url>
-    <loc>https://xtoolkit.live/blog/what-is-base64</loc>
+    <loc>https://www.xtoolkit.live/blog/what-is-base64</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -96,7 +96,7 @@
 
   <!-- Twitter bio tips: social media / creator audience -->
   <url>
-    <loc>https://xtoolkit.live/blog/twitter-bio-tips</loc>
+    <loc>https://www.xtoolkit.live/blog/twitter-bio-tips</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -104,7 +104,7 @@
 
   <!-- UUID: developer evergreen, high search volume -->
   <url>
-    <loc>https://xtoolkit.live/blog/what-is-uuid</loc>
+    <loc>https://www.xtoolkit.live/blog/what-is-uuid</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -112,7 +112,7 @@
 
   <!-- URL encoding: developer fundamentals, broad search intent -->
   <url>
-    <loc>https://xtoolkit.live/blog/url-encoding-guide</loc>
+    <loc>https://www.xtoolkit.live/blog/url-encoding-guide</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -120,7 +120,7 @@
 
   <!-- Regex: high-volume developer evergreen query -->
   <url>
-    <loc>https://xtoolkit.live/blog/what-is-regex</loc>
+    <loc>https://www.xtoolkit.live/blog/what-is-regex</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -128,7 +128,7 @@
 
   <!-- SEO meta tags: high-intent developer/marketer query -->
   <url>
-    <loc>https://xtoolkit.live/blog/seo-meta-tags-guide</loc>
+    <loc>https://www.xtoolkit.live/blog/seo-meta-tags-guide</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -136,7 +136,7 @@
 
   <!-- JWT: developer authentication evergreen content -->
   <url>
-    <loc>https://xtoolkit.live/blog/what-is-jwt</loc>
+    <loc>https://www.xtoolkit.live/blog/what-is-jwt</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
@@ -144,7 +144,7 @@
 
   <!-- Complete Temp Mail Guide: primary temp mail guides keyword target -->
   <url>
-    <loc>https://xtoolkit.live/blog/temp-mail-complete-guide</loc>
+    <loc>https://www.xtoolkit.live/blog/temp-mail-complete-guide</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
@@ -152,7 +152,7 @@
 
   <!-- Bulk Twitter checker: high commercial intent, targets X/Twitter power users -->
   <url>
-    <loc>https://xtoolkit.live/blog/bulk-twitter-account-checker</loc>
+    <loc>https://www.xtoolkit.live/blog/bulk-twitter-account-checker</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
@@ -160,7 +160,7 @@
 
   <!-- Free temp Gmail: high search volume, blocks disposable-email objection -->
   <url>
-    <loc>https://xtoolkit.live/blog/free-temp-gmail</loc>
+    <loc>https://www.xtoolkit.live/blog/free-temp-gmail</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
@@ -168,7 +168,7 @@
 
   <!-- JSON-LD schema generator: developer/SEO high-intent keyword with tool CTA -->
   <url>
-    <loc>https://xtoolkit.live/blog/json-ld-schema-generator</loc>
+    <loc>https://www.xtoolkit.live/blog/json-ld-schema-generator</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
@@ -176,7 +176,7 @@
 
   <!-- Gmail account checker: high commercial intent, email verification keyword -->
   <url>
-    <loc>https://xtoolkit.live/blog/gmail-account-checker</loc>
+    <loc>https://www.xtoolkit.live/blog/gmail-account-checker</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
@@ -184,7 +184,7 @@
 
   <!-- Temp mail guides hub: targets "temp mail guides" hub keyword, links all temp mail content -->
   <url>
-    <loc>https://xtoolkit.live/blog/temp-mail-guides</loc>
+    <loc>https://www.xtoolkit.live/blog/temp-mail-guides</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -192,7 +192,7 @@
 
   <!-- X bio writing guide: social media / creator audience, targets bio generator tool -->
   <url>
-    <loc>https://xtoolkit.live/blog/x-bio-writing-guide</loc>
+    <loc>https://www.xtoolkit.live/blog/x-bio-writing-guide</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -200,7 +200,7 @@
 
   <!-- Meta tags explainer: high-intent SEO/developer query, targets meta tag generator -->
   <url>
-    <loc>https://xtoolkit.live/blog/what-is-a-meta-tag</loc>
+    <loc>https://www.xtoolkit.live/blog/what-is-a-meta-tag</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -208,7 +208,7 @@
 
   <!-- QR code explainer: broad consumer + developer query, targets QR code generator -->
   <url>
-    <loc>https://xtoolkit.live/blog/what-is-a-qr-code</loc>
+    <loc>https://www.xtoolkit.live/blog/what-is-a-qr-code</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>

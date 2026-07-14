@@ -38,7 +38,7 @@ interface MiniToolLayoutProps {
   affiliateCategory?: "scheduling" | "design" | "monetize" | "growth" | "analytics" | "all";
 }
 
-const SITE_URL = "https://xtoolkit.live";
+const SITE_URL = "https://www.xtoolkit.live";
 
 export function MiniToolLayout({
   seoTitle,

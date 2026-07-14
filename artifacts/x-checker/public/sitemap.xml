@@ -3,25 +3,25 @@
 
   <!-- Primary pages: homepage, category landings, static, chrome-extension -->
   <sitemap>
-    <loc>https://xtoolkit.live/sitemap-pages.xml</loc>
+    <loc>https://www.xtoolkit.live/sitemap-pages.xml</loc>
     <lastmod>2026-07-03</lastmod>
   </sitemap>
 
   <!-- All tool pages -->
   <sitemap>
-    <loc>https://xtoolkit.live/sitemap-tools.xml</loc>
+    <loc>https://www.xtoolkit.live/sitemap-tools.xml</loc>
     <lastmod>2026-07-03</lastmod>
   </sitemap>
 
   <!-- Blog articles -->
   <sitemap>
-    <loc>https://xtoolkit.live/sitemap-blog.xml</loc>
+    <loc>https://www.xtoolkit.live/sitemap-blog.xml</loc>
     <lastmod>2026-07-03</lastmod>
   </sitemap>
 
   <!-- Image sitemap -->
   <sitemap>
-    <loc>https://xtoolkit.live/sitemap-images.xml</loc>
+    <loc>https://www.xtoolkit.live/sitemap-images.xml</loc>
     <lastmod>2026-07-03</lastmod>
   </sitemap>
 

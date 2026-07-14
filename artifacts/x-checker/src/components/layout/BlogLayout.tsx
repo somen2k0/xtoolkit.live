@@ -35,7 +35,7 @@ interface BlogLayoutProps {
   children: React.ReactNode;
 }
 
-const SITE_URL = "https://xtoolkit.live";
+const SITE_URL = "https://www.xtoolkit.live";
 
 export function BlogLayout({
   seoTitle,
