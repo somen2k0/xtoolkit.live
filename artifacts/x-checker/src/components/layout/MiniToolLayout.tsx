@@ -103,7 +103,17 @@ export function MiniToolLayout({
     },
   };
 
-  const allExtraSchemas = [breadcrumbSchema, webAppSchema, ...(seoExtraSchemas ?? [])];
+  const faqSchema = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(f => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  } : null;
+
+  const allExtraSchemas = [breadcrumbSchema, webAppSchema, ...(faqSchema ? [faqSchema] : []), ...(seoExtraSchemas ?? [])];
 
   return (
     <Layout>

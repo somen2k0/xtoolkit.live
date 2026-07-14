@@ -60,6 +60,17 @@ export default function About() {
         {/* Who? */}
         <section className="mb-14">
           <h2 className="text-xl font-bold text-foreground mb-4">Who?</h2>
+          <div className="flex items-center gap-4 mb-5">
+            <img
+              src="/founder.jpg"
+              alt="Somen Biswas — founder of X Toolkit"
+              className="w-16 h-16 rounded-full object-cover border-2 border-border flex-shrink-0"
+            />
+            <div>
+              <p className="text-base font-semibold text-foreground">Somen Biswas</p>
+              <p className="text-sm text-muted-foreground">Founder &amp; Developer, X Toolkit</p>
+            </div>
+          </div>
           <p className="text-base text-muted-foreground leading-relaxed mb-3">
             X Toolkit is designed, built, and maintained by{" "}
             <strong className="text-foreground font-semibold">Somen Biswas</strong> as an independent

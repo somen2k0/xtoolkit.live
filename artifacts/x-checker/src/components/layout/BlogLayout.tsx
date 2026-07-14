@@ -63,15 +63,37 @@ export function BlogLayout({
     ],
   };
 
+  const MONTH_MAP: Record<string, string> = {
+    January: "01", February: "02", March: "03", April: "04",
+    May: "05", June: "06", July: "07", August: "08",
+    September: "09", October: "10", November: "11", December: "12",
+  };
+  const [pubMonth, pubYear] = publishDate.split(" ");
+  const dateISO = pubYear && MONTH_MAP[pubMonth]
+    ? `${pubYear}-${MONTH_MAP[pubMonth]}-01`
+    : `${publishDate}-01-01`;
+
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: title,
     description: seoDescription,
-    author: { "@type": "Organization", name: "X Toolkit" },
-    publisher: { "@type": "Organization", name: "X Toolkit", url: SITE_URL },
-    datePublished: publishDate,
+    author: {
+      "@type": "Person",
+      name: "Somen Biswas",
+      url: `${SITE_URL}/about`,
+      image: `${SITE_URL}/founder.jpg`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "X Toolkit",
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon-512.png` },
+    },
+    datePublished: dateISO,
+    dateModified: dateISO,
     url: `${SITE_URL}${path}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}${path}` },
   };
 
   return (
