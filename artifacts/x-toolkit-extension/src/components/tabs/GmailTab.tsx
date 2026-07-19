@@ -62,14 +62,14 @@ function GmailTricksPanel() {
   const displayed = showAll ? dots : dots.slice(0, 12);
 
   const inputStyle: React.CSSProperties = {
-    flex: 1, background: "#0f1623", border: "1px solid #1e2a3a",
+    flex: 1, background: "rgba(20,12,45,0.85)", border: "1px solid rgba(255,255,255,0.10)",
     borderRadius: 8, padding: "7px 10px", color: "#e7e9ea",
     fontSize: 12, outline: "none",
   };
   const btn = (active = true): React.CSSProperties => ({
-    padding: "7px 14px", background: active ? "#1d9bf0" : "#1a2436",
-    border: active ? "none" : "1px solid #1e2a3a",
-    borderRadius: 8, color: active ? "#fff" : "#71767b",
+    padding: "7px 14px", background: active ? "#f59e0b" : "rgba(245,158,11,0.10)",
+    border: active ? "none" : "1px solid rgba(255,255,255,0.10)",
+    borderRadius: 8, color: active ? "#fff" : "rgba(220,225,245,0.50)",
     fontSize: 12, fontWeight: 600, cursor: "pointer", flexShrink: 0,
   });
 
@@ -96,22 +96,22 @@ function GmailTricksPanel() {
 
       {username && (
         <>
-          <div style={{ background: "#0a1020", border: "1px solid #1e2a3a", borderRadius: 10, overflow: "hidden" }}>
-            <div style={{ padding: "8px 12px", borderBottom: "1px solid #1e2a3a", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: 11, fontWeight: 700, color: "#1d9bf0" }}>Dot Trick</span>
-              <span style={{ fontSize: 10, color: "#71767b" }}>{dots.length} variants</span>
+          <div style={{ background: "#0a1020", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 10, overflow: "hidden" }}>
+            <div style={{ padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.10)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: "#f59e0b" }}>Dot Trick</span>
+              <span style={{ fontSize: 10, color: "rgba(220,225,245,0.50)" }}>{dots.length} variants</span>
             </div>
             <div style={{ padding: "6px 8px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
               {displayed.map((addr) => (
                 <button key={addr} onClick={() => copy(addr)} style={{
-                  background: "#0f1623", border: "1px solid #1e2a3a", borderRadius: 6,
+                  background: "rgba(20,12,45,0.85)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 6,
                   padding: "4px 6px", cursor: "pointer", textAlign: "left", display: "flex",
                   justifyContent: "space-between", alignItems: "center", gap: 4,
                 }}>
                   <span style={{ fontSize: 10, color: copied === addr ? "#00ba7c" : "#e7e9ea", fontFamily: "monospace", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                     {addr}
                   </span>
-                  <span style={{ fontSize: 9, color: copied === addr ? "#00ba7c" : "#71767b", flexShrink: 0 }}>
+                  <span style={{ fontSize: 9, color: copied === addr ? "#00ba7c" : "rgba(220,225,245,0.50)", flexShrink: 0 }}>
                     {copied === addr ? "✓" : "⧉"}
                   </span>
                 </button>
@@ -119,28 +119,28 @@ function GmailTricksPanel() {
             </div>
             {dots.length > 12 && (
               <div style={{ padding: "4px 12px 8px", textAlign: "center" }}>
-                <button onClick={() => setShowAll(!showAll)} style={{ background: "none", border: "none", color: "#1d9bf0", fontSize: 11, cursor: "pointer" }}>
+                <button onClick={() => setShowAll(!showAll)} style={{ background: "none", border: "none", color: "#f59e0b", fontSize: 11, cursor: "pointer" }}>
                   {showAll ? "Show less" : `Show all ${dots.length}`}
                 </button>
               </div>
             )}
           </div>
 
-          <div style={{ background: "#0a1020", border: "1px solid #1e2a3a", borderRadius: 10, overflow: "hidden" }}>
-            <div style={{ padding: "8px 12px", borderBottom: "1px solid #1e2a3a", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ background: "#0a1020", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 10, overflow: "hidden" }}>
+            <div style={{ padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.10)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <span style={{ fontSize: 11, fontWeight: 700, color: "#9b59b6" }}>Plus Trick</span>
             </div>
             <div style={{ padding: "6px 8px 4px" }}>
               <div style={{ display: "flex", gap: 4, marginBottom: 6 }}>
-                <div style={{ flex: 1, display: "flex", alignItems: "center", background: "#0f1623", border: "1px solid #1e2a3a", borderRadius: 7, padding: "5px 8px", gap: 4 }}>
-                  <span style={{ fontSize: 10, color: "#71767b", fontFamily: "monospace", flexShrink: 0 }}>{username}+</span>
+                <div style={{ flex: 1, display: "flex", alignItems: "center", background: "rgba(20,12,45,0.85)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 7, padding: "5px 8px", gap: 4 }}>
+                  <span style={{ fontSize: 10, color: "rgba(220,225,245,0.50)", fontFamily: "monospace", flexShrink: 0 }}>{username}+</span>
                   <input
                     value={customTag}
                     onChange={(e) => setCustomTag(e.target.value.replace(/[^a-z0-9._-]/gi, ""))}
                     placeholder="customtag"
                     style={{ flex: 1, background: "none", border: "none", outline: "none", fontSize: 10, color: "#e7e9ea", fontFamily: "monospace" }}
                   />
-                  <span style={{ fontSize: 10, color: "#71767b", fontFamily: "monospace", flexShrink: 0 }}>@gmail.com</span>
+                  <span style={{ fontSize: 10, color: "rgba(220,225,245,0.50)", fontFamily: "monospace", flexShrink: 0 }}>@gmail.com</span>
                 </div>
                 <button
                   onClick={() => customTag && copy(`${username}+${customTag.toLowerCase()}@gmail.com`)}
@@ -153,14 +153,14 @@ function GmailTricksPanel() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4, paddingBottom: 6 }}>
                 {plusList.map((addr) => (
                   <button key={addr} onClick={() => copy(addr)} style={{
-                    background: "#0f1623", border: "1px solid #1e2a3a", borderRadius: 6,
+                    background: "rgba(20,12,45,0.85)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 6,
                     padding: "4px 6px", cursor: "pointer", textAlign: "left", display: "flex",
                     justifyContent: "space-between", alignItems: "center", gap: 4,
                   }}>
                     <span style={{ fontSize: 10, color: copied === addr ? "#00ba7c" : "#e7e9ea", fontFamily: "monospace", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {addr}
                     </span>
-                    <span style={{ fontSize: 9, color: copied === addr ? "#00ba7c" : "#71767b", flexShrink: 0 }}>
+                    <span style={{ fontSize: 9, color: copied === addr ? "#00ba7c" : "rgba(220,225,245,0.50)", flexShrink: 0 }}>
                       {copied === addr ? "✓" : "⧉"}
                     </span>
                   </button>
@@ -227,17 +227,17 @@ export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisp
 
   const subTabStyle = (active: boolean): React.CSSProperties => ({
     flex: 1, padding: "5px 4px",
-    background: active ? "#1d2e42" : "#0f1623",
-    border: `1px solid ${active ? "#1d9bf0" : "#1e2a3a"}`,
+    background: active ? "rgba(245,158,11,0.12)" : "rgba(20,12,45,0.85)",
+    border: `1px solid ${active ? "#f59e0b" : "rgba(255,255,255,0.10)"}`,
     borderRadius: 7, cursor: "pointer",
-    color: active ? "#1d9bf0" : "#71767b",
+    color: active ? "#f59e0b" : "rgba(220,225,245,0.50)",
     fontSize: 11, fontWeight: active ? 600 : 400,
   });
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       {/* Sub-tabs */}
-      <div style={{ display: "flex", gap: 4, padding: "8px 12px", borderBottom: "1px solid #1e2a3a", flexShrink: 0 }}>
+      <div style={{ display: "flex", gap: 4, padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.10)", flexShrink: 0 }}>
         <button onClick={() => setSubTab("inbox")} style={subTabStyle(subTab === "inbox")}>
           Temp Gmail
         </button>
@@ -289,7 +289,7 @@ export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisp
                   onClick={onSwitchToDisposable}
                   style={{
                     background: "none", border: "none", cursor: "pointer",
-                    color: "#1d9bf0", fontSize: 11, padding: 0, fontWeight: 600,
+                    color: "#f59e0b", fontSize: 11, padding: 0, fontWeight: 600,
                   }}
                 >
                   Try Disposable Email instead →
@@ -306,7 +306,7 @@ export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisp
             {!email && !creating ? (
               <div style={{ padding: "28px 20px", textAlign: "center" }}>
                 <div style={{ fontSize: 30, marginBottom: 8 }}>📧</div>
-                <div style={{ color: "#71767b", fontSize: 13, marginBottom: 4 }}>Generate a temp Gmail address</div>
+                <div style={{ color: "rgba(220,225,245,0.50)", fontSize: 13, marginBottom: 4 }}>Generate a temp Gmail address</div>
                 <div style={{ color: "#3d4753", fontSize: 11, marginBottom: 6 }}>
                   Works with Gmail dot-trick — receive emails instantly
                 </div>
@@ -322,7 +322,7 @@ export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisp
                 <button
                   onClick={() => void handleNew()}
                   style={{
-                    padding: "8px 20px", background: "#1d9bf0",
+                    padding: "8px 20px", background: "#f59e0b",
                     border: "none", borderRadius: 20,
                     color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer",
                   }}
@@ -338,7 +338,7 @@ export function GmailTab({ state, setState, patch: _patch, ready, onSwitchToDisp
                 onSelect={setSelectedId}
                 onRetry={refresh}
                 emptyText="No messages yet · inbox updates every 15s"
-                accentColor="#1d9bf0"
+                accentColor="#f59e0b"
                 refreshing={refreshing}
               />
             )}

@@ -76,16 +76,16 @@ export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badg
     <div
       style={{
         padding: "10px 12px 8px",
-        borderBottom: "1px solid #1e2a3a",
-        background: "#0a1020",
+        borderBottom: "1px solid rgba(255,255,255,0.10)",
+        background: "#0d0a1e",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <div
           style={{
             flex: 1,
-            background: "#0f1623",
-            border: "1px solid #1e2a3a",
+            background: "rgba(20,12,45,0.85)",
+            border: "1px solid rgba(255,255,255,0.10)",
             borderRadius: 8,
             padding: "6px 10px",
             display: "flex",
@@ -96,12 +96,12 @@ export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badg
         >
           {loading ? (
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{ width: 140, height: 12, background: "#1e2a3a", borderRadius: 4, animation: "pulse 1.5s infinite" }} />
-              <div style={{ width: 60, height: 12, background: "#1e2a3a", borderRadius: 4, animation: "pulse 1.5s infinite" }} />
+              <div style={{ width: 140, height: 12, background: "rgba(255,255,255,0.10)", borderRadius: 4, animation: "pulse 1.5s infinite" }} />
+              <div style={{ width: 60, height: 12, background: "rgba(255,255,255,0.10)", borderRadius: 4, animation: "pulse 1.5s infinite" }} />
             </div>
           ) : email ? (
             <span style={{ fontSize: 13, fontFamily: "monospace", color: "#e7e9ea", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              <span style={{ color: "#1d9bf0", fontWeight: 600 }}>{local}</span>
+              <span style={{ color: "#f59e0b", fontWeight: 600 }}>{local}</span>
               <span style={{ color: "#71767b" }}>@{domain}</span>
             </span>
           ) : (
@@ -116,9 +116,9 @@ export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badg
           style={{
             width: 32, height: 32,
             display: "flex", alignItems: "center", justifyContent: "center",
-            background: "#0f1623", border: "1px solid #1e2a3a",
+            background: "rgba(20,12,45,0.85)", border: "1px solid rgba(255,255,255,0.10)",
             borderRadius: 8, cursor: "pointer",
-            color: copied ? "#00ba7c" : "#71767b",
+            color: copied ? "#4ade80" : "rgba(220,225,245,0.50)",
             flexShrink: 0,
             transition: "color 0.15s",
           }}
@@ -133,9 +133,9 @@ export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badg
           style={{
             width: 32, height: 32,
             display: "flex", alignItems: "center", justifyContent: "center",
-            background: "#0f1623", border: "1px solid #1e2a3a",
+            background: "rgba(20,12,45,0.85)", border: "1px solid rgba(255,255,255,0.10)",
             borderRadius: 8, cursor: "pointer",
-            color: "#71767b", flexShrink: 0,
+            color: "rgba(220,225,245,0.50)", flexShrink: 0,
             position: "relative",
           }}
         >
@@ -143,7 +143,7 @@ export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badg
           {badge > 0 && (
             <span style={{
               position: "absolute", top: -4, right: -4,
-              background: "#1d9bf0", color: "#fff",
+              background: "#f59e0b", color: "#0d0a1e",
               borderRadius: 9999, fontSize: 9, fontWeight: 700,
               minWidth: 14, height: 14, display: "flex", alignItems: "center", justifyContent: "center",
               padding: "0 3px",
@@ -160,9 +160,9 @@ export function EmailHeader({ email, loading, refreshing, onNew, onRefresh, badg
           style={{
             height: 32, padding: "0 10px",
             display: "flex", alignItems: "center", gap: 4,
-            background: "#1d2e42", border: "1px solid #1d9bf0",
+            background: "rgba(245,158,11,0.12)", border: "1px solid rgba(245,158,11,0.40)",
             borderRadius: 8, cursor: "pointer",
-            color: "#1d9bf0", fontSize: 12, fontWeight: 600, flexShrink: 0,
+            color: "#f59e0b", fontSize: 12, fontWeight: 600, flexShrink: 0,
           }}
         >
           <PlusIcon /> New

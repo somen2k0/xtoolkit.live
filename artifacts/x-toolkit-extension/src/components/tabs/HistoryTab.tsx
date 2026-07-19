@@ -64,7 +64,7 @@ function HistoryItem({ entry, onCopy, onDelete }: {
       style={{
         display: "flex", alignItems: "center", gap: 8,
         padding: "9px 12px",
-        borderBottom: "1px solid #1e2a3a",
+        borderBottom: "1px solid rgba(255,255,255,0.10)",
       }}
     >
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -84,7 +84,7 @@ function HistoryItem({ entry, onCopy, onDelete }: {
         title="Copy"
         style={{
           width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center",
-          background: "none", border: "1px solid #1e2a3a", borderRadius: 6,
+          background: "none", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 6,
           color: copied ? "#00ba7c" : "#71767b", cursor: "pointer",
         }}
       >
@@ -95,7 +95,7 @@ function HistoryItem({ entry, onCopy, onDelete }: {
         title="Remove"
         style={{
           width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center",
-          background: "none", border: "1px solid #1e2a3a", borderRadius: 6,
+          background: "none", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 6,
           color: "#71767b", cursor: "pointer",
         }}
       >
@@ -128,7 +128,7 @@ export function HistoryTab({ state, patch, setTab }: Props) {
         <button
           onClick={() => setTab("tempmail")}
           style={{
-            padding: "7px 18px", background: "#1d9bf0",
+            padding: "7px 18px", background: "#f59e0b",
             border: "none", borderRadius: 20,
             color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer",
           }}
@@ -141,7 +141,7 @@ export function HistoryTab({ state, patch, setTab }: Props) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      <div style={{ display: "flex", alignItems: "center", padding: "8px 12px", borderBottom: "1px solid #1e2a3a", flexShrink: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.10)", flexShrink: 0 }}>
         <span style={{ fontSize: 12, color: "#71767b", flex: 1 }}>{history.length} address{history.length !== 1 ? "es" : ""}</span>
         <button
           onClick={clearAll}

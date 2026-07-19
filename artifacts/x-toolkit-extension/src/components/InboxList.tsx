@@ -49,8 +49,8 @@ function VerifyBadge() {
   return (
     <span style={{
       fontSize: 8, fontWeight: 700, padding: "1px 5px",
-      background: "#1a2e4a", color: "#1d9bf0",
-      borderRadius: 9999, border: "1px solid #1d9bf033",
+      background: "rgba(245,158,11,0.12)", color: "#f59e0b",
+      borderRadius: 9999, border: "1px solid #f59e0b33",
       textTransform: "uppercase", letterSpacing: "0.4px", flexShrink: 0,
     }}>
       Verify
@@ -64,18 +64,18 @@ function Skeleton({ accentColor: _accentColor }: { accentColor: string }) {
       {[1, 0.75, 0.9].map((_, i) => (
         <div key={i} style={{
           display: "flex", gap: 10, padding: "11px 12px",
-          borderBottom: "1px solid #111d2e",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
           animation: "pulse 1.5s infinite",
           animationDelay: `${i * 0.2}s`,
         }}>
-          <div style={{ width: 34, height: 34, borderRadius: "50%", background: "#141e30", flexShrink: 0 }} />
+          <div style={{ width: 34, height: 34, borderRadius: "50%", background: "rgba(255,255,255,0.07)", flexShrink: 0 }} />
           <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 6 }}>
             <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-              <div style={{ height: 10, background: "#141e30", borderRadius: 4, width: "50%" }} />
-              <div style={{ height: 8, background: "#0f1825", borderRadius: 4, width: 28, marginLeft: "auto" }} />
+              <div style={{ height: 10, background: "rgba(255,255,255,0.07)", borderRadius: 4, width: "50%" }} />
+              <div style={{ height: 8, background: "rgba(255,255,255,0.03)", borderRadius: 4, width: 28, marginLeft: "auto" }} />
             </div>
-            <div style={{ height: 11, background: "#141e30", borderRadius: 4, width: "80%" }} />
-            <div style={{ height: 9, background: "#0f1825", borderRadius: 4, width: "65%" }} />
+            <div style={{ height: 11, background: "rgba(255,255,255,0.07)", borderRadius: 4, width: "80%" }} />
+            <div style={{ height: 9, background: "rgba(255,255,255,0.03)", borderRadius: 4, width: "65%" }} />
           </div>
         </div>
       ))}
@@ -95,28 +95,28 @@ function EmptyState({ text, onSwitchToGmail, accentColor }: { text: string; onSw
     <div style={{ padding: "28px 16px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
       <div style={{
         width: 48, height: 48, borderRadius: 14,
-        background: "#0a1020", border: "1px solid #1e2a3a",
+        background: "rgba(20,12,45,0.80)", border: "1px solid rgba(255,255,255,0.10)",
         display: "flex", alignItems: "center", justifyContent: "center",
         fontSize: 22,
       }}>
         📭
       </div>
       <div>
-        <div style={{ color: "#b0b8c1", fontSize: 13, fontWeight: 600, marginBottom: 3 }}>{text}</div>
-        <div style={{ color: "#3d4753", fontSize: 11 }}>Emails sent here will appear instantly</div>
+        <div style={{ color: "#eaecf4", fontSize: 13, fontWeight: 600, marginBottom: 3 }}>{text}</div>
+        <div style={{ color: "rgba(220,225,245,0.30)", fontSize: 11 }}>Emails sent here will appear instantly</div>
       </div>
 
       {/* Refresh countdown pill */}
       <div style={{
         display: "inline-flex", alignItems: "center", gap: 6,
-        background: "#0a1020", border: "1px solid #1e2a3a",
+        background: "rgba(20,12,45,0.80)", border: "1px solid rgba(255,255,255,0.10)",
         borderRadius: 20, padding: "4px 10px",
       }}>
         <div style={{
           width: 5, height: 5, borderRadius: "50%", background: accentColor,
           animation: "pulse 1.5s infinite",
         }} />
-        <span style={{ fontSize: 10, color: "#71767b" }}>
+        <span style={{ fontSize: 10, color: "rgba(220,225,245,0.50)" }}>
           Auto-checking in <span style={{ color: accentColor, fontWeight: 600 }}>{countdown}s</span>
         </span>
       </div>
@@ -125,14 +125,14 @@ function EmptyState({ text, onSwitchToGmail, accentColor }: { text: string; onSw
         <button
           onClick={onSwitchToGmail}
           style={{
-            background: "none", border: "1px solid #1e2a3a",
+            background: "none", border: "1px solid rgba(255,255,255,0.10)",
             borderRadius: 8, cursor: "pointer",
-            color: "#71767b", fontSize: 11,
+            color: "rgba(220,225,245,0.50)", fontSize: 11,
             padding: "6px 10px",
             lineHeight: 1.4,
           }}
         >
-          Sites blocking this? Try <span style={{ color: "#1d9bf0", fontWeight: 600 }}>Temp Gmail</span> instead →
+          Sites blocking this? Try <span style={{ color: "#f59e0b", fontWeight: 600 }}>Temp Gmail</span> instead →
         </button>
       )}
     </div>
@@ -144,7 +144,7 @@ function ErrorState({ error, onRetry }: { error: string; onRetry: () => void }) 
     <div style={{ padding: "28px 16px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
       <div style={{
         width: 44, height: 44, borderRadius: 12,
-        background: "#2a1515", border: "1px solid #f4212e33",
+        background: "rgba(248,113,113,0.12)", border: "1px solid #f4212e33",
         display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20,
       }}>
         ⚠️
@@ -153,9 +153,9 @@ function ErrorState({ error, onRetry }: { error: string; onRetry: () => void }) 
       <button
         onClick={onRetry}
         style={{
-          padding: "7px 18px", background: "#1e2a3a",
+          padding: "7px 18px", background: "rgba(255,255,255,0.10)",
           border: "1px solid #2f3a4a", borderRadius: 8,
-          color: "#e7e9ea", fontSize: 12, fontWeight: 600, cursor: "pointer",
+          color: "#eaecf4", fontSize: 12, fontWeight: 600, cursor: "pointer",
         }}
       >
         Retry
@@ -168,7 +168,7 @@ export function InboxList({
   messages, loading, error, onSelect, onRetry,
   emptyText = "No messages yet",
   onSwitchToGmail,
-  accentColor = "#1d9bf0",
+  accentColor = "#f59e0b",
   refreshing = false,
 }: InboxListProps) {
   const [readIds, setReadIds] = useState<Set<string>>(new Set());
@@ -186,14 +186,14 @@ export function InboxList({
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "5px 12px 4px",
-        borderBottom: "1px solid #0f1825",
+        borderBottom: "1px solid rgba(255,255,255,0.03)",
       }}>
-        <span style={{ fontSize: 10, color: "#3d4753", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.8px" }}>
+        <span style={{ fontSize: 10, color: "rgba(220,225,245,0.30)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.8px" }}>
           Inbox
         </span>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           {refreshing && (
-            <span style={{ fontSize: 9, color: "#3d4753" }}>Checking…</span>
+            <span style={{ fontSize: 9, color: "rgba(220,225,245,0.30)" }}>Checking…</span>
           )}
           {unreadCount > 0 && (
             <span style={{
@@ -225,8 +225,8 @@ export function InboxList({
             style={{
               width: "100%", display: "flex", alignItems: "flex-start", gap: 9,
               padding: "10px 12px 9px",
-              borderBottom: i < messages.length - 1 ? "1px solid #0f1825" : "none",
-              background: isHov ? "#0c1628" : isUnread ? "#090e1a" : "transparent",
+              borderBottom: i < messages.length - 1 ? "1px solid rgba(255,255,255,0.03)" : "none",
+              background: isHov ? "rgba(255,255,255,0.08)" : isUnread ? "rgba(255,255,255,0.04)" : "transparent",
               border: "none",
               cursor: "pointer",
               textAlign: "left",
@@ -243,7 +243,7 @@ export function InboxList({
                 <span style={{
                   fontSize: 12,
                   fontWeight: isUnread ? 700 : 500,
-                  color: isUnread ? "#e7e9ea" : "#71767b",
+                  color: isUnread ? "#eaecf4" : "rgba(220,225,245,0.50)",
                   overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
                   flex: 1,
                 }}>
@@ -251,7 +251,7 @@ export function InboxList({
                 </span>
                 {isVerify && <VerifyBadge />}
                 {isUnread && <UnreadDot color={accentColor} />}
-                <span style={{ fontSize: 10, color: "#3d4753", flexShrink: 0 }}>
+                <span style={{ fontSize: 10, color: "rgba(220,225,245,0.30)", flexShrink: 0 }}>
                   {formatDate(msg.date)}
                 </span>
               </div>
@@ -260,7 +260,7 @@ export function InboxList({
               <div style={{
                 fontSize: 12,
                 fontWeight: isUnread ? 650 : 400,
-                color: isUnread ? "#c8d0da" : "#566070",
+                color: isUnread ? "rgba(220,225,245,0.85)" : "rgba(220,225,245,0.40)",
                 overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
                 marginBottom: msg.intro ? 2 : 0,
               }}>
@@ -271,7 +271,7 @@ export function InboxList({
               {msg.intro && (
                 <div style={{
                   fontSize: 11,
-                  color: "#3d4753",
+                  color: "rgba(220,225,245,0.30)",
                   overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
                 }}>
                   {msg.intro}

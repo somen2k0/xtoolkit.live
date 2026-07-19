@@ -163,7 +163,7 @@ async function pollInbox(): Promise<void> {
   // Update badge
   const totalNew = newMessages.length;
   await chrome.action.setBadgeText({ text: totalNew > 0 ? String(totalNew > 99 ? "99+" : totalNew) : "" });
-  await chrome.action.setBadgeBackgroundColor({ color: "#1d9bf0" });
+  await chrome.action.setBadgeBackgroundColor({ color: "#f59e0b" });
 
   // Persist seen IDs (keep last 200)
   const updatedSeen = [...allSeen].slice(-200);

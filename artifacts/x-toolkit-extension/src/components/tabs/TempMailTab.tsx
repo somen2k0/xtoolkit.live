@@ -165,7 +165,7 @@ function DomainSelector({ currentDomain, switching, onSwitch, domainStatus }: Do
         position: "relative",
         padding: "5px 12px 6px",
         background: "#070b12",
-        borderBottom: open ? "none" : "1px solid #1e2a3a",
+        borderBottom: open ? "none" : "1px solid rgba(255,255,255,0.10)",
         zIndex: open ? 50 : "auto",
       }}
     >
@@ -176,8 +176,8 @@ function DomainSelector({ currentDomain, switching, onSwitch, domainStatus }: Do
         style={{
           width: "100%",
           display: "flex", alignItems: "center", gap: 6,
-          background: "#0f1623",
-          border: `1px solid ${open ? "#1d9bf044" : "#1e2a3a"}`,
+          background: "rgba(20,12,45,0.85)",
+          border: `1px solid ${open ? "#f59e0b44" : "rgba(255,255,255,0.10)"}`,
           borderRadius: 6, padding: "4px 8px",
           color: switching ? "#71767b" : "#e7e9ea",
           fontSize: 11, cursor: switching ? "not-allowed" : "pointer",
@@ -200,8 +200,8 @@ function DomainSelector({ currentDomain, switching, onSwitch, domainStatus }: Do
         <div style={{
           position: "absolute",
           top: "100%", left: 12, right: 12,
-          background: "#0f1623",
-          border: "1px solid #1e2a3a",
+          background: "rgba(20,12,45,0.85)",
+          border: "1px solid rgba(255,255,255,0.10)",
           borderRadius: "0 0 8px 8px",
           overflow: "hidden",
           boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
@@ -213,7 +213,7 @@ function DomainSelector({ currentDomain, switching, onSwitch, domainStatus }: Do
                 padding: "5px 10px 3px",
                 fontSize: 9, color: "#3d4753",
                 fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px",
-                borderTop: "1px solid #1e2a3a",
+                borderTop: "1px solid rgba(255,255,255,0.10)",
               }}>
                 {group.label}
               </div>
@@ -229,7 +229,7 @@ function DomainSelector({ currentDomain, switching, onSwitch, domainStatus }: Do
                     width: "100%",
                     display: "flex", alignItems: "center", gap: 7,
                     padding: "6px 10px",
-                    background: value === currentDomain ? "#1e2a3a" : "none",
+                    background: value === currentDomain ? "rgba(255,255,255,0.10)" : "none",
                     border: "none",
                     cursor: "pointer",
                     color: value === currentDomain ? "#e7e9ea" : "#b0b8c1",
@@ -243,15 +243,15 @@ function DomainSelector({ currentDomain, switching, onSwitch, domainStatus }: Do
                   <span style={{ flex: 1, fontFamily: "monospace" }}>{value}</span>
                   {badge && (
                     <span style={{
-                      fontSize: 8, background: "#7c3aed22", color: "#a78bfa",
-                      border: "1px solid #7c3aed44", borderRadius: 3,
+                      fontSize: 8, background: "rgba(245,158,11,0.15)", color: "#f59e0b",
+                      border: "1px solid rgba(245,158,11,0.30)", borderRadius: 3,
                       padding: "1px 4px", flexShrink: 0,
                     }}>
                       {badge}
                     </span>
                   )}
                   {value === currentDomain && (
-                    <span style={{ fontSize: 10, color: "#1d9bf0", flexShrink: 0 }}>✓</span>
+                    <span style={{ fontSize: 10, color: "#f59e0b", flexShrink: 0 }}>✓</span>
                   )}
                 </button>
               ))}
@@ -355,7 +355,7 @@ export function TempMailTab({ state, setState, patch: _patch, ready, onSwitchToG
             <button
               onClick={() => void handleNew()}
               style={{
-                padding: "8px 20px", background: "#7c3aed",
+                padding: "8px 20px", background: "#f59e0b",
                 border: "none", borderRadius: 20,
                 color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer",
               }}
@@ -378,7 +378,7 @@ export function TempMailTab({ state, setState, patch: _patch, ready, onSwitchToG
             onSelect={setSelectedId}
             onRetry={refresh}
             onSwitchToGmail={onSwitchToGmail}
-            accentColor="#7c3aed"
+            accentColor="#f59e0b"
             refreshing={refreshing}
           />
         )}

@@ -52,53 +52,52 @@
   --radius-xl: calc(var(--radius) + 6px);
 }
 
-/* ── Theme variables ─────────────────────────────────────────────────────── */
+/* ── Theme variables (dark glassmorphism — only theme) ───────────────────── */
 :root {
-  --background: #F5EFE6;
-  --foreground: #1C1C1C;
+  --background: #0d0a1e;
+  --foreground: #eaecf4;
 
-  --card: #FFFCF8;
-  --card-foreground: #1C1C1C;
-  --card-border: #E4D8CC;
+  --card: rgba(20, 12, 45, 0.70);
+  --card-foreground: #eaecf4;
+  --card-border: rgba(255, 255, 255, 0.08);
 
-  --popover: #FFFCF8;
-  --popover-foreground: #1C1C1C;
-  --popover-border: #E4D8CC;
+  --popover: rgba(16, 10, 38, 0.90);
+  --popover-foreground: #eaecf4;
+  --popover-border: rgba(255, 255, 255, 0.10);
 
-  /* Replit orange-red accent */
-  --primary: #F5390A;
-  --primary-foreground: #ffffff;
-  --primary-border: #F5390A;
+  --primary: #f59e0b;
+  --primary-foreground: #080a1a;
+  --primary-border: #f59e0b;
 
-  --secondary: #F0E8DF;
-  --secondary-foreground: #1C1C1C;
-  --secondary-border: #E4D8CC;
+  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary-foreground: #eaecf4;
+  --secondary-border: rgba(255, 255, 255, 0.08);
 
-  --muted: #F0E8DF;
-  --muted-foreground: #44403C;
-  --muted-border: #E4D8CC;
+  --muted: rgba(255, 255, 255, 0.04);
+  --muted-foreground: rgba(220, 225, 245, 0.55);
+  --muted-border: rgba(255, 255, 255, 0.07);
 
-  --accent: #FDE8E2;
-  --accent-foreground: #C73008;
-  --accent-border: #F5C4B5;
+  --accent: rgba(245, 158, 11, 0.15);
+  --accent-foreground: #f59e0b;
+  --accent-border: rgba(245, 158, 11, 0.30);
 
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --destructive-border: #ef4444;
+  --destructive: #f87171;
+  --destructive-foreground: #080a1a;
+  --destructive-border: rgba(248, 113, 113, 0.30);
 
-  --success: #22c55e;
-  --success-foreground: #ffffff;
+  --success: #4ade80;
+  --success-foreground: #080a1a;
 
   --warning: #f59e0b;
-  --warning-foreground: #000000;
+  --warning-foreground: #080a1a;
 
-  --border: #E4D8CC;
-  --input: #E4D8CC;
-  --ring: #F5390A;
+  --border: rgba(255, 255, 255, 0.10);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #f59e0b;
 
   --app-font-sans: 'Inter', system-ui, sans-serif;
   --app-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 /* ── Keyframe animations ─────────────────────────────────────────────────── */
@@ -132,10 +131,15 @@
 
   body {
     @apply font-sans antialiased text-foreground;
-    background-color: #F5EFE6;
+    background-color: #0d0a1e;
     min-height: 100vh;
     cursor: auto;
   }
+}
+
+/* Force dark background outside @layer so it wins the cascade */
+html, body {
+  background-color: #0d0a1e !important;
 }
 
 #root {
@@ -157,8 +161,8 @@
 }
 
 .card-hover-glow:hover {
-  border-color: rgba(245, 57, 10, 0.4);
-  box-shadow: 0 2px 8px rgba(245, 57, 10, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.14);
 }
 
 /* ── Fade-in-up (scroll-triggered via IntersectionObserver) ─────────────── */
@@ -248,3 +252,29 @@
     animation: none;
   }
 }
+
+/* ── Glass backdrop on cards and popovers ────────────────────────────────── */
+.bg-card,
+.bg-popover {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* ── Tailwind color overrides for hardcoded light icon backgrounds ────────── */
+.bg-blue-50,   .bg-blue-100   { background-color: rgba(59,  130, 246, 0.28) !important; }
+.bg-violet-50, .bg-violet-100 { background-color: rgba(139,  92, 246, 0.28) !important; }
+.bg-orange-50, .bg-orange-100 { background-color: rgba(249, 115,  22, 0.28) !important; }
+.bg-green-50,  .bg-green-100  { background-color: rgba(34,  197,  94, 0.28) !important; }
+.bg-pink-50,   .bg-pink-100   { background-color: rgba(236,  72, 153, 0.28) !important; }
+.bg-indigo-50, .bg-indigo-100 { background-color: rgba(99,  102, 241, 0.28) !important; }
+.bg-red-50,    .bg-red-100    { background-color: rgba(239,  68,  68, 0.28) !important; }
+.bg-teal-50,   .bg-teal-100   { background-color: rgba(20,  184, 166, 0.28) !important; }
+.bg-yellow-50, .bg-yellow-100 { background-color: rgba(234, 179,   8, 0.28) !important; }
+
+.text-blue-600   { color: #60a5fa !important; }
+.text-violet-600 { color: #a78bfa !important; }
+.text-green-600  { color: #4ade80 !important; }
+.text-pink-600   { color: #f472b6 !important; }
+.text-indigo-600 { color: #818cf8 !important; }
+.text-orange-600 { color: #fb923c !important; }
+.text-orange-500 { color: #f59e0b !important; }

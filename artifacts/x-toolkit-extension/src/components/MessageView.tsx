@@ -174,7 +174,7 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", animation: "fade-in 0.2s ease" }}>
       {/* Header */}
-      <div style={{ padding: "8px 12px", borderBottom: "1px solid #1e2a3a", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+      <div style={{ padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.10)", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
         <button
           onClick={onBack}
           style={{ width: 30, height: 30, display: "flex", alignItems: "center", justifyContent: "center", background: "none", border: "none", cursor: "pointer", color: "#71767b", borderRadius: 6 }}
@@ -237,7 +237,7 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
         {loading ? (
           <div style={{ padding: "12px", display: "flex", flexDirection: "column", gap: 8 }}>
             {[1, 0.7, 0.85, 0.5, 0.9].map((w, i) => (
-              <div key={i} style={{ width: `${w * 100}%`, height: 11, background: "#1e2a3a", borderRadius: 4, animation: "pulse 1.5s infinite" }} />
+              <div key={i} style={{ width: `${w * 100}%`, height: 11, background: "rgba(255,255,255,0.10)", borderRadius: 4, animation: "pulse 1.5s infinite" }} />
             ))}
           </div>
         ) : bodyType === "html" ? (
@@ -274,14 +274,14 @@ export function MessageView({ message, onBack, fetchBody }: MessageViewProps) {
 
       {/* Copy email text button */}
       {!loading && (body || plainText) && (
-        <div style={{ padding: "8px 12px", borderTop: "1px solid #1e2a3a", flexShrink: 0 }}>
+        <div style={{ padding: "8px 12px", borderTop: "1px solid rgba(255,255,255,0.10)", flexShrink: 0 }}>
           <button
             onClick={() => void copyText()}
             style={{
               width: "100%",
               padding: "6px 12px",
-              background: textCopied ? "#1a2e1a" : "#0f1623",
-              border: `1px solid ${textCopied ? "#10b98144" : "#1e2a3a"}`,
+              background: textCopied ? "#1a2e1a" : "rgba(20,12,45,0.85)",
+              border: `1px solid ${textCopied ? "#10b98144" : "rgba(255,255,255,0.10)"}`,
               borderRadius: 8,
               color: textCopied ? "#10b981" : "#71767b",
               fontSize: 11,

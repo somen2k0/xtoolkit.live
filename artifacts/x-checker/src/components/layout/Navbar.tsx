@@ -120,8 +120,8 @@ function NavDropdown({
   return (
     <div
       className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 z-50
-        rounded-xl border border-border bg-popover
-        shadow-lg shadow-black/30 animate-in fade-in slide-in-from-top-1 duration-150"
+        rounded-2xl border border-white/10 bg-popover backdrop-blur-2xl
+        shadow-2xl shadow-black/50 animate-in fade-in slide-in-from-top-1 duration-150"
     >
       <div className="p-2">
         <Link href={category.href} onClick={onClose}>
@@ -220,25 +220,20 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-border bg-background shadow-sm">
-        {/* Teal accent line at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-32px)] max-w-[1060px] rounded-[20px] border border-white/10 bg-[rgba(13,10,30,0.75)] backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
 
-        <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-2">
+        <div className="px-4 md:px-5 h-14 grid grid-cols-[auto_1fr_auto] items-center gap-2">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <div className="h-7 w-7 rounded-lg overflow-hidden shadow-lg shadow-primary/20 shrink-0">
               <img src="/logo.png" alt="X Toolkit Logo" className="h-full w-full object-cover" />
             </div>
-            <span className="font-semibold text-sm text-foreground tracking-tight">X Toolkit</span>
-            <Badge variant="outline" className="hidden lg:inline-flex text-[10px] font-medium border-primary/20 text-primary bg-accent px-1.5 py-0">
-              {TOTAL_LIVE} Tools
-            </Badge>
+            <span className="font-semibold text-sm text-foreground tracking-tight whitespace-nowrap">X Toolkit</span>
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex flex-1 items-center justify-center">
+          {/* Desktop nav — 1fr grid column guarantees it never overlaps logo or right side */}
+          <div className="hidden md:flex items-center justify-center min-w-0">
             <div className="flex items-center gap-0 px-1.5 py-1 rounded-2xl bg-card border border-border">
               <Link href="/">
                 <button className={`${NAV_LINK_BASE} ${
@@ -266,17 +261,6 @@ export function Navbar() {
                 </button>
               </Link>
 
-              <Link href="/guides">
-                <button className={`${NAV_LINK_BASE} ${
-                  location === "/guides"
-                    ? "bg-secondary text-primary"
-                    : "text-foreground hover:bg-secondary hover:text-primary"
-                }`}>
-                  <BookMarked className="h-3.5 w-3.5 shrink-0" />
-                  Guides
-                </button>
-              </Link>
-
               <Link href="/about">
                 <button className={`${NAV_LINK_BASE} ${
                   location === "/about"
@@ -291,13 +275,13 @@ export function Navbar() {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-1 shrink-0">
+          <div className="flex items-center gap-1 justify-end">
             <NavSearchDialog />
 
             <Link href="/chrome-extension">
-              <button className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-white whitespace-nowrap transition-all duration-200 bg-primary hover:bg-[#D42D06] shadow-[0_2px_8px_rgba(245,57,10,0.3)] hover:shadow-[0_4px_12px_rgba(245,57,10,0.45)] hover:-translate-y-px">
+              <button className="hidden lg:flex items-center gap-1.5 px-3 xl:px-4 py-2 rounded-xl text-[13px] font-bold text-[#0d0a1e] whitespace-nowrap transition-all duration-200 bg-primary hover:bg-[#fbbf24] shadow-[0_2px_8px_rgba(245,158,11,0.35)] hover:shadow-[0_4px_16px_rgba(245,158,11,0.5)] hover:-translate-y-px">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.5 11H19V7a2 2 0 0 0-2-2h-4V3.5A2.5 2.5 0 0 0 10.5 1 2.5 2.5 0 0 0 8 3.5V5H4a2 2 0 0 0-2 2v3.8h1.5a2.5 2.5 0 0 1 0 5H2V20a2 2 0 0 0 2 2h3.8v-1.5a2.5 2.5 0 0 1 5 0V22H17a2 2 0 0 0 2-2v-4h1.5a2.5 2.5 0 0 0 0-5Z"/></svg>
-                Extension
+                <span className="hidden xl:inline">Extension</span>
               </button>
             </Link>
 
@@ -305,17 +289,6 @@ export function Navbar() {
               <div className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
               <span className="text-[11px] text-foreground/60">Operational</span>
             </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowFeedback(true)}
-              className="hidden xl:flex text-xs border-border text-foreground hover:bg-secondary hover:text-primary hover:border-border gap-1.5 h-8 px-2.5"
-              title="Send Feedback"
-            >
-              <MessageSquare className="h-3.5 w-3.5 shrink-0" />
-              <span className="hidden 2xl:inline">Feedback</span>
-            </Button>
 
             {/* Mobile hamburger */}
             <button
@@ -330,7 +303,7 @@ export function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden border-t border-border bg-background">
+          <div className="md:hidden border-t border-white/10 bg-background/80 backdrop-blur-2xl">
             <div className="px-4 py-3 space-y-1 max-h-[80vh] overflow-y-auto">
 
               <Link href="/" onClick={closeMenu}>

@@ -51,12 +51,12 @@ const FAQS = [
 ];
 
 const TOOL_ICONS = [
-  { icon: Search,     label: "X Tools",    bg: "bg-blue-100",   color: "text-blue-600" },
-  { icon: Sparkles,   label: "AI Writing", bg: "bg-violet-100", color: "text-violet-600" },
-  { icon: Code2,      label: "Developer",  bg: "bg-orange-100", color: "text-orange-600" },
-  { icon: Type,       label: "Text",       bg: "bg-green-100",  color: "text-green-600" },
-  { icon: TrendingUp, label: "SEO",        bg: "bg-pink-100",   color: "text-pink-600" },
-  { icon: Mail,       label: "Email",      bg: "bg-indigo-100", color: "text-indigo-600" },
+  { icon: Search,     label: "X Tools",    bg: "bg-blue-600/50",    color: "text-blue-200",    border: "border-blue-400/25" },
+  { icon: Sparkles,   label: "AI Writing", bg: "bg-violet-600/50",  color: "text-violet-200",  border: "border-violet-400/25" },
+  { icon: Code2,      label: "Developer",  bg: "bg-orange-700/55",  color: "text-orange-200",  border: "border-orange-500/25" },
+  { icon: Type,       label: "Text",       bg: "bg-emerald-700/50", color: "text-emerald-200", border: "border-emerald-500/25" },
+  { icon: TrendingUp, label: "SEO",        bg: "bg-rose-700/50",    color: "text-rose-200",    border: "border-rose-500/25" },
+  { icon: Mail,       label: "Email",      bg: "bg-indigo-600/50",  color: "text-indigo-200",  border: "border-indigo-400/25" },
 ];
 
 // ── Hooks ────────────────────────────────────────────────────────────────────
@@ -221,18 +221,18 @@ export default function Home() {
             </div>
 
             <div className="flex-1 flex justify-center md:justify-end">
-              <div className="bg-[#FFFCF8] p-6 rounded-2xl border border-[#F5390A]/10 shadow-sm max-w-sm w-full">
+              <div className="bg-card p-6 rounded-2xl border border-border shadow-sm max-w-sm w-full backdrop-blur-xl">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#F5390A] mb-4 text-center md:text-left opacity-80">
                 </p>
                 <div className="grid grid-cols-3 gap-3">
-                  {TOOL_ICONS.map(({ icon: Icon, label, bg, color }, index) => (
+                  {TOOL_ICONS.map(({ icon: Icon, label, bg, color, border }, index) => (
                     <div
                       key={label}
                       style={{ animationDelay: `${index * 150}ms` }}
-                      className={`${bg} rounded-2xl p-4 flex flex-col items-center justify-center gap-2 aspect-square shadow-sm animate-bounce [animation-duration:3s] transition-all duration-300 ease-out hover:scale-105 hover:shadow-md cursor-default`}
+                      className={`${bg} border ${border} rounded-2xl p-4 flex flex-col items-center justify-center gap-2 aspect-square animate-bounce [animation-duration:3s] transition-all duration-300 ease-out hover:scale-105 cursor-default`}
                     >
-                      <Icon className={`h-6 w-6 ${color}`} />
-                      <span className={`text-[10px] font-semibold ${color}`}>{label}</span>
+                      <Icon className={`h-7 w-7 ${color}`} />
+                      <span className={`text-[10px] font-bold ${color}`}>{label}</span>
                     </div>
                   ))}
                 </div>

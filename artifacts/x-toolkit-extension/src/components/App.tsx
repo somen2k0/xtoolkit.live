@@ -84,7 +84,7 @@ export function App() {
 
   return (
     <div
-      style={{ width: 400, height: 580, background: "#080c14", color: "#e7e9ea", display: "flex", flexDirection: "column", overflow: "hidden" }}
+      style={{ width: 400, height: 580, background: "#0d0a1e", color: "#eaecf4", display: "flex", flexDirection: "column", overflow: "hidden" }}
     >
       {/* Top logo bar */}
       <div
@@ -93,7 +93,7 @@ export function App() {
           alignItems: "center",
           gap: 8,
           padding: "10px 14px 8px",
-          borderBottom: "1px solid #1e2a3a",
+          borderBottom: "1px solid rgba(255,255,255,0.10)",
           flexShrink: 0,
         }}
       >
@@ -148,7 +148,7 @@ export function App() {
           </div>
           <span style={{ fontWeight: 700, fontSize: 14, color: "#e7e9ea", letterSpacing: "-0.2px" }}>X Toolkit</span>
         </div>
-        <span style={{ fontSize: 11, color: "#71767b", marginLeft: 2, marginTop: 1 }}>Temp Email & Gmail</span>
+        <span style={{ fontSize: 11, color: "rgba(220,225,245,0.45)", marginLeft: 2, marginTop: 1 }}>Temp Email & Gmail</span>
         <div style={{ flex: 1 }} />
         <a
           href={SITE_URL}
@@ -157,7 +157,7 @@ export function App() {
           title="44+ free tools at xtoolkit.live"
           style={{
             display: "flex", alignItems: "center", gap: 4,
-            color: "#7c3aed", textDecoration: "none",
+            color: "#f59e0b", textDecoration: "none",
             fontSize: 10, fontWeight: 600,
           }}
         >
@@ -193,8 +193,8 @@ export function App() {
       <div
         style={{
           display: "flex",
-          borderTop: "1px solid #1e2a3a",
-          background: "#080c14",
+          borderTop: "1px solid rgba(255,255,255,0.10)",
+          background: "#0d0a1e",
           flexShrink: 0,
         }}
       >
@@ -214,9 +214,9 @@ export function App() {
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                color: active ? "#1d9bf0" : "#71767b",
+                color: active ? "#f59e0b" : "rgba(220,225,245,0.50)",
                 transition: "color 0.15s",
-                borderTop: active ? "2px solid #1d9bf0" : "2px solid transparent",
+                borderTop: active ? "2px solid #f59e0b" : "2px solid transparent",
                 marginTop: -1,
               }}
             >
@@ -235,16 +235,16 @@ export function App() {
         style={{
           display: "flex", alignItems: "center", justifyContent: "center", gap: 5,
           padding: "5px 12px",
-          background: "#050a10",
-          borderTop: "1px solid #0f1e2e",
+          background: "#06040f",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
           textDecoration: "none",
-          color: "#3d5a7a",
+          color: "rgba(220,225,245,0.25)",
           fontSize: 10,
           flexShrink: 0,
         }}
       >
         <span>Want 44+ more tools?</span>
-        <span style={{ color: "#7c3aed", fontWeight: 600 }}>Visit xtoolkit.live →</span>
+        <span style={{ color: "#f59e0b", fontWeight: 600 }}>Visit xtoolkit.live →</span>
       </a>
     </div>
   );

@@ -9,9 +9,9 @@ interface ToolCardProps {
 }
 
 const BADGE_STYLES: Record<string, string> = {
-  Popular: "bg-amber-50 text-amber-600 border-amber-200",
-  New: "bg-emerald-50 text-emerald-600 border-emerald-200",
-  AI: "bg-primary/10 text-primary border-primary/25",
+  Popular: "bg-amber-400/15 text-amber-300 border-amber-400/30",
+  New: "bg-emerald-400/15 text-emerald-300 border-emerald-400/30",
+  AI: "bg-primary/15 text-primary border-primary/30",
 };
 
 const ACCENT_COLORS: Record<string, string> = {
@@ -30,10 +30,10 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
 
   const card = (
     <div
-      className={`group relative flex flex-col rounded-xl border border-border bg-card shadow-sm overflow-hidden transition-all duration-200 ${
+      className={`group relative flex flex-col rounded-xl border border-white/10 bg-card backdrop-blur-sm overflow-hidden transition-all duration-200 ${
         tool.isComingSoon
           ? "opacity-55 cursor-default"
-          : "hover:border-primary/30 hover:bg-card hover:shadow-md cursor-pointer"
+          : "hover:border-primary/35 hover:shadow-[0_4px_20px_rgba(245,158,11,0.12)] cursor-pointer"
       } ${compact ? "p-4" : "p-5"}`}
     >
       {/* Left accent bar — slides in on hover */}
