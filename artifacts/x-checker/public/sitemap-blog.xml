@@ -15,7 +15,7 @@
   <!-- Blog hub -->
   <url>
     <loc>https://www.xtoolkit.live/blog</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -210,6 +210,30 @@
   <url>
     <loc>https://www.xtoolkit.live/blog/what-is-a-qr-code</loc>
     <lastmod>2026-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Suspended Twitter account checker: high commercial intent, targets X account checker -->
+  <url>
+    <loc>https://www.xtoolkit.live/blog/how-to-check-if-twitter-account-is-suspended</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- Keyword density: high-intent SEO query, targets keyword density checker tool -->
+  <url>
+    <loc>https://www.xtoolkit.live/blog/what-is-keyword-density</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Strong password guide: high search volume, targets password generator tool -->
+  <url>
+    <loc>https://www.xtoolkit.live/blog/how-to-create-a-strong-password</loc>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>

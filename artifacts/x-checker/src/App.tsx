@@ -99,6 +99,9 @@ const TempMailGuides = lazy(() => import("@/pages/blog/temp-mail-guides"));
 const XBioWritingGuide = lazy(() => import("@/pages/blog/x-bio-writing-guide"));
 const WhatIsAMetaTag = lazy(() => import("@/pages/blog/what-is-a-meta-tag"));
 const WhatIsAQrCode = lazy(() => import("@/pages/blog/what-is-a-qr-code"));
+const HowToCheckIfTwitterAccountIsSuspended = lazy(() => import("@/pages/blog/how-to-check-if-twitter-account-is-suspended"));
+const WhatIsKeywordDensity = lazy(() => import("@/pages/blog/what-is-keyword-density"));
+const HowToCreateAStrongPassword = lazy(() => import("@/pages/blog/how-to-create-a-strong-password"));
 // Category pages (lazy)
 const AiWritingTools = lazy(() => import("@/pages/categories/ai-writing-tools"));
 const SocialMediaTools = lazy(() => import("@/pages/categories/social-media-tools"));
@@ -243,6 +246,9 @@ function TrackedRouter() {
           <Route path="/blog/x-bio-writing-guide" component={XBioWritingGuide} />
           <Route path="/blog/what-is-a-meta-tag" component={WhatIsAMetaTag} />
           <Route path="/blog/what-is-a-qr-code" component={WhatIsAQrCode} />
+          <Route path="/blog/how-to-check-if-twitter-account-is-suspended" component={HowToCheckIfTwitterAccountIsSuspended} />
+          <Route path="/blog/what-is-keyword-density" component={WhatIsKeywordDensity} />
+          <Route path="/blog/how-to-create-a-strong-password" component={HowToCreateAStrongPassword} />
 
           {/* Category landing pages */}
           <Route path="/ai-writing-tools" component={AiWritingTools} />

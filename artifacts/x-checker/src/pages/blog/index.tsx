@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key, Users, Edit, Tag, QrCode } from "lucide-react";
+import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key, Users, Edit, Tag, QrCode, Lock, TrendingUp } from "lucide-react";
 
 const ARTICLES = [
   {
@@ -268,6 +268,39 @@ const ARTICLES = [
     icon: QrCode,
     color: "text-sky-400",
     bg: "bg-sky-400/10 border-sky-400/20",
+  },
+  {
+    slug: "how-to-check-if-twitter-account-is-suspended",
+    href: "/blog/how-to-check-if-twitter-account-is-suspended",
+    title: "How to Check if a Twitter/X Account Is Suspended",
+    description: "Find out if a Twitter/X account is suspended, deleted, or active in seconds. Free bulk checker — paste up to 100 usernames and see exact status with no signup required.",
+    readTime: "6 min",
+    category: "Social Media",
+    icon: Search,
+    color: "text-pink-400",
+    bg: "bg-pink-400/10 border-pink-400/20",
+  },
+  {
+    slug: "what-is-keyword-density",
+    href: "/blog/what-is-keyword-density",
+    title: "What Is Keyword Density in SEO? How to Check and Optimize It",
+    description: "Keyword density is the percentage of times a keyword appears on a page. What a good density looks like, how to calculate it, and how to avoid over-optimization penalties.",
+    readTime: "6 min",
+    category: "SEO",
+    icon: TrendingUp,
+    color: "text-orange-400",
+    bg: "bg-orange-400/10 border-orange-400/20",
+  },
+  {
+    slug: "how-to-create-a-strong-password",
+    href: "/blog/how-to-create-a-strong-password",
+    title: "How to Create a Strong Password (and Actually Remember Your Accounts)",
+    description: "Most people's passwords are weaker than they think. What makes a password secure, the mistakes to avoid, and the fastest way to generate uncrackable passwords for free.",
+    readTime: "7 min",
+    category: "Security",
+    icon: Lock,
+    color: "text-emerald-400",
+    bg: "bg-emerald-400/10 border-emerald-400/20",
   },
 ];
 
