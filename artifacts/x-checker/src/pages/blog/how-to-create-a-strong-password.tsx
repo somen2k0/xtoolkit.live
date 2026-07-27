@@ -4,10 +4,10 @@ import { Lock, Shield, Key, Hash } from "lucide-react";
 export default function HowToCreateAStrongPassword() {
   return (
     <BlogLayout
-      seoTitle="How to Create a Strong Password — Tips and Free Generator (2026)"
-      seoDescription="A strong password is long, random, and unique per site. Learn what makes a password secure, the mistakes most people make, and how to generate uncrackable passwords instantly."
-      title="How to Create a Strong Password (and Actually Remember Your Accounts)"
-      description="Most people's passwords are weaker than they think. Here's what actually makes a password secure, the common mistakes to avoid, and the fastest way to generate strong passwords for every site."
+      seoTitle="How Long Should a Password Be? (2026 Security Guide)"
+      seoDescription="Security experts recommend 16+ characters for most accounts, 20+ for email and banking. Here's exactly how length, randomness, and uniqueness combine to protect your accounts."
+      title="How Long Should a Password Be? The Honest Answer for 2026"
+      description="Password length is the single biggest security factor — but most people still use 8-character passwords. Here's what the research actually says, and how to fix all your accounts in 10 minutes."
       icon={Lock}
       readTime="7 min read"
       publishDate="July 2026"

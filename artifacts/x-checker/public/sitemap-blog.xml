@@ -230,9 +230,33 @@
     <priority>0.80</priority>
   </url>
 
-  <!-- Strong password guide: high search volume, targets password generator tool -->
+  <!-- Password length guide: specific long-tail, targets password generator tool -->
   <url>
     <loc>https://www.xtoolkit.live/blog/how-to-create-a-strong-password</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Email spam trigger words: winnable SERP (niche email tools dominate), targets spam score checker -->
+  <url>
+    <loc>https://www.xtoolkit.live/blog/email-spam-trigger-words</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- View Twitter without account: small sites dominate SERP, targets X account checker -->
+  <url>
+    <loc>https://www.xtoolkit.live/blog/view-twitter-profile-without-account</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- Email signature elements: small tool sites dominate SERP, targets email signature generator -->
+  <url>
+    <loc>https://www.xtoolkit.live/blog/what-to-include-in-email-signature</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>

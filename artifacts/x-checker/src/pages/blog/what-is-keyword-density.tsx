@@ -4,10 +4,10 @@ import { Search, TrendingUp, AlertCircle, CheckCircle } from "lucide-react";
 export default function WhatIsKeywordDensity() {
   return (
     <BlogLayout
-      seoTitle="What Is Keyword Density in SEO? How to Check and Optimize It"
-      seoDescription="Keyword density is the percentage of times a keyword appears on a page. Learn what a good keyword density is, how to calculate it, and how to avoid over-optimization penalties."
-      title="What Is Keyword Density in SEO? How to Check and Optimize It"
-      description="Keyword density is a basic SEO concept that's easy to get wrong. Here's what it actually means, what percentages to aim for, and how to check your pages in seconds."
+      seoTitle="Keyword Density Checker — What Percentage Is Right for SEO?"
+      seoDescription="Most SEO guides say 1–2% keyword density — but is that rule still valid in 2026? How to measure it, what really matters, and how to check any page free in 30 seconds."
+      title="Keyword Density: What Percentage Is Actually Right for SEO?"
+      description="The 1–2% rule gets repeated everywhere, but most people don't know where it came from or whether it still applies. Here's what keyword density actually does (and doesn't) do for your rankings."
       icon={Search}
       readTime="6 min read"
       publishDate="July 2026"

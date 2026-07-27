@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { SeoHead } from "@/components/SeoHead";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key, Users, Edit, Tag, QrCode, Lock, TrendingUp } from "lucide-react";
+import { BookOpen, Clock, ArrowRight, Mail, Shield, HelpCircle, Star, ArrowLeftRight, Chrome, Code, Binary, User, Hash, Link as LinkIcon, Search, Key, Users, Edit, Tag, QrCode, Lock, TrendingUp, AlertCircle, Eye } from "lucide-react";
 
 const ARTICLES = [
   {
@@ -294,13 +294,46 @@ const ARTICLES = [
   {
     slug: "how-to-create-a-strong-password",
     href: "/blog/how-to-create-a-strong-password",
-    title: "How to Create a Strong Password (and Actually Remember Your Accounts)",
-    description: "Most people's passwords are weaker than they think. What makes a password secure, the mistakes to avoid, and the fastest way to generate uncrackable passwords for free.",
+    title: "How Long Should a Password Be? The Honest Answer for 2026",
+    description: "Password length is the single biggest security factor. What the research says, how length compares to complexity, and how to fix all your accounts in 10 minutes.",
     readTime: "7 min",
     category: "Security",
     icon: Lock,
     color: "text-emerald-400",
     bg: "bg-emerald-400/10 border-emerald-400/20",
+  },
+  {
+    slug: "email-spam-trigger-words",
+    href: "/blog/email-spam-trigger-words",
+    title: "Email Subject Line Spam Words to Avoid — Complete 2026 List",
+    description: "50+ spam trigger phrases organized by category — urgency, financial promises, CTAs, and formatting. Plus how to check your own subject lines free before sending.",
+    readTime: "7 min",
+    category: "Email",
+    icon: AlertCircle,
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
+  },
+  {
+    slug: "view-twitter-profile-without-account",
+    href: "/blog/view-twitter-profile-without-account",
+    title: "How to View a Twitter/X Profile Without an Account (2026)",
+    description: "4 methods to view public Twitter/X profiles without logging in — direct URL, Google site: search, Nitter mirrors, and the Wayback Machine. Plus bulk status checking.",
+    readTime: "5 min",
+    category: "Social Media",
+    icon: Eye,
+    color: "text-pink-400",
+    bg: "bg-pink-400/10 border-pink-400/20",
+  },
+  {
+    slug: "what-to-include-in-email-signature",
+    href: "/blog/what-to-include-in-email-signature",
+    title: "What to Include in a Professional Email Signature (2026 Guide)",
+    description: "5 required elements, 3 optional ones, and what to leave out. Plus technical requirements for HTML signatures that render correctly in Gmail, Outlook, and Apple Mail.",
+    readTime: "6 min",
+    category: "Email",
+    icon: Mail,
+    color: "text-primary",
+    bg: "bg-primary/10 border-primary/20",
   },
 ];
 

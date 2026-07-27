@@ -102,6 +102,9 @@ const WhatIsAQrCode = lazy(() => import("@/pages/blog/what-is-a-qr-code"));
 const HowToCheckIfTwitterAccountIsSuspended = lazy(() => import("@/pages/blog/how-to-check-if-twitter-account-is-suspended"));
 const WhatIsKeywordDensity = lazy(() => import("@/pages/blog/what-is-keyword-density"));
 const HowToCreateAStrongPassword = lazy(() => import("@/pages/blog/how-to-create-a-strong-password"));
+const EmailSpamTriggerWords = lazy(() => import("@/pages/blog/email-spam-trigger-words"));
+const ViewTwitterProfileWithoutAccount = lazy(() => import("@/pages/blog/view-twitter-profile-without-account"));
+const WhatToIncludeInEmailSignature = lazy(() => import("@/pages/blog/what-to-include-in-email-signature"));
 // Category pages (lazy)
 const AiWritingTools = lazy(() => import("@/pages/categories/ai-writing-tools"));
 const SocialMediaTools = lazy(() => import("@/pages/categories/social-media-tools"));
@@ -249,6 +252,9 @@ function TrackedRouter() {
           <Route path="/blog/how-to-check-if-twitter-account-is-suspended" component={HowToCheckIfTwitterAccountIsSuspended} />
           <Route path="/blog/what-is-keyword-density" component={WhatIsKeywordDensity} />
           <Route path="/blog/how-to-create-a-strong-password" component={HowToCreateAStrongPassword} />
+          <Route path="/blog/email-spam-trigger-words" component={EmailSpamTriggerWords} />
+          <Route path="/blog/view-twitter-profile-without-account" component={ViewTwitterProfileWithoutAccount} />
+          <Route path="/blog/what-to-include-in-email-signature" component={WhatToIncludeInEmailSignature} />
 
           {/* Category landing pages */}
           <Route path="/ai-writing-tools" component={AiWritingTools} />
