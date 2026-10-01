@@ -16,6 +16,7 @@ interface GmailResult {
   status: "valid" | "invalid" | "disabled" | "unknown";
 }
 
+
 const STATUS_CONFIG = {
   valid: {
     label: "Valid",
